@@ -9,7 +9,7 @@ export function expandTabata(
 ): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.tabata;
-  const base = { blockName: block.name, blockType: block.type as const, blockColor: color, blockIndex, totalBlocks };
+  const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
   const sets = block.sets ?? TABATA_DEFAULTS.sets;
   const rounds = block.rounds ?? TABATA_DEFAULTS.rounds;

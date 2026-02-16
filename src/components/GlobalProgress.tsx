@@ -38,7 +38,7 @@ export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
     currentDuration += step.estimatedDuration;
   }
 
-  const _ = currentStepIndex; // used for reactivity
+  void currentStepIndex; // used for reactivity
 
   return (
     <div className="w-full h-2 flex bg-white/5 overflow-hidden">

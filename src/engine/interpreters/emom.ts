@@ -9,7 +9,7 @@ export function expandEMOM(
 ): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.emom;
-  const base = { blockName: block.name, blockType: block.type as const, blockColor: color, blockIndex, totalBlocks };
+  const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
   const intervalDuration = block.intervalDuration ?? 60;
 
   const exercisesSummary = block.exercises

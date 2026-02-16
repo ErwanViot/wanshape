@@ -9,7 +9,7 @@ export function expandPyramid(
 ): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.pyramid;
-  const base = { blockName: block.name, blockType: block.type as const, blockColor: color, blockIndex, totalBlocks };
+  const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
   const patternStr = block.pattern.join("-");
 

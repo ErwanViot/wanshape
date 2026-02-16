@@ -9,7 +9,7 @@ export function expandCircuit(
 ): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.circuit;
-  const base = { blockName: block.name, blockType: block.type as const, blockColor: color, blockIndex, totalBlocks };
+  const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
   steps.push({
     id: `block-${blockIndex}-transition`,
@@ -47,10 +47,6 @@ export function expandCircuit(
       }
 
       const duration = isTimed ? (ex.bilateral ? (ex.duration ?? 30) * 2 : (ex.duration ?? 30)) : null;
-      const description = isTimed
-        ? `${duration}s`
-        : `${ex.reps} reps`;
-
       steps.push({
         id: `block-${blockIndex}-round-${round}-ex-${exIdx}-work`,
         phase: "work",

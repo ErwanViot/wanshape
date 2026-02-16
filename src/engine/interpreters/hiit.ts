@@ -9,7 +9,7 @@ export function expandHIIT(
 ): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.hiit;
-  const base = { blockName: block.name, blockType: block.type as const, blockColor: color, blockIndex, totalBlocks };
+  const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
   const totalIntervals = block.rounds * block.exercises.length;
 
   steps.push({

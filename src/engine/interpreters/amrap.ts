@@ -9,7 +9,7 @@ export function expandAMRAP(
 ): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.amrap;
-  const base = { blockName: block.name, blockType: block.type as const, blockColor: color, blockIndex, totalBlocks };
+  const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
   const exercisesSummary = block.exercises
     .map(ex => `${ex.reps} ${ex.name}`)
