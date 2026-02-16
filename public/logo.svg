@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 83" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="90" y2="83" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer circle (open arc) -->
+  <path d="M45 5C23.5 5 6 22 6 42.5S23.5 80 45 80c17.5 0 32.5-11.5 37.5-27.5" stroke="url(#g)" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- Stylized W -->
+  <path d="M22 30l8 25 7.5-18 7.5 18 8-25" stroke="url(#g)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Accent swoosh -->
+  <path d="M58 25c6-4 14-6 22-4" stroke="url(#g)" stroke-width="5" stroke-linecap="round" fill="none"/>
+</svg>

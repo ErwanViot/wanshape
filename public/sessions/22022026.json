@@ -1,0 +1,116 @@
+{
+  "date": "22022026",
+  "title": "Superset Force",
+  "description": "Superset antagoniste push/pull et squat/hinge pour un travail équilibré",
+  "estimatedDuration": 33,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 45,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 30,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Superset Antagoniste",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 45,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes larges",
+              "reps": 10,
+              "instructions": "Mains plus larges que les epaules, focus pectoraux"
+            },
+            {
+              "name": "Rowing inverse (table)",
+              "reps": 10,
+              "instructions": "Sous une table, tirer la poitrine vers le bord"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Squats",
+              "reps": 12,
+              "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+            },
+            {
+              "name": "Good morning",
+              "reps": 12,
+              "instructions": "Mains derriere la tete, pencher le buste en gardant le dos droit"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hanches hautes en V inverse, descendre la tete entre les mains"
+            },
+            {
+              "name": "Superman alterne",
+              "reps": 12,
+              "instructions": "Lever bras droit + jambe gauche, alterner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 25,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}
