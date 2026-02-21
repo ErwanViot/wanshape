@@ -32,29 +32,18 @@ export function expandTabata(
     const setInfo = sets > 1 ? { current: set + 1, total: sets } : undefined;
     const isLastSet = set === sets - 1;
 
-    for (let exIdx = 0; exIdx < block.exercises.length; exIdx++) {
-      const ex = block.exercises[exIdx];
-      const isLastExercise = exIdx === block.exercises.length - 1;
-      const nextEx = !isLastExercise ? block.exercises[exIdx + 1] : undefined;
+    for (let round = 0; round < rounds; round++) {
+      const roundInfo = { current: round + 1, total: rounds };
+      const isLastRound = round === rounds - 1;
 
-      steps.push({
-        id: `block-${blockIndex}-set-${set}-ex-${exIdx}-prepare`,
-        phase: "prepare",
-        timerMode: "countdown",
-        duration: PREPARE_COUNTDOWN,
-        exerciseName: ex.name,
-        instructions: `${ex.name} - ${rounds} rounds de ${work}s/${rest}s`,
-        ...base,
-        setInfo,
-        estimatedDuration: PREPARE_COUNTDOWN,
-      });
-
-      for (let round = 0; round < rounds; round++) {
-        const roundInfo = { current: round + 1, total: rounds };
-        const isLastRound = round === rounds - 1;
+      for (let exIdx = 0; exIdx < block.exercises.length; exIdx++) {
+        const ex = block.exercises[exIdx];
+        const isLastExercise = exIdx === block.exercises.length - 1;
+        const nextEx = !isLastExercise ? block.exercises[exIdx + 1] : block.exercises[0];
+        const isVeryLast = isLastSet && isLastRound && isLastExercise;
 
         steps.push({
-          id: `block-${blockIndex}-set-${set}-ex-${exIdx}-round-${round}-work`,
+          id: `block-${blockIndex}-set-${set}-round-${round}-ex-${exIdx}-work`,
           phase: "work",
           timerMode: "countdown",
           duration: work,
@@ -63,54 +52,33 @@ export function expandTabata(
           ...base,
           setInfo,
           roundInfo,
-          isLastInBlock: isLastSet && isLastExercise && isLastRound,
-          isLastInRound: isLastRound,
+          isLastInBlock: isVeryLast,
+          isLastInRound: isLastExercise,
           estimatedDuration: work,
         });
 
-        if (!isLastRound) {
+        // Rest after each exercise, except after the very last exercise of the very last round/set
+        if (!isVeryLast) {
+          const isEndOfRound = isLastExercise;
+          const nextLabel = isEndOfRound
+            ? (isLastRound
+              ? `Set ${set + 2}/${sets} dans...`
+              : `Round ${round + 2}/${rounds} - ${block.exercises[0].name}`)
+            : `${nextEx!.name}`;
+
           steps.push({
-            id: `block-${blockIndex}-set-${set}-ex-${exIdx}-round-${round}-rest`,
+            id: `block-${blockIndex}-set-${set}-round-${round}-ex-${exIdx}-rest`,
             phase: "rest",
             timerMode: "countdown",
-            duration: rest,
+            duration: isEndOfRound && !isLastRound ? rest : isEndOfRound && isLastRound && !isLastSet ? restBetweenSets : rest,
             exerciseName: "Repos",
-            instructions: `${ex.name} - Round ${round + 2}/${rounds}`,
+            instructions: `Prochain : ${nextLabel}`,
             ...base,
             setInfo,
             roundInfo,
-            estimatedDuration: rest,
+            estimatedDuration: isEndOfRound && isLastRound && !isLastSet ? restBetweenSets : rest,
           });
         }
-      }
-
-      // Rest between exercises (within same set)
-      if (!isLastExercise) {
-        steps.push({
-          id: `block-${blockIndex}-set-${set}-ex-${exIdx}-rest-between`,
-          phase: "rest",
-          timerMode: "countdown",
-          duration: restBetweenSets,
-          exerciseName: "Repos",
-          instructions: nextEx ? `Prochain : ${nextEx.name}` : "",
-          ...base,
-          setInfo,
-          estimatedDuration: restBetweenSets,
-        });
-      } else if (!isLastSet) {
-        // Rest between sets
-        steps.push({
-          id: `block-${blockIndex}-set-${set}-rest-between-sets`,
-          phase: "rest",
-          timerMode: "countdown",
-          duration: restBetweenSets,
-          exerciseName: "Repos entre sets",
-          instructions: `Set ${set + 2}/${sets} dans...`,
-          ...base,
-          setInfo,
-          isLastInRound: true,
-          estimatedDuration: restBetweenSets,
-        });
       }
     }
   }
