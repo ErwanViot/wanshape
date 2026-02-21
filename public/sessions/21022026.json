@@ -35,37 +35,38 @@
       "type": "circuit",
       "name": "Circuit Renforcement",
       "rounds": 3,
+      "restBetweenExercises": 30,
       "restBetweenRounds": 90,
       "exercises": [
         {
           "name": "Pompes classiques",
+          "mode": "reps",
           "reps": 10,
-          "rest": 30,
           "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
         },
         {
           "name": "Squats",
+          "mode": "reps",
           "reps": 15,
-          "rest": 30,
           "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
         },
         {
           "name": "Fentes avant",
+          "mode": "reps",
           "reps": 10,
-          "rest": 30,
           "instructions": "Grand pas en avant, genou arriere frole le sol",
           "bilateral": true
         },
         {
           "name": "Gainage planche",
+          "mode": "timed",
           "duration": 30,
-          "rest": 30,
           "instructions": "Sur les avant-bras, corps parfaitement aligne, serrer les abdos"
         },
         {
           "name": "Crunchs",
+          "mode": "reps",
           "reps": 15,
-          "rest": 30,
           "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
         }
       ]
