@@ -1,0 +1,116 @@
+{
+  "date": "05032026",
+  "title": "Superset Force",
+  "description": "Superset antagoniste push/pull avec pompes larges, rowing inverse et pike push-ups",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 30,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Superset Push/Pull",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 60,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes larges",
+              "reps": 10,
+              "instructions": "Mains plus larges que les epaules, focus pectoraux"
+            },
+            {
+              "name": "Rowing inverse (table)",
+              "reps": 10,
+              "instructions": "Sous une table, tirer la poitrine vers le bord"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hanches hautes en V inverse, descendre la tete entre les mains"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 10,
+              "instructions": "A plat ventre, bras en T, serrer les omoplates"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pompes commando",
+              "reps": 8,
+              "instructions": "Alterner entre position planche et position pompe",
+              "bilateral": true
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "A plat ventre, lever le buste du sol, serrer les omoplates"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

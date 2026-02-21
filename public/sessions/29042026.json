@@ -1,0 +1,93 @@
+{
+  "date": "29042026",
+  "title": "HIIT Explosif",
+  "description": "Intervalles haute intensite avec burpees, squat jumps et high knees pour un cardio intense",
+  "estimatedDuration": 27,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "HIIT Cardio Intense",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Burpees",
+          "instructions": "Descendre, poser les mains, sauter les pieds en arriere, pompe, sauter debout"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Squat explosif avec saut maximum, amortir a la reception"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Sauts lateraux d'un pied a l'autre, bras en balance"
+        },
+        {
+          "name": "Pop squats",
+          "instructions": "Sauter pieds ecartes en squat, sauter pieds joints"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

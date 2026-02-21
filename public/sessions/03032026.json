@@ -1,0 +1,89 @@
+{
+  "date": "03032026",
+  "title": "Tabata Flash",
+  "description": "Tabata explosive avec tuck jumps, mountain climbers, star jumps et burpees sans pompe",
+  "estimatedDuration": 26,
+  "focus": ["cardio", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Tabata Explosif",
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Tuck jumps",
+          "instructions": "Sauter en ramenant les genoux a la poitrine"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Sauter en ecartant bras et jambes en etoile"
+        },
+        {
+          "name": "Burpees sans pompe",
+          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

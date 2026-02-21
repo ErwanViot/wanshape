@@ -1,0 +1,118 @@
+{
+  "date": "08052026",
+  "title": "Cardio Double Impact",
+  "description": "Combo HIIT et Tabata avec jump lunges, broad jumps et mountain climbers pour un cardio sans relache",
+  "estimatedDuration": 30,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 45,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "HIIT Puissance",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Jump lunges",
+          "instructions": "Fentes sautees en alternant les jambes"
+        },
+        {
+          "name": "Broad jumps",
+          "instructions": "Sauts en longueur, amortir et recommencer"
+        },
+        {
+          "name": "Burpees sans pompe",
+          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Sauts lateraux puissants d'un pied a l'autre"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Tabata Finisher",
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Mountain climbers",
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Squat explosif avec saut maximum, amortir a la reception"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Sauts lateraux d'un pied a l'autre, bras en balance"
+        },
+        {
+          "name": "Flutter kicks",
+          "instructions": "Dos au sol, jambes tendues, battements rapides"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 25,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

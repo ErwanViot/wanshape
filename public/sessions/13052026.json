@@ -1,0 +1,110 @@
+{
+  "date": "13052026",
+  "title": "Circuit Athletique",
+  "description": "Circuit de 3 rounds avec fentes, pompes Hindu, bear hold et high knees pour un defi complet",
+  "estimatedDuration": 33,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Complet",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Fentes avec pause",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Descendre et maintenir 3s en bas avant de remonter",
+          "bilateral": true
+        },
+        {
+          "name": "Pompes Hindu",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Bear hold",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "A quatre pattes, genoux decolles du sol de 2cm, maintenir"
+        },
+        {
+          "name": "Squats sumo",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        },
+        {
+          "name": "Russian twists",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Assis, pieds decolles, tourner le buste de gauche a droite"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

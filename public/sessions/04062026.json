@@ -1,0 +1,88 @@
+{
+  "date": "04062026",
+  "title": "Tabata Flash",
+  "description": "Tabata rapide et intense avec tuck jumps, mountain climbers et burpees",
+  "estimatedDuration": 25,
+  "focus": ["cardio", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 45,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Tabata Explosif",
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Tuck jumps",
+          "instructions": "Sauter en ramenant les genoux a la poitrine"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        },
+        {
+          "name": "Burpees",
+          "instructions": "Descendre, poser les mains, sauter les pieds en arriere, pompe, sauter debout"
+        },
+        {
+          "name": "Scissors",
+          "instructions": "Dos au sol, jambes tendues, croiser en alternant dessus/dessous"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

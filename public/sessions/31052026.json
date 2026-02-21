@@ -1,0 +1,123 @@
+{
+  "date": "31052026",
+  "title": "Jambes d'Acier",
+  "description": "Travail intensif des jambes avec sissy squat et fentes avec pause suivi d'un core solide",
+  "estimatedDuration": 33,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Quadriceps & Fessiers",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Sissy squat",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Se pencher en arriere, genoux vers l'avant, quadriceps en feu"
+        },
+        {
+          "name": "Fentes avec pause",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Descendre et maintenir 3s en bas avant de remonter",
+          "bilateral": true
+        },
+        {
+          "name": "Hip thrust unilateral",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hip thrust sur une seule jambe, l'autre en l'air",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Stabilite & Force",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Gainage lateral",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Sur un avant-bras, corps aligne, hanches hautes",
+          "bilateral": true
+        },
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+        },
+        {
+          "name": "Planche to downward dog",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Alterner entre planche haute et position du chien tete en bas"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "date": "10042026",
+  "title": "Fondations Solides",
+  "description": "Renforcement bas du corps avec squats et fentes suivi d'un bloc core dynamique et statique",
+  "estimatedDuration": 33,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Squat & Fentes",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Squats 1.5",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Descendre, remonter a mi-chemin, redescendre, remonter completement"
+        },
+        {
+          "name": "Fentes bulgares",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Pied arriere sur une chaise, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Hip thrust au sol",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, pieds a plat, monter les hanches, serrer les fessiers"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Gainage & Dynamique",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Gainage lateral",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Sur un avant-bras, corps aligne, hanches hautes",
+          "bilateral": true
+        },
+        {
+          "name": "Leg raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever les jambes tendues a la verticale"
+        },
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, bras et jambes en l'air, etendre bras/jambe opposes en alternant"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

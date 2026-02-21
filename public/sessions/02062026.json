@@ -1,0 +1,105 @@
+{
+  "date": "02062026",
+  "title": "Montee en Force",
+  "description": "Pyramide de squats sautes suivie d'un renforcement classique full body avec gainage",
+  "estimatedDuration": 36,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Squats Sautes",
+      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Squats sautes",
+          "instructions": "Squat explosif avec saut, amortir a la reception"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Renforcement Complet",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Pompes Hindu",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Fentes avant",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Grand pas en avant, genou arriere frole le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Sit-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, remonter completement le buste, toucher les pieds"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

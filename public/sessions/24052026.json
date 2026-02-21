@@ -1,0 +1,115 @@
+{
+  "date": "24052026",
+  "title": "Superset Antagonistes",
+  "description": "Paires push-pull et squat-hinge en superset pour un travail equilibre du haut du corps",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 45,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 40,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Supersets Push-Pull",
+      "sets": 3,
+      "restBetweenSets": 75,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes classiques",
+              "reps": 10,
+              "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+            },
+            {
+              "name": "Superman alterne",
+              "reps": 12,
+              "instructions": "Lever bras droit + jambe gauche, alterner"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hanches hautes en V inverse, descendre la tete entre les mains"
+            },
+            {
+              "name": "Rowing inverse (table)",
+              "reps": 10,
+              "instructions": "Sous une table, tirer la poitrine vers le bord"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Dips sur chaise",
+              "reps": 10,
+              "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 10,
+              "instructions": "A plat ventre, bras en T, serrer les omoplates"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 30,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

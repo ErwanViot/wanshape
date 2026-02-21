@@ -1,0 +1,117 @@
+{
+  "date": "24032026",
+  "title": "Full Body Pyramide",
+  "description": "Circuit complet suivi d'une pyramide explosive pour un travail full body intense",
+  "estimatedDuration": 36,
+  "focus": ["full-body", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 45,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Full Body",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Pompes larges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+        },
+        {
+          "name": "Goblet squat (sans poids)",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Mains devant la poitrine, descendre profond"
+        },
+        {
+          "name": "Planche epaule",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "En planche haute, toucher l'epaule opposee en alternant"
+        },
+        {
+          "name": "Fentes laterales",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Grand pas lateral, plier une jambe, l'autre tendue",
+          "bilateral": true
+        },
+        {
+          "name": "Leg raises",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Dos au sol, lever les jambes tendues a la verticale"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Explosive",
+      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Squats sautes",
+          "instructions": "Squat explosif avec saut, amortir a la reception"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

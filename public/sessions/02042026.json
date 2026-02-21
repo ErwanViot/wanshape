@@ -1,0 +1,115 @@
+{
+  "date": "02042026",
+  "title": "Superset Force",
+  "description": "Superset push-pull intense avec pompes Hindu, dips et travail dorsal complet",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 35,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Superset Haut du Corps",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes Hindu",
+              "reps": 10,
+              "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+            },
+            {
+              "name": "Rowing inverse (table)",
+              "reps": 10,
+              "instructions": "Sous une table, tirer la poitrine vers le bord"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Dips sur chaise",
+              "reps": 10,
+              "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+            },
+            {
+              "name": "Superman",
+              "reps": 12,
+              "instructions": "A plat ventre, lever bras et jambes simultanement, maintenir 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pompes diamant",
+              "reps": 8,
+              "instructions": "Mains rapprochees sous la poitrine, coudes le long du corps"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "A plat ventre, lever le buste du sol, serrer les omoplates"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

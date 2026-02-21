@@ -1,0 +1,109 @@
+{
+  "date": "04032026",
+  "title": "Challenge Pyramide",
+  "description": "Pyramide montante-descendante de pompes Hindu et squats suivie d'un renforcement classique",
+  "estimatedDuration": 35,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Montante-Descendante",
+      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Pompes Hindu",
+          "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Squats",
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Renforcement",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Fentes arriere",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Grand pas en arriere, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Dips sur chaise",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Assis, pieds decolles, tourner le buste de gauche a droite"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 25,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

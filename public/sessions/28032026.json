@@ -1,0 +1,105 @@
+{
+  "date": "28032026",
+  "title": "Circuit Athlétique",
+  "description": "Circuit de 3 rounds mélangeant squats, pompes, gainage et fentes pour un full body complet",
+  "estimatedDuration": 33,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Athlétique",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats sumo",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+        },
+        {
+          "name": "Pompes commando",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Alterner entre position planche et position pompe",
+          "bilateral": true
+        },
+        {
+          "name": "Dead bug",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Dos au sol, bras et jambes en l'air, etendre bras/jambe opposes en alternant"
+        },
+        {
+          "name": "Fentes arriere",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Grand pas en arriere, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Burpees sans pompe",
+          "mode": "reps",
+          "reps": 6,
+          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

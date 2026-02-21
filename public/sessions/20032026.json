@@ -1,0 +1,89 @@
+{
+  "date": "20032026",
+  "title": "Tabata Explosif",
+  "description": "4 minutes intenses avec burpees, mountain climbers, squat jumps et high knees",
+  "estimatedDuration": 26,
+  "focus": ["cardio", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Tabata Explosif",
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Burpees",
+          "instructions": "Descendre, poser les mains, sauter les pieds en arriere, pompe, sauter debout"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Squat explosif avec saut maximum, amortir a la reception"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

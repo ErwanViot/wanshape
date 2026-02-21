@@ -1,0 +1,121 @@
+{
+  "date": "20042026",
+  "title": "Buste d'Acier",
+  "description": "Push-pull intensif avec pompes archer, rowing inverse et travail des épaules au sol",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Planche to downward dog",
+          "duration": 40,
+          "instructions": "Alterner entre planche haute et position du chien tete en bas"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Poussée Intense",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Pompes archer",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Un bras tendu sur le cote, descendre vers l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Pompes larges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+        },
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Hanches hautes en V inverse, descendre la tete entre les mains"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Tirage Dorsal",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Rowing inverse (table)",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 75,
+          "instructions": "Sous une table, tirer la poitrine vers le bord"
+        },
+        {
+          "name": "Reverse snow angels",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, bras le long du corps, arc de cercle au sol"
+        },
+        {
+          "name": "Face pulls au sol",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, coudes a 90 degres, tirer vers l'arriere"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

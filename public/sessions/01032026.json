@@ -1,0 +1,122 @@
+{
+  "date": "01032026",
+  "title": "Fondations Solides",
+  "description": "Renforcement bas du corps avec squats sumo, fentes bulgares et gainage dynamique",
+  "estimatedDuration": 33,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Squats sumo",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+        },
+        {
+          "name": "Fentes bulgares",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Pied arriere sur une chaise, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Hip thrust au sol",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, pieds a plat, monter les hanches, serrer les fessiers"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, bras et jambes en l'air, etendre bras/jambe opposes en alternant"
+        },
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+        },
+        {
+          "name": "Gainage lateral",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Sur un avant-bras, corps aligne, hanches hautes",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

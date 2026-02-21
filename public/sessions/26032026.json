@@ -1,0 +1,113 @@
+{
+  "date": "26032026",
+  "title": "Endurance Totale",
+  "description": "EMOM de 10 minutes suivi d'un AMRAP de 10 minutes pour tester l'endurance",
+  "estimatedDuration": 35,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 40,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Endurance",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Pompes Hindu",
+          "reps": 8,
+          "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Squats 1.5",
+          "reps": 8,
+          "instructions": "Descendre, remonter a mi-chemin, redescendre, remonter completement"
+        },
+        {
+          "name": "V-ups",
+          "reps": 10,
+          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Challenge",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Fentes marchees",
+          "reps": 10,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Pompes larges",
+          "reps": 8,
+          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+        },
+        {
+          "name": "Sit-ups",
+          "reps": 10,
+          "instructions": "Dos au sol, remonter completement le buste, toucher les pieds"
+        },
+        {
+          "name": "Glute bridge",
+          "reps": 12,
+          "instructions": "Comme le hip thrust mais dos au sol, pousser les hanches vers le ciel"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "date": "21052026",
+  "title": "AMRAP Determination",
+  "description": "Maximum de rounds en 10 minutes avec pompes, squats et gainage dynamique",
+  "estimatedDuration": 28,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 10 Minutes",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Pompes larges",
+          "reps": 10,
+          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+        },
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+        },
+        {
+          "name": "V-ups",
+          "reps": 8,
+          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+        },
+        {
+          "name": "Fentes avant",
+          "reps": 10,
+          "instructions": "Grand pas en avant, genou arriere frole le sol",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

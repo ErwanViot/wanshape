@@ -1,0 +1,116 @@
+{
+  "date": "23052026",
+  "title": "Circuit Pyramidal Complet",
+  "description": "Circuit full body de 3 rounds suivi d'une pyramide explosive sur les pompes",
+  "estimatedDuration": 36,
+  "focus": ["full-body", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Full Body",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Goblet squat (sans poids)",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mains devant la poitrine, descendre profond"
+        },
+        {
+          "name": "Pompes Hindu",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Gainage lateral",
+          "mode": "timed",
+          "duration": 20,
+          "instructions": "Sur un avant-bras, corps aligne, hanches hautes",
+          "bilateral": true
+        },
+        {
+          "name": "Fentes marchees",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Leg raises",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Dos au sol, lever les jambes tendues a la verticale"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Pompes Explosives",
+      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "restBetweenSets": 20,
+      "exercises": [
+        {
+          "name": "Pompes explosives",
+          "instructions": "Pousser fort pour decoller les mains du sol"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

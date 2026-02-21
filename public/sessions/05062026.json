@@ -1,0 +1,91 @@
+{
+  "date": "05062026",
+  "title": "AMRAP Express",
+  "description": "Maximum de rounds en 10 minutes avec fentes, pompes diamant et gainage dynamique",
+  "estimatedDuration": 28,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 10 Minutes",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Fentes alternees",
+          "reps": 12,
+          "instructions": "Alterner avant gauche et avant droite sans pause"
+        },
+        {
+          "name": "Pompes diamant",
+          "reps": 8,
+          "instructions": "Mains rapprochees sous la poitrine, coudes le long du corps"
+        },
+        {
+          "name": "Crunchs",
+          "reps": 12,
+          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+        },
+        {
+          "name": "Squats sumo",
+          "reps": 10,
+          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

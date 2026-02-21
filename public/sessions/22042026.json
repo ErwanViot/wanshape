@@ -1,0 +1,115 @@
+{
+  "date": "22042026",
+  "title": "Superset Force",
+  "description": "Superset antagoniste pompes-tirage et dips-superman pour un travail équilibré du haut du corps",
+  "estimatedDuration": 31,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Superset Haut du Corps",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 60,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes declinees",
+              "reps": 10,
+              "instructions": "Pieds sureleves sur une chaise, corps gaine"
+            },
+            {
+              "name": "Superman alterne",
+              "reps": 12,
+              "instructions": "Lever bras droit + jambe gauche, alterner"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Dips sur chaise",
+              "reps": 10,
+              "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+            },
+            {
+              "name": "Prone Y raises",
+              "reps": 10,
+              "instructions": "A plat ventre, bras en Y, lever et maintenir 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pompes Hindu",
+              "reps": 8,
+              "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "A plat ventre, lever le buste du sol, serrer les omoplates"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

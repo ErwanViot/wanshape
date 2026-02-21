@@ -1,0 +1,110 @@
+{
+  "date": "13042026",
+  "title": "Circuit Athlétique",
+  "description": "Circuit de 3 rounds mêlant squats sumo, pompes larges, gainage et fentes pour un full body complet",
+  "estimatedDuration": 32,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Toe taps (marche)",
+          "duration": 35,
+          "instructions": "Taper le pied sur une marche en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Full Body",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats sumo",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+        },
+        {
+          "name": "Pompes larges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+        },
+        {
+          "name": "Planche epaule",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "En planche haute, toucher l'epaule opposee en alternant"
+        },
+        {
+          "name": "Fentes curtsy",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Croiser la jambe derriere en diagonale",
+          "bilateral": true
+        },
+        {
+          "name": "Bicycle crunchs",
+          "mode": "reps",
+          "reps": 16,
+          "instructions": "Coude vers genou oppose en alternant, jambe tendue"
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

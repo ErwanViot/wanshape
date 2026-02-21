@@ -1,0 +1,96 @@
+{
+  "date": "28052026",
+  "title": "HIIT Machine",
+  "description": "Intervalles haute intensite avec burpees, skaters et sauts pour un cardio intense",
+  "estimatedDuration": 27,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 40,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "HIIT Cardio Intense",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Burpees sans pompe",
+          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Sauts lateraux d'un pied a l'autre, bras en balance"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Squat explosif avec saut maximum, amortir a la reception"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Sauts lateraux puissants d'un pied a l'autre"
+        },
+        {
+          "name": "Pop squats",
+          "instructions": "Sauter pieds ecartes en squat, sauter pieds joints"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Sauter en ecartant bras et jambes en etoile"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

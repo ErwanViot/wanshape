@@ -1,0 +1,121 @@
+{
+  "date": "11032026",
+  "title": "Buste d'Acier",
+  "description": "Renforcement haut du corps avec pompes archer, face pulls et reverse snow angels",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 35,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 30,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Pompes archer",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Un bras tendu sur le cote, descendre vers l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Pompes inclinees",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Mains sur un support sureleve, plus facile"
+        },
+        {
+          "name": "Pompes explosives",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Pousser fort pour decoller les mains du sol"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Face pulls au sol",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, coudes a 90 degres, tirer vers l'arriere"
+        },
+        {
+          "name": "Reverse snow angels",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, bras le long du corps, arc de cercle au sol"
+        },
+        {
+          "name": "Superman alterne",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lever bras droit + jambe gauche, alterner"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

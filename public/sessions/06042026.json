@@ -1,0 +1,92 @@
+{
+  "date": "06042026",
+  "title": "Max de Rounds",
+  "description": "AMRAP de 10 minutes avec goblet squat, pompes, fentes arrière et sit-ups",
+  "estimatedDuration": 29,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Max Rounds",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Goblet squat (sans poids)",
+          "reps": 12,
+          "instructions": "Mains devant la poitrine, descendre profond"
+        },
+        {
+          "name": "Pompes classiques",
+          "reps": 10,
+          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+        },
+        {
+          "name": "Fentes arriere",
+          "reps": 10,
+          "instructions": "Grand pas en arriere, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Sit-ups",
+          "reps": 10,
+          "instructions": "Dos au sol, remonter completement le buste, toucher les pieds"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "date": "19042026",
+  "title": "AMRAP Express",
+  "description": "AMRAP de 10 minutes avec fentes avant, pompes diamant, sit-ups et squats pour un max de rounds",
+  "estimatedDuration": 28,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Max Rounds",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Fentes avant",
+          "reps": 10,
+          "instructions": "Grand pas en avant, genou arriere frole le sol"
+        },
+        {
+          "name": "Pompes diamant",
+          "reps": 8,
+          "instructions": "Mains rapprochees sous la poitrine, coudes le long du corps"
+        },
+        {
+          "name": "Sit-ups",
+          "reps": 12,
+          "instructions": "Dos au sol, remonter completement le buste, toucher les pieds"
+        },
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

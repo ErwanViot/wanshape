@@ -1,0 +1,101 @@
+{
+  "date": "01062026",
+  "title": "Superset Force Express",
+  "description": "Supersets push-pull rapides avec pompes explosives et tirage pour un haut du corps tonique",
+  "estimatedDuration": 31,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 45,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Supersets Haut du Corps",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes explosives",
+              "reps": 8,
+              "instructions": "Pousser fort pour decoller les mains du sol"
+            },
+            {
+              "name": "Superman",
+              "reps": 10,
+              "instructions": "A plat ventre, lever bras et jambes simultanement, maintenir 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pompes declinees",
+              "reps": 10,
+              "instructions": "Pieds sureleves sur une chaise, corps gaine"
+            },
+            {
+              "name": "Reverse snow angels",
+              "reps": 10,
+              "instructions": "A plat ventre, bras le long du corps, arc de cercle au sol"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 30,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

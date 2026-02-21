@@ -1,0 +1,103 @@
+{
+  "date": "10032026",
+  "title": "Endurance Totale",
+  "description": "EMOM de 10 minutes avec pompes diamant et squats suivi d'un AMRAP de 8 minutes",
+  "estimatedDuration": 35,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Endurance",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Pompes diamant",
+          "reps": 8,
+          "instructions": "Mains rapprochees sous la poitrine, coudes le long du corps"
+        },
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Finisher",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Fentes avant",
+          "reps": 10,
+          "instructions": "Grand pas en avant, genou arriere frole le sol"
+        },
+        {
+          "name": "Pompes classiques",
+          "reps": 8,
+          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+        },
+        {
+          "name": "Crunchs",
+          "reps": 12,
+          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 25,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

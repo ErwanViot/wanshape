@@ -1,0 +1,122 @@
+{
+  "date": "11052026",
+  "title": "Bas du Corps Intensif",
+  "description": "Squats, fentes curtsy et good mornings pour un travail complet des jambes et du core",
+  "estimatedDuration": 32,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Squat & Hinge",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Goblet squat (sans poids)",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Mains devant la poitrine, descendre profond"
+        },
+        {
+          "name": "Fentes curtsy",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Croiser la jambe derriere en diagonale",
+          "bilateral": true
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Mains derriere la tete, pencher le buste en gardant le dos droit"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Stabilite",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Hollow hold",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "tempo": "3s hold",
+          "instructions": "Dos au sol, bras et jambes tendus au-dessus du sol, dos plaque"
+        },
+        {
+          "name": "Planche to downward dog",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Alterner entre planche haute et position du chien tete en bas"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes tendues, croiser en alternant dessus/dessous"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

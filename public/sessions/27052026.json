@@ -1,0 +1,106 @@
+{
+  "date": "27052026",
+  "title": "Circuit Athletique",
+  "description": "Circuit de 3 rounds combinant squats, pompes, gainage et cardio pour un travail complet",
+  "estimatedDuration": 33,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 45,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Full Body",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats 1.5",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Descendre, remonter a mi-chemin, redescendre, remonter completement"
+        },
+        {
+          "name": "Pompes commando",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Alterner entre position planche et position pompe",
+          "bilateral": true
+        },
+        {
+          "name": "Hollow hold",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "Dos au sol, bras et jambes tendus au-dessus du sol, dos plaque"
+        },
+        {
+          "name": "Fentes curtsy",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Croiser la jambe derriere en diagonale",
+          "bilateral": true
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 20,
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

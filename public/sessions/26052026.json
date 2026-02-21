@@ -1,0 +1,128 @@
+{
+  "date": "26052026",
+  "title": "Fondations Solides",
+  "description": "Renforcement bas du corps avec squats pulse et fentes laterales suivi de core dynamique",
+  "estimatedDuration": 32,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Force & Stabilite",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Squats pulse",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Rester en bas du squat, petits mouvements de montee-descente"
+        },
+        {
+          "name": "Fentes laterales",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Grand pas lateral, plier une jambe, l'autre tendue",
+          "bilateral": true
+        },
+        {
+          "name": "Glute bridge marche",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "En pont, alterner lever une jambe puis l'autre comme une marche"
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Mains derriere la tete, pencher le buste en gardant le dos droit"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core Dynamique",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes verticales, toucher les pieds avec les mains"
+        },
+        {
+          "name": "Planche epaule",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "En planche haute, toucher l'epaule opposee en alternant"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes tendues, croiser en alternant dessus/dessous"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "date": "16032026",
+  "title": "Intervalles Infernaux",
+  "description": "HIIT intense avec burpees, tuck jumps, skaters et squat jumps pour un cardio explosif",
+  "estimatedDuration": 27,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 35,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "HIIT Infernal",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Tuck jumps",
+          "instructions": "Sauter en ramenant les genoux a la poitrine"
+        },
+        {
+          "name": "Burpees",
+          "instructions": "Descendre, poser les mains, sauter les pieds en arriere, pompe, sauter debout"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Sauter en ecartant bras et jambes en etoile"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Squat explosif avec saut maximum, amortir a la reception"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Sauts lateraux puissants d'un pied a l'autre"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

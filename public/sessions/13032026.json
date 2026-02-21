@@ -1,0 +1,101 @@
+{
+  "date": "13032026",
+  "title": "Antagonistes",
+  "description": "Superset push/pull et squat/hinge pour un travail équilibré du haut du corps",
+  "estimatedDuration": 31,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 30,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Superset Antagoniste",
+      "sets": 3,
+      "restBetweenSets": 75,
+      "restBetweenPairs": 45,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes classiques",
+              "reps": 12,
+              "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+            },
+            {
+              "name": "Superman",
+              "reps": 12,
+              "instructions": "A plat ventre, lever bras et jambes simultanement, maintenir 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Dips sur chaise",
+              "reps": 10,
+              "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+            },
+            {
+              "name": "Prone Y raises",
+              "reps": 10,
+              "instructions": "A plat ventre, bras en Y, lever et maintenir 2s"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

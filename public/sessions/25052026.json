@@ -1,0 +1,99 @@
+{
+  "date": "25052026",
+  "title": "Endurance Totale",
+  "description": "EMOM de 10 minutes suivi d'un AMRAP de 8 minutes pour tester l'endurance complete",
+  "estimatedDuration": 34,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 45,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM 10 Minutes",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Pompes diamant",
+          "reps": 8,
+          "instructions": "Mains rapprochees sous la poitrine, coudes le long du corps"
+        },
+        {
+          "name": "Squats sautes",
+          "reps": 8,
+          "instructions": "Squat explosif avec saut, amortir a la reception"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 8 Minutes",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Fentes arriere",
+          "reps": 10,
+          "instructions": "Grand pas en arriere, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Crunchs",
+          "reps": 12,
+          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+        },
+        {
+          "name": "Pompes inclinees",
+          "reps": 10,
+          "instructions": "Mains sur un support sureleve, plus facile"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "date": "17042026",
+  "title": "Montée en Force",
+  "description": "Pyramide de pompes et squats suivie d'un classic ciblé core et hinge pour un full body progressif",
+  "estimatedDuration": 35,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Ascendante",
+      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Pompes inclinees",
+          "instructions": "Mains sur un support sureleve, plus facile"
+        },
+        {
+          "name": "Squats",
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Renforcement Complémentaire",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Mains derriere la tete, pencher le buste en gardant le dos droit"
+        },
+        {
+          "name": "Gainage planche",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Sur les avant-bras, corps parfaitement aligne, serrer les abdos"
+        },
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes verticales, toucher les pieds avec les mains"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

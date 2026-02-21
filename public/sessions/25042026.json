@@ -1,0 +1,118 @@
+{
+  "date": "25042026",
+  "title": "HIIT & Tabata Inferno",
+  "description": "HIIT de 3 rounds avec skaters et jump lunges suivi d'un tabata de squat jumps et flutter kicks",
+  "estimatedDuration": 30,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 35,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "HIIT Puissance",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Skaters",
+          "instructions": "Sauts lateraux d'un pied a l'autre, bras en balance"
+        },
+        {
+          "name": "Jump lunges",
+          "instructions": "Fentes sautees en alternant les jambes"
+        },
+        {
+          "name": "Burpees",
+          "instructions": "Descendre, poser les mains, sauter les pieds en arriere, pompe, sauter debout"
+        },
+        {
+          "name": "Box jumps (marche)",
+          "instructions": "Sauter sur une marche ou plateforme basse, redescendre"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Tabata Final",
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Squat jumps",
+          "instructions": "Squat explosif avec saut maximum, amortir a la reception"
+        },
+        {
+          "name": "Flutter kicks",
+          "instructions": "Dos au sol, jambes tendues, battements rapides"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Sauter en ecartant bras et jambes en etoile"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

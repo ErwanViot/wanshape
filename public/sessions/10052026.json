@@ -1,0 +1,120 @@
+{
+  "date": "10052026",
+  "title": "Buste d'Acier",
+  "description": "Travail push avec pompes archer et pike push-ups puis pull avec back extensions et face pulls",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 45,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 40,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Force",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Pompes archer",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Un bras tendu sur le cote, descendre vers l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Hanches hautes en V inverse, descendre la tete entre les mains"
+        },
+        {
+          "name": "Pompes explosives",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Pousser fort pour decoller les mains du sol"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Dos",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Back extensions",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, lever le buste du sol, serrer les omoplates"
+        },
+        {
+          "name": "Face pulls au sol",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, coudes a 90 degres, tirer vers l'arriere"
+        },
+        {
+          "name": "Reverse snow angels",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, bras le long du corps, arc de cercle au sol"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

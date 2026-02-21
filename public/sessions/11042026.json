@@ -1,0 +1,113 @@
+{
+  "date": "11042026",
+  "title": "Endurance Totale",
+  "description": "EMOM de 10 minutes suivi d'un AMRAP de 10 minutes pour un travail d'endurance complet",
+  "estimatedDuration": 35,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 35,
+          "instructions": "Course sur place, talons vers les fessiers"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Endurance",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Pompes explosives",
+          "reps": 8,
+          "instructions": "Pousser fort pour decoller les mains du sol"
+        },
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+        },
+        {
+          "name": "V-ups",
+          "reps": 10,
+          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Challenge",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Fentes marchees",
+          "reps": 12,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Pompes Hindu",
+          "reps": 8,
+          "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Russian twists",
+          "reps": 16,
+          "instructions": "Assis, pieds decolles, tourner le buste de gauche a droite"
+        },
+        {
+          "name": "Squats sumo",
+          "reps": 10,
+          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

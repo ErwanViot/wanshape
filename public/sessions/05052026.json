@@ -1,0 +1,90 @@
+{
+  "date": "05052026",
+  "title": "AMRAP Defi Total",
+  "description": "AMRAP de 10 minutes avec fentes marchees, pompes et crunchs pour un maximum de tours",
+  "estimatedDuration": 28,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 45,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 40,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 10 Minutes",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Fentes marchees",
+          "reps": 10,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Pompes Hindu",
+          "reps": 8,
+          "instructions": "Mouvement de plongee : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Crunchs",
+          "reps": 12,
+          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+        },
+        {
+          "name": "Goblet squat (sans poids)",
+          "reps": 10,
+          "instructions": "Mains devant la poitrine, descendre profond"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

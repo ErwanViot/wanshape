@@ -1,0 +1,118 @@
+{
+  "date": "22052026",
+  "title": "Cardio Double Impact",
+  "description": "Combo HIIT explosif et Tabata pour un cardio haute intensite complet",
+  "estimatedDuration": 30,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 45,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 40,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "HIIT Explosif",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Burpees",
+          "instructions": "Descendre, poser les mains, sauter les pieds en arriere, pompe, sauter debout"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Sauts lateraux d'un pied a l'autre, bras en balance"
+        },
+        {
+          "name": "Tuck jumps",
+          "instructions": "Sauter en ramenant les genoux a la poitrine"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Sauter en ecartant bras et jambes en etoile"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Tabata Finisher",
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Jump lunges",
+          "instructions": "Fentes sautees en alternant les jambes"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        },
+        {
+          "name": "Broad jumps",
+          "instructions": "Sauts en longueur, amortir et recommencer"
+        },
+        {
+          "name": "Flutter kicks",
+          "instructions": "Dos au sol, jambes tendues, battements rapides"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

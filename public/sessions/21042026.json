@@ -1,0 +1,129 @@
+{
+  "date": "21042026",
+  "title": "Bas du Corps Focus",
+  "description": "Sissy squats, fentes latérales et glute bridge marché pour un travail jambes et core complet",
+  "estimatedDuration": 32,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Toe taps (marche)",
+          "duration": 35,
+          "instructions": "Taper le pied sur une marche en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Variété",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Sissy squat",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Se pencher en arriere, genoux vers l'avant, quadriceps en feu"
+        },
+        {
+          "name": "Fentes laterales",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Grand pas lateral, plier une jambe, l'autre tendue",
+          "bilateral": true
+        },
+        {
+          "name": "Glute bridge marche",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "En pont, alterner lever une jambe puis l'autre comme une marche"
+        },
+        {
+          "name": "Single leg deadlift",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Pencher le buste, une jambe se leve derriere, garder l'equilibre",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Dynamique",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+        },
+        {
+          "name": "Gainage Superman",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "En planche, lever un bras et la jambe opposee, alterner"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 16,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes tendues, croiser en alternant dessus/dessous"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

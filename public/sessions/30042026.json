@@ -1,0 +1,122 @@
+{
+  "date": "30042026",
+  "title": "Jambes & Gainage Solide",
+  "description": "Renforcement bas du corps avec squats sumo, fentes bulgares et gainage dynamique",
+  "estimatedDuration": 33,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 45,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Squats & Fentes",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Squats sumo",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+        },
+        {
+          "name": "Fentes bulgares",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Pied arriere sur une chaise, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Hip thrust au sol",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, pieds a plat, monter les hanches, serrer les fessiers"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Gainage",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Bicycle crunchs",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Coude vers genou oppose en alternant, jambe tendue"
+        },
+        {
+          "name": "Gainage lateral",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Sur un avant-bras, corps aligne, hanches hautes",
+          "bilateral": true
+        },
+        {
+          "name": "Leg raises",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever les jambes tendues a la verticale"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

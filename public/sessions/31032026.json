@@ -1,0 +1,121 @@
+{
+  "date": "31032026",
+  "title": "Buste d'Acier",
+  "description": "Push-pull ciblé avec pompes archer, rowing inverse et travail d'épaules",
+  "estimatedDuration": 34,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Poussée",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Pompes archer",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Un bras tendu sur le cote, descendre vers l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hanches hautes en V inverse, descendre la tete entre les mains"
+        },
+        {
+          "name": "Pompes explosives",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Pousser fort pour decoller les mains du sol"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Tirage",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Rowing inverse (table)",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Sous une table, tirer la poitrine vers le bord"
+        },
+        {
+          "name": "Reverse snow angels",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, bras le long du corps, arc de cercle au sol"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, bras en Y, lever et maintenir 2s"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "date": "18032026",
+  "title": "Montée en Force",
+  "description": "Pyramide de squats et pompes suivie d'un renforcement classique complet",
+  "estimatedDuration": 35,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Full Body",
+      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "restBetweenSets": 20,
+      "exercises": [
+        {
+          "name": "Squats",
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+        },
+        {
+          "name": "Pompes classiques",
+          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Renforcement Complémentaire",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Fentes avant",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Grand pas en avant, genou arriere frole le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Superman",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, lever bras et jambes simultanement, maintenir 2s"
+        },
+        {
+          "name": "Bicycle crunchs",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Coude vers genou oppose en alternant, jambe tendue"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

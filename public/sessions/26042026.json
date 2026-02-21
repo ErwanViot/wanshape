@@ -1,0 +1,113 @@
+{
+  "date": "26042026",
+  "title": "Double Défi Chrono",
+  "description": "EMOM de 10 minutes avec pompes larges et squats sumo suivi d'un AMRAP de 8 minutes complet",
+  "estimatedDuration": 33,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Précision",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Pompes larges",
+          "reps": 10,
+          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+        },
+        {
+          "name": "Squats sumo",
+          "reps": 12,
+          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+        },
+        {
+          "name": "Toe touches",
+          "reps": 12,
+          "instructions": "Dos au sol, jambes verticales, toucher les pieds avec les mains"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Total",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Fentes arriere",
+          "reps": 10,
+          "instructions": "Grand pas en arriere, descendre le genou"
+        },
+        {
+          "name": "Pompes classiques",
+          "reps": 10,
+          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+        },
+        {
+          "name": "Bicycle crunchs",
+          "reps": 16,
+          "instructions": "Coude vers genou oppose en alternant, jambe tendue"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

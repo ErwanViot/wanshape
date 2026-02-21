@@ -1,0 +1,86 @@
+{
+  "date": "15042026",
+  "title": "Chrono EMOM",
+  "description": "EMOM de 12 minutes avec pompes commando, goblet squats et flutter kicks pour l'endurance",
+  "estimatedDuration": 28,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 35,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Précision",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Pompes commando",
+          "reps": 8,
+          "instructions": "Alterner entre position planche et position pompe"
+        },
+        {
+          "name": "Goblet squat (sans poids)",
+          "reps": 12,
+          "instructions": "Mains devant la poitrine, descendre profond"
+        },
+        {
+          "name": "Flutter kicks",
+          "reps": 20,
+          "instructions": "Dos au sol, jambes tendues, battements rapides"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

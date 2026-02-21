@@ -1,0 +1,129 @@
+{
+  "date": "15032026",
+  "title": "Jambes & Core",
+  "description": "Renforcement jambes avec wall sit, fentes avec pause et single leg deadlift, suivi d'un travail core",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Fentes avec pause",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Descendre et maintenir 3s en bas avant de remonter",
+          "bilateral": true
+        },
+        {
+          "name": "Single leg deadlift",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Pencher le buste, une jambe se leve derriere, garder l'equilibre",
+          "bilateral": true
+        },
+        {
+          "name": "Wall sit",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos contre le mur, cuisses paralleles, maintenir la position"
+        },
+        {
+          "name": "Glute bridge marche",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "En pont, alterner lever une jambe puis l'autre comme une marche"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes tendues, croiser en alternant dessus/dessous"
+        },
+        {
+          "name": "Gainage planche",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Sur les avant-bras, corps parfaitement aligne, serrer les abdos"
+        },
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

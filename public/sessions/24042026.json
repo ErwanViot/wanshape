@@ -1,0 +1,129 @@
+{
+  "date": "24042026",
+  "title": "Jambes & Core Intensif",
+  "description": "Pistol squats assistés, fentes avec pause et reverse hyper suivis d'un bloc core complet",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Force Unilatérale",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Pistol squat assiste",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Squat sur une jambe en se tenant a un support",
+          "bilateral": true
+        },
+        {
+          "name": "Fentes avec pause",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Descendre et maintenir 3s en bas avant de remonter",
+          "bilateral": true
+        },
+        {
+          "name": "Reverse hyper sur table",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Ventre sur le bord, lever les jambes derriere soi"
+        },
+        {
+          "name": "Glute bridge",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Comme le hip thrust mais dos au sol, pousser les hanches vers le ciel"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Gainage Complet",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Planche RKC",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Planche avec contraction maximale, serrer poings et fessiers"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 16,
+          "restBetweenSets": 60,
+          "instructions": "Assis, pieds decolles, tourner le buste de gauche a droite"
+        },
+        {
+          "name": "Leg raises",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever les jambes tendues a la verticale"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "date": "01042026",
+  "title": "Bas du Corps Focus",
+  "description": "Renforcement des jambes avec pistol squat assisté, fentes avec pause et travail de core",
+  "estimatedDuration": 32,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Renforcement",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Pistol squat assiste",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Squat sur une jambe en se tenant a un support",
+          "bilateral": true
+        },
+        {
+          "name": "Fentes avec pause",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Descendre et maintenir 3s en bas avant de remonter",
+          "bilateral": true
+        },
+        {
+          "name": "Romanian deadlift unilateral",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Sur une jambe, pencher le buste en avant, jambe arriere tendue",
+          "bilateral": true
+        },
+        {
+          "name": "Glute bridge marche",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "En pont, alterner lever une jambe puis l'autre comme une marche"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Stabilisation",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Hollow hold",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, bras et jambes tendus au-dessus du sol, dos plaque",
+          "tempo": "25s hold"
+        },
+        {
+          "name": "Bicycle crunchs",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Coude vers genou oppose en alternant, jambe tendue"
+        },
+        {
+          "name": "Bear hold",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "A quatre pattes, genoux decolles du sol de 2cm, maintenir",
+          "tempo": "20s hold"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

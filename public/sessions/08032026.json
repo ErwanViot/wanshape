@@ -1,0 +1,120 @@
+{
+  "date": "08032026",
+  "title": "Circuit Pyramidal",
+  "description": "Circuit full body de 3 rounds suivi d'une pyramide explosive pompes-squats sautes",
+  "estimatedDuration": 36,
+  "focus": ["full-body", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Complet",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Fentes avant",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Grand pas en avant, genou arriere frole le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pompes declinees",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Pieds sureleves sur une chaise, corps gaine"
+        },
+        {
+          "name": "Gainage Superman",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "En planche, lever un bras et la jambe opposee, alterner"
+        },
+        {
+          "name": "Good morning",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Mains derriere la tete, pencher le buste en gardant le dos droit"
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnes"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Explosive",
+      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "restBetweenSets": 20,
+      "exercises": [
+        {
+          "name": "Pompes classiques",
+          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+        },
+        {
+          "name": "Squats sautes",
+          "instructions": "Squat explosif avec saut, amortir a la reception"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 25,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

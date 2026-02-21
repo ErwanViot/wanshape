@@ -1,0 +1,125 @@
+{
+  "date": "23042026",
+  "title": "Challenge Complet",
+  "description": "Circuit de 3 rounds avec fentes sautées et gainage suivi d'une pyramide de burpees et crunchs",
+  "estimatedDuration": 37,
+  "focus": ["full-body", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 35,
+          "instructions": "Deplacements lateraux rapides, 3-4 pas de chaque cote"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Explosif",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Fentes sautees",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Alterner les jambes en sautant, explosif"
+        },
+        {
+          "name": "Pompes declinees",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Pieds sureleves sur une chaise, corps gaine"
+        },
+        {
+          "name": "Planche epaule",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "En planche haute, toucher l'epaule opposee en alternant"
+        },
+        {
+          "name": "Squats sautes",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Squat explosif avec saut, amortir a la reception"
+        },
+        {
+          "name": "Superman",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "A plat ventre, lever bras et jambes simultanement, maintenir 2s"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Finale",
+      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Burpees sans pompe",
+          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+        },
+        {
+          "name": "Crunchs",
+          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

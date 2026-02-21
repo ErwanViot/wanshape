@@ -1,0 +1,115 @@
+{
+  "date": "25032026",
+  "title": "Superset Antagonistes",
+  "description": "Paires push-pull en superset pour un haut du corps équilibré et efficace",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Superset Push-Pull",
+      "sets": 3,
+      "restBetweenSets": 75,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes classiques",
+              "reps": 10,
+              "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+            },
+            {
+              "name": "Superman alterne",
+              "reps": 12,
+              "instructions": "Lever bras droit + jambe gauche, alterner"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pompes declinees",
+              "reps": 8,
+              "instructions": "Pieds sureleves sur une chaise, corps gaine"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 12,
+              "instructions": "A plat ventre, bras en T, serrer les omoplates"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Dips sur chaise",
+              "reps": 10,
+              "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+            },
+            {
+              "name": "Face pulls au sol",
+              "reps": 12,
+              "instructions": "A plat ventre, coudes a 90 degres, tirer vers l'arriere"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondement"
+        }
+      ]
+    }
+  ]
+}

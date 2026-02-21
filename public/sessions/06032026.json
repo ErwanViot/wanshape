@@ -1,0 +1,91 @@
+{
+  "date": "06032026",
+  "title": "AMRAP Express",
+  "description": "AMRAP de 10 minutes enchainant squats pulse, pompes inclinees, fentes marchees et sit-ups",
+  "estimatedDuration": 28,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 10 min",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Squats pulse",
+          "reps": 12,
+          "instructions": "Rester en bas du squat, petits mouvements de montee-descente"
+        },
+        {
+          "name": "Pompes inclinees",
+          "reps": 10,
+          "instructions": "Mains sur un support sureleve, plus facile"
+        },
+        {
+          "name": "Fentes marchees",
+          "reps": 10,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Sit-ups",
+          "reps": 10,
+          "instructions": "Dos au sol, remonter completement le buste, toucher les pieds"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

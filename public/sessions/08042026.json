@@ -1,0 +1,120 @@
+{
+  "date": "08042026",
+  "title": "Force du Haut",
+  "description": "Renforcement haut du corps en push-pull avec pompes variées et travail dorsal au sol",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 40,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Poussée",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Pompes declinees",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Pieds sureleves sur une chaise, corps gaine"
+        },
+        {
+          "name": "Pompes diamant",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Mains rapprochees sous la poitrine, coudes le long du corps"
+        },
+        {
+          "name": "Dips sur chaise",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Tirage",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Rowing inverse (table)",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Sous une table, tirer la poitrine vers le bord"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, bras en Y, lever et maintenir 2s"
+        },
+        {
+          "name": "Superman",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, lever bras et jambes simultanement, maintenir 2s"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 25,
+          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}
