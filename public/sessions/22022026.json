@@ -1,13 +1,13 @@
 {
   "date": "22022026",
-  "title": "Superset Force",
-  "description": "Superset antagoniste push/pull et squat/hinge pour un travail équilibré",
-  "estimatedDuration": 33,
+  "title": "Renforcement Essentiel",
+  "description": "Seance de renforcement accessible avec des exercices fondamentaux au poids du corps",
+  "estimatedDuration": 28,
   "focus": ["full-body"],
   "blocks": [
     {
       "type": "warmup",
-      "name": "Échauffement",
+      "name": "Echauffement",
       "exercises": [
         {
           "name": "Rotations articulaires",
@@ -20,66 +20,57 @@
           "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
         },
         {
-          "name": "World's greatest stretch",
-          "duration": 45,
-          "instructions": "Fente + rotation du buste + bras vers le ciel",
-          "bilateral": true
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
         },
         {
-          "name": "Scapular push-ups",
+          "name": "Deep squat hold",
           "duration": 30,
-          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
         }
       ]
     },
     {
-      "type": "superset",
-      "name": "Superset Antagoniste",
-      "sets": 3,
-      "restBetweenSets": 90,
-      "restBetweenPairs": 45,
-      "pairs": [
+      "type": "classic",
+      "name": "Renforcement",
+      "restBetweenExercises": 45,
+      "exercises": [
         {
-          "exercises": [
-            {
-              "name": "Pompes larges",
-              "reps": 10,
-              "instructions": "Mains plus larges que les epaules, focus pectoraux"
-            },
-            {
-              "name": "Rowing inverse (table)",
-              "reps": 10,
-              "instructions": "Sous une table, tirer la poitrine vers le bord"
-            }
-          ]
+          "name": "Squats",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
         },
         {
-          "exercises": [
-            {
-              "name": "Squats",
-              "reps": 12,
-              "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
-            },
-            {
-              "name": "Good morning",
-              "reps": 12,
-              "instructions": "Mains derriere la tete, pencher le buste en gardant le dos droit"
-            }
-          ]
+          "name": "Pompes inclinees",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Mains sur un support sureleve, plus facile"
         },
         {
-          "exercises": [
-            {
-              "name": "Pike push-ups",
-              "reps": 8,
-              "instructions": "Hanches hautes en V inverse, descendre la tete entre les mains"
-            },
-            {
-              "name": "Superman alterne",
-              "reps": 12,
-              "instructions": "Lever bras droit + jambe gauche, alterner"
-            }
-          ]
+          "name": "Fentes arriere",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Grand pas en arriere, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Gainage planche",
+          "sets": 3,
+          "duration": 30,
+          "restBetweenSets": 45,
+          "instructions": "Sur les avant-bras, corps parfaitement aligne, serrer les abdos"
+        },
+        {
+          "name": "Glute bridge",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 45,
+          "instructions": "Comme le hip thrust mais dos au sol, pousser les hanches vers le ciel"
         }
       ]
     },
@@ -88,9 +79,9 @@
       "name": "Retour au calme",
       "exercises": [
         {
-          "name": "Etirement pectoraux",
-          "duration": 25,
-          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
           "bilateral": true
         },
         {
@@ -100,9 +91,9 @@
           "bilateral": true
         },
         {
-          "name": "Etirement triceps",
+          "name": "Etirement pectoraux",
           "duration": 25,
-          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
           "bilateral": true
         },
         {
