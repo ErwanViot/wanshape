@@ -1,6 +1,6 @@
 import type { TabataBlock } from '../../types/session.ts';
 import type { AtomicStep } from '../../types/player.ts';
-import { BLOCK_COLORS, TRANSITION_DURATION, PREPARE_COUNTDOWN, TABATA_DEFAULTS } from '../constants.ts';
+import { BLOCK_COLORS, TRANSITION_DURATION, TABATA_DEFAULTS } from '../constants.ts';
 
 export function expandTabata(
   block: TabataBlock,
