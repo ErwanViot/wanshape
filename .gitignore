@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Working files
+work/
+
+# AI tooling
+.claude/
+.serena/

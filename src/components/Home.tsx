@@ -121,6 +121,10 @@ export function Home() {
             <Link to="/formats" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
               En savoir plus
             </Link>
+            {' · '}
+            <Link to="/exercices" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
+              Nos exercices
+            </Link>
           </p>
         </div>
 
