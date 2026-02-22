@@ -1,5 +1,7 @@
+import { Link } from 'react-router';
 import { BLOCK_COLORS } from '../engine/constants.ts';
 import { computeTimeline, formatBlockDuration } from '../utils/sessionTimeline.ts';
+import { getExerciseLink } from '../utils/exerciseLinks.ts';
 import type { Session, Block } from '../types/session.ts';
 
 interface Props {
@@ -88,7 +90,7 @@ function BlockDetail({ block, segment, index, total }: {
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-[13px] font-medium text-strong">{ex.name}</span>
+                  <ExerciseName name={ex.name} />
                   <span className="text-[11px] text-muted">{ex.detail}</span>
                 </div>
                 <p className="text-[11px] text-faint mt-0.5 leading-relaxed">{ex.instructions}</p>
@@ -175,6 +177,19 @@ function getExercises(block: Block): ExerciseInfo[] {
         instructions: ex.instructions,
       }));
   }
+}
+
+function ExerciseName({ name }: { name: string }) {
+  const link = getExerciseLink(name);
+  if (!link) {
+    return <span className="text-[13px] font-medium text-strong">{name}</span>;
+  }
+  const to = `/exercices/${link.slug}${link.anchor ? `#${link.anchor}` : ''}`;
+  return (
+    <Link to={to} className="text-[13px] font-medium text-indigo-400 hover:text-indigo-300 transition-colors underline underline-offset-2 decoration-indigo-400/30">
+      {name}
+    </Link>
+  );
 }
 
 function getBlockMeta(block: Block): string {
