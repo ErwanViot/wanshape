@@ -12,9 +12,47 @@
   --color-superset: #4F46E5;
   --color-pyramid: #9333EA;
   --color-brand: #4F46E5;
-  --color-surface: #0f0f13;
-  --color-surface-light: #16161d;
-  --color-surface-card: #1a1a24;
+  --color-surface: #1a1a22;
+  --color-surface-light: #22222d;
+  --color-surface-card: #262635;
+
+  /* Semantic text hierarchy */
+  --color-heading: #ffffff;
+  --color-strong: rgba(255, 255, 255, 0.92);
+  --color-body: rgba(255, 255, 255, 0.72);
+  --color-subtle: rgba(255, 255, 255, 0.65);
+  --color-muted: rgba(255, 255, 255, 0.55);
+  --color-faint: rgba(255, 255, 255, 0.45);
+
+  /* Borders */
+  --color-divider: rgba(255, 255, 255, 0.08);
+  --color-divider-strong: rgba(255, 255, 255, 0.15);
+
+  /* Cards & surfaces */
+  --color-card-bg: rgba(255, 255, 255, 0.04);
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-dot-inactive: rgba(255, 255, 255, 0.12);
+}
+
+/* Light mode overrides */
+[data-theme="light"] {
+  --color-surface: #f5f5f7;
+  --color-surface-light: #ebedf0;
+  --color-surface-card: #ffffff;
+
+  --color-heading: #1a1a2e;
+  --color-strong: rgba(26, 26, 46, 0.85);
+  --color-body: rgba(26, 26, 46, 0.65);
+  --color-subtle: rgba(26, 26, 46, 0.55);
+  --color-muted: rgba(26, 26, 46, 0.45);
+  --color-faint: rgba(26, 26, 46, 0.25);
+
+  --color-divider: rgba(26, 26, 46, 0.08);
+  --color-divider-strong: rgba(26, 26, 46, 0.15);
+
+  --color-card-bg: rgba(255, 255, 255, 0.8);
+  --color-card-border: rgba(26, 26, 46, 0.08);
+  --color-dot-inactive: rgba(26, 26, 46, 0.15);
 }
 
 * {
@@ -29,18 +67,22 @@ html, body, #root {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #0f0f13;
-  color: #ffffff;
+  background-color: var(--color-surface);
+  color: var(--color-heading);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Glass morphism card */
 .glass-card {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--color-card-bg);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-card-border);
+}
+
+[data-theme="light"] .glass-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 /* Gradient text utility */
@@ -64,24 +106,6 @@ body {
   transform: scale(0.98) translateY(0);
 }
 
-/* Session image overlay */
-.session-image-wrapper {
-  overflow: hidden;
-}
-.session-image-wrapper::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(15, 15, 19, 0.95) 0%,
-    rgba(15, 15, 19, 0.6) 40%,
-    rgba(15, 15, 19, 0.2) 70%,
-    rgba(15, 15, 19, 0.1) 100%
-  );
-  pointer-events: none;
-}
-
 /* Timeline bar */
 .timeline-segment {
   height: 5px;
@@ -98,21 +122,27 @@ body {
   background: linear-gradient(135deg, #4F46E5, #3B82F6);
 }
 .intensity-dot.inactive {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--color-dot-inactive);
 }
 
 /* Format card hover */
 .format-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-card-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-card-border);
   transition: all 0.25s ease;
 }
 .format-card:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-divider-strong);
   transform: translateY(-2px);
+}
+
+[data-theme="light"] .format-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .format-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Value prop icon */
@@ -125,13 +155,6 @@ body {
   justify-content: center;
   background: rgba(79, 70, 229, 0.1);
   flex-shrink: 0;
-}
-
-/* Left column subtle gradient */
-.left-gradient-bg {
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(79, 70, 229, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 80% 20%, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
 }
 
 /* Session label glow */

@@ -1,11 +1,7 @@
-import { useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
 type Tab = 'mentions' | 'privacy' | 'cgu';
-
-interface Props {
-  onBack: () => void;
-  initialTab?: Tab;
-}
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'mentions', label: 'Mentions légales' },
@@ -13,24 +9,37 @@ const TABS: { key: Tab; label: string }[] = [
   { key: 'cgu', label: 'CGU' },
 ];
 
-export function Legal({ onBack, initialTab = 'mentions' }: Props) {
-  const [tab, setTab] = useState<Tab>(initialTab);
+const TAB_TITLES: Record<Tab, string> = {
+  mentions: 'Mentions légales',
+  privacy: 'Politique de confidentialité',
+  cgu: 'Conditions Générales d\'Utilisation',
+};
+
+export function Legal() {
+  const { tab: tabParam } = useParams<{ tab: string }>();
+  const navigate = useNavigate();
+  const tab: Tab = (tabParam && ['mentions', 'privacy', 'cgu'].includes(tabParam)) ? tabParam as Tab : 'mentions';
+
+  useDocumentHead({
+    title: TAB_TITLES[tab],
+    description: `${TAB_TITLES[tab]} du site WAN SHAPE, édité par WAN SOFT.`,
+  });
 
   return (
     <div className="min-h-screen bg-surface">
       {/* Header */}
-      <header className="bg-surface border-b border-white/8 sticky top-0 z-10">
+      <header className="bg-surface border-b border-divider sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-6 py-4 flex items-center gap-4">
-          <button
-            onClick={onBack}
-            className="text-white/40 hover:text-white/70 transition-colors"
+          <Link
+            to="/"
+            className="text-muted hover:text-strong transition-colors"
             aria-label="Retour"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M15 18l-6-6 6-6" />
             </svg>
-          </button>
-          <h1 className="font-bold text-lg text-white">Informations légales</h1>
+          </Link>
+          <h1 className="font-bold text-lg text-heading">Informations légales</h1>
         </div>
 
         {/* Tabs */}
@@ -38,11 +47,11 @@ export function Legal({ onBack, initialTab = 'mentions' }: Props) {
           {TABS.map(t => (
             <button
               key={t.key}
-              onClick={() => setTab(t.key)}
+              onClick={() => navigate(`/legal/${t.key}`, { replace: true })}
               className={`px-4 py-2.5 text-sm font-medium rounded-t-lg transition-colors ${
                 tab === t.key
-                  ? 'text-indigo-400 bg-surface-light border-t-2 border-x border-indigo-500 border-x-white/8 -mb-px'
-                  : 'text-white/40 hover:text-white/60'
+                  ? 'text-indigo-400 bg-surface-light border-t-2 border-x border-indigo-500 border-x-divider -mb-px'
+                  : 'text-muted hover:text-body'
               }`}
             >
               {t.label}
@@ -65,8 +74,8 @@ export function Legal({ onBack, initialTab = 'mentions' }: Props) {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mb-8">
-      <h2 className="text-lg font-bold text-white mb-3">{title}</h2>
-      <div className="space-y-2 text-sm text-white/50 leading-relaxed">{children}</div>
+      <h2 className="text-lg font-bold text-heading mb-3">{title}</h2>
+      <div className="space-y-2 text-sm text-subtle leading-relaxed">{children}</div>
     </section>
   );
 }
@@ -74,14 +83,14 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function MentionsLegales() {
   return (
     <>
-      <h1 className="text-2xl font-bold text-white mb-6">Mentions légales</h1>
+      <h1 className="text-2xl font-bold text-heading mb-6">Mentions légales</h1>
 
       <Section title="Éditeur du site">
         <p>
-          Le site <strong className="text-white/70">WAN SHAPE</strong> (ci-après « le Site ») est édité par :
+          Le site <strong className="text-strong">WAN SHAPE</strong> (ci-après « le Site ») est édité par :
         </p>
         <p>
-          <strong className="text-white/70">WAN SOFT</strong><br />
+          <strong className="text-strong">WAN SOFT</strong><br />
           SARL (Société à Responsabilité Limitée)<br />
           SIRET : 831 188 586 00026<br />
           Directeur de la publication : Erwan VIOT<br />
@@ -95,7 +104,7 @@ function MentionsLegales() {
           Le Site est hébergé par :
         </p>
         <p>
-          <strong className="text-white/70">Vercel Inc.</strong><br />
+          <strong className="text-strong">Vercel Inc.</strong><br />
           440 N Barranca Ave #4133, Covina, CA 91723, États-Unis<br />
           Site web : <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-indigo-400 underline">vercel.com</a>
         </p>
@@ -140,9 +149,9 @@ function MentionsLegales() {
 function PolitiqueConfidentialite() {
   return (
     <>
-      <h1 className="text-2xl font-bold text-white mb-6">Politique de confidentialité</h1>
+      <h1 className="text-2xl font-bold text-heading mb-6">Politique de confidentialité</h1>
 
-      <p className="text-sm text-white/35 mb-6">Dernière mise à jour : février 2026</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : février 2026</p>
 
       <Section title="Responsable du traitement">
         <p>
@@ -153,7 +162,7 @@ function PolitiqueConfidentialite() {
 
       <Section title="Données collectées">
         <p>
-          <strong className="text-white/70">WAN SHAPE ne collecte aucune donnée personnelle.</strong>
+          <strong className="text-strong">WAN SHAPE ne collecte aucune donnée personnelle.</strong>
         </p>
         <p>
           Le Site ne requiert ni inscription, ni création de compte. Aucune information
@@ -172,7 +181,7 @@ function PolitiqueConfidentialite() {
 
       <Section title="Cookies">
         <p>
-          <strong className="text-white/70">WAN SHAPE n'utilise aucun cookie</strong> de suivi, d'analyse ou publicitaire.
+          <strong className="text-strong">WAN SHAPE n'utilise aucun cookie</strong> de suivi, d'analyse ou publicitaire.
         </p>
         <p>
           Aucun cookie tiers n'est déposé sur votre appareil lors de votre visite.
@@ -221,9 +230,9 @@ function PolitiqueConfidentialite() {
 function CGU() {
   return (
     <>
-      <h1 className="text-2xl font-bold text-white mb-6">Conditions Générales d'Utilisation</h1>
+      <h1 className="text-2xl font-bold text-heading mb-6">Conditions Générales d'Utilisation</h1>
 
-      <p className="text-sm text-white/35 mb-6">Dernière mise à jour : février 2026</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : février 2026</p>
 
       <Section title="Objet">
         <p>
@@ -245,7 +254,7 @@ function CGU() {
 
       <Section title="Nature du contenu">
         <p>
-          <strong className="text-white/70">WAN SHAPE est un service de contenu éditorial et informationnel
+          <strong className="text-strong">WAN SHAPE est un service de contenu éditorial et informationnel
           relatif à l'activité physique.</strong>
         </p>
         <p>
@@ -281,7 +290,7 @@ function CGU() {
 
       <Section title="Avertissement santé">
         <p>
-          <strong className="text-white/70">Les exercices proposés sont fournis à titre purement informatif et ne
+          <strong className="text-strong">Les exercices proposés sont fournis à titre purement informatif et ne
           constituent en aucun cas un avis médical ni une prescription d'activité
           physique.</strong>
         </p>
@@ -319,7 +328,7 @@ function CGU() {
 
       <Section title="Acceptation des risques et responsabilité">
         <p>
-          <strong className="text-white/70">L'utilisateur reconnaît que la pratique d'exercices physiques
+          <strong className="text-strong">L'utilisateur reconnaît que la pratique d'exercices physiques
           comporte des risques inhérents, y compris de blessure.</strong>
         </p>
         <p>
