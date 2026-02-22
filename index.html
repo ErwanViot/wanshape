@@ -68,6 +68,12 @@
     </script>
   </head>
   <body>
+    <script>
+      (function() {
+        var t = localStorage.getItem('wan-shape-theme');
+        if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -100,23 +100,23 @@ export function Formats() {
 
   return (
     <div className="min-h-screen bg-surface">
-      <header className="bg-surface border-b border-white/8 sticky top-0 z-10">
+      <header className="bg-surface border-b border-divider sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center gap-3">
           <Link
             to="/"
-            className="p-1 -ml-1 text-white/40 hover:text-white/70 transition-colors"
+            className="p-1 -ml-1 text-muted hover:text-strong transition-colors"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </Link>
-          <h1 className="font-bold text-lg text-white">Les formats de séance</h1>
+          <h1 className="font-bold text-lg text-heading">Les formats de séance</h1>
         </div>
       </header>
 
       <main className="max-w-3xl mx-auto px-6 py-8 space-y-6">
-        <p className="text-sm text-white/50 leading-relaxed">
-          <strong className="text-white/70">8 formats</strong> alternent au fil des jours : les séances intenses sont plus courtes, les séances de renforcement et d'endurance plus longues. Toutes incluent échauffement et étirements.
+        <p className="text-sm text-subtle leading-relaxed">
+          <strong className="text-strong">8 formats</strong> alternent au fil des jours : les séances intenses sont plus courtes, les séances de renforcement et d'endurance plus longues. Toutes incluent échauffement et étirements.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -125,9 +125,9 @@ export function Formats() {
               key={format.type}
               to={`/formats/${format.slug}`}
               className="rounded-[20px] overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
-              style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.06)' }}
+              style={{ background: 'var(--color-card-bg)', border: '1px solid var(--color-card-border)' }}
             >
-              {/* Image */}
+              {/* Image — text stays white (over image) */}
               <div className="relative h-28 overflow-hidden">
                 <img
                   src={format.image}
@@ -146,7 +146,7 @@ export function Formats() {
                 </div>
               </div>
 
-              {/* Content */}
+              {/* Content (below image) */}
               <div className="p-4 flex-1 flex flex-col gap-3">
                 {/* Intensity dots */}
                 <div className="flex items-center gap-1.5">
@@ -155,7 +155,7 @@ export function Formats() {
                   ))}
                 </div>
 
-                <p className="text-[13px] text-white/50 leading-relaxed flex-1">
+                <p className="text-[13px] text-subtle leading-relaxed flex-1">
                   {format.description}
                 </p>
 
@@ -167,7 +167,7 @@ export function Formats() {
           ))}
         </div>
 
-        <p className="text-xs text-white/30 text-center leading-relaxed">
+        <p className="text-xs text-faint text-center leading-relaxed">
           Les durées indiquées incluent l'échauffement et les étirements.
         </p>
       </main>

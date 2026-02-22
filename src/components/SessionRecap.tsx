@@ -12,7 +12,7 @@ export function SessionRecap({ session }: Props) {
 
   return (
     <div className="glass-card rounded-[20px] p-6 md:p-8 h-full flex flex-col overflow-y-auto">
-      <h3 className="text-sm font-bold uppercase tracking-wider text-white/50 mb-5">
+      <h3 className="text-sm font-bold uppercase tracking-wider text-subtle mb-5">
         Contenu de la séance
       </h3>
 
@@ -30,8 +30,8 @@ export function SessionRecap({ session }: Props) {
       </div>
 
       {/* Summary bar */}
-      <div className="mt-6 pt-4 border-t border-white/8">
-        <div className="flex items-center justify-between text-xs text-white/40">
+      <div className="mt-6 pt-4 border-t border-divider">
+        <div className="flex items-center justify-between text-xs text-muted">
           <span>{session.blocks.length} blocs</span>
           <span>~{formatBlockDuration(totalDuration)} estimées</span>
         </div>
@@ -65,7 +65,7 @@ function BlockDetail({ block, segment, index, total }: {
   const exercises = getExercises(block);
 
   return (
-    <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+    <div className="rounded-2xl overflow-hidden" style={{ background: 'var(--color-card-bg)', border: '1px solid var(--color-card-border)' }}>
       {/* Block header */}
       <div className="px-4 pt-3 pb-2 flex items-center gap-3">
         <div className="w-1.5 h-7 rounded-full shrink-0" style={{ backgroundColor: color }} />
@@ -73,25 +73,25 @@ function BlockDetail({ block, segment, index, total }: {
           <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color }}>
             {segment.label} · {index + 1}/{total}
           </span>
-          <h4 className="text-sm font-bold text-white">{block.name}</h4>
+          <h4 className="text-sm font-bold text-heading">{block.name}</h4>
         </div>
-        <span className="text-[11px] text-white/40 shrink-0">{getBlockMeta(block)}</span>
+        <span className="text-[11px] text-muted shrink-0">{getBlockMeta(block)}</span>
       </div>
 
       {/* Exercises list */}
       <div className="px-4 pb-3">
-        <div className="border-t border-white/6 pt-2.5 space-y-2">
+        <div className="border-t border-divider pt-2.5 space-y-2">
           {exercises.map((ex, i) => (
             <div key={i} className="flex items-start gap-2.5">
-              <span className="text-[11px] text-white/25 font-mono mt-0.5 w-4 shrink-0 text-right">
+              <span className="text-[11px] text-faint font-mono mt-0.5 w-4 shrink-0 text-right">
                 {i + 1}
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-[13px] font-medium text-white/85">{ex.name}</span>
-                  <span className="text-[11px] text-white/40">{ex.detail}</span>
+                  <span className="text-[13px] font-medium text-strong">{ex.name}</span>
+                  <span className="text-[11px] text-muted">{ex.detail}</span>
                 </div>
-                <p className="text-[11px] text-white/35 mt-0.5 leading-relaxed">{ex.instructions}</p>
+                <p className="text-[11px] text-faint mt-0.5 leading-relaxed">{ex.instructions}</p>
               </div>
             </div>
           ))}

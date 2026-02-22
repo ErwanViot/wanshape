@@ -19,7 +19,7 @@ export function FormatPage() {
 
   return (
     <div className="min-h-screen bg-surface">
-      {/* Hero */}
+      {/* Hero — text stays white (over image) */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
           <img src={format.image} alt="" className="w-full h-full object-cover" />
@@ -58,25 +58,25 @@ export function FormatPage() {
 
       <main className="max-w-2xl mx-auto px-6 py-8 space-y-8">
         {/* Intro */}
-        <p className="text-base text-white/60 leading-relaxed">
+        <p className="text-base text-body leading-relaxed">
           {format.shortDescription}
         </p>
 
         {/* Principe */}
         <ContentSection title="Principe" icon="💡">
-          <p className="text-sm text-white/50 leading-relaxed">{format.principle}</p>
+          <p className="text-sm text-subtle leading-relaxed">{format.principle}</p>
         </ContentSection>
 
         {/* Protocole */}
         <ContentSection title="Comment ça se passe" icon="⏱️">
-          <p className="text-sm text-white/50 leading-relaxed">{format.protocol}</p>
+          <p className="text-sm text-subtle leading-relaxed">{format.protocol}</p>
         </ContentSection>
 
         {/* Bénéfices */}
         <ContentSection title="Bénéfices" icon="✅">
           <ul className="space-y-2">
             {format.benefits.map((b, i) => (
-              <li key={i} className="flex gap-3 text-sm text-white/50 leading-relaxed">
+              <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
                 <span className="text-indigo-400 shrink-0 mt-0.5">•</span>
                 <span>{b}</span>
               </li>
@@ -86,14 +86,14 @@ export function FormatPage() {
 
         {/* Public cible */}
         <ContentSection title="Pour qui ?" icon="🎯">
-          <p className="text-sm text-white/50 leading-relaxed">{format.targetAudience}</p>
+          <p className="text-sm text-subtle leading-relaxed">{format.targetAudience}</p>
         </ContentSection>
 
         {/* Conseils */}
         <ContentSection title="Nos conseils" icon="💬">
           <ul className="space-y-2">
             {format.tips.map((t, i) => (
-              <li key={i} className="flex gap-3 text-sm text-white/50 leading-relaxed">
+              <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
                 <span className="text-emerald-400 shrink-0 mt-0.5">{i + 1}.</span>
                 <span>{t}</span>
               </li>
@@ -105,7 +105,7 @@ export function FormatPage() {
         <ContentSection title="Erreurs courantes" icon="⚠️">
           <ul className="space-y-2">
             {format.commonMistakes.map((m, i) => (
-              <li key={i} className="flex gap-3 text-sm text-white/50 leading-relaxed">
+              <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
                 <span className="text-amber-400 shrink-0 mt-0.5">•</span>
                 <span>{m}</span>
               </li>
@@ -114,10 +114,10 @@ export function FormatPage() {
         </ContentSection>
 
         {/* Navigation */}
-        <div className="pt-4 border-t border-white/8 flex items-center justify-between">
+        <div className="pt-4 border-t border-divider flex items-center justify-between">
           <Link
             to="/formats"
-            className="text-sm text-white/40 hover:text-white/60 transition-colors flex items-center gap-2"
+            className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M15 18l-6-6 6-6" />
@@ -138,8 +138,8 @@ export function FormatPage() {
 
 function ContentSection({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl p-5 md:p-6" style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
-      <h2 className="text-base font-bold text-white mb-3 flex items-center gap-2">
+    <section className="rounded-2xl p-5 md:p-6" style={{ background: 'var(--color-card-bg)', border: '1px solid var(--color-card-border)' }}>
+      <h2 className="text-base font-bold text-heading mb-3 flex items-center gap-2">
         <span>{icon}</span>
         {title}
       </h2>

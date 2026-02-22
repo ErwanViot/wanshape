@@ -51,6 +51,9 @@ export function Home() {
       {/* Brand header — full width */}
       <BrandHeader />
 
+      {/* Gradient divider */}
+      <div className="gradient-divider mb-8" />
+
       {/* Two-column section: Session du jour + Récap */}
       <div className="flex flex-col lg:flex-row lg:items-start px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
 
@@ -58,7 +61,7 @@ export function Home() {
         <div className="lg:w-1/2 flex flex-col relative rounded-[20px] overflow-hidden">
           {loading && (
             <div className="flex items-center justify-center flex-1">
-              <div className="w-6 h-6 border-2 border-white/20 border-t-indigo-500 rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-divider-strong border-t-indigo-500 rounded-full animate-spin" />
             </div>
           )}
 
@@ -66,8 +69,8 @@ export function Home() {
             <div className="flex items-center justify-center flex-1 p-6">
               <div className="text-center">
                 <div className="text-5xl mb-4">😴</div>
-                <p className="text-white/60 text-lg font-medium">Pas de séance prévue aujourd'hui.</p>
-                <p className="text-white/30 text-sm mt-2">Profitez-en pour récupérer !</p>
+                <p className="text-body text-lg font-medium">Pas de séance prévue aujourd'hui.</p>
+                <p className="text-faint text-sm mt-2">Profitez-en pour récupérer !</p>
               </div>
             </div>
           )}
@@ -85,16 +88,16 @@ export function Home() {
         <div className="lg:w-1/2">
           {loading && (
             <div className="glass-card rounded-[20px] p-6 md:p-8 flex items-center justify-center min-h-[200px]">
-              <div className="w-6 h-6 border-2 border-white/20 border-t-indigo-500 rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-divider-strong border-t-indigo-500 rounded-full animate-spin" />
             </div>
           )}
 
           {!loading && (error || !session) && (
             <div className="glass-card rounded-[20px] p-6 md:p-8">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-white/50 mb-5">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-subtle mb-5">
                 Contenu de la séance
               </h3>
-              <p className="text-sm text-white/30">Aucune séance disponible.</p>
+              <p className="text-sm text-faint">Aucune séance disponible.</p>
             </div>
           )}
 
@@ -110,8 +113,8 @@ export function Home() {
       {/* Formats section */}
       <section id="formats" className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
         <div className="max-w-7xl mx-auto mb-10 md:mb-14">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">Nos formats</h2>
-          <p className="text-sm text-white/40">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-heading mb-2">Nos formats</h2>
+          <p className="text-sm text-muted">
             8 méthodes d'entraînement, du renforcement doux au cardio maximal.
             {' '}
             <Link to="/formats" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
@@ -128,10 +131,10 @@ export function Home() {
               className="format-card rounded-[14px] p-5 block transition-transform hover:scale-[1.02]"
             >
               <div className="flex items-start justify-between mb-3">
-                <h3 className="text-sm font-bold text-white/90">{f.name}</h3>
-                <span className="text-[11px] font-medium text-white/35">{f.duration} min</span>
+                <h3 className="text-sm font-bold text-strong">{f.name}</h3>
+                <span className="text-[11px] font-medium text-faint">{f.duration} min</span>
               </div>
-              <p className="text-xs text-white/40 leading-relaxed mb-4">{f.desc}</p>
+              <p className="text-xs text-muted leading-relaxed mb-4">{f.desc}</p>
               <IntensityDots level={f.intensity} />
             </Link>
           ))}
@@ -139,21 +142,21 @@ export function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-8 border-t border-white/5">
-        <p className="text-white/25 text-xs text-center">
+      <footer className="px-6 py-8 border-t border-divider">
+        <p className="text-faint text-xs text-center">
           WAN SHAPE par{' '}
-          <a href="https://www.wan-soft.fr" target="_blank" rel="noopener noreferrer" className="text-white/35 hover:text-white/50 underline transition-colors">
+          <a href="https://www.wan-soft.fr" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-subtle underline transition-colors">
             WAN SOFT
           </a>
         </p>
         <div className="flex justify-center gap-4 mt-3">
-          <Link to="/legal/mentions" className="text-xs text-white/25 hover:text-white/50 transition-colors">
+          <Link to="/legal/mentions" className="text-xs text-faint hover:text-subtle transition-colors">
             Mentions légales
           </Link>
-          <Link to="/legal/privacy" className="text-xs text-white/25 hover:text-white/50 transition-colors">
+          <Link to="/legal/privacy" className="text-xs text-faint hover:text-subtle transition-colors">
             Confidentialité
           </Link>
-          <Link to="/legal/cgu" className="text-xs text-white/25 hover:text-white/50 transition-colors">
+          <Link to="/legal/cgu" className="text-xs text-faint hover:text-subtle transition-colors">
             CGU
           </Link>
         </div>
@@ -162,6 +165,7 @@ export function Home() {
   );
 }
 
+/* SessionPanel stays fully white — it's over an image */
 function SessionPanel({ session, dateKey, onStart }: { session: Session; dateKey: string; onStart: () => void }) {
   const image = getSessionImage(session);
   const timeline = computeTimeline(session.blocks);
