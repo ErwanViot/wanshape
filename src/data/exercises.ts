@@ -930,7 +930,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
     slug: 'echauffement',
     name: 'Échauffement dynamique',
     aliases: ['Échauffement', 'Warm-up'],
-    category: 'cardio',
+    category: 'mobility',
     muscles: ['Corps entier'],
     difficulty: 1,
     image: '/images/cardio.webp',

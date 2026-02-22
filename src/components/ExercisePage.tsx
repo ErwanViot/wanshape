@@ -3,17 +3,8 @@ import { Link, useParams, useLocation, Navigate } from 'react-router';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { getExerciseBySlug } from '../data/exercises.ts';
 import { slugify } from '../utils/exerciseLinks.ts';
-
-const CATEGORY_LABELS: Record<string, string> = {
-  upper: 'Haut du corps',
-  lower: 'Bas du corps',
-  core: 'Core',
-  cardio: 'Cardio',
-  'full-body': 'Full body',
-  mobility: 'Mobilité',
-};
-
-const DIFFICULTY_LABELS = ['Accessible', 'Intermédiaire', 'Avancé'];
+import { ContentSection } from './ContentSection.tsx';
+import { CATEGORY_LABELS, DIFFICULTY_LABELS, DIFFICULTY_COLORS } from '../types/exercise.ts';
 
 export function ExercisePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -39,7 +30,7 @@ export function ExercisePage() {
   }, [hash]);
 
   if (!exercise) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/exercices" replace />;
   }
 
   return (
@@ -47,14 +38,14 @@ export function ExercisePage() {
       {/* Hero */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
-          <img src={exercise.image} alt="" className="w-full h-full object-cover" />
+          <img src={exercise.image} alt="" className="w-full h-full object-cover" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-surface/20" />
         </div>
 
         <Link
-          to="/"
+          to="/exercices"
           className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white"
-          aria-label="Retour à l'accueil"
+          aria-label="Retour aux exercices"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <path d="M15 18l-6-6 6-6" />
@@ -170,26 +161,9 @@ export function ExercisePage() {
   );
 }
 
-function ContentSection({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
-  return (
-    <section className="rounded-2xl p-5 md:p-6" style={{ background: 'var(--color-card-bg)', border: '1px solid var(--color-card-border)' }}>
-      <h2 className="text-base font-bold text-heading mb-3 flex items-center gap-2">
-        <span>{icon}</span>
-        {title}
-      </h2>
-      {children}
-    </section>
-  );
-}
-
 function DifficultyBadge({ level }: { level: 1 | 2 | 3 }) {
-  const colors = [
-    'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
-    'bg-amber-500/15 text-amber-400 border-amber-500/20',
-    'bg-red-500/15 text-red-400 border-red-500/20',
-  ];
   return (
-    <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${colors[level - 1]}`}>
+    <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${DIFFICULTY_COLORS[level - 1]}`}>
       {DIFFICULTY_LABELS[level - 1]}
     </span>
   );

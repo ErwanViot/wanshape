@@ -1,28 +1,11 @@
 import { Link } from 'react-router';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { EXERCISES_DATA } from '../data/exercises.ts';
-import type { ExerciseData } from '../types/exercise.ts';
+import { CATEGORY_LABELS, CATEGORY_ORDER, DIFFICULTY_LABELS, DIFFICULTY_COLORS } from '../types/exercise.ts';
+import type { ExerciseData, ExerciseCategory } from '../types/exercise.ts';
 
-const CATEGORY_LABELS: Record<string, string> = {
-  upper: 'Haut du corps',
-  lower: 'Bas du corps',
-  core: 'Core',
-  cardio: 'Cardio',
-  'full-body': 'Full body',
-  mobility: 'Mobilité',
-};
-
-const CATEGORY_ORDER: string[] = ['upper', 'lower', 'core', 'cardio', 'full-body', 'mobility'];
-
-const DIFFICULTY_LABELS = ['Accessible', 'Intermédiaire', 'Avancé'];
-const DIFFICULTY_COLORS = [
-  'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
-  'bg-amber-500/15 text-amber-400 border-amber-500/20',
-  'bg-red-500/15 text-red-400 border-red-500/20',
-];
-
-function groupByCategory(exercises: ExerciseData[]): [string, ExerciseData[]][] {
-  const groups = new Map<string, ExerciseData[]>();
+function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, ExerciseData[]][] {
+  const groups = new Map<ExerciseCategory, ExerciseData[]>();
   for (const ex of exercises) {
     const list = groups.get(ex.category) ?? [];
     list.push(ex);
@@ -77,7 +60,7 @@ export function Exercises() {
                 >
                   {/* Image */}
                   <div className="relative h-28 overflow-hidden">
-                    <img src={ex.image} alt="" className="w-full h-full object-cover" />
+                    <img src={ex.image} alt="" className="w-full h-full object-cover" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
                       <h3 className="font-bold text-white text-base drop-shadow-sm">{ex.name}</h3>

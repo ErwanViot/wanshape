@@ -1,19 +1,16 @@
 import { EXERCISES_DATA } from '../data/exercises.ts';
 
-/** Lowercase, strip accents, spaces → hyphens */
-export function slugify(name: string): string {
-  return name
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/\s+/g, '-');
-}
-
+/** Lowercase, strip accents */
 function normalize(name: string): string {
   return name
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
+}
+
+/** Lowercase, strip accents, spaces → hyphens */
+export function slugify(name: string): string {
+  return normalize(name).replace(/\s+/g, '-');
 }
 
 interface ExerciseLink {
