@@ -1,29 +1,18 @@
 import { useState } from 'react';
 
-const STORAGE_KEY = 'wanshape-health-accepted';
-
-export function useHealthDisclaimer() {
-  const [accepted, setAccepted] = useState(
-    () => localStorage.getItem(STORAGE_KEY) === '1'
-  );
-
-  function accept() {
-    localStorage.setItem(STORAGE_KEY, '1');
-    setAccepted(true);
-  }
-
-  return { accepted, accept };
-}
-
 interface Props {
   onAccept: () => void;
+  onCancel?: () => void;
 }
 
-export function HealthDisclaimer({ onAccept }: Props) {
+export function HealthDisclaimer({ onAccept, onCancel }: Props) {
   const [checked, setChecked] = useState(false);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm"
+      onClick={(e) => { if (e.target === e.currentTarget && onCancel) onCancel(); }}
+    >
       <div className="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[90vh] flex flex-col">
         <div className="p-6 pb-0">
           <div className="text-3xl mb-3">⚕️</div>
