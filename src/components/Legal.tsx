@@ -1,11 +1,7 @@
-import { useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
 type Tab = 'mentions' | 'privacy' | 'cgu';
-
-interface Props {
-  onBack: () => void;
-  initialTab?: Tab;
-}
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'mentions', label: 'Mentions légales' },
@@ -13,23 +9,36 @@ const TABS: { key: Tab; label: string }[] = [
   { key: 'cgu', label: 'CGU' },
 ];
 
-export function Legal({ onBack, initialTab = 'mentions' }: Props) {
-  const [tab, setTab] = useState<Tab>(initialTab);
+const TAB_TITLES: Record<Tab, string> = {
+  mentions: 'Mentions légales',
+  privacy: 'Politique de confidentialité',
+  cgu: 'Conditions Générales d\'Utilisation',
+};
+
+export function Legal() {
+  const { tab: tabParam } = useParams<{ tab: string }>();
+  const navigate = useNavigate();
+  const tab: Tab = (tabParam && ['mentions', 'privacy', 'cgu'].includes(tabParam)) ? tabParam as Tab : 'mentions';
+
+  useDocumentHead({
+    title: TAB_TITLES[tab],
+    description: `${TAB_TITLES[tab]} du site WAN SHAPE, édité par WAN SOFT.`,
+  });
 
   return (
     <div className="min-h-screen bg-surface">
       {/* Header */}
       <header className="bg-surface border-b border-white/8 sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-6 py-4 flex items-center gap-4">
-          <button
-            onClick={onBack}
+          <Link
+            to="/"
             className="text-white/40 hover:text-white/70 transition-colors"
             aria-label="Retour"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M15 18l-6-6 6-6" />
             </svg>
-          </button>
+          </Link>
           <h1 className="font-bold text-lg text-white">Informations légales</h1>
         </div>
 
@@ -38,7 +47,7 @@ export function Legal({ onBack, initialTab = 'mentions' }: Props) {
           {TABS.map(t => (
             <button
               key={t.key}
-              onClick={() => setTab(t.key)}
+              onClick={() => navigate(`/legal/${t.key}`, { replace: true })}
               className={`px-4 py-2.5 text-sm font-medium rounded-t-lg transition-colors ${
                 tab === t.key
                   ? 'text-indigo-400 bg-surface-light border-t-2 border-x border-indigo-500 border-x-white/8 -mb-px'

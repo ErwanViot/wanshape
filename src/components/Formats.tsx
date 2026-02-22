@@ -1,11 +1,10 @@
-interface Props {
-  onBack: () => void;
-}
+import { Link } from 'react-router';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
-// Sorted by intensity: progressive → modérée → modérée à haute → haute → très haute
 const FORMATS = [
   {
     type: 'pyramid' as const,
+    slug: 'pyramide',
     name: 'Pyramide',
     subtitle: 'Montée-descente progressive',
     duration: '30-38',
@@ -16,6 +15,7 @@ const FORMATS = [
   },
   {
     type: 'classic' as const,
+    slug: 'renforcement',
     name: 'Renforcement',
     subtitle: 'Classique par séries',
     duration: '30-35',
@@ -26,6 +26,7 @@ const FORMATS = [
   },
   {
     type: 'superset' as const,
+    slug: 'superset',
     name: 'Superset',
     subtitle: 'Paires antagonistes',
     duration: '30-35',
@@ -36,6 +37,7 @@ const FORMATS = [
   },
   {
     type: 'emom' as const,
+    slug: 'emom',
     name: 'EMOM',
     subtitle: 'Every Minute On the Minute',
     duration: '28-32',
@@ -46,6 +48,7 @@ const FORMATS = [
   },
   {
     type: 'circuit' as const,
+    slug: 'circuit',
     name: 'Circuit',
     subtitle: 'Enchaînement full body',
     duration: '30-38',
@@ -56,6 +59,7 @@ const FORMATS = [
   },
   {
     type: 'amrap' as const,
+    slug: 'amrap',
     name: 'AMRAP',
     subtitle: 'As Many Rounds As Possible',
     duration: '28-32',
@@ -66,6 +70,7 @@ const FORMATS = [
   },
   {
     type: 'hiit' as const,
+    slug: 'hiit',
     name: 'HIIT',
     subtitle: 'High-Intensity Interval Training',
     duration: '25-30',
@@ -76,6 +81,7 @@ const FORMATS = [
   },
   {
     type: 'tabata' as const,
+    slug: 'tabata',
     name: 'Tabata',
     subtitle: 'Protocole 20/10',
     duration: '25-28',
@@ -86,19 +92,24 @@ const FORMATS = [
   },
 ];
 
-export function Formats({ onBack }: Props) {
+export function Formats() {
+  useDocumentHead({
+    title: 'Formats de séance',
+    description: '8 formats d\'entraînement sans matériel : Pyramide, Renforcement, Superset, EMOM, Circuit, AMRAP, HIIT et Tabata. Découvrez chaque méthode.',
+  });
+
   return (
     <div className="min-h-screen bg-surface">
       <header className="bg-surface border-b border-white/8 sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center gap-3">
-          <button
-            onClick={onBack}
+          <Link
+            to="/"
             className="p-1 -ml-1 text-white/40 hover:text-white/70 transition-colors"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 18l-6-6 6-6" />
             </svg>
-          </button>
+          </Link>
           <h1 className="font-bold text-lg text-white">Les formats de séance</h1>
         </div>
       </header>
@@ -110,7 +121,12 @@ export function Formats({ onBack }: Props) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {FORMATS.map((format) => (
-            <div key={format.type} className="rounded-[20px] overflow-hidden flex flex-col" style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
+            <Link
+              key={format.type}
+              to={`/formats/${format.slug}`}
+              className="rounded-[20px] overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+              style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.06)' }}
+            >
               {/* Image */}
               <div className="relative h-28 overflow-hidden">
                 <img
@@ -147,7 +163,7 @@ export function Formats({ onBack }: Props) {
                   {format.benefit}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

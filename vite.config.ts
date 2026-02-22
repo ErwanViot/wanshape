@@ -27,6 +27,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,json,png,svg}'],
+        navigateFallback: '/index.html',
+        navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/icons\//, /^\/ads\.txt$/],
         runtimeCaching: [
           {
             urlPattern: /\/sessions\/.*\.json$/,

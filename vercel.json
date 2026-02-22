@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/((?!assets|sessions|images|icons|logo-wansoft\\.png|icon-192\\.png|icon-512\\.png|favicon\\.ico|ads\\.txt|manifest\\.webmanifest|sw\\.js).*)", "destination": "/index.html" }
+  ]
+}

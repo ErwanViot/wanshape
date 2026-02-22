@@ -1,8 +1,11 @@
 import { useMemo } from 'react';
+import { useParams, useNavigate, Link } from 'react-router';
 import type { Session } from '../types/session.ts';
 import { compileSession } from '../engine/interpreter.ts';
+import { useSession } from '../hooks/useSession.ts';
 import { useWorkout } from '../hooks/useWorkout.ts';
 import { useWakeLock } from '../hooks/useWakeLock.ts';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { GlobalProgress } from './GlobalProgress.tsx';
 import { ExerciseView } from './ExerciseView.tsx';
 import { RepsView } from './RepsView.tsx';
@@ -13,33 +16,61 @@ import { BlockTransition } from './BlockTransition.tsx';
 import { EndScreen } from './EndScreen.tsx';
 import { Controls } from './Controls.tsx';
 
-interface Props {
-  session: Session;
-  onBack: () => void;
+export function PlayerPage() {
+  const { dateKey } = useParams<{ dateKey: string }>();
+  const { session, loading } = useSession(dateKey ?? null);
+
+  useDocumentHead({
+    title: session ? `${session.title} — En cours` : 'Séance en cours',
+  });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-white/20 border-t-indigo-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6">
+        <div className="text-center">
+          <div className="text-5xl mb-4">😴</div>
+          <p className="text-white/60 text-lg font-medium">Séance introuvable.</p>
+          <Link to="/" className="text-indigo-400 hover:text-indigo-300 underline mt-4 inline-block">
+            Retour à l'accueil
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return <Player session={session} />;
 }
 
-export function Player({ session, onBack }: Props) {
+function Player({ session }: { session: Session }) {
+  const navigate = useNavigate();
   const steps = useMemo(() => compileSession(session), [session]);
 
   const workout = useWorkout(steps);
 
-  // Prevent screen from sleeping during workout
   useWakeLock(workout.status !== 'idle' && workout.status !== 'complete');
 
-  // Start automatically on mount
   useMemo(() => {
     if (workout.status === 'idle' && steps.length > 0) {
-      // Defer start to next tick
       setTimeout(() => workout.start(), 0);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const goHome = () => navigate('/');
 
   if (workout.status === 'complete') {
     return (
       <EndScreen
         session={session}
         amrapRounds={workout.amrapRounds}
-        onBack={onBack}
+        onBack={goHome}
       />
     );
   }
@@ -69,7 +100,7 @@ export function Player({ session, onBack }: Props) {
           progress={workout.globalProgress}
         />
         <button
-          onClick={onBack}
+          onClick={goHome}
           className="absolute top-2 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/50 hover:text-white/80 hover:bg-white/20 transition-colors"
           aria-label="Quitter la séance"
         >
@@ -104,7 +135,7 @@ export function Player({ session, onBack }: Props) {
         </div>
       )}
 
-      {/* Main content by step type — key forces animation on step change */}
+      {/* Main content by step type */}
       <div key={step.id} className="flex-1 flex flex-col animate-fade-in">
         {step.phase === 'transition' && (
           <BlockTransition
