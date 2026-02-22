@@ -49,23 +49,6 @@ export function computeTimeline(blocks: Block[]): TimelineSegment[] {
   });
 }
 
-export function getBlockExerciseCount(block: Block): number {
-  switch (block.type) {
-    case 'warmup':
-    case 'cooldown':
-    case 'classic':
-    case 'circuit':
-    case 'hiit':
-    case 'tabata':
-    case 'emom':
-    case 'amrap':
-    case 'pyramid':
-      return block.exercises.length;
-    case 'superset':
-      return block.pairs.reduce((sum, pair) => sum + pair.exercises.length, 0);
-  }
-}
-
 export function formatBlockDuration(seconds: number): string {
   const mins = Math.round(seconds / 60);
   if (mins < 1) return `${seconds}s`;

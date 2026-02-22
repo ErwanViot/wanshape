@@ -3,13 +3,16 @@ import { useNavigate } from 'react-router';
 
 const STORAGE_KEY = 'wanshape-health-accepted';
 
+export function isHealthAccepted(): boolean {
+  return localStorage.getItem(STORAGE_KEY) === '1';
+}
+
 export function useHealthCheck() {
   const navigate = useNavigate();
-  const [accepted] = useState(() => localStorage.getItem(STORAGE_KEY) === '1');
   const [pendingPath, setPendingPath] = useState<string | null>(null);
 
   const guardNavigation = useCallback((path: string) => {
-    if (localStorage.getItem(STORAGE_KEY) === '1') {
+    if (isHealthAccepted()) {
       navigate(path);
     } else {
       setPendingPath(path);
@@ -29,7 +32,6 @@ export function useHealthCheck() {
   }, []);
 
   return {
-    accepted,
     showDisclaimer: pendingPath !== null,
     guardNavigation,
     acceptAndNavigate,

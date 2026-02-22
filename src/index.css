@@ -20,8 +20,8 @@
   --color-heading: #ffffff;
   --color-strong: rgba(255, 255, 255, 0.92);
   --color-body: rgba(255, 255, 255, 0.72);
-  --color-subtle: rgba(255, 255, 255, 0.6);
-  --color-muted: rgba(255, 255, 255, 0.6);
+  --color-subtle: rgba(255, 255, 255, 0.65);
+  --color-muted: rgba(255, 255, 255, 0.55);
   --color-faint: rgba(255, 255, 255, 0.45);
 
   /* Borders */

@@ -1,11 +1,12 @@
-import { useMemo } from 'react';
-import { useParams, useNavigate, Link } from 'react-router';
+import { useMemo, useEffect } from 'react';
+import { useParams, useNavigate, Navigate, Link } from 'react-router';
 import type { Session } from '../types/session.ts';
 import { compileSession } from '../engine/interpreter.ts';
 import { useSession } from '../hooks/useSession.ts';
 import { useWorkout } from '../hooks/useWorkout.ts';
 import { useWakeLock } from '../hooks/useWakeLock.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
 import { GlobalProgress } from './GlobalProgress.tsx';
 import { ExerciseView } from './ExerciseView.tsx';
 import { RepsView } from './RepsView.tsx';
@@ -23,6 +24,10 @@ export function PlayerPage() {
   useDocumentHead({
     title: session ? `${session.title} — En cours` : 'Séance en cours',
   });
+
+  if (!isHealthAccepted()) {
+    return <Navigate to="/" replace />;
+  }
 
   if (loading) {
     return (
@@ -57,9 +62,9 @@ function Player({ session }: { session: Session }) {
 
   useWakeLock(workout.status !== 'idle' && workout.status !== 'complete');
 
-  useMemo(() => {
+  useEffect(() => {
     if (workout.status === 'idle' && steps.length > 0) {
-      setTimeout(() => workout.start(), 0);
+      workout.start();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

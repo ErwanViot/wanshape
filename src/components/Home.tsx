@@ -5,6 +5,7 @@ import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { getSessionImage } from '../utils/sessionImage.ts';
 import { computeTimeline } from '../utils/sessionTimeline.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
+import { FORMATS_DATA } from '../data/formats.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
 import { SessionRecap } from './SessionRecap.tsx';
@@ -17,16 +18,16 @@ function formatShortDate(dateKey: string): string {
   return `${dd}.${mm}.${d.getFullYear()}`;
 }
 
-const FORMATS_COMPACT = [
-  { name: 'Pyramide', slug: 'pyramide', duration: '30-38', desc: 'Séries croissantes puis décroissantes', intensity: 1 },
-  { name: 'Renforcement', slug: 'renforcement', duration: '30-35', desc: 'Travail ciblé en séries classiques', intensity: 2 },
-  { name: 'Superset', slug: 'superset', duration: '30-35', desc: 'Deux exercices enchaînés sans pause', intensity: 2 },
-  { name: 'EMOM', slug: 'emom', duration: '28-32', desc: 'Chaque minute, un effort à compléter', intensity: 2 },
-  { name: 'Circuit', slug: 'circuit', duration: '30-38', desc: "Rotation d'ateliers variés en boucle", intensity: 3 },
-  { name: 'AMRAP', slug: 'amrap', duration: '28-32', desc: 'Maximum de tours dans le temps imparti', intensity: 3 },
-  { name: 'HIIT', slug: 'hiit', duration: '25-30', desc: 'Efforts explosifs, récupération courte', intensity: 4 },
-  { name: 'Tabata', slug: 'tabata', duration: '25-28', desc: '20s à fond, 10s de repos, sans répit', intensity: 5 },
-];
+const FORMAT_SHORT_DESCS: Record<string, string> = {
+  pyramid: 'Séries croissantes puis décroissantes',
+  classic: 'Travail ciblé en séries classiques',
+  superset: 'Deux exercices enchaînés sans pause',
+  emom: 'Chaque minute, un effort à compléter',
+  circuit: "Rotation d'ateliers variés en boucle",
+  amrap: 'Maximum de tours dans le temps imparti',
+  hiit: 'Efforts explosifs, récupération courte',
+  tabata: '20s à fond, 10s de repos, sans répit',
+};
 
 export function Home() {
   const todayKey = getTodayKey();
@@ -124,9 +125,9 @@ export function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-          {FORMATS_COMPACT.map((f) => (
+          {FORMATS_DATA.map((f) => (
             <Link
-              key={f.name}
+              key={f.type}
               to={`/formats/${f.slug}`}
               className="format-card rounded-[14px] p-5 block transition-transform hover:scale-[1.02]"
             >
@@ -134,7 +135,7 @@ export function Home() {
                 <h3 className="text-sm font-bold text-strong">{f.name}</h3>
                 <span className="text-[11px] font-medium text-faint">{f.duration} min</span>
               </div>
-              <p className="text-xs text-muted leading-relaxed mb-4">{f.desc}</p>
+              <p className="text-xs text-muted leading-relaxed mb-4">{FORMAT_SHORT_DESCS[f.type] ?? f.shortDescription}</p>
               <IntensityDots level={f.intensity} />
             </Link>
           ))}
@@ -251,7 +252,7 @@ function SessionPanel({ session, dateKey, onStart }: { session: Session; dateKey
           {/* CTA */}
           <button
             onClick={onStart}
-            className="cta-gradient w-full py-4 rounded-2xl text-base font-bold text-white tracking-wide"
+            className="cta-gradient w-full py-4 rounded-2xl text-base font-bold text-white tracking-wide cursor-pointer"
           >
             C'est parti
           </button>

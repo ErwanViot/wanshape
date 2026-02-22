@@ -1,96 +1,41 @@
 import { Link } from 'react-router';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { FORMATS_DATA } from '../data/formats.ts';
 
-const FORMATS = [
-  {
-    type: 'pyramid' as const,
-    slug: 'pyramide',
-    name: 'Pyramide',
-    subtitle: 'Montée-descente progressive',
-    duration: '30-38',
-    intensity: 1,
-    image: '/images/explosive.webp',
+const FORMAT_DESCRIPTIONS: Record<string, { description: string; benefit: string }> = {
+  pyramid: {
     description: 'Les répétitions augmentent à chaque palier (2, 4, 6, 8…) puis redescendent. L\'intensité monte puis diminue naturellement.',
     benefit: 'Auto-régulé : l\'échauffement est intégré dans la montée.',
   },
-  {
-    type: 'classic' as const,
-    slug: 'renforcement',
-    name: 'Renforcement',
-    subtitle: 'Classique par séries',
-    duration: '30-35',
-    intensity: 2,
-    image: '/images/upper.webp',
+  classic: {
     description: 'Des exercices ciblés en séries avec des temps de repos. Haut du corps (push & pull) ou bas du corps & core.',
     benefit: 'Tonification ciblée. Progression claire et mesurable.',
   },
-  {
-    type: 'superset' as const,
-    slug: 'superset',
-    name: 'Superset',
-    subtitle: 'Paires antagonistes',
-    duration: '30-35',
-    intensity: 2,
-    image: '/images/fullbody.webp',
+  superset: {
     description: 'Deux exercices complémentaires enchaînés sans repos (ex : pompes puis tirage). Repos entre les paires.',
     benefit: 'Travail équilibré et efficace en moins de temps.',
   },
-  {
-    type: 'emom' as const,
-    slug: 'emom',
-    name: 'EMOM',
-    subtitle: 'Every Minute On the Minute',
-    duration: '28-32',
-    intensity: 2,
-    image: '/images/endurance.webp',
+  emom: {
     description: 'À chaque début de minute, réaliser un nombre défini de répétitions. Le temps restant = repos.',
     benefit: 'Développe l\'endurance et apprend à gérer son effort.',
   },
-  {
-    type: 'circuit' as const,
-    slug: 'circuit',
-    name: 'Circuit',
-    subtitle: 'Enchaînement full body',
-    duration: '30-38',
-    intensity: 3,
-    image: '/images/fullbody.webp',
+  circuit: {
     description: 'Enchaînement d\'exercices variés avec très peu de repos. On répète le circuit plusieurs fois.',
     benefit: 'Combine renforcement et cardio pour un travail complet.',
   },
-  {
-    type: 'amrap' as const,
-    slug: 'amrap',
-    name: 'AMRAP',
-    subtitle: 'As Many Rounds As Possible',
-    duration: '28-32',
-    intensity: 3,
-    image: '/images/endurance.webp',
+  amrap: {
     description: 'Enchaîner un circuit le plus de fois possible dans un temps imparti. Vous gérez votre rythme.',
     benefit: 'Liberté de rythme. Idéal pour mesurer sa progression.',
   },
-  {
-    type: 'hiit' as const,
-    slug: 'hiit',
-    name: 'HIIT',
-    subtitle: 'High-Intensity Interval Training',
-    duration: '25-30',
-    intensity: 4,
-    image: '/images/cardio.webp',
+  hiit: {
     description: 'Alternance d\'effort intense (30s) et de repos (30s). Chaque exercice est réalisé à fond.',
     benefit: 'Maximum de résultats en minimum de temps.',
   },
-  {
-    type: 'tabata' as const,
-    slug: 'tabata',
-    name: 'Tabata',
-    subtitle: 'Protocole 20/10',
-    duration: '25-28',
-    intensity: 5,
-    image: '/images/cardio.webp',
+  tabata: {
     description: '8 rounds de 20 secondes d\'effort maximal suivies de 10 secondes de repos. Court mais intense.',
     benefit: 'Le format le plus court et le plus intense.',
   },
-];
+};
 
 export function Formats() {
   useDocumentHead({
@@ -105,6 +50,7 @@ export function Formats() {
           <Link
             to="/"
             className="p-1 -ml-1 text-muted hover:text-strong transition-colors"
+            aria-label="Retour à l'accueil"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 18l-6-6 6-6" />
@@ -120,51 +66,53 @@ export function Formats() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {FORMATS.map((format) => (
-            <Link
-              key={format.type}
-              to={`/formats/${format.slug}`}
-              className="rounded-[20px] overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
-              style={{ background: 'var(--color-card-bg)', border: '1px solid var(--color-card-border)' }}
-            >
-              {/* Image — text stays white (over image) */}
-              <div className="relative h-28 overflow-hidden">
-                <img
-                  src={format.image}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
-                <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                  <div>
-                    <h2 className="font-bold text-white text-base drop-shadow-sm">{format.name}</h2>
-                    <p className="text-[11px] text-white/60">{format.subtitle}</p>
+          {FORMATS_DATA.map((format) => {
+            const extra = FORMAT_DESCRIPTIONS[format.type];
+            return (
+              <Link
+                key={format.type}
+                to={`/formats/${format.slug}`}
+                className="format-card rounded-[20px] overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+              >
+                {/* Image — text stays white (over image) */}
+                <div className="relative h-28 overflow-hidden">
+                  <img
+                    src={format.image}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+                    <div>
+                      <h2 className="font-bold text-white text-base drop-shadow-sm">{format.name}</h2>
+                      <p className="text-[11px] text-white/60">{format.subtitle}</p>
+                    </div>
+                    <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full shrink-0">
+                      {format.duration} min
+                    </span>
                   </div>
-                  <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full shrink-0">
-                    {format.duration} min
-                  </span>
-                </div>
-              </div>
-
-              {/* Content (below image) */}
-              <div className="p-4 flex-1 flex flex-col gap-3">
-                {/* Intensity dots */}
-                <div className="flex items-center gap-1.5">
-                  {[1, 2, 3, 4, 5].map(i => (
-                    <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
-                  ))}
                 </div>
 
-                <p className="text-[13px] text-subtle leading-relaxed flex-1">
-                  {format.description}
-                </p>
+                {/* Content (below image) */}
+                <div className="p-4 flex-1 flex flex-col gap-3">
+                  {/* Intensity dots */}
+                  <div className="flex items-center gap-1.5">
+                    {[1, 2, 3, 4, 5].map(i => (
+                      <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
+                    ))}
+                  </div>
 
-                <p className="text-xs text-indigo-400 font-medium leading-relaxed">
-                  {format.benefit}
-                </p>
-              </div>
-            </Link>
-          ))}
+                  <p className="text-[13px] text-subtle leading-relaxed flex-1">
+                    {extra?.description ?? format.shortDescription}
+                  </p>
+
+                  <p className="text-xs text-indigo-400 font-medium leading-relaxed">
+                    {extra?.benefit}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         <p className="text-xs text-faint text-center leading-relaxed">
