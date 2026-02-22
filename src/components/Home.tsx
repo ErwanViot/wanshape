@@ -43,7 +43,7 @@ export function Home() {
   });
 
   const handleStartSession = () => {
-    guardNavigation(`/seance/${todayKey}/play`);
+    guardNavigation('/seance/play');
   };
 
   return (
