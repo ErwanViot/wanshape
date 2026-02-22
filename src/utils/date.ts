@@ -16,6 +16,12 @@ export function getTodayKey(): string {
   return formatDateToDDMMYYYY(new Date());
 }
 
+export function getTomorrowKey(): string {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  return formatDateToDDMMYYYY(d);
+}
+
 export function formatDuration(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;

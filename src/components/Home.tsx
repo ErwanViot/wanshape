@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { getTodayKey, parseDDMMYYYY } from '../utils/date.ts';
+import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
 import { useSession } from '../hooks/useSession.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { getSessionImage } from '../utils/sessionImage.ts';
@@ -31,7 +31,10 @@ const FORMAT_SHORT_DESCS: Record<string, string> = {
 
 export function Home() {
   const todayKey = getTodayKey();
+  const tomorrowKey = getTomorrowKey();
   const { session, loading, error } = useSession(todayKey);
+  // error intentionally ignored — if tomorrow's session can't load, we simply hide the panel
+  const { session: tomorrowSession, loading: tomorrowLoading } = useSession(tomorrowKey);
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
 
   useDocumentHead({
@@ -55,11 +58,11 @@ export function Home() {
       {/* Gradient divider */}
       <div className="gradient-divider mb-8" />
 
-      {/* Two-column section: Session du jour + Récap */}
-      <div className="flex flex-col lg:flex-row lg:items-start px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
+      {/* Two-column grid: today panel + recap side by side, tomorrow panel below left */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
 
-        {/* LEFT — Session du jour */}
-        <div className="lg:w-1/2 flex flex-col relative rounded-[20px] overflow-hidden">
+        {/* Today panel — col 1, row 1 */}
+        <div className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-1 lg:col-start-1">
           {loading && (
             <div className="flex items-center justify-center flex-1">
               <div className="w-6 h-6 border-2 border-divider-strong border-t-indigo-500 rounded-full animate-spin" />
@@ -81,12 +84,14 @@ export function Home() {
               session={session}
               dateKey={todayKey}
               onStart={handleStartSession}
+              badge="SÉANCE DU JOUR"
+              showCta
             />
           )}
         </div>
 
-        {/* RIGHT — Session recap */}
-        <div className="lg:w-1/2">
+        {/* Session recap — col 2, row 1+2 on desktop / order 2 on mobile */}
+        <div className="lg:row-start-1 lg:row-span-2 lg:col-start-2">
           {loading && (
             <div className="glass-card rounded-[20px] p-6 md:p-8 flex items-center justify-center min-h-[200px]">
               <div className="w-6 h-6 border-2 border-divider-strong border-t-indigo-500 rounded-full animate-spin" />
@@ -106,6 +111,22 @@ export function Home() {
             <SessionRecap session={session} />
           )}
         </div>
+
+        {/* Tomorrow panel — col 1, row 2 on desktop / last on mobile */}
+        {!tomorrowLoading && tomorrowSession && (
+          <section
+            aria-label="Aperçu de la séance de demain"
+            className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-2 lg:col-start-1"
+          >
+            <SessionPanel
+              session={tomorrowSession}
+              dateKey={tomorrowKey}
+              badge="SÉANCE DE DEMAIN"
+              variant="tomorrow"
+              showCta={false}
+            />
+          </section>
+        )}
       </div>
 
       {/* Gradient divider */}
@@ -171,17 +192,25 @@ export function Home() {
 }
 
 /* SessionPanel stays fully white — it's over an image */
-function SessionPanel({ session, dateKey, onStart }: { session: Session; dateKey: string; onStart: () => void }) {
+function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', variant = 'today', showCta = true }: {
+  session: Session;
+  dateKey: string;
+  onStart?: () => void;
+  badge?: string;
+  variant?: 'today' | 'tomorrow';
+  showCta?: boolean;
+}) {
   const image = getSessionImage(session);
   const timeline = computeTimeline(session.blocks);
   const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0) || 1;
+  const isTomorrow = variant === 'tomorrow';
 
   return (
     <>
       {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <img src={image} alt="" className="w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-black/20" />
+        <img src={image} alt="" className="w-full h-full object-cover" loading={isTomorrow ? 'lazy' : 'eager'} />
+        <div className={`absolute inset-0 bg-gradient-to-b ${isTomorrow ? 'from-black/95 via-black/60 to-black/40' : 'from-black/90 via-black/40 to-black/20'}`} />
       </div>
 
       {/* Content over image */}
@@ -190,8 +219,8 @@ function SessionPanel({ session, dateKey, onStart }: { session: Session; dateKey
         <div>
           {/* Badge */}
           <div className="flex items-center gap-3 mb-4">
-            <div className="session-label px-4 py-1.5 rounded-xl">
-              <span className="text-xs font-bold tracking-widest uppercase text-white">SÉANCE DU JOUR</span>
+            <div className={`${isTomorrow ? 'session-label-tomorrow' : 'session-label'} px-4 py-1.5 rounded-xl`}>
+              <span className="text-xs font-bold tracking-widest uppercase text-white">{badge}</span>
             </div>
           </div>
 
@@ -254,12 +283,14 @@ function SessionPanel({ session, dateKey, onStart }: { session: Session; dateKey
           </div>
 
           {/* CTA */}
-          <button
-            onClick={onStart}
-            className="cta-gradient w-full py-4 rounded-2xl text-base font-bold text-white tracking-wide cursor-pointer"
-          >
-            C'est parti
-          </button>
+          {showCta && onStart && (
+            <button
+              onClick={onStart}
+              className="cta-gradient w-full py-4 rounded-2xl text-base font-bold text-white tracking-wide cursor-pointer"
+            >
+              C'est parti
+            </button>
+          )}
         </div>
       </div>
     </>
