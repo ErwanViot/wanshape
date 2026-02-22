@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, useParams } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 import { Home } from './components/Home.tsx';
 import { PlayerPage } from './components/Player.tsx';
 import { Legal } from './components/Legal.tsx';
@@ -8,18 +8,15 @@ import { Exercises } from './components/Exercises.tsx';
 import { ExercisePage } from './components/ExercisePage.tsx';
 import { Layout } from './components/Layout.tsx';
 
-function SessionRedirect() {
-  const { dateKey } = useParams();
-  return <Navigate to={`/seance/${dateKey}/play`} replace />;
-}
-
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'seance/:dateKey', element: <SessionRedirect /> },
-      { path: 'seance/:dateKey/play', element: <PlayerPage /> },
+      { path: 'seance/play', element: <PlayerPage /> },
+      // Legacy URLs with date → redirect to dateless route
+      { path: 'seance/:dateKey/play', element: <Navigate to="/seance/play" replace /> },
+      { path: 'seance/:dateKey', element: <Navigate to="/seance/play" replace /> },
       { path: 'formats', element: <Formats /> },
       { path: 'formats/:slug', element: <FormatPage /> },
       { path: 'exercices', element: <Exercises /> },

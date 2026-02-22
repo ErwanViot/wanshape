@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from 'react';
-import { useParams, useNavigate, Navigate, Link } from 'react-router';
+import { useNavigate, Navigate, Link } from 'react-router';
 import type { Session } from '../types/session.ts';
 import { compileSession } from '../engine/interpreter.ts';
 import { useSession } from '../hooks/useSession.ts';
@@ -16,10 +16,11 @@ import { AMRAPView } from './AMRAPView.tsx';
 import { BlockTransition } from './BlockTransition.tsx';
 import { EndScreen } from './EndScreen.tsx';
 import { Controls } from './Controls.tsx';
+import { getTodayKey } from '../utils/date.ts';
 
 export function PlayerPage() {
-  const { dateKey } = useParams<{ dateKey: string }>();
-  const { session, loading } = useSession(dateKey ?? null);
+  const dateKey = getTodayKey();
+  const { session, loading } = useSession(dateKey);
 
   useDocumentHead({
     title: session ? `${session.title} — En cours` : 'Séance en cours',
