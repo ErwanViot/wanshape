@@ -33,6 +33,7 @@ export function Home() {
   const todayKey = getTodayKey();
   const tomorrowKey = getTomorrowKey();
   const { session, loading, error } = useSession(todayKey);
+  // error intentionally ignored — if tomorrow's session can't load, we simply hide the panel
   const { session: tomorrowSession, loading: tomorrowLoading } = useSession(tomorrowKey);
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
 
@@ -113,15 +114,18 @@ export function Home() {
 
         {/* Tomorrow panel — col 1, row 2 on desktop / last on mobile */}
         {!tomorrowLoading && tomorrowSession && (
-          <div className="flex flex-col relative rounded-[20px] overflow-hidden opacity-75 lg:row-start-2 lg:col-start-1">
+          <section
+            aria-label="Aperçu de la séance de demain"
+            className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-2 lg:col-start-1"
+          >
             <SessionPanel
               session={tomorrowSession}
               dateKey={tomorrowKey}
               badge="SÉANCE DE DEMAIN"
-              badgeClassName="bg-amber-500/80"
+              variant="tomorrow"
               showCta={false}
             />
-          </div>
+          </section>
         )}
       </div>
 
@@ -188,24 +192,25 @@ export function Home() {
 }
 
 /* SessionPanel stays fully white — it's over an image */
-function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', badgeClassName, showCta = true }: {
+function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', variant = 'today', showCta = true }: {
   session: Session;
   dateKey: string;
   onStart?: () => void;
   badge?: string;
-  badgeClassName?: string;
+  variant?: 'today' | 'tomorrow';
   showCta?: boolean;
 }) {
   const image = getSessionImage(session);
   const timeline = computeTimeline(session.blocks);
   const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0) || 1;
+  const isTomorrow = variant === 'tomorrow';
 
   return (
     <>
       {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <img src={image} alt="" className="w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-black/20" />
+        <img src={image} alt="" className="w-full h-full object-cover" loading={isTomorrow ? 'lazy' : 'eager'} />
+        <div className={`absolute inset-0 bg-gradient-to-b ${isTomorrow ? 'from-black/95 via-black/60 to-black/40' : 'from-black/90 via-black/40 to-black/20'}`} />
       </div>
 
       {/* Content over image */}
@@ -214,7 +219,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', ba
         <div>
           {/* Badge */}
           <div className="flex items-center gap-3 mb-4">
-            <div className={`${badgeClassName ?? 'session-label'} px-4 py-1.5 rounded-xl`}>
+            <div className={`${isTomorrow ? 'session-label-tomorrow' : 'session-label'} px-4 py-1.5 rounded-xl`}>
               <span className="text-xs font-bold tracking-widest uppercase text-white">{badge}</span>
             </div>
           </div>

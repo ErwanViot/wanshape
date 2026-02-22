@@ -163,6 +163,11 @@ body {
   box-shadow: 0 0 24px rgba(79, 70, 229, 0.3);
 }
 
+.session-label-tomorrow {
+  background: linear-gradient(135deg, #D97706, #F59E0B);
+  box-shadow: 0 0 24px rgba(217, 119, 6, 0.3);
+}
+
 /* Gradient divider */
 .gradient-divider {
   height: 1px;
