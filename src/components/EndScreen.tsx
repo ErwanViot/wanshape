@@ -10,17 +10,11 @@ export function EndScreen({ session, amrapRounds, onBack }: Props) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center bg-[#0a0a0a]">
       {/* Trophy */}
-      <div className="text-7xl">
-        💪
-      </div>
+      <div className="text-7xl">💪</div>
 
-      <h1 className="text-3xl sm:text-4xl font-bold text-white">
-        Séance terminée !
-      </h1>
+      <h1 className="text-3xl sm:text-4xl font-bold text-white">Séance terminée !</h1>
 
-      <p className="text-white/60 text-lg">
-        {session.title}
-      </p>
+      <p className="text-white/60 text-lg">{session.title}</p>
 
       <div className="flex gap-6">
         <div className="text-center">
@@ -40,6 +34,7 @@ export function EndScreen({ session, amrapRounds, onBack }: Props) {
       </div>
 
       <button
+        type="button"
         onClick={onBack}
         className="mt-4 px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
       >

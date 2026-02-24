@@ -5,7 +5,12 @@ export function Footer() {
     <footer className="px-6 py-8 border-t border-divider">
       <p className="text-faint text-xs text-center">
         WAN SHAPE par{' '}
-        <a href="https://www.wan-soft.fr" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-subtle underline transition-colors">
+        <a
+          href="https://www.wan-soft.fr"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted hover:text-subtle underline transition-colors"
+        >
           WAN SOFT
         </a>
       </p>

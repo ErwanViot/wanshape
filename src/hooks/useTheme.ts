@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light';
 
@@ -25,7 +25,7 @@ export function useTheme() {
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme(t => (t === 'dark' ? 'light' : 'dark'));
+    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
   }, []);
 
   return { theme, toggleTheme } as const;

@@ -1,6 +1,6 @@
-import { Link, useParams, Navigate } from 'react-router';
-import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { Link, Navigate, useParams } from 'react-router';
 import { getFormatBySlug } from '../data/formats.ts';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { ContentSection } from './ContentSection.tsx';
 
 export function FormatPage() {
@@ -32,7 +32,15 @@ export function FormatPage() {
           className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white"
           aria-label="Retour aux formats"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          >
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </Link>
@@ -48,7 +56,7 @@ export function FormatPage() {
                 {format.duration} min
               </span>
               <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map(i => (
+                {[1, 2, 3, 4, 5].map((i) => (
                   <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
                 ))}
               </div>
@@ -59,9 +67,7 @@ export function FormatPage() {
 
       <main id="main-content" className="max-w-2xl mx-auto px-6 py-8 space-y-8">
         {/* Intro */}
-        <p className="text-base text-body leading-relaxed">
-          {format.shortDescription}
-        </p>
+        <p className="text-base text-body leading-relaxed">{format.shortDescription}</p>
 
         {/* Principe */}
         <ContentSection title="Principe" icon="💡">
@@ -116,19 +122,21 @@ export function FormatPage() {
 
         {/* Navigation */}
         <div className="pt-4 border-t border-divider flex items-center justify-between">
-          <Link
-            to="/formats"
-            className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <Link to="/formats" className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
               <path d="M15 18l-6-6 6-6" />
             </svg>
             Tous les formats
           </Link>
-          <Link
-            to="/"
-            className="text-sm text-link hover:text-link-hover transition-colors"
-          >
+          <Link to="/" className="text-sm text-link hover:text-link-hover transition-colors">
             Séance du jour →
           </Link>
         </div>

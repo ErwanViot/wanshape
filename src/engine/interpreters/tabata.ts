@@ -1,12 +1,8 @@
-import type { TabataBlock } from '../../types/session.ts';
 import type { AtomicStep } from '../../types/player.ts';
-import { BLOCK_COLORS, TRANSITION_DURATION, TABATA_DEFAULTS } from '../constants.ts';
+import type { TabataBlock } from '../../types/session.ts';
+import { BLOCK_COLORS, TABATA_DEFAULTS, TRANSITION_DURATION } from '../constants.ts';
 
-export function expandTabata(
-  block: TabataBlock,
-  blockIndex: number,
-  totalBlocks: number
-): AtomicStep[] {
+export function expandTabata(block: TabataBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.tabata;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -19,11 +15,11 @@ export function expandTabata(
 
   steps.push({
     id: `block-${blockIndex}-transition`,
-    phase: "transition",
-    timerMode: "countdown",
+    phase: 'transition',
+    timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `${sets > 1 ? `${sets} sets x ` : ""}${rounds} rounds - ${work}s/${rest}s`,
+    instructions: `${sets > 1 ? `${sets} sets x ` : ''}${rounds} rounds - ${work}s/${rest}s`,
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });
@@ -44,8 +40,8 @@ export function expandTabata(
 
         steps.push({
           id: `block-${blockIndex}-set-${set}-round-${round}-ex-${exIdx}-work`,
-          phase: "work",
-          timerMode: "countdown",
+          phase: 'work',
+          timerMode: 'countdown',
           duration: work,
           exerciseName: ex.name,
           instructions: ex.instructions,
@@ -61,17 +57,18 @@ export function expandTabata(
         if (!isVeryLast) {
           const isEndOfRound = isLastExercise;
           const nextLabel = isEndOfRound
-            ? (isLastRound
+            ? isLastRound
               ? `Set ${set + 2}/${sets} dans...`
-              : `Round ${round + 2}/${rounds} - ${block.exercises[0].name}`)
+              : `Round ${round + 2}/${rounds} - ${block.exercises[0].name}`
             : `${nextEx!.name}`;
 
           steps.push({
             id: `block-${blockIndex}-set-${set}-round-${round}-ex-${exIdx}-rest`,
-            phase: "rest",
-            timerMode: "countdown",
-            duration: isEndOfRound && !isLastRound ? rest : isEndOfRound && isLastRound && !isLastSet ? restBetweenSets : rest,
-            exerciseName: "Repos",
+            phase: 'rest',
+            timerMode: 'countdown',
+            duration:
+              isEndOfRound && !isLastRound ? rest : isEndOfRound && isLastRound && !isLastSet ? restBetweenSets : rest,
+            exerciseName: 'Repos',
             instructions: `Prochain : ${nextLabel}`,
             ...base,
             setInfo,

@@ -16,38 +16,24 @@ export function EMOMView({ step, remaining, progress }: Props) {
       </div>
 
       {/* Block name */}
-      <h2 className="text-2xl font-bold text-white">
-        {step.blockName}
-      </h2>
+      <h2 className="text-2xl font-bold text-white">{step.blockName}</h2>
 
       {/* Timer */}
-      <TimerDisplay
-        remaining={remaining}
-        progress={progress}
-        color={step.blockColor}
-      />
+      <TimerDisplay remaining={remaining} progress={progress} color={step.blockColor} />
 
       {/* Exercise list */}
       <div className="w-full max-w-sm space-y-3">
         {step.emomExercises?.map((ex, i) => (
-          <div
-            key={i}
-            className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/10"
-          >
+          <div key={i} className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/10">
             <span className="text-white font-medium">{ex.name}</span>
-            <span
-              className="text-lg font-bold"
-              style={{ color: step.blockColor }}
-            >
+            <span className="text-lg font-bold" style={{ color: step.blockColor }}>
               x{ex.reps}
             </span>
           </div>
         ))}
       </div>
 
-      <p className="text-white/40 text-xs">
-        Faites les exercices puis récupérez jusqu'à la prochaine minute
-      </p>
+      <p className="text-white/40 text-xs">Faites les exercices puis récupérez jusqu'à la prochaine minute</p>
     </div>
   );
 }

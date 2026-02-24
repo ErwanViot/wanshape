@@ -1,4 +1,4 @@
-import { useCallback, useRef, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const STORAGE_KEY = 'wanshape-audio-enabled';
 
@@ -19,7 +19,6 @@ export function useAudio() {
     localStorage.setItem(STORAGE_KEY, String(enabled));
   }, [enabled]);
 
-
   const getCtx = useCallback(() => {
     if (!ctxRef.current) {
       ctxRef.current = new AudioContext();
@@ -30,24 +29,27 @@ export function useAudio() {
     return ctxRef.current;
   }, []);
 
-  const playTone = useCallback((freq: number, duration: number, type: OscillatorType = 'sine') => {
-    if (!enabled) return;
-    try {
-      const ctx = getCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = type;
-      osc.frequency.value = freq;
-      gain.gain.value = 0.3;
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + duration);
-    } catch {
-      // Audio not available
-    }
-  }, [enabled, getCtx]);
+  const playTone = useCallback(
+    (freq: number, duration: number, type: OscillatorType = 'sine') => {
+      if (!enabled) return;
+      try {
+        const ctx = getCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.value = 0.3;
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch {
+        // Audio not available
+      }
+    },
+    [enabled, getCtx],
+  );
 
   const beepCountdown = useCallback(() => {
     playTone(440, 0.1, 'square');
@@ -81,17 +83,20 @@ export function useAudio() {
     // Voice disabled — beeps only
   }, []);
 
-  const speakCountdown = useCallback((remaining: number) => {
-    if (!enabled) return;
-    if (remaining <= 3) beepCountdown();
-  }, [enabled, beepCountdown]);
+  const speakCountdown = useCallback(
+    (remaining: number) => {
+      if (!enabled) return;
+      if (remaining <= 3) beepCountdown();
+    },
+    [enabled, beepCountdown],
+  );
 
   const speakGo = useCallback(() => {
     beepGo();
   }, [beepGo]);
 
   const toggle = useCallback(() => {
-    setEnabled(prev => !prev);
+    setEnabled((prev) => !prev);
   }, []);
 
   return {

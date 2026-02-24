@@ -1,17 +1,17 @@
 import { Link } from 'react-router';
-import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
-import { useSession } from '../hooks/useSession.ts';
+import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { useHealthCheck } from '../hooks/useHealthCheck.ts';
+import { useSession } from '../hooks/useSession.ts';
+import type { Session } from '../types/session.ts';
+import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
+import { computeDifficulty } from '../utils/sessionDifficulty.ts';
 import { getSessionImage } from '../utils/sessionImage.ts';
 import { computeTimeline } from '../utils/sessionTimeline.ts';
-import { computeDifficulty } from '../utils/sessionDifficulty.ts';
-import { useHealthCheck } from '../hooks/useHealthCheck.ts';
-import { FORMATS_DATA } from '../data/formats.ts';
-import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
 import { Footer } from './Footer.tsx';
+import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { SessionRecap } from './SessionRecap.tsx';
-import type { Session } from '../types/session.ts';
 
 function formatShortDate(dateKey: string): string {
   const d = parseDDMMYYYY(dateKey);
@@ -41,7 +41,8 @@ export function Home() {
 
   useDocumentHead({
     title: 'WAN SHAPE',
-    description: 'Chaque jour, une séance de sport guidée sans matériel. 8 formats d\'entraînement, 25-40 min, 100% gratuit.',
+    description:
+      "Chaque jour, une séance de sport guidée sans matériel. 8 formats d'entraînement, 25-40 min, 100% gratuit.",
   });
 
   const handleStartSession = () => {
@@ -50,9 +51,7 @@ export function Home() {
 
   return (
     <>
-      {showDisclaimer && (
-        <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />
-      )}
+      {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
 
       {/* Brand header — full width */}
       <BrandHeader />
@@ -62,7 +61,6 @@ export function Home() {
 
       {/* Two-column grid: today panel + recap side by side, tomorrow panel below left */}
       <div id="main-content" className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
-
         {/* Today panel — col 1, row 1 */}
         <div className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-1 lg:col-start-1">
           {loading && (
@@ -102,16 +100,12 @@ export function Home() {
 
           {!loading && (error || !session) && (
             <div className="glass-card rounded-[20px] p-6 md:p-8">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-subtle mb-5">
-                Contenu de la séance
-              </h3>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-subtle mb-5">Contenu de la séance</h3>
               <p className="text-sm text-faint">Aucune séance disponible.</p>
             </div>
           )}
 
-          {!loading && session && (
-            <SessionRecap session={session} />
-          )}
+          {!loading && session && <SessionRecap session={session} />}
         </div>
 
         {/* Tomorrow panel — col 1, row 2 on desktop / last on mobile */}
@@ -139,13 +133,18 @@ export function Home() {
         <div className="max-w-7xl mx-auto mb-10 md:mb-14">
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-heading mb-2">Nos formats</h2>
           <p className="text-sm text-muted">
-            8 méthodes d'entraînement, du renforcement doux au cardio maximal.
-            {' '}
-            <Link to="/formats" className="text-link hover:text-link-hover underline underline-offset-2 transition-colors">
+            8 méthodes d'entraînement, du renforcement doux au cardio maximal.{' '}
+            <Link
+              to="/formats"
+              className="text-link hover:text-link-hover underline underline-offset-2 transition-colors"
+            >
               En savoir plus
             </Link>
             {' · '}
-            <Link to="/exercices" className="text-link hover:text-link-hover underline underline-offset-2 transition-colors">
+            <Link
+              to="/exercices"
+              className="text-link hover:text-link-hover underline underline-offset-2 transition-colors"
+            >
               Nos exercices
             </Link>
           </p>
@@ -162,7 +161,9 @@ export function Home() {
                 <h3 className="text-sm font-bold text-strong">{f.name}</h3>
                 <span className="text-[11px] font-medium text-faint">{f.duration} min</span>
               </div>
-              <p className="text-xs text-muted leading-relaxed mb-4">{FORMAT_SHORT_DESCS[f.type] ?? f.shortDescription}</p>
+              <p className="text-xs text-muted leading-relaxed mb-4">
+                {FORMAT_SHORT_DESCS[f.type] ?? f.shortDescription}
+              </p>
               <IntensityDots level={f.intensity} />
             </Link>
           ))}
@@ -175,7 +176,14 @@ export function Home() {
 }
 
 /* SessionPanel stays fully white — it's over an image */
-function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', variant = 'today', showCta = true }: {
+function SessionPanel({
+  session,
+  dateKey,
+  onStart,
+  badge = 'SÉANCE DU JOUR',
+  variant = 'today',
+  showCta = true,
+}: {
   session: Session;
   dateKey: string;
   onStart?: () => void;
@@ -194,7 +202,9 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <img src={image} alt="" className="w-full h-full object-cover" loading={isTomorrow ? 'lazy' : 'eager'} />
-        <div className={`absolute inset-0 bg-gradient-to-b ${isTomorrow ? 'from-black/95 via-black/60 to-black/40' : 'from-black/90 via-black/40 to-black/20'}`} />
+        <div
+          className={`absolute inset-0 bg-gradient-to-b ${isTomorrow ? 'from-black/95 via-black/60 to-black/40' : 'from-black/90 via-black/40 to-black/20'}`}
+        />
       </div>
 
       {/* Content over image */}
@@ -209,9 +219,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
           </div>
 
           {/* Date */}
-          <p className="text-xs font-medium tracking-widest uppercase text-white/50 mb-3">
-            {formatShortDate(dateKey)}
-          </p>
+          <p className="text-xs font-medium tracking-widest uppercase text-white/50 mb-3">{formatShortDate(dateKey)}</p>
 
           {/* Title */}
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.9] tracking-tight text-white mb-4">
@@ -220,29 +228,32 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
 
           {/* Focus tags + duration */}
           <div className="flex items-center gap-2 flex-wrap mb-4">
-            {session.focus.map(f => (
-              <span key={f} className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80">
+            {session.focus.map((f) => (
+              <span
+                key={f}
+                className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80"
+              >
                 {f}
               </span>
             ))}
             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80">
               ~{session.estimatedDuration} min
             </span>
-            <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${
-              difficulty.level === 'accessible'
-                ? 'bg-emerald-500/20 border-emerald-400/30 text-emerald-300'
-                : difficulty.level === 'modere'
-                  ? 'bg-amber-500/20 border-amber-400/30 text-amber-300'
-                  : 'bg-red-500/20 border-red-400/30 text-red-300'
-            }`}>
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-semibold border ${
+                difficulty.level === 'accessible'
+                  ? 'bg-emerald-500/20 border-emerald-400/30 text-emerald-300'
+                  : difficulty.level === 'modere'
+                    ? 'bg-amber-500/20 border-amber-400/30 text-amber-300'
+                    : 'bg-red-500/20 border-red-400/30 text-red-300'
+              }`}
+            >
               {difficulty.label}
             </span>
           </div>
 
           {/* Description */}
-          <p className="text-sm text-white/60 leading-relaxed max-w-md">
-            {session.description}
-          </p>
+          <p className="text-sm text-white/60 leading-relaxed max-w-md">{session.description}</p>
         </div>
 
         {/* Bottom — timeline + CTA */}
@@ -278,6 +289,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
           {/* CTA */}
           {showCta && onStart && (
             <button
+              type="button"
               onClick={onStart}
               className="cta-gradient w-full py-4 rounded-2xl text-base font-bold text-white tracking-wide cursor-pointer"
             >
@@ -293,7 +305,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
 function IntensityDots({ level }: { level: number }) {
   return (
     <div className="flex items-center gap-1.5" role="img" aria-label={`Intensité ${level} sur 5`}>
-      {[1, 2, 3, 4, 5].map(i => (
+      {[1, 2, 3, 4, 5].map((i) => (
         <div key={i} className={`intensity-dot ${i <= level ? 'active' : 'inactive'}`} />
       ))}
     </div>

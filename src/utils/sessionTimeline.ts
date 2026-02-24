@@ -1,7 +1,7 @@
-import type { Block } from '../types/session.ts';
 import { BLOCK_LABELS } from '../engine/constants.ts';
+import type { Block } from '../types/session.ts';
 
-export interface TimelineSegment {
+interface TimelineSegment {
   label: string;
   type: Block['type'];
   isAccent: boolean;
@@ -9,7 +9,7 @@ export interface TimelineSegment {
 }
 
 export function computeTimeline(blocks: Block[]): TimelineSegment[] {
-  return blocks.map(block => {
+  return blocks.map((block) => {
     const label = BLOCK_LABELS[block.type];
     const isAccent = block.type !== 'warmup' && block.type !== 'cooldown';
     let duration = 0;
@@ -17,7 +17,7 @@ export function computeTimeline(blocks: Block[]): TimelineSegment[] {
     switch (block.type) {
       case 'warmup':
       case 'cooldown':
-        duration = block.exercises.reduce((sum, ex) => sum + (ex.duration * (ex.bilateral ? 2 : 1)), 0);
+        duration = block.exercises.reduce((sum, ex) => sum + ex.duration * (ex.bilateral ? 2 : 1), 0);
         break;
       case 'classic':
         duration = block.exercises.reduce((sum, ex) => sum + ex.sets * 30 + (ex.sets - 1) * ex.restBetweenSets, 0);

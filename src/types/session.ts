@@ -1,4 +1,4 @@
-export interface Alternative {
+interface Alternative {
   name: string;
   equipment?: string;
   instructions?: string;
@@ -13,13 +13,13 @@ export interface WarmupExercise {
 }
 
 export interface WarmupBlock {
-  type: "warmup";
+  type: 'warmup';
   name: string;
   exercises: WarmupExercise[];
 }
 
 export interface CooldownBlock {
-  type: "cooldown";
+  type: 'cooldown';
   name: string;
   exercises: WarmupExercise[];
 }
@@ -27,7 +27,7 @@ export interface CooldownBlock {
 export interface ClassicExercise {
   name: string;
   sets: number;
-  reps: number | "max";
+  reps: number | 'max';
   restBetweenSets: number;
   tempo?: string;
   instructions: string;
@@ -36,7 +36,7 @@ export interface ClassicExercise {
 }
 
 export interface ClassicBlock {
-  type: "classic";
+  type: 'classic';
   name: string;
   restBetweenExercises: number;
   exercises: ClassicExercise[];
@@ -44,7 +44,7 @@ export interface ClassicBlock {
 
 export interface CircuitExercise {
   name: string;
-  mode: "timed" | "reps";
+  mode: 'timed' | 'reps';
   duration?: number;
   reps?: number;
   instructions: string;
@@ -53,7 +53,7 @@ export interface CircuitExercise {
 }
 
 export interface CircuitBlock {
-  type: "circuit";
+  type: 'circuit';
   name: string;
   rounds: number;
   restBetweenExercises: number;
@@ -68,7 +68,7 @@ export interface HIITExercise {
 }
 
 export interface HIITBlock {
-  type: "hiit";
+  type: 'hiit';
   name: string;
   rounds: number;
   work: number;
@@ -77,7 +77,7 @@ export interface HIITBlock {
 }
 
 export interface TabataBlock {
-  type: "tabata";
+  type: 'tabata';
   name: string;
   sets?: number;
   rounds?: number;
@@ -94,7 +94,7 @@ export interface EMOMExercise {
 }
 
 export interface EMOMBlock {
-  type: "emom";
+  type: 'emom';
   name: string;
   minutes: number;
   intervalDuration?: number;
@@ -108,7 +108,7 @@ export interface AMRAPExercise {
 }
 
 export interface AMRAPBlock {
-  type: "amrap";
+  type: 'amrap';
   name: string;
   duration: number;
   exercises: AMRAPExercise[];
@@ -123,7 +123,7 @@ export interface SupersetPair {
 }
 
 export interface SupersetBlock {
-  type: "superset";
+  type: 'superset';
   name: string;
   sets: number;
   restBetweenSets: number;
@@ -132,7 +132,7 @@ export interface SupersetBlock {
 }
 
 export interface PyramidBlock {
-  type: "pyramid";
+  type: 'pyramid';
   name: string;
   pattern: number[];
   restBetweenSets: number;
@@ -152,7 +152,7 @@ export type Block =
   | SupersetBlock
   | PyramidBlock;
 
-export type BlockType = Block["type"];
+export type BlockType = Block['type'];
 
 export interface Session {
   schema_version?: 1;
@@ -165,6 +165,4 @@ export interface Session {
 }
 
 /** Where to fetch sessions from — extensible for future Supabase source. */
-export type SessionSource =
-  | { type: 'static' }
-  | { type: 'api'; baseUrl: string };
+export type SessionSource = { type: 'static' } | { type: 'api'; baseUrl: string };

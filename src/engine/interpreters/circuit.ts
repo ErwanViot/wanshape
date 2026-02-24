@@ -1,20 +1,16 @@
-import type { CircuitBlock } from '../../types/session.ts';
 import type { AtomicStep } from '../../types/player.ts';
-import { BLOCK_COLORS, TRANSITION_DURATION, PREPARE_COUNTDOWN, DEFAULT_REST_FOR_REPS } from '../constants.ts';
+import type { CircuitBlock } from '../../types/session.ts';
+import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, PREPARE_COUNTDOWN, TRANSITION_DURATION } from '../constants.ts';
 
-export function expandCircuit(
-  block: CircuitBlock,
-  blockIndex: number,
-  totalBlocks: number
-): AtomicStep[] {
+export function expandCircuit(block: CircuitBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.circuit;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
   steps.push({
     id: `block-${blockIndex}-transition`,
-    phase: "transition",
-    timerMode: "countdown",
+    phase: 'transition',
+    timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
     instructions: `${block.rounds} rounds - ${block.exercises.length} exercices`,
@@ -29,17 +25,17 @@ export function expandCircuit(
     for (let exIdx = 0; exIdx < block.exercises.length; exIdx++) {
       const ex = block.exercises[exIdx];
       const isLastExInRound = exIdx === block.exercises.length - 1;
-      const isTimed = ex.mode === "timed";
+      const isTimed = ex.mode === 'timed';
 
       // Prepare countdown for first timed exercise of first round
       if (round === 0 && exIdx === 0 && isTimed) {
         steps.push({
           id: `block-${blockIndex}-prepare`,
-          phase: "prepare",
-          timerMode: "countdown",
+          phase: 'prepare',
+          timerMode: 'countdown',
           duration: PREPARE_COUNTDOWN,
           exerciseName: ex.name,
-          instructions: "Préparez-vous !",
+          instructions: 'Préparez-vous !',
           ...base,
           roundInfo,
           estimatedDuration: PREPARE_COUNTDOWN,
@@ -49,8 +45,8 @@ export function expandCircuit(
       const duration = isTimed ? (ex.bilateral ? (ex.duration ?? 30) * 2 : (ex.duration ?? 30)) : null;
       steps.push({
         id: `block-${blockIndex}-round-${round}-ex-${exIdx}-work`,
-        phase: "work",
-        timerMode: isTimed ? "countdown" : "manual",
+        phase: 'work',
+        timerMode: isTimed ? 'countdown' : 'manual',
         duration,
         exerciseName: ex.name,
         instructions: ex.instructions,
@@ -60,7 +56,13 @@ export function expandCircuit(
         isLastInBlock: isLastRound && isLastExInRound,
         isLastInRound: isLastExInRound,
         nextStepPreview: !isLastExInRound
-          ? { exerciseName: block.exercises[exIdx + 1].name, description: block.exercises[exIdx + 1].mode === "timed" ? `${block.exercises[exIdx + 1].duration}s` : `${block.exercises[exIdx + 1].reps} reps` }
+          ? {
+              exerciseName: block.exercises[exIdx + 1].name,
+              description:
+                block.exercises[exIdx + 1].mode === 'timed'
+                  ? `${block.exercises[exIdx + 1].duration}s`
+                  : `${block.exercises[exIdx + 1].reps} reps`,
+            }
           : !isLastRound
             ? { exerciseName: block.exercises[0].name, description: `Round ${round + 2}/${block.rounds}` }
             : undefined,
@@ -71,10 +73,10 @@ export function expandCircuit(
       if (!isLastExInRound) {
         steps.push({
           id: `block-${blockIndex}-round-${round}-ex-${exIdx}-rest`,
-          phase: "rest",
-          timerMode: "countdown",
+          phase: 'rest',
+          timerMode: 'countdown',
           duration: block.restBetweenExercises,
-          exerciseName: "Repos",
+          exerciseName: 'Repos',
           instructions: `Prochain : ${block.exercises[exIdx + 1].name}`,
           ...base,
           roundInfo,
@@ -87,10 +89,10 @@ export function expandCircuit(
     if (!isLastRound) {
       steps.push({
         id: `block-${blockIndex}-round-${round}-rest`,
-        phase: "rest",
-        timerMode: "countdown",
+        phase: 'rest',
+        timerMode: 'countdown',
         duration: block.restBetweenRounds,
-        exerciseName: "Repos",
+        exerciseName: 'Repos',
         instructions: `Fin du round ${round + 1} - Round ${round + 2} dans...`,
         ...base,
         roundInfo,

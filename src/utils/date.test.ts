@@ -1,10 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import {
-  formatDateToDDMMYYYY,
-  parseDDMMYYYY,
-  formatDuration,
-  formatDurationLong,
-} from './date.ts';
+import { describe, expect, it } from 'vitest';
+import { formatDateToDDMMYYYY, formatDuration, formatDurationLong, parseDDMMYYYY } from './date.ts';
 
 describe('formatDateToDDMMYYYY', () => {
   it('formats a date correctly', () => {

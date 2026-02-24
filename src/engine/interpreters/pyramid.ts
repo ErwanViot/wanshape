@@ -1,23 +1,19 @@
-import type { PyramidBlock } from '../../types/session.ts';
 import type { AtomicStep } from '../../types/player.ts';
-import { BLOCK_COLORS, TRANSITION_DURATION, DEFAULT_REST_FOR_REPS } from '../constants.ts';
+import type { PyramidBlock } from '../../types/session.ts';
+import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
 
-export function expandPyramid(
-  block: PyramidBlock,
-  blockIndex: number,
-  totalBlocks: number
-): AtomicStep[] {
+export function expandPyramid(block: PyramidBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.pyramid;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
-  const patternStr = block.pattern.join("-");
+  const patternStr = block.pattern.join('-');
   const restBetweenExercises = block.restBetweenExercises ?? block.restBetweenSets * 2;
 
   steps.push({
     id: `block-${blockIndex}-transition`,
-    phase: "transition",
-    timerMode: "countdown",
+    phase: 'transition',
+    timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
     instructions: `Pyramide : ${patternStr}`,
@@ -39,19 +35,19 @@ export function expandPyramid(
       const setInfo = { current: i + 1, total: block.pattern.length };
 
       const nextReps = !isLastLevel ? block.pattern[i + 1] : undefined;
-      const nextPreviewInExercise = nextReps !== undefined
-        ? { exerciseName: ex.name, description: `${nextReps} reps` }
-        : undefined;
+      const nextPreviewInExercise =
+        nextReps !== undefined ? { exerciseName: ex.name, description: `${nextReps} reps` } : undefined;
 
       // Preview for last level: next exercise's first level (if any)
-      const nextPreviewCrossExercise = isLastLevel && !isLastExercise
-        ? { exerciseName: block.exercises[exIdx + 1].name, description: `${block.pattern[0]} reps` }
-        : undefined;
+      const nextPreviewCrossExercise =
+        isLastLevel && !isLastExercise
+          ? { exerciseName: block.exercises[exIdx + 1].name, description: `${block.pattern[0]} reps` }
+          : undefined;
 
       steps.push({
         id: `block-${blockIndex}-ex-${exIdx}-step-${i}-work`,
-        phase: "work",
-        timerMode: "manual",
+        phase: 'work',
+        timerMode: 'manual',
         duration: null,
         exerciseName: ex.name,
         instructions: ex.instructions,
@@ -68,10 +64,10 @@ export function expandPyramid(
       if (!isLastLevel) {
         steps.push({
           id: `block-${blockIndex}-ex-${exIdx}-step-${i}-rest`,
-          phase: "rest",
-          timerMode: "countdown",
+          phase: 'rest',
+          timerMode: 'countdown',
           duration: block.restBetweenSets,
-          exerciseName: "Repos",
+          exerciseName: 'Repos',
           instructions: `Prochain : ${ex.name} — ${block.pattern[i + 1]} reps`,
           ...base,
           setInfo,
@@ -85,10 +81,10 @@ export function expandPyramid(
     if (!isLastExercise) {
       steps.push({
         id: `block-${blockIndex}-ex-${exIdx}-rest-between`,
-        phase: "rest",
-        timerMode: "countdown",
+        phase: 'rest',
+        timerMode: 'countdown',
         duration: restBetweenExercises,
-        exerciseName: "Repos",
+        exerciseName: 'Repos',
         instructions: `Prochain exercice : ${block.exercises[exIdx + 1].name}`,
         ...base,
         exerciseInfo,

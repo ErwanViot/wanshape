@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 const STORAGE_KEY = 'wanshape-health-accepted';
@@ -11,13 +11,16 @@ export function useHealthCheck() {
   const navigate = useNavigate();
   const [pendingPath, setPendingPath] = useState<string | null>(null);
 
-  const guardNavigation = useCallback((path: string) => {
-    if (isHealthAccepted()) {
-      navigate(path);
-    } else {
-      setPendingPath(path);
-    }
-  }, [navigate]);
+  const guardNavigation = useCallback(
+    (path: string) => {
+      if (isHealthAccepted()) {
+        navigate(path);
+      } else {
+        setPendingPath(path);
+      }
+    },
+    [navigate],
+  );
 
   const acceptAndNavigate = useCallback(() => {
     localStorage.setItem(STORAGE_KEY, '1');

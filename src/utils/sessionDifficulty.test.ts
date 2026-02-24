@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { computeDifficulty } from './sessionDifficulty.ts';
+import { describe, expect, it } from 'vitest';
 import type { Session } from '../types/session.ts';
+import { computeDifficulty } from './sessionDifficulty.ts';
 
 function makeSession(blocks: Session['blocks'], estimatedDuration = 30): Session {
   return {
@@ -61,19 +61,13 @@ describe('computeDifficulty', () => {
   });
 
   it('adds long session bonus', () => {
-    const short = makeSession([
-      { type: 'classic', name: 'Renforcement', restBetweenExercises: 30, exercises: [] },
-    ], 30);
-    const long = makeSession([
-      { type: 'classic', name: 'Renforcement', restBetweenExercises: 30, exercises: [] },
-    ], 40);
+    const short = makeSession([{ type: 'classic', name: 'Renforcement', restBetweenExercises: 30, exercises: [] }], 30);
+    const long = makeSession([{ type: 'classic', name: 'Renforcement', restBetweenExercises: 30, exercises: [] }], 40);
     expect(computeDifficulty(long).score).toBeGreaterThan(computeDifficulty(short).score);
   });
 
   it('returns label in French', () => {
-    const session = makeSession([
-      { type: 'emom', name: 'EMOM', minutes: 12, exercises: [] },
-    ]);
+    const session = makeSession([{ type: 'emom', name: 'EMOM', minutes: 12, exercises: [] }]);
     const result = computeDifficulty(session);
     expect(result.label).toBe('Modéré');
   });

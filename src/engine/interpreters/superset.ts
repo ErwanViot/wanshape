@@ -1,23 +1,19 @@
-import type { SupersetBlock } from '../../types/session.ts';
 import type { AtomicStep } from '../../types/player.ts';
-import { BLOCK_COLORS, TRANSITION_DURATION, DEFAULT_REST_FOR_REPS } from '../constants.ts';
+import type { SupersetBlock } from '../../types/session.ts';
+import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
 
-export function expandSuperset(
-  block: SupersetBlock,
-  blockIndex: number,
-  totalBlocks: number
-): AtomicStep[] {
+export function expandSuperset(block: SupersetBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.superset;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
   steps.push({
     id: `block-${blockIndex}-transition`,
-    phase: "transition",
-    timerMode: "countdown",
+    phase: 'transition',
+    timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `${block.sets} séries - ${block.pairs.length} paire${block.pairs.length > 1 ? "s" : ""}`,
+    instructions: `${block.sets} séries - ${block.pairs.length} paire${block.pairs.length > 1 ? 's' : ''}`,
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });
@@ -42,8 +38,8 @@ export function expandSuperset(
 
         steps.push({
           id: `block-${blockIndex}-set-${set}-pair-${pairIdx}-ex-${exIdx}-work`,
-          phase: "work",
-          timerMode: "manual",
+          phase: 'work',
+          timerMode: 'manual',
           duration: null,
           exerciseName: ex.name,
           instructions: ex.instructions,
@@ -51,9 +47,7 @@ export function expandSuperset(
           ...base,
           setInfo,
           isLastInBlock: isLastSet && isLastPair && isLastExInPair,
-          nextStepPreview: nextEx
-            ? { exerciseName: nextEx.name, description: `${nextEx.reps} reps` }
-            : undefined,
+          nextStepPreview: nextEx ? { exerciseName: nextEx.name, description: `${nextEx.reps} reps` } : undefined,
           estimatedDuration: DEFAULT_REST_FOR_REPS,
         });
       }
@@ -63,10 +57,10 @@ export function expandSuperset(
         const nextPair = block.pairs[pairIdx + 1];
         steps.push({
           id: `block-${blockIndex}-set-${set}-pair-${pairIdx}-rest`,
-          phase: "rest",
-          timerMode: "countdown",
+          phase: 'rest',
+          timerMode: 'countdown',
           duration: block.restBetweenPairs,
-          exerciseName: "Repos",
+          exerciseName: 'Repos',
           instructions: `Prochain : ${nextPair.exercises[0].name}`,
           ...base,
           setInfo,
@@ -79,10 +73,10 @@ export function expandSuperset(
     if (!isLastSet) {
       steps.push({
         id: `block-${blockIndex}-set-${set}-rest`,
-        phase: "rest",
-        timerMode: "countdown",
+        phase: 'rest',
+        timerMode: 'countdown',
         duration: block.restBetweenSets,
-        exerciseName: "Repos",
+        exerciseName: 'Repos',
         instructions: `Série ${set + 2}/${block.sets} dans...`,
         ...base,
         setInfo,

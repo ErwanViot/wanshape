@@ -13,29 +13,17 @@ export function AMRAPView({ step, remaining, progress, rounds, onIncrementRound 
   return (
     <div className="flex flex-col items-center justify-center flex-1 gap-5 px-6 text-center">
       {/* Block name */}
-      <h2 className="text-2xl font-bold text-white">
-        {step.blockName}
-      </h2>
+      <h2 className="text-2xl font-bold text-white">{step.blockName}</h2>
 
       {/* Timer */}
-      <TimerDisplay
-        remaining={remaining}
-        progress={progress}
-        color={step.blockColor}
-      />
+      <TimerDisplay remaining={remaining} progress={progress} color={step.blockColor} />
 
       {/* Exercise list */}
       <div className="w-full max-w-sm space-y-2">
         {step.amrapExercises?.map((ex, i) => (
-          <div
-            key={i}
-            className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/10"
-          >
+          <div key={i} className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/10">
             <span className="text-white font-medium">{ex.name}</span>
-            <span
-              className="text-lg font-bold"
-              style={{ color: step.blockColor }}
-            >
+            <span className="text-lg font-bold" style={{ color: step.blockColor }}>
               x{ex.reps}
             </span>
           </div>
@@ -52,6 +40,7 @@ export function AMRAPView({ step, remaining, progress, rounds, onIncrementRound 
         </div>
 
         <button
+          type="button"
           onClick={onIncrementRound}
           className="h-16 px-8 rounded-2xl font-bold text-lg text-white transition-all active:scale-95"
           style={{ backgroundColor: step.blockColor }}

@@ -1,20 +1,16 @@
-import type { ClassicBlock } from '../../types/session.ts';
 import type { AtomicStep } from '../../types/player.ts';
-import { BLOCK_COLORS, TRANSITION_DURATION, DEFAULT_REST_FOR_REPS } from '../constants.ts';
+import type { ClassicBlock } from '../../types/session.ts';
+import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
 
-export function expandClassic(
-  block: ClassicBlock,
-  blockIndex: number,
-  totalBlocks: number
-): AtomicStep[] {
+export function expandClassic(block: ClassicBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.classic;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
   steps.push({
     id: `block-${blockIndex}-transition`,
-    phase: "transition",
-    timerMode: "countdown",
+    phase: 'transition',
+    timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
     instructions: `${block.exercises.length} exercices`,
@@ -34,11 +30,11 @@ export function expandClassic(
       const setInfo = { current: set + 1, total: ex.sets };
 
       // Work step
-      const repsLabel = ex.reps === "max" ? "max reps" : `${ex.reps} reps`;
+      const repsLabel = ex.reps === 'max' ? 'max reps' : `${ex.reps} reps`;
       steps.push({
         id: `block-${blockIndex}-ex-${exIdx}-set-${set}-work`,
-        phase: "work",
-        timerMode: "manual",
+        phase: 'work',
+        timerMode: 'manual',
         duration: null,
         exerciseName: ex.name,
         instructions: ex.instructions,
@@ -51,7 +47,10 @@ export function expandClassic(
         nextStepPreview: !isLastSet
           ? { exerciseName: ex.name, description: `Série ${set + 2}/${ex.sets} - ${repsLabel}` }
           : !isLastExercise
-            ? { exerciseName: block.exercises[exIdx + 1].name, description: `${block.exercises[exIdx + 1].reps === "max" ? "max" : block.exercises[exIdx + 1].reps} reps` }
+            ? {
+                exerciseName: block.exercises[exIdx + 1].name,
+                description: `${block.exercises[exIdx + 1].reps === 'max' ? 'max' : block.exercises[exIdx + 1].reps} reps`,
+              }
             : undefined,
         estimatedDuration: DEFAULT_REST_FOR_REPS,
       });
@@ -60,10 +59,10 @@ export function expandClassic(
       if (!isLastSet) {
         steps.push({
           id: `block-${blockIndex}-ex-${exIdx}-set-${set}-rest`,
-          phase: "rest",
-          timerMode: "countdown",
+          phase: 'rest',
+          timerMode: 'countdown',
           duration: ex.restBetweenSets,
-          exerciseName: "Repos",
+          exerciseName: 'Repos',
           instructions: `Prochain : ${ex.name} - Série ${set + 2}/${ex.sets}`,
           ...base,
           setInfo,
@@ -78,10 +77,10 @@ export function expandClassic(
       const nextEx = block.exercises[exIdx + 1];
       steps.push({
         id: `block-${blockIndex}-ex-${exIdx}-transition-rest`,
-        phase: "rest",
-        timerMode: "countdown",
+        phase: 'rest',
+        timerMode: 'countdown',
         duration: block.restBetweenExercises,
-        exerciseName: "Repos",
+        exerciseName: 'Repos',
         instructions: `Prochain : ${nextEx.name}`,
         ...base,
         exerciseInfo,
