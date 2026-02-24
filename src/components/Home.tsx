@@ -12,6 +12,7 @@ import { BrandHeader } from './BrandHeader.tsx';
 import { Footer } from './Footer.tsx';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { SessionRecap } from './SessionRecap.tsx';
+import { StreakWidget } from './StreakWidget.tsx';
 
 function formatShortDate(dateKey: string): string {
   const d = parseDDMMYYYY(dateKey);
@@ -58,6 +59,9 @@ export function Home() {
 
       {/* Gradient divider */}
       <div className="gradient-divider mb-8" />
+
+      {/* Streak widget — logged-in users only */}
+      <StreakWidget />
 
       {/* Two-column grid: today panel + recap side by side, tomorrow panel below left */}
       <div id="main-content" className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
