@@ -26,7 +26,7 @@ export function Legal() {
   });
 
   return (
-    <div className="min-h-screen bg-surface">
+    <>
       {/* Header */}
       <header className="bg-surface border-b border-divider sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-6 py-4 flex items-center gap-4">
@@ -67,7 +67,7 @@ export function Legal() {
           {tab === 'cgu' && <CGU />}
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

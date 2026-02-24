@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
 
-export function Layout() {
+export function PublicLayout() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return <Outlet />;
+  return (
+    <div className="min-h-screen bg-surface flex flex-col">
+      <Outlet />
+    </div>
+  );
 }

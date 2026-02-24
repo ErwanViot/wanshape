@@ -9,6 +9,7 @@ import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
+import { Footer } from './Footer.tsx';
 import { SessionRecap } from './SessionRecap.tsx';
 import type { Session } from '../types/session.ts';
 
@@ -48,7 +49,7 @@ export function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-surface flex flex-col">
+    <>
       {showDisclaimer && (
         <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />
       )}
@@ -168,27 +169,8 @@ export function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="px-6 py-8 border-t border-divider">
-        <p className="text-faint text-xs text-center">
-          WAN SHAPE par{' '}
-          <a href="https://www.wan-soft.fr" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-subtle underline transition-colors">
-            WAN SOFT
-          </a>
-        </p>
-        <div className="flex justify-center gap-4 mt-3">
-          <Link to="/legal/mentions" className="text-xs text-faint hover:text-subtle transition-colors">
-            Mentions légales
-          </Link>
-          <Link to="/legal/privacy" className="text-xs text-faint hover:text-subtle transition-colors">
-            Confidentialité
-          </Link>
-          <Link to="/legal/cgu" className="text-xs text-faint hover:text-subtle transition-colors">
-            CGU
-          </Link>
-        </div>
-      </footer>
-    </div>
+      <Footer />
+    </>
   );
 }
 

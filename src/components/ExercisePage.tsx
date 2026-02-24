@@ -34,7 +34,7 @@ export function ExercisePage() {
   }
 
   return (
-    <div className="min-h-screen bg-surface">
+    <>
       {/* Hero */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
@@ -157,7 +157,7 @@ export function ExercisePage() {
           </Link>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

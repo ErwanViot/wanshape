@@ -19,7 +19,7 @@ export function FormatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-surface">
+    <>
       {/* Hero — text stays white (over image) */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
@@ -133,6 +133,6 @@ export function FormatPage() {
           </Link>
         </div>
       </main>
-    </div>
+    </>
   );
 }

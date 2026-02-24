@@ -44,7 +44,7 @@ export function Formats() {
   });
 
   return (
-    <div className="min-h-screen bg-surface">
+    <>
       <header className="bg-surface border-b border-divider sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center gap-3">
           <Link
@@ -119,6 +119,6 @@ export function Formats() {
           Les durées indiquées incluent l'échauffement et les étirements.
         </p>
       </main>
-    </div>
+    </>
   );
 }
