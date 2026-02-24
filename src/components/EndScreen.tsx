@@ -1,12 +1,32 @@
+import { useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext.tsx';
+import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
 import type { Session } from '../types/session.ts';
 
 interface Props {
   session: Session;
   amrapRounds: number;
+  durationSeconds: number;
   onBack: () => void;
+  programSessionId?: string;
 }
 
-export function EndScreen({ session, amrapRounds, onBack }: Props) {
+export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId }: Props) {
+  const { user } = useAuth();
+  const { save, saved } = useSaveCompletion();
+
+  useEffect(() => {
+    if (!user) return;
+    save({
+      sessionDate: programSessionId ? undefined : session.date,
+      programSessionId,
+      durationSeconds,
+      amrapRounds,
+    });
+  }, [user, save, session.date, programSessionId, durationSeconds, amrapRounds]);
+
+  const realMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center bg-[#0a0a0a]">
       {/* Trophy */}
@@ -16,9 +36,11 @@ export function EndScreen({ session, amrapRounds, onBack }: Props) {
 
       <p className="text-white/60 text-lg">{session.title}</p>
 
+      {user && saved && <p className="text-emerald-400 text-sm font-medium">Séance enregistrée</p>}
+
       <div className="flex gap-6">
         <div className="text-center">
-          <div className="text-3xl font-bold text-white">{session.estimatedDuration}</div>
+          <div className="text-3xl font-bold text-white">{realMinutes}</div>
           <div className="text-white/50 text-sm">minutes</div>
         </div>
         <div className="text-center">
@@ -38,7 +60,7 @@ export function EndScreen({ session, amrapRounds, onBack }: Props) {
         onClick={onBack}
         className="mt-4 px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
       >
-        Retour à l'accueil
+        {programSessionId ? 'Retour au programme' : "Retour à l'accueil"}
       </button>
     </div>
   );

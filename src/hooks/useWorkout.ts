@@ -7,7 +7,9 @@ export function useWorkout(steps: AtomicStep[]) {
   const [status, setStatus] = useState<PlayerStatus>('idle');
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [amrapRounds, setAmrapRounds] = useState(0);
+  const [durationSeconds, setDurationSeconds] = useState(0);
   const previousStatusRef = useRef<PlayerStatus>('idle');
+  const startedAtRef = useRef(0);
   const stepsRef = useRef(steps);
   stepsRef.current = steps;
 
@@ -108,6 +110,7 @@ export function useWorkout(steps: AtomicStep[]) {
 
   const start = useCallback(() => {
     if (steps.length === 0) return;
+    startedAtRef.current = Date.now();
     setCurrentStepIndex(0);
     setAmrapRounds(0);
     const firstStep = steps[0];
@@ -154,6 +157,13 @@ export function useWorkout(steps: AtomicStep[]) {
     setAmrapRounds((prev) => prev + 1);
   }, []);
 
+  // Track real duration when workout completes
+  useEffect(() => {
+    if (status === 'complete' && startedAtRef.current > 0) {
+      setDurationSeconds(Math.round((Date.now() - startedAtRef.current) / 1000));
+    }
+  }, [status]);
+
   // Compute global progress
   const totalEstimated = steps.reduce((sum, s) => sum + s.estimatedDuration, 0);
   const elapsedEstimated = steps.slice(0, currentStepIndex).reduce((sum, s) => sum + s.estimatedDuration, 0);
@@ -167,6 +177,7 @@ export function useWorkout(steps: AtomicStep[]) {
     timer,
     audio,
     amrapRounds,
+    durationSeconds,
     globalProgress,
     start,
     pause,

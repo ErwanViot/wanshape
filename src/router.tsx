@@ -21,6 +21,11 @@ const LazyAuthCallback = lazy(() =>
 const LazyProfilePage = lazy(() =>
   import('./components/auth/ProfilePage.tsx').then((m) => ({ default: m.ProfilePage })),
 );
+const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
+const LazyProgramPage = lazy(() => import('./components/ProgramPage.tsx').then((m) => ({ default: m.ProgramPage })));
+const LazyProgramPlayerPage = lazy(() =>
+  import('./components/ProgramPlayerPage.tsx').then((m) => ({ default: m.ProgramPlayerPage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -93,6 +98,23 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
+      // Programme routes
+      {
+        path: 'programmes',
+        element: (
+          <Lazy>
+            <LazyProgramList />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'programme/:slug',
+        element: (
+          <Lazy>
+            <LazyProgramPage />
+          </Lazy>
+        ),
+      },
     ],
   },
   // Player — full screen, no chrome
@@ -103,6 +125,15 @@ export const router = createBrowserRouter([
       // Legacy URLs with date → redirect to dateless route
       { path: 'seance/:dateKey/play', element: <PlayerPage /> },
       { path: 'seance/:dateKey', element: <Navigate to="/seance/play" replace /> },
+      // Programme player
+      {
+        path: 'programme/:slug/seance/:order/play',
+        element: (
+          <Lazy>
+            <LazyProgramPlayerPage />
+          </Lazy>
+        ),
+      },
     ],
   },
   // Catch-all
