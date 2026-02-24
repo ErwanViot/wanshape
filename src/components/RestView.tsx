@@ -21,6 +21,7 @@ export function RestView({ step, remaining, progress, onSkip }: Props) {
         {step.roundInfo && (
           <span>Round {step.roundInfo.current}/{step.roundInfo.total}</span>
         )}
+        {step.roundInfo && step.setInfo && <span> · </span>}
         {step.setInfo && (
           <span>Série {step.setInfo.current}/{step.setInfo.total}</span>
         )}
