@@ -16,6 +16,19 @@ export function RestView({ step, remaining, progress, onSkip }: Props) {
         Repos
       </h2>
 
+      {/* Context: round/set info */}
+      <div className="text-white/50 text-sm">
+        {step.roundInfo && (
+          <span>Round {step.roundInfo.current}/{step.roundInfo.total}</span>
+        )}
+        {step.setInfo && (
+          <span>Série {step.setInfo.current}/{step.setInfo.total}</span>
+        )}
+        {step.intervalInfo && (
+          <span className="ml-2">· Intervalle {step.intervalInfo.current}/{step.intervalInfo.total}</span>
+        )}
+      </div>
+
       {/* Timer */}
       <TimerDisplay
         remaining={remaining}
@@ -25,7 +38,7 @@ export function RestView({ step, remaining, progress, onSkip }: Props) {
       />
 
       {/* Next exercise info */}
-      <p className="text-white/60 text-base">
+      <p className="text-white/80 text-lg">
         {step.instructions}
       </p>
 

@@ -35,5 +35,7 @@ export const TABATA_DEFAULTS = {
 } as const;
 
 export const TRANSITION_DURATION = 4;
+export const FIRST_TRANSITION_DURATION = 8;
+export const INTER_BLOCK_REST = 60;
 export const PREPARE_COUNTDOWN = 3;
 export const DEFAULT_REST_FOR_REPS = 5;

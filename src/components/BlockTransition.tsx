@@ -8,7 +8,22 @@ interface Props {
   progress: number;
 }
 
+function HealthDisclaimer() {
+  return (
+    <div className="bg-white/10 backdrop-blur-sm rounded-2xl px-5 py-4 max-w-sm text-left space-y-2">
+      <p className="text-white/90 text-sm font-medium">Avant de commencer :</p>
+      <ul className="text-white/70 text-sm space-y-1.5">
+        <li>⚕️ Consultez un médecin en cas de doute</li>
+        <li>✅ Assurez-vous de n'avoir aucune contre-indication</li>
+        <li>🛑 Arrêtez immédiatement en cas de douleur</li>
+      </ul>
+    </div>
+  );
+}
+
 export function BlockTransition({ step, remaining, progress }: Props) {
+  const isFirstBlock = step.blockIndex === 0;
+
   return (
     <div className="flex flex-col items-center justify-center flex-1 gap-6 px-6 text-center">
       {/* Block indicator */}
@@ -33,6 +48,9 @@ export function BlockTransition({ step, remaining, progress }: Props) {
       <p className="text-white/60 text-base">
         {step.instructions}
       </p>
+
+      {/* Health disclaimer on first block */}
+      {isFirstBlock && <HealthDisclaimer />}
 
       {/* Timer */}
       <TimerDisplay

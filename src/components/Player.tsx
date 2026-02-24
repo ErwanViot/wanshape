@@ -1,7 +1,9 @@
 import { useMemo, useEffect } from 'react';
-import { useNavigate, Navigate, Link } from 'react-router';
+import { useNavigate, useParams, Navigate, Link } from 'react-router';
 import type { Session } from '../types/session.ts';
+import type { AtomicStep } from '../types/player.ts';
 import { compileSession } from '../engine/interpreter.ts';
+import { BLOCK_LABELS } from '../engine/constants.ts';
 import { useSession } from '../hooks/useSession.ts';
 import { useWorkout } from '../hooks/useWorkout.ts';
 import { useWakeLock } from '../hooks/useWakeLock.ts';
@@ -19,7 +21,8 @@ import { Controls } from './Controls.tsx';
 import { getTodayKey } from '../utils/date.ts';
 
 export function PlayerPage() {
-  const dateKey = getTodayKey();
+  const { dateKey: paramDateKey } = useParams<{ dateKey?: string }>();
+  const dateKey = paramDateKey ?? getTodayKey();
   const { session, loading } = useSession(dateKey);
 
   useDocumentHead({
@@ -53,6 +56,48 @@ export function PlayerPage() {
   }
 
   return <Player session={session} />;
+}
+
+function getBlockProgress(step: AtomicStep): string {
+  if (step.phase === 'transition') return '';
+  // Exercise-based: classic, pyramid, warmup, cooldown
+  if (step.exerciseInfo) return `${step.exerciseInfo.current}/${step.exerciseInfo.total}`;
+  // Round-based: circuit, hiit, tabata, emom
+  if (step.roundInfo) return `${step.roundInfo.current}/${step.roundInfo.total}`;
+  // Set-based: superset
+  if (step.setInfo) return `${step.setInfo.current}/${step.setInfo.total}`;
+  return '';
+}
+
+function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep }) {
+  const progress = getBlockProgress(step);
+
+  return (
+    <div className="flex items-center justify-center gap-1.5 flex-wrap text-[11px] tracking-wide">
+      {session.blocks.map((block, i) => {
+        const isActive = i === step.blockIndex;
+        const isPast = i < step.blockIndex;
+
+        return (
+          <span key={i} className="flex items-center gap-1.5">
+            {i > 0 && <span className="text-white/15">›</span>}
+            <span
+              className={isActive ? 'font-semibold' : 'font-medium'}
+              style={{
+                color: isActive
+                  ? step.blockColor
+                  : isPast
+                    ? 'rgba(255,255,255,0.4)'
+                    : 'rgba(255,255,255,0.2)',
+              }}
+            >
+              {BLOCK_LABELS[block.type]}{isActive && progress && ` - ${progress}`}
+            </span>
+          </span>
+        );
+      })}
+    </div>
+  );
 }
 
 function Player({ session }: { session: Session }) {
@@ -116,14 +161,9 @@ function Player({ session }: { session: Session }) {
         </button>
       </div>
 
-      {/* Block info */}
+      {/* Block breadcrumb */}
       <div className="px-6 pt-4 pb-2">
-        <div
-          className="text-xs font-semibold uppercase tracking-wider"
-          style={{ color: step.blockColor }}
-        >
-          {step.blockName}
-        </div>
+        <BlockBreadcrumb session={session} step={step} />
       </div>
 
       {/* Paused overlay */}
@@ -220,8 +260,8 @@ function Player({ session }: { session: Session }) {
 
       {/* Health reminder */}
       <div className="px-6 pb-3 text-center">
-        <p className="text-[10px] text-white/25">
-          Écoutez votre corps. En cas de douleur, arrêtez immédiatement.
+        <p className="text-xs text-white">
+          ⚕️ Écoutez votre corps. En cas de douleur, arrêtez immédiatement.
         </p>
       </div>
     </div>

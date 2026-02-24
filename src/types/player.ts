@@ -39,6 +39,7 @@ export interface AtomicStep {
   roundInfo?: StepRoundInfo;
   setInfo?: StepRoundInfo;
   intervalInfo?: StepRoundInfo;
+  exerciseInfo?: StepRoundInfo;
 
   nextStepPreview?: NextStepPreview;
 

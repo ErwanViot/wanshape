@@ -14,8 +14,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'seance/play', element: <PlayerPage /> },
-      // Legacy URLs with date → redirect to dateless route
-      { path: 'seance/:dateKey/play', element: <Navigate to="/seance/play" replace /> },
+      { path: 'seance/:dateKey/play', element: <PlayerPage /> },
       { path: 'seance/:dateKey', element: <Navigate to="/seance/play" replace /> },
       { path: 'formats', element: <Formats /> },
       { path: 'formats/:slug', element: <FormatPage /> },

@@ -136,6 +136,7 @@ export interface PyramidBlock {
   name: string;
   pattern: number[];
   restBetweenSets: number;
+  restBetweenExercises?: number;
   exercises: { name: string; instructions: string }[];
 }
 
