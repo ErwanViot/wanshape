@@ -22,9 +22,12 @@ export function expandClassic(
     estimatedDuration: TRANSITION_DURATION,
   });
 
-  for (let exIdx = 0; exIdx < block.exercises.length; exIdx++) {
+  const totalExercises = block.exercises.length;
+
+  for (let exIdx = 0; exIdx < totalExercises; exIdx++) {
     const ex = block.exercises[exIdx];
-    const isLastExercise = exIdx === block.exercises.length - 1;
+    const isLastExercise = exIdx === totalExercises - 1;
+    const exerciseInfo = { current: exIdx + 1, total: totalExercises };
 
     for (let set = 0; set < ex.sets; set++) {
       const isLastSet = set === ex.sets - 1;
@@ -43,6 +46,7 @@ export function expandClassic(
         tempo: ex.tempo,
         ...base,
         setInfo,
+        exerciseInfo,
         isLastInBlock: isLastExercise && isLastSet,
         nextStepPreview: !isLastSet
           ? { exerciseName: ex.name, description: `Série ${set + 2}/${ex.sets} - ${repsLabel}` }
@@ -63,6 +67,7 @@ export function expandClassic(
           instructions: `Prochain : ${ex.name} - Série ${set + 2}/${ex.sets}`,
           ...base,
           setInfo,
+          exerciseInfo,
           estimatedDuration: ex.restBetweenSets,
         });
       }
@@ -79,6 +84,7 @@ export function expandClassic(
         exerciseName: "Repos",
         instructions: `Prochain : ${nextEx.name}`,
         ...base,
+        exerciseInfo,
         estimatedDuration: block.restBetweenExercises,
       });
     }

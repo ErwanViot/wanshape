@@ -28,7 +28,7 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,json,png,svg}'],
         navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/icons\//, /^\/ads\.txt$/],
+        navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/ads\.txt$/],
         runtimeCaching: [
           {
             urlPattern: /\/sessions\/.*\.json$/,
@@ -36,6 +36,15 @@ export default defineConfig({
             options: {
               cacheName: 'sessions-cache',
               expiration: { maxEntries: 110, maxAgeSeconds: 60 * 60 * 24 * 120 },
+            },
+          },
+          {
+            urlPattern: /\/videos\/.*\.mp4$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'videos-cache',
+              expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              cacheableResponse: { statuses: [200] },
             },
           },
         ],

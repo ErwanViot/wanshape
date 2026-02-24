@@ -12,6 +12,7 @@ export function expandPyramid(
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
 
   const patternStr = block.pattern.join("-");
+  const restBetweenExercises = block.restBetweenExercises ?? block.restBetweenSets * 2;
 
   steps.push({
     id: `block-${blockIndex}-transition`,
@@ -24,43 +25,74 @@ export function expandPyramid(
     estimatedDuration: TRANSITION_DURATION,
   });
 
-  for (let i = 0; i < block.pattern.length; i++) {
-    const reps = block.pattern[i];
-    const isLast = i === block.pattern.length - 1;
-    const setInfo = { current: i + 1, total: block.pattern.length };
+  const totalExercises = block.exercises.length;
 
-    // Cycle through exercises
-    const exIdx = i % block.exercises.length;
+  // Outer loop: each exercise completes the full pyramid pattern
+  for (let exIdx = 0; exIdx < totalExercises; exIdx++) {
     const ex = block.exercises[exIdx];
+    const isLastExercise = exIdx === totalExercises - 1;
+    const exerciseInfo = { current: exIdx + 1, total: totalExercises };
 
-    steps.push({
-      id: `block-${blockIndex}-step-${i}-work`,
-      phase: "work",
-      timerMode: "manual",
-      duration: null,
-      exerciseName: ex.name,
-      instructions: ex.instructions,
-      repTarget: reps,
-      ...base,
-      setInfo,
-      isLastInBlock: isLast,
-      nextStepPreview: !isLast
-        ? { exerciseName: block.exercises[(i + 1) % block.exercises.length].name, description: `${block.pattern[i + 1]} reps` }
-        : undefined,
-      estimatedDuration: DEFAULT_REST_FOR_REPS,
-    });
+    for (let i = 0; i < block.pattern.length; i++) {
+      const reps = block.pattern[i];
+      const isLastLevel = i === block.pattern.length - 1;
+      const setInfo = { current: i + 1, total: block.pattern.length };
 
-    if (!isLast) {
+      const nextReps = !isLastLevel ? block.pattern[i + 1] : undefined;
+      const nextPreviewInExercise = nextReps !== undefined
+        ? { exerciseName: ex.name, description: `${nextReps} reps` }
+        : undefined;
+
+      // Preview for last level: next exercise's first level (if any)
+      const nextPreviewCrossExercise = isLastLevel && !isLastExercise
+        ? { exerciseName: block.exercises[exIdx + 1].name, description: `${block.pattern[0]} reps` }
+        : undefined;
+
       steps.push({
-        id: `block-${blockIndex}-step-${i}-rest`,
-        phase: "rest",
-        timerMode: "countdown",
-        duration: block.restBetweenSets,
-        exerciseName: "Repos",
-        instructions: `Prochain : ${block.pattern[i + 1]} reps`,
+        id: `block-${blockIndex}-ex-${exIdx}-step-${i}-work`,
+        phase: "work",
+        timerMode: "manual",
+        duration: null,
+        exerciseName: ex.name,
+        instructions: ex.instructions,
+        repTarget: reps,
         ...base,
         setInfo,
-        estimatedDuration: block.restBetweenSets,
+        exerciseInfo,
+        isLastInBlock: isLastExercise && isLastLevel,
+        nextStepPreview: nextPreviewInExercise ?? nextPreviewCrossExercise,
+        estimatedDuration: DEFAULT_REST_FOR_REPS,
+      });
+
+      // Rest between levels (within same exercise)
+      if (!isLastLevel) {
+        steps.push({
+          id: `block-${blockIndex}-ex-${exIdx}-step-${i}-rest`,
+          phase: "rest",
+          timerMode: "countdown",
+          duration: block.restBetweenSets,
+          exerciseName: "Repos",
+          instructions: `Prochain : ${ex.name} — ${block.pattern[i + 1]} reps`,
+          ...base,
+          setInfo,
+          exerciseInfo,
+          estimatedDuration: block.restBetweenSets,
+        });
+      }
+    }
+
+    // Rest between exercises (after completing full pyramid for one exercise)
+    if (!isLastExercise) {
+      steps.push({
+        id: `block-${blockIndex}-ex-${exIdx}-rest-between`,
+        phase: "rest",
+        timerMode: "countdown",
+        duration: restBetweenExercises,
+        exerciseName: "Repos",
+        instructions: `Prochain exercice : ${block.exercises[exIdx + 1].name}`,
+        ...base,
+        exerciseInfo,
+        estimatedDuration: restBetweenExercises,
       });
     }
   }
