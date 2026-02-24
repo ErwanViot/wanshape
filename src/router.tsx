@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
+import { RequireAuth } from './components/auth/RequireAuth.tsx';
 import { Exercises } from './components/Exercises.tsx';
 import { Formats } from './components/Formats.tsx';
 import { Home } from './components/Home.tsx';
@@ -12,6 +13,10 @@ import { PublicLayout } from './components/PublicLayout.tsx';
 const LazyLegal = lazy(() => import('./components/Legal.tsx').then((m) => ({ default: m.Legal })));
 const LazyFormatPage = lazy(() => import('./components/FormatPage.tsx').then((m) => ({ default: m.FormatPage })));
 const LazyExercisePage = lazy(() => import('./components/ExercisePage.tsx').then((m) => ({ default: m.ExercisePage })));
+const LazyLoginPage = lazy(() => import('./components/auth/LoginPage.tsx').then((m) => ({ default: m.LoginPage })));
+const LazySignupPage = lazy(() => import('./components/auth/SignupPage.tsx').then((m) => ({ default: m.SignupPage })));
+const LazyAuthCallback = lazy(() => import('./components/auth/AuthCallback.tsx').then((m) => ({ default: m.AuthCallback })));
+const LazyProfilePage = lazy(() => import('./components/auth/ProfilePage.tsx').then((m) => ({ default: m.ProfilePage })));
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -46,6 +51,41 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyLegal />
+          </Lazy>
+        ),
+      },
+      // Auth routes
+      {
+        path: 'login',
+        element: (
+          <Lazy>
+            <LazyLoginPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'signup',
+        element: (
+          <Lazy>
+            <LazySignupPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'auth/callback',
+        element: (
+          <Lazy>
+            <LazyAuthCallback />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'profil',
+        element: (
+          <Lazy>
+            <RequireAuth>
+              <LazyProfilePage />
+            </RequireAuth>
           </Lazy>
         ),
       },
