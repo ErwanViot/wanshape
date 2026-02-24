@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 
 interface ExerciseVideoProps {
   src: string;
@@ -13,50 +13,45 @@ export function ExerciseVideo({ src, fallbackImage, alt = '', className = '' }: 
   const [hasError, setHasError] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleError = useCallback(() => setHasError(true), []);
+
+  // Single observer: lazy-load on first intersection, then play/pause on visibility
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
 
+    let loaded = false;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (!loaded && entry.isIntersecting) {
+          loaded = true;
           setIsVisible(true);
-          observer.disconnect();
+        }
+        // Play/pause after video is loaded
+        if (loaded) {
+          const video = videoRef.current;
+          if (!video) return;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
         }
       },
-      { rootMargin: '200px' },
+      { rootMargin: '200px', threshold: 0.25 },
     );
 
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  // Auto-pause when scrolled out of view
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !isVisible) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.25 },
-    );
-
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, [isVisible]);
-
   if (hasError) {
     return <img src={fallbackImage} alt={alt} className={className} loading="lazy" />;
   }
 
   return (
-    <div ref={containerRef} className={className}>
+    <div ref={containerRef} className={className} role="img" aria-label={alt}>
       {isVisible ? (
         <video
           ref={videoRef}
@@ -64,11 +59,10 @@ export function ExerciseVideo({ src, fallbackImage, alt = '', className = '' }: 
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="none"
           className="w-full h-full object-cover"
-          onError={() => setHasError(true)}
         >
-          <source src={src} type="video/mp4" />
+          <source src={src} type="video/mp4" onError={handleError} />
         </video>
       ) : (
         <img src={fallbackImage} alt={alt} className="w-full h-full object-cover" loading="lazy" />

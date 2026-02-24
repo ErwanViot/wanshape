@@ -12,7 +12,7 @@
  *   --model <name>  Veo model (default: veo-3.1-generate-preview)
  */
 
-import { readFileSync, writeFileSync, existsSync, cpSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -20,6 +20,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 const EXERCISES_PATH = resolve(ROOT, 'src/data/exercises.ts');
 const VIDEOS_DIR = resolve(ROOT, 'public/videos');
+
+const MAX_POLL_ATTEMPTS = 40; // 40 × 15s = 10 min max
 
 // ── Args ──────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -43,10 +45,8 @@ if (!API_KEY && !DRY_RUN) {
 // ── Parse exercises from TS source ────────────────────────────────────
 function parseExercises() {
   const src = readFileSync(EXERCISES_PATH, 'utf8');
-  // Quick & dirty: use regex to extract structured data
   const exercises = [];
   const blocks = src.split(/\n  \{[\s]*\n\s+slug:/);
-  // First block has the array preamble
   blocks.shift();
 
   for (const raw of blocks) {
@@ -56,7 +56,6 @@ function parseExercises() {
       return m ? m[1] : '';
     };
     const getMultiline = (key) => {
-      // Match key: 'value' or key:\n      'value'
       const m = block.match(new RegExp(`${key}:\\s*\\n?\\s*'([^']*(?:\\\\.[^']*)*)'`));
       return m ? m[1].replace(/\\'/g, "'") : '';
     };
@@ -67,7 +66,6 @@ function parseExercises() {
     const execution = getMultiline('execution');
     const shortDescription = getMultiline('shortDescription');
 
-    // Parse variants
     const variants = [];
     const variantsMatch = block.match(/variants:\s*\[([\s\S]*?)\],\s*\n\s*tips/);
     if (variantsMatch) {
@@ -76,7 +74,6 @@ function parseExercises() {
       for (const v of vEntries) {
         const vName = v.match(/name:\s*'([^']+)'/)?.[1] || '';
         const vDesc = v.match(/description:\s*'([^']*(?:\\.[^']*)*)'/)?.[1]?.replace(/\\'/g, "'") || '';
-        // Check if variant block contains a video field
         const vHasVideo = v.includes("video: '/videos/");
         if (vName) variants.push({ name: vName, description: vDesc, hasVideo: vHasVideo });
       }
@@ -123,7 +120,6 @@ function slugifyVariant(name) {
 async function generateVideo(prompt, outputPath) {
   console.log(`  Calling Veo API...`);
 
-  // Start generation
   const startRes = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:predictLongRunning`,
     {
@@ -152,20 +148,27 @@ async function generateVideo(prompt, outputPath) {
   const operationName = startData.name;
   console.log(`  Operation: ${operationName}`);
 
-  // Poll until done
+  // Poll until done (max 10 minutes)
   let result;
-  while (true) {
+  for (let attempt = 0; attempt < MAX_POLL_ATTEMPTS; attempt++) {
     await new Promise((r) => setTimeout(r, 15_000));
     const pollRes = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/${operationName}`,
       { headers: { 'x-goog-api-key': API_KEY } },
     );
+    if (!pollRes.ok) {
+      console.warn(`  Poll request failed (${pollRes.status}), retrying...`);
+      continue;
+    }
     result = await pollRes.json();
-
     if (result.done) break;
     process.stdout.write('.');
   }
   console.log();
+
+  if (!result?.done) {
+    throw new Error(`Timed out after ${MAX_POLL_ATTEMPTS * 15}s waiting for video generation`);
+  }
 
   if (result.error) {
     throw new Error(`API error: ${JSON.stringify(result.error)}`);
@@ -184,6 +187,7 @@ async function generateVideo(prompt, outputPath) {
   if (!dlRes.ok) throw new Error(`Download failed: ${dlRes.status}`);
 
   const buffer = Buffer.from(await dlRes.arrayBuffer());
+  mkdirSync(dirname(outputPath), { recursive: true });
   writeFileSync(outputPath, buffer);
   console.log(`  Saved: ${outputPath} (${(buffer.length / 1024 / 1024).toFixed(1)} MB)`);
 }
@@ -191,7 +195,6 @@ async function generateVideo(prompt, outputPath) {
 // ── Update exercises.ts ───────────────────────────────────────────────
 function addVideoToExercise(slug, videoPath) {
   let src = readFileSync(EXERCISES_PATH, 'utf8');
-  // Find the exercise block and add video after image line
   const imageLineRegex = new RegExp(
     `(slug: '${slug}',[\\s\\S]*?image: '[^']+',)\\n(\\s+shortDescription:)`,
   );
@@ -203,11 +206,16 @@ function addVideoToExercise(slug, videoPath) {
 
 function addVideoToVariant(exerciseSlug, variantName, videoPath) {
   let src = readFileSync(EXERCISES_PATH, 'utf8');
-  // Find the variant and add video after description
+  const escaped = variantName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Check if this specific variant already has a video field
+  const variantBlockRegex = new RegExp(`name: '${escaped}'[\\s\\S]*?\\}`);
+  const variantBlock = src.match(variantBlockRegex);
+  if (variantBlock && variantBlock[0].includes("video:")) return;
+
   const descRegex = new RegExp(
-    `(name: '${variantName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}',[\\s\\S]*?description:[\\s\\S]*?',)\\n(\\s+\\})`,
+    `(name: '${escaped}',[\\s\\S]*?description:[\\s\\S]*?',)\\n(\\s+\\})`,
   );
-  if (src.match(descRegex) && !src.includes(`name: '${variantName}'`?.replace(/.*/, '') + `video:`)) {
+  if (src.match(descRegex)) {
     src = src.replace(descRegex, `$1\n        video: '${videoPath}',\n$2`);
     writeFileSync(EXERCISES_PATH, src);
   }
@@ -215,6 +223,7 @@ function addVideoToVariant(exerciseSlug, variantName, videoPath) {
 
 // ── Main ──────────────────────────────────────────────────────────────
 async function main() {
+  mkdirSync(VIDEOS_DIR, { recursive: true });
   const exercises = parseExercises();
   console.log(`Found ${exercises.length} exercises\n`);
 

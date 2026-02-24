@@ -43,8 +43,8 @@ export default defineConfig({
             handler: 'CacheFirst',
             options: {
               cacheName: 'videos-cache',
-              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 90 },
-              cacheableResponse: { statuses: [0, 200] },
+              expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              cacheableResponse: { statuses: [200] },
             },
           },
         ],
