@@ -1,13 +1,21 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { Home } from './components/Home.tsx';
 import { PlayerPage } from './components/Player.tsx';
-import { Legal } from './components/Legal.tsx';
 import { Formats } from './components/Formats.tsx';
-import { FormatPage } from './components/FormatPage.tsx';
 import { Exercises } from './components/Exercises.tsx';
-import { ExercisePage } from './components/ExercisePage.tsx';
 import { PublicLayout } from './components/PublicLayout.tsx';
 import { PlayerLayout } from './components/PlayerLayout.tsx';
+import { LoadingFallback } from './components/LoadingFallback.tsx';
+
+// Lazy-loaded secondary routes
+const LazyLegal = lazy(() => import('./components/Legal.tsx').then(m => ({ default: m.Legal })));
+const LazyFormatPage = lazy(() => import('./components/FormatPage.tsx').then(m => ({ default: m.FormatPage })));
+const LazyExercisePage = lazy(() => import('./components/ExercisePage.tsx').then(m => ({ default: m.ExercisePage })));
+
+function Lazy({ children }: { children: React.ReactNode }) {
+  return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
+}
 
 export const router = createBrowserRouter([
   // Public pages — shared wrapper (min-h-screen bg-surface)
@@ -16,10 +24,10 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'formats', element: <Formats /> },
-      { path: 'formats/:slug', element: <FormatPage /> },
+      { path: 'formats/:slug', element: <Lazy><LazyFormatPage /></Lazy> },
       { path: 'exercices', element: <Exercises /> },
-      { path: 'exercices/:slug', element: <ExercisePage /> },
-      { path: 'legal/:tab', element: <Legal /> },
+      { path: 'exercices/:slug', element: <Lazy><LazyExercisePage /></Lazy> },
+      { path: 'legal/:tab', element: <Lazy><LazyLegal /></Lazy> },
     ],
   },
   // Player — full screen, no chrome
