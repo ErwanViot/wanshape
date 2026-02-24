@@ -10,6 +10,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
     muscles: ['Pectoraux', 'Triceps', 'Deltoïdes antérieurs', 'Core (stabilisation)'],
     difficulty: 2,
     image: '/images/upper.webp',
+    video: '/videos/pompes-classiques.mp4',
     shortDescription: 'L\'exercice fondamental du haut du corps au poids du corps. Les pompes développent la poussée horizontale en sollicitant pectoraux, triceps et épaules dans un mouvement complet et fonctionnel.',
     execution:
       'Position de départ : mains au sol légèrement plus larges que les épaules, bras tendus, corps aligné de la tête aux talons. Les pieds sont serrés ou légèrement écartés. Descendez en fléchissant les coudes jusqu\'à ce que la poitrine frôle le sol (coudes à environ 45° du corps, pas écartés à 90°). Poussez pour revenir à la position initiale en verrouillant les bras. Le corps reste gainé tout au long du mouvement : pas de creux dans le dos, pas de fesses en l\'air.',
@@ -25,6 +26,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
       {
         name: 'Pompes inclinées',
         description: 'Mains sur un support surélevé (chaise, marche). Réduit la charge et facilite le mouvement — idéal pour débuter ou en fin de série quand la fatigue s\'installe.',
+        video: '/videos/pompes-inclinees.mp4',
       },
       {
         name: 'Pompes diamant',
@@ -171,6 +173,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
     muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers', 'Core (stabilisation)'],
     difficulty: 1,
     image: '/images/explosive.webp',
+    video: '/videos/squats.mp4',
     shortDescription: 'Le mouvement roi du bas du corps. Le squat est un patron moteur fondamental qui sollicite l\'ensemble de la chaîne inférieure : cuisses, fessiers et tronc. C\'est le mouvement que vous faites chaque fois que vous vous asseyez et vous relevez.',
     execution:
       'Debout, pieds écartés à largeur d\'épaules ou légèrement plus, pointes de pieds tournées vers l\'extérieur (15-30°). Initiez le mouvement en poussant les hanches vers l\'arrière comme pour vous asseoir sur une chaise. Descendez en gardant le poids sur les talons et le milieu du pied, genoux alignés avec les pointes de pieds. Descendez au moins jusqu\'à ce que les cuisses soient parallèles au sol (ou plus bas si votre mobilité le permet). Poussez dans le sol pour remonter en contractant les fessiers en haut du mouvement.',
