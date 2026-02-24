@@ -12,6 +12,9 @@
   --color-superset: #4F46E5;
   --color-pyramid: #9333EA;
   --color-brand: #4F46E5;
+  --color-brand-secondary: #3B82F6;
+  --color-link: #818CF8;
+  --color-link-hover: #A5B4FC;
   --color-surface: #1a1a22;
   --color-surface-light: #22222d;
   --color-surface-card: #262635;
@@ -111,7 +114,7 @@ body {
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #4F46E5, #3B82F6);
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -119,11 +122,11 @@ body {
 
 /* CTA gradient button */
 .cta-gradient {
-  background: linear-gradient(135deg, #4F46E5, #3B82F6);
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary));
   transition: all 0.25s ease;
 }
 .cta-gradient:hover {
-  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.3), 0 4px 16px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-brand) 30%, transparent), 0 4px 16px color-mix(in srgb, var(--color-brand-secondary) 20%, transparent);
   transform: translateY(-1px);
 }
 .cta-gradient:active {
@@ -143,7 +146,7 @@ body {
   border-radius: 50%;
 }
 .intensity-dot.active {
-  background: linear-gradient(135deg, #4F46E5, #3B82F6);
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary));
 }
 .intensity-dot.inactive {
   background: var(--color-dot-inactive);
@@ -177,14 +180,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(79, 70, 229, 0.1);
+  background: color-mix(in srgb, var(--color-brand) 10%, transparent);
   flex-shrink: 0;
 }
 
 /* Session label glow */
 .session-label {
-  background: linear-gradient(135deg, #4F46E5, #3B82F6);
-  box-shadow: 0 0 24px rgba(79, 70, 229, 0.3);
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary));
+  box-shadow: 0 0 24px color-mix(in srgb, var(--color-brand) 30%, transparent);
 }
 
 .session-label-tomorrow {
@@ -195,7 +198,7 @@ body {
 /* Gradient divider */
 .gradient-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.3), rgba(59, 130, 246, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-brand) 30%, transparent), color-mix(in srgb, var(--color-brand-secondary) 30%, transparent), transparent);
 }
 
 /* Countdown pulse animation */

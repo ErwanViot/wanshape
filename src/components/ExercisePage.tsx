@@ -74,7 +74,7 @@ export function ExercisePage() {
         {/* Muscles ciblés */}
         <div className="flex flex-wrap gap-2">
           {exercise.muscles.map(m => (
-            <span key={m} className="px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <span key={m} className="px-3 py-1.5 rounded-full text-xs font-semibold bg-brand/10 text-link border border-brand/20">
               {m}
             </span>
           ))}
@@ -95,7 +95,7 @@ export function ExercisePage() {
           <ul className="space-y-2">
             {exercise.benefits.map((b, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
-                <span className="text-indigo-400 shrink-0 mt-0.5">•</span>
+                <span className="text-link shrink-0 mt-0.5">•</span>
                 <span>{b}</span>
               </li>
             ))}
@@ -106,7 +106,7 @@ export function ExercisePage() {
         <ContentSection title="Variantes" icon="🔄">
           <div className="space-y-4">
             {exercise.variants.map((v, i) => (
-              <div key={i} id={slugify(v.name)} className="scroll-mt-24 target:ring-2 target:ring-indigo-500/30 target:rounded-lg target:p-2 target:-m-2">
+              <div key={i} id={slugify(v.name)} className="scroll-mt-24 target:ring-2 target:ring-brand/30 target:rounded-lg target:p-2 target:-m-2">
                 <h3 className="text-sm font-bold text-strong mb-1">{v.name}</h3>
                 <p className="text-sm text-subtle leading-relaxed">{v.description}</p>
               </div>
@@ -151,7 +151,7 @@ export function ExercisePage() {
           </Link>
           <Link
             to="/formats"
-            className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
+            className="text-sm text-link hover:text-link-hover transition-colors"
           >
             Les formats →
           </Link>

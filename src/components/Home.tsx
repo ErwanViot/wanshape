@@ -67,7 +67,7 @@ export function Home() {
         <div className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-1 lg:col-start-1">
           {loading && (
             <div className="flex items-center justify-center flex-1">
-              <div className="w-6 h-6 border-2 border-divider-strong border-t-indigo-500 rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
             </div>
           )}
 
@@ -96,7 +96,7 @@ export function Home() {
         <div className="lg:row-start-1 lg:row-span-2 lg:col-start-2">
           {loading && (
             <div className="glass-card rounded-[20px] p-6 md:p-8 flex items-center justify-center min-h-[200px]">
-              <div className="w-6 h-6 border-2 border-divider-strong border-t-indigo-500 rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
             </div>
           )}
 
@@ -141,11 +141,11 @@ export function Home() {
           <p className="text-sm text-muted">
             8 méthodes d'entraînement, du renforcement doux au cardio maximal.
             {' '}
-            <Link to="/formats" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
+            <Link to="/formats" className="text-link hover:text-link-hover underline underline-offset-2 transition-colors">
               En savoir plus
             </Link>
             {' · '}
-            <Link to="/exercices" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
+            <Link to="/exercices" className="text-link hover:text-link-hover underline underline-offset-2 transition-colors">
               Nos exercices
             </Link>
           </p>
@@ -257,7 +257,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
                   style={{
                     width: `${(t.duration / totalDuration) * 100}%`,
                     background: t.isAccent
-                      ? 'linear-gradient(135deg, #4F46E5, #3B82F6)'
+                      ? 'linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary))'
                       : 'rgba(255, 255, 255, 0.15)',
                   }}
                 />

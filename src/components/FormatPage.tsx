@@ -78,7 +78,7 @@ export function FormatPage() {
           <ul className="space-y-2">
             {format.benefits.map((b, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
-                <span className="text-indigo-400 shrink-0 mt-0.5">•</span>
+                <span className="text-link shrink-0 mt-0.5">•</span>
                 <span>{b}</span>
               </li>
             ))}
@@ -127,7 +127,7 @@ export function FormatPage() {
           </Link>
           <Link
             to="/"
-            className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
+            className="text-sm text-link hover:text-link-hover transition-colors"
           >
             Séance du jour →
           </Link>

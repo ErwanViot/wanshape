@@ -106,7 +106,7 @@ export function Formats() {
                     {extra?.description ?? format.shortDescription}
                   </p>
 
-                  <p className="text-xs text-indigo-400 font-medium leading-relaxed">
+                  <p className="text-xs text-link font-medium leading-relaxed">
                     {extra?.benefit}
                   </p>
                 </div>

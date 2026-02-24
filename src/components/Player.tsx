@@ -36,7 +36,7 @@ export function PlayerPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-white/20 border-t-indigo-500 rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-white/20 border-t-brand rounded-full animate-spin" />
       </div>
     );
   }
@@ -47,7 +47,7 @@ export function PlayerPage() {
         <div className="text-center">
           <div className="text-5xl mb-4">😴</div>
           <p className="text-white/60 text-lg font-medium">Séance introuvable.</p>
-          <Link to="/" className="text-indigo-400 hover:text-indigo-300 underline mt-4 inline-block">
+          <Link to="/" className="text-link hover:text-link-hover underline mt-4 inline-block">
             Retour à l'accueil
           </Link>
         </div>
