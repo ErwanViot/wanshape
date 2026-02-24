@@ -19,19 +19,21 @@ export function usePrograms() {
 
     let cancelled = false;
 
-    supabase
-      .from('programs')
-      .select('*')
-      .eq('is_fixed', true)
-      .order('created_at')
-      .then(({ data }) => {
+    (async () => {
+      try {
+        const { data } = await supabase
+          .from('programs')
+          .select('*')
+          .eq('is_fixed', true)
+          .order('created_at');
+
         if (cancelled) return;
         setPrograms((data as Program[]) ?? []);
         setLoading(false);
-      })
-      .catch(() => {
+      } catch {
         if (!cancelled) setLoading(false);
-      });
+      }
+    })();
 
     return () => {
       cancelled = true;

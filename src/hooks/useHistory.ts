@@ -87,20 +87,22 @@ export function useHistory(userId: string | undefined): HistoryStats {
     let cancelled = false;
     setLoading(true);
 
-    supabase
-      .from('session_completions')
-      .select('*')
-      .eq('user_id', userId)
-      .order('completed_at', { ascending: false })
-      .limit(200)
-      .then(({ data }) => {
+    (async () => {
+      try {
+        const { data } = await supabase
+          .from('session_completions')
+          .select('*')
+          .eq('user_id', userId)
+          .order('completed_at', { ascending: false })
+          .limit(200);
+
         if (cancelled) return;
         setCompletions((data as SessionCompletion[]) ?? []);
         setLoading(false);
-      })
-      .catch(() => {
+      } catch {
         if (!cancelled) setLoading(false);
-      });
+      }
+    })();
 
     return () => {
       cancelled = true;
