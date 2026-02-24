@@ -8,11 +8,12 @@ export interface ExerciseData {
   muscles: string[];
   difficulty: 1 | 2 | 3;
   image: string;
+  video?: string;
   shortDescription: string;
   execution: string;
   breathing: string;
   benefits: string[];
-  variants: { name: string; description: string }[];
+  variants: { name: string; description: string; video?: string }[];
   tips: string[];
   commonMistakes: string[];
 }
