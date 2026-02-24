@@ -21,6 +21,8 @@ export function AuthCallback() {
       return;
     }
 
+    const client = supabase;
+
     const timeout = setTimeout(() => {
       setError('La connexion prend trop de temps. Veuillez réessayer.');
     }, TIMEOUT_MS);
@@ -29,11 +31,11 @@ export function AuthCallback() {
     const code = params.get('code');
 
     if (code) {
-      supabase.auth.exchangeCodeForSession(code).then(({ error: err }) => {
+      client.auth.exchangeCodeForSession(code).then(({ error: err }) => {
         clearTimeout(timeout);
         if (err) {
           // Code exchange failed — session may already be active via onAuthStateChange
-          supabase.auth.getSession().then(({ data: { session } }) => {
+          client.auth.getSession().then(({ data: { session } }) => {
             if (session) {
               navigate('/profil', { replace: true });
             } else {
@@ -46,7 +48,7 @@ export function AuthCallback() {
       });
     } else {
       // No code — check if session is already present (hash fragment flow)
-      supabase.auth.getSession().then(({ data: { session } }) => {
+      client.auth.getSession().then(({ data: { session } }) => {
         clearTimeout(timeout);
         if (session) {
           navigate('/profil', { replace: true });
