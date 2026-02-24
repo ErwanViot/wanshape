@@ -97,7 +97,7 @@ function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep
   );
 }
 
-function Player({ session }: { session: Session }) {
+export function Player({ session, programSessionId }: { session: Session; programSessionId?: string }) {
   const navigate = useNavigate();
   const steps = useMemo(() => compileSession(session), [session]);
 
@@ -114,7 +114,15 @@ function Player({ session }: { session: Session }) {
   const goHome = () => navigate('/');
 
   if (workout.status === 'complete') {
-    return <EndScreen session={session} amrapRounds={workout.amrapRounds} onBack={goHome} />;
+    return (
+      <EndScreen
+        session={session}
+        amrapRounds={workout.amrapRounds}
+        durationSeconds={workout.durationSeconds}
+        onBack={goHome}
+        programSessionId={programSessionId}
+      />
+    );
   }
 
   const step = workout.currentStep;
