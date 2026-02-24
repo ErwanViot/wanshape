@@ -58,7 +58,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!supabase) return { error: 'Auth non disponible' };
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        shouldCreateUser: false,
+      },
     });
     return { error: error?.message ?? null };
   };

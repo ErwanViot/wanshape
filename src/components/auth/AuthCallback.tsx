@@ -7,26 +7,40 @@ export function AuthCallback() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('code');
-
-    if (!code) {
-      setError('Code de vérification manquant');
-      return;
-    }
-
     if (!supabase) {
       setError('Auth non disponible');
       return;
     }
 
-    supabase.auth.exchangeCodeForSession(code).then(({ error: err }) => {
-      if (err) {
-        setError(err.message);
-      } else {
-        navigate('/profil', { replace: true });
-      }
-    });
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+
+    if (code) {
+      // PKCE flow: exchange code for session
+      supabase.auth.exchangeCodeForSession(code).then(({ error: err }) => {
+        if (err) {
+          // Code exchange failed — but session may already be active via onAuthStateChange
+          supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+              navigate('/profil', { replace: true });
+            } else {
+              setError(err.message);
+            }
+          });
+        } else {
+          navigate('/profil', { replace: true });
+        }
+      });
+    } else {
+      // No code — check if session is already present (hash fragment flow)
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session) {
+          navigate('/profil', { replace: true });
+        } else {
+          setError('Code de vérification manquant');
+        }
+      });
+    }
   }, [navigate]);
 
   if (error) {
