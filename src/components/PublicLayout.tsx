@@ -10,6 +10,9 @@ export function PublicLayout() {
 
   return (
     <div className="min-h-screen bg-surface flex flex-col">
+      <a href="#main-content" className="skip-to-content">
+        Aller au contenu principal
+      </a>
       <Outlet />
     </div>
   );

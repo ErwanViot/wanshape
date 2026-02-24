@@ -22,7 +22,7 @@
   --color-body: rgba(255, 255, 255, 0.72);
   --color-subtle: rgba(255, 255, 255, 0.65);
   --color-muted: rgba(255, 255, 255, 0.55);
-  --color-faint: rgba(255, 255, 255, 0.45);
+  --color-faint: rgba(255, 255, 255, 0.50);
 
   /* Borders */
   --color-divider: rgba(255, 255, 255, 0.08);
@@ -45,7 +45,7 @@
   --color-body: rgba(26, 26, 46, 0.65);
   --color-subtle: rgba(26, 26, 46, 0.55);
   --color-muted: rgba(26, 26, 46, 0.45);
-  --color-faint: rgba(26, 26, 46, 0.25);
+  --color-faint: rgba(26, 26, 46, 0.38);
 
   --color-divider: rgba(26, 26, 46, 0.08);
   --color-divider-strong: rgba(26, 26, 46, 0.15);
@@ -57,6 +57,30 @@
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Keyboard focus indicator */
+:focus-visible {
+  outline: 2px solid var(--color-brand, #4F46E5);
+  outline-offset: 2px;
+}
+
+/* Skip to content link — visible only on keyboard focus */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-brand, #4F46E5);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.5rem 0;
+  text-decoration: none;
+}
+.skip-to-content:focus {
+  left: 0;
+  top: 0;
 }
 
 html, body, #root {

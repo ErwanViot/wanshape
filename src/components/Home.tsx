@@ -61,7 +61,7 @@ export function Home() {
       <div className="gradient-divider mb-8" />
 
       {/* Two-column grid: today panel + recap side by side, tomorrow panel below left */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
+      <div id="main-content" className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
 
         {/* Today panel — col 1, row 1 */}
         <div className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-1 lg:col-start-1">
@@ -292,7 +292,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
 
 function IntensityDots({ level }: { level: number }) {
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-1.5" role="img" aria-label={`Intensité ${level} sur 5`}>
       {[1, 2, 3, 4, 5].map(i => (
         <div key={i} className={`intensity-dot ${i <= level ? 'active' : 'inactive'}`} />
       ))}
