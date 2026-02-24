@@ -44,7 +44,7 @@ export function Formats() {
   });
 
   return (
-    <div className="min-h-screen bg-surface">
+    <>
       <header className="bg-surface border-b border-divider sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center gap-3">
           <Link
@@ -60,7 +60,7 @@ export function Formats() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-8 space-y-6">
+      <main id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-6">
         <p className="text-sm text-subtle leading-relaxed">
           <strong className="text-strong">8 formats</strong> alternent au fil des jours : les séances intenses sont plus courtes, les séances de renforcement et d'endurance plus longues. Toutes incluent échauffement et étirements.
         </p>
@@ -106,7 +106,7 @@ export function Formats() {
                     {extra?.description ?? format.shortDescription}
                   </p>
 
-                  <p className="text-xs text-indigo-400 font-medium leading-relaxed">
+                  <p className="text-xs text-link font-medium leading-relaxed">
                     {extra?.benefit}
                   </p>
                 </div>
@@ -119,6 +119,6 @@ export function Formats() {
           Les durées indiquées incluent l'échauffement et les étirements.
         </p>
       </main>
-    </div>
+    </>
   );
 }

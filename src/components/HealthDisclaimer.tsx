@@ -59,7 +59,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
               type="checkbox"
               checked={checked}
               onChange={(e) => setChecked(e.target.checked)}
-              className="mt-0.5 w-5 h-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              className="mt-0.5 w-5 h-5 rounded border-gray-300 text-brand focus:ring-brand"
             />
             <span className="text-sm text-gray-700 leading-snug">
               J'ai lu et compris cet avertissement. Je pratique sous ma propre
@@ -72,7 +72,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
             disabled={!checked}
             className={`w-full py-4 rounded-2xl font-bold text-lg transition-all ${
               checked
-                ? 'bg-gradient-to-r from-indigo-600 to-blue-500 text-white shadow-lg shadow-indigo-500/25 active:scale-[0.98]'
+                ? 'bg-gradient-to-r from-brand to-brand-secondary text-white shadow-lg shadow-brand/25 active:scale-[0.98]'
                 : 'bg-gray-100 text-gray-300 cursor-not-allowed'
             }`}
           >

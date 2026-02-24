@@ -9,6 +9,7 @@ import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
+import { Footer } from './Footer.tsx';
 import { SessionRecap } from './SessionRecap.tsx';
 import type { Session } from '../types/session.ts';
 
@@ -48,7 +49,7 @@ export function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-surface flex flex-col">
+    <>
       {showDisclaimer && (
         <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />
       )}
@@ -60,13 +61,13 @@ export function Home() {
       <div className="gradient-divider mb-8" />
 
       {/* Two-column grid: today panel + recap side by side, tomorrow panel below left */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
+      <div id="main-content" className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
 
         {/* Today panel — col 1, row 1 */}
         <div className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-1 lg:col-start-1">
           {loading && (
             <div className="flex items-center justify-center flex-1">
-              <div className="w-6 h-6 border-2 border-divider-strong border-t-indigo-500 rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
             </div>
           )}
 
@@ -95,7 +96,7 @@ export function Home() {
         <div className="lg:row-start-1 lg:row-span-2 lg:col-start-2">
           {loading && (
             <div className="glass-card rounded-[20px] p-6 md:p-8 flex items-center justify-center min-h-[200px]">
-              <div className="w-6 h-6 border-2 border-divider-strong border-t-indigo-500 rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
             </div>
           )}
 
@@ -140,11 +141,11 @@ export function Home() {
           <p className="text-sm text-muted">
             8 méthodes d'entraînement, du renforcement doux au cardio maximal.
             {' '}
-            <Link to="/formats" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
+            <Link to="/formats" className="text-link hover:text-link-hover underline underline-offset-2 transition-colors">
               En savoir plus
             </Link>
             {' · '}
-            <Link to="/exercices" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
+            <Link to="/exercices" className="text-link hover:text-link-hover underline underline-offset-2 transition-colors">
               Nos exercices
             </Link>
           </p>
@@ -168,27 +169,8 @@ export function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="px-6 py-8 border-t border-divider">
-        <p className="text-faint text-xs text-center">
-          WAN SHAPE par{' '}
-          <a href="https://www.wan-soft.fr" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-subtle underline transition-colors">
-            WAN SOFT
-          </a>
-        </p>
-        <div className="flex justify-center gap-4 mt-3">
-          <Link to="/legal/mentions" className="text-xs text-faint hover:text-subtle transition-colors">
-            Mentions légales
-          </Link>
-          <Link to="/legal/privacy" className="text-xs text-faint hover:text-subtle transition-colors">
-            Confidentialité
-          </Link>
-          <Link to="/legal/cgu" className="text-xs text-faint hover:text-subtle transition-colors">
-            CGU
-          </Link>
-        </div>
-      </footer>
-    </div>
+      <Footer />
+    </>
   );
 }
 
@@ -275,7 +257,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
                   style={{
                     width: `${(t.duration / totalDuration) * 100}%`,
                     background: t.isAccent
-                      ? 'linear-gradient(135deg, #4F46E5, #3B82F6)'
+                      ? 'linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary))'
                       : 'rgba(255, 255, 255, 0.15)',
                   }}
                 />
@@ -310,7 +292,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
 
 function IntensityDots({ level }: { level: number }) {
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-1.5" role="img" aria-label={`Intensité ${level} sur 5`}>
       {[1, 2, 3, 4, 5].map(i => (
         <div key={i} className={`intensity-dot ${i <= level ? 'active' : 'inactive'}`} />
       ))}

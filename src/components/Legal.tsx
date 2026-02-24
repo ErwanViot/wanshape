@@ -26,7 +26,7 @@ export function Legal() {
   });
 
   return (
-    <div className="min-h-screen bg-surface">
+    <>
       {/* Header */}
       <header className="bg-surface border-b border-divider sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-6 py-4 flex items-center gap-4">
@@ -50,7 +50,7 @@ export function Legal() {
               onClick={() => navigate(`/legal/${t.key}`, { replace: true })}
               className={`px-4 py-2.5 text-sm font-medium rounded-t-lg transition-colors ${
                 tab === t.key
-                  ? 'text-indigo-400 bg-surface-light border-t-2 border-x border-indigo-500 border-x-divider -mb-px'
+                  ? 'text-link bg-surface-light border-t-2 border-x border-brand border-x-divider -mb-px'
                   : 'text-muted hover:text-body'
               }`}
             >
@@ -60,14 +60,14 @@ export function Legal() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 py-8">
+      <main id="main-content" className="max-w-2xl mx-auto px-6 py-8">
         <div className="max-w-none">
           {tab === 'mentions' && <MentionsLegales />}
           {tab === 'privacy' && <PolitiqueConfidentialite />}
           {tab === 'cgu' && <CGU />}
         </div>
       </main>
-    </div>
+    </>
   );
 }
 
@@ -95,7 +95,7 @@ function MentionsLegales() {
           SIRET : 831 188 586 00026<br />
           Directeur de la publication : Erwan VIOT<br />
           Téléphone : 06 79 08 40 63<br />
-          Contact : <a href="mailto:erwan.viot@wan-soft.fr" className="text-indigo-400 underline">erwan.viot@wan-soft.fr</a>
+          Contact : <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">erwan.viot@wan-soft.fr</a>
         </p>
       </Section>
 
@@ -106,7 +106,7 @@ function MentionsLegales() {
         <p>
           <strong className="text-strong">Vercel Inc.</strong><br />
           440 N Barranca Ave #4133, Covina, CA 91723, États-Unis<br />
-          Site web : <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-indigo-400 underline">vercel.com</a>
+          Site web : <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-link underline">vercel.com</a>
         </p>
       </Section>
 
@@ -156,7 +156,7 @@ function PolitiqueConfidentialite() {
       <Section title="Responsable du traitement">
         <p>
           Le responsable du traitement des données est WAN SOFT,
-          joignable à l'adresse : <a href="mailto:erwan.viot@wan-soft.fr" className="text-indigo-400 underline">erwan.viot@wan-soft.fr</a>
+          joignable à l'adresse : <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">erwan.viot@wan-soft.fr</a>
         </p>
       </Section>
 
@@ -212,7 +212,7 @@ function PolitiqueConfidentialite() {
         <p>
           Étant donné qu'aucune donnée personnelle n'est collectée, ces droits
           s'exercent de fait. Pour toute question, contactez-nous
-          à <a href="mailto:erwan.viot@wan-soft.fr" className="text-indigo-400 underline">erwan.viot@wan-soft.fr</a>.
+          à <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">erwan.viot@wan-soft.fr</a>.
         </p>
       </Section>
 
@@ -396,7 +396,7 @@ function CGU() {
       <Section title="Contact">
         <p>
           Pour toute question relative aux présentes CGU, vous pouvez nous
-          contacter à : <a href="mailto:erwan.viot@wan-soft.fr" className="text-indigo-400 underline">erwan.viot@wan-soft.fr</a>
+          contacter à : <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">erwan.viot@wan-soft.fr</a>
         </p>
       </Section>
     </>

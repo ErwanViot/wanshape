@@ -28,7 +28,7 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,json,png,svg}'],
         navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/ads\.txt$/],
+        navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
         runtimeCaching: [
           {
             urlPattern: /\/sessions\/.*\.json$/,
@@ -37,6 +37,14 @@ export default defineConfig({
               cacheName: 'sessions-cache',
               expiration: { maxEntries: 110, maxAgeSeconds: 60 * 60 * 24 * 120 },
             },
+          },
+          {
+            urlPattern: /^https:\/\/.*\.supabase\.co\/.*/,
+            handler: 'NetworkOnly',
+          },
+          {
+            urlPattern: /\/api\/.*/,
+            handler: 'NetworkOnly',
           },
           {
             urlPattern: /\/videos\/.*\.mp4$/,

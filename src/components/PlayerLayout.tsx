@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
 
-export function Layout() {
+export function PlayerLayout() {
   const { pathname } = useLocation();
 
   useEffect(() => {

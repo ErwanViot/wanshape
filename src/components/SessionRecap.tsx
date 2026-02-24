@@ -186,7 +186,7 @@ function ExerciseName({ name }: { name: string }) {
   }
   const to = `/exercices/${link.slug}${link.anchor ? `#${link.anchor}` : ''}`;
   return (
-    <Link to={to} className="text-[13px] font-medium text-indigo-400 hover:text-indigo-300 transition-colors underline underline-offset-2 decoration-indigo-400/30">
+    <Link to={to} className="text-[13px] font-medium text-link hover:text-link-hover transition-colors underline underline-offset-2 decoration-link/30">
       {name}
     </Link>
   );

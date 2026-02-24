@@ -25,7 +25,7 @@ export function Exercises() {
   const grouped = groupByCategory(EXERCISES_DATA);
 
   return (
-    <div className="min-h-screen bg-surface">
+    <>
       <header className="bg-surface border-b border-divider sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center gap-3">
           <Link
@@ -41,7 +41,7 @@ export function Exercises() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-8 space-y-10">
+      <main id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-10">
         <p className="text-sm text-subtle leading-relaxed">
           Retrouvez ici les fiches détaillées de nos exercices : exécution, respiration, variantes, conseils et erreurs courantes.
         </p>
@@ -74,7 +74,7 @@ export function Exercises() {
                   <div className="p-4 flex-1 flex flex-col gap-3">
                     <div className="flex flex-wrap gap-1.5">
                       {ex.muscles.slice(0, 3).map(m => (
-                        <span key={m} className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                        <span key={m} className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-brand/10 text-link border border-brand/20">
                           {m}
                         </span>
                       ))}
@@ -87,7 +87,7 @@ export function Exercises() {
                     <p className="text-[13px] text-subtle leading-relaxed flex-1 line-clamp-2">
                       {ex.shortDescription}
                     </p>
-                    <span className="text-xs text-indigo-400 font-medium">
+                    <span className="text-xs text-link font-medium">
                       {ex.variants.length} variante{ex.variants.length > 1 ? 's' : ''}
                     </span>
                   </div>
@@ -101,6 +101,6 @@ export function Exercises() {
           De nouvelles fiches sont ajoutées régulièrement.
         </p>
       </main>
-    </div>
+    </>
   );
 }
