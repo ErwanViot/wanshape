@@ -155,6 +155,7 @@ export type Block =
 export type BlockType = Block["type"];
 
 export interface Session {
+  schema_version?: 1;
   date: string;
   title: string;
   description: string;
@@ -162,3 +163,8 @@ export interface Session {
   focus: string[];
   blocks: Block[];
 }
+
+/** Where to fetch sessions from — extensible for future Supabase source. */
+export type SessionSource =
+  | { type: 'static' }
+  | { type: 'api'; baseUrl: string };
