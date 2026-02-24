@@ -12,7 +12,7 @@ export function SignupPage() {
   const [submitting, setSubmitting] = useState(false);
 
   useDocumentHead({
-    title: 'Créer un compte — WAN SHAPE',
+    title: 'Créer un compte',
     description: 'Créez votre compte WanShape pour accéder à votre historique.',
   });
 

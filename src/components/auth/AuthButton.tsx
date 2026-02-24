@@ -1,18 +1,7 @@
 import { Link } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { supabase } from '../../lib/supabase.ts';
-
-function getInitials(name: string | null | undefined, email: string | undefined): string {
-  if (name) {
-    return name
-      .split(' ')
-      .map((w) => w[0])
-      .join('')
-      .slice(0, 2)
-      .toUpperCase();
-  }
-  return (email?.[0] ?? '?').toUpperCase();
-}
+import { getInitials } from '../../utils/getInitials.ts';
 
 export function AuthButton() {
   const { user, profile, loading } = useAuth();

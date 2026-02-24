@@ -11,7 +11,7 @@ export function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
 
   useDocumentHead({
-    title: 'Connexion — WAN SHAPE',
+    title: 'Connexion',
     description: 'Connectez-vous à votre compte WanShape.',
   });
 

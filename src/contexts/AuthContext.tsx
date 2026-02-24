@@ -1,5 +1,5 @@
 import type { User } from '@supabase/supabase-js';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { Profile } from '../types/auth.ts';
 
@@ -24,34 +24,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(!!supabase);
+  const mounted = useRef(true);
 
   useEffect(() => {
+    mounted.current = true;
     if (!supabase) return;
 
     // Initial session check
     supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!mounted.current) return;
       const currentUser = session?.user ?? null;
       setUser(currentUser);
       if (currentUser) {
-        setProfile(await fetchProfile(currentUser.id));
+        const p = await fetchProfile(currentUser.id);
+        if (mounted.current) setProfile(p);
       }
-      setLoading(false);
+      if (mounted.current) setLoading(false);
     });
 
-    // Listen for auth changes
+    // Listen for auth changes (skip INITIAL_SESSION to avoid double fetch)
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!mounted.current || event === 'INITIAL_SESSION') return;
       const currentUser = session?.user ?? null;
       setUser(currentUser);
       if (currentUser) {
-        setProfile(await fetchProfile(currentUser.id));
+        const p = await fetchProfile(currentUser.id);
+        if (mounted.current) setProfile(p);
       } else {
         setProfile(null);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted.current = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signIn = async (email: string): Promise<{ error: string | null }> => {

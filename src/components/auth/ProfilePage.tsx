@@ -1,18 +1,7 @@
 import { Link } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
-
-function getInitials(name: string | null | undefined, email: string | undefined): string {
-  if (name) {
-    return name
-      .split(' ')
-      .map((w) => w[0])
-      .join('')
-      .slice(0, 2)
-      .toUpperCase();
-  }
-  return (email?.[0] ?? '?').toUpperCase();
-}
+import { getInitials } from '../../utils/getInitials.ts';
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('fr-FR', {
@@ -26,7 +15,7 @@ export function ProfilePage() {
   const { user, profile, signOut } = useAuth();
 
   useDocumentHead({
-    title: 'Mon profil — WAN SHAPE',
+    title: 'Mon profil',
     description: 'Gérez votre compte WanShape.',
   });
 

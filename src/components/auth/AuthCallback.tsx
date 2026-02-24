@@ -1,25 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { supabase } from '../../lib/supabase.ts';
+
+const TIMEOUT_MS = 15_000;
 
 export function AuthCallback() {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+  const handled = useRef(false);
+
+  useDocumentHead({ title: 'Connexion en cours' });
 
   useEffect(() => {
+    if (handled.current) return;
+    handled.current = true;
+
     if (!supabase) {
       setError('Auth non disponible');
       return;
     }
 
+    const timeout = setTimeout(() => {
+      setError('La connexion prend trop de temps. Veuillez réessayer.');
+    }, TIMEOUT_MS);
+
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
 
     if (code) {
-      // PKCE flow: exchange code for session
       supabase.auth.exchangeCodeForSession(code).then(({ error: err }) => {
+        clearTimeout(timeout);
         if (err) {
-          // Code exchange failed — but session may already be active via onAuthStateChange
+          // Code exchange failed — session may already be active via onAuthStateChange
           supabase.auth.getSession().then(({ data: { session } }) => {
             if (session) {
               navigate('/profil', { replace: true });
@@ -34,6 +47,7 @@ export function AuthCallback() {
     } else {
       // No code — check if session is already present (hash fragment flow)
       supabase.auth.getSession().then(({ data: { session } }) => {
+        clearTimeout(timeout);
         if (session) {
           navigate('/profil', { replace: true });
         } else {
@@ -41,6 +55,8 @@ export function AuthCallback() {
         }
       });
     }
+
+    return () => clearTimeout(timeout);
   }, [navigate]);
 
   if (error) {
@@ -76,7 +92,10 @@ export function AuthCallback() {
 
   return (
     <main className="px-6 py-12 flex-1 flex items-center justify-center">
-      <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+      <output className="flex flex-col items-center gap-3">
+        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <p className="text-sm text-muted">Connexion en cours...</p>
+      </output>
     </main>
   );
 }
