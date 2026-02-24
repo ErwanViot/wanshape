@@ -1,4 +1,5 @@
 import { useTheme } from '../hooks/useTheme.ts';
+import { AuthButton } from './auth/AuthButton.tsx';
 
 export function BrandHeader() {
   const { theme, toggleTheme } = useTheme();
@@ -24,11 +25,13 @@ export function BrandHeader() {
             — Chaque jour, une séance guidée sans matériel
           </span>
 
-          {/* Theme toggle — pushed to the right */}
+          {/* Auth + Theme toggle — pushed to the right */}
+          <div className="ml-auto flex items-center gap-2">
+          <AuthButton />
           <button
             type="button"
             onClick={toggleTheme}
-            className="ml-auto p-2.5 rounded-xl border border-divider hover:border-divider-strong transition-colors"
+            className="p-2.5 rounded-xl border border-divider hover:border-divider-strong transition-colors"
             aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}
           >
             {theme === 'dark' ? (
@@ -69,6 +72,7 @@ export function BrandHeader() {
               </svg>
             )}
           </button>
+          </div>
         </div>
 
         {/* Value props */}
