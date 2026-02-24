@@ -57,7 +57,7 @@ export function FormatPage() {
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-6 py-8 space-y-8">
+      <main id="main-content" className="max-w-2xl mx-auto px-6 py-8 space-y-8">
         {/* Intro */}
         <p className="text-base text-body leading-relaxed">
           {format.shortDescription}

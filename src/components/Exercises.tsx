@@ -41,7 +41,7 @@ export function Exercises() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-8 space-y-10">
+      <main id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-10">
         <p className="text-sm text-subtle leading-relaxed">
           Retrouvez ici les fiches détaillées de nos exercices : exécution, respiration, variantes, conseils et erreurs courantes.
         </p>

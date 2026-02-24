@@ -60,7 +60,7 @@ export function Formats() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-8 space-y-6">
+      <main id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-6">
         <p className="text-sm text-subtle leading-relaxed">
           <strong className="text-strong">8 formats</strong> alternent au fil des jours : les séances intenses sont plus courtes, les séances de renforcement et d'endurance plus longues. Toutes incluent échauffement et étirements.
         </p>

@@ -60,7 +60,7 @@ export function Legal() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 py-8">
+      <main id="main-content" className="max-w-2xl mx-auto px-6 py-8">
         <div className="max-w-none">
           {tab === 'mentions' && <MentionsLegales />}
           {tab === 'privacy' && <PolitiqueConfidentialite />}
