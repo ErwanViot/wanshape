@@ -7,5 +7,4 @@ if (!supabaseUrl || !supabaseKey) {
   console.warn('Supabase env vars missing — auth features disabled');
 }
 
-export const supabase =
-  supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+export const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;

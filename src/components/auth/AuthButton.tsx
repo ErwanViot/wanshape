@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
-import { supabase } from '../../lib/supabase.ts';
 import { useAuth } from '../../contexts/AuthContext.tsx';
+import { supabase } from '../../lib/supabase.ts';
 
 function getInitials(name: string | null | undefined, email: string | undefined): string {
   if (name) {
@@ -22,10 +22,7 @@ export function AuthButton() {
 
   if (!user) {
     return (
-      <Link
-        to="/login"
-        className="text-sm font-medium text-muted hover:text-strong transition-colors"
-      >
+      <Link to="/login" className="text-sm font-medium text-muted hover:text-strong transition-colors">
         Connexion
       </Link>
     );

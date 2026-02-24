@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { Profile } from '../types/auth.ts';
 
@@ -16,11 +16,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 async function fetchProfile(userId: string): Promise<Profile | null> {
   if (!supabase) return null;
-  const { data } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', userId)
-    .single();
+  const { data } = await supabase.from('profiles').select('*').eq('id', userId).single();
   return data as Profile | null;
 }
 
@@ -67,10 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error: error?.message ?? null };
   };
 
-  const signUp = async (
-    email: string,
-    displayName: string,
-  ): Promise<{ error: string | null }> => {
+  const signUp = async (email: string, displayName: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: 'Auth non disponible' };
     const { error } = await supabase.auth.signInWithOtp({
       email,
@@ -90,9 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, signIn, signUp, signOut }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ user, profile, loading, signIn, signUp, signOut }}>{children}</AuthContext.Provider>
   );
 }
 

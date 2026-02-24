@@ -15,8 +15,12 @@ const LazyFormatPage = lazy(() => import('./components/FormatPage.tsx').then((m)
 const LazyExercisePage = lazy(() => import('./components/ExercisePage.tsx').then((m) => ({ default: m.ExercisePage })));
 const LazyLoginPage = lazy(() => import('./components/auth/LoginPage.tsx').then((m) => ({ default: m.LoginPage })));
 const LazySignupPage = lazy(() => import('./components/auth/SignupPage.tsx').then((m) => ({ default: m.SignupPage })));
-const LazyAuthCallback = lazy(() => import('./components/auth/AuthCallback.tsx').then((m) => ({ default: m.AuthCallback })));
-const LazyProfilePage = lazy(() => import('./components/auth/ProfilePage.tsx').then((m) => ({ default: m.ProfilePage })));
+const LazyAuthCallback = lazy(() =>
+  import('./components/auth/AuthCallback.tsx').then((m) => ({ default: m.AuthCallback })),
+);
+const LazyProfilePage = lazy(() =>
+  import('./components/auth/ProfilePage.tsx').then((m) => ({ default: m.ProfilePage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
