@@ -1,12 +1,8 @@
-import type { HIITBlock } from '../../types/session.ts';
 import type { AtomicStep } from '../../types/player.ts';
-import { BLOCK_COLORS, TRANSITION_DURATION, PREPARE_COUNTDOWN } from '../constants.ts';
+import type { HIITBlock } from '../../types/session.ts';
+import { BLOCK_COLORS, PREPARE_COUNTDOWN, TRANSITION_DURATION } from '../constants.ts';
 
-export function expandHIIT(
-  block: HIITBlock,
-  blockIndex: number,
-  totalBlocks: number
-): AtomicStep[] {
+export function expandHIIT(block: HIITBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.hiit;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -14,8 +10,8 @@ export function expandHIIT(
 
   steps.push({
     id: `block-${blockIndex}-transition`,
-    phase: "transition",
-    timerMode: "countdown",
+    phase: 'transition',
+    timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
     instructions: `${block.rounds} rounds - ${block.work}s/${block.rest}s`,
@@ -25,11 +21,11 @@ export function expandHIIT(
 
   steps.push({
     id: `block-${blockIndex}-prepare`,
-    phase: "prepare",
-    timerMode: "countdown",
+    phase: 'prepare',
+    timerMode: 'countdown',
     duration: PREPARE_COUNTDOWN,
     exerciseName: block.exercises[0].name,
-    instructions: "Préparez-vous !",
+    instructions: 'Préparez-vous !',
     ...base,
     estimatedDuration: PREPARE_COUNTDOWN,
   });
@@ -46,16 +42,12 @@ export function expandHIIT(
       const isLastExInRound = exIdx === block.exercises.length - 1;
       const intervalInfo = { current: interval, total: totalIntervals };
 
-      const nextEx = !isLastExInRound
-        ? block.exercises[exIdx + 1]
-        : !isLastRound
-          ? block.exercises[0]
-          : undefined;
+      const nextEx = !isLastExInRound ? block.exercises[exIdx + 1] : !isLastRound ? block.exercises[0] : undefined;
 
       steps.push({
         id: `block-${blockIndex}-round-${round}-ex-${exIdx}-work`,
-        phase: "work",
-        timerMode: "countdown",
+        phase: 'work',
+        timerMode: 'countdown',
         duration: block.work,
         exerciseName: ex.name,
         instructions: ex.instructions,
@@ -64,20 +56,18 @@ export function expandHIIT(
         intervalInfo,
         isLastInBlock: isLastInterval,
         isLastInRound: isLastExInRound,
-        nextStepPreview: nextEx
-          ? { exerciseName: nextEx.name, description: `${block.work}s` }
-          : undefined,
+        nextStepPreview: nextEx ? { exerciseName: nextEx.name, description: `${block.work}s` } : undefined,
         estimatedDuration: block.work,
       });
 
       if (!isLastInterval) {
         steps.push({
           id: `block-${blockIndex}-round-${round}-ex-${exIdx}-rest`,
-          phase: "rest",
-          timerMode: "countdown",
+          phase: 'rest',
+          timerMode: 'countdown',
           duration: block.rest,
-          exerciseName: "Repos",
-          instructions: nextEx ? `Prochain : ${nextEx.name}` : "",
+          exerciseName: 'Repos',
+          instructions: nextEx ? `Prochain : ${nextEx.name}` : '',
           ...base,
           roundInfo,
           intervalInfo,

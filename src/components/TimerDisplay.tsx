@@ -9,9 +9,9 @@ interface Props {
 }
 
 const SIZES = {
-  large:  { box: 220, stroke: 8, text: 'text-6xl sm:text-7xl' },
+  large: { box: 220, stroke: 8, text: 'text-6xl sm:text-7xl' },
   medium: { box: 170, stroke: 7, text: 'text-4xl sm:text-5xl' },
-  small:  { box: 120, stroke: 6, text: 'text-2xl sm:text-3xl' },
+  small: { box: 120, stroke: 6, text: 'text-2xl sm:text-3xl' },
 } as const;
 
 export function TimerDisplay({ remaining, progress, color, size = 'large', pulse = false }: Props) {
@@ -22,20 +22,9 @@ export function TimerDisplay({ remaining, progress, color, size = 'large', pulse
 
   return (
     <div className="relative flex items-center justify-center" style={{ width: box, height: box }}>
-      <svg
-        width={box}
-        height={box}
-        className="absolute inset-0 -rotate-90"
-      >
+      <svg width={box} height={box} className="absolute inset-0 -rotate-90">
         {/* Track */}
-        <circle
-          cx={box / 2}
-          cy={box / 2}
-          r={radius}
-          fill="none"
-          stroke="rgba(255,255,255,0.08)"
-          strokeWidth={stroke}
-        />
+        <circle cx={box / 2} cy={box / 2} r={radius} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={stroke} />
         {/* Progress */}
         <circle
           cx={box / 2}

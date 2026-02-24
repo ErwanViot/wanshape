@@ -1,10 +1,10 @@
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-export interface UseTimerReturn {
+interface UseTimerReturn {
   remaining: number;
   isRunning: boolean;
   progress: number;
-  start: (duration: number, direction?: "down" | "up") => void;
+  start: (duration: number, direction?: 'down' | 'up') => void;
   pause: () => void;
   resume: () => void;
   skip: () => void;
@@ -19,10 +19,7 @@ export function useTimer(onComplete: () => void): UseTimerReturn {
   onCompleteRef.current = onComplete;
 
   useEffect(() => {
-    const worker = new Worker(
-      new URL('../workers/timer.worker.ts', import.meta.url),
-      { type: 'module' }
-    );
+    const worker = new Worker(new URL('../workers/timer.worker.ts', import.meta.url), { type: 'module' });
 
     worker.onmessage = (e: MessageEvent) => {
       if (e.data.type === 'tick') {
@@ -40,7 +37,7 @@ export function useTimer(onComplete: () => void): UseTimerReturn {
     };
   }, []);
 
-  const start = useCallback((duration: number, direction: "down" | "up" = "down") => {
+  const start = useCallback((duration: number, direction: 'down' | 'up' = 'down') => {
     totalRef.current = duration;
     setRemaining(duration);
     setIsRunning(true);

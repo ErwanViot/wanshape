@@ -1,11 +1,11 @@
-import type { WarmupBlock, CooldownBlock } from '../../types/session.ts';
 import type { AtomicStep } from '../../types/player.ts';
+import type { CooldownBlock, WarmupBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, TRANSITION_DURATION } from '../constants.ts';
 
 export function expandWarmup(
   block: WarmupBlock | CooldownBlock,
   blockIndex: number,
-  totalBlocks: number
+  totalBlocks: number,
 ): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS[block.type];
@@ -13,8 +13,8 @@ export function expandWarmup(
 
   steps.push({
     id: `block-${blockIndex}-transition`,
-    phase: "transition",
-    timerMode: "countdown",
+    phase: 'transition',
+    timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
     instructions: `${block.exercises.length} exercices`,
@@ -34,13 +34,11 @@ export function expandWarmup(
 
     steps.push({
       id: `block-${blockIndex}-ex-${i}-work`,
-      phase: "work",
-      timerMode: "countdown",
+      phase: 'work',
+      timerMode: 'countdown',
       duration: totalDuration,
       exerciseName: ex.name,
-      instructions: ex.bilateral
-        ? `${ex.instructions} (${ex.duration}s par cote)`
-        : ex.instructions,
+      instructions: ex.bilateral ? `${ex.instructions} (${ex.duration}s par cote)` : ex.instructions,
       ...base,
       exerciseInfo,
       isLastInBlock: isLast,

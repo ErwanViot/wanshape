@@ -64,7 +64,7 @@
 
 /* Keyboard focus indicator */
 :focus-visible {
-  outline: 2px solid var(--color-brand, #4F46E5);
+  outline: 2px solid var(--color-brand, #4f46e5);
   outline-offset: 2px;
 }
 
@@ -74,7 +74,7 @@
   left: -9999px;
   z-index: 999;
   padding: 0.75rem 1.5rem;
-  background: var(--color-brand, #4F46E5);
+  background: var(--color-brand, #4f46e5);
   color: white;
   font-weight: 600;
   font-size: 0.875rem;
@@ -86,14 +86,16 @@
   top: 0;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   overscroll-behavior: none;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--color-surface);
   color: var(--color-heading);
   -webkit-font-smoothing: antialiased;
@@ -126,7 +128,9 @@ body {
   transition: all 0.25s ease;
 }
 .cta-gradient:hover {
-  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-brand) 30%, transparent), 0 4px 16px color-mix(in srgb, var(--color-brand-secondary) 20%, transparent);
+  box-shadow:
+    0 8px 32px color-mix(in srgb, var(--color-brand) 30%, transparent),
+    0 4px 16px color-mix(in srgb, var(--color-brand-secondary) 20%, transparent);
   transform: translateY(-1px);
 }
 .cta-gradient:active {
@@ -191,20 +195,33 @@ body {
 }
 
 .session-label-tomorrow {
-  background: linear-gradient(135deg, #D97706, #F59E0B);
+  background: linear-gradient(135deg, #d97706, #f59e0b);
   box-shadow: 0 0 24px rgba(217, 119, 6, 0.3);
 }
 
 /* Gradient divider */
 .gradient-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-brand) 30%, transparent), color-mix(in srgb, var(--color-brand-secondary) 30%, transparent), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-brand) 30%, transparent),
+    color-mix(in srgb, var(--color-brand-secondary) 30%, transparent),
+    transparent
+  );
 }
 
 /* Countdown pulse animation */
 @keyframes countdown-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.15); opacity: 0.8; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
 }
 .animate-countdown {
   animation: countdown-pulse 1s ease-in-out infinite;
@@ -212,8 +229,14 @@ body {
 
 /* Fade in */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
@@ -221,8 +244,14 @@ body {
 
 /* Slide up */
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-slide-up {
   animation: slide-up 0.4s ease-out;
@@ -230,9 +259,15 @@ body {
 
 /* Bounce in */
 @keyframes bounce-in {
-  0% { transform: scale(0.9); }
-  50% { transform: scale(1.03); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 .animate-bounce-in {
   animation: bounce-in 0.3s ease-out;
@@ -240,8 +275,13 @@ body {
 
 /* Timer flash */
 @keyframes timer-flash {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 .animate-timer-flash {
   animation: timer-flash 0.5s ease-in-out infinite;

@@ -1,29 +1,29 @@
 import type { BlockType } from '../types/session.ts';
 
 export const BLOCK_COLORS: Record<BlockType, string> = {
-  warmup: "#F97316",
-  cooldown: "#0EA5E9",
-  classic: "#6366F1",
-  circuit: "#7C3AED",
-  hiit: "#DC2626",
-  tabata: "#B91C1C",
-  emom: "#0D9488",
-  amrap: "#D97706",
-  superset: "#4F46E5",
-  pyramid: "#9333EA",
+  warmup: '#F97316',
+  cooldown: '#0EA5E9',
+  classic: '#6366F1',
+  circuit: '#7C3AED',
+  hiit: '#DC2626',
+  tabata: '#B91C1C',
+  emom: '#0D9488',
+  amrap: '#D97706',
+  superset: '#4F46E5',
+  pyramid: '#9333EA',
 };
 
 export const BLOCK_LABELS: Record<BlockType, string> = {
-  warmup: "Échauffement",
-  cooldown: "Retour au calme",
-  classic: "Renforcement",
-  circuit: "Circuit",
-  hiit: "HIIT",
-  tabata: "Tabata",
-  emom: "EMOM",
-  amrap: "AMRAP",
-  superset: "Superset",
-  pyramid: "Pyramide",
+  warmup: 'Échauffement',
+  cooldown: 'Retour au calme',
+  classic: 'Renforcement',
+  circuit: 'Circuit',
+  hiit: 'HIIT',
+  tabata: 'Tabata',
+  emom: 'EMOM',
+  amrap: 'AMRAP',
+  superset: 'Superset',
+  pyramid: 'Pyramide',
 };
 
 export const TABATA_DEFAULTS = {

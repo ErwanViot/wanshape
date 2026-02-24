@@ -1,24 +1,24 @@
-import { useMemo, useEffect } from 'react';
-import { useNavigate, useParams, Navigate, Link } from 'react-router';
-import type { Session } from '../types/session.ts';
-import type { AtomicStep } from '../types/player.ts';
-import { compileSession } from '../engine/interpreter.ts';
+import { useEffect, useMemo } from 'react';
+import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import { BLOCK_LABELS } from '../engine/constants.ts';
-import { useSession } from '../hooks/useSession.ts';
-import { useWorkout } from '../hooks/useWorkout.ts';
-import { useWakeLock } from '../hooks/useWakeLock.ts';
+import { compileSession } from '../engine/interpreter.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
-import { GlobalProgress } from './GlobalProgress.tsx';
-import { ExerciseView } from './ExerciseView.tsx';
-import { RepsView } from './RepsView.tsx';
-import { RestView } from './RestView.tsx';
-import { EMOMView } from './EMOMView.tsx';
+import { useSession } from '../hooks/useSession.ts';
+import { useWakeLock } from '../hooks/useWakeLock.ts';
+import { useWorkout } from '../hooks/useWorkout.ts';
+import type { AtomicStep } from '../types/player.ts';
+import type { Session } from '../types/session.ts';
+import { getTodayKey } from '../utils/date.ts';
 import { AMRAPView } from './AMRAPView.tsx';
 import { BlockTransition } from './BlockTransition.tsx';
-import { EndScreen } from './EndScreen.tsx';
 import { Controls } from './Controls.tsx';
-import { getTodayKey } from '../utils/date.ts';
+import { EMOMView } from './EMOMView.tsx';
+import { EndScreen } from './EndScreen.tsx';
+import { ExerciseView } from './ExerciseView.tsx';
+import { GlobalProgress } from './GlobalProgress.tsx';
+import { RepsView } from './RepsView.tsx';
+import { RestView } from './RestView.tsx';
 
 export function PlayerPage() {
   const { dateKey: paramDateKey } = useParams<{ dateKey?: string }>();
@@ -84,14 +84,11 @@ function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep
             <span
               className={isActive ? 'font-semibold' : 'font-medium'}
               style={{
-                color: isActive
-                  ? step.blockColor
-                  : isPast
-                    ? 'rgba(255,255,255,0.4)'
-                    : 'rgba(255,255,255,0.2)',
+                color: isActive ? step.blockColor : isPast ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.2)',
               }}
             >
-              {BLOCK_LABELS[block.type]}{isActive && progress && ` - ${progress}`}
+              {BLOCK_LABELS[block.type]}
+              {isActive && progress && ` - ${progress}`}
             </span>
           </span>
         );
@@ -112,28 +109,18 @@ function Player({ session }: { session: Session }) {
     if (workout.status === 'idle' && steps.length > 0) {
       workout.start();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [steps.length, workout.start, workout.status]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const goHome = () => navigate('/');
 
   if (workout.status === 'complete') {
-    return (
-      <EndScreen
-        session={session}
-        amrapRounds={workout.amrapRounds}
-        onBack={goHome}
-      />
-    );
+    return <EndScreen session={session} amrapRounds={workout.amrapRounds} onBack={goHome} />;
   }
 
   const step = workout.currentStep;
   if (!step) return null;
 
-  const bgOpacity = step.phase === 'rest'
-    ? '25'
-    : step.phase === 'transition'
-      ? '18'
-      : '12';
+  const bgOpacity = step.phase === 'rest' ? '25' : step.phase === 'transition' ? '18' : '12';
 
   return (
     <div
@@ -145,17 +132,22 @@ function Player({ session }: { session: Session }) {
     >
       {/* Top bar: progress + quit */}
       <div className="relative">
-        <GlobalProgress
-          steps={steps}
-          currentStepIndex={workout.currentStepIndex}
-          progress={workout.globalProgress}
-        />
+        <GlobalProgress steps={steps} currentStepIndex={workout.currentStepIndex} progress={workout.globalProgress} />
         <button
+          type="button"
           onClick={goHome}
           className="absolute top-2 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/50 hover:text-white/80 hover:bg-white/20 transition-colors"
           aria-label="Quitter la séance"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          >
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         </button>
@@ -172,6 +164,7 @@ function Player({ session }: { session: Session }) {
           <div className="text-center">
             <div className="text-4xl font-bold text-white mb-4">Pause</div>
             <button
+              type="button"
               onClick={workout.togglePause}
               className="px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
             >
@@ -184,34 +177,21 @@ function Player({ session }: { session: Session }) {
       {/* Main content by step type */}
       <div key={step.id} className="flex-1 flex flex-col animate-fade-in">
         {step.phase === 'transition' && (
-          <BlockTransition
-            step={step}
-            remaining={workout.timer.remaining}
-            progress={workout.timer.progress}
-          />
+          <BlockTransition step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} />
         )}
 
         {step.phase === 'prepare' && (
           <div className="flex flex-col items-center justify-center flex-1 gap-6">
             <p className="text-white/60 text-lg">{step.instructions}</p>
-            <div
-              className="text-8xl font-bold font-mono animate-countdown"
-              style={{ color: step.blockColor }}
-            >
+            <div className="text-8xl font-bold font-mono animate-countdown" style={{ color: step.blockColor }}>
               {workout.timer.remaining}
             </div>
-            <h2 className="text-2xl font-bold text-white">
-              {step.exerciseName}
-            </h2>
+            <h2 className="text-2xl font-bold text-white">{step.exerciseName}</h2>
           </div>
         )}
 
         {step.phase === 'work' && step.timerMode === 'emom' && (
-          <EMOMView
-            step={step}
-            remaining={workout.timer.remaining}
-            progress={workout.timer.progress}
-          />
+          <EMOMView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} />
         )}
 
         {step.phase === 'work' && step.timerMode === 'amrap' && (
@@ -225,19 +205,10 @@ function Player({ session }: { session: Session }) {
         )}
 
         {step.phase === 'work' && step.timerMode === 'countdown' && (
-          <ExerciseView
-            step={step}
-            remaining={workout.timer.remaining}
-            progress={workout.timer.progress}
-          />
+          <ExerciseView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} />
         )}
 
-        {step.phase === 'work' && step.timerMode === 'manual' && (
-          <RepsView
-            step={step}
-            onDone={workout.done}
-          />
-        )}
+        {step.phase === 'work' && step.timerMode === 'manual' && <RepsView step={step} onDone={workout.done} />}
 
         {step.phase === 'rest' && (
           <RestView
@@ -260,9 +231,7 @@ function Player({ session }: { session: Session }) {
 
       {/* Health reminder */}
       <div className="px-6 pb-3 text-center">
-        <p className="text-xs text-white">
-          ⚕️ Écoutez votre corps. En cas de douleur, arrêtez immédiatement.
-        </p>
+        <p className="text-xs text-white">⚕️ Écoutez votre corps. En cas de douleur, arrêtez immédiatement.</p>
       </div>
     </div>
   );

@@ -1,21 +1,21 @@
 let intervalId: ReturnType<typeof setInterval> | null = null;
 let remaining = 0;
-let counting: "down" | "up" = "down";
+let counting: 'down' | 'up' = 'down';
 
 function tick() {
-  if (counting === "down") {
+  if (counting === 'down') {
     remaining--;
     if (remaining <= 0) {
       remaining = 0;
-      self.postMessage({ type: "tick", remaining: 0 });
-      self.postMessage({ type: "complete" });
+      self.postMessage({ type: 'tick', remaining: 0 });
+      self.postMessage({ type: 'complete' });
       stop();
       return;
     }
   } else {
     remaining++;
   }
-  self.postMessage({ type: "tick", remaining });
+  self.postMessage({ type: 'tick', remaining });
 }
 
 function stop() {
@@ -29,25 +29,25 @@ self.onmessage = (e: MessageEvent) => {
   const { command, duration, direction } = e.data;
 
   switch (command) {
-    case "start":
+    case 'start':
       stop();
       remaining = duration;
-      counting = direction === "up" ? "up" : "down";
-      self.postMessage({ type: "tick", remaining });
+      counting = direction === 'up' ? 'up' : 'down';
+      self.postMessage({ type: 'tick', remaining });
       intervalId = setInterval(tick, 1000);
       break;
 
-    case "pause":
+    case 'pause':
       stop();
       break;
 
-    case "resume":
+    case 'resume':
       if (intervalId === null) {
         intervalId = setInterval(tick, 1000);
       }
       break;
 
-    case "stop":
+    case 'stop':
       stop();
       remaining = 0;
       break;

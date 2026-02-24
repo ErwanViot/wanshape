@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface ExerciseVideoProps {
   src: string;
@@ -53,15 +53,7 @@ export function ExerciseVideo({ src, fallbackImage, alt = '', className = '' }: 
   return (
     <div ref={containerRef} className={className} role="img" aria-label={alt}>
       {isVisible ? (
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="none"
-          className="w-full h-full object-cover"
-        >
+        <video ref={videoRef} autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover">
           <source src={src} type="video/mp4" onError={handleError} />
         </video>
       ) : (

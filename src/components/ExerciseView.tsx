@@ -1,6 +1,6 @@
 import type { AtomicStep } from '../types/player.ts';
-import { TimerDisplay } from './TimerDisplay.tsx';
 import { NextPreview } from './NextPreview.tsx';
+import { TimerDisplay } from './TimerDisplay.tsx';
 
 interface Props {
   step: AtomicStep;
@@ -16,45 +16,36 @@ export function ExerciseView({ step, remaining, progress }: Props) {
       {/* Context */}
       <div className="text-white/50 text-sm">
         {step.roundInfo && (
-          <span>Round {step.roundInfo.current}/{step.roundInfo.total}</span>
+          <span>
+            Round {step.roundInfo.current}/{step.roundInfo.total}
+          </span>
         )}
         {step.setInfo && (
-          <span>Série {step.setInfo.current}/{step.setInfo.total}</span>
+          <span>
+            Série {step.setInfo.current}/{step.setInfo.total}
+          </span>
         )}
         {step.intervalInfo && (
-          <span className="ml-2">· Intervalle {step.intervalInfo.current}/{step.intervalInfo.total}</span>
+          <span className="ml-2">
+            · Intervalle {step.intervalInfo.current}/{step.intervalInfo.total}
+          </span>
         )}
       </div>
 
       {/* Exercise name */}
-      <h2 className="text-3xl sm:text-4xl font-bold text-white">
-        {step.exerciseName}
-      </h2>
+      <h2 className="text-3xl sm:text-4xl font-bold text-white">{step.exerciseName}</h2>
 
       {/* Timer */}
-      <TimerDisplay
-        remaining={remaining}
-        progress={progress}
-        color={step.blockColor}
-        pulse={pulse}
-      />
+      <TimerDisplay remaining={remaining} progress={progress} color={step.blockColor} pulse={pulse} />
 
       {/* Instructions */}
-      <p className="text-white text-lg max-w-sm">
-        {step.instructions}
-      </p>
+      <p className="text-white text-lg max-w-sm">{step.instructions}</p>
 
       {/* Tempo */}
-      {step.tempo && (
-        <p className="text-white/40 text-sm font-mono">
-          Tempo {step.tempo}
-        </p>
-      )}
+      {step.tempo && <p className="text-white/40 text-sm font-mono">Tempo {step.tempo}</p>}
 
       {/* Next preview */}
-      {step.nextStepPreview && (
-        <NextPreview preview={step.nextStepPreview} />
-      )}
+      {step.nextStepPreview && <NextPreview preview={step.nextStepPreview} />}
     </div>
   );
 }

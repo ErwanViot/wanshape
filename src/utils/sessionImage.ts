@@ -1,29 +1,29 @@
 import type { Session } from '../types/session.ts';
 
 const FOCUS_MAP: Record<string, string> = {
-  'cardio': 'cardio',
-  'hiit': 'cardio',
+  cardio: 'cardio',
+  hiit: 'cardio',
   'upper-body': 'upper',
   'lower-body': 'lower',
-  'core': 'core',
+  core: 'core',
   'full-body': 'fullbody',
-  'flexibility': 'stretching',
-  'mobility': 'stretching',
-  'stretching': 'stretching',
-  'endurance': 'endurance',
-  'explosive': 'explosive',
-  'plyometric': 'explosive',
+  flexibility: 'stretching',
+  mobility: 'stretching',
+  stretching: 'stretching',
+  endurance: 'endurance',
+  explosive: 'explosive',
+  plyometric: 'explosive',
 };
 
 const BLOCK_TYPE_MAP: Record<string, string> = {
-  'hiit': 'cardio',
-  'tabata': 'cardio',
-  'circuit': 'fullbody',
-  'emom': 'endurance',
-  'amrap': 'endurance',
-  'superset': 'fullbody',
-  'pyramid': 'explosive',
-  'classic': 'upper',
+  hiit: 'cardio',
+  tabata: 'cardio',
+  circuit: 'fullbody',
+  emom: 'endurance',
+  amrap: 'endurance',
+  superset: 'fullbody',
+  pyramid: 'explosive',
+  classic: 'upper',
 };
 
 export function getSessionImage(session: Session): string {
@@ -34,9 +34,7 @@ export function getSessionImage(session: Session): string {
   }
 
   // 2. Fall back to dominant block type (skip warmup/cooldown)
-  const mainBlocks = session.blocks.filter(
-    b => b.type !== 'warmup' && b.type !== 'cooldown'
-  );
+  const mainBlocks = session.blocks.filter((b) => b.type !== 'warmup' && b.type !== 'cooldown');
   if (mainBlocks.length > 0) {
     const type = mainBlocks[0].type;
     if (BLOCK_TYPE_MAP[type]) return `/images/${BLOCK_TYPE_MAP[type]}.webp`;

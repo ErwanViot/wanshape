@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { Session, SessionSource } from '../types/session.ts';
 
 const DEFAULT_SOURCE: SessionSource = { type: 'static' };
@@ -47,7 +47,9 @@ export function useSession(dateKey: string | null) {
         }
       });
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [dateKey]);
 
   return { session, loading, error };
