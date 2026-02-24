@@ -33,7 +33,7 @@ export function RepsView({ step, onDone }: Props) {
       </div>
 
       {/* Instructions */}
-      <p className="text-white/60 text-base max-w-sm">
+      <p className="text-white text-lg max-w-sm">
         {step.instructions}
       </p>
 

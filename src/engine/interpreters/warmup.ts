@@ -22,10 +22,13 @@ export function expandWarmup(
     estimatedDuration: TRANSITION_DURATION,
   });
 
-  for (let i = 0; i < block.exercises.length; i++) {
+  const totalExercises = block.exercises.length;
+
+  for (let i = 0; i < totalExercises; i++) {
     const ex = block.exercises[i];
     const totalDuration = ex.bilateral ? ex.duration * 2 : ex.duration;
-    const isLast = i === block.exercises.length - 1;
+    const isLast = i === totalExercises - 1;
+    const exerciseInfo = { current: i + 1, total: totalExercises };
 
     const next = !isLast ? block.exercises[i + 1] : undefined;
 
@@ -39,6 +42,7 @@ export function expandWarmup(
         ? `${ex.instructions} (${ex.duration}s par cote)`
         : ex.instructions,
       ...base,
+      exerciseInfo,
       isLastInBlock: isLast,
       nextStepPreview: next
         ? { exerciseName: next.name, description: `${next.bilateral ? next.duration * 2 : next.duration}s` }

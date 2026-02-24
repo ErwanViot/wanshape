@@ -6,7 +6,7 @@ interface Props {
 
 export function NextPreview({ preview }: Props) {
   return (
-    <div className="text-center text-white/60 text-sm">
+    <div className="text-center text-white/60 text-base">
       <span className="text-white/40">Suivant : </span>
       <span className="text-white/80 font-medium">{preview.exerciseName}</span>
       <span className="text-white/40"> · {preview.description}</span>

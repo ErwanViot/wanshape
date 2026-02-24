@@ -4,6 +4,7 @@ import { useSession } from '../hooks/useSession.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { getSessionImage } from '../utils/sessionImage.ts';
 import { computeTimeline } from '../utils/sessionTimeline.ts';
+import { computeDifficulty } from '../utils/sessionDifficulty.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
@@ -201,6 +202,7 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
   showCta?: boolean;
 }) {
   const image = getSessionImage(session);
+  const difficulty = computeDifficulty(session);
   const timeline = computeTimeline(session.blocks);
   const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0) || 1;
   const isTomorrow = variant === 'tomorrow';
@@ -243,6 +245,15 @@ function SessionPanel({ session, dateKey, onStart, badge = 'SÉANCE DU JOUR', va
             ))}
             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80">
               ~{session.estimatedDuration} min
+            </span>
+            <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${
+              difficulty.level === 'accessible'
+                ? 'bg-emerald-500/20 border-emerald-400/30 text-emerald-300'
+                : difficulty.level === 'modere'
+                  ? 'bg-amber-500/20 border-amber-400/30 text-amber-300'
+                  : 'bg-red-500/20 border-red-400/30 text-red-300'
+            }`}>
+              {difficulty.label}
             </span>
           </div>
 
