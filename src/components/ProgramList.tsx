@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { usePrograms } from '../hooks/useProgram.ts';
+import { supabase } from '../lib/supabase.ts';
 import type { Program } from '../types/completion.ts';
 
 const FITNESS_LABELS: Record<string, string> = {
@@ -106,7 +107,9 @@ export function ProgramList() {
 
         {!loading && programs.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted">Aucun programme disponible pour le moment.</p>
+            <p className="text-muted">
+              {supabase ? 'Aucun programme disponible pour le moment.' : 'Service temporairement indisponible.'}
+            </p>
           </div>
         )}
 

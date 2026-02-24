@@ -75,11 +75,12 @@ function computeWeekDots(completions: SessionCompletion[]): boolean[] {
 
 export function useHistory(userId: string | undefined): HistoryStats {
   const [completions, setCompletions] = useState<SessionCompletion[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!userId || !supabase) {
       setCompletions([]);
+      setLoading(false);
       return;
     }
 
@@ -96,6 +97,9 @@ export function useHistory(userId: string | undefined): HistoryStats {
         if (cancelled) return;
         setCompletions((data as SessionCompletion[]) ?? []);
         setLoading(false);
+      })
+      .catch(() => {
+        if (!cancelled) setLoading(false);
       });
 
     return () => {

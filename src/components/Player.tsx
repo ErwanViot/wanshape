@@ -97,7 +97,15 @@ function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep
   );
 }
 
-export function Player({ session, programSessionId }: { session: Session; programSessionId?: string }) {
+export function Player({
+  session,
+  programSessionId,
+  backTo = '/',
+}: {
+  session: Session;
+  programSessionId?: string;
+  backTo?: string;
+}) {
   const navigate = useNavigate();
   const steps = useMemo(() => compileSession(session), [session]);
 
@@ -111,7 +119,7 @@ export function Player({ session, programSessionId }: { session: Session; progra
     }
   }, [steps.length, workout.start, workout.status]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const goHome = () => navigate('/');
+  const goBack = () => navigate(backTo);
 
   if (workout.status === 'complete') {
     return (
@@ -119,7 +127,7 @@ export function Player({ session, programSessionId }: { session: Session; progra
         session={session}
         amrapRounds={workout.amrapRounds}
         durationSeconds={workout.durationSeconds}
-        onBack={goHome}
+        onBack={goBack}
         programSessionId={programSessionId}
       />
     );
@@ -143,7 +151,7 @@ export function Player({ session, programSessionId }: { session: Session; progra
         <GlobalProgress steps={steps} currentStepIndex={workout.currentStepIndex} progress={workout.globalProgress} />
         <button
           type="button"
-          onClick={goHome}
+          onClick={goBack}
           className="absolute top-2 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/50 hover:text-white/80 hover:bg-white/20 transition-colors"
           aria-label="Quitter la séance"
         >

@@ -45,5 +45,5 @@ export function ProgramPlayerPage() {
     );
   }
 
-  return <Player session={sessionData} programSessionId={programSession.id} />;
+  return <Player session={sessionData} programSessionId={programSession.id} backTo={`/programme/${slug}`} />;
 }

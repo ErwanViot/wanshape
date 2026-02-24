@@ -60,7 +60,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
         onClick={onBack}
         className="mt-4 px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
       >
-        Retour à l'accueil
+        {programSessionId ? 'Retour au programme' : "Retour à l'accueil"}
       </button>
     </div>
   );
