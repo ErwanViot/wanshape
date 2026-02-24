@@ -165,4 +165,7 @@ export interface Session {
 }
 
 /** Where to fetch sessions from — extensible for future Supabase source. */
-export type SessionSource = { type: 'static' } | { type: 'api'; baseUrl: string };
+export type SessionSource =
+  | { type: 'static' }
+  | { type: 'api'; baseUrl: string }
+  | { type: 'program'; programSessionId: string };

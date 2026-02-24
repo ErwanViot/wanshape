@@ -34,9 +34,7 @@ export function StreakWidget() {
             </span>
             <div>
               <div className="text-2xl font-bold text-heading leading-none">{streak}</div>
-              <div className="text-xs text-muted">
-                {streak <= 1 ? 'jour' : 'jours consécutifs'}
-              </div>
+              <div className="text-xs text-muted">{streak <= 1 ? 'jour' : 'jours consécutifs'}</div>
             </div>
           </div>
 
@@ -58,9 +56,7 @@ export function StreakWidget() {
               <div key={i} className="flex flex-col items-center gap-1">
                 <div
                   className={`w-6 h-6 rounded-full border-2 transition-colors ${
-                    done
-                      ? 'bg-emerald-500 border-emerald-400'
-                      : 'bg-transparent border-divider'
+                    done ? 'bg-emerald-500 border-emerald-400' : 'bg-transparent border-divider'
                   }`}
                 />
                 <span className="text-[9px] text-muted">{DAY_LABELS[i]}</span>

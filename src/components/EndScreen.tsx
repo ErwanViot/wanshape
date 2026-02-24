@@ -36,9 +36,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 
       <p className="text-white/60 text-lg">{session.title}</p>
 
-      {user && saved && (
-        <p className="text-emerald-400 text-sm font-medium">Séance enregistrée</p>
-      )}
+      {user && saved && <p className="text-emerald-400 text-sm font-medium">Séance enregistrée</p>}
 
       <div className="flex gap-6">
         <div className="text-center">
