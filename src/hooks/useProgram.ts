@@ -53,12 +53,7 @@ export function useProgram(slug: string | undefined) {
 
     (async () => {
       // Fetch program
-      const { data: pgm } = await supabase
-        .from('programs')
-        .select('*')
-        .eq('slug', slug)
-        .eq('is_fixed', true)
-        .single();
+      const { data: pgm } = await supabase.from('programs').select('*').eq('slug', slug).eq('is_fixed', true).single();
 
       if (cancelled || !pgm) {
         if (!cancelled) setLoading(false);
@@ -129,12 +124,7 @@ export function useProgramSession(slug: string | undefined, order: number | unde
 
     (async () => {
       // Find program by slug
-      const { data: pgm } = await supabase
-        .from('programs')
-        .select('id')
-        .eq('slug', slug)
-        .eq('is_fixed', true)
-        .single();
+      const { data: pgm } = await supabase.from('programs').select('id').eq('slug', slug).eq('is_fixed', true).single();
 
       if (cancelled || !pgm) {
         if (!cancelled) setLoading(false);

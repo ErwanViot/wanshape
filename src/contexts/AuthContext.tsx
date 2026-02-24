@@ -31,16 +31,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!supabase) return;
 
     // Initial session check
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (!mounted.current) return;
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      if (currentUser) {
-        const p = await fetchProfile(currentUser.id);
-        if (mounted.current) setProfile(p);
-      }
-      if (mounted.current) setLoading(false);
-    });
+    supabase.auth
+      .getSession()
+      .then(async ({ data: { session } }) => {
+        if (!mounted.current) return;
+        const currentUser = session?.user ?? null;
+        setUser(currentUser);
+        if (currentUser) {
+          try {
+            const p = await fetchProfile(currentUser.id);
+            if (mounted.current) setProfile(p);
+          } catch {
+            // Profile fetch failed — continue without profile
+          }
+        }
+        if (mounted.current) setLoading(false);
+      })
+      .catch(() => {
+        // Session retrieval failed — mark as loaded with no user
+        if (mounted.current) setLoading(false);
+      });
 
     // Listen for auth changes (skip INITIAL_SESSION to avoid double fetch)
     const {
@@ -50,8 +60,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const currentUser = session?.user ?? null;
       setUser(currentUser);
       if (currentUser) {
-        const p = await fetchProfile(currentUser.id);
-        if (mounted.current) setProfile(p);
+        try {
+          const p = await fetchProfile(currentUser.id);
+          if (mounted.current) setProfile(p);
+        } catch {
+          // Profile fetch failed — continue without profile
+        }
       } else {
         setProfile(null);
       }
