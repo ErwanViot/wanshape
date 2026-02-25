@@ -4,6 +4,7 @@ import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { usePrograms } from '../hooks/useProgram.ts';
 import { useSession } from '../hooks/useSession.ts';
+import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
 import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
 import { computeDifficulty } from '../utils/sessionDifficulty.ts';
@@ -48,13 +49,16 @@ export function Home() {
       {/* Brand header — full width */}
       <BrandHeader />
 
-      {/* Logged-in: streak first, then session */}
+      {/* Logged-in: streak widget */}
       {user && (
         <>
           <StreakWidget />
           <div className="gradient-divider" />
         </>
       )}
+
+      {/* Visitor: signup banner */}
+      {!user && supabase && <SignupBanner />}
 
       {/* Session du jour — CTA visible above fold */}
       <div className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 py-8">
@@ -87,8 +91,8 @@ export function Home() {
           )}
         </div>
 
-        {/* Session recap — desktop only alongside session panel */}
-        <div className="hidden lg:block lg:row-start-1 lg:row-span-2 lg:col-start-2">
+        {/* Session recap — below on mobile, alongside on desktop */}
+        <div className="lg:row-start-1 lg:row-span-2 lg:col-start-2">
           {loading && (
             <div className="glass-card rounded-[20px] p-6 md:p-8 flex items-center justify-center min-h-[200px]">
               <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
@@ -128,6 +132,27 @@ export function Home() {
 
       <Footer />
     </>
+  );
+}
+
+function SignupBanner() {
+  return (
+    <div className="px-6 md:px-10 lg:px-14 py-6">
+      <div className="glass-card rounded-[20px] p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+        <div className="flex-1 min-w-0">
+          <h2 className="text-lg font-bold text-heading mb-1">Gardez une trace de vos efforts</h2>
+          <p className="text-sm text-muted leading-relaxed">
+            Créez un compte gratuit pour sauvegarder vos séances, construire votre streak et suivre vos programmes.
+          </p>
+        </div>
+        <Link
+          to="/signup"
+          className="cta-gradient px-6 py-3 rounded-xl text-sm font-bold text-white whitespace-nowrap shrink-0"
+        >
+          Créer un compte
+        </Link>
+      </div>
+    </div>
   );
 }
 

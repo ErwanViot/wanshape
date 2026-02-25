@@ -41,30 +41,32 @@ export function Discover() {
         <p className="text-sm text-muted">Formats d'entraînement et exercices</p>
       </div>
 
-      {/* Formats section */}
+      {/* Formats section — card grid like /formats page */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-heading">Formats</h2>
+          <h2 className="text-lg font-bold text-heading">Nos formats</h2>
           <Link to="/formats" className="text-xs text-link hover:text-link-hover transition-colors">
-            Tout voir
+            En savoir plus
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {FORMATS_DATA.map((f) => (
             <Link
               key={f.type}
               to={`/formats/${f.slug}`}
-              className="glass-card rounded-xl p-4 flex items-center gap-4 hover:border-divider-strong transition-colors"
+              className="glass-card rounded-xl p-4 flex flex-col gap-3 hover:border-divider-strong transition-colors"
             >
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center text-white text-sm font-bold shrink-0"
-                style={{ backgroundColor: `var(--color-${f.type})` }}
-              >
-                {f.duration}
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-bold text-heading">{f.name}</h3>
+                <span className="text-xs text-muted shrink-0">{f.duration} min</span>
               </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-semibold text-heading">{f.name}</h3>
-                <p className="text-xs text-muted truncate">{FORMAT_SHORT_DESCS[f.type] ?? f.shortDescription}</p>
+              <p className="text-xs text-muted leading-relaxed flex-1">
+                {FORMAT_SHORT_DESCS[f.type] ?? f.shortDescription}
+              </p>
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className={`intensity-dot ${i <= f.intensity ? 'active' : 'inactive'}`} />
+                ))}
               </div>
             </Link>
           ))}
