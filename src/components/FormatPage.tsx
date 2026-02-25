@@ -65,7 +65,7 @@ export function FormatPage() {
         </div>
       </div>
 
-      <main id="main-content" className="max-w-2xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-2xl mx-auto px-6 py-8 space-y-8">
         {/* Intro */}
         <p className="text-base text-body leading-relaxed">{format.shortDescription}</p>
 
@@ -140,7 +140,7 @@ export function FormatPage() {
             Séance du jour →
           </Link>
         </div>
-      </main>
+      </div>
     </>
   );
 }

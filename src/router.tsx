@@ -21,6 +21,7 @@ const LazyAuthCallback = lazy(() =>
 const LazyProfilePage = lazy(() =>
   import('./components/auth/ProfilePage.tsx').then((m) => ({ default: m.ProfilePage })),
 );
+const LazyDiscover = lazy(() => import('./components/Discover.tsx').then((m) => ({ default: m.Discover })));
 const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
 const LazyProgramPage = lazy(() => import('./components/ProgramPage.tsx').then((m) => ({ default: m.ProgramPage })));
 const LazyProgramPlayerPage = lazy(() =>
@@ -37,6 +38,14 @@ export const router = createBrowserRouter([
     element: <PublicLayout />,
     children: [
       { index: true, element: <Home /> },
+      {
+        path: 'decouvrir',
+        element: (
+          <Lazy>
+            <LazyDiscover />
+          </Lazy>
+        ),
+      },
       { path: 'formats', element: <Formats /> },
       {
         path: 'formats/:slug',

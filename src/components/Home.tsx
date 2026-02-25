@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { FORMATS_DATA } from '../data/formats.ts';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { usePrograms } from '../hooks/useProgram.ts';
@@ -23,24 +23,13 @@ function formatShortDate(dateKey: string): string {
   return `${dd}.${mm}.${d.getFullYear()}`;
 }
 
-const FORMAT_SHORT_DESCS: Record<string, string> = {
-  pyramid: 'Séries croissantes puis décroissantes',
-  classic: 'Travail ciblé en séries classiques',
-  superset: 'Deux exercices enchaînés sans pause',
-  emom: 'Chaque minute, un effort à compléter',
-  circuit: "Rotation d'ateliers variés en boucle",
-  amrap: 'Maximum de tours dans le temps imparti',
-  hiit: 'Efforts explosifs, récupération courte',
-  tabata: '20s à fond, 10s de repos, sans répit',
-};
-
 export function Home() {
   const todayKey = getTodayKey();
   const tomorrowKey = getTomorrowKey();
   const { session, loading, error } = useSession(todayKey);
-  // error intentionally ignored — if tomorrow's session can't load, we simply hide the panel
   const { session: tomorrowSession, loading: tomorrowLoading } = useSession(tomorrowKey);
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
+  const { user } = useAuth();
 
   useDocumentHead({
     title: 'WAN SHAPE',
@@ -59,24 +48,26 @@ export function Home() {
       {/* Brand header — full width */}
       <BrandHeader />
 
-      {/* Gradient divider */}
-      <div className="gradient-divider mb-8" />
+      {/* Logged-in: streak first, then session */}
+      {user && (
+        <>
+          <StreakWidget />
+          <div className="gradient-divider" />
+        </>
+      )}
 
-      {/* Streak widget — logged-in users only */}
-      <StreakWidget />
-
-      {/* Two-column grid: today panel + recap side by side, tomorrow panel below left */}
-      <div id="main-content" className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
-        {/* Today panel — col 1, row 1 */}
+      {/* Session du jour — CTA visible above fold */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 py-8">
+        {/* Today panel */}
         <div className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-1 lg:col-start-1">
           {loading && (
-            <div className="flex items-center justify-center flex-1">
+            <div className="flex items-center justify-center flex-1 min-h-[300px]">
               <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
             </div>
           )}
 
           {!loading && (error || !session) && (
-            <div className="flex items-center justify-center flex-1 p-6">
+            <div className="flex items-center justify-center flex-1 p-6 min-h-[200px]">
               <div className="text-center">
                 <div className="text-5xl mb-4">😴</div>
                 <p className="text-body text-lg font-medium">Pas de séance prévue aujourd'hui.</p>
@@ -96,8 +87,8 @@ export function Home() {
           )}
         </div>
 
-        {/* Session recap — col 2, row 1+2 on desktop / order 2 on mobile */}
-        <div className="lg:row-start-1 lg:row-span-2 lg:col-start-2">
+        {/* Session recap — desktop only alongside session panel */}
+        <div className="hidden lg:block lg:row-start-1 lg:row-span-2 lg:col-start-2">
           {loading && (
             <div className="glass-card rounded-[20px] p-6 md:p-8 flex items-center justify-center min-h-[200px]">
               <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
@@ -114,7 +105,7 @@ export function Home() {
           {!loading && session && <SessionRecap session={session} />}
         </div>
 
-        {/* Tomorrow panel — col 1, row 2 on desktop / last on mobile */}
+        {/* Tomorrow panel — col 1, row 2 on desktop / below on mobile */}
         {!tomorrowLoading && tomorrowSession && (
           <section
             aria-label="Aperçu de la séance de demain"
@@ -131,56 +122,9 @@ export function Home() {
         )}
       </div>
 
-      {/* Gradient divider */}
-      <div className="gradient-divider" />
-
       {/* Programs section */}
-      <ProgramsTeaser />
-
-      {/* Gradient divider */}
       <div className="gradient-divider" />
-
-      {/* Formats section */}
-      <section id="formats" className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
-        <div className="max-w-7xl mx-auto mb-10 md:mb-14">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-heading mb-2">Nos formats</h2>
-          <p className="text-sm text-muted">
-            8 méthodes d'entraînement, du renforcement doux au cardio maximal.{' '}
-            <Link
-              to="/formats"
-              className="text-link hover:text-link-hover underline underline-offset-2 transition-colors"
-            >
-              En savoir plus
-            </Link>
-            {' · '}
-            <Link
-              to="/exercices"
-              className="text-link hover:text-link-hover underline underline-offset-2 transition-colors"
-            >
-              Nos exercices
-            </Link>
-          </p>
-        </div>
-
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-          {FORMATS_DATA.map((f) => (
-            <Link
-              key={f.type}
-              to={`/formats/${f.slug}`}
-              className="format-card rounded-[14px] p-5 block transition-transform hover:scale-[1.02]"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-sm font-bold text-strong">{f.name}</h3>
-                <span className="text-[11px] font-medium text-faint">{f.duration} min</span>
-              </div>
-              <p className="text-xs text-muted leading-relaxed mb-4">
-                {FORMAT_SHORT_DESCS[f.type] ?? f.shortDescription}
-              </p>
-              <IntensityDots level={f.intensity} />
-            </Link>
-          ))}
-        </div>
-      </section>
+      <ProgramsTeaser />
 
       <Footer />
     </>
@@ -193,11 +137,11 @@ function ProgramsTeaser() {
   if (loading || programs.length === 0) return null;
 
   return (
-    <section id="programmes" className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
-      <div className="max-w-7xl mx-auto mb-10 md:mb-14">
+    <section className="px-6 md:px-10 lg:px-14 py-10 md:py-14">
+      <div className="max-w-7xl mx-auto mb-8 md:mb-10">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-heading mb-2">Programmes</h2>
         <p className="text-sm text-muted">
-          Des programmes structurés sur plusieurs semaines pour progresser étape par étape.{' '}
+          Obtenez des résultats visibles avec des programmes guidés sur plusieurs semaines.{' '}
           <Link
             to="/programmes"
             className="text-link hover:text-link-hover underline underline-offset-2 transition-colors"
@@ -340,15 +284,5 @@ function SessionPanel({
         </div>
       </div>
     </>
-  );
-}
-
-function IntensityDots({ level }: { level: number }) {
-  return (
-    <div className="flex items-center gap-1.5" role="img" aria-label={`Intensité ${level} sur 5`}>
-      {[1, 2, 3, 4, 5].map((i) => (
-        <div key={i} className={`intensity-dot ${i <= level ? 'active' : 'inactive'}`} />
-      ))}
-    </div>
   );
 }

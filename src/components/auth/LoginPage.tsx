@@ -31,7 +31,7 @@ export function LoginPage() {
   };
 
   return (
-    <main className="px-6 py-12 flex-1 flex items-start justify-center">
+    <div className="px-6 py-12 flex-1 flex items-start justify-center">
       <div className="w-full max-w-md">
         {/* Back link */}
         <Link
@@ -120,6 +120,6 @@ export function LoginPage() {
           </Link>
         </p>
       </div>
-    </main>
+    </div>
   );
 }

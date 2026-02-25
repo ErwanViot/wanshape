@@ -63,7 +63,7 @@ export function AuthCallback() {
 
   if (error) {
     return (
-      <main className="px-6 py-12 flex-1 flex items-start justify-center">
+      <div className="px-6 py-12 flex-1 flex items-start justify-center">
         <div className="w-full max-w-md text-center">
           <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-red-500/10 flex items-center justify-center">
             <svg
@@ -88,16 +88,16 @@ export function AuthCallback() {
             Retour à la connexion
           </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="px-6 py-12 flex-1 flex items-center justify-center">
+    <div className="px-6 py-12 flex-1 flex items-center justify-center">
       <output className="flex flex-col items-center gap-3">
         <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
         <p className="text-sm text-muted">Connexion en cours...</p>
       </output>
-    </main>
+    </div>
   );
 }

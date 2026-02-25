@@ -71,7 +71,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 }
 
 const NUDGE_STORAGE_KEY = 'wan-shape-nudge-dismissed';
-const NUDGE_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+const NUDGE_COOLDOWN_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 function SignupNudge() {
   const [visible, setVisible] = useState(() => {
@@ -89,9 +89,10 @@ function SignupNudge() {
 
   return (
     <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 p-5 text-left">
-      <p className="text-white text-sm font-semibold mb-1">Suivez votre progression</p>
+      <p className="text-white text-sm font-semibold mb-1">Ne perdez pas votre progression</p>
       <p className="text-white/50 text-xs leading-relaxed mb-4">
-        Créez un compte gratuit pour enregistrer vos séances, suivre votre streak et accéder aux programmes.
+        Sans compte, cette séance ne sera pas sauvegardée. Créez un compte gratuit pour garder votre historique, votre
+        streak et vos programmes.
       </p>
       <div className="flex items-center gap-3">
         <Link to="/signup" className="cta-gradient px-5 py-2.5 rounded-xl text-sm font-bold text-white">

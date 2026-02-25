@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   onAccept: () => void;
@@ -7,11 +7,52 @@ interface Props {
 
 export function HealthDisclaimer({ onAccept, onCancel }: Props) {
   const [checked, setChecked] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  // Focus trap: focus the dialog on mount, trap Tab inside
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    // Focus the first focusable element
+    const focusable = dialog.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+    if (focusable.length > 0) focusable[0].focus();
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape' && onCancel) {
+        onCancel();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onCancel]);
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: backdrop click-to-dismiss is a standard modal pattern
     <div
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="health-disclaimer-title"
       onClick={(e) => {
         if (e.target === e.currentTarget && onCancel) onCancel();
       }}
@@ -19,10 +60,15 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
         if (e.key === 'Escape' && onCancel) onCancel();
       }}
     >
-      <div className="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[90vh] flex flex-col">
+      <div
+        ref={dialogRef}
+        className="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[90vh] flex flex-col"
+      >
         <div className="p-6 pb-0">
           <div className="text-3xl mb-3">⚕️</div>
-          <h2 className="text-xl font-bold text-gray-900 mb-1">Avertissement santé</h2>
+          <h2 id="health-disclaimer-title" className="text-xl font-bold text-gray-900 mb-1">
+            Avertissement santé
+          </h2>
           <p className="text-sm text-gray-400 mb-4">Avant de commencer, merci de lire attentivement.</p>
         </div>
 

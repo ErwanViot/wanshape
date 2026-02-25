@@ -41,11 +41,11 @@ export function ProgramList() {
         </div>
       </header>
 
-      <main id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-6">
+      <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
         <p className="text-sm text-subtle leading-relaxed">
-          Des programmes structurés sur <strong className="text-strong">plusieurs semaines</strong> pour progresser
-          étape par étape.
-          {!user && ' Connectez-vous pour suivre votre progression.'}
+          Atteignez vos objectifs avec des programmes de <strong className="text-strong">plusieurs semaines</strong>,
+          conçus pour des résultats visibles.
+          {!user && ' Créez un compte gratuit pour suivre votre avancement.'}
         </p>
 
         {loading && (
@@ -69,7 +69,7 @@ export function ProgramList() {
             ))}
           </div>
         )}
-      </main>
+      </div>
     </>
   );
 }

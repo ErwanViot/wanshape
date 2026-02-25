@@ -21,11 +21,7 @@ export function usePrograms() {
 
     (async () => {
       try {
-        const { data } = await supabase
-          .from('programs')
-          .select('*')
-          .eq('is_fixed', true)
-          .order('created_at');
+        const { data } = await supabase.from('programs').select('*').eq('is_fixed', true).order('created_at');
 
         if (cancelled) return;
         setPrograms((data as Program[]) ?? []);

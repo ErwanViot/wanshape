@@ -22,7 +22,7 @@ export function ProgramCard({ program, compact }: { program: Program; compact?: 
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-bold text-heading">{program.title}</h3>
         <span
-          className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border shrink-0 ${FITNESS_COLORS[program.fitness_level] ?? ''}`}
+          className={`text-xs font-semibold px-2.5 py-1 rounded-full border shrink-0 ${FITNESS_COLORS[program.fitness_level] ?? ''}`}
         >
           {FITNESS_LABELS[program.fitness_level] ?? program.fitness_level}
         </span>
@@ -39,10 +39,7 @@ export function ProgramCard({ program, compact }: { program: Program; compact?: 
       {!compact && program.goals.length > 0 && (
         <ul className="flex flex-wrap gap-2">
           {program.goals.map((goal) => (
-            <li
-              key={goal}
-              className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-subtle"
-            >
+            <li key={goal} className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-subtle">
               {goal}
             </li>
           ))}

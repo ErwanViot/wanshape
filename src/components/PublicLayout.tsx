@@ -15,9 +15,9 @@ export function PublicLayout() {
       <a href="#main-content" className="skip-to-content">
         Aller au contenu principal
       </a>
-      <div className="flex-1 pb-16">
+      <main id="main-content" className="flex-1 pb-16 md:pb-0">
         <Outlet />
-      </div>
+      </main>
       <BottomNav />
     </div>
   );

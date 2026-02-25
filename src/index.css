@@ -32,8 +32,8 @@
   --color-divider-strong: rgba(255, 255, 255, 0.15);
 
   /* Cards & surfaces */
-  --color-card-bg: rgba(255, 255, 255, 0.04);
-  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-card-bg: rgba(255, 255, 255, 0.08);
+  --color-card-border: rgba(255, 255, 255, 0.12);
   --color-dot-inactive: rgba(255, 255, 255, 0.12);
 }
 
@@ -45,10 +45,10 @@
 
   --color-heading: #1a1a2e;
   --color-strong: rgba(26, 26, 46, 0.85);
-  --color-body: rgba(26, 26, 46, 0.65);
-  --color-subtle: rgba(26, 26, 46, 0.55);
-  --color-muted: rgba(26, 26, 46, 0.45);
-  --color-faint: rgba(26, 26, 46, 0.38);
+  --color-body: rgba(26, 26, 46, 0.75);
+  --color-subtle: rgba(26, 26, 46, 0.68);
+  --color-muted: rgba(26, 26, 46, 0.58);
+  --color-faint: rgba(26, 26, 46, 0.50);
 
   --color-divider: rgba(26, 26, 46, 0.08);
   --color-divider-strong: rgba(26, 26, 46, 0.15);
@@ -285,4 +285,24 @@ body {
 }
 .animate-timer-flash {
   animation: timer-flash 0.5s ease-in-out infinite;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .cta-gradient:hover {
+    transform: none;
+  }
+
+  .format-card:hover {
+    transform: none;
+  }
 }

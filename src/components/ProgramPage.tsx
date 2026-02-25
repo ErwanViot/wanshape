@@ -91,7 +91,7 @@ export function ProgramPage() {
         </div>
       </header>
 
-      <main id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
         {/* Program info */}
         <div className="space-y-3">
           {program.description && <p className="text-sm text-subtle leading-relaxed">{program.description}</p>}
@@ -107,7 +107,7 @@ export function ProgramPage() {
               {program.goals.map((goal) => (
                 <li
                   key={goal}
-                  className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-subtle"
+                  className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-subtle"
                 >
                   {goal}
                 </li>
@@ -151,32 +151,31 @@ export function ProgramPage() {
               {sessions.map((ps) => {
                 const data = ps.session_data as unknown as Session;
                 const isDone = user ? program.completedSessionIds.has(ps.id) : false;
-                const isNext = user && ps.session_order === nextSessionOrder;
-                const isLocked = user ? !isDone && !isNext : true;
+                const isSuggested = user && ps.session_order === nextSessionOrder;
 
                 return (
                   <div
                     key={ps.id}
-                    className={`glass-card rounded-xl p-4 flex items-center gap-4 ${isLocked ? 'opacity-50' : isDone ? 'opacity-70' : ''}`}
+                    className={`glass-card rounded-xl p-4 flex items-center gap-4 ${isDone ? 'opacity-70' : ''}`}
                   >
                     {/* Status indicator */}
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
                         isDone
                           ? 'bg-emerald-500/20 text-emerald-400'
-                          : isNext
+                          : isSuggested
                             ? 'bg-brand/20 text-brand'
                             : 'bg-white/5 text-muted'
                       }`}
                     >
-                      {isDone ? '✓' : isLocked ? <LockIcon /> : ps.session_order}
+                      {isDone ? '✓' : ps.session_order}
                     </div>
 
                     {/* Session info */}
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-semibold text-heading truncate">{data.title}</h3>
-                      {!isLocked && <p className="text-xs text-muted truncate">{data.description}</p>}
-                      <div className="flex items-center gap-2 mt-1 text-[11px] text-faint">
+                      <p className="text-xs text-muted truncate">{data.description}</p>
+                      <div className="flex items-center gap-2 mt-1 text-xs text-faint">
                         <span>~{data.estimatedDuration} min</span>
                         <span>·</span>
                         <span>{data.blocks.length} blocs</span>
@@ -184,7 +183,7 @@ export function ProgramPage() {
                     </div>
 
                     {/* CTA */}
-                    {isNext && (
+                    {user && isSuggested && (
                       <button
                         type="button"
                         onClick={() => handleStartSession(ps.session_order)}
@@ -193,13 +192,22 @@ export function ProgramPage() {
                         {completedCount === 0 ? 'Commencer' : 'Continuer'}
                       </button>
                     )}
-                    {isDone && (
+                    {user && isDone && (
                       <button
                         type="button"
                         onClick={() => handleStartSession(ps.session_order)}
                         className="shrink-0 px-4 py-2 rounded-xl text-xs font-bold bg-white/5 text-subtle hover:bg-white/10 transition-colors"
                       >
                         Refaire
+                      </button>
+                    )}
+                    {user && !isSuggested && !isDone && (
+                      <button
+                        type="button"
+                        onClick={() => handleStartSession(ps.session_order)}
+                        className="shrink-0 px-3 py-2 rounded-xl text-xs font-medium text-muted hover:text-subtle hover:bg-white/5 transition-colors"
+                      >
+                        Lancer
                       </button>
                     )}
                   </div>
@@ -229,25 +237,7 @@ export function ProgramPage() {
             Tous les programmes
           </Link>
         </div>
-      </main>
+      </div>
     </>
-  );
-}
-
-function LockIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-    </svg>
   );
 }

@@ -23,7 +23,7 @@ export function AuthButton() {
   return (
     <Link
       to="/profil"
-      className="w-8 h-8 rounded-full flex items-center justify-center text-xs text-white font-bold cta-gradient shrink-0"
+      className="w-8 h-8 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand shrink-0"
       aria-label="Mon profil"
     >
       {initials}

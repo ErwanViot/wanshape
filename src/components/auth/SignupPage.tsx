@@ -13,7 +13,7 @@ export function SignupPage() {
 
   useDocumentHead({
     title: 'Créer un compte',
-    description: 'Créez votre compte WanShape pour accéder à votre historique.',
+    description: 'Créez votre compte gratuit pour sauvegarder vos séances et suivre vos progrès.',
   });
 
   if (!loading && user) return <Navigate to="/profil" replace />;
@@ -32,7 +32,7 @@ export function SignupPage() {
   };
 
   return (
-    <main className="px-6 py-12 flex-1 flex items-start justify-center">
+    <div className="px-6 py-12 flex-1 flex items-start justify-center">
       <div className="w-full max-w-md">
         <Link
           to="/"
@@ -136,6 +136,6 @@ export function SignupPage() {
           </Link>
         </p>
       </div>
-    </main>
+    </div>
   );
 }
