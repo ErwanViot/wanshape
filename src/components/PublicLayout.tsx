@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
+import { BottomNav } from './BottomNav.tsx';
 
 export function PublicLayout() {
   const { pathname } = useLocation();
@@ -14,7 +15,10 @@ export function PublicLayout() {
       <a href="#main-content" className="skip-to-content">
         Aller au contenu principal
       </a>
-      <Outlet />
+      <div className="flex-1 pb-16">
+        <Outlet />
+      </div>
+      <BottomNav />
     </div>
   );
 }

@@ -34,7 +34,7 @@ export function StreakWidget() {
             </span>
             <div>
               <div className="text-2xl font-bold text-heading leading-none">{streak}</div>
-              <div className="text-xs text-muted">{streak <= 1 ? 'jour' : 'jours consécutifs'}</div>
+              <div className="text-xs text-muted">{streak <= 1 ? 'jour' : 'jours de suite'}</div>
             </div>
           </div>
 

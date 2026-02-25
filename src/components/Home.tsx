@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
+import { usePrograms } from '../hooks/useProgram.ts';
 import { useSession } from '../hooks/useSession.ts';
 import type { Session } from '../types/session.ts';
 import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
@@ -11,6 +12,7 @@ import { computeTimeline } from '../utils/sessionTimeline.ts';
 import { BrandHeader } from './BrandHeader.tsx';
 import { Footer } from './Footer.tsx';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
+import { ProgramCard } from './ProgramCard.tsx';
 import { SessionRecap } from './SessionRecap.tsx';
 import { StreakWidget } from './StreakWidget.tsx';
 
@@ -132,6 +134,12 @@ export function Home() {
       {/* Gradient divider */}
       <div className="gradient-divider" />
 
+      {/* Programs section */}
+      <ProgramsTeaser />
+
+      {/* Gradient divider */}
+      <div className="gradient-divider" />
+
       {/* Formats section */}
       <section id="formats" className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
         <div className="max-w-7xl mx-auto mb-10 md:mb-14">
@@ -176,6 +184,35 @@ export function Home() {
 
       <Footer />
     </>
+  );
+}
+
+function ProgramsTeaser() {
+  const { programs, loading } = usePrograms();
+
+  if (loading || programs.length === 0) return null;
+
+  return (
+    <section id="programmes" className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
+      <div className="max-w-7xl mx-auto mb-10 md:mb-14">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-heading mb-2">Programmes</h2>
+        <p className="text-sm text-muted">
+          Des programmes structurés sur plusieurs semaines pour progresser étape par étape.{' '}
+          <Link
+            to="/programmes"
+            className="text-link hover:text-link-hover underline underline-offset-2 transition-colors"
+          >
+            Voir tous les programmes
+          </Link>
+        </p>
+      </div>
+
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {programs.slice(0, 3).map((p) => (
+          <ProgramCard key={p.id} program={p} compact />
+        ))}
+      </div>
+    </section>
   );
 }
 

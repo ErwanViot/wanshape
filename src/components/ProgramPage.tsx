@@ -48,6 +48,9 @@ export function ProgramPage() {
   const completedCount = program.sessions.filter((s) => program.completedSessionIds.has(s.id)).length;
   const progressPct = totalSessions > 0 ? Math.round((completedCount / totalSessions) * 100) : 0;
 
+  // Find the next session to do (first uncompleted in order)
+  const nextSessionOrder = program.sessions.find((s) => !program.completedSessionIds.has(s.id))?.session_order;
+
   // Group sessions by week
   const byWeek = new Map<number, typeof program.sessions>();
   for (const s of program.sessions) {
@@ -113,6 +116,18 @@ export function ProgramPage() {
           )}
         </div>
 
+        {/* Auth gate for non-connected users */}
+        {!user && (
+          <div className="glass-card rounded-2xl p-6 text-center space-y-3">
+            <p className="text-sm text-subtle">
+              Connectez-vous pour suivre ce programme et enregistrer votre progression.
+            </p>
+            <Link to="/login" className="inline-block cta-gradient px-6 py-3 rounded-xl text-sm font-bold text-white">
+              Se connecter
+            </Link>
+          </div>
+        )}
+
         {/* Progress bar (logged-in only) */}
         {user && totalSessions > 0 && (
           <div className="space-y-2">
@@ -135,26 +150,32 @@ export function ProgramPage() {
             <div className="space-y-2">
               {sessions.map((ps) => {
                 const data = ps.session_data as unknown as Session;
-                const isDone = program.completedSessionIds.has(ps.id);
+                const isDone = user ? program.completedSessionIds.has(ps.id) : false;
+                const isNext = user && ps.session_order === nextSessionOrder;
+                const isLocked = user ? !isDone && !isNext : true;
 
                 return (
                   <div
                     key={ps.id}
-                    className={`glass-card rounded-xl p-4 flex items-center gap-4 ${isDone ? 'opacity-70' : ''}`}
+                    className={`glass-card rounded-xl p-4 flex items-center gap-4 ${isLocked ? 'opacity-50' : isDone ? 'opacity-70' : ''}`}
                   >
                     {/* Status indicator */}
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
-                        isDone ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-muted'
+                        isDone
+                          ? 'bg-emerald-500/20 text-emerald-400'
+                          : isNext
+                            ? 'bg-brand/20 text-brand'
+                            : 'bg-white/5 text-muted'
                       }`}
                     >
-                      {isDone ? '✓' : ps.session_order}
+                      {isDone ? '✓' : isLocked ? <LockIcon /> : ps.session_order}
                     </div>
 
                     {/* Session info */}
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-semibold text-heading truncate">{data.title}</h3>
-                      <p className="text-xs text-muted truncate">{data.description}</p>
+                      {!isLocked && <p className="text-xs text-muted truncate">{data.description}</p>}
                       <div className="flex items-center gap-2 mt-1 text-[11px] text-faint">
                         <span>~{data.estimatedDuration} min</span>
                         <span>·</span>
@@ -163,15 +184,24 @@ export function ProgramPage() {
                     </div>
 
                     {/* CTA */}
-                    <button
-                      type="button"
-                      onClick={() => handleStartSession(ps.session_order)}
-                      className={`shrink-0 px-4 py-2 rounded-xl text-xs font-bold transition-colors ${
-                        isDone ? 'bg-white/5 text-subtle hover:bg-white/10' : 'bg-brand text-white hover:bg-brand/80'
-                      }`}
-                    >
-                      {isDone ? 'Refaire' : 'Lancer'}
-                    </button>
+                    {isNext && (
+                      <button
+                        type="button"
+                        onClick={() => handleStartSession(ps.session_order)}
+                        className="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold cta-gradient text-white"
+                      >
+                        {completedCount === 0 ? 'Commencer' : 'Continuer'}
+                      </button>
+                    )}
+                    {isDone && (
+                      <button
+                        type="button"
+                        onClick={() => handleStartSession(ps.session_order)}
+                        className="shrink-0 px-4 py-2 rounded-xl text-xs font-bold bg-white/5 text-subtle hover:bg-white/10 transition-colors"
+                      >
+                        Refaire
+                      </button>
+                    )}
                   </div>
                 );
               })}
@@ -201,5 +231,23 @@ export function ProgramPage() {
         </div>
       </main>
     </>
+  );
+}
+
+function LockIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
   );
 }
