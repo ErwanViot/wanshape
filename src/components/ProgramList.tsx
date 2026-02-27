@@ -16,60 +16,49 @@ export function ProgramList() {
   });
 
   return (
-    <>
-      <header className="bg-surface border-b border-divider sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto px-6 py-4 flex items-center gap-3">
-          <Link
-            to="/"
-            className="p-1 -ml-1 text-muted hover:text-strong transition-colors"
-            aria-label="Retour à l'accueil"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </Link>
-          <h1 className="font-bold text-lg text-heading">Programmes</h1>
-        </div>
-      </header>
-
-      <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
-        <p className="text-sm text-subtle leading-relaxed">
-          Atteignez vos objectifs avec des programmes de <strong className="text-strong">plusieurs semaines</strong>,
-          conçus pour des résultats visibles.
+    <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
+      {/* Hero */}
+      <section className="text-center space-y-4 py-4 md:py-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-heading">
+          Nos <span className="gradient-text">programmes</span>
+        </h1>
+        <p className="text-base text-muted max-w-md mx-auto leading-relaxed">
+          Atteignez vos objectifs avec des programmes de plusieurs semaines, conçus pour des résultats
+          visibles.
           {!user && ' Créez un compte gratuit pour suivre votre avancement.'}
         </p>
+      </section>
 
-        {loading && (
-          <div className="flex items-center justify-center py-12">
-            <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
-          </div>
-        )}
+      {loading && (
+        <div className="flex items-center justify-center py-12">
+          <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        </div>
+      )}
 
-        {!loading && programs.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted">
-              {supabase ? 'Aucun programme disponible pour le moment.' : 'Service temporairement indisponible.'}
-            </p>
-          </div>
-        )}
+      {!loading && programs.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-muted">
+            {supabase ? 'Aucun programme disponible pour le moment.' : 'Service temporairement indisponible.'}
+          </p>
+        </div>
+      )}
 
-        {!loading && programs.length > 0 && (
-          <div className="grid grid-cols-1 gap-4">
-            {programs.map((p) => (
-              <ProgramCard key={p.id} program={p} />
-            ))}
-          </div>
-        )}
-      </div>
-    </>
+      {!loading && programs.length > 0 && (
+        <div className="grid grid-cols-1 gap-5">
+          {programs.map((p) => (
+            <ProgramCard key={p.id} program={p} />
+          ))}
+        </div>
+      )}
+
+      {/* CTA for visitors */}
+      {!user && supabase && !loading && programs.length > 0 && (
+        <div className="text-center pt-4">
+          <Link to="/signup" className="cta-gradient inline-block px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer">
+            Créer un compte gratuit
+          </Link>
+        </div>
+      )}
+    </div>
   );
 }

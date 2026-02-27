@@ -24,6 +24,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       programSessionId,
       durationSeconds,
       amrapRounds,
+      sessionTitle: session.title,
     });
   }, [user, save, session.date, programSessionId, durationSeconds, amrapRounds]);
 

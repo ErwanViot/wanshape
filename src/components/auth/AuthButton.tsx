@@ -11,8 +11,8 @@ export function AuthButton() {
 
   if (!user) {
     return (
-      <Link to="/login" className="text-sm font-medium text-muted hover:text-strong transition-colors">
-        Connexion
+      <Link to="/login" className="text-sm font-medium text-muted hover:text-strong transition-colors whitespace-nowrap">
+        Se connecter / S'inscrire
       </Link>
     );
   }

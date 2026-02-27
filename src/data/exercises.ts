@@ -5,7 +5,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'pompes-classiques',
     name: 'Pompes classiques',
-    aliases: ['Pompes', 'Push-ups', 'Scapular push-ups'],
+    aliases: ['Pompes', 'Push-ups', 'Scapular push-ups', 'Pompes pike'],
     category: 'upper',
     muscles: ['Pectoraux', 'Triceps', 'Deltoïdes antérieurs', 'Core (stabilisation)'],
     difficulty: 2,
@@ -174,7 +174,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'squats',
     name: 'Squats',
-    aliases: ['Squat', 'Flexion de jambes'],
+    aliases: ['Squat', 'Flexion de jambes', 'Jump squats', 'Speed squats'],
     category: 'lower',
     muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers', 'Core (stabilisation)'],
     difficulty: 1,
@@ -257,7 +257,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'fentes',
     name: 'Fentes avant',
-    aliases: ['Fentes', 'Lunges', 'Fentes alternees', 'Jump lunges'],
+    aliases: ['Fentes', 'Lunges', 'Fentes alternees', 'Jump lunges', 'Jumping lunges'],
     category: 'lower',
     muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers', 'Mollets', 'Core (stabilisation)'],
     difficulty: 2,
@@ -438,7 +438,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'good-morning',
     name: 'Good morning',
-    aliases: [],
+    aliases: ['Good mornings'],
     category: 'lower',
     muscles: ['Ischio-jambiers', 'Érecteurs du rachis', 'Fessiers'],
     difficulty: 2,
@@ -487,7 +487,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'gainage-planche',
     name: 'Gainage planche',
-    aliases: ['Planche', 'Plank', 'Gainage'],
+    aliases: ['Planche', 'Plank', 'Gainage', 'Bear crawl', 'Hollow body hold'],
     category: 'core',
     muscles: ["Transverse de l'abdomen", 'Grand droit', 'Obliques', 'Deltoïdes', 'Érecteurs du rachis'],
     difficulty: 1,
@@ -510,6 +510,11 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Gainage latéral',
         description:
           'En appui sur un avant-bras et le bord extérieur du pied, corps de profil. Cible les obliques et le moyen fessier pour renforcer la stabilité latérale du tronc. Alternez les deux côtés pour un travail équilibré.',
+      },
+      {
+        name: 'Gainage latéral sur genoux',
+        description:
+          "Version accessible du gainage latéral : en appui sur l'avant-bras et le genou plutôt que le pied. Réduit le bras de levier pour les débutants tout en travaillant les obliques et la stabilité latérale. Idéal pour construire la force avant de passer à la version complète.",
       },
       {
         name: 'Gainage Superman',
@@ -559,7 +564,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'crunchs',
     name: 'Crunchs',
-    aliases: ['Crunch', 'Abdominaux'],
+    aliases: ['Crunch', 'Abdominaux', 'Crunchs vélo'],
     category: 'core',
     muscles: ["Grand droit de l'abdomen", 'Obliques'],
     difficulty: 1,
@@ -735,7 +740,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'dead-bug',
     name: 'Dead bug',
-    aliases: [],
+    aliases: ['Bird dog'],
     category: 'core',
     muscles: ["Transverse de l'abdomen", 'Grand droit', 'Obliques', 'Fléchisseurs de hanche'],
     difficulty: 1,
@@ -773,7 +778,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'mountain-climbers',
     name: 'Mountain climbers',
-    aliases: ['Mountain climber'],
+    aliases: ['Mountain climber', 'Spider-Man mountain climbers'],
     category: 'cardio',
     muscles: ['Core', 'Épaules', 'Quadriceps', 'Fléchisseurs de hanche'],
     difficulty: 2,
@@ -851,7 +856,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'high-knees',
     name: 'High knees',
-    aliases: ['Montées de genoux', 'Montees de genoux moderees'],
+    aliases: ['Montées de genoux', 'Montees de genoux moderees', 'Butt kicks', 'Sprint sur place', 'Talons-fesses', 'Skipping'],
     category: 'cardio',
     muscles: ['Fléchisseurs de hanche', 'Quadriceps', 'Mollets', 'Core'],
     difficulty: 2,
@@ -893,7 +898,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'skaters',
     name: 'Skaters',
-    aliases: ['Skater', 'Patineur'],
+    aliases: ['Skater', 'Patineur', 'Speed skaters'],
     category: 'cardio',
     muscles: ['Fessiers', 'Quadriceps', 'Adducteurs', 'Mollets'],
     difficulty: 2,
@@ -942,7 +947,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'burpees',
     name: 'Burpees',
-    aliases: ['Burpee'],
+    aliases: ['Burpee', 'Sprawls', 'Sprawl', 'Push-up burpees', 'Tuck jump burpees', 'Broad jump burpees'],
     category: 'full-body',
     muscles: ['Pectoraux', 'Quadriceps', 'Fessiers', 'Épaules', 'Triceps', 'Core'],
     difficulty: 3,
@@ -1032,7 +1037,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'etirements',
     name: 'Étirements',
-    aliases: ['Stretching', 'Étirement'],
+    aliases: ['Stretching', 'Étirement', 'Torsion', 'Cobra', 'Savasana', 'Devil press'],
     category: 'mobility',
     muscles: ['Ischio-jambiers', 'Quadriceps', 'Pectoraux', 'Psoas', 'Triceps'],
     difficulty: 1,
@@ -1094,7 +1099,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'mobilite',
     name: 'Mobilité articulaire',
-    aliases: ['Mobilité', 'Mobility'],
+    aliases: ['Mobilité', 'Mobility', 'Chat-vache', "Posture de l'enfant", 'Pigeon allongé', 'Scorpion stretches', 'Squat to stand', 'Rotation thoracique'],
     category: 'mobility',
     muscles: ['Hanches', 'Colonne vertébrale', 'Épaules', 'Chevilles'],
     difficulty: 1,
@@ -1144,6 +1149,11 @@ export const EXERCISES_DATA: ExerciseData[] = [
           'Allongé sur le ventre, bras écartés en croix. Amenez le pied droit vers la main gauche en tournant le bassin, puis alternez. Mobilise la colonne thoracique en rotation et étire les fléchisseurs de hanche.',
       },
       {
+        name: "Child's pose",
+        description:
+          "À genoux, asseyez-vous sur les talons et penchez le buste vers l'avant, bras tendus devant vous, front au sol. Genoux serrés pour cibler le bas du dos, ou écartés pour ouvrir les hanches. Maintien passif de 30 à 60 secondes en respirant profondément. Posture de récupération fondamentale.",
+      },
+      {
         name: "World's greatest stretch",
         description:
           "En position de fente basse, posez la main intérieure au sol, puis effectuez une rotation du buste en levant l'autre bras vers le ciel. Combine fente, rotation thoracique et ouverture de hanche en un seul mouvement complet. Le roi des échauffements.",
@@ -1166,7 +1176,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
   {
     slug: 'echauffement',
     name: 'Échauffement dynamique',
-    aliases: ['Échauffement', 'Warm-up'],
+    aliases: ['Échauffement', 'Warm-up', 'Arm circles', 'Respiration', 'Rotations', 'Marche', 'Course sur place', 'Cercles', 'Balancement', 'A-skips', 'Carioca', 'Lateral shuffles'],
     category: 'mobility',
     muscles: ['Corps entier'],
     difficulty: 1,

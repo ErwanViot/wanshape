@@ -119,7 +119,7 @@ export const cardioExpressSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 35,
             instructions: 'Genoux au sol, bras tendus, relâcher complètement',
           },
@@ -247,7 +247,7 @@ export const cardioExpressSessions: Session[] = [
           { name: 'Jump squats', instructions: 'Squat profond, sauter le plus haut possible, amortir en silence' },
           { name: 'Mountain climbers croisés', instructions: 'Genou vers le coude opposé en planche, rythme soutenu' },
           {
-            name: 'Fentes sautées alternées',
+            name: 'Fentes sautées',
             instructions: 'Alterner les fentes en sautant, genou arrière frôle le sol',
           },
           { name: 'Plank shoulder taps', instructions: 'En planche, toucher épaule opposée sans tourner les hanches' },
@@ -349,7 +349,7 @@ export const cardioExpressSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 30,
             instructions: 'Genoux au sol, bras allongés devant, respirer profondément',
           },
@@ -486,7 +486,7 @@ export const cardioExpressSessions: Session[] = [
         work: 40,
         rest: 20,
         exercises: [
-          { name: 'Burpee tuck jumps', instructions: 'Burpee complet avec tuck jump au lieu du saut classique' },
+          { name: 'Burpees avec tuck jump', instructions: 'Burpee complet avec tuck jump au lieu du saut classique' },
           { name: 'Squats sautés groupés', instructions: 'Squat profond, sauter en ramenant les genoux à la poitrine' },
           {
             name: 'Mountain climbers sprinter',
@@ -540,7 +540,7 @@ export const cardioExpressSessions: Session[] = [
             instructions: "Courir sur place à 70 % d'intensité, monter progressivement",
           },
           {
-            name: 'Scorpion stretches',
+            name: 'Scorpion stretch',
             duration: 30,
             instructions: 'Sur le ventre, lever un pied vers la main opposée en tournant le bassin',
             bilateral: true,
@@ -560,7 +560,7 @@ export const cardioExpressSessions: Session[] = [
         work: 20,
         rest: 10,
         exercises: [
-          { name: 'Burpee tuck jumps', instructions: 'Burpee complet terminé par un saut genoux poitrine' },
+          { name: 'Burpees avec tuck jump', instructions: 'Burpee complet terminé par un saut genoux poitrine' },
           {
             name: 'Speed skaters',
             instructions: 'Sauts latéraux rapides, toucher le sol à chaque côté, rebondir vite',
@@ -661,7 +661,7 @@ export const cardioExpressSessions: Session[] = [
         restBetweenRounds: 30,
         exercises: [
           {
-            name: 'Burpee tuck jumps',
+            name: 'Burpees avec tuck jump',
             mode: 'reps' as const,
             reps: 8,
             instructions: 'Burpee complet avec saut genoux poitrine, pas de pause entre les reps',
@@ -865,7 +865,7 @@ export const cardioExpressSessions: Session[] = [
         rest: 10,
         restBetweenSets: 40,
         exercises: [
-          { name: 'Tuck jump burpees', instructions: 'Burpee terminé par un tuck jump, enchaîner immédiatement' },
+          { name: 'Burpees avec tuck jump', instructions: 'Burpee terminé par un tuck jump, enchaîner immédiatement' },
           {
             name: 'Pompes plyo larges',
             instructions: 'Pompes avec poussée explosive, mains décollent et se posent plus large',

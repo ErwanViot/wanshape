@@ -199,7 +199,7 @@ export const debutant4SemainesSessions: Session[] = [
         name: 'Échauffement',
         exercises: [
           {
-            name: 'Chat-vache',
+            name: 'Cat-cow',
             duration: 40,
             instructions: 'À quatre pattes, alterner dos rond et dos creux en respirant',
           },
@@ -237,7 +237,7 @@ export const debutant4SemainesSessions: Session[] = [
             instructions: 'Allongé sur le ventre, lever bras et jambes simultanément, tenir 2s',
           },
           {
-            name: 'Planche latérale sur genoux',
+            name: 'Gainage latéral sur genoux',
             sets: 2,
             reps: 1,
             restBetweenSets: 20,
@@ -260,7 +260,7 @@ export const debutant4SemainesSessions: Session[] = [
         name: 'Étirements',
         exercises: [
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 35,
             instructions: 'Genoux au sol, bras tendus devant, relâcher le dos',
           },
@@ -333,7 +333,7 @@ export const debutant4SemainesSessions: Session[] = [
             instructions: "Descendre la poitrine jusqu'au sol, remonter en expirant, garder les abdos serrés",
           },
           {
-            name: 'Fentes avant alternées',
+            name: 'Fentes alternées',
             sets: 2,
             reps: 10,
             restBetweenSets: 25,
@@ -488,12 +488,12 @@ export const debutant4SemainesSessions: Session[] = [
         name: 'Échauffement ciblé',
         exercises: [
           {
-            name: 'Chat-vache',
+            name: 'Cat-cow',
             duration: 35,
             instructions: "Dos rond sur l'expiration, dos creux sur l'inspiration, 8 répétitions",
           },
           {
-            name: 'Glute bridge lent',
+            name: 'Glute bridge',
             duration: 35,
             instructions: 'Monter les hanches sur 3 secondes, tenir 2 secondes en haut, redescendre sur 3 secondes',
           },
@@ -534,7 +534,7 @@ export const debutant4SemainesSessions: Session[] = [
             instructions: 'Avant-bras au sol, genoux au sol, serrer le ventre, tenir 30 secondes',
           },
           {
-            name: 'Planche latérale sur genoux',
+            name: 'Gainage latéral sur genoux',
             sets: 2,
             reps: 1,
             restBetweenSets: 20,
@@ -557,7 +557,7 @@ export const debutant4SemainesSessions: Session[] = [
         name: 'Étirements profonds',
         exercises: [
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 35,
             instructions: 'Fesses sur les talons, bras tendus devant, front au sol, relâcher complètement',
           },
@@ -630,7 +630,7 @@ export const debutant4SemainesSessions: Session[] = [
             instructions: 'Corps gainé de la tête aux pieds, descendre la poitrine au sol, coudes à 45°',
           },
           {
-            name: 'Fentes arrière alternées',
+            name: 'Fentes arrière',
             sets: 3,
             reps: 10,
             restBetweenSets: 20,
@@ -782,7 +782,7 @@ export const debutant4SemainesSessions: Session[] = [
         name: 'Réveil du core',
         exercises: [
           {
-            name: 'Chat-vache dynamique',
+            name: 'Cat-cow dynamique',
             duration: 35,
             instructions: 'Alterner dos rond et creux rapidement, bien synchroniser avec la respiration',
           },
@@ -813,7 +813,7 @@ export const debutant4SemainesSessions: Session[] = [
             instructions: 'Sur les avant-bras et pointes de pieds, corps parfaitement aligné, serrer abdos et fessiers',
           },
           {
-            name: 'Planche latérale',
+            name: 'Gainage latéral',
             sets: 3,
             reps: 1,
             restBetweenSets: 15,
@@ -831,7 +831,7 @@ export const debutant4SemainesSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: 'Crunch bicyclette',
+            name: 'Bicycle crunchs',
             sets: 3,
             reps: 12,
             restBetweenSets: 20,
@@ -853,7 +853,7 @@ export const debutant4SemainesSessions: Session[] = [
         name: 'Étirements profonds',
         exercises: [
           {
-            name: "Posture de l'enfant élargie",
+            name: "Child's pose",
             duration: 35,
             instructions:
               'Genoux écartés, bras tendus devant, front au sol, laisser le buste descendre entre les cuisses',
@@ -930,7 +930,7 @@ export const debutant4SemainesSessions: Session[] = [
           {
             exercises: [
               {
-                name: 'Fentes avant alternées',
+                name: 'Fentes alternées',
                 reps: 12,
                 instructions: 'Grand pas en avant, genou arrière frôle le sol, buste droit, alterner',
               },
@@ -949,7 +949,7 @@ export const debutant4SemainesSessions: Session[] = [
         restBetweenExercises: 25,
         exercises: [
           {
-            name: 'Pont fessier avec marche',
+            name: 'Glute bridge marché',
             sets: 3,
             reps: 10,
             restBetweenSets: 20,
@@ -985,7 +985,7 @@ export const debutant4SemainesSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 30,
             instructions: 'Fesses sur les talons, bras tendus devant, respirer profondément',
           },
@@ -1131,7 +1131,7 @@ export const debutant4SemainesSessions: Session[] = [
             instructions: 'Tenir 30 secondes en planche sur les avant-bras, repos le temps restant',
           },
           {
-            name: 'Crunch bicyclette (min paires)',
+            name: 'Bicycle crunchs (min paires)',
             reps: 15,
             instructions: 'Coude vers genou opposé en pédalant, rythme contrôlé, repos le temps restant',
           },
@@ -1161,13 +1161,13 @@ export const debutant4SemainesSessions: Session[] = [
           {
             exercises: [
               {
-                name: 'Planche latérale avec rotation',
+                name: 'Gainage latéral avec rotation',
                 reps: 8,
                 instructions:
                   'Sur le coude, pieds empilés, tourner le buste vers le sol puis ouvrir bras au ciel, alterner',
               },
               {
-                name: 'Pont fessier unilatéral',
+                name: 'Hip thrust unilatéral',
                 reps: 10,
                 instructions: "Un pied au sol, l'autre jambe tendue en l'air, monter les hanches en serrant le fessier",
               },
@@ -1189,7 +1189,7 @@ export const debutant4SemainesSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: 'Hollow body hold',
+            name: 'Hollow hold',
             sets: 2,
             reps: 1,
             restBetweenSets: 15,
@@ -1204,7 +1204,7 @@ export const debutant4SemainesSessions: Session[] = [
         name: 'Détente finale',
         exercises: [
           {
-            name: "Posture de l'enfant élargie",
+            name: "Child's pose",
             duration: 40,
             instructions: 'Genoux écartés, bras tendus devant, relâcher complètement le dos et les épaules',
           },

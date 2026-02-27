@@ -1,20 +1,18 @@
-import { useState } from 'react';
 import { Link } from 'react-router';
-import { BLOCK_COLORS } from '../engine/constants.ts';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
-import { useHistory } from '../hooks/useHistory.ts';
+import { useActiveProgram } from '../hooks/useProgram.ts';
 import { useSession } from '../hooks/useSession.ts';
 import { supabase } from '../lib/supabase.ts';
-import type { Block, Session } from '../types/session.ts';
+import type { Session } from '../types/session.ts';
 import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
 import { computeDifficulty } from '../utils/sessionDifficulty.ts';
 import { getSessionImage } from '../utils/sessionImage.ts';
-import { computeTimeline, formatBlockDuration } from '../utils/sessionTimeline.ts';
-import { getExerciseLink } from '../utils/exerciseLinks.ts';
+import { getProgramImage } from '../utils/programImage.ts';
 import { Footer } from './Footer.tsx';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
+import { SessionAccordion } from './SessionAccordion.tsx';
 
 function formatShortDate(dateKey: string): string {
   const d = parseDDMMYYYY(dateKey);
@@ -45,7 +43,7 @@ export function Home() {
     <>
       {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
 
-      <div className="px-6 md:px-10 lg:px-14 pb-8 max-w-2xl mx-auto">
+      <div className="px-6 md:px-10 lg:px-14 pb-8 max-w-3xl mx-auto">
         {user ? (
           <ConnectedContent
             session={session}
@@ -56,7 +54,6 @@ export function Home() {
             todayKey={todayKey}
             tomorrowKey={tomorrowKey}
             onStart={handleStartSession}
-            userId={user.id}
           />
         ) : (
           <VisitorContent
@@ -90,7 +87,6 @@ function ConnectedContent({
   todayKey,
   tomorrowKey,
   onStart,
-  userId,
 }: {
   session: Session | null;
   loading: boolean;
@@ -100,27 +96,120 @@ function ConnectedContent({
   todayKey: string;
   tomorrowKey: string;
   onStart: () => void;
-  userId: string;
 }) {
-  const { streak, totalSessions, totalDuration, loading: historyLoading } = useHistory(userId);
-  const totalMinutes = Math.round(totalDuration / 60);
+  const { user } = useAuth();
+  const { activeProgram } = useActiveProgram(user?.id);
+
+  const progressPct =
+    activeProgram && activeProgram.totalSessions > 0
+      ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
+      : 0;
 
   return (
-    <div className="space-y-5 pt-4 md:pt-0">
-      {/* Mobile brand */}
-      <MobileBrand />
-
+    <div className="space-y-5 pt-6 md:pt-4">
       <h1 className="sr-only">WAN SHAPE — Votre séance de sport quotidienne</h1>
 
-      {/* Inline streak */}
-      {!historyLoading && totalSessions > 0 && (
-        <p className="text-sm text-muted">
-          <span role="img" aria-label="Flamme">
-            🔥
-          </span>{' '}
-          {streak} jour{streak > 1 ? 's' : ''} · {totalSessions} séance{totalSessions > 1 ? 's' : ''} ·{' '}
-          {totalMinutes} min
-        </p>
+      {/* Programme — active or discovery */}
+      {activeProgram ? (
+        <div className="rounded-2xl overflow-hidden border border-card-border">
+          {/* Image hero with title + progress */}
+          <Link
+            to={`/programme/${activeProgram.slug}`}
+            className="relative block min-h-[220px] flex flex-col cursor-pointer group"
+          >
+            <img
+              src={getProgramImage(activeProgram.slug)}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/50 to-black/30" />
+
+            <div className="relative z-10 flex flex-col justify-between flex-1 p-6 min-h-[220px]">
+              <div>
+                <div className="session-label px-3 py-1 rounded-lg inline-block mb-3">
+                  <span className="text-xs font-bold tracking-widest uppercase text-white">Continuer mon programme</span>
+                </div>
+
+                <h2 className="text-2xl md:text-3xl font-black leading-none tracking-tight text-white group-hover:text-white/90 transition-colors mb-4">
+                  {activeProgram.title.toUpperCase()}
+                </h2>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between text-xs text-white/50 mb-1.5">
+                  <span>
+                    {activeProgram.completedCount}/{activeProgram.totalSessions} séances
+                  </span>
+                  <span>{progressPct}%</span>
+                </div>
+                <div className="h-1.5 rounded-full bg-white/15 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-white transition-all"
+                    style={{ width: `${progressPct}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          {/* Next session CTA */}
+          {activeProgram.nextSessionTitle && activeProgram.nextSessionOrder !== null && (
+            <Link
+              to={`/programme/${activeProgram.slug}`}
+              className="flex items-center gap-3 px-5 py-3.5 bg-surface-card border border-card-border border-t-0 rounded-b-2xl cursor-pointer group/next"
+            >
+              <div className="w-9 h-9 rounded-full bg-brand/15 flex items-center justify-center shrink-0">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-muted">Prochaine séance</p>
+                <p className="text-sm font-semibold text-heading group-hover/next:text-brand transition-colors truncate">
+                  {activeProgram.nextSessionTitle}
+                </p>
+              </div>
+              <svg
+                aria-hidden="true"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                className="text-muted shrink-0"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </Link>
+          )}
+        </div>
+      ) : (
+        <Link
+          to="/programmes"
+          className="flex items-center gap-3 glass-card rounded-xl px-4 py-3 group transition-colors hover:border-brand/30 cursor-pointer"
+        >
+          <span className="text-lg shrink-0" role="img" aria-label="Programme">
+            📋
+          </span>
+          <span className="text-sm text-subtle group-hover:text-heading transition-colors">
+            Envie de structure ? Voir nos programmes
+          </span>
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="text-muted ml-auto shrink-0"
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </Link>
       )}
 
       {/* Today */}
@@ -144,32 +233,6 @@ function ConnectedContent({
           variant="tomorrow"
         />
       )}
-
-      {/* Programme suggestion */}
-      <Link
-        to="/programmes"
-        className="flex items-center gap-3 glass-card rounded-xl px-4 py-3 group transition-colors hover:border-brand/30"
-      >
-        <span className="text-lg shrink-0" role="img" aria-label="Programme">
-          📋
-        </span>
-        <span className="text-sm text-subtle group-hover:text-heading transition-colors">
-          Envie de structure ? Voir nos programmes
-        </span>
-        <svg
-          aria-hidden="true"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          className="text-muted ml-auto shrink-0"
-        >
-          <path d="M9 18l6-6-6-6" />
-        </svg>
-      </Link>
     </div>
   );
 }
@@ -198,49 +261,30 @@ function VisitorContent({
   onStart: () => void;
 }) {
   return (
-    <div className="space-y-8 pt-4 md:pt-0">
-      {/* Hero */}
-      <section className="text-center space-y-6">
-        {/* Mobile brand */}
-        <MobileBrand className="justify-center" />
-
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-heading leading-tight">
-          Chaque jour, une séance différente.
+    <div className="space-y-10 pt-6 md:pt-0">
+      {/* Hero — typography-first, Behance-inspired */}
+      <section className="text-center space-y-8 py-6 md:py-14">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-heading leading-[1.1]">
+          Votre séance de sport
           <br />
-          <span className="text-muted font-bold">Sans matériel. Sans excuses.</span>
+          <span className="gradient-text">guidée au quotidien</span>
         </h1>
 
-        <ul className="space-y-2.5 text-left max-w-sm mx-auto">
-          <li className="flex items-center gap-3 text-sm text-body">
-            <span className="text-brand font-bold" aria-hidden="true">
-              ✓
-            </span>
-            8 formats variés — HIIT, Tabata, Circuit…
-          </li>
-          <li className="flex items-center gap-3 text-sm text-body">
-            <span className="text-brand font-bold" aria-hidden="true">
-              ✓
-            </span>
-            25-40 min, chrono guidé du début à la fin
-          </li>
-          <li className="flex items-center gap-3 text-sm text-body">
-            <span className="text-brand font-bold" aria-hidden="true">
-              ✓
-            </span>
-            100 % gratuit, zéro matériel
-          </li>
-        </ul>
+        <p className="text-base md:text-lg text-muted max-w-md mx-auto leading-relaxed">
+          8 formats d'entraînement variés, 25 à 40 minutes, sans matériel.
+          Chaque jour une séance différente, 100&nbsp;% gratuit.
+        </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           {supabase && (
-            <Link to="/signup" className="cta-gradient px-6 py-3 rounded-xl text-sm font-bold text-white">
+            <Link to="/signup" className="cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white">
               Créer un compte gratuit
             </Link>
           )}
           <button
             type="button"
             onClick={onStart}
-            className="px-6 py-3 rounded-xl text-sm font-bold text-brand border border-brand/30 hover:bg-brand/5 transition-colors"
+            className="px-8 py-3.5 rounded-full text-sm font-bold text-brand border border-brand/30 hover:bg-brand/5 transition-colors cursor-pointer"
           >
             Essayer la séance du jour
           </button>
@@ -266,27 +310,6 @@ function VisitorContent({
 }
 
 /* ────────────────────────────────────────────
-   Mobile brand (md:hidden)
-   ──────────────────────────────────────────── */
-
-function MobileBrand({ className = '' }: { className?: string }) {
-  return (
-    <div className={`flex items-center gap-2 md:hidden ${className}`}>
-      <img
-        src="/logo-wansoft.png"
-        alt=""
-        className="w-7 h-7 shrink-0"
-        style={{
-          filter:
-            'brightness(0) saturate(100%) invert(26%) sepia(89%) saturate(4438%) hue-rotate(233deg) brightness(91%) contrast(96%)',
-        }}
-      />
-      <span className="text-lg font-extrabold tracking-tight gradient-text">Wan Shape</span>
-    </div>
-  );
-}
-
-/* ────────────────────────────────────────────
    Session card with accordion
    ──────────────────────────────────────────── */
 
@@ -307,8 +330,6 @@ function SessionCard({
   variant?: 'today' | 'tomorrow';
   onStart?: () => void;
 }) {
-  const [showDetail, setShowDetail] = useState(false);
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[260px] rounded-2xl glass-card">
@@ -405,192 +426,9 @@ function SessionCard({
         </div>
       </div>
 
-      {/* Accordion toggle */}
-      <button
-        type="button"
-        onClick={() => setShowDetail((v) => !v)}
-        className="w-full px-5 py-3 flex items-center justify-between bg-surface-card border-t border-divider text-sm"
-      >
-        <span className="text-muted font-medium">Contenu de la séance</span>
-        <svg
-          aria-hidden="true"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={`text-muted transition-transform ${showDetail ? 'rotate-180' : ''}`}
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </button>
-
-      {/* Accordion content */}
-      {showDetail && <SessionDetail session={session} />}
+      {/* Accordion */}
+      <SessionAccordion session={session} />
     </div>
   );
 }
 
-/* ────────────────────────────────────────────
-   Session detail (accordion content)
-   ──────────────────────────────────────────── */
-
-function SessionDetail({ session }: { session: Session }) {
-  const timeline = computeTimeline(session.blocks);
-  const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0);
-
-  return (
-    <div className="bg-surface-card px-5 pb-5 space-y-3">
-      {session.blocks.map((block, i) => {
-        const seg = timeline[i];
-        const color = BLOCK_COLORS[seg.type];
-        const exercises = getBlockExercises(block);
-        return (
-          <div key={i}>
-            <div className="flex items-center gap-2 mb-1.5">
-              <div className="w-1.5 h-5 rounded-full shrink-0" style={{ backgroundColor: color }} />
-              <span className="text-xs font-bold uppercase tracking-wider" style={{ color }}>
-                {seg.label} · {i + 1}/{session.blocks.length}
-              </span>
-              <span className="text-xs text-muted ml-auto">{getBlockMeta(block)}</span>
-            </div>
-            <div className="pl-4 space-y-0.5">
-              {exercises.map((ex, j) => (
-                <div key={j} className="flex items-baseline gap-2 text-xs">
-                  <ExerciseName name={ex.name} />
-                  <span className="text-faint">{ex.detail}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      })}
-
-      {/* Mini timeline */}
-      <div className="flex gap-1 pt-2">
-        {timeline.map((t, i) => (
-          <div
-            key={i}
-            className="h-1.5 rounded-full"
-            style={{
-              width: `${(t.duration / (totalDuration || 1)) * 100}%`,
-              backgroundColor: BLOCK_COLORS[t.type],
-              opacity: t.isAccent ? 1 : 0.4,
-            }}
-          />
-        ))}
-      </div>
-      <p className="text-xs text-muted">
-        {session.blocks.length} blocs · ~{formatBlockDuration(totalDuration)} estimées
-      </p>
-    </div>
-  );
-}
-
-function ExerciseName({ name }: { name: string }) {
-  const link = getExerciseLink(name);
-  if (!link) {
-    return <span className="text-body">{name}</span>;
-  }
-  const to = `/exercices/${link.slug}${link.anchor ? `#${link.anchor}` : ''}`;
-  return (
-    <Link
-      to={to}
-      className="text-link hover:text-link-hover transition-colors underline underline-offset-2 decoration-link/30"
-    >
-      {name}
-    </Link>
-  );
-}
-
-/* ────────────────────────────────────────────
-   Block exercise helpers (adapted from SessionRecap)
-   ──────────────────────────────────────────── */
-
-interface ExerciseInfo {
-  name: string;
-  detail: string;
-}
-
-function getBlockExercises(block: Block): ExerciseInfo[] {
-  switch (block.type) {
-    case 'warmup':
-    case 'cooldown':
-      return block.exercises.map((ex) => ({
-        name: ex.name,
-        detail: ex.bilateral ? `${ex.duration}s × 2 côtés` : `${ex.duration}s`,
-      }));
-    case 'classic':
-      return block.exercises.map((ex) => ({
-        name: ex.name,
-        detail: `${ex.sets} × ${ex.reps === 'max' ? 'max' : ex.reps} reps`,
-      }));
-    case 'circuit':
-      return block.exercises.map((ex) => ({
-        name: ex.name,
-        detail: ex.mode === 'timed' ? `${ex.duration}s` : `${ex.reps} reps`,
-      }));
-    case 'hiit':
-      return block.exercises.map((ex) => ({
-        name: ex.name,
-        detail: `${block.work}s effort`,
-      }));
-    case 'tabata':
-      return block.exercises.map((ex) => ({
-        name: ex.name,
-        detail: `${block.work ?? 20}s / ${block.rest ?? 10}s`,
-      }));
-    case 'emom':
-      return block.exercises.map((ex) => ({
-        name: ex.name,
-        detail: `× ${ex.reps}`,
-      }));
-    case 'amrap':
-      return block.exercises.map((ex) => ({
-        name: ex.name,
-        detail: `× ${ex.reps}`,
-      }));
-    case 'superset':
-      return block.pairs.flatMap((pair, pi) =>
-        pair.exercises.map((ex) => ({
-          name: ex.name,
-          detail: `× ${ex.reps} · paire ${pi + 1}`,
-        })),
-      );
-    case 'pyramid':
-      return block.exercises.map((ex) => ({
-        name: ex.name,
-        detail: `${block.pattern.join(' - ')} reps`,
-      }));
-  }
-}
-
-function getBlockMeta(block: Block): string {
-  switch (block.type) {
-    case 'warmup':
-    case 'cooldown':
-      return `${block.exercises.length} exercices`;
-    case 'classic':
-      return `${block.exercises.length} exercices`;
-    case 'circuit':
-      return `${block.rounds} rounds × ${block.exercises.length} exos`;
-    case 'hiit':
-      return `${block.rounds} rounds · ${block.work}s/${block.rest}s`;
-    case 'tabata': {
-      const sets = block.sets ?? 1;
-      const rounds = block.rounds ?? 8;
-      return sets > 1 ? `${sets} sets × ${rounds} rounds` : `${rounds} rounds`;
-    }
-    case 'emom':
-      return `${block.minutes} minutes`;
-    case 'amrap':
-      return `${Math.floor(block.duration / 60)} minutes`;
-    case 'superset':
-      return `${block.sets} séries · ${block.pairs.length} paires`;
-    case 'pyramid':
-      return `${block.pattern.length} paliers`;
-  }
-}

@@ -93,13 +93,9 @@ export function Discover() {
                 >
                   <div className="relative h-24">
                     <img src={ex.image} alt="" className="w-full h-full object-cover" loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
-                    <div className="absolute bottom-2 left-3 right-3">
-                      <p className="text-xs font-semibold text-white truncate drop-shadow-sm">{ex.name}</p>
-                    </div>
                   </div>
                   <div className="px-3 py-2 flex items-center justify-between">
-                    <span className="text-xs text-muted truncate">{ex.muscles[0]}</span>
+                    <span className="text-xs font-semibold text-heading truncate">{ex.name}</span>
                     <span
                       className={`text-xs font-bold px-1.5 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
                     >

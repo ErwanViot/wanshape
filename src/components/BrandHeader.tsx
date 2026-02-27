@@ -23,14 +23,14 @@ export function BrandHeader() {
   const { pathname } = useLocation();
 
   return (
-    <header className="hidden md:block px-10 lg:px-14 py-4 border-b border-divider">
+    <header className="px-6 md:px-10 lg:px-14 py-4 border-b border-divider">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5">
           <img
             src="/logo-wansoft.png"
             alt=""
-            className="w-8 h-8 shrink-0"
+            className="w-7 h-7 md:w-8 md:h-8 shrink-0"
             style={{
               filter:
                 'brightness(0) saturate(100%) invert(26%) sepia(89%) saturate(4438%) hue-rotate(233deg) brightness(91%) contrast(96%)',
@@ -39,8 +39,8 @@ export function BrandHeader() {
           <span className="text-lg font-extrabold tracking-tight gradient-text">Wan Shape</span>
         </Link>
 
-        {/* Nav */}
-        <nav className="flex items-center gap-1" aria-label="Navigation principale">
+        {/* Nav — desktop only, BottomNav handles mobile */}
+        <nav className="hidden md:flex items-center gap-1" aria-label="Navigation principale">
           {NAV_ITEMS.map((item) => {
             const active = item.match(pathname);
             return (
@@ -64,7 +64,7 @@ export function BrandHeader() {
           <button
             type="button"
             onClick={cycleTheme}
-            className="p-2 rounded-xl border border-divider hover:border-divider-strong transition-colors"
+            className="hidden md:flex p-2 rounded-xl border border-divider hover:border-divider-strong transition-colors"
             aria-label={THEME_LABELS[preference]}
             title={THEME_LABELS[preference]}
           >
