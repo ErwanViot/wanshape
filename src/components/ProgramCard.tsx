@@ -17,7 +17,7 @@ export function ProgramCard({ program, compact }: { program: Program; compact?: 
   return (
     <Link
       to={`/programme/${program.slug}`}
-      className="glass-card rounded-[20px] p-6 flex flex-col gap-4 transition-transform hover:scale-[1.01]"
+      className="glass-card rounded-2xl p-6 flex flex-col gap-4 transition-transform hover:scale-[1.01]"
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-bold text-heading">{program.title}</h3>

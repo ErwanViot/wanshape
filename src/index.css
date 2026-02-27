@@ -18,6 +18,10 @@
   --color-surface: #1a1a22;
   --color-surface-light: #22222d;
   --color-surface-card: #262635;
+  --color-surface-0: #141419;
+  --color-surface-1: #1a1a22;
+  --color-surface-2: #22222d;
+  --color-surface-3: #2a2a3a;
 
   /* Semantic text hierarchy */
   --color-heading: #ffffff;
@@ -42,13 +46,19 @@
   --color-surface: #f5f5f7;
   --color-surface-light: #ebedf0;
   --color-surface-card: #ffffff;
+  --color-surface-0: #ffffff;
+  --color-surface-1: #f5f5f7;
+  --color-surface-2: #ebedf0;
+  --color-surface-3: #e2e4e8;
 
   --color-heading: #1a1a2e;
   --color-strong: rgba(26, 26, 46, 0.85);
   --color-body: rgba(26, 26, 46, 0.75);
   --color-subtle: rgba(26, 26, 46, 0.68);
-  --color-muted: rgba(26, 26, 46, 0.58);
-  --color-faint: rgba(26, 26, 46, 0.50);
+  --color-muted: rgba(26, 26, 46, 0.65);
+  --color-faint: rgba(26, 26, 46, 0.55);
+  --color-link: #4338CA;
+  --color-link-hover: #3730A3;
 
   --color-divider: rgba(26, 26, 46, 0.08);
   --color-divider-strong: rgba(26, 26, 46, 0.15);

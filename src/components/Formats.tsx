@@ -86,7 +86,7 @@ export function Formats() {
               <Link
                 key={format.type}
                 to={`/formats/${format.slug}`}
-                className="format-card rounded-[20px] overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+                className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
               >
                 {/* Image — text stays white (over image) */}
                 <div className="relative h-28 overflow-hidden">

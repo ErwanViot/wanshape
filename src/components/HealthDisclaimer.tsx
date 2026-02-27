@@ -15,10 +15,9 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
     if (!dialog) return;
 
     // Focus the first focusable element
-    const focusable = dialog.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-    );
-    if (focusable.length > 0) focusable[0].focus();
+    const selector = 'button:not(:disabled), [href], input:not(:disabled), select, textarea, [tabindex]:not([tabindex="-1"])';
+    const initialFocusable = dialog.querySelectorAll<HTMLElement>(selector);
+    if (initialFocusable.length > 0) initialFocusable[0].focus();
 
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape' && onCancel) {
@@ -26,6 +25,10 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
         return;
       }
       if (e.key !== 'Tab') return;
+
+      // Re-query on each keydown to account for disabled state changes
+      const focusable = dialog!.querySelectorAll<HTMLElement>(selector);
+      if (focusable.length === 0) return;
 
       const first = focusable[0];
       const last = focusable[focusable.length - 1];

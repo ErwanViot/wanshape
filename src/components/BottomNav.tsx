@@ -1,11 +1,11 @@
 import { Link, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { supabase } from '../lib/supabase.ts';
 import { getInitials } from '../utils/getInitials.ts';
 
 function HomeIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="20"
       height="20"
       viewBox="0 0 24 24"
@@ -24,6 +24,7 @@ function HomeIcon() {
 function DiscoverIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="20"
       height="20"
       viewBox="0 0 24 24"
@@ -42,6 +43,7 @@ function DiscoverIcon() {
 function ProgramsIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="20"
       height="20"
       viewBox="0 0 24 24"
@@ -62,6 +64,7 @@ function ProgramsIcon() {
 function UserIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="20"
       height="20"
       viewBox="0 0 24 24"
@@ -97,7 +100,7 @@ function NavItem({
       aria-current={active ? 'page' : undefined}
     >
       {children}
-      <span className="text-[10px] font-medium leading-tight">{label}</span>
+      <span className="text-xs font-medium leading-tight">{label}</span>
     </Link>
   );
 }
@@ -105,8 +108,6 @@ function NavItem({
 export function BottomNav() {
   const { pathname } = useLocation();
   const { user, profile, loading } = useAuth();
-
-  if (!supabase) return null;
 
   const isHome = pathname === '/';
   const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
@@ -118,7 +119,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-divider"
+      className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-divider md:hidden"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       aria-label="Navigation principale"
     >
@@ -134,7 +135,7 @@ export function BottomNav() {
         </NavItem>
         <NavItem to={profileTo} label={profileLabel} active={isProfile}>
           {!loading && user ? (
-            <div className="w-5 h-5 rounded-full flex items-center justify-center text-[8px] text-white font-bold bg-brand">
+            <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand">
               {getInitials(profile?.display_name ?? user.user_metadata?.display_name, user.email)}
             </div>
           ) : (

@@ -9,5 +9,9 @@ export function PlayerLayout() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return <Outlet />;
+  return (
+    <main>
+      <Outlet />
+    </main>
+  );
 }

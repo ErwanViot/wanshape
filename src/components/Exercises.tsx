@@ -63,7 +63,7 @@ export function Exercises() {
                 <Link
                   key={ex.slug}
                   to={`/exercices/${ex.slug}`}
-                  className="format-card rounded-[20px] overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+                  className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
                 >
                   {/* Image */}
                   <div className="relative h-28 overflow-hidden">

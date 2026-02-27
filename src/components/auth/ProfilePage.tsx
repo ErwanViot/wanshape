@@ -57,6 +57,27 @@ export function ProfilePage() {
           </div>
         </div>
 
+        {/* Quick action CTA */}
+        {!historyLoading && totalSessions > 0 && (
+          <Link
+            to="/"
+            className="flex items-center gap-3 rounded-xl bg-brand/10 border border-brand/20 p-4 group transition-colors hover:bg-brand/15"
+          >
+            <div className="w-10 h-10 rounded-full bg-brand/20 flex items-center justify-center shrink-0">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-heading group-hover:text-brand transition-colors">Séance du jour</p>
+              <p className="text-xs text-muted">Continuez sur votre lancée</p>
+            </div>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-muted shrink-0">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </Link>
+        )}
+
         {/* Stats section — inline, no card wrapper */}
         {!historyLoading && totalSessions > 0 && (
           <div className="space-y-4">
@@ -88,6 +109,7 @@ export function ProfilePage() {
                   >
                     {done && (
                       <svg
+                        aria-hidden="true"
                         width="14"
                         height="14"
                         viewBox="0 0 24 24"
@@ -101,7 +123,7 @@ export function ProfilePage() {
                       </svg>
                     )}
                   </div>
-                  <span className="text-[10px] text-muted">{DAY_LABELS[i]}</span>
+                  <span className="text-xs text-muted">{DAY_LABELS[i]}</span>
                 </div>
               ))}
             </fieldset>
@@ -186,7 +208,7 @@ export function ProfilePage() {
         <button
           type="button"
           onClick={signOut}
-          className="w-full py-3 rounded-xl text-red-400 font-semibold border border-red-400/30 hover:bg-red-400/10 transition-colors"
+          className="w-full py-3 rounded-xl text-red-400 font-semibold border border-red-400/30 hover:bg-red-400/10 transition-colors cursor-pointer"
         >
           Se déconnecter
         </button>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
 import { BottomNav } from './BottomNav.tsx';
+import { BrandHeader } from './BrandHeader.tsx';
 
 export function PublicLayout() {
   const { pathname } = useLocation();
@@ -15,8 +16,11 @@ export function PublicLayout() {
       <a href="#main-content" className="skip-to-content">
         Aller au contenu principal
       </a>
-      <main id="main-content" className="flex-1 pb-16">
-        <Outlet />
+      <BrandHeader />
+      <main id="main-content" className="flex-1 pb-16 md:pb-0" key={pathname}>
+        <div className="animate-fade-in">
+          <Outlet />
+        </div>
       </main>
       <BottomNav />
     </div>

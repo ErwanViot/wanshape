@@ -91,7 +91,7 @@ export function ProgramPage() {
         </div>
       </header>
 
-      <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
+      <div id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-8">
         {/* Program info */}
         <div className="space-y-3">
           {program.description && <p className="text-sm text-subtle leading-relaxed">{program.description}</p>}

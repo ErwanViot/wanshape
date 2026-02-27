@@ -14,7 +14,7 @@ export function StreakWidget() {
   if (totalSessions === 0) {
     return (
       <div className="px-6 md:px-10 lg:px-14 mb-6">
-        <div className="glass-card rounded-[20px] p-5 md:p-6">
+        <div className="glass-card rounded-2xl p-5 md:p-6">
           <p className="text-sm text-subtle text-center">
             Votre première séance vous attend — commencez aujourd'hui et suivez vos progrès ici.
           </p>
@@ -25,7 +25,7 @@ export function StreakWidget() {
 
   return (
     <div className="px-6 md:px-10 lg:px-14 mb-6">
-      <div className="glass-card rounded-[20px] p-5 md:p-6">
+      <div className="glass-card rounded-2xl p-5 md:p-6">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           {/* Streak */}
           <div className="flex items-center gap-3">
@@ -71,12 +71,13 @@ export function StreakWidget() {
                       strokeWidth="3"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      aria-hidden="true"
                     >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   )}
                 </div>
-                <span className="text-[10px] text-muted">{DAY_LABELS[i]}</span>
+                <span className="text-xs text-muted">{DAY_LABELS[i]}</span>
               </div>
             ))}
           </fieldset>

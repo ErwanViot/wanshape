@@ -13,7 +13,7 @@ export function SessionRecap({ session }: Props) {
   const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0);
 
   return (
-    <div className="glass-card rounded-[20px] p-6 md:p-8 h-full flex flex-col overflow-y-auto">
+    <div className="glass-card rounded-2xl p-6 md:p-8 h-full flex flex-col overflow-y-auto">
       <h3 className="text-sm font-bold uppercase tracking-wider text-subtle mb-5">Contenu de la séance</h3>
 
       {/* Blocks with full exercise list */}

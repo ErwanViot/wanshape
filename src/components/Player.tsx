@@ -73,7 +73,7 @@ function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep
   const progress = getBlockProgress(step);
 
   return (
-    <div className="flex items-center justify-center gap-1.5 flex-wrap text-[11px] tracking-wide">
+    <div className="flex items-center justify-center gap-1.5 flex-wrap text-xs tracking-wide">
       {session.blocks.map((block, i) => {
         const isActive = i === step.blockIndex;
         const isPast = i < step.blockIndex;
