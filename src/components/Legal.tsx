@@ -175,34 +175,80 @@ function PolitiqueConfidentialite() {
 
       <Section title="Données collectées">
         <p>
-          <strong className="text-strong">WAN SHAPE ne collecte aucune donnée personnelle.</strong>
+          Le Site peut être utilisé librement sans création de compte. Si vous choisissez de créer un compte, les
+          données suivantes sont collectées :
         </p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>
+            <strong className="text-strong">Adresse email</strong> — pour l'authentification et la récupération de
+            compte
+          </li>
+          <li>
+            <strong className="text-strong">Prénom ou pseudo</strong> — pour personnaliser l'affichage
+          </li>
+          <li>
+            <strong className="text-strong">Historique des séances complétées</strong> — pour le suivi de progression
+            (dates, durées)
+          </li>
+        </ul>
         <p>
-          Le Site ne requiert ni inscription, ni création de compte. Aucune information personnelle (nom, email,
-          adresse, etc.) n'est demandée ni stockée.
+          Nous ne collectons aucune donnée de santé, de localisation, ni de données relatives à votre condition
+          physique. Vos données ne sont jamais revendues à des tiers.
         </p>
+      </Section>
+
+      <Section title="Finalités du traitement">
+        <p>Vos données sont utilisées exclusivement pour :</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Gérer votre compte et votre authentification</li>
+          <li>Sauvegarder votre progression et votre historique de séances</li>
+          <li>Vous envoyer des emails transactionnels (confirmation de compte, réinitialisation de mot de passe)</li>
+        </ul>
+        <p>Nous n'envoyons aucun email marketing ni newsletter.</p>
       </Section>
 
       <Section title="Stockage local">
         <p>
-          Le Site utilise le stockage local de votre navigateur (localStorage) uniquement pour mémoriser vos préférences
-          d'utilisation (ex : activation/désactivation du son). Ces données restent sur votre appareil et ne sont jamais
-          transmises à nos serveurs ni à des tiers.
+          Le Site utilise le stockage local de votre navigateur (localStorage) pour mémoriser vos préférences
+          d'utilisation (thème clair/sombre, préférences de son). Ces données restent sur votre appareil et ne sont
+          jamais transmises à nos serveurs.
         </p>
       </Section>
 
       <Section title="Cookies">
         <p>
-          <strong className="text-strong">WAN SHAPE n'utilise aucun cookie</strong> de suivi, d'analyse ou publicitaire.
+          Le Site utilise des <strong className="text-strong">cookies techniques</strong> strictement nécessaires au
+          fonctionnement de l'authentification.
         </p>
-        <p>Aucun cookie tiers n'est déposé sur votre appareil lors de votre visite.</p>
+        <p>
+          Le Site peut également utiliser des <strong className="text-strong">cookies publicitaires</strong> déposés par
+          des régies tierces pour financer le service. Vous pouvez gérer vos préférences de cookies à tout moment via le
+          bandeau de consentement.
+        </p>
       </Section>
 
       <Section title="Services tiers">
+        <p>Le Site fait appel aux services tiers suivants :</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>
+            <strong className="text-strong">Vercel</strong> — hébergement du site (logs serveur standard : adresse IP,
+            navigateur, pages visitées)
+          </li>
+          <li>
+            <strong className="text-strong">Supabase</strong> — authentification et base de données (stockage de votre
+            compte et de votre historique)
+          </li>
+        </ul>
         <p>
-          Le Site est hébergé par Vercel Inc. Les logs serveur standard (adresse IP, type de navigateur, pages visitées)
-          peuvent être collectés par l'hébergeur dans le cadre de son fonctionnement normal. Ces données sont soumises à
-          la politique de confidentialité de Vercel.
+          Ces prestataires sont soumis à leurs propres politiques de confidentialité et offrent des garanties conformes
+          au RGPD.
+        </p>
+      </Section>
+
+      <Section title="Durée de conservation">
+        <p>
+          Vos données sont conservées tant que votre compte est actif. En cas de suppression de compte, vos données
+          personnelles sont effacées dans un délai de 30 jours.
         </p>
       </Section>
 
@@ -214,24 +260,24 @@ function PolitiqueConfidentialite() {
         <ul className="list-disc list-inside space-y-1">
           <li>Droit d'accès à vos données</li>
           <li>Droit de rectification</li>
-          <li>Droit à l'effacement</li>
+          <li>Droit à l'effacement (suppression de compte)</li>
           <li>Droit à la portabilité</li>
           <li>Droit d'opposition</li>
         </ul>
         <p>
-          Étant donné qu'aucune donnée personnelle n'est collectée, ces droits s'exercent de fait. Pour toute question,
-          contactez-nous à{' '}
+          Pour exercer ces droits, contactez-nous à{' '}
           <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
             erwan.viot@wan-soft.fr
           </a>
-          .
+          . Nous nous engageons à répondre dans un délai de 30 jours.
         </p>
       </Section>
 
       <Section title="Évolution de cette politique">
         <p>
-          Cette politique de confidentialité peut être mise à jour à tout moment. En cas de modification significative
-          (par exemple, ajout de publicités nécessitant des cookies), un bandeau d'information sera affiché sur le Site.
+          Cette politique de confidentialité peut être mise à jour à tout moment. En cas de modification significative,
+          un bandeau d'information sera affiché sur le Site. La date de dernière mise à jour est indiquée en haut de
+          cette page.
         </p>
       </Section>
     </>
@@ -255,8 +301,12 @@ function CGU() {
 
       <Section title="Description du service">
         <p>
-          WAN SHAPE est un service gratuit proposant des séances d'exercices physiques quotidiennes, accessibles sans
-          inscription ni équipement. Le Site met à disposition un programme d'entraînement guidé avec minuteur intégré.
+          WAN SHAPE est un service gratuit proposant des séances d'exercices physiques quotidiennes. Le Site met à
+          disposition des suggestions d'exercices guidées avec minuteur intégré, sans équipement nécessaire.
+        </p>
+        <p>
+          La création d'un compte est optionnelle. Elle permet de sauvegarder son historique de séances et de suivre sa
+          progression.
         </p>
       </Section>
 
@@ -290,8 +340,22 @@ function CGU() {
       <Section title="Accès au service">
         <p>
           Le service est accessible gratuitement à toute personne disposant d'un accès à Internet et d'un navigateur web
-          compatible. WAN SOFT se réserve le droit de suspendre ou d'interrompre le service à tout moment, sans préavis
-          ni indemnité.
+          compatible. L'accès aux séances ne nécessite pas de compte. WAN SOFT se réserve le droit de suspendre ou
+          d'interrompre le service à tout moment, sans préavis ni indemnité.
+        </p>
+      </Section>
+
+      <Section title="Compte utilisateur">
+        <p>
+          La création d'un compte est facultative et gratuite. Elle nécessite une adresse email valide et un mot de
+          passe. L'utilisateur est responsable de la confidentialité de ses identifiants.
+        </p>
+        <p>
+          L'utilisateur peut demander la suppression de son compte à tout moment en contactant{' '}
+          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
+            erwan.viot@wan-soft.fr
+          </a>
+          . La suppression entraîne l'effacement de l'ensemble des données associées dans un délai de 30 jours.
         </p>
       </Section>
 

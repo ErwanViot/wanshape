@@ -6,7 +6,7 @@ import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 export function LoginPage() {
   const { user, loading, signIn } = useAuth();
   const [email, setEmail] = useState('');
-  const [sent, setSent] = useState(false);
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -21,13 +21,9 @@ export function LoginPage() {
     e.preventDefault();
     setError(null);
     setSubmitting(true);
-    const { error: err } = await signIn(email.trim());
+    const { error: err } = await signIn(email.trim(), password);
     setSubmitting(false);
-    if (err) {
-      setError(err);
-    } else {
-      setSent(true);
-    }
+    if (err) setError(err);
   };
 
   return (
@@ -56,61 +52,62 @@ export function LoginPage() {
         <h1 className="text-2xl font-bold text-heading mb-8">Connexion</h1>
 
         <div className="glass-card rounded-2xl p-6">
-          {sent ? (
-            <div className="text-center py-4">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-green-400"
-                >
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <p className="text-strong font-medium mb-1">Vérifiez votre boîte mail</p>
-              <p className="text-sm text-muted">
-                Un lien de connexion a été envoyé à <strong className="text-strong">{email}</strong>
-              </p>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="login-email" className="block text-sm font-medium text-strong mb-1.5">
+                Email
+              </label>
+              <input
+                id="login-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="vous@exemple.com"
+                className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
+              />
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="login-email" className="block text-sm font-medium text-strong mb-1.5">
-                  Email
+
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label htmlFor="login-password" className="block text-sm font-medium text-strong">
+                  Mot de passe
                 </label>
-                <input
-                  id="login-email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="vous@exemple.com"
-                  className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
-                />
+                <Link
+                  to="/mot-de-passe-oublie"
+                  className="text-xs text-link hover:text-link-hover transition-colors"
+                >
+                  Mot de passe oublié ?
+                </Link>
               </div>
+              <input
+                id="login-password"
+                type="password"
+                required
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Votre mot de passe"
+                className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
+              />
+            </div>
 
-              {error && (
-                <p className="text-sm text-red-400" role="alert">
-                  {error}
-                </p>
-              )}
+            {error && (
+              <p className="text-sm text-red-400" role="alert">
+                {error}
+              </p>
+            )}
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full py-3 rounded-xl text-white font-semibold cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {submitting ? 'Envoi en cours...' : 'Recevoir le lien magique'}
-              </button>
-            </form>
-          )}
+            <button
+              type="submit"
+              disabled={submitting}
+              className="w-full py-3 rounded-xl text-white font-semibold cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {submitting ? 'Connexion...' : 'Se connecter'}
+            </button>
+          </form>
+
         </div>
 
         <p className="text-center text-sm text-muted mt-6">

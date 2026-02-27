@@ -27,6 +27,12 @@ const LazyProgramPage = lazy(() => import('./components/ProgramPage.tsx').then((
 const LazyProgramPlayerPage = lazy(() =>
   import('./components/ProgramPlayerPage.tsx').then((m) => ({ default: m.ProgramPlayerPage })),
 );
+const LazyResetPasswordPage = lazy(() =>
+  import('./components/auth/ResetPasswordPage.tsx').then((m) => ({ default: m.ResetPasswordPage })),
+);
+const LazyUpdatePasswordPage = lazy(() =>
+  import('./components/auth/UpdatePasswordPage.tsx').then((m) => ({ default: m.UpdatePasswordPage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -86,6 +92,22 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazySignupPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'mot-de-passe-oublie',
+        element: (
+          <Lazy>
+            <LazyResetPasswordPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'reset-password',
+        element: (
+          <Lazy>
+            <LazyUpdatePasswordPage />
           </Lazy>
         ),
       },
