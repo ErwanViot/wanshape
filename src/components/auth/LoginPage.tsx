@@ -21,9 +21,14 @@ export function LoginPage() {
     e.preventDefault();
     setError(null);
     setSubmitting(true);
-    const { error: err } = await signIn(email.trim(), password);
-    setSubmitting(false);
-    if (err) setError(err);
+    try {
+      const { error: err } = await signIn(email.trim(), password);
+      if (err) setError(err);
+    } catch {
+      setError('Une erreur est survenue. Veuillez réessayer.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

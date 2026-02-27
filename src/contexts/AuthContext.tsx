@@ -33,9 +33,8 @@ function translateError(message: string | undefined): string | null {
   for (const [en, fr] of Object.entries(ERROR_FR)) {
     if (message.includes(en)) return fr;
   }
-  return message;
+  return 'Une erreur est survenue. Veuillez réessayer.';
 }
-
 
 async function fetchProfile(userId: string): Promise<Profile | null> {
   if (!supabase) return null;

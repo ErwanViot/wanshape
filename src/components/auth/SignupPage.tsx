@@ -8,6 +8,7 @@ export function SignupPage() {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [acceptedCgu, setAcceptedCgu] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -27,9 +28,18 @@ export function SignupPage() {
       return;
     }
     setSubmitting(true);
-    const { error: err } = await signUp(email.trim(), password, displayName.trim());
-    setSubmitting(false);
-    if (err) setError(err);
+    try {
+      const { error: err } = await signUp(email.trim(), password, displayName.trim());
+      if (err) {
+        setError(err);
+      } else {
+        setSent(true);
+      }
+    } catch {
+      setError('Une erreur est survenue. Veuillez réessayer.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -57,6 +67,29 @@ export function SignupPage() {
         <h1 className="text-2xl font-bold text-heading mb-8">Créer un compte</h1>
 
         <div className="glass-card rounded-2xl p-6">
+          {sent ? (
+            <div className="text-center py-4">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-green-400"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <p className="text-strong font-medium mb-1">Vérifiez votre boîte mail</p>
+              <p className="text-sm text-muted">
+                Un lien de confirmation a été envoyé à <strong className="text-strong">{email}</strong>
+              </p>
+            </div>
+          ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="signup-name" className="block text-sm font-medium text-strong mb-1.5">
@@ -154,7 +187,7 @@ export function SignupPage() {
               {submitting ? 'Création...' : 'Créer mon compte'}
             </button>
           </form>
-
+          )}
         </div>
 
         <p className="text-center text-sm text-muted mt-6">

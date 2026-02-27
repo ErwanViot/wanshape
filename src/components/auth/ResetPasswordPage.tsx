@@ -21,12 +21,17 @@ export function ResetPasswordPage() {
     e.preventDefault();
     setError(null);
     setSubmitting(true);
-    const { error: err } = await resetPassword(email.trim());
-    setSubmitting(false);
-    if (err) {
-      setError(err);
-    } else {
-      setSent(true);
+    try {
+      const { error: err } = await resetPassword(email.trim());
+      if (err) {
+        setError(err);
+      } else {
+        setSent(true);
+      }
+    } catch {
+      setError('Une erreur est survenue. Veuillez réessayer.');
+    } finally {
+      setSubmitting(false);
     }
   };
 

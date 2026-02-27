@@ -1,10 +1,10 @@
 import { type FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 
 export function UpdatePasswordPage() {
-  const { updatePassword } = useAuth();
+  const { user, loading, updatePassword } = useAuth();
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -30,15 +30,58 @@ export function UpdatePasswordPage() {
     }
 
     setSubmitting(true);
-    const { error: err } = await updatePassword(password);
-    setSubmitting(false);
-
-    if (err) {
-      setError(err);
-    } else {
-      navigate('/profil', { replace: true });
+    try {
+      const { error: err } = await updatePassword(password);
+      if (err) {
+        setError(err);
+      } else {
+        navigate('/profil', { replace: true });
+      }
+    } catch {
+      setError('Une erreur est survenue. Veuillez réessayer.');
+    } finally {
+      setSubmitting(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="px-6 py-12 flex-1 flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="px-6 py-12 flex-1 flex items-start justify-center">
+        <div className="w-full max-w-md text-center">
+          <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-red-500/10 flex items-center justify-center">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-red-400"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+          </div>
+          <p className="text-strong font-medium mb-1">Lien expiré ou invalide</p>
+          <p className="text-sm text-muted mb-6">Veuillez refaire une demande de réinitialisation.</p>
+          <Link to="/mot-de-passe-oublie" className="text-link hover:text-link-hover transition-colors text-sm">
+            Mot de passe oublié
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="px-6 py-12 flex-1 flex items-start justify-center">
