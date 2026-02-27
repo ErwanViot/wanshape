@@ -157,7 +157,7 @@ export const remiseEnFormeSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 35,
             instructions: 'Genoux au sol, bras tendus devant, relâcher le dos',
           },
@@ -223,7 +223,7 @@ export const remiseEnFormeSessions: Session[] = [
         name: 'Étirements',
         exercises: [
           {
-            name: 'Pigeon allongé',
+            name: 'Pigeon stretch',
             duration: 35,
             instructions: "Une jambe croisée devant, l'autre tendue derrière, pencher le buste",
             bilateral: true,
@@ -283,7 +283,7 @@ export const remiseEnFormeSessions: Session[] = [
             instructions: "Assis, jambes tendues, pencher le buste vers l'avant",
           },
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 35,
             instructions: 'Genoux au sol, bras tendus, relâcher tout le dos',
           },
@@ -531,7 +531,7 @@ export const remiseEnFormeSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: 'Pont fessier unipodal',
+            name: 'Hip thrust unilatéral',
             sets: 3,
             reps: 10,
             restBetweenSets: 25,
@@ -548,7 +548,7 @@ export const remiseEnFormeSessions: Session[] = [
         restBetweenRounds: 40,
         exercises: [
           {
-            name: 'Crunchs vélo',
+            name: 'Bicycle crunchs',
             mode: 'timed' as const,
             duration: 30,
             instructions: 'Coude vers genou opposé en alternance, rythme soutenu',
@@ -572,7 +572,7 @@ export const remiseEnFormeSessions: Session[] = [
         name: 'Étirements',
         exercises: [
           {
-            name: 'Pigeon allongé',
+            name: 'Pigeon stretch',
             duration: 35,
             instructions: "Une jambe croisée devant, l'autre tendue derrière, relâcher le buste",
             bilateral: true,
@@ -657,7 +657,7 @@ export const remiseEnFormeSessions: Session[] = [
             instructions: "Assis, jambes tendues, pencher le buste doucement vers l'avant",
           },
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 40,
             instructions: 'Genoux au sol, bras tendus, front au sol, relâcher complètement',
           },
@@ -848,7 +848,7 @@ export const remiseEnFormeSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 40,
             instructions: 'Genoux au sol, front au sol, bras tendus devant, respirer profondément',
           },
@@ -909,12 +909,12 @@ export const remiseEnFormeSessions: Session[] = [
           {
             exercises: [
               {
-                name: 'Fentes sautées alternées',
+                name: 'Fentes sautées',
                 reps: 10,
                 instructions: "Alterner les jambes en sautant, rester gainé à l'atterrissage",
               },
               {
-                name: 'Planche latérale',
+                name: 'Gainage latéral',
                 reps: 1,
                 instructions: 'Avant-bras au sol, hanches hautes, tenir 25 secondes par côté',
               },
@@ -954,7 +954,7 @@ export const remiseEnFormeSessions: Session[] = [
         name: 'Étirements',
         exercises: [
           {
-            name: 'Pigeon allongé',
+            name: 'Pigeon stretch',
             duration: 35,
             instructions: 'Jambe avant croisée, buste penché, respirer profondément',
             bilateral: true,
@@ -1013,7 +1013,7 @@ export const remiseEnFormeSessions: Session[] = [
             instructions: 'Burpee complet avec pompe et saut, mouvement fluide',
           },
           {
-            name: 'Pompes pike',
+            name: 'Pike push-ups',
             reps: 10,
             instructions: 'Position V inversé, coudes fléchis, tête vers le sol',
           },
@@ -1045,7 +1045,7 @@ export const remiseEnFormeSessions: Session[] = [
             bilateral: true,
           },
           {
-            name: "Posture de l'enfant",
+            name: "Child's pose",
             duration: 40,
             instructions: 'Genoux au sol, bras tendus devant, relâcher le dos et la nuque',
           },
@@ -1299,12 +1299,12 @@ export const remiseEnFormeSessions: Session[] = [
           {
             exercises: [
               {
-                name: 'Fentes sautées alternées',
+                name: 'Fentes sautées',
                 reps: 14,
                 instructions: 'Alterner en sautant, le genou arrière frôle le sol, rester gainé',
               },
               {
-                name: 'Planche latérale avec élévation de hanche',
+                name: 'Gainage latéral avec élévation de hanche',
                 reps: 12,
                 instructions: 'En planche latérale, descendre la hanche au sol puis remonter',
               },
@@ -1344,7 +1344,7 @@ export const remiseEnFormeSessions: Session[] = [
         name: 'Étirements profonds',
         exercises: [
           {
-            name: 'Pigeon allongé',
+            name: 'Pigeon stretch',
             duration: 40,
             instructions: 'Jambe avant croisée, buste posé au sol, respirer profondément',
             bilateral: true,
@@ -1403,7 +1403,7 @@ export const remiseEnFormeSessions: Session[] = [
             instructions: 'Burpee complet avec pompe et saut, mouvement fluide et contrôlé',
           },
           {
-            name: 'Pompes pike',
+            name: 'Pike push-ups',
             reps: 12,
             instructions: 'Position V inversé, descente contrôlée, pousser explosif',
           },
@@ -1434,7 +1434,7 @@ export const remiseEnFormeSessions: Session[] = [
             instructions: 'Assis, jambes tendues, pencher le buste vers les pieds, tenir la position',
           },
           {
-            name: "Posture de l'enfant étendue",
+            name: "Child's pose",
             duration: 45,
             instructions: 'Genoux écartés, bras loin devant, front au sol, relâcher complètement tout le corps',
           },

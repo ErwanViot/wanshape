@@ -73,7 +73,7 @@ export function Formats() {
         </div>
       </header>
 
-      <main id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-6">
+      <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
         <p className="text-sm text-subtle leading-relaxed">
           <strong className="text-strong">8 formats</strong> alternent au fil des jours : les séances intenses sont plus
           courtes, les séances de renforcement et d'endurance plus longues. Toutes incluent échauffement et étirements.
@@ -86,7 +86,7 @@ export function Formats() {
               <Link
                 key={format.type}
                 to={`/formats/${format.slug}`}
-                className="format-card rounded-[20px] overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+                className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
               >
                 {/* Image — text stays white (over image) */}
                 <div className="relative h-28 overflow-hidden">
@@ -95,7 +95,7 @@ export function Formats() {
                   <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
                     <div>
                       <h2 className="font-bold text-white text-base drop-shadow-sm">{format.name}</h2>
-                      <p className="text-[11px] text-white/60">{format.subtitle}</p>
+                      <p className="text-xs text-white/60">{format.subtitle}</p>
                     </div>
                     <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full shrink-0">
                       {format.duration} min
@@ -126,7 +126,7 @@ export function Formats() {
         <p className="text-xs text-faint text-center leading-relaxed">
           Les durées indiquées incluent l'échauffement et les étirements.
         </p>
-      </main>
+      </div>
     </>
   );
 }

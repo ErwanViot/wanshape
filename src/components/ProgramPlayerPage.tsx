@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
 import { useProgramSession } from '../hooks/useProgram.ts';
@@ -7,6 +8,7 @@ import { Player } from './Player.tsx';
 
 export function ProgramPlayerPage() {
   const { slug, order } = useParams<{ slug: string; order: string }>();
+  const { user, loading: authLoading } = useAuth();
   const orderNum = order ? Number.parseInt(order, 10) : undefined;
   const { session: programSession, loading } = useProgramSession(slug, orderNum);
 
@@ -15,6 +17,10 @@ export function ProgramPlayerPage() {
   useDocumentHead({
     title: sessionData ? `${sessionData.title} — En cours` : 'Séance programme',
   });
+
+  if (!authLoading && !user) {
+    return <Navigate to="/login" replace />;
+  }
 
   if (!isHealthAccepted()) {
     return <Navigate to="/" replace />;

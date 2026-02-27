@@ -21,10 +21,17 @@ const LazyAuthCallback = lazy(() =>
 const LazyProfilePage = lazy(() =>
   import('./components/auth/ProfilePage.tsx').then((m) => ({ default: m.ProfilePage })),
 );
+const LazyDiscover = lazy(() => import('./components/Discover.tsx').then((m) => ({ default: m.Discover })));
 const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
 const LazyProgramPage = lazy(() => import('./components/ProgramPage.tsx').then((m) => ({ default: m.ProgramPage })));
 const LazyProgramPlayerPage = lazy(() =>
   import('./components/ProgramPlayerPage.tsx').then((m) => ({ default: m.ProgramPlayerPage })),
+);
+const LazyResetPasswordPage = lazy(() =>
+  import('./components/auth/ResetPasswordPage.tsx').then((m) => ({ default: m.ResetPasswordPage })),
+);
+const LazyUpdatePasswordPage = lazy(() =>
+  import('./components/auth/UpdatePasswordPage.tsx').then((m) => ({ default: m.UpdatePasswordPage })),
 );
 
 function Lazy({ children }: { children: React.ReactNode }) {
@@ -37,6 +44,14 @@ export const router = createBrowserRouter([
     element: <PublicLayout />,
     children: [
       { index: true, element: <Home /> },
+      {
+        path: 'decouvrir',
+        element: (
+          <Lazy>
+            <LazyDiscover />
+          </Lazy>
+        ),
+      },
       { path: 'formats', element: <Formats /> },
       {
         path: 'formats/:slug',
@@ -77,6 +92,22 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazySignupPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'mot-de-passe-oublie',
+        element: (
+          <Lazy>
+            <LazyResetPasswordPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'reset-password',
+        element: (
+          <Lazy>
+            <LazyUpdatePasswordPage />
           </Lazy>
         ),
       },

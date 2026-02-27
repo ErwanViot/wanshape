@@ -1,18 +1,18 @@
 import { Link } from 'react-router';
-import { FORMATS_DATA } from '../data/formats.ts';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
+import { useActiveProgram } from '../hooks/useProgram.ts';
 import { useSession } from '../hooks/useSession.ts';
+import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
 import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
 import { computeDifficulty } from '../utils/sessionDifficulty.ts';
 import { getSessionImage } from '../utils/sessionImage.ts';
-import { computeTimeline } from '../utils/sessionTimeline.ts';
-import { BrandHeader } from './BrandHeader.tsx';
+import { getProgramImage } from '../utils/programImage.ts';
 import { Footer } from './Footer.tsx';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
-import { SessionRecap } from './SessionRecap.tsx';
-import { StreakWidget } from './StreakWidget.tsx';
+import { SessionAccordion } from './SessionAccordion.tsx';
 
 function formatShortDate(dateKey: string): string {
   const d = parseDDMMYYYY(dateKey);
@@ -21,24 +21,13 @@ function formatShortDate(dateKey: string): string {
   return `${dd}.${mm}.${d.getFullYear()}`;
 }
 
-const FORMAT_SHORT_DESCS: Record<string, string> = {
-  pyramid: 'Séries croissantes puis décroissantes',
-  classic: 'Travail ciblé en séries classiques',
-  superset: 'Deux exercices enchaînés sans pause',
-  emom: 'Chaque minute, un effort à compléter',
-  circuit: "Rotation d'ateliers variés en boucle",
-  amrap: 'Maximum de tours dans le temps imparti',
-  hiit: 'Efforts explosifs, récupération courte',
-  tabata: '20s à fond, 10s de repos, sans répit',
-};
-
 export function Home() {
   const todayKey = getTodayKey();
   const tomorrowKey = getTomorrowKey();
   const { session, loading, error } = useSession(todayKey);
-  // error intentionally ignored — if tomorrow's session can't load, we simply hide the panel
   const { session: tomorrowSession, loading: tomorrowLoading } = useSession(tomorrowKey);
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
+  const { user } = useAuth();
 
   useDocumentHead({
     title: 'WAN SHAPE',
@@ -54,264 +43,392 @@ export function Home() {
     <>
       {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
 
-      {/* Brand header — full width */}
-      <BrandHeader />
-
-      {/* Gradient divider */}
-      <div className="gradient-divider mb-8" />
-
-      {/* Streak widget — logged-in users only */}
-      <StreakWidget />
-
-      {/* Two-column grid: today panel + recap side by side, tomorrow panel below left */}
-      <div id="main-content" className="grid grid-cols-1 lg:grid-cols-2 px-6 md:px-10 lg:px-14 gap-6 lg:gap-8 pb-8">
-        {/* Today panel — col 1, row 1 */}
-        <div className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-1 lg:col-start-1">
-          {loading && (
-            <div className="flex items-center justify-center flex-1">
-              <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
-            </div>
-          )}
-
-          {!loading && (error || !session) && (
-            <div className="flex items-center justify-center flex-1 p-6">
-              <div className="text-center">
-                <div className="text-5xl mb-4">😴</div>
-                <p className="text-body text-lg font-medium">Pas de séance prévue aujourd'hui.</p>
-                <p className="text-faint text-sm mt-2">Profitez-en pour récupérer !</p>
-              </div>
-            </div>
-          )}
-
-          {!loading && session && (
-            <SessionPanel
-              session={session}
-              dateKey={todayKey}
-              onStart={handleStartSession}
-              badge="SÉANCE DU JOUR"
-              showCta
-            />
-          )}
-        </div>
-
-        {/* Session recap — col 2, row 1+2 on desktop / order 2 on mobile */}
-        <div className="lg:row-start-1 lg:row-span-2 lg:col-start-2">
-          {loading && (
-            <div className="glass-card rounded-[20px] p-6 md:p-8 flex items-center justify-center min-h-[200px]">
-              <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
-            </div>
-          )}
-
-          {!loading && (error || !session) && (
-            <div className="glass-card rounded-[20px] p-6 md:p-8">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-subtle mb-5">Contenu de la séance</h3>
-              <p className="text-sm text-faint">Aucune séance disponible.</p>
-            </div>
-          )}
-
-          {!loading && session && <SessionRecap session={session} />}
-        </div>
-
-        {/* Tomorrow panel — col 1, row 2 on desktop / last on mobile */}
-        {!tomorrowLoading && tomorrowSession && (
-          <section
-            aria-label="Aperçu de la séance de demain"
-            className="flex flex-col relative rounded-[20px] overflow-hidden lg:row-start-2 lg:col-start-1"
-          >
-            <SessionPanel
-              session={tomorrowSession}
-              dateKey={tomorrowKey}
-              badge="SÉANCE DE DEMAIN"
-              variant="tomorrow"
-              showCta={false}
-            />
-          </section>
+      <div className="px-6 md:px-10 lg:px-14 pb-8 max-w-3xl mx-auto">
+        {user ? (
+          <ConnectedContent
+            session={session}
+            loading={loading}
+            error={error}
+            tomorrowSession={tomorrowSession}
+            tomorrowLoading={tomorrowLoading}
+            todayKey={todayKey}
+            tomorrowKey={tomorrowKey}
+            onStart={handleStartSession}
+          />
+        ) : (
+          <VisitorContent
+            session={session}
+            loading={loading}
+            error={error}
+            tomorrowSession={tomorrowSession}
+            tomorrowLoading={tomorrowLoading}
+            todayKey={todayKey}
+            tomorrowKey={tomorrowKey}
+            onStart={handleStartSession}
+          />
         )}
       </div>
-
-      {/* Gradient divider */}
-      <div className="gradient-divider" />
-
-      {/* Formats section */}
-      <section id="formats" className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
-        <div className="max-w-7xl mx-auto mb-10 md:mb-14">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-heading mb-2">Nos formats</h2>
-          <p className="text-sm text-muted">
-            8 méthodes d'entraînement, du renforcement doux au cardio maximal.{' '}
-            <Link
-              to="/formats"
-              className="text-link hover:text-link-hover underline underline-offset-2 transition-colors"
-            >
-              En savoir plus
-            </Link>
-            {' · '}
-            <Link
-              to="/exercices"
-              className="text-link hover:text-link-hover underline underline-offset-2 transition-colors"
-            >
-              Nos exercices
-            </Link>
-          </p>
-        </div>
-
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-          {FORMATS_DATA.map((f) => (
-            <Link
-              key={f.type}
-              to={`/formats/${f.slug}`}
-              className="format-card rounded-[14px] p-5 block transition-transform hover:scale-[1.02]"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-sm font-bold text-strong">{f.name}</h3>
-                <span className="text-[11px] font-medium text-faint">{f.duration} min</span>
-              </div>
-              <p className="text-xs text-muted leading-relaxed mb-4">
-                {FORMAT_SHORT_DESCS[f.type] ?? f.shortDescription}
-              </p>
-              <IntensityDots level={f.intensity} />
-            </Link>
-          ))}
-        </div>
-      </section>
 
       <Footer />
     </>
   );
 }
 
-/* SessionPanel stays fully white — it's over an image */
-function SessionPanel({
+/* ────────────────────────────────────────────
+   Connected user
+   ──────────────────────────────────────────── */
+
+function ConnectedContent({
   session,
-  dateKey,
+  loading,
+  error,
+  tomorrowSession,
+  tomorrowLoading,
+  todayKey,
+  tomorrowKey,
   onStart,
-  badge = 'SÉANCE DU JOUR',
-  variant = 'today',
-  showCta = true,
 }: {
-  session: Session;
-  dateKey: string;
-  onStart?: () => void;
-  badge?: string;
-  variant?: 'today' | 'tomorrow';
-  showCta?: boolean;
+  session: Session | null;
+  loading: boolean;
+  error: string | null;
+  tomorrowSession: Session | null;
+  tomorrowLoading: boolean;
+  todayKey: string;
+  tomorrowKey: string;
+  onStart: () => void;
 }) {
+  const { user } = useAuth();
+  const { activeProgram } = useActiveProgram(user?.id);
+
+  const progressPct =
+    activeProgram && activeProgram.totalSessions > 0
+      ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
+      : 0;
+
+  return (
+    <div className="space-y-5 pt-6 md:pt-4">
+      <h1 className="sr-only">WAN SHAPE — Votre séance de sport quotidienne</h1>
+
+      {/* Programme — active or discovery */}
+      {activeProgram ? (
+        <div className="rounded-2xl overflow-hidden border border-card-border">
+          {/* Image hero with title + progress */}
+          <Link
+            to={`/programme/${activeProgram.slug}`}
+            className="relative block min-h-[220px] flex flex-col cursor-pointer group"
+          >
+            <img
+              src={getProgramImage(activeProgram.slug)}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/50 to-black/30" />
+
+            <div className="relative z-10 flex flex-col justify-between flex-1 p-6 min-h-[220px]">
+              <div>
+                <div className="session-label px-3 py-1 rounded-lg inline-block mb-3">
+                  <span className="text-xs font-bold tracking-widest uppercase text-white">Continuer mon programme</span>
+                </div>
+
+                <h2 className="text-2xl md:text-3xl font-black leading-none tracking-tight text-white group-hover:text-white/90 transition-colors mb-4">
+                  {activeProgram.title.toUpperCase()}
+                </h2>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between text-xs text-white/50 mb-1.5">
+                  <span>
+                    {activeProgram.completedCount}/{activeProgram.totalSessions} séances
+                  </span>
+                  <span>{progressPct}%</span>
+                </div>
+                <div className="h-1.5 rounded-full bg-white/15 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-white transition-all"
+                    style={{ width: `${progressPct}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          {/* Next session CTA */}
+          {activeProgram.nextSessionTitle && activeProgram.nextSessionOrder !== null && (
+            <Link
+              to={`/programme/${activeProgram.slug}`}
+              className="flex items-center gap-3 px-5 py-3.5 bg-surface-card border border-card-border border-t-0 rounded-b-2xl cursor-pointer group/next"
+            >
+              <div className="w-9 h-9 rounded-full bg-brand/15 flex items-center justify-center shrink-0">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-muted">Prochaine séance</p>
+                <p className="text-sm font-semibold text-heading group-hover/next:text-brand transition-colors truncate">
+                  {activeProgram.nextSessionTitle}
+                </p>
+              </div>
+              <svg
+                aria-hidden="true"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                className="text-muted shrink-0"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </Link>
+          )}
+        </div>
+      ) : (
+        <Link
+          to="/programmes"
+          className="flex items-center gap-3 glass-card rounded-xl px-4 py-3 group transition-colors hover:border-brand/30 cursor-pointer"
+        >
+          <span className="text-lg shrink-0" role="img" aria-label="Programme">
+            📋
+          </span>
+          <span className="text-sm text-subtle group-hover:text-heading transition-colors">
+            Envie de structure ? Voir nos programmes
+          </span>
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="text-muted ml-auto shrink-0"
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </Link>
+      )}
+
+      {/* Today */}
+      <SessionCard
+        session={session}
+        loading={loading}
+        error={error}
+        dateKey={todayKey}
+        badge="Séance du jour"
+        onStart={onStart}
+      />
+
+      {/* Tomorrow */}
+      {!tomorrowLoading && tomorrowSession && (
+        <SessionCard
+          session={tomorrowSession}
+          loading={false}
+          error={null}
+          dateKey={tomorrowKey}
+          badge="Séance de demain"
+          variant="tomorrow"
+        />
+      )}
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────
+   Visitor
+   ──────────────────────────────────────────── */
+
+function VisitorContent({
+  session,
+  loading,
+  error,
+  tomorrowSession,
+  tomorrowLoading,
+  todayKey,
+  tomorrowKey,
+  onStart,
+}: {
+  session: Session | null;
+  loading: boolean;
+  error: string | null;
+  tomorrowSession: Session | null;
+  tomorrowLoading: boolean;
+  todayKey: string;
+  tomorrowKey: string;
+  onStart: () => void;
+}) {
+  return (
+    <div className="space-y-10 pt-6 md:pt-0">
+      {/* Hero — typography-first, Behance-inspired */}
+      <section className="text-center space-y-8 py-6 md:py-14">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-heading leading-[1.1]">
+          Votre séance de sport
+          <br />
+          <span className="gradient-text">guidée au quotidien</span>
+        </h1>
+
+        <p className="text-base md:text-lg text-muted max-w-md mx-auto leading-relaxed">
+          8 formats d'entraînement variés, 25 à 40 minutes, sans matériel.
+          Chaque jour une séance différente, 100&nbsp;% gratuit.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          {supabase && (
+            <Link to="/signup" className="cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white">
+              Créer un compte gratuit
+            </Link>
+          )}
+          <button
+            type="button"
+            onClick={onStart}
+            className="px-8 py-3.5 rounded-full text-sm font-bold text-brand border border-brand/30 hover:bg-brand/5 transition-colors cursor-pointer"
+          >
+            Essayer la séance du jour
+          </button>
+        </div>
+      </section>
+
+      {/* Session preview */}
+      <SessionCard session={session} loading={loading} error={error} dateKey={todayKey} badge="Séance du jour" onStart={onStart} />
+
+      {/* Tomorrow */}
+      {!tomorrowLoading && tomorrowSession && (
+        <SessionCard
+          session={tomorrowSession}
+          loading={false}
+          error={null}
+          dateKey={tomorrowKey}
+          badge="Séance de demain"
+          variant="tomorrow"
+        />
+      )}
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────
+   Session card with accordion
+   ──────────────────────────────────────────── */
+
+function SessionCard({
+  session,
+  loading,
+  error,
+  dateKey,
+  badge,
+  variant = 'today',
+  onStart,
+}: {
+  session: Session | null;
+  loading: boolean;
+  error: string | null;
+  dateKey: string;
+  badge: string;
+  variant?: 'today' | 'tomorrow';
+  onStart?: () => void;
+}) {
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[260px] rounded-2xl glass-card">
+        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (error || !session) {
+    return (
+      <div className="flex items-center justify-center p-6 min-h-[200px] rounded-2xl glass-card">
+        <div className="text-center">
+          <div className="text-5xl mb-4">😴</div>
+          <p className="text-body text-lg font-medium">Pas de séance prévue aujourd'hui.</p>
+          <p className="text-faint text-sm mt-2">Profitez-en pour récupérer !</p>
+        </div>
+      </div>
+    );
+  }
+
   const image = getSessionImage(session);
   const difficulty = computeDifficulty(session);
-  const timeline = computeTimeline(session.blocks);
-  const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0) || 1;
   const isTomorrow = variant === 'tomorrow';
 
   return (
-    <>
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <img src={image} alt="" className="w-full h-full object-cover" loading={isTomorrow ? 'lazy' : 'eager'} />
-        <div
-          className={`absolute inset-0 bg-gradient-to-b ${isTomorrow ? 'from-black/95 via-black/60 to-black/40' : 'from-black/90 via-black/40 to-black/20'}`}
-        />
-      </div>
-
-      {/* Content over image */}
-      <div className="relative z-10 flex flex-col justify-between flex-1 p-6 md:p-8">
-        {/* Top — session info */}
-        <div>
-          {/* Badge */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className={`${isTomorrow ? 'session-label-tomorrow' : 'session-label'} px-4 py-1.5 rounded-xl`}>
-              <span className="text-xs font-bold tracking-widest uppercase text-white">{badge}</span>
-            </div>
-          </div>
-
-          {/* Date */}
-          <p className="text-xs font-medium tracking-widest uppercase text-white/50 mb-3">{formatShortDate(dateKey)}</p>
-
-          {/* Title */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.9] tracking-tight text-white mb-4">
-            {session.title.toUpperCase()}
-          </h2>
-
-          {/* Focus tags + duration */}
-          <div className="flex items-center gap-2 flex-wrap mb-4">
-            {session.focus.map((f) => (
-              <span
-                key={f}
-                className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80"
-              >
-                {f}
-              </span>
-            ))}
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80">
-              ~{session.estimatedDuration} min
-            </span>
-            <span
-              className={`px-3 py-1 rounded-full text-xs font-semibold border ${
-                difficulty.level === 'accessible'
-                  ? 'bg-emerald-500/20 border-emerald-400/30 text-emerald-300'
-                  : difficulty.level === 'modere'
-                    ? 'bg-amber-500/20 border-amber-400/30 text-amber-300'
-                    : 'bg-red-500/20 border-red-400/30 text-red-300'
-              }`}
-            >
-              {difficulty.label}
-            </span>
-          </div>
-
-          {/* Description */}
-          <p className="text-sm text-white/60 leading-relaxed max-w-md">{session.description}</p>
+    <div className="rounded-2xl overflow-hidden border border-card-border">
+      {/* Image hero */}
+      <div className="relative min-h-[260px] flex flex-col">
+        <div className="absolute inset-0">
+          <img
+            src={image}
+            alt=""
+            className="w-full h-full object-cover"
+            loading={isTomorrow ? 'lazy' : 'eager'}
+          />
+          <div
+            className={`absolute inset-0 bg-gradient-to-b ${
+              isTomorrow ? 'from-black/90 via-black/55 to-black/35' : 'from-black/85 via-black/50 to-black/30'
+            }`}
+          />
         </div>
 
-        {/* Bottom — timeline + CTA */}
-        <div>
-          {/* Timeline */}
-          <div className="mb-6">
-            <div className="flex gap-1.5 mb-2">
-              {timeline.map((t, i) => (
-                <div
-                  key={i}
-                  className="timeline-segment"
-                  style={{
-                    width: `${(t.duration / totalDuration) * 100}%`,
-                    background: t.isAccent
-                      ? 'linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary))'
-                      : 'rgba(255, 255, 255, 0.15)',
-                  }}
-                />
-              ))}
+        <div className="relative z-10 flex flex-col justify-between flex-1 p-6">
+          <div>
+            <div
+              className={`${isTomorrow ? 'session-label-tomorrow' : 'session-label'} px-3 py-1 rounded-lg inline-block mb-3`}
+            >
+              <span className="text-xs font-bold tracking-widest uppercase text-white">{badge}</span>
             </div>
-            <div className="flex text-[10px] font-medium tracking-wider uppercase text-white/35">
-              {timeline.map((t, i) => {
-                const pct = (t.duration / totalDuration) * 100;
-                return (
-                  <span key={i} className="overflow-hidden whitespace-nowrap" style={{ width: `${pct}%` }}>
-                    {pct >= 15 ? t.label : ''}
-                  </span>
-                );
-              })}
+
+            <p className="text-xs font-medium tracking-widest uppercase text-white/50 mb-2">
+              {formatShortDate(dateKey)}
+            </p>
+
+            <h2 className="text-3xl md:text-4xl font-black leading-none tracking-tight text-white mb-3">
+              {session.title.toUpperCase()}
+            </h2>
+
+            <div className="flex items-center gap-2 flex-wrap">
+              {session.focus.slice(0, 2).map((f) => (
+                <span
+                  key={f}
+                  className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80"
+                >
+                  {f}
+                </span>
+              ))}
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80">
+                ~{session.estimatedDuration} min
+              </span>
+              <span
+                className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${
+                  difficulty.level === 'accessible'
+                    ? 'bg-emerald-500/20 border-emerald-400/30 text-emerald-300'
+                    : difficulty.level === 'modere'
+                      ? 'bg-amber-500/20 border-amber-400/30 text-amber-300'
+                      : 'bg-red-500/20 border-red-400/30 text-red-300'
+                }`}
+              >
+                {difficulty.label}
+              </span>
             </div>
           </div>
 
-          {/* CTA */}
-          {showCta && onStart && (
+          {onStart && (
             <button
               type="button"
               onClick={onStart}
-              className="cta-gradient w-full py-4 rounded-2xl text-base font-bold text-white tracking-wide cursor-pointer"
+              className="cta-gradient w-full py-3.5 rounded-xl text-sm font-bold text-white tracking-wide cursor-pointer mt-6"
             >
               C'est parti
             </button>
           )}
         </div>
       </div>
-    </>
-  );
-}
 
-function IntensityDots({ level }: { level: number }) {
-  return (
-    <div className="flex items-center gap-1.5" role="img" aria-label={`Intensité ${level} sur 5`}>
-      {[1, 2, 3, 4, 5].map((i) => (
-        <div key={i} className={`intensity-dot ${i <= level ? 'active' : 'inactive'}`} />
-      ))}
+      {/* Accordion */}
+      <SessionAccordion session={session} />
     </div>
   );
 }
+

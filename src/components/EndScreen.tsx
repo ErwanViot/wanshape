@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
+import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
 
 interface Props {
@@ -22,6 +24,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       programSessionId,
       durationSeconds,
       amrapRounds,
+      sessionTitle: session.title,
     });
   }, [user, save, session.date, programSessionId, durationSeconds, amrapRounds]);
 
@@ -55,6 +58,8 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
         )}
       </div>
 
+      {!user && supabase && <SignupNudge />}
+
       <button
         type="button"
         onClick={onBack}
@@ -62,6 +67,42 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       >
         {programSessionId ? 'Retour au programme' : "Retour à l'accueil"}
       </button>
+    </div>
+  );
+}
+
+const NUDGE_STORAGE_KEY = 'wan-shape-nudge-dismissed';
+const NUDGE_COOLDOWN_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
+
+function SignupNudge() {
+  const [visible, setVisible] = useState(() => {
+    const dismissed = localStorage.getItem(NUDGE_STORAGE_KEY);
+    if (!dismissed) return true;
+    return Date.now() - Number(dismissed) > NUDGE_COOLDOWN_MS;
+  });
+
+  if (!visible) return null;
+
+  const dismiss = () => {
+    localStorage.setItem(NUDGE_STORAGE_KEY, String(Date.now()));
+    setVisible(false);
+  };
+
+  return (
+    <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 p-5 text-left">
+      <p className="text-white text-sm font-semibold mb-1">Ne perdez pas votre progression</p>
+      <p className="text-white/50 text-xs leading-relaxed mb-4">
+        Sans compte, cette séance ne sera pas sauvegardée. Créez un compte gratuit pour garder votre historique, votre
+        streak et vos programmes.
+      </p>
+      <div className="flex items-center gap-3">
+        <Link to="/signup" className="cta-gradient px-5 py-2.5 rounded-xl text-sm font-bold text-white">
+          Créer un compte
+        </Link>
+        <button type="button" onClick={dismiss} className="text-white/40 text-xs hover:text-white/60 transition-colors">
+          Plus tard
+        </button>
+      </div>
     </div>
   );
 }

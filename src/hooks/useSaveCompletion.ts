@@ -6,6 +6,7 @@ interface SaveParams {
   programSessionId?: string;
   durationSeconds: number;
   amrapRounds: number;
+  sessionTitle?: string;
 }
 
 export function useSaveCompletion() {
@@ -27,6 +28,7 @@ export function useSaveCompletion() {
       program_session_id: params.programSessionId ?? null,
       duration_seconds: params.durationSeconds,
       amrap_rounds: params.amrapRounds > 0 ? params.amrapRounds : null,
+      metadata: params.sessionTitle ? { session_title: params.sessionTitle } : {},
     });
 
     if (!error) setSaved(true);

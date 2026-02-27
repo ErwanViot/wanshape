@@ -73,7 +73,7 @@ export function ExercisePage() {
         </div>
       </div>
 
-      <main id="main-content" className="max-w-2xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-2xl mx-auto px-6 py-8 space-y-8">
         {/* Intro */}
         <p className="text-base text-body leading-relaxed">{exercise.shortDescription}</p>
 
@@ -174,7 +174,7 @@ export function ExercisePage() {
             Les formats →
           </Link>
         </div>
-      </main>
+      </div>
     </>
   );
 }

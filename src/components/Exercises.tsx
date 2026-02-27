@@ -49,7 +49,7 @@ export function Exercises() {
         </div>
       </header>
 
-      <main id="main-content" className="max-w-3xl mx-auto px-6 py-8 space-y-10">
+      <div className="max-w-3xl mx-auto px-6 py-8 space-y-10">
         <p className="text-sm text-subtle leading-relaxed">
           Retrouvez ici les fiches détaillées de nos exercices : exécution, respiration, variantes, conseils et erreurs
           courantes.
@@ -63,7 +63,7 @@ export function Exercises() {
                 <Link
                   key={ex.slug}
                   to={`/exercices/${ex.slug}`}
-                  className="format-card rounded-[20px] overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+                  className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
                 >
                   {/* Image */}
                   <div className="relative h-28 overflow-hidden">
@@ -72,7 +72,7 @@ export function Exercises() {
                     <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
                       <h3 className="font-bold text-white text-base drop-shadow-sm">{ex.name}</h3>
                       <span
-                        className={`text-[11px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
+                        className={`text-xs font-bold px-2 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
                       >
                         {DIFFICULTY_LABELS[ex.difficulty - 1]}
                       </span>
@@ -85,13 +85,13 @@ export function Exercises() {
                       {ex.muscles.slice(0, 3).map((m) => (
                         <span
                           key={m}
-                          className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-brand/10 text-link border border-brand/20"
+                          className="px-2 py-0.5 rounded-full text-xs font-semibold bg-brand/10 text-link border border-brand/20"
                         >
                           {m}
                         </span>
                       ))}
                       {ex.muscles.length > 3 && (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold text-muted">
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold text-muted">
                           +{ex.muscles.length - 3}
                         </span>
                       )}
@@ -110,7 +110,7 @@ export function Exercises() {
         <p className="text-xs text-faint text-center leading-relaxed">
           De nouvelles fiches sont ajoutées régulièrement.
         </p>
-      </main>
+      </div>
     </>
   );
 }

@@ -13,7 +13,7 @@ export function SessionRecap({ session }: Props) {
   const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0);
 
   return (
-    <div className="glass-card rounded-[20px] p-6 md:p-8 h-full flex flex-col overflow-y-auto">
+    <div className="glass-card rounded-2xl p-6 md:p-8 h-full flex flex-col overflow-y-auto">
       <h3 className="text-sm font-bold uppercase tracking-wider text-subtle mb-5">Contenu de la séance</h3>
 
       {/* Blocks with full exercise list */}
@@ -72,12 +72,12 @@ function BlockDetail({
       <div className="px-4 pt-3 pb-2 flex items-center gap-3">
         <div className="w-1.5 h-7 rounded-full shrink-0" style={{ backgroundColor: color }} />
         <div className="flex-1 min-w-0">
-          <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color }}>
+          <span className="text-xs font-bold uppercase tracking-wider" style={{ color }}>
             {segment.label} · {index + 1}/{total}
           </span>
           <h4 className="text-sm font-bold text-heading">{block.name}</h4>
         </div>
-        <span className="text-[11px] text-muted shrink-0">{getBlockMeta(block)}</span>
+        <span className="text-xs text-muted shrink-0">{getBlockMeta(block)}</span>
       </div>
 
       {/* Exercises list */}
@@ -85,13 +85,13 @@ function BlockDetail({
         <div className="border-t border-divider pt-2.5 space-y-2">
           {exercises.map((ex, i) => (
             <div key={i} className="flex items-start gap-2.5">
-              <span className="text-[11px] text-faint font-mono mt-0.5 w-4 shrink-0 text-right">{i + 1}</span>
+              <span className="text-xs text-faint font-mono mt-0.5 w-4 shrink-0 text-right">{i + 1}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-2">
                   <ExerciseName name={ex.name} />
-                  <span className="text-[11px] text-muted">{ex.detail}</span>
+                  <span className="text-xs text-muted">{ex.detail}</span>
                 </div>
-                <p className="text-[11px] text-faint mt-0.5 leading-relaxed">{ex.instructions}</p>
+                <p className="text-xs text-faint mt-0.5 leading-relaxed">{ex.instructions}</p>
               </div>
             </div>
           ))}

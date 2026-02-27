@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { SessionCompletion } from '../types/completion.ts';
 
+export interface CompletionWithTitle extends SessionCompletion {
+  session_title: string | null;
+}
+
 export interface HistoryStats {
-  completions: SessionCompletion[];
+  completions: CompletionWithTitle[];
   streak: number;
   totalSessions: number;
   totalDuration: number;
@@ -74,7 +78,7 @@ function computeWeekDots(completions: SessionCompletion[]): boolean[] {
 }
 
 export function useHistory(userId: string | undefined): HistoryStats {
-  const [completions, setCompletions] = useState<SessionCompletion[]>([]);
+  const [completions, setCompletions] = useState<CompletionWithTitle[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -91,13 +95,23 @@ export function useHistory(userId: string | undefined): HistoryStats {
       try {
         const { data } = await supabase
           .from('session_completions')
-          .select('*')
+          .select('*, program_sessions(session_data)')
           .eq('user_id', userId)
           .order('completed_at', { ascending: false })
           .limit(200);
 
         if (cancelled) return;
-        setCompletions((data as SessionCompletion[]) ?? []);
+
+        const enriched: CompletionWithTitle[] = ((data as Record<string, unknown>[]) ?? []).map((row) => {
+          const ps = row.program_sessions as { session_data?: { title?: string } } | null;
+          const metaTitle = (row.metadata as Record<string, unknown>)?.session_title as string | undefined;
+          return {
+            ...(row as unknown as SessionCompletion),
+            session_title: metaTitle ?? ps?.session_data?.title ?? null,
+          };
+        });
+
+        setCompletions(enriched);
         setLoading(false);
       } catch {
         if (!cancelled) setLoading(false);
