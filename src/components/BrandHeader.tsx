@@ -31,10 +31,6 @@ export function BrandHeader() {
             src="/logo-wansoft.png"
             alt=""
             className="w-7 h-7 md:w-8 md:h-8 shrink-0"
-            style={{
-              filter:
-                'brightness(0) saturate(100%) invert(26%) sepia(89%) saturate(4438%) hue-rotate(233deg) brightness(91%) contrast(96%)',
-            }}
           />
           <span className="text-lg font-extrabold tracking-tight gradient-text">Wan Shape</span>
         </Link>

@@ -1,73 +1,69 @@
-# React + TypeScript + Vite
+# Wan Shape
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application de sport gratuite avec des séances guidées, des programmes structurés et un suivi de progression.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend** : React 19 + TypeScript 5.9 + Tailwind v4
+- **Build** : Vite 7 (PWA via vite-plugin-pwa)
+- **Backend** : Supabase (Auth, PostgreSQL, RLS)
+- **Déploiement** : Vercel
+- **Qualité** : Biome (lint + format), Knip (dead code)
 
-## React Compiler
+## Démarrage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+cp .env.example .env.local   # renseigner les clés Supabase
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+L'app fonctionne sans Supabase (les fonctionnalités auth/historique sont désactivées).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Variables d'environnement
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Variable | Description |
+|----------|-------------|
+| `VITE_SUPABASE_URL` | URL du projet Supabase |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Clé publique (anon/publishable) |
+
+## Scripts
+
+| Commande | Description |
+|----------|-------------|
+| `npm run dev` | Serveur de développement |
+| `npm run build` | Build production (tsc + Vite) |
+| `npm run preview` | Preview du build local |
+| `npm run lint` | Lint + format (Biome) |
+| `npx knip` | Détection de code mort |
+| `npx tsx scripts/seed-programs.ts` | Seed des programmes (nécessite `SUPABASE_SERVICE_ROLE_KEY`) |
+
+## Structure
+
 ```
+src/
+  components/       # Composants React (pages + UI)
+  components/auth/  # Pages authentification
+  contexts/         # AuthContext (Supabase Auth)
+  data/             # Formats, exercices, programmes (seed)
+  hooks/            # Hooks métier (useHistory, useProgram, useTheme...)
+  lib/              # Client Supabase
+  types/            # Types TypeScript
+  utils/            # Utilitaires (images, difficulté, liens)
+public/
+  sessions/         # Séances JSON (contenu éditorial)
+supabase/
+  migrations/       # Migrations SQL
+  email-templates/  # Templates email (confirm signup, reset password)
+```
+
+## Base de données
+
+Deux migrations :
+
+1. **001** : `profiles`, `organizations`, trigger `handle_new_user`, RLS
+2. **002** : `session_completions`, `programs`, `program_sessions`, seed des 3 programmes fixes
+
+## Licence
+
+Propriétaire.
