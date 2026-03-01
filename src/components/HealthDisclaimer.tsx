@@ -52,7 +52,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="health-disclaimer-title"
@@ -65,9 +65,9 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
     >
       <div
         ref={dialogRef}
-        className="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[90vh] flex flex-col"
+        className="bg-white w-full max-w-lg rounded-3xl shadow-2xl max-h-full flex flex-col"
       >
-        <div className="p-6 pb-0">
+        <div className="p-6 pb-0 shrink-0">
           <div className="text-3xl mb-3">⚕️</div>
           <h2 id="health-disclaimer-title" className="text-xl font-bold text-gray-900 mb-1">
             Avertissement santé
@@ -99,7 +99,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
           </p>
         </div>
 
-        <div className="p-6 space-y-4">
+        <div className="p-6 pt-4 space-y-4 shrink-0">
           <label className="flex items-start gap-3 cursor-pointer">
             <input
               type="checkbox"
