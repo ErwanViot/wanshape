@@ -35,7 +35,24 @@ for (const ex of EXERCISES_DATA) {
   }
 }
 
+// Sorted known names from longest to shortest for prefix matching
+const sortedKeys = [...linkMap.keys()].sort((a, b) => b.length - a.length);
+
 /** Returns { slug, anchor? } if the exercise has a dedicated page, null otherwise. */
 export function getExerciseLink(name: string): ExerciseLink | null {
-  return linkMap.get(normalize(name)) ?? null;
+  const key = normalize(name);
+
+  // 1. Exact match
+  const exact = linkMap.get(key);
+  if (exact) return exact;
+
+  // 2. Fuzzy prefix: find the longest known name that is a prefix of the input
+  //    e.g. "Pompes sur genoux" → matches "pompes" → links to pompes-classiques
+  for (const known of sortedKeys) {
+    if (key.startsWith(known) && (key.length === known.length || key[known.length] === ' ')) {
+      return linkMap.get(known)!;
+    }
+  }
+
+  return null;
 }

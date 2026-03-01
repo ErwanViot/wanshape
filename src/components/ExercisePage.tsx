@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { Link, useParams, useLocation, Navigate } from 'react-router';
-import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { Link, Navigate, useLocation, useParams } from 'react-router';
 import { getExerciseBySlug } from '../data/exercises.ts';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { CATEGORY_LABELS, DIFFICULTY_COLORS, DIFFICULTY_LABELS } from '../types/exercise.ts';
 import { slugify } from '../utils/exerciseLinks.ts';
 import { ContentSection } from './ContentSection.tsx';
-import { CATEGORY_LABELS, DIFFICULTY_LABELS, DIFFICULTY_COLORS } from '../types/exercise.ts';
 
 export function ExercisePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -34,7 +34,7 @@ export function ExercisePage() {
   }
 
   return (
-    <div className="min-h-screen bg-surface">
+    <>
       {/* Hero */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
@@ -47,7 +47,15 @@ export function ExercisePage() {
           className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white"
           aria-label="Retour aux exercices"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          >
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </Link>
@@ -65,16 +73,17 @@ export function ExercisePage() {
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-2xl mx-auto px-6 py-8 space-y-8">
         {/* Intro */}
-        <p className="text-base text-body leading-relaxed">
-          {exercise.shortDescription}
-        </p>
+        <p className="text-base text-body leading-relaxed">{exercise.shortDescription}</p>
 
         {/* Muscles ciblés */}
         <div className="flex flex-wrap gap-2">
-          {exercise.muscles.map(m => (
-            <span key={m} className="px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+          {exercise.muscles.map((m) => (
+            <span
+              key={m}
+              className="px-3 py-1.5 rounded-full text-xs font-semibold bg-brand/10 text-link border border-brand/20"
+            >
               {m}
             </span>
           ))}
@@ -95,7 +104,7 @@ export function ExercisePage() {
           <ul className="space-y-2">
             {exercise.benefits.map((b, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
-                <span className="text-indigo-400 shrink-0 mt-0.5">•</span>
+                <span className="text-link shrink-0 mt-0.5">•</span>
                 <span>{b}</span>
               </li>
             ))}
@@ -106,7 +115,11 @@ export function ExercisePage() {
         <ContentSection title="Variantes" icon="🔄">
           <div className="space-y-4">
             {exercise.variants.map((v, i) => (
-              <div key={i} id={slugify(v.name)} className="scroll-mt-24 target:ring-2 target:ring-indigo-500/30 target:rounded-lg target:p-2 target:-m-2">
+              <div
+                key={i}
+                id={slugify(v.name)}
+                className="scroll-mt-24 target:ring-2 target:ring-brand/30 target:rounded-lg target:p-2 target:-m-2"
+              >
                 <h3 className="text-sm font-bold text-strong mb-1">{v.name}</h3>
                 <p className="text-sm text-subtle leading-relaxed">{v.description}</p>
               </div>
@@ -144,20 +157,25 @@ export function ExercisePage() {
             to="/exercices"
             className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
               <path d="M15 18l-6-6 6-6" />
             </svg>
             Nos exercices
           </Link>
-          <Link
-            to="/formats"
-            className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
-          >
+          <Link to="/formats" className="text-sm text-link hover:text-link-hover transition-colors">
             Les formats →
           </Link>
         </div>
-      </main>
-    </div>
+      </div>
+    </>
   );
 }
 

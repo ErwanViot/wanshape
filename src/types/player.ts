@@ -1,8 +1,8 @@
 import type { BlockType } from './session.ts';
 
-export type TimerMode = "countdown" | "countup" | "manual" | "emom" | "amrap";
-export type StepPhase = "work" | "rest" | "prepare" | "transition";
-export type PlayerStatus = "idle" | "countdown" | "active" | "rest" | "transition" | "paused" | "complete";
+export type TimerMode = 'countdown' | 'countup' | 'manual' | 'emom' | 'amrap';
+export type StepPhase = 'work' | 'rest' | 'prepare' | 'transition';
+export type PlayerStatus = 'idle' | 'countdown' | 'active' | 'rest' | 'transition' | 'paused' | 'complete';
 
 export interface StepRoundInfo {
   current: number;
@@ -27,7 +27,7 @@ export interface AtomicStep {
 
   exerciseName: string;
   instructions: string;
-  repTarget?: number | "max";
+  repTarget?: number | 'max';
   tempo?: string;
 
   blockName: string;
@@ -51,13 +51,4 @@ export interface AtomicStep {
   emomExercises?: AMRAPExerciseInfo[];
 
   estimatedDuration: number;
-}
-
-export interface PlayerState {
-  status: PlayerStatus;
-  steps: AtomicStep[];
-  currentStepIndex: number;
-  elapsedTotal: number;
-  amrapRounds: number;
-  previousStatus: PlayerStatus | null;
 }

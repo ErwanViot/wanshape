@@ -1,5 +1,5 @@
-import type { AtomicStep } from '../types/player.ts';
 import { BLOCK_COLORS } from '../engine/constants.ts';
+import type { AtomicStep } from '../types/player.ts';
 import type { BlockType } from '../types/session.ts';
 
 interface Props {
@@ -43,20 +43,13 @@ export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
   return (
     <div className="w-full h-2 flex bg-white/5 overflow-hidden">
       {segments.map((seg, i) => (
-        <div
-          key={i}
-          className="h-full relative"
-          style={{ width: `${seg.widthPercent}%` }}
-        >
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{ backgroundColor: seg.color }}
-          />
+        <div key={i} className="h-full relative" style={{ width: `${seg.widthPercent}%` }}>
+          <div className="absolute inset-0 opacity-30" style={{ backgroundColor: seg.color }} />
           <div
             className="absolute inset-0 transition-all duration-300"
             style={{
               backgroundColor: seg.color,
-              clipPath: `inset(0 ${Math.max(0, 100 - (progress * 100 - seg.startPercent) / seg.widthPercent * 100)}% 0 0)`,
+              clipPath: `inset(0 ${Math.max(0, 100 - ((progress * 100 - seg.startPercent) / seg.widthPercent) * 100)}% 0 0)`,
             }}
           />
         </div>

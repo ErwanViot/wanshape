@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /formats
+Allow: /formats/
+Allow: /exercices
+Allow: /exercices/
+Disallow: /seance/
+Disallow: /sessions/
+Disallow: /legal/
+
+Sitemap: https://wanshape.fr/sitemap.xml

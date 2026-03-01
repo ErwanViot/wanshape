@@ -1,8 +1,8 @@
-import type { Session, Block } from '../types/session.ts';
+import type { Block, Session } from '../types/session.ts';
 
-export type DifficultyLevel = 'accessible' | 'modere' | 'intense';
+type DifficultyLevel = 'accessible' | 'modere' | 'intense';
 
-export interface Difficulty {
+interface Difficulty {
   level: DifficultyLevel;
   label: string;
   score: number;
@@ -36,19 +36,14 @@ function getWorkRestRatio(block: Block): number | null {
 }
 
 export function computeDifficulty(session: Session): Difficulty {
-  const activeBlocks = session.blocks.filter(
-    (b) => b.type !== 'warmup' && b.type !== 'cooldown',
-  );
+  const activeBlocks = session.blocks.filter((b) => b.type !== 'warmup' && b.type !== 'cooldown');
 
   if (activeBlocks.length === 0) {
     return { level: 'accessible', label: LABELS.accessible, score: 0 };
   }
 
   // Weighted average of block weights
-  const totalWeight = activeBlocks.reduce(
-    (sum, b) => sum + (BLOCK_WEIGHTS[b.type] ?? 1),
-    0,
-  );
+  const totalWeight = activeBlocks.reduce((sum, b) => sum + (BLOCK_WEIGHTS[b.type] ?? 1), 0);
   let score = totalWeight / activeBlocks.length;
 
   // Bonus: harsh work/rest ratio on HIIT/Tabata

@@ -1,5 +1,5 @@
-import type { AtomicStep } from '../types/player.ts';
 import { BLOCK_LABELS } from '../engine/constants.ts';
+import type { AtomicStep } from '../types/player.ts';
 import { TimerDisplay } from './TimerDisplay.tsx';
 
 interface Props {
@@ -34,31 +34,22 @@ export function BlockTransition({ step, remaining, progress }: Props) {
       {/* Block type label */}
       <div
         className="text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full"
-        style={{ backgroundColor: step.blockColor + '30', color: step.blockColor }}
+        style={{ backgroundColor: `${step.blockColor}30`, color: step.blockColor }}
       >
         {BLOCK_LABELS[step.blockType]}
       </div>
 
       {/* Block name */}
-      <h2 className="text-3xl sm:text-4xl font-bold text-white">
-        {step.exerciseName}
-      </h2>
+      <h2 className="text-3xl sm:text-4xl font-bold text-white">{step.exerciseName}</h2>
 
       {/* Description */}
-      <p className="text-white/60 text-base">
-        {step.instructions}
-      </p>
+      <p className="text-white/60 text-base">{step.instructions}</p>
 
       {/* Health disclaimer on first block */}
       {isFirstBlock && <HealthDisclaimer />}
 
       {/* Timer */}
-      <TimerDisplay
-        remaining={remaining}
-        progress={progress}
-        color={step.blockColor}
-        size="small"
-      />
+      <TimerDisplay remaining={remaining} progress={progress} color={step.blockColor} size="small" />
     </div>
   );
 }

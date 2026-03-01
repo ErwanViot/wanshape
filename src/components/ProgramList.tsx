@@ -1,0 +1,64 @@
+import { Link } from 'react-router';
+import { useAuth } from '../contexts/AuthContext.tsx';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { usePrograms } from '../hooks/useProgram.ts';
+import { supabase } from '../lib/supabase.ts';
+import { ProgramCard } from './ProgramCard.tsx';
+
+export function ProgramList() {
+  const { user } = useAuth();
+  const { programs, loading } = usePrograms();
+
+  useDocumentHead({
+    title: 'Programmes',
+    description:
+      "Programmes d'entraînement structurés sur plusieurs semaines. Progressez à votre rythme avec des séances guidées.",
+  });
+
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
+      {/* Hero */}
+      <section className="text-center space-y-4 py-4 md:py-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-heading">
+          Nos <span className="gradient-text">programmes</span>
+        </h1>
+        <p className="text-base text-muted max-w-md mx-auto leading-relaxed">
+          Atteignez vos objectifs avec des programmes de plusieurs semaines, conçus pour des résultats
+          visibles.
+          {!user && ' Créez un compte gratuit pour suivre votre avancement.'}
+        </p>
+      </section>
+
+      {loading && (
+        <div className="flex items-center justify-center py-12">
+          <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        </div>
+      )}
+
+      {!loading && programs.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-muted">
+            {supabase ? 'Aucun programme disponible pour le moment.' : 'Service temporairement indisponible.'}
+          </p>
+        </div>
+      )}
+
+      {!loading && programs.length > 0 && (
+        <div className="grid grid-cols-1 gap-5">
+          {programs.map((p) => (
+            <ProgramCard key={p.id} program={p} />
+          ))}
+        </div>
+      )}
+
+      {/* CTA for visitors */}
+      {!user && supabase && !loading && programs.length > 0 && (
+        <div className="text-center pt-4">
+          <Link to="/signup" className="cta-gradient inline-block px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer">
+            Créer un compte gratuit
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}

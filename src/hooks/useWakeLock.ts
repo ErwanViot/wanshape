@@ -8,15 +8,18 @@ export function useWakeLock(active: boolean) {
 
     let released = false;
 
-    navigator.wakeLock.request('screen').then(sentinel => {
-      if (released) {
-        sentinel.release();
-        return;
-      }
-      wakeLock.current = sentinel;
-    }).catch(() => {
-      // Wake Lock not available (e.g. low battery, background tab)
-    });
+    navigator.wakeLock
+      .request('screen')
+      .then((sentinel) => {
+        if (released) {
+          sentinel.release();
+          return;
+        }
+        wakeLock.current = sentinel;
+      })
+      .catch(() => {
+        // Wake Lock not available (e.g. low battery, background tab)
+      });
 
     return () => {
       released = true;

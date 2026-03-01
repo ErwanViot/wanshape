@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <!-- SEO -->
     <title>WAN SHAPE — Séance de sport gratuite chaque jour, sans matériel</title>
@@ -70,7 +70,10 @@
   <body>
     <script>
       (function() {
-        var t = localStorage.getItem('wan-shape-theme');
+        var p = localStorage.getItem('wan-shape-theme') || 'system';
+        var t = p === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : p;
         if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
       })();
     </script>

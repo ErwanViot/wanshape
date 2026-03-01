@@ -1,36 +1,36 @@
-import type { Session, Block } from '../types/session.ts';
 import type { AtomicStep } from '../types/player.ts';
-import { expandWarmup } from './interpreters/warmup.ts';
-import { expandClassic } from './interpreters/classic.ts';
-import { expandCircuit } from './interpreters/circuit.ts';
-import { expandHIIT } from './interpreters/hiit.ts';
-import { expandTabata } from './interpreters/tabata.ts';
-import { expandEMOM } from './interpreters/emom.ts';
+import type { Block, Session } from '../types/session.ts';
+import { BLOCK_COLORS, FIRST_TRANSITION_DURATION, INTER_BLOCK_REST } from './constants.ts';
 import { expandAMRAP } from './interpreters/amrap.ts';
-import { expandSuperset } from './interpreters/superset.ts';
+import { expandCircuit } from './interpreters/circuit.ts';
+import { expandClassic } from './interpreters/classic.ts';
+import { expandEMOM } from './interpreters/emom.ts';
+import { expandHIIT } from './interpreters/hiit.ts';
 import { expandPyramid } from './interpreters/pyramid.ts';
-import { FIRST_TRANSITION_DURATION, INTER_BLOCK_REST, BLOCK_COLORS } from './constants.ts';
+import { expandSuperset } from './interpreters/superset.ts';
+import { expandTabata } from './interpreters/tabata.ts';
+import { expandWarmup } from './interpreters/warmup.ts';
 
 function expandBlock(block: Block, blockIndex: number, totalBlocks: number): AtomicStep[] {
   switch (block.type) {
-    case "warmup":
-    case "cooldown":
+    case 'warmup':
+    case 'cooldown':
       return expandWarmup(block, blockIndex, totalBlocks);
-    case "classic":
+    case 'classic':
       return expandClassic(block, blockIndex, totalBlocks);
-    case "circuit":
+    case 'circuit':
       return expandCircuit(block, blockIndex, totalBlocks);
-    case "hiit":
+    case 'hiit':
       return expandHIIT(block, blockIndex, totalBlocks);
-    case "tabata":
+    case 'tabata':
       return expandTabata(block, blockIndex, totalBlocks);
-    case "emom":
+    case 'emom':
       return expandEMOM(block, blockIndex, totalBlocks);
-    case "amrap":
+    case 'amrap':
       return expandAMRAP(block, blockIndex, totalBlocks);
-    case "superset":
+    case 'superset':
       return expandSuperset(block, blockIndex, totalBlocks);
-    case "pyramid":
+    case 'pyramid':
       return expandPyramid(block, blockIndex, totalBlocks);
   }
 }
@@ -52,10 +52,10 @@ export function compileSession(session: Session): AtomicStep[] {
     if (nextBlock && needsInterBlockRest(session.blocks[i], nextBlock)) {
       allSteps.push({
         id: `inter-block-rest-${i}`,
-        phase: "rest",
-        timerMode: "countdown",
+        phase: 'rest',
+        timerMode: 'countdown',
         duration: INTER_BLOCK_REST,
-        exerciseName: "Repos entre blocs",
+        exerciseName: 'Repos entre blocs',
         instructions: `Prochain bloc : ${nextBlock.name}`,
         blockName: session.blocks[i].name,
         blockType: session.blocks[i].type,
@@ -71,7 +71,7 @@ export function compileSession(session: Session): AtomicStep[] {
   for (let i = 0; i < allSteps.length; i++) {
     if (allSteps[i].isLastInBlock && !allSteps[i].nextStepPreview && i < allSteps.length - 1) {
       const next = allSteps[i + 1];
-      if (next.phase === "transition" || next.phase === "rest") {
+      if (next.phase === 'transition' || next.phase === 'rest') {
         allSteps[i].nextStepPreview = {
           exerciseName: next.exerciseName,
           description: next.instructions,
@@ -87,8 +87,4 @@ export function compileSession(session: Session): AtomicStep[] {
   }
 
   return allSteps;
-}
-
-export function getTotalEstimatedDuration(steps: AtomicStep[]): number {
-  return steps.reduce((sum, step) => sum + step.estimatedDuration, 0);
 }
