@@ -28,7 +28,7 @@ export function BrandHeader() {
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5">
           <img
-            src="/logo-wansoft.png"
+            src="/logo-wanshape.png"
             alt=""
             className="w-7 h-7 md:w-8 md:h-8 shrink-0"
           />
@@ -60,7 +60,7 @@ export function BrandHeader() {
           <button
             type="button"
             onClick={cycleTheme}
-            className="hidden md:flex p-2 rounded-xl border border-divider hover:border-divider-strong transition-colors"
+            className="flex p-2 rounded-xl border border-divider hover:border-divider-strong transition-colors"
             aria-label={THEME_LABELS[preference]}
             title={THEME_LABELS[preference]}
           >
