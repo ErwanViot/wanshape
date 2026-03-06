@@ -182,7 +182,7 @@ export function SignupPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 rounded-xl text-white font-semibold cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? 'Création...' : 'Créer mon compte'}
             </button>
