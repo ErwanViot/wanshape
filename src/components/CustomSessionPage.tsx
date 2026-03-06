@@ -59,7 +59,7 @@ export function CustomSessionPage() {
 
   const navigate = useNavigate();
   const { generate, loading, error } = useGenerateSession();
-  const { sessions: history, loading: historyLoading, refresh } = useCustomSessions();
+  const { sessions: history, loading: historyLoading, error: historyError, refresh } = useCustomSessions();
 
   const [mode, setMode] = useState<CustomSessionMode>('quick');
   const [preset, setPreset] = useState<CustomSessionPreset>('transpirer');
@@ -302,6 +302,13 @@ export function CustomSessionPage() {
         <div className="mt-4 flex items-center justify-center gap-3">
           <div className="w-5 h-5 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
           <p className="text-sm text-muted">L'IA prépare votre séance...</p>
+        </div>
+      )}
+
+      {/* History error */}
+      {historyError && (
+        <div className="mt-6 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+          {historyError}
         </div>
       )}
 

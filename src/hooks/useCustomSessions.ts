@@ -5,6 +5,7 @@ import type { CustomSessionRecord } from '../types/custom-session.ts';
 export function useCustomSessions() {
   const [sessions, setSessions] = useState<CustomSessionRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
     if (!supabase) {
@@ -19,7 +20,7 @@ export function useCustomSessions() {
         return;
       }
 
-      const { data, error } = await supabase
+      const { data, error: fetchError } = await supabase
         .from('custom_sessions')
         .select('*')
         .eq('user_id', user.id)
@@ -27,11 +28,14 @@ export function useCustomSessions() {
         .order('created_at', { ascending: false })
         .limit(20);
 
-      if (!error && data) {
+      if (fetchError) {
+        setError('Impossible de charger l\u2019historique.');
+      } else {
         setSessions(data as unknown as CustomSessionRecord[]);
+        setError(null);
       }
     } catch {
-      // silently fail
+      setError('Impossible de charger l\u2019historique.');
     } finally {
       setLoading(false);
     }
@@ -41,7 +45,7 @@ export function useCustomSessions() {
     refresh();
   }, [refresh]);
 
-  return { sessions, loading, refresh };
+  return { sessions, loading, error, refresh };
 }
 
 export function useCustomSession(id: string | undefined) {
@@ -58,10 +62,13 @@ export function useCustomSession(id: string | undefined) {
 
     async function load() {
       try {
+        const { data: { user } } = await supabase!.auth.getUser();
+        if (!user) { if (!cancelled) setLoading(false); return; }
         const { data, error } = await supabase!
           .from('custom_sessions')
           .select('*')
           .eq('id', id)
+          .eq('user_id', user.id)
           .single();
 
         if (!cancelled && !error && data) {
@@ -87,10 +94,13 @@ export function useCustomSession(id: string | undefined) {
 export async function confirmCustomSession(id: string): Promise<boolean> {
   if (!supabase) return false;
   try {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return false;
     const { error } = await supabase
       .from('custom_sessions')
       .update({ status: 'confirmed' })
-      .eq('id', id);
+      .eq('id', id)
+      .eq('user_id', user.id);
     return !error;
   } catch {
     return false;

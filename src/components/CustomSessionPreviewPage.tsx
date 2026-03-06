@@ -4,6 +4,7 @@ import { BLOCK_COLORS, BLOCK_LABELS } from '../engine/constants.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { confirmCustomSession, useCustomSession } from '../hooks/useCustomSessions.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
+import type { CustomSessionMode, Equipment, Intensity, BodyFocus } from '../types/custom-session.ts';
 import type { Block, Session } from '../types/session.ts';
 
 function BlockDetail({ block, index }: { block: Block; index: number }) {
@@ -138,12 +139,12 @@ export function CustomSessionPreviewPage() {
 
   const handleRegenerate = async () => {
     const input = {
-      mode: record.mode as 'quick' | 'detailed',
+      mode: record.mode as CustomSessionMode,
       duration: record.duration_minutes,
       ...(record.preset ? { preset: record.preset as 'transpirer' | 'renfo' | 'express' | 'mobilite' } : {}),
-      ...(record.equipment.length > 0 ? { equipment: record.equipment as ('halteres' | 'elastiques' | 'kettlebell' | 'tapis' | 'barre-traction' | 'banc' | 'corde-a-sauter' | 'aucun')[] } : {}),
-      ...(record.intensity ? { intensity: record.intensity as 'douce' | 'moderee' | 'intense' } : {}),
-      ...(record.body_focus.length > 0 ? { bodyFocus: record.body_focus as ('upper' | 'lower' | 'core' | 'full')[] } : {}),
+      ...(record.equipment.length > 0 ? { equipment: record.equipment as Equipment[] } : {}),
+      ...(record.intensity ? { intensity: record.intensity as Intensity } : {}),
+      ...(record.body_focus.length > 0 ? { bodyFocus: record.body_focus as BodyFocus[] } : {}),
       ...(record.preferences ? { preferences: record.preferences } : {}),
       refinementNote: refinementNote.trim() || undefined,
       previousSession: session,
