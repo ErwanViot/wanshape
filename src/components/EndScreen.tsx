@@ -11,22 +11,24 @@ interface Props {
   durationSeconds: number;
   onBack: () => void;
   programSessionId?: string;
+  customSessionId?: string;
 }
 
-export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId }: Props) {
+export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId, customSessionId }: Props) {
   const { user } = useAuth();
   const { save, saved } = useSaveCompletion();
 
   useEffect(() => {
     if (!user) return;
     save({
-      sessionDate: programSessionId ? undefined : session.date,
+      sessionDate: programSessionId || customSessionId ? undefined : session.date,
       programSessionId,
+      customSessionId,
       durationSeconds,
       amrapRounds,
       sessionTitle: session.title,
     });
-  }, [user, save, session.date, programSessionId, durationSeconds, amrapRounds]);
+  }, [user, save, session.date, programSessionId, customSessionId, durationSeconds, amrapRounds]);
 
   const realMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
 
@@ -65,7 +67,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
         onClick={onBack}
         className="mt-4 px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
       >
-        {programSessionId ? 'Retour au programme' : "Retour à l'accueil"}
+        {programSessionId ? 'Retour au programme' : customSessionId ? 'Retour à la séance' : "Retour à l'accueil"}
       </button>
     </div>
   );

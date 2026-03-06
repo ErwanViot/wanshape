@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { FEATURE_CUSTOM_SESSION } from '../config/features.ts';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
@@ -195,6 +196,34 @@ function ConnectedContent({
           </span>
           <span className="text-sm text-subtle group-hover:text-heading transition-colors">
             Envie de structure ? Voir nos programmes
+          </span>
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="text-muted ml-auto shrink-0"
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </Link>
+      )}
+
+      {/* Custom session CTA */}
+      {FEATURE_CUSTOM_SESSION && (
+        <Link
+          to="/seance/custom"
+          className="flex items-center gap-3 glass-card rounded-xl px-4 py-3 group transition-colors hover:border-brand/30 cursor-pointer"
+        >
+          <span className="text-lg shrink-0" role="img" aria-label="Séance personnalisée">
+            ✨
+          </span>
+          <span className="text-sm text-subtle group-hover:text-heading transition-colors">
+            Créer une séance sur-mesure avec l'IA
           </span>
           <svg
             aria-hidden="true"

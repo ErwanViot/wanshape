@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RequireAuth } from './components/auth/RequireAuth.tsx';
+import { FEATURE_CUSTOM_SESSION } from './config/features.ts';
 import { Exercises } from './components/Exercises.tsx';
 import { Formats } from './components/Formats.tsx';
 import { Home } from './components/Home.tsx';
@@ -32,6 +33,15 @@ const LazyResetPasswordPage = lazy(() =>
 );
 const LazyUpdatePasswordPage = lazy(() =>
   import('./components/auth/UpdatePasswordPage.tsx').then((m) => ({ default: m.UpdatePasswordPage })),
+);
+const LazyCustomSessionPage = lazy(() =>
+  import('./components/CustomSessionPage.tsx').then((m) => ({ default: m.CustomSessionPage })),
+);
+const LazyCustomSessionPreviewPage = lazy(() =>
+  import('./components/CustomSessionPreviewPage.tsx').then((m) => ({ default: m.CustomSessionPreviewPage })),
+);
+const LazyCustomPlayerPage = lazy(() =>
+  import('./components/CustomPlayerPage.tsx').then((m) => ({ default: m.CustomPlayerPage })),
 );
 
 function Lazy({ children }: { children: React.ReactNode }) {
@@ -146,6 +156,31 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
+      // Custom session routes (feature-flagged)
+      ...(FEATURE_CUSTOM_SESSION
+        ? [
+            {
+              path: 'seance/custom',
+              element: (
+                <Lazy>
+                  <RequireAuth>
+                    <LazyCustomSessionPage />
+                  </RequireAuth>
+                </Lazy>
+              ),
+            },
+            {
+              path: 'seance/custom/:id',
+              element: (
+                <Lazy>
+                  <RequireAuth>
+                    <LazyCustomSessionPreviewPage />
+                  </RequireAuth>
+                </Lazy>
+              ),
+            },
+          ]
+        : []),
     ],
   },
   // Player — full screen, no chrome
@@ -165,6 +200,19 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
+      // Custom session player (feature-flagged)
+      ...(FEATURE_CUSTOM_SESSION
+        ? [
+            {
+              path: 'seance/custom/:id/play',
+              element: (
+                <Lazy>
+                  <LazyCustomPlayerPage />
+                </Lazy>
+              ),
+            },
+          ]
+        : []),
     ],
   },
   // Catch-all
