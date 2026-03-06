@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase.ts';
 interface SaveParams {
   sessionDate?: string;
   programSessionId?: string;
+  customSessionId?: string;
   durationSeconds: number;
   amrapRounds: number;
   sessionTitle?: string;
@@ -26,6 +27,7 @@ export function useSaveCompletion() {
       user_id: user.id,
       session_date: params.sessionDate ?? null,
       program_session_id: params.programSessionId ?? null,
+      custom_session_id: params.customSessionId ?? null,
       duration_seconds: params.durationSeconds,
       amrap_rounds: params.amrapRounds > 0 ? params.amrapRounds : null,
       metadata: params.sessionTitle ? { session_title: params.sessionTitle } : {},
