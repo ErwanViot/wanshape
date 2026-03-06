@@ -108,7 +108,7 @@ export function UpdatePasswordPage() {
             <Link
               to="/profil"
               replace
-              className="inline-block px-6 py-3 rounded-xl text-white font-semibold cta-gradient"
+              className="inline-block px-6 py-3 rounded-xl text-white font-semibold btn-primary"
             >
               Accéder à mon profil
             </Link>
@@ -168,7 +168,7 @@ export function UpdatePasswordPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 rounded-xl text-white font-semibold cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? 'Mise à jour...' : 'Mettre à jour le mot de passe'}
             </button>

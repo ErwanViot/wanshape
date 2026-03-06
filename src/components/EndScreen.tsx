@@ -98,7 +98,7 @@ function SignupNudge() {
         streak et vos programmes.
       </p>
       <div className="flex items-center gap-3">
-        <Link to="/signup" className="cta-gradient px-5 py-2.5 rounded-xl text-sm font-bold text-white">
+        <Link to="/signup" className="btn-primary px-5 py-2.5 rounded-xl text-sm font-bold text-white">
           Créer un compte
         </Link>
         <button type="button" onClick={dismiss} className="text-white/40 text-xs hover:text-white/60 transition-colors">

@@ -132,7 +132,7 @@ body {
   background-clip: text;
 }
 
-/* CTA gradient button */
+/* CTA gradient button — reserve for primary call-to-action only */
 .cta-gradient {
   background: linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary));
   transition: all 0.25s ease;
@@ -145,6 +145,18 @@ body {
 }
 .cta-gradient:active {
   transform: scale(0.98) translateY(0);
+}
+
+/* Solid brand button — for form submits, secondary actions */
+.btn-primary {
+  background: var(--color-brand);
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--color-brand) 85%, white);
+}
+.btn-primary:active {
+  transform: scale(0.98);
 }
 
 /* Timeline bar */
