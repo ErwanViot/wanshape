@@ -11,22 +11,24 @@ interface Props {
   durationSeconds: number;
   onBack: () => void;
   programSessionId?: string;
+  customSessionId?: string;
 }
 
-export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId }: Props) {
+export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId, customSessionId }: Props) {
   const { user } = useAuth();
   const { save, saved } = useSaveCompletion();
 
   useEffect(() => {
     if (!user) return;
     save({
-      sessionDate: programSessionId ? undefined : session.date,
+      sessionDate: programSessionId || customSessionId ? undefined : session.date,
       programSessionId,
+      customSessionId,
       durationSeconds,
       amrapRounds,
       sessionTitle: session.title,
     });
-  }, [user, save, session.date, programSessionId, durationSeconds, amrapRounds]);
+  }, [user, save, session.date, programSessionId, customSessionId, durationSeconds, amrapRounds]);
 
   const realMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
 
@@ -65,7 +67,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
         onClick={onBack}
         className="mt-4 px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
       >
-        {programSessionId ? 'Retour au programme' : "Retour à l'accueil"}
+        {programSessionId ? 'Retour au programme' : customSessionId ? 'Retour à la séance' : "Retour à l'accueil"}
       </button>
     </div>
   );
@@ -90,14 +92,13 @@ function SignupNudge() {
 
   return (
     <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 p-5 text-left">
-      <p className="text-white text-sm font-semibold mb-1">Ne perdez pas votre progression</p>
+      <p className="text-white text-sm font-semibold mb-1">Ne perds pas ta progression</p>
       <p className="text-white/50 text-xs leading-relaxed mb-4">
-        Sans compte, cette séance ne sera pas sauvegardée. Créez un compte gratuit pour garder votre historique, votre
-        streak et vos programmes.
+        Sans compte, cette séance disparaît. Crée ton compte gratuit pour suivre ta progression et garder ta dynamique.
       </p>
       <div className="flex items-center gap-3">
-        <Link to="/signup" className="cta-gradient px-5 py-2.5 rounded-xl text-sm font-bold text-white">
-          Créer un compte
+        <Link to="/signup" className="btn-primary px-5 py-2.5 rounded-xl text-sm font-bold text-white">
+          Créer mon compte
         </Link>
         <button type="button" onClick={dismiss} className="text-white/40 text-xs hover:text-white/60 transition-colors">
           Plus tard

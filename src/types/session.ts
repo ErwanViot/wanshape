@@ -168,4 +168,5 @@ export interface Session {
 export type SessionSource =
   | { type: 'static' }
   | { type: 'api'; baseUrl: string }
-  | { type: 'program'; programSessionId: string };
+  | { type: 'program'; programSessionId: string }
+  | { type: 'custom'; customSessionId: string };

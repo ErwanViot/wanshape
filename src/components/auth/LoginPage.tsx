@@ -12,7 +12,7 @@ export function LoginPage() {
 
   useDocumentHead({
     title: 'Connexion',
-    description: 'Connectez-vous à votre compte WanShape.',
+    description: 'Connecte-toi à ton compte WanShape.',
   });
 
   if (!loading && user) return <Navigate to="/profil" replace />;
@@ -25,7 +25,7 @@ export function LoginPage() {
       const { error: err } = await signIn(email.trim(), password);
       if (err) setError(err);
     } catch {
-      setError('Une erreur est survenue. Veuillez réessayer.');
+      setError('Une erreur est survenue. Réessaie plus tard.');
     } finally {
       setSubmitting(false);
     }
@@ -69,7 +69,7 @@ export function LoginPage() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="vous@exemple.com"
+                placeholder="toi@exemple.com"
                 className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
               />
             </div>
@@ -93,7 +93,7 @@ export function LoginPage() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Votre mot de passe"
+                placeholder="Ton mot de passe"
                 className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
               />
             </div>
@@ -107,7 +107,7 @@ export function LoginPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 rounded-xl text-white font-semibold cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? 'Connexion...' : 'Se connecter'}
             </button>

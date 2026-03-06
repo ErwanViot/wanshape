@@ -15,7 +15,7 @@ export function SignupPage() {
 
   useDocumentHead({
     title: 'Créer un compte',
-    description: 'Créez votre compte gratuit pour sauvegarder vos séances et suivre vos progrès.',
+    description: 'Crée ton compte gratuit pour suivre ta progression et ne rien perdre.',
   });
 
   if (!loading && user) return <Navigate to="/profil" replace />;
@@ -36,7 +36,7 @@ export function SignupPage() {
         setSent(true);
       }
     } catch {
-      setError('Une erreur est survenue. Veuillez réessayer.');
+      setError('Une erreur est survenue. Réessaie plus tard.');
     } finally {
       setSubmitting(false);
     }
@@ -64,7 +64,7 @@ export function SignupPage() {
           Retour
         </Link>
 
-        <h1 className="text-2xl font-bold text-heading mb-8">Créer un compte</h1>
+        <h1 className="text-2xl font-bold text-heading mb-8">Crée ton compte</h1>
 
         <div className="glass-card rounded-2xl p-6">
           {sent ? (
@@ -118,7 +118,7 @@ export function SignupPage() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="vous@exemple.com"
+                placeholder="toi@exemple.com"
                 className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
               />
             </div>
@@ -165,11 +165,11 @@ export function SignupPage() {
               <p className="font-semibold text-subtle">En bref (pour ceux qui ne lisent pas les CGU) 😉</p>
               <ul className="space-y-0.5 list-inside">
                 <li>C'est gratuit, pas de piège.</li>
-                <li>On stocke votre email, votre prénom et vos séances. C'est tout.</li>
-                <li>On ne revend pas vos données.</li>
-                <li>Les exercices sont du contenu éditorial, pas du coaching : libre à vous de les suivre ou non.</li>
-                <li>On n'est pas médecins — consultez le vôtre avant de suer.</li>
-                <li>Vous pouvez supprimer votre compte quand vous voulez.</li>
+                <li>On stocke ton email, ton prénom et tes séances. C'est tout.</li>
+                <li>On ne revend pas tes données.</li>
+                <li>Les exercices sont du contenu éditorial, pas du coaching : libre à toi de les suivre ou non.</li>
+                <li>On n'est pas médecins — consulte le tien avant de suer.</li>
+                <li>Tu peux supprimer ton compte quand tu veux.</li>
               </ul>
             </div>
 
@@ -182,7 +182,7 @@ export function SignupPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 rounded-xl text-white font-semibold cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? 'Création...' : 'Créer mon compte'}
             </button>

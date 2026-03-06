@@ -12,7 +12,7 @@ export function ResetPasswordPage() {
 
   useDocumentHead({
     title: 'Mot de passe oublié',
-    description: 'Réinitialisez votre mot de passe WanShape.',
+    description: 'Réinitialise ton mot de passe WanShape.',
   });
 
   if (!loading && user) return <Navigate to="/profil" replace />;
@@ -29,7 +29,7 @@ export function ResetPasswordPage() {
         setSent(true);
       }
     } catch {
-      setError('Une erreur est survenue. Veuillez réessayer.');
+      setError('Une erreur est survenue. Réessaie plus tard.');
     } finally {
       setSubmitting(false);
     }
@@ -85,7 +85,7 @@ export function ResetPasswordPage() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <p className="text-sm text-muted mb-2">
-                Saisissez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+                Saisis ton adresse email et on t'enverra un lien pour réinitialiser ton mot de passe.
               </p>
 
               <div>
@@ -99,7 +99,7 @@ export function ResetPasswordPage() {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="vous@exemple.com"
+                  placeholder="toi@exemple.com"
                   className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
                 />
               </div>
@@ -113,7 +113,7 @@ export function ResetPasswordPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-3 rounded-xl text-white font-semibold cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitting ? 'Envoi...' : 'Envoyer le lien'}
               </button>

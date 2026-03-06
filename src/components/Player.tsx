@@ -100,10 +100,12 @@ function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep
 export function Player({
   session,
   programSessionId,
+  customSessionId,
   backTo = '/',
 }: {
   session: Session;
   programSessionId?: string;
+  customSessionId?: string;
   backTo?: string;
 }) {
   const navigate = useNavigate();
@@ -129,6 +131,7 @@ export function Player({
         durationSeconds={workout.durationSeconds}
         onBack={goBack}
         programSessionId={programSessionId}
+        customSessionId={customSessionId}
       />
     );
   }
