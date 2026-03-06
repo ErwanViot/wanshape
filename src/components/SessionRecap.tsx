@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import { BLOCK_COLORS } from '../engine/constants.ts';
 import type { Block, Session } from '../types/session.ts';
 import { getExerciseLink } from '../utils/exerciseLinks.ts';
-import { computeTimeline, formatBlockDuration } from '../utils/sessionTimeline.ts';
+import { computeTimeline } from '../utils/sessionTimeline.ts';
 
 interface Props {
   session: Session;
@@ -27,7 +27,7 @@ export function SessionRecap({ session }: Props) {
       <div className="mt-6 pt-4 border-t border-divider">
         <div className="flex items-center justify-between text-xs text-muted">
           <span>{session.blocks.length} blocs</span>
-          <span>~{formatBlockDuration(totalDuration)} estimées</span>
+          <span>~{session.estimatedDuration} min estimées</span>
         </div>
 
         {/* Mini timeline */}
