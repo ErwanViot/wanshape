@@ -92,14 +92,13 @@ function SignupNudge() {
 
   return (
     <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 p-5 text-left">
-      <p className="text-white text-sm font-semibold mb-1">Ne perdez pas votre progression</p>
+      <p className="text-white text-sm font-semibold mb-1">Ne perds pas ta progression</p>
       <p className="text-white/50 text-xs leading-relaxed mb-4">
-        Sans compte, cette séance ne sera pas sauvegardée. Créez un compte gratuit pour garder votre historique, votre
-        streak et vos programmes.
+        Sans compte, cette séance disparaît. Crée ton compte gratuit pour suivre ta progression et garder ta dynamique.
       </p>
       <div className="flex items-center gap-3">
         <Link to="/signup" className="btn-primary px-5 py-2.5 rounded-xl text-sm font-bold text-white">
-          Créer un compte
+          Créer mon compte
         </Link>
         <button type="button" onClick={dismiss} className="text-white/40 text-xs hover:text-white/60 transition-colors">
           Plus tard

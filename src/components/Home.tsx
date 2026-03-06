@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
 import { FEATURE_CUSTOM_SESSION } from '../config/features.ts';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -14,6 +15,7 @@ import { getProgramImage } from '../utils/programImage.ts';
 import { Footer } from './Footer.tsx';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
+import { WelcomeModal, useShowWelcome } from './WelcomeModal.tsx';
 
 function formatShortDate(dateKey: string): string {
   const d = parseDDMMYYYY(dateKey);
@@ -29,6 +31,8 @@ export function Home() {
   const { session: tomorrowSession, loading: tomorrowLoading } = useSession(tomorrowKey);
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
   const { user } = useAuth();
+  const shouldShowWelcome = useShowWelcome(user);
+  const [showWelcome, setShowWelcome] = useState(shouldShowWelcome);
 
   useDocumentHead({
     title: 'WAN SHAPE',
@@ -43,6 +47,7 @@ export function Home() {
   return (
     <>
       {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
+      {showWelcome && <WelcomeModal onClose={() => setShowWelcome(false)} />}
 
       <div className="px-6 md:px-10 lg:px-14 pb-8 max-w-3xl mx-auto">
         {user ? (
@@ -195,7 +200,7 @@ function ConnectedContent({
             📋
           </span>
           <span className="text-sm text-subtle group-hover:text-heading transition-colors">
-            Envie de structure ? Voir nos programmes
+            Atteins tes objectifs avec un programme guidé
           </span>
           <svg
             aria-hidden="true"
@@ -223,7 +228,7 @@ function ConnectedContent({
             ✨
           </span>
           <span className="text-sm text-subtle group-hover:text-heading transition-colors">
-            Créer une séance sur-mesure avec l'IA
+            Génère une séance adaptée à tes envies
           </span>
           <svg
             aria-hidden="true"
@@ -294,20 +299,19 @@ function VisitorContent({
       {/* Hero — typography-first, Behance-inspired */}
       <section className="text-center space-y-8 py-6 md:py-14">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-heading leading-[1.1]">
-          Votre séance de sport
+          Progresse chaque jour,
           <br />
-          <span className="gradient-text">guidée au quotidien</span>
+          <span className="gradient-text">à ton rythme</span>
         </h1>
 
         <p className="text-base md:text-lg text-muted max-w-md mx-auto leading-relaxed">
-          8 formats d'entraînement variés, 25 à 40 minutes, sans matériel.
-          Chaque jour une séance différente, 100&nbsp;% gratuit.
+          Des séances courtes et variées, sans matériel, pour te dépasser un peu plus chaque jour. 100&nbsp;% gratuit.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           {supabase && (
             <Link to="/signup" className="cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white">
-              Créer un compte gratuit
+              Commencer gratuitement
             </Link>
           )}
           <button
@@ -315,7 +319,7 @@ function VisitorContent({
             onClick={onStart}
             className="px-8 py-3.5 rounded-full text-sm font-bold text-brand border border-brand/30 hover:bg-brand/5 transition-colors cursor-pointer"
           >
-            Essayer la séance du jour
+            Essayer sans inscription
           </button>
         </div>
       </section>
