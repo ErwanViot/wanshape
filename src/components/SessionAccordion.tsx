@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { BLOCK_COLORS } from '../engine/constants.ts';
 import type { Block, Session } from '../types/session.ts';
 import { getExerciseLink } from '../utils/exerciseLinks.ts';
-import { computeTimeline, formatBlockDuration } from '../utils/sessionTimeline.ts';
+import { computeTimeline } from '../utils/sessionTimeline.ts';
 
 export function SessionAccordion({ session }: { session: Session }) {
   const [open, setOpen] = useState(false);
@@ -85,7 +85,7 @@ function SessionDetail({ session }: { session: Session }) {
         ))}
       </div>
       <p className="text-xs text-muted">
-        {session.blocks.length} blocs · ~{formatBlockDuration(totalDuration)} estimées
+        {session.blocks.length} blocs · ~{session.estimatedDuration} min estimées
       </p>
     </div>
   );

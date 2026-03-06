@@ -104,7 +104,7 @@ function ConnectedContent({
   onStart: () => void;
 }) {
   const { user } = useAuth();
-  const { activeProgram } = useActiveProgram(user?.id);
+  const { activeProgram, loading: programLoading } = useActiveProgram(user?.id);
 
   const progressPct =
     activeProgram && activeProgram.totalSessions > 0
@@ -116,7 +116,7 @@ function ConnectedContent({
       <h1 className="sr-only">WAN SHAPE — Votre séance de sport quotidienne</h1>
 
       {/* Programme — active or discovery */}
-      {activeProgram ? (
+      {programLoading ? null : activeProgram ? (
         <div className="rounded-2xl overflow-hidden border border-card-border">
           {/* Image hero with title + progress */}
           <Link

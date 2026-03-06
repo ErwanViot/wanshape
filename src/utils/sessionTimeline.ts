@@ -48,9 +48,3 @@ export function computeTimeline(blocks: Block[]): TimelineSegment[] {
     return { label, type: block.type, isAccent, duration };
   });
 }
-
-export function formatBlockDuration(seconds: number): string {
-  const mins = Math.round(seconds / 60);
-  if (mins < 1) return `${seconds}s`;
-  return `${mins} min`;
-}
