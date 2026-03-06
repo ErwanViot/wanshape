@@ -117,7 +117,7 @@ export function ProfilePage() {
         {!historyLoading && totalSessions === 0 && (
           <div className="rounded-xl border border-dashed border-divider-strong p-6 text-center">
             <p className="text-sm text-subtle">
-              Votre première séance vous attend — lancez-la et vos progrès s'afficheront ici.
+              Ta première séance t'attend — lance-toi et suis ta progression ici.
             </p>
             <Link to="/" className="inline-block mt-3 text-sm text-link hover:text-link-hover transition-colors">
               Voir la séance du jour
@@ -159,7 +159,7 @@ export function ProfilePage() {
             <div className="glass-card rounded-xl p-4 text-center">
               <p className="text-sm text-muted">Aucun programme en cours</p>
               <Link to="/programmes" className="inline-block mt-2 text-sm text-link hover:text-link-hover transition-colors">
-                Découvrir nos programmes
+                Trouver mon programme
               </Link>
             </div>
           )}

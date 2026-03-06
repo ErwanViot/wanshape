@@ -16,7 +16,7 @@ export function StreakWidget() {
       <div className="px-6 md:px-10 lg:px-14 mb-6">
         <div className="glass-card rounded-2xl p-5 md:p-6">
           <p className="text-sm text-subtle text-center">
-            Votre première séance vous attend — commencez aujourd'hui et suivez vos progrès ici.
+            Ta première séance t'attend — commence aujourd'hui et suis ta progression ici.
           </p>
         </div>
       </div>

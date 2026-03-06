@@ -23,9 +23,8 @@ export function ProgramList() {
           Nos <span className="gradient-text">programmes</span>
         </h1>
         <p className="text-base text-muted max-w-md mx-auto leading-relaxed">
-          Atteignez vos objectifs avec des programmes de plusieurs semaines, conçus pour des résultats
-          visibles.
-          {!user && ' Créez un compte gratuit pour suivre votre avancement.'}
+          Atteins tes objectifs avec des programmes conçus pour des résultats visibles.
+          {!user && ' Crée ton compte gratuit pour suivre ton avancement.'}
         </p>
       </section>
 
@@ -55,7 +54,7 @@ export function ProgramList() {
       {!user && supabase && !loading && programs.length > 0 && (
         <div className="text-center pt-4">
           <Link to="/signup" className="cta-gradient inline-block px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer">
-            Créer un compte gratuit
+            Commencer gratuitement
           </Link>
         </div>
       )}
