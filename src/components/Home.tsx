@@ -246,6 +246,34 @@ function ConnectedContent({
         </Link>
       )}
 
+      {/* Custom program CTA */}
+      {FEATURE_CUSTOM_SESSION && (
+        <Link
+          to="/programme/creer"
+          className="flex items-center gap-3 glass-card rounded-xl px-4 py-3 group transition-colors hover:border-brand/30 cursor-pointer"
+        >
+          <span className="text-lg shrink-0" role="img" aria-label="Programme personnalisé">
+            🏋️
+          </span>
+          <span className="text-sm text-subtle group-hover:text-heading transition-colors">
+            Crée un programme sur-mesure avec l'IA
+          </span>
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="text-muted ml-auto shrink-0"
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </Link>
+      )}
+
       {/* Today */}
       <SessionCard
         session={session}
