@@ -334,15 +334,16 @@ export function CreateProgramPage() {
           </fieldset>
 
           <div>
-            <label htmlFor="objectif-detail" className="text-sm font-semibold text-heading mb-2 block">
-              Précise ton objectif (optionnel)
+            <label htmlFor="objectif-detail" className="text-sm font-semibold text-heading mb-1 block">
+              Dis-nous en plus
             </label>
+            <p className="text-xs text-muted mb-2">Plus tu précises, plus ton programme sera adapté.</p>
             <textarea
               id="objectif-detail"
               value={draft.objectif_detail}
               onChange={(e) => update('objectif_detail', e.target.value)}
               maxLength={300}
-              rows={2}
+              rows={3}
               placeholder="Ex : perdre 5kg avant l'été, pré-saison foot, programme en parallèle du basket pour performer le week-end..."
               className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand"
             />
