@@ -37,6 +37,9 @@ const LazyUpdatePasswordPage = lazy(() =>
 const LazyCustomSessionPage = lazy(() =>
   import('./components/CustomSessionPage.tsx').then((m) => ({ default: m.CustomSessionPage })),
 );
+const LazyCreateProgramPage = lazy(() =>
+  import('./components/CreateProgramPage.tsx').then((m) => ({ default: m.CreateProgramPage })),
+);
 const LazyCustomSessionPreviewPage = lazy(() =>
   import('./components/CustomSessionPreviewPage.tsx').then((m) => ({ default: m.CustomSessionPreviewPage })),
 );
@@ -175,6 +178,16 @@ export const router = createBrowserRouter([
                 <Lazy>
                   <RequireAuth>
                     <LazyCustomSessionPreviewPage />
+                  </RequireAuth>
+                </Lazy>
+              ),
+            },
+            {
+              path: 'programme/creer',
+              element: (
+                <Lazy>
+                  <RequireAuth>
+                    <LazyCreateProgramPage />
                   </RequireAuth>
                 </Lazy>
               ),

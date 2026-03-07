@@ -20,6 +20,11 @@ export interface Program {
   fitness_level: 'beginner' | 'intermediate' | 'advanced';
   is_fixed: boolean;
   created_at: string;
+  user_id: string | null;
+  note_coach: string | null;
+  progression: import('./custom-program.ts').ProgramProgression | null;
+  consignes_semaine: Record<string, string> | null;
+  onboarding_data: import('./custom-program.ts').ProgramOnboardingInput | null;
 }
 
 export interface ProgramSession {

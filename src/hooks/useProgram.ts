@@ -172,11 +172,11 @@ export function useProgram(slug: string | undefined) {
     (async () => {
       try {
         // Fetch program
+        // RLS handles access control (fixed programs + own programs)
         const { data: pgm } = await supabase
           .from('programs')
           .select('*')
           .eq('slug', slug)
-          .eq('is_fixed', true)
           .single();
 
         if (cancelled || !pgm) {
@@ -251,12 +251,11 @@ export function useProgramSession(slug: string | undefined, order: number | unde
 
     (async () => {
       try {
-        // Find program by slug
+        // Find program by slug (RLS handles access control)
         const { data: pgm } = await supabase
           .from('programs')
           .select('id')
           .eq('slug', slug)
-          .eq('is_fixed', true)
           .single();
 
         if (cancelled || !pgm) {
