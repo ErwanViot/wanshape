@@ -39,11 +39,14 @@ function errorResponse(message: string, status = 400) {
   return jsonResponse({ error: message }, status);
 }
 
+const VALID_BLESSURES = [
+  'genou', 'dos', 'epaule', 'cheville', 'poignet', 'cervicales', 'hanche',
+];
+const VALID_SEXE = ['homme', 'femme', 'autre'];
+
 interface RequestInput {
   objectifs: string[];
   objectif_detail?: string;
-  sport?: string;
-  jour_match?: string;
   experience_duree: string;
   frequence_actuelle: string;
   blessures: string[];
@@ -85,6 +88,20 @@ function validateInput(body: RequestInput): string | null {
 
   if (body.blessures && !Array.isArray(body.blessures))
     return "blessures doit etre un tableau";
+  if (Array.isArray(body.blessures)) {
+    for (const b of body.blessures) {
+      if (!VALID_BLESSURES.includes(b)) return `Blessure invalide: ${b}`;
+    }
+  }
+
+  if (body.age !== undefined && body.age !== null) {
+    if (typeof body.age !== 'number' || body.age < 14 || body.age > 99)
+      return "age doit etre un nombre entre 14 et 99";
+  }
+
+  if (body.sexe !== undefined && body.sexe !== null && body.sexe !== '') {
+    if (!VALID_SEXE.includes(body.sexe)) return "sexe invalide";
+  }
 
   if (body.objectif_detail && typeof body.objectif_detail !== "string")
     return "objectif_detail doit etre une chaine";

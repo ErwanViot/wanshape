@@ -152,18 +152,18 @@ export function ProgramPage() {
           aria-labelledby="delete-program-title"
           onClick={(e) => { if (e.target === e.currentTarget) setShowDeleteModal(false); }}
         >
-          <div ref={deleteDialogRef} className="bg-white w-full max-w-sm rounded-2xl shadow-2xl p-6 space-y-4">
-            <h2 id="delete-program-title" className="text-lg font-bold text-gray-900">
+          <div ref={deleteDialogRef} className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4">
+            <h2 id="delete-program-title" className="text-lg font-bold text-heading">
               Supprimer ce programme ?
             </h2>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted">
               Ton historique de séances sera conservé. Cette action est irréversible.
             </p>
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setShowDeleteModal(false)}
-                className="flex-1 py-3 rounded-xl text-sm font-semibold border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
+                className="flex-1 py-3 rounded-xl text-sm font-semibold border border-divider text-muted hover:text-heading transition-colors cursor-pointer"
               >
                 Annuler
               </button>
@@ -321,6 +321,7 @@ export function ProgramPage() {
                 type="button"
                 onClick={() => isCustom && toggleWeek(week)}
                 className={`flex items-center gap-2 w-full text-left ${isCustom ? 'cursor-pointer' : ''}`}
+                aria-expanded={isCustom ? !isCollapsed : undefined}
               >
                 <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">Semaine {week}</h2>
                 {isCustom && (

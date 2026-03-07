@@ -9,8 +9,6 @@ export type FrequenceActuelle = 'jamais' | 'une_deux' | 'trois_quatre' | 'cinq_p
 export interface ProgramOnboardingInput {
   objectifs: string[];
   objectif_detail?: string;
-  sport?: string;
-  jour_match?: string;
   experience_duree: ExperienceDuree;
   frequence_actuelle: FrequenceActuelle;
   blessures: string[];

@@ -1,8 +1,6 @@
 interface ProgramInput {
   objectifs: string[];
   objectif_detail?: string;
-  sport?: string;
-  jour_match?: string;
   experience_duree: string;
   frequence_actuelle: string;
   blessures: string[];
@@ -112,7 +110,7 @@ Regles sport-specifiques :
 - Sports collectifs (hand, basket, foot, rugby) : travail explosif (box jumps, sprints), changements de direction, equilibre, renfo une jambe/un bras
 - Running : renfo bas du corps + core, descentes lentes controlees, petits sauts, mobilite hanches/chevilles
 - Sports de raquette : travail epaule/coude, rotateurs, core anti-rotation, agilite laterale
-- Si jour_match specifie : placer les seances les plus intenses 48-72h avant le match, seance legere J-1
+- Si le profil mentionne un sport et des jours de competition, placer les seances les plus intenses 48-72h avant, seance legere J-1
 
 Regles generales :
 - Ne jamais travailler les memes groupes musculaires 2 jours de suite
@@ -279,13 +277,6 @@ export function buildUserPrompt(input: ProgramInput): string {
     parts.push(`Detail : ${input.objectif_detail}`);
   }
 
-  if (input.sport) {
-    parts.push(`Sport pratique : ${input.sport}`);
-    if (input.jour_match) {
-      parts.push(`Jour de match/competition : ${input.jour_match}`);
-    }
-  }
-
   // Profil
   parts.push('');
   parts.push('PROFIL :');
@@ -301,9 +292,9 @@ export function buildUserPrompt(input: ProgramInput): string {
       .map((b) => BLESSURE_LABELS[b] ?? b)
       .join(', ');
     parts.push(`- ⚠️ BLESSURES/SENSIBILITES : ${blessuresList}`);
-    if (input.blessure_detail) {
-      parts.push(`  Detail : ${input.blessure_detail}`);
-    }
+  }
+  if (input.blessure_detail) {
+    parts.push(`- ⚠️ Detail blessure : ${input.blessure_detail}`);
   }
 
   // Programme

@@ -343,7 +343,7 @@ export function CreateProgramPage() {
               onChange={(e) => update('objectif_detail', e.target.value)}
               maxLength={300}
               rows={2}
-              placeholder="Ex : perdre 5kg avant l'été, reprendre après une blessure..."
+              placeholder="Ex : perdre 5kg avant l'été, pré-saison foot, programme en parallèle du basket pour performer le week-end..."
               className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand"
             />
           </div>

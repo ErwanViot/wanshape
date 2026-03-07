@@ -331,5 +331,16 @@ export function validateProgram(
     .replace(/https?:\/\/\S+/gi, '')
     .slice(0, 2000);
 
+  // Sanitize progression strings
+  if (isString(progression.logique)) progression.logique = sanitizeString(progression.logique);
+  for (const key of ['cible_semaine_3', 'cible_semaine_6', 'cible_semaine_8', 'cible_semaine_12']) {
+    if (isString(progression[key])) progression[key] = sanitizeString(progression[key] as string);
+  }
+
+  // Sanitize consignes_semaine values
+  for (const key of consigneKeys) {
+    consignes[key] = sanitizeString(consignes[key] as string);
+  }
+
   return { valid: true };
 }
