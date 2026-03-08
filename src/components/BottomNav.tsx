@@ -82,6 +82,26 @@ function UserIcon() {
   );
 }
 
+function ChartIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="18" y1="20" x2="18" y2="10" />
+      <line x1="12" y1="20" x2="12" y2="4" />
+      <line x1="6" y1="20" x2="6" y2="14" />
+    </svg>
+  );
+}
+
 function PlayIcon() {
   return (
     <svg
@@ -124,15 +144,17 @@ function NavItem({
 
 export function BottomNav() {
   const { pathname } = useLocation();
-  const { user, profile, loading } = useAuth();
+  const { user, profile } = useAuth();
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
 
   const isHome = pathname === '/';
   const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
   const isPrograms = pathname.startsWith('/programme');
-  const isProfile = pathname === '/profil' || pathname === '/login' || pathname === '/signup';
+  const isSuivi = pathname === '/suivi';
+  const isProfile = pathname === '/parametres' || pathname === '/profil' || pathname === '/login' || pathname === '/signup';
 
-  const profileTo = user ? '/profil' : '/login';
+  const suiviTo = user ? '/suivi' : '/login';
+  const profileTo = user ? '/parametres' : '/login';
   const profileLabel = user ? 'Profil' : 'Connexion';
 
   return (
@@ -148,7 +170,7 @@ export function BottomNav() {
           <NavItem to="/" label="Accueil" active={isHome}>
             <HomeIcon />
           </NavItem>
-          <NavItem to="/decouvrir" label="Découvrir" active={isDiscover}>
+          <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
             <DiscoverIcon />
           </NavItem>
 
@@ -167,15 +189,23 @@ export function BottomNav() {
           <NavItem to="/programmes" label="Programmes" active={isPrograms}>
             <ProgramsIcon />
           </NavItem>
+          {user && (
+            <NavItem to={suiviTo} label="Suivi" active={isSuivi}>
+              <ChartIcon />
+            </NavItem>
+          )}
+          {!user && (
           <NavItem to={profileTo} label={profileLabel} active={isProfile}>
-            {!loading && user ? (
-              <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand">
+            <UserIcon />
+          </NavItem>
+          )}
+          {user && (
+            <NavItem to={profileTo} label={profileLabel} active={isProfile}>
+              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] text-white font-bold bg-brand">
                 {getInitials(profile?.display_name ?? user.user_metadata?.display_name, user.email)}
               </div>
-            ) : (
-              <UserIcon />
-            )}
-          </NavItem>
+            </NavItem>
+          )}
         </div>
       </nav>
     </>

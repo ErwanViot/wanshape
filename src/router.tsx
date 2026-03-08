@@ -19,8 +19,11 @@ const LazySignupPage = lazy(() => import('./components/auth/SignupPage.tsx').the
 const LazyAuthCallback = lazy(() =>
   import('./components/auth/AuthCallback.tsx').then((m) => ({ default: m.AuthCallback })),
 );
-const LazyProfilePage = lazy(() =>
-  import('./components/auth/ProfilePage.tsx').then((m) => ({ default: m.ProfilePage })),
+const LazyStatsPage = lazy(() =>
+  import('./components/auth/StatsPage.tsx').then((m) => ({ default: m.StatsPage })),
+);
+const LazySettingsPage = lazy(() =>
+  import('./components/auth/SettingsPage.tsx').then((m) => ({ default: m.SettingsPage })),
 );
 const LazyDiscover = lazy(() => import('./components/Discover.tsx').then((m) => ({ default: m.Discover })));
 const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
@@ -136,15 +139,28 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'profil',
+        path: 'suivi',
         element: (
           <Lazy>
             <RequireAuth>
-              <LazyProfilePage />
+              <LazyStatsPage />
             </RequireAuth>
           </Lazy>
         ),
       },
+      { path: 'stats', element: <Navigate to="/suivi" replace /> },
+      {
+        path: 'parametres',
+        element: (
+          <Lazy>
+            <RequireAuth>
+              <LazySettingsPage />
+            </RequireAuth>
+          </Lazy>
+        ),
+      },
+      // Legacy redirects
+      { path: 'profil', element: <Navigate to="/suivi" replace /> },
       // Programme routes
       {
         path: 'programmes',

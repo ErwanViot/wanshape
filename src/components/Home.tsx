@@ -117,13 +117,16 @@ function ConnectedContent({
   tomorrowKey: string;
   onStart: () => void;
 }) {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const { activeProgram, loading: programLoading } = useActiveProgram(user?.id);
 
   const progressPct =
     activeProgram && activeProgram.totalSessions > 0
       ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
       : 0;
+
+  const firstName = (profile?.display_name ?? user?.user_metadata?.display_name ?? '')
+    .split(' ')[0];
 
   return (
     <div className="px-6 md:px-10 lg:px-14 py-8">
@@ -132,6 +135,11 @@ function ConnectedContent({
 
         {/* ── Titre + 3 colonnes d'action ── */}
         <section>
+          {firstName && (
+            <p className="text-sm text-muted mb-1">
+              Salut {firstName}
+            </p>
+          )}
           <h2 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">
             Aujourd'hui je &hellip;
           </h2>

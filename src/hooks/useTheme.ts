@@ -62,5 +62,9 @@ export function useTheme() {
     });
   }, []);
 
-  return { preference, theme: resolved, cycleTheme } as const;
+  const setTheme = useCallback((pref: ThemePreference) => {
+    setPreference(pref);
+  }, []);
+
+  return { preference, theme: resolved, cycleTheme, setTheme } as const;
 }

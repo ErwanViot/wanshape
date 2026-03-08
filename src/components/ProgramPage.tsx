@@ -6,21 +6,10 @@ import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { useProgram } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import type { Session } from '../types/session.ts';
-import { getProgramImage } from '../utils/programImage.ts';
+import { FITNESS_COLORS, FITNESS_LABELS, GOAL_COLORS, GOAL_LABELS } from '../utils/labels.ts';
+import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
-
-const FITNESS_LABELS: Record<string, string> = {
-  beginner: 'Débutant',
-  intermediate: 'Intermédiaire',
-  advanced: 'Avancé',
-};
-
-const FITNESS_COLORS: Record<string, string> = {
-  beginner: 'bg-emerald-500/30 text-emerald-200 border-emerald-400/40',
-  intermediate: 'bg-amber-500/30 text-amber-200 border-amber-400/40',
-  advanced: 'bg-red-500/30 text-red-200 border-red-400/40',
-};
 
 function getConsigneForWeek(consignes: Record<string, string> | null, week: number): string | null {
   if (!consignes) return null;
@@ -184,18 +173,12 @@ export function ProgramPage() {
         {/* Hero */}
         <section className="space-y-5 -mx-6 -mt-8 md:mx-0 md:mt-0">
           <div className="relative min-h-[220px] sm:min-h-[280px] md:rounded-2xl overflow-hidden">
-            {isCustom ? (
-              <div className="absolute inset-0 bg-gradient-to-br from-brand/30 via-surface to-brand-secondary/20" />
-            ) : (
-              <>
-                <img
-                  src={getProgramImage(program.slug)}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/75" />
-              </>
-            )}
+            <img
+              src={isCustom ? getAIProgramImage() : getProgramImage(program.slug)}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/75" />
 
             <div className="relative z-10 flex flex-col justify-between min-h-[220px] sm:min-h-[280px] p-6">
               <div className="flex items-start justify-between">
@@ -225,12 +208,12 @@ export function ProgramPage() {
                   {FITNESS_LABELS[program.fitness_level] ?? program.fitness_level}
                 </span>
 
-                <h1 className={`font-display text-3xl md:text-4xl font-black tracking-tight ${isCustom ? 'text-heading' : 'text-white'}`}>
+                <h1 className="font-display text-3xl md:text-4xl font-black tracking-tight text-white">
                   {program.title}
                 </h1>
 
                 {program.description && (
-                  <p className={`text-sm leading-relaxed ${isCustom ? 'text-muted' : 'text-white/70'}`}>{program.description}</p>
+                  <p className="text-sm leading-relaxed text-white/70">{program.description}</p>
                 )}
 
                 <div className={`flex items-center gap-3 text-xs ${isCustom ? 'text-faint' : 'text-white/50'}`}>
@@ -256,13 +239,9 @@ export function ProgramPage() {
                     {program.goals.map((goal) => (
                       <li
                         key={goal}
-                        className={`text-xs font-medium px-2.5 py-1 rounded-full border ${
-                          isCustom
-                            ? 'bg-white/5 border-divider text-muted'
-                            : 'bg-white/10 border-white/15 text-white/70'
-                        }`}
+                        className={`text-xs font-bold px-2.5 py-1 rounded-full text-white ${GOAL_COLORS[goal] ?? 'bg-rose-400/80'}`}
                       >
-                        {goal}
+                        {GOAL_LABELS[goal] ?? goal}
                       </li>
                     ))}
                   </ul>

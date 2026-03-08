@@ -5,7 +5,12 @@ const PROGRAM_IMAGES: Record<string, string> = {
 };
 
 const DEFAULT_IMAGE = '/images/fullbody.webp';
+const AI_PROGRAM_IMAGE = '/images/illustration-program.webp';
 
 export function getProgramImage(slug: string): string {
   return PROGRAM_IMAGES[slug] ?? DEFAULT_IMAGE;
+}
+
+export function getAIProgramImage(): string {
+  return AI_PROGRAM_IMAGE;
 }
