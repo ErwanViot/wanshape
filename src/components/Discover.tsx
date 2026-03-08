@@ -37,7 +37,7 @@ export function Discover() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-8 space-y-12">
       <div>
-        <h1 className="text-2xl font-bold text-heading mb-1">Découvrir</h1>
+        <h1 className="font-display text-2xl font-bold text-heading mb-1">Découvrir</h1>
         <p className="text-sm text-muted">Formats d'entraînement et exercices</p>
       </div>
 

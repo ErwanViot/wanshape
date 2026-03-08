@@ -14,6 +14,7 @@ export interface ActiveProgramInfo {
   totalSessions: number;
   nextSessionTitle: string | null;
   nextSessionOrder: number | null;
+  nextSessionData: Record<string, unknown> | null;
 }
 
 /** Returns the most recently active program for the given user (if any),
@@ -109,6 +110,7 @@ export function useActiveProgram(userId: string | undefined) {
           totalSessions: sessions.length,
           nextSessionTitle: (nextData?.title as string) ?? null,
           nextSessionOrder: nextSession?.session_order ?? null,
+          nextSessionData: nextData ?? null,
         });
         setLoading(false);
       } catch {

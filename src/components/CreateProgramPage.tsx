@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { ClipboardList } from 'lucide-react';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useGenerateProgram } from '../hooks/useGenerateProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
@@ -233,7 +234,7 @@ export function CreateProgramPage() {
   if (atLimit) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-12 text-center space-y-6">
-        <div className="text-5xl">📋</div>
+        <ClipboardList className="w-12 h-12 text-muted mx-auto" aria-hidden="true" />
         <h1 className="text-2xl font-bold text-heading">Limite atteinte</h1>
         <p className="text-muted">
           Tu as déjà {MAX_ACTIVE} programmes actifs. Supprime un programme existant pour en créer un nouveau.
@@ -271,6 +272,8 @@ export function CreateProgramPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-8 pb-12">
+      <h1 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">Créer mon programme</h1>
+
       {/* Step indicator */}
       <nav aria-label={`Étape ${draft.step} sur 3`} className="flex items-center gap-1 mb-8">
         {([

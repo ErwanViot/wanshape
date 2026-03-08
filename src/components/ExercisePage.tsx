@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router';
+import { AlertTriangle, CheckCircle, Dumbbell, GitBranch, Lightbulb, Wind } from 'lucide-react';
 import { getExerciseBySlug } from '../data/exercises.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { CATEGORY_LABELS, DIFFICULTY_COLORS, DIFFICULTY_LABELS } from '../types/exercise.ts';
@@ -63,7 +64,7 @@ export function ExercisePage() {
         <div className="absolute bottom-4 left-5 right-5">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <h1 className="text-3xl font-extrabold text-white drop-shadow-sm leading-tight">{exercise.name}</h1>
+              <h1 className="font-display text-3xl font-black text-white drop-shadow-sm leading-tight">{exercise.name}</h1>
               <p className="text-sm text-white/60 mt-1">{CATEGORY_LABELS[exercise.category]}</p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
@@ -90,17 +91,17 @@ export function ExercisePage() {
         </div>
 
         {/* Exécution */}
-        <ContentSection title="Exécution" icon="🏋️">
+        <ContentSection title="Exécution" icon={<Dumbbell className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <p className="text-sm text-subtle leading-relaxed">{exercise.execution}</p>
         </ContentSection>
 
         {/* Respiration */}
-        <ContentSection title="Respiration" icon="💨">
+        <ContentSection title="Respiration" icon={<Wind className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <p className="text-sm text-subtle leading-relaxed">{exercise.breathing}</p>
         </ContentSection>
 
         {/* Bénéfices */}
-        <ContentSection title="Bénéfices" icon="✅">
+        <ContentSection title="Bénéfices" icon={<CheckCircle className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <ul className="space-y-2">
             {exercise.benefits.map((b, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
@@ -112,7 +113,7 @@ export function ExercisePage() {
         </ContentSection>
 
         {/* Variantes */}
-        <ContentSection title="Variantes" icon="🔄">
+        <ContentSection title="Variantes" icon={<GitBranch className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <div className="space-y-4">
             {exercise.variants.map((v, i) => (
               <div
@@ -128,7 +129,7 @@ export function ExercisePage() {
         </ContentSection>
 
         {/* Conseils */}
-        <ContentSection title="Nos conseils" icon="💬">
+        <ContentSection title="Nos conseils" icon={<Lightbulb className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <ul className="space-y-2">
             {exercise.tips.map((t, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
@@ -140,7 +141,7 @@ export function ExercisePage() {
         </ContentSection>
 
         {/* Erreurs courantes */}
-        <ContentSection title="Erreurs courantes" icon="⚠️">
+        <ContentSection title="Erreurs courantes" icon={<AlertTriangle className="w-4 h-4 text-amber-400" aria-hidden="true" />}>
           <ul className="space-y-2">
             {exercise.commonMistakes.map((m, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">

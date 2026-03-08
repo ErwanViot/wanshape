@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
+import { Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase.ts';
 import type { User } from '@supabase/supabase-js';
 
@@ -86,7 +87,9 @@ export function WelcomeModal({ onClose }: Props) {
         className="glass-card w-full max-w-md rounded-3xl shadow-2xl p-6 space-y-6"
       >
         <div className="text-center space-y-2">
-          <div className="text-4xl">🎉</div>
+          <div className="w-14 h-14 rounded-full bg-brand/15 flex items-center justify-center mx-auto">
+            <Sparkles className="w-7 h-7 text-brand" aria-hidden="true" />
+          </div>
           <h2 id="welcome-title" className="text-xl font-bold text-heading">
             Bienvenue sur WanShape !
           </h2>

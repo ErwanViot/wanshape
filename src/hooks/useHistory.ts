@@ -8,7 +8,7 @@ export interface CompletionWithTitle extends SessionCompletion {
 
 export interface HistoryStats {
   completions: CompletionWithTitle[];
-  streak: number;
+  consecutiveDays: number;
   totalSessions: number;
   totalDuration: number;
   weekDots: boolean[];
@@ -19,7 +19,7 @@ function toDateString(date: Date): string {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
 
-function computeStreak(completions: SessionCompletion[]): number {
+function computeConsecutiveDays(completions: SessionCompletion[]): number {
   if (completions.length === 0) return 0;
 
   const completionDays = new Set(
@@ -37,20 +37,20 @@ function computeStreak(completions: SessionCompletion[]): number {
   yesterday.setDate(yesterday.getDate() - 1);
   const yesterdayStr = toDateString(yesterday);
 
-  // Streak must include today or yesterday to be active
+  // Must include today or yesterday to be active
   if (!completionDays.has(todayStr) && !completionDays.has(yesterdayStr)) return 0;
 
   // Start counting from the most recent day that has a completion
   const startDate = completionDays.has(todayStr) ? new Date(today) : new Date(yesterday);
-  let streak = 0;
+  let count = 0;
   const cursor = new Date(startDate);
 
   while (completionDays.has(toDateString(cursor))) {
-    streak++;
+    count++;
     cursor.setDate(cursor.getDate() - 1);
   }
 
-  return streak;
+  return count;
 }
 
 function computeWeekDots(completions: SessionCompletion[]): boolean[] {
@@ -123,10 +123,10 @@ export function useHistory(userId: string | undefined): HistoryStats {
     };
   }, [userId]);
 
-  const streak = computeStreak(completions);
+  const consecutiveDays = computeConsecutiveDays(completions);
   const totalSessions = completions.length;
   const totalDuration = completions.reduce((sum, c) => sum + (c.duration_seconds ?? 0), 0);
   const weekDots = computeWeekDots(completions);
 
-  return { completions, streak, totalSessions, totalDuration, weekDots, loading };
+  return { completions, consecutiveDays, totalSessions, totalDuration, weekDots, loading };
 }

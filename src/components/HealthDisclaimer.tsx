@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { HeartPulse } from 'lucide-react';
 
 interface Props {
   onAccept: () => void;
@@ -68,7 +69,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
         className="bg-white w-full max-w-lg rounded-3xl shadow-2xl max-h-full flex flex-col"
       >
         <div className="p-6 pb-0 shrink-0">
-          <div className="text-3xl mb-3">⚕️</div>
+          <HeartPulse className="w-8 h-8 text-brand mb-3" aria-hidden="true" />
           <h2 id="health-disclaimer-title" className="text-xl font-bold text-gray-900 mb-1">
             Avertissement santé
           </h2>

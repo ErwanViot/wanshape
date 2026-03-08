@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
+import { HeartPulse, Moon } from 'lucide-react';
 import { BLOCK_LABELS } from '../engine/constants.ts';
 import { compileSession } from '../engine/interpreter.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -45,7 +46,7 @@ export function PlayerPage() {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6">
         <div className="text-center">
-          <div className="text-5xl mb-4">😴</div>
+          <Moon className="w-12 h-12 text-white/40 mb-4 mx-auto" aria-hidden="true" />
           <p className="text-white/60 text-lg font-medium">Séance introuvable.</p>
           <Link to="/" className="text-link hover:text-link-hover underline mt-4 inline-block">
             Retour à l'accueil
@@ -250,7 +251,10 @@ export function Player({
 
       {/* Health reminder */}
       <div className="px-6 pb-3 text-center">
-        <p className="text-xs text-white">⚕️ Écoutez votre corps. En cas de douleur, arrêtez immédiatement.</p>
+        <p className="text-xs text-white inline-flex items-center gap-1.5">
+          <HeartPulse className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+          Écoutez votre corps. En cas de douleur, arrêtez immédiatement.
+        </p>
       </div>
     </div>
   );
