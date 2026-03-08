@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import { Trophy } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
 import { supabase } from '../lib/supabase.ts';
@@ -35,13 +36,20 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center bg-[#0a0a0a]">
       {/* Trophy */}
-      <div className="text-7xl">💪</div>
+      <div className="w-20 h-20 rounded-full bg-brand/15 flex items-center justify-center">
+        <Trophy className="w-10 h-10 text-brand" aria-hidden="true" />
+      </div>
 
-      <h1 className="text-3xl sm:text-4xl font-bold text-white">Séance terminée !</h1>
+      <h1 className="font-display text-3xl sm:text-4xl font-bold text-white">Séance terminée !</h1>
 
       <p className="text-white/60 text-lg">{session.title}</p>
 
-      {user && saved && <p className="text-emerald-400 text-sm font-medium">Séance enregistrée</p>}
+      {user && saved && (
+        <div className="flex items-center gap-2 text-accent text-sm font-medium">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+          Séance enregistrée
+        </div>
+      )}
 
       <div className="flex gap-6">
         <div className="text-center">

@@ -1,5 +1,25 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import {
+  Moon,
+  Sparkles,
+  BrainCircuit,
+  Zap,
+  Calendar,
+  ArrowRight,
+  Play,
+  Target,
+  ClipboardList,
+  Dumbbell,
+  Clock,
+  RotateCcw,
+
+  Shuffle,
+  TrendingUp,
+  Wand2,
+  ListChecks,
+  ChevronRight,
+} from 'lucide-react';
 import { FEATURE_CUSTOM_SESSION } from '../config/features.ts';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -49,31 +69,29 @@ export function Home() {
       {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
       {showWelcome && <WelcomeModal onClose={() => setShowWelcome(false)} />}
 
-      <div className="px-6 md:px-10 lg:px-14 pb-8 max-w-3xl mx-auto">
-        {user ? (
-          <ConnectedContent
-            session={session}
-            loading={loading}
-            error={error}
-            tomorrowSession={tomorrowSession}
-            tomorrowLoading={tomorrowLoading}
-            todayKey={todayKey}
-            tomorrowKey={tomorrowKey}
-            onStart={handleStartSession}
-          />
-        ) : (
-          <VisitorContent
-            session={session}
-            loading={loading}
-            error={error}
-            tomorrowSession={tomorrowSession}
-            tomorrowLoading={tomorrowLoading}
-            todayKey={todayKey}
-            tomorrowKey={tomorrowKey}
-            onStart={handleStartSession}
-          />
-        )}
-      </div>
+      {user ? (
+        <ConnectedContent
+          session={session}
+          loading={loading}
+          error={error}
+          tomorrowSession={tomorrowSession}
+          tomorrowLoading={tomorrowLoading}
+          todayKey={todayKey}
+          tomorrowKey={tomorrowKey}
+          onStart={handleStartSession}
+        />
+      ) : (
+        <VisitorContent
+          session={session}
+          loading={loading}
+          error={error}
+          tomorrowSession={tomorrowSession}
+          tomorrowLoading={tomorrowLoading}
+          todayKey={todayKey}
+          tomorrowKey={tomorrowKey}
+          onStart={handleStartSession}
+        />
+      )}
 
       <Footer />
     </>
@@ -81,16 +99,14 @@ export function Home() {
 }
 
 /* ────────────────────────────────────────────
-   Connected user
+   Connected user — Dashboard layout
    ──────────────────────────────────────────── */
 
 function ConnectedContent({
   session,
   loading,
-  error,
   tomorrowSession,
   tomorrowLoading,
-  todayKey,
   tomorrowKey,
   onStart,
 }: {
@@ -112,204 +128,270 @@ function ConnectedContent({
       : 0;
 
   return (
-    <div className="space-y-5 pt-6 md:pt-4">
-      <h1 className="sr-only">WAN SHAPE — Votre séance de sport quotidienne</h1>
+    <div className="px-6 md:px-10 lg:px-14 py-8">
+      <div className="max-w-5xl mx-auto space-y-10">
+        <h1 className="sr-only">WAN SHAPE — Votre séance de sport quotidienne</h1>
 
-      {/* Programme — active or discovery */}
-      {programLoading ? null : activeProgram ? (
-        <div className="rounded-2xl overflow-hidden border border-card-border">
-          {/* Image hero with title + progress */}
-          <Link
-            to={`/programme/${activeProgram.slug}`}
-            className="relative block min-h-[220px] flex flex-col cursor-pointer group"
-          >
-            <img
-              src={getProgramImage(activeProgram.slug)}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/50 to-black/30" />
+        {/* ── Titre + 3 colonnes d'action ── */}
+        <section>
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">
+            Aujourd'hui je &hellip;
+          </h2>
 
-            <div className="relative z-10 flex flex-col justify-between flex-1 p-6 min-h-[220px]">
-              <div>
-                <div className="session-label px-3 py-1 rounded-lg inline-block mb-3">
-                  <span className="text-xs font-bold tracking-widest uppercase text-white">Continuer mon programme</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+            {/* 1 — Fais la séance du jour */}
+            <div className="flex flex-col rounded-2xl overflow-hidden border border-card-border transition-all hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10">
+              <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
+                &hellip; fais la séance du jour
+              </h3>
+              {loading ? (
+                <div className="flex-1 p-5 space-y-3">
+                  <div className="skeleton h-36 rounded-xl" />
+                  <div className="skeleton h-5 w-3/4" />
+                  <div className="skeleton h-10 w-full rounded-xl" />
                 </div>
-
-                <h2 className="text-2xl md:text-3xl font-black leading-none tracking-tight text-white group-hover:text-white/90 transition-colors mb-4">
-                  {activeProgram.title.toUpperCase()}
-                </h2>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between text-xs text-white/50 mb-1.5">
-                  <span>
-                    {activeProgram.completedCount}/{activeProgram.totalSessions} séances
-                  </span>
-                  <span>{progressPct}%</span>
+              ) : session ? (
+                <>
+                  <button type="button" onClick={onStart} className="relative h-36 w-full cursor-pointer text-left">
+                    <img src={getSessionImage(session)} alt="" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-3 left-4 right-4">
+                      <p className="font-display text-lg font-bold text-white leading-tight">
+                        {session.title.toUpperCase()}
+                      </p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-xs text-white/70">~{session.estimatedDuration} min</span>
+                        {session.focus.slice(0, 2).map((f) => (
+                          <span key={f} className="text-xs text-white/70">· {f}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </button>
+                  <div className="flex-1 flex flex-col justify-end px-5 py-4 bg-surface-card space-y-3">
+                    {session.description && (
+                      <p className="text-sm text-muted leading-relaxed">{session.description}</p>
+                    )}
+                    <button
+                      type="button"
+                      onClick={onStart}
+                      className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cursor-pointer"
+                    >
+                      <Play className="w-4 h-4" aria-hidden="true" />
+                      C'est parti
+                    </button>
+                  </div>
+                  <SessionAccordion session={session} />
+                </>
+              ) : (
+                <div className="flex-1 p-6 flex items-center justify-center">
+                  <div className="text-center">
+                    <Moon className="w-10 h-10 text-muted mx-auto mb-3" aria-hidden="true" />
+                    <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
+                  </div>
                 </div>
-                <div className="h-1.5 rounded-full bg-white/15 overflow-hidden">
-                  <div
-                    className="h-full rounded-full bg-white transition-all"
-                    style={{ width: `${progressPct}%` }}
-                  />
-                </div>
-              </div>
+              )}
             </div>
-          </Link>
 
-          {/* Next session CTA */}
-          {activeProgram.nextSessionTitle && activeProgram.nextSessionOrder !== null && (
-            <Link
-              to={`/programme/${activeProgram.slug}`}
-              className="flex items-center gap-3 px-5 py-3.5 bg-surface-card border border-card-border border-t-0 rounded-b-2xl cursor-pointer group/next"
-            >
-              <div className="w-9 h-9 rounded-full bg-brand/15 flex items-center justify-center shrink-0">
-                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs text-muted">Prochaine séance</p>
-                <p className="text-sm font-semibold text-heading group-hover/next:text-brand transition-colors truncate">
-                  {activeProgram.nextSessionTitle}
-                </p>
-              </div>
-              <svg
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                className="text-muted shrink-0"
+            {/* 2 — Crée ma propre séance / Découvre les formats */}
+            {FEATURE_CUSTOM_SESSION ? (
+              <Link
+                to="/seance/custom"
+                className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-accent/30 hover:shadow-lg hover:shadow-accent/10"
               >
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </Link>
-          )}
+                <div className="flex items-center gap-2 px-5 py-4 bg-surface-card border-b border-divider">
+                  <h3 className="font-display text-base font-bold text-heading group-hover:text-accent transition-colors">
+                    &hellip; crée ma propre séance
+                  </h3>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-brand/60 bg-brand/8 px-2 py-0.5 rounded-full shrink-0">Premium</span>
+                </div>
+                <div className="relative h-36 bg-gradient-to-br from-surface-3 to-surface-2 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-accent/20 to-brand/20 flex items-center justify-center">
+                    <BrainCircuit className="w-10 h-10 text-accent" aria-hidden="true" />
+                  </div>
+                </div>
+                <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
+                  <p className="text-sm text-muted leading-relaxed">
+                    L'IA génère une séance adaptée à mes envies et mon niveau.
+                  </p>
+                  <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white bg-accent hover:bg-accent/90 transition-colors">
+                    <Play className="w-4 h-4" aria-hidden="true" />
+                    C'est parti
+                  </div>
+                </div>
+              </Link>
+            ) : (
+              <Link
+                to="/decouvrir"
+                className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10"
+              >
+                <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider group-hover:text-brand transition-colors">
+                  &hellip; découvre les formats
+                </h3>
+                <div className="relative h-36 bg-gradient-to-br from-surface-3 to-surface-2 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-brand/20 to-accent/20 flex items-center justify-center">
+                    <Sparkles className="w-10 h-10 text-brand" aria-hidden="true" />
+                  </div>
+                </div>
+                <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
+                  <p className="text-sm text-muted leading-relaxed">
+                    8 formats d'entraînement variés à explorer.
+                  </p>
+                  <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient">
+                    <Play className="w-4 h-4" aria-hidden="true" />
+                    C'est parti
+                  </div>
+                </div>
+              </Link>
+            )}
+
+            {/* 3 — Programme */}
+            {programLoading ? (
+              <div className="flex flex-col rounded-2xl overflow-hidden border border-card-border">
+                <div className="px-5 py-4 bg-surface-card border-b border-divider">
+                  <div className="skeleton h-5 w-3/4" />
+                </div>
+                <div className="skeleton h-36 rounded-none" />
+                <div className="flex-1 p-5 space-y-3">
+                  <div className="skeleton h-4 w-1/2" />
+                </div>
+              </div>
+            ) : activeProgram ? (
+              <div className="flex flex-col rounded-2xl overflow-hidden border border-card-border transition-all hover:border-brand-secondary/30 hover:shadow-lg hover:shadow-brand-secondary/10">
+                <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
+                  &hellip; poursuis mon programme
+                </h3>
+                <Link to={`/programme/${activeProgram.slug}`} className="block relative h-36 group">
+                  <img src={getProgramImage(activeProgram.slug)} alt="" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4">
+                    <p className="font-display text-lg font-bold text-white leading-tight group-hover:text-white/80 transition-colors">
+                      {activeProgram.title.toUpperCase()}
+                    </p>
+                  </div>
+                </Link>
+                <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card">
+                  <div>
+                    <div className="flex items-center justify-between text-xs text-muted mb-1.5">
+                      <span>{activeProgram.completedCount}/{activeProgram.totalSessions} séances</span>
+                      <span>{progressPct}%</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-divider overflow-hidden">
+                      <div className="h-full rounded-full bg-brand-secondary transition-all" style={{ width: `${progressPct}%` }} />
+                    </div>
+                  </div>
+                  {activeProgram.nextSessionTitle && (
+                    <p className="text-xs text-muted mt-3">
+                      Prochaine : <span className="text-heading font-semibold">{activeProgram.nextSessionTitle}</span>
+                    </p>
+                  )}
+                  {activeProgram.nextSessionOrder != null && (
+                    <Link
+                      to={`/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`}
+                      className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white mt-3"
+                    >
+                      <Play className="w-4 h-4" aria-hidden="true" />
+                      C'est parti
+                    </Link>
+                  )}
+                </div>
+                {activeProgram.nextSessionData && (
+                  <SessionAccordion session={activeProgram.nextSessionData as unknown as Session} />
+                )}
+              </div>
+            ) : (
+              <Link
+                to="/programmes"
+                className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-brand-secondary/30 hover:shadow-lg hover:shadow-brand-secondary/10"
+              >
+                <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider group-hover:text-brand-secondary transition-colors">
+                  &hellip; suis un programme
+                </h3>
+                <div className="relative h-36 bg-gradient-to-br from-surface-3 to-surface-2 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-brand-secondary/20 to-brand/20 flex items-center justify-center">
+                    <ClipboardList className="w-10 h-10 text-brand-secondary" aria-hidden="true" />
+                  </div>
+                </div>
+                <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
+                  <p className="text-sm text-muted leading-relaxed">
+                    Un plan structuré sur plusieurs semaines pour progresser.
+                  </p>
+                  <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient">
+                    <Play className="w-4 h-4" aria-hidden="true" />
+                    C'est parti
+                  </div>
+                </div>
+              </Link>
+            )}
+          </div>
+        </section>
+
+        {/* ── Séance de demain ── */}
+        {!tomorrowLoading && tomorrowSession && (
+          <section>
+            <TomorrowCard session={tomorrowSession} dateKey={tomorrowKey} />
+          </section>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────
+   Screenshot Carousel
+   ──────────────────────────────────────────── */
+
+function ScreenshotCarousel({ images, ratio = 'portrait', fit = 'cover', interval = 4000 }: { images: { src: string; alt: string }[]; ratio?: 'portrait' | 'landscape'; fit?: 'cover' | 'contain'; interval?: number }) {
+  const [active, setActive] = useState(0);
+
+  const next = useCallback(() => setActive((i) => (i + 1) % images.length), [images.length]);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const id = window.setInterval(next, interval);
+    return () => clearInterval(id);
+  }, [next, interval, images.length]);
+
+  const aspectClass = ratio === 'portrait' ? 'aspect-[4/5] max-h-[480px]' : 'aspect-[5/3]';
+
+  return (
+    <div className="relative w-full">
+      <div className={`relative ${aspectClass} mx-auto overflow-hidden rounded-2xl border border-card-border shadow-2xl`}>
+        {images.map((img, i) => (
+          <img
+            key={img.src}
+            src={img.src}
+            alt={img.alt}
+            loading="lazy"
+            className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${fit === 'contain' ? 'object-contain' : 'object-cover object-top'} ${i === active ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
+      </div>
+      {images.length > 1 && (
+        <div className="flex justify-center gap-2 mt-3">
+          {images.map((img, i) => (
+            <button
+              key={img.src}
+              type="button"
+              onClick={() => setActive(i)}
+              className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${i === active ? 'bg-brand' : 'bg-muted/30'}`}
+              aria-label={img.alt}
+            />
+          ))}
         </div>
-      ) : (
-        <Link
-          to="/programmes"
-          className="flex items-center gap-3 glass-card rounded-xl px-4 py-3 group transition-colors hover:border-brand/30 cursor-pointer"
-        >
-          <span className="text-lg shrink-0" role="img" aria-label="Programme">
-            📋
-          </span>
-          <span className="text-sm text-subtle group-hover:text-heading transition-colors">
-            Atteins tes objectifs avec un programme guidé
-          </span>
-          <svg
-            aria-hidden="true"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            className="text-muted ml-auto shrink-0"
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </Link>
-      )}
-
-      {/* Custom session CTA */}
-      {FEATURE_CUSTOM_SESSION && (
-        <Link
-          to="/seance/custom"
-          className="flex items-center gap-3 glass-card rounded-xl px-4 py-3 group transition-colors hover:border-brand/30 cursor-pointer"
-        >
-          <span className="text-lg shrink-0" role="img" aria-label="Séance personnalisée">
-            ✨
-          </span>
-          <span className="text-sm text-subtle group-hover:text-heading transition-colors">
-            Génère une séance adaptée à tes envies
-          </span>
-          <svg
-            aria-hidden="true"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            className="text-muted ml-auto shrink-0"
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </Link>
-      )}
-
-      {/* Custom program CTA */}
-      {FEATURE_CUSTOM_SESSION && (
-        <Link
-          to="/programme/creer"
-          className="flex items-center gap-3 glass-card rounded-xl px-4 py-3 group transition-colors hover:border-brand/30 cursor-pointer"
-        >
-          <span className="text-lg shrink-0" role="img" aria-label="Programme personnalisé">
-            🏋️
-          </span>
-          <span className="text-sm text-subtle group-hover:text-heading transition-colors">
-            Crée un programme sur-mesure avec l'IA
-          </span>
-          <svg
-            aria-hidden="true"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            className="text-muted ml-auto shrink-0"
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </Link>
-      )}
-
-      {/* Today */}
-      <SessionCard
-        session={session}
-        loading={loading}
-        error={error}
-        dateKey={todayKey}
-        badge="Séance du jour"
-        onStart={onStart}
-      />
-
-      {/* Tomorrow */}
-      {!tomorrowLoading && tomorrowSession && (
-        <SessionCard
-          session={tomorrowSession}
-          loading={false}
-          error={null}
-          dateKey={tomorrowKey}
-          badge="Séance de demain"
-          variant="tomorrow"
-        />
       )}
     </div>
   );
 }
 
 /* ────────────────────────────────────────────
-   Visitor
+   Visitor — Landing page
    ──────────────────────────────────────────── */
 
 function VisitorContent({
   session,
   loading,
-  error,
   tomorrowSession,
   tomorrowLoading,
-  todayKey,
   tomorrowKey,
   onStart,
 }: {
@@ -323,171 +405,427 @@ function VisitorContent({
   onStart: () => void;
 }) {
   return (
-    <div className="space-y-10 pt-6 md:pt-0">
-      {/* Hero — typography-first, Behance-inspired */}
-      <section className="text-center space-y-8 py-6 md:py-14">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-heading leading-[1.1]">
-          Progresse chaque jour,
-          <br />
-          <span className="gradient-text">à ton rythme</span>
-        </h1>
+    <div className="space-y-0">
+      {/* ── 1. Hero — photo pleine largeur ── */}
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero-landing.webp"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30" />
+        </div>
 
-        <p className="text-base md:text-lg text-muted max-w-md mx-auto leading-relaxed">
-          Des séances courtes et variées, sans matériel, pour te dépasser un peu plus chaque jour. 100&nbsp;% gratuit.
-        </p>
+        <div className="relative z-10 w-full px-6 md:px-10 lg:px-14">
+          <div className="max-w-5xl mx-auto py-16 md:py-24 space-y-6">
+            <div className="stagger-fade-in stagger-1">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20 backdrop-blur-sm">
+                <Zap className="w-3 h-3" aria-hidden="true" />
+                Sans matériel, où tu veux
+              </span>
+            </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          {supabase && (
-            <Link to="/signup" className="cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white">
-              Commencer gratuitement
-            </Link>
-          )}
-          <button
-            type="button"
-            onClick={onStart}
-            className="px-8 py-3.5 rounded-full text-sm font-bold text-brand border border-brand/30 hover:bg-brand/5 transition-colors cursor-pointer"
-          >
-            Essayer sans inscription
-          </button>
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.05] max-w-xl stagger-fade-in stagger-2">
+              Progresse
+              <br />
+              <span className="gradient-text">chaque jour</span>
+            </h1>
+
+            <p className="text-lg md:text-xl text-white/70 max-w-lg leading-relaxed stagger-fade-in stagger-3">
+              Une séance guidée chaque jour, 8 formats variés, 25-40 min. Gratuit pour commencer, premium pour aller plus loin.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-start gap-3 stagger-fade-in stagger-4">
+              {supabase && (
+                <Link
+                  to="/signup"
+                  className="cta-gradient px-8 py-4 rounded-full text-base font-bold text-white flex items-center gap-2"
+                >
+                  Commencer gratuitement
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+              )}
+              <button
+                type="button"
+                onClick={onStart}
+                className="px-8 py-4 rounded-full text-base font-bold text-white border border-white/30 hover:bg-white/10 transition-colors cursor-pointer"
+              >
+                Essayer sans inscription
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Session preview */}
-      <SessionCard session={session} loading={loading} error={error} dateKey={todayKey} badge="Séance du jour" onStart={onStart} />
+      {/* ── 2. Comment ça marche — 3 étapes ── */}
+      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="font-display text-2xl md:text-3xl font-black text-heading text-center mb-10">
+            Comment ça marche
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {[
+              { step: '1', icon: Calendar, title: 'Ouvre l\'app', desc: 'Ta séance du jour est prête. Pas besoin de réfléchir.' },
+              { step: '2', icon: Play, title: 'Suis ta séance', desc: 'Exercices guidés, chrono intégré, transitions automatiques.' },
+              { step: '3', icon: Target, title: 'Progresse', desc: 'Statistiques, régularité et programmes pour aller plus loin.' },
+            ].map((item) => (
+              <div key={item.step} className="flex flex-col items-center gap-4">
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-2xl bg-brand/10 flex items-center justify-center">
+                    <item.icon className="w-7 h-7 text-brand" aria-hidden="true" />
+                  </div>
+                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-brand text-white text-xs font-bold flex items-center justify-center">
+                    {item.step}
+                  </span>
+                </div>
+                <h3 className="font-display text-lg font-bold text-heading">{item.title}</h3>
+                <p className="text-sm text-muted leading-relaxed max-w-xs">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Tomorrow */}
-      {!tomorrowLoading && tomorrowSession && (
-        <SessionCard
-          session={tomorrowSession}
-          loading={false}
-          error={null}
-          dateKey={tomorrowKey}
-          badge="Séance de demain"
-          variant="tomorrow"
-        />
-      )}
+      {/* ── 3. Feature : Séance du jour ── */}
+      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Texte */}
+            <div className="space-y-5">
+              <span className="text-xs font-bold tracking-widest uppercase text-brand">Séance du jour</span>
+              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
+                Chaque jour,<br />une nouvelle séance
+              </h2>
+              <p className="text-muted leading-relaxed">
+                Pas besoin de réfléchir. Tu ouvres l'app, ta séance t'attend — avec un format différent chaque jour.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { icon: Shuffle, text: '8 formats variés : HIIT, EMOM, Circuit, Tabata…' },
+                  { icon: Clock, text: '25 à 40 min, adapté à ton emploi du temps' },
+                  { icon: Dumbbell, text: '100% sans matériel, faisable partout' },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-start gap-3">
+                    <item.icon className="w-5 h-5 text-brand shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-sm text-body">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={onStart}
+                className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand/80 transition-colors cursor-pointer"
+              >
+                Essayer maintenant
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Visuel : preview séance du jour + demain */}
+            <div className="space-y-4">
+              <div className="rounded-2xl overflow-hidden border border-card-border">
+                {loading ? (
+                  <div className="p-6 space-y-3">
+                    <div className="skeleton h-40 rounded-xl" />
+                    <div className="skeleton h-5 w-3/4" />
+                    <div className="skeleton h-10 w-full rounded-xl" />
+                  </div>
+                ) : session ? (
+                  <>
+                    <button type="button" onClick={onStart} className="relative h-44 w-full cursor-pointer text-left">
+                      <img src={getSessionImage(session)} alt="" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute top-3 left-4">
+                        <span className="session-label px-2.5 py-1 rounded-lg text-xs font-bold tracking-widest uppercase text-white">
+                          Aujourd'hui
+                        </span>
+                      </div>
+                      <div className="absolute bottom-3 left-4 right-4">
+                        <p className="font-display text-xl font-bold text-white leading-tight">
+                          {session.title.toUpperCase()}
+                        </p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-xs text-white/70">~{session.estimatedDuration} min</span>
+                          {session.focus.slice(0, 2).map((f) => (
+                            <span key={f} className="text-xs text-white/70">· {f}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </button>
+                    <div className="px-5 py-4 bg-surface-card space-y-3">
+                      {session.description && (
+                        <p className="text-sm text-muted leading-relaxed">{session.description}</p>
+                      )}
+                      <button
+                        type="button"
+                        onClick={onStart}
+                        className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cursor-pointer"
+                      >
+                        <Play className="w-4 h-4" aria-hidden="true" />
+                        C'est parti
+                      </button>
+                    </div>
+                    <SessionAccordion session={session} />
+                  </>
+                ) : (
+                  <div className="p-8 flex items-center justify-center min-h-[200px]">
+                    <div className="text-center">
+                      <Moon className="w-10 h-10 text-muted mx-auto mb-3" aria-hidden="true" />
+                      <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Séance de demain */}
+              {!tomorrowLoading && tomorrowSession && (
+                <TomorrowCard session={tomorrowSession} dateKey={tomorrowKey} />
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Feature : IA sur-mesure (Premium) ── */}
+      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Visuel : carrousel 3 modes de création (à gauche en desktop) */}
+            <div className="order-2 md:order-1">
+              <ScreenshotCarousel
+                fit="contain"
+                images={[
+                  { src: '/images/screenshot-custom-session.webp', alt: 'Créer une séance — Mode Rapide' },
+                  { src: '/images/screenshot-custom-detailed.webp', alt: 'Créer une séance — Mode Détaillé' },
+                  { src: '/images/screenshot-custom-expert.webp', alt: 'Créer une séance — Mode Expert' },
+                ]}
+              />
+            </div>
+
+            {/* Texte (à droite en desktop) */}
+            <div className="space-y-5 order-1 md:order-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold tracking-widest uppercase text-accent">IA sur-mesure</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full">Premium</span>
+              </div>
+              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
+                Des séances créées<br />rien que pour toi
+              </h2>
+              <p className="text-muted leading-relaxed">
+                L'intelligence artificielle génère des séances et des programmes adaptés à tes envies, ton niveau et tes objectifs.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { icon: Wand2, text: 'Séances personnalisées en quelques secondes' },
+                  { icon: TrendingUp, text: 'Programmes sur-mesure avec progression intégrée' },
+                  { icon: RotateCcw, text: 'S\'adapte à tes retours et ta forme du moment' },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-start gap-3">
+                    <item.icon className="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-sm text-body">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+              {FEATURE_CUSTOM_SESSION && (
+                <Link
+                  to="/seance/custom"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors"
+                >
+                  Découvrir
+                  <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Feature : Le player ── */}
+      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Texte */}
+            <div className="space-y-5">
+              <span className="text-xs font-bold tracking-widest uppercase text-brand">Entraînement guidé</span>
+              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
+                Tu n'as qu'à<br />suivre le rythme
+              </h2>
+              <p className="text-muted leading-relaxed">
+                Chrono, compteur de reps, transitions automatiques — le player gère tout pour que tu restes concentré sur l'effort.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { icon: Play, text: 'Timer et reps guidés en temps réel' },
+                  { icon: Shuffle, text: 'Enchaînement automatique des blocs' },
+                  { icon: Zap, text: 'Signal sonore à chaque transition' },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-start gap-3">
+                    <item.icon className="w-5 h-5 text-brand shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-sm text-body">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={onStart}
+                className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand/80 transition-colors cursor-pointer"
+              >
+                Lancer une séance
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Visuel : carrousel player */}
+            <ScreenshotCarousel
+              images={[
+                { src: '/images/screenshot-player-reps.webp', alt: 'Player — exercice en reps' },
+                { src: '/images/screenshot-player-emom.webp', alt: 'Player — EMOM avec timer' },
+                { src: '/images/screenshot-player-hiit.webp', alt: 'Player — HIIT Mountain climbers' },
+                { src: '/images/screenshot-player-cooldown.webp', alt: 'Player — Retour au calme' },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. Feature : Programmes guidés ── */}
+      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Texte */}
+            <div className="space-y-5">
+              <span className="text-xs font-bold tracking-widest uppercase text-brand-secondary">Programmes guidés</span>
+              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
+                Un plan structuré<br />pour progresser
+              </h2>
+              <p className="text-muted leading-relaxed">
+                Suis un programme complet avec progression intégrée, suivi détaillé et séances adaptées à chaque étape.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { icon: ListChecks, text: '3 programmes inclus pour bien démarrer' },
+                  { icon: Target, text: 'Suivi de complétion et objectifs clairs' },
+                  { icon: Wand2, text: 'Des programmes sur mesure pour atteindre tes objectifs', premium: true },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-start gap-3">
+                    <item.icon className="w-5 h-5 text-brand-secondary shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-sm text-body">
+                      {item.text}
+                      {'premium' in item && item.premium && (
+                        <span className="ml-2 text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full align-middle">Premium</span>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/programmes"
+                className="inline-flex items-center gap-2 text-sm font-bold text-brand-secondary hover:text-brand-secondary/80 transition-colors"
+              >
+                Voir les programmes
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </div>
+
+            {/* Visuel : carrousel programmes */}
+            <ScreenshotCarousel
+              fit="contain"
+              images={[
+                { src: '/images/screenshot-program-list.webp', alt: 'Liste des programmes disponibles' },
+                { src: '/images/screenshot-program-objectif.webp', alt: 'Création de programme — Objectif' },
+                { src: '/images/screenshot-program-profil.webp', alt: 'Création de programme — Profil' },
+                { src: '/images/screenshot-program-config.webp', alt: 'Création de programme — Configuration' },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. CTA final ── */}
+      <section className="px-6 md:px-10 lg:px-14 py-16 md:py-20">
+        <div className="max-w-2xl mx-auto text-center space-y-6">
+          <h2 className="font-display text-3xl md:text-4xl font-black text-heading">
+            Prêt à commencer ?
+          </h2>
+          <p className="text-muted">
+            Ta séance quotidienne t'attend — rejoins WanShape et commence dès aujourd'hui.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            {supabase && (
+              <Link
+                to="/signup"
+                className="cta-gradient px-8 py-4 rounded-full text-base font-bold text-white"
+              >
+                Créer mon compte gratuit
+              </Link>
+            )}
+            <Link
+              to="/decouvrir"
+              className="text-sm text-link hover:text-link-hover transition-colors flex items-center gap-1"
+            >
+              Découvrir les formats
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
 
 /* ────────────────────────────────────────────
-   Session card with accordion
+   Active Program Card
    ──────────────────────────────────────────── */
 
-function SessionCard({
-  session,
-  loading,
-  error,
-  dateKey,
-  badge,
-  variant = 'today',
-  onStart,
-}: {
-  session: Session | null;
-  loading: boolean;
-  error: string | null;
-  dateKey: string;
-  badge: string;
-  variant?: 'today' | 'tomorrow';
-  onStart?: () => void;
-}) {
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[260px] rounded-2xl glass-card">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
-      </div>
-    );
-  }
+/* ────────────────────────────────────────────
+   Tomorrow Card — compact header + accordion
+   ──────────────────────────────────────────── */
 
-  if (error || !session) {
-    return (
-      <div className="flex items-center justify-center p-6 min-h-[200px] rounded-2xl glass-card">
-        <div className="text-center">
-          <div className="text-5xl mb-4">😴</div>
-          <p className="text-body text-lg font-medium">Pas de séance prévue aujourd'hui.</p>
-          <p className="text-faint text-sm mt-2">Profitez-en pour récupérer !</p>
-        </div>
-      </div>
-    );
-  }
-
+function TomorrowCard({ session, dateKey }: { session: Session; dateKey: string }) {
   const image = getSessionImage(session);
   const difficulty = computeDifficulty(session);
-  const isTomorrow = variant === 'tomorrow';
 
   return (
     <div className="rounded-2xl overflow-hidden border border-card-border">
-      {/* Image hero */}
-      <div className="relative min-h-[260px] flex flex-col">
-        <div className="absolute inset-0">
-          <img
-            src={image}
-            alt=""
-            className="w-full h-full object-cover"
-            loading={isTomorrow ? 'lazy' : 'eager'}
-          />
-          <div
-            className={`absolute inset-0 bg-gradient-to-b ${
-              isTomorrow ? 'from-black/90 via-black/55 to-black/35' : 'from-black/85 via-black/50 to-black/30'
-            }`}
-          />
-        </div>
-
-        <div className="relative z-10 flex flex-col justify-between flex-1 p-6">
-          <div>
-            <div
-              className={`${isTomorrow ? 'session-label-tomorrow' : 'session-label'} px-3 py-1 rounded-lg inline-block mb-3`}
-            >
-              <span className="text-xs font-bold tracking-widest uppercase text-white">{badge}</span>
-            </div>
-
-            <p className="text-xs font-medium tracking-widest uppercase text-white/50 mb-2">
-              {formatShortDate(dateKey)}
-            </p>
-
-            <h2 className="text-3xl md:text-4xl font-black leading-none tracking-tight text-white mb-3">
-              {session.title.toUpperCase()}
-            </h2>
-
-            <div className="flex items-center gap-2 flex-wrap">
-              {session.focus.slice(0, 2).map((f) => (
-                <span
-                  key={f}
-                  className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80"
-                >
-                  {f}
-                </span>
-              ))}
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white/80">
-                ~{session.estimatedDuration} min
-              </span>
-              <span
-                className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${
-                  difficulty.level === 'accessible'
-                    ? 'bg-emerald-500/20 border-emerald-400/30 text-emerald-300'
-                    : difficulty.level === 'modere'
-                      ? 'bg-amber-500/20 border-amber-400/30 text-amber-300'
-                      : 'bg-red-500/20 border-red-400/30 text-red-300'
-                }`}
-              >
-                {difficulty.label}
-              </span>
+      {/* Compact header */}
+      <div className="flex items-stretch min-h-[100px]">
+        {/* Thumbnail */}
+        <div className="relative w-28 sm:w-36 shrink-0">
+          <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="session-label-tomorrow px-2 py-0.5 rounded-md">
+              <span className="text-xs font-bold text-white">Demain</span>
             </div>
           </div>
+        </div>
 
-          {onStart && (
-            <button
-              type="button"
-              onClick={onStart}
-              className="cta-gradient w-full py-3.5 rounded-xl text-sm font-bold text-white tracking-wide cursor-pointer mt-6"
+        {/* Info */}
+        <div className="flex-1 p-4 flex flex-col justify-center min-w-0 bg-surface-card">
+          <p className="text-xs text-muted mb-1">{formatShortDate(dateKey)}</p>
+          <h3 className="font-display text-base font-bold text-heading truncate">
+            {session.title.toUpperCase()}
+          </h3>
+          <div className="flex items-center gap-2 mt-2">
+            <span className="text-xs text-muted">~{session.estimatedDuration} min</span>
+            <span className="text-xs text-muted">·</span>
+            <span
+              className={`text-xs font-semibold ${
+                difficulty.level === 'accessible'
+                  ? 'text-emerald-400'
+                  : difficulty.level === 'modere'
+                    ? 'text-amber-400'
+                    : 'text-red-400'
+              }`}
             >
-              C'est parti
-            </button>
-          )}
+              {difficulty.label}
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Accordion */}
+      {/* Contenu détaillé */}
       <SessionAccordion session={session} />
     </div>
   );

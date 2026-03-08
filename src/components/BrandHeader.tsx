@@ -32,7 +32,7 @@ export function BrandHeader() {
             alt=""
             className="w-7 h-7 md:w-8 md:h-8 shrink-0"
           />
-          <span className="text-lg font-extrabold tracking-tight gradient-text">Wan Shape</span>
+          <span className="font-display text-lg font-black tracking-tight gradient-text">Wan Shape</span>
         </Link>
 
         {/* Nav — desktop only, BottomNav handles mobile */}

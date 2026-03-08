@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { Dumbbell, Flame, Heart, Zap } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useCustomSessions } from '../hooks/useCustomSessions.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
@@ -12,11 +14,11 @@ import type {
   Intensity,
 } from '../types/custom-session.ts';
 
-const PRESETS: { value: CustomSessionPreset; emoji: string; label: string; desc: string }[] = [
-  { value: 'transpirer', emoji: '🔥', label: 'Objectif : transpirer', desc: 'HIIT + Tabata, haute intensité' },
-  { value: 'renfo', emoji: '💪', label: 'Renfo complet', desc: 'Renforcement musculaire structuré' },
-  { value: 'express', emoji: '⚡', label: 'Full body express', desc: 'Circuit rapide, zéro temps mort' },
-  { value: 'mobilite', emoji: '🌿', label: 'Détente & mobilité', desc: 'Stretching et récupération active' },
+const PRESETS: { value: CustomSessionPreset; Icon: LucideIcon; label: string; desc: string }[] = [
+  { value: 'transpirer', Icon: Flame, label: 'Objectif : transpirer', desc: 'HIIT + Tabata, haute intensité' },
+  { value: 'renfo', Icon: Dumbbell, label: 'Renfo complet', desc: 'Renforcement musculaire structuré' },
+  { value: 'express', Icon: Zap, label: 'Full body express', desc: 'Circuit rapide, zéro temps mort' },
+  { value: 'mobilite', Icon: Heart, label: 'Détente & mobilité', desc: 'Stretching et récupération active' },
 ];
 
 const DURATION_MIN = 10;
@@ -41,10 +43,10 @@ const EQUIPMENT_OPTIONS: { value: Equipment; label: string }[] = [
   { value: 'aucun', label: 'Sans matériel' },
 ];
 
-const INTENSITY_OPTIONS: { value: Intensity; label: string; emoji: string }[] = [
-  { value: 'douce', label: 'Douce', emoji: '🟢' },
-  { value: 'moderee', label: 'Modérée', emoji: '🟡' },
-  { value: 'intense', label: 'Intense', emoji: '🔴' },
+const INTENSITY_OPTIONS: { value: Intensity; label: string; color: string }[] = [
+  { value: 'douce', label: 'Douce', color: 'bg-green-500' },
+  { value: 'moderee', label: 'Modérée', color: 'bg-yellow-500' },
+  { value: 'intense', label: 'Intense', color: 'bg-red-500' },
 ];
 
 const BODY_FOCUS_OPTIONS: { value: BodyFocus; label: string }[] = [
@@ -155,7 +157,9 @@ export function CustomSessionPage() {
                   : 'border-divider bg-surface-card hover:border-brand/30'
               }`}
             >
-              <span className="text-lg mr-2">{p.emoji}</span>
+              <span className="inline-flex items-center mr-2">
+                <p.Icon className="w-5 h-5 text-brand" aria-hidden="true" />
+              </span>
               <span className="font-semibold text-heading">{p.label}</span>
               <p className="text-sm text-muted mt-0.5 ml-8">{p.desc}</p>
             </button>
@@ -202,7 +206,8 @@ export function CustomSessionPage() {
                       : 'border-divider text-muted hover:border-brand/30'
                   }`}
                 >
-                  {i.emoji} {i.label}
+                  <span className={`inline-block w-2.5 h-2.5 rounded-full ${i.color} mr-1.5`} aria-hidden="true" />
+                  {i.label}
                 </button>
               ))}
             </div>

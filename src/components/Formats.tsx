@@ -69,7 +69,7 @@ export function Formats() {
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </Link>
-          <h1 className="font-bold text-lg text-heading">Les formats de séance</h1>
+          <h1 className="font-display font-bold text-lg text-heading">Les formats de séance</h1>
         </div>
       </header>
 

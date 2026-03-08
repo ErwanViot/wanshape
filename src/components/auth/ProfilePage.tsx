@@ -24,7 +24,7 @@ function formatShortDate(iso: string): string {
 
 export function ProfilePage() {
   const { user, profile, signOut } = useAuth();
-  const { streak, totalSessions, totalDuration, weekDots, completions, loading: historyLoading } = useHistory(user?.id);
+  const { consecutiveDays, totalSessions, totalDuration, weekDots, completions, loading: historyLoading } = useHistory(user?.id);
   const { activeProgram } = useActiveProgram(user?.id);
 
   useDocumentHead({
@@ -71,8 +71,8 @@ export function ProfilePage() {
                 <div className="text-xs text-muted">min totales</div>
               </div>
               <div className="glass-card rounded-xl p-3">
-                <div className="text-2xl font-bold text-heading">{streak}</div>
-                <div className="text-xs text-muted">{streak <= 1 ? 'jour d\'affilée' : 'jours d\'affilée'}</div>
+                <div className="text-2xl font-bold text-heading">{consecutiveDays}</div>
+                <div className="text-xs text-muted">{consecutiveDays <= 1 ? 'jour d\'affilée' : 'jours d\'affilée'}</div>
               </div>
             </div>
 

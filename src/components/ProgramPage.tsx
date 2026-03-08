@@ -225,7 +225,7 @@ export function ProgramPage() {
                   {FITNESS_LABELS[program.fitness_level] ?? program.fitness_level}
                 </span>
 
-                <h1 className={`text-3xl md:text-4xl font-extrabold tracking-tight ${isCustom ? 'text-heading' : 'text-white'}`}>
+                <h1 className={`font-display text-3xl md:text-4xl font-black tracking-tight ${isCustom ? 'text-heading' : 'text-white'}`}>
                   {program.title}
                 </h1>
 

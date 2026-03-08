@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router';
+import { Moon } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
@@ -38,7 +39,7 @@ export function ProgramPlayerPage() {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6">
         <div className="text-center">
-          <div className="text-5xl mb-4">😴</div>
+          <Moon className="w-12 h-12 text-white/40 mb-4 mx-auto" aria-hidden="true" />
           <p className="text-white/60 text-lg font-medium">Séance introuvable.</p>
           <Link
             to={slug ? `/programme/${slug}` : '/programmes'}

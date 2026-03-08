@@ -24,7 +24,7 @@ export function ProgramList() {
     <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
       {/* Hero */}
       <section className="text-center space-y-4 py-4 md:py-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-heading">
+        <h1 className="font-display text-3xl md:text-4xl font-black tracking-tight text-heading">
           Nos <span className="gradient-text">programmes</span>
         </h1>
         <p className="text-base text-muted max-w-md mx-auto leading-relaxed">
