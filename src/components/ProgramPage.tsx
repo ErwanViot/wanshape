@@ -6,43 +6,10 @@ import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { useProgram } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import type { Session } from '../types/session.ts';
+import { FITNESS_COLORS, FITNESS_LABELS, GOAL_COLORS, GOAL_LABELS } from '../utils/labels.ts';
 import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
-
-const FITNESS_LABELS: Record<string, string> = {
-  beginner: 'Débutant',
-  intermediate: 'Intermédiaire',
-  advanced: 'Avancé',
-};
-
-const GOAL_LABELS: Record<string, string> = {
-  perte_poids: 'Perte de poids',
-  prise_muscle: 'Prise de muscle',
-  remise_forme: 'Remise en forme',
-  force: 'Force',
-  endurance: 'Endurance',
-  performance_sportive: 'Performance sportive',
-  bien_etre: 'Bien-être',
-  souplesse: 'Souplesse',
-};
-
-const GOAL_COLORS: Record<string, string> = {
-  perte_poids: 'bg-rose-400/80',
-  prise_muscle: 'bg-orange-400/80',
-  remise_forme: 'bg-amber-400/80',
-  force: 'bg-red-400/80',
-  endurance: 'bg-sky-400/80',
-  performance_sportive: 'bg-pink-400/80',
-  bien_etre: 'bg-teal-400/80',
-  souplesse: 'bg-violet-400/80',
-};
-
-const FITNESS_COLORS: Record<string, string> = {
-  beginner: 'bg-emerald-500/30 text-emerald-200 border-emerald-400/40',
-  intermediate: 'bg-amber-500/30 text-amber-200 border-amber-400/40',
-  advanced: 'bg-red-500/30 text-red-200 border-red-400/40',
-};
 
 function getConsigneForWeek(consignes: Record<string, string> | null, week: number): string | null {
   if (!consignes) return null;

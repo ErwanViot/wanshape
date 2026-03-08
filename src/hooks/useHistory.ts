@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { SessionCompletion } from '../types/completion.ts';
 
@@ -183,12 +183,15 @@ export function useHistory(userId: string | undefined): HistoryStats {
     };
   }, [userId]);
 
-  const consecutiveDays = computeConsecutiveDays(completions);
-  const totalSessions = completions.length;
-  const totalDuration = completions.reduce((sum, c) => sum + (c.duration_seconds ?? 0), 0);
-  const weekDots = computeWeekDots(completions);
-  const weeklyChart = computeWeeklyChart(completions);
-  const thisWeekSessions = weekDots.filter(Boolean).length;
+  const derived = useMemo(() => {
+    const consecutiveDays = computeConsecutiveDays(completions);
+    const totalSessions = completions.length;
+    const totalDuration = completions.reduce((sum, c) => sum + (c.duration_seconds ?? 0), 0);
+    const weekDots = computeWeekDots(completions);
+    const weeklyChart = computeWeeklyChart(completions);
+    const thisWeekSessions = weekDots.filter(Boolean).length;
+    return { consecutiveDays, totalSessions, totalDuration, weekDots, weeklyChart, thisWeekSessions };
+  }, [completions]);
 
-  return { completions, consecutiveDays, totalSessions, totalDuration, weekDots, weeklyChart, thisWeekSessions, loading };
+  return { completions, ...derived, loading };
 }

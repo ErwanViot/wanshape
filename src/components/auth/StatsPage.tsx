@@ -51,7 +51,7 @@ export function StatsPage() {
   const firstName = (profile?.display_name ?? user?.user_metadata?.display_name ?? '')
     .split(' ')[0];
 
-  const progressPct = activeProgram
+  const progressPct = activeProgram && activeProgram.totalSessions > 0
     ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
     : 0;
 

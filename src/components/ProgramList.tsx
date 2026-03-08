@@ -6,19 +6,9 @@ import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useActiveProgram, usePrograms } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import { supabase } from '../lib/supabase.ts';
+import { GOAL_LABELS } from '../utils/labels.ts';
 import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
 import { ProgramCard } from './ProgramCard.tsx';
-
-const GOAL_LABELS: Record<string, string> = {
-  perte_poids: 'Perte de poids',
-  prise_muscle: 'Prise de muscle',
-  remise_forme: 'Remise en forme',
-  force: 'Force',
-  endurance: 'Endurance',
-  performance_sportive: 'Performance sportive',
-  bien_etre: 'Bien-être',
-  souplesse: 'Souplesse',
-};
 
 export function ProgramList() {
   const { user } = useAuth();
@@ -28,7 +18,7 @@ export function ProgramList() {
   const [searchParams] = useSearchParams();
   const justDeleted = searchParams.get('deleted') === '1';
 
-  const progressPct = activeProgram
+  const progressPct = activeProgram && activeProgram.totalSessions > 0
     ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
     : 0;
 

@@ -24,7 +24,7 @@ export function AuthButton() {
     <Link
       to="/parametres"
       className="w-8 h-8 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand shrink-0"
-      aria-label="Parametres"
+      aria-label="Paramètres"
     >
       {initials}
     </Link>
