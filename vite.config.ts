@@ -26,7 +26,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,json,png,svg}'],
+        globPatterns: ['**/*.{js,css,html,json,svg,png}'],
+        globIgnores: ['**/og-image.png'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
         runtimeCaching: [
@@ -45,6 +46,15 @@ export default defineConfig({
           {
             urlPattern: /\/api\/.*/,
             handler: 'NetworkOnly',
+          },
+          {
+            urlPattern: /\/images\/.*\.webp$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'images-cache',
+              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              cacheableResponse: { statuses: [200] },
+            },
           },
           {
             urlPattern: /\/videos\/.*\.mp4$/,

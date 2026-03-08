@@ -21,7 +21,7 @@ function resolveTheme(pref: ThemePreference): ResolvedTheme {
 function getStoredPreference(): ThemePreference {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === 'dark' || stored === 'light' || stored === 'system') return stored;
-  return 'system';
+  return 'light';
 }
 
 function applyTheme(resolved: ResolvedTheme) {

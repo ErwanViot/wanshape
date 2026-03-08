@@ -72,7 +72,7 @@
   <body>
     <script>
       (function() {
-        var p = localStorage.getItem('wan-shape-theme') || 'system';
+        var p = localStorage.getItem('wan-shape-theme') || 'light';
         var t = p === 'system'
           ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
           : p;
