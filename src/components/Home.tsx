@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import {
-
   Sparkles,
   Zap,
   Calendar,
@@ -532,7 +531,7 @@ function VisitorContent({
                 ) : session ? (
                   <>
                     <button type="button" onClick={onStart} className="relative h-44 w-full cursor-pointer text-left">
-                      <img src={getSessionImage(session)} alt="" className="w-full h-full object-cover" />
+                      <img src={getSessionImage(session)} alt="" className="w-full h-full object-cover object-[50%_30%]" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute top-3 left-4">
                         <span className="session-label px-2.5 py-1 rounded-lg text-xs font-bold tracking-widest uppercase text-white">
@@ -790,7 +789,7 @@ function TomorrowCard({ session, dateKey }: { session: Session; dateKey: string 
       <div className="flex items-stretch min-h-[100px]">
         {/* Thumbnail */}
         <div className="relative w-28 sm:w-36 shrink-0">
-          <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover object-[50%_30%]" loading="lazy" />
           <div className="absolute inset-0 bg-black/30" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="session-label-tomorrow px-2 py-0.5 rounded-md">

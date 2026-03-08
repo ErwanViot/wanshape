@@ -26,7 +26,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,json,svg}'],
+        globPatterns: ['**/*.{js,css,html,json,svg,png}'],
         globIgnores: ['**/og-image.png'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
