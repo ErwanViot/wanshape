@@ -272,7 +272,11 @@ export function CreateProgramPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-8 pb-12">
-      <h1 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">Créer mon programme</h1>
+      <div className="relative rounded-2xl overflow-hidden mb-6">
+        <img src="/images/illustration-program.webp" alt="" className="w-full h-32 sm:h-40 object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
+        <h1 className="absolute bottom-4 left-4 font-display text-2xl sm:text-3xl font-black text-white drop-shadow-sm">Créer mon programme</h1>
+      </div>
 
       {/* Step indicator */}
       <nav aria-label={`Étape ${draft.step} sur 3`} className="flex items-center gap-1 mb-8">

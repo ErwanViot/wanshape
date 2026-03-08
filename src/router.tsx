@@ -46,6 +46,9 @@ const LazyCustomSessionPreviewPage = lazy(() =>
 const LazyCustomPlayerPage = lazy(() =>
   import('./components/CustomPlayerPage.tsx').then((m) => ({ default: m.CustomPlayerPage })),
 );
+const LazyImageTestPage = lazy(() =>
+  import('./components/ImageTestPage.tsx').then((m) => ({ default: m.ImageTestPage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -62,6 +65,14 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyDiscover />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'test-images',
+        element: (
+          <Lazy>
+            <LazyImageTestPage />
           </Lazy>
         ),
       },

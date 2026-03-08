@@ -24,7 +24,7 @@ export function FormatPage() {
       {/* Hero — text stays white (over image) */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
-          <img src={format.image} alt="" className="w-full h-full object-cover" />
+          <img src={format.image} alt="" className="w-full h-full object-cover object-[50%_30%]" />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-surface/20" />
         </div>
 

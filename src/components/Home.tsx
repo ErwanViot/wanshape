@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import {
-  Moon,
+
   Sparkles,
-  BrainCircuit,
   Zap,
   Calendar,
   ArrowRight,
@@ -153,7 +152,7 @@ function ConnectedContent({
               ) : session ? (
                 <>
                   <button type="button" onClick={onStart} className="relative h-36 w-full cursor-pointer text-left">
-                    <img src={getSessionImage(session)} alt="" className="w-full h-full object-cover" />
+                    <img src={getSessionImage(session)} alt="" className="w-full h-full object-cover object-[50%_30%]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
                       <p className="font-display text-lg font-bold text-white leading-tight">
@@ -185,7 +184,7 @@ function ConnectedContent({
               ) : (
                 <div className="flex-1 p-6 flex items-center justify-center">
                   <div className="text-center">
-                    <Moon className="w-10 h-10 text-muted mx-auto mb-3" aria-hidden="true" />
+                    <img src="/images/illustration-empty-state.webp" alt="" className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80" />
                     <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
                   </div>
                 </div>
@@ -204,10 +203,9 @@ function ConnectedContent({
                   </h3>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-brand/60 bg-brand/8 px-2 py-0.5 rounded-full shrink-0">Premium</span>
                 </div>
-                <div className="relative h-36 bg-gradient-to-br from-surface-3 to-surface-2 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-accent/20 to-brand/20 flex items-center justify-center">
-                    <BrainCircuit className="w-10 h-10 text-accent" aria-hidden="true" />
-                  </div>
+                <div className="relative h-36 overflow-hidden">
+                  <img src="/images/illustration-ai-session.webp" alt="" className="w-full h-full object-cover object-center" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface-card/80 to-transparent" />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
                   <p className="text-sm text-muted leading-relaxed">
@@ -261,7 +259,7 @@ function ConnectedContent({
                   &hellip; poursuis mon programme
                 </h3>
                 <Link to={`/programme/${activeProgram.slug}`} className="block relative h-36 group">
-                  <img src={getProgramImage(activeProgram.slug)} alt="" className="w-full h-full object-cover" />
+                  <img src={getProgramImage(activeProgram.slug)} alt="" className="w-full h-full object-cover object-[50%_30%]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4">
                     <p className="font-display text-lg font-bold text-white leading-tight group-hover:text-white/80 transition-colors">
@@ -571,7 +569,7 @@ function VisitorContent({
                 ) : (
                   <div className="p-8 flex items-center justify-center min-h-[200px]">
                     <div className="text-center">
-                      <Moon className="w-10 h-10 text-muted mx-auto mb-3" aria-hidden="true" />
+                      <img src="/images/illustration-empty-state.webp" alt="" className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80" />
                       <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
                     </div>
                   </div>

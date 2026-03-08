@@ -27,10 +27,10 @@ export function ProgramCard({ program }: { program: Program }) {
         <img
           src={image}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/70 transition-opacity group-hover:opacity-70" />
 
         <div className="relative z-10 flex flex-col justify-between flex-1 p-6">
           {/* Top: badge */}
