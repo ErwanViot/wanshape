@@ -42,7 +42,7 @@ export function ProgramPlayerPage() {
           <Moon className="w-12 h-12 text-white/40 mb-4 mx-auto" aria-hidden="true" />
           <p className="text-white/60 text-lg font-medium">Séance introuvable.</p>
           <Link
-            to={slug ? `/programme/${slug}` : '/programmes'}
+            to={slug ? `/programme/${slug}/suivi` : '/programmes'}
             className="text-link hover:text-link-hover underline mt-4 inline-block"
           >
             Retour au programme
@@ -52,5 +52,5 @@ export function ProgramPlayerPage() {
     );
   }
 
-  return <Player session={sessionData} programSessionId={programSession.id} backTo={`/programme/${slug}`} />;
+  return <Player session={sessionData} programSessionId={programSession.id} backTo={`/programme/${slug}/suivi`} />;
 }

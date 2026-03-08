@@ -135,7 +135,7 @@ export function ProfilePage() {
           </div>
           {activeProgram ? (
             <Link
-              to={`/programme/${activeProgram.slug}`}
+              to={`/programme/${activeProgram.slug}/suivi`}
               className="glass-card rounded-xl p-4 flex items-center gap-4 group"
             >
               <div className="w-10 h-10 rounded-full bg-brand/15 flex items-center justify-center shrink-0">

@@ -92,7 +92,7 @@ export function Discover() {
                   className="glass-card rounded-xl overflow-hidden group"
                 >
                   <div className="relative h-24">
-                    <img src={ex.image} alt="" className="w-full h-full object-cover" loading="lazy" />
+                    <img src={ex.image} alt={ex.name} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                   <div className="px-3 py-2 flex items-center justify-between">
                     <span className="text-xs font-semibold text-heading truncate">{ex.name}</span>

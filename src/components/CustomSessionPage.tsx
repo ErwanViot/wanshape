@@ -103,7 +103,7 @@ export function CustomSessionPage() {
   return (
     <div className="px-6 md:px-10 lg:px-14 pb-12 max-w-2xl mx-auto pt-6 md:pt-4">
       <div className="relative rounded-2xl overflow-hidden mb-6">
-        <img src="/images/illustration-ai-session.webp" alt="" className="w-full h-32 sm:h-40 object-cover object-center" />
+        <img src="/images/illustration-ai-session.webp" alt="Créer une séance personnalisée par IA" className="w-full h-32 sm:h-40 object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
         <h1 className="absolute bottom-4 left-4 text-2xl sm:text-3xl font-bold text-white drop-shadow-sm">Créer ma séance</h1>
       </div>

@@ -151,7 +151,7 @@ function ConnectedContent({
               ) : session ? (
                 <>
                   <button type="button" onClick={onStart} className="relative h-36 w-full cursor-pointer text-left">
-                    <img src={getSessionImage(session)} alt="" className="w-full h-full object-cover object-[50%_30%]" />
+                    <img src={getSessionImage(session)} alt={`Séance du jour : ${session.title}`} className="w-full h-full object-cover object-[50%_30%]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
                       <p className="font-display text-lg font-bold text-white leading-tight">
@@ -183,7 +183,7 @@ function ConnectedContent({
               ) : (
                 <div className="flex-1 p-6 flex items-center justify-center">
                   <div className="text-center">
-                    <img src="/images/illustration-empty-state.webp" alt="" className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80" />
+                    <img src="/images/illustration-empty-state.webp" alt="Pas de séance prévue" className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80" />
                     <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
                   </div>
                 </div>
@@ -203,7 +203,7 @@ function ConnectedContent({
                   <span className="text-[10px] font-bold uppercase tracking-wider text-brand/60 bg-brand/8 px-2 py-0.5 rounded-full shrink-0">Premium</span>
                 </div>
                 <div className="relative h-36 overflow-hidden">
-                  <img src="/images/illustration-ai-session.webp" alt="" className="w-full h-full object-cover object-center" />
+                  <img src="/images/illustration-ai-session.webp" alt="Séance personnalisée par IA" className="w-full h-full object-cover object-center" />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-card/80 to-transparent" />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
@@ -257,8 +257,8 @@ function ConnectedContent({
                 <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
                   &hellip; poursuis mon programme
                 </h3>
-                <Link to={`/programme/${activeProgram.slug}`} className="block relative h-36 group">
-                  <img src={getProgramImage(activeProgram.slug)} alt="" className="w-full h-full object-cover object-[50%_30%]" />
+                <Link to={`/programme/${activeProgram.slug}/suivi`} className="block relative h-36 group">
+                  <img src={getProgramImage(activeProgram.slug)} alt={activeProgram.title} className="w-full h-full object-cover object-[50%_30%]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4">
                     <p className="font-display text-lg font-bold text-white leading-tight group-hover:text-white/80 transition-colors">
@@ -531,7 +531,7 @@ function VisitorContent({
                 ) : session ? (
                   <>
                     <button type="button" onClick={onStart} className="relative h-44 w-full cursor-pointer text-left">
-                      <img src={getSessionImage(session)} alt="" className="w-full h-full object-cover object-[50%_30%]" />
+                      <img src={getSessionImage(session)} alt={`Séance du jour : ${session.title}`} className="w-full h-full object-cover object-[50%_30%]" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute top-3 left-4">
                         <span className="session-label px-2.5 py-1 rounded-lg text-xs font-bold tracking-widest uppercase text-white">
@@ -568,7 +568,7 @@ function VisitorContent({
                 ) : (
                   <div className="p-8 flex items-center justify-center min-h-[200px]">
                     <div className="text-center">
-                      <img src="/images/illustration-empty-state.webp" alt="" className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80" />
+                      <img src="/images/illustration-empty-state.webp" alt="Pas de séance prévue" className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80" />
                       <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
                     </div>
                   </div>
@@ -789,7 +789,7 @@ function TomorrowCard({ session, dateKey }: { session: Session; dateKey: string 
       <div className="flex items-stretch min-h-[100px]">
         {/* Thumbnail */}
         <div className="relative w-28 sm:w-36 shrink-0">
-          <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover object-[50%_30%]" loading="lazy" />
+          <img src={image} alt={`Séance de demain : ${session.title}`} className="absolute inset-0 w-full h-full object-cover object-[50%_30%]" loading="lazy" />
           <div className="absolute inset-0 bg-black/30" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="session-label-tomorrow px-2 py-0.5 rounded-md">

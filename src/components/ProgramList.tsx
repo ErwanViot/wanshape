@@ -71,7 +71,7 @@ export function ProgramList() {
                 return (
                   <Link
                     key={p.id}
-                    to={`/programme/${p.slug}`}
+                    to={`/programme/${p.slug}/suivi`}
                     className="glass-card rounded-xl px-4 py-3 flex items-center gap-3 group transition-colors hover:border-brand/30 cursor-pointer"
                   >
                     <div className="w-10 h-10 rounded-full bg-brand/15 flex items-center justify-center shrink-0">

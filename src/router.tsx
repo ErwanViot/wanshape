@@ -24,6 +24,9 @@ const LazyProfilePage = lazy(() =>
 );
 const LazyDiscover = lazy(() => import('./components/Discover.tsx').then((m) => ({ default: m.Discover })));
 const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
+const LazyProgramContentPage = lazy(() =>
+  import('./components/ProgramContentPage.tsx').then((m) => ({ default: m.ProgramContentPage })),
+);
 const LazyProgramPage = lazy(() => import('./components/ProgramPage.tsx').then((m) => ({ default: m.ProgramPage })));
 const LazyProgramPlayerPage = lazy(() =>
   import('./components/ProgramPlayerPage.tsx').then((m) => ({ default: m.ProgramPlayerPage })),
@@ -155,7 +158,17 @@ export const router = createBrowserRouter([
         path: 'programme/:slug',
         element: (
           <Lazy>
-            <LazyProgramPage />
+            <LazyProgramContentPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'programme/:slug/suivi',
+        element: (
+          <Lazy>
+            <RequireAuth>
+              <LazyProgramPage />
+            </RequireAuth>
           </Lazy>
         ),
       },
