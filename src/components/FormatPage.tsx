@@ -24,7 +24,7 @@ export function FormatPage() {
       {/* Hero — text stays white (over image) */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
-          <img src={format.image} alt="" className="w-full h-full object-cover object-[50%_30%]" />
+          <img src={format.image} alt={`Format ${format.name}`} className="w-full h-full object-cover object-[50%_30%]" />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-surface/20" />
         </div>
 
@@ -121,25 +121,35 @@ export function FormatPage() {
           </ul>
         </ContentSection>
 
-        {/* Navigation */}
-        <div className="pt-4 border-t border-divider flex items-center justify-between">
-          <Link to="/formats" className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-            Tous les formats
-          </Link>
-          <Link to="/" className="text-sm text-link hover:text-link-hover transition-colors">
-            Séance du jour →
-          </Link>
+        {/* Cross-links */}
+        <div className="pt-4 border-t border-divider space-y-3">
+          <div className="flex flex-wrap gap-3">
+            <Link to="/exercices" className="text-sm text-link hover:text-link-hover transition-colors">
+              Nos exercices →
+            </Link>
+            <Link to="/programmes" className="text-sm text-link hover:text-link-hover transition-colors">
+              Nos programmes →
+            </Link>
+          </div>
+          <div className="flex items-center justify-between">
+            <Link to="/formats" className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+              Tous les formats
+            </Link>
+            <Link to="/" className="text-sm text-link hover:text-link-hover transition-colors">
+              Séance du jour →
+            </Link>
+          </div>
         </div>
       </div>
     </>

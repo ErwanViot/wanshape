@@ -224,7 +224,7 @@ export function CreateProgramPage() {
     const result = await generate(input);
     if (result) {
       sessionStorage.removeItem(DRAFT_KEY);
-      navigate(`/programme/${result.slug}`);
+      navigate(`/programme/${result.slug}/suivi`);
     }
   };
 
@@ -273,7 +273,7 @@ export function CreateProgramPage() {
   return (
     <div className="max-w-2xl mx-auto px-6 py-8 pb-12">
       <div className="relative rounded-2xl overflow-hidden mb-6">
-        <img src="/images/illustration-program.webp" alt="" className="w-full h-32 sm:h-40 object-cover object-center" />
+        <img src="/images/illustration-program.webp" alt="Créer un programme sportif personnalisé" className="w-full h-32 sm:h-40 object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
         <h1 className="absolute bottom-4 left-4 font-display text-2xl sm:text-3xl font-black text-white drop-shadow-sm">Créer mon programme</h1>
       </div>

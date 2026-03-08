@@ -4,8 +4,13 @@ Allow: /formats
 Allow: /formats/
 Allow: /exercices
 Allow: /exercices/
+Allow: /programmes
+Allow: /programme/
 Disallow: /seance/
 Disallow: /sessions/
 Disallow: /legal/
+Disallow: /profil
+Disallow: /login
+Disallow: /signup
 
-Sitemap: https://wanshape.fr/sitemap.xml
+Sitemap: https://www.wan-shape.fr/sitemap.xml

@@ -39,7 +39,7 @@ export function ExercisePage() {
       {/* Hero */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
-          <img src={exercise.image} alt="" className="w-full h-full object-cover" loading="eager" />
+          <img src={exercise.image} alt={exercise.name} className="w-full h-full object-cover" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-surface/20" />
         </div>
 
@@ -152,28 +152,38 @@ export function ExercisePage() {
           </ul>
         </ContentSection>
 
-        {/* Navigation */}
-        <div className="pt-4 border-t border-divider flex items-center justify-between">
-          <Link
-            to="/exercices"
-            className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
+        {/* Cross-links */}
+        <div className="pt-4 border-t border-divider space-y-3">
+          <div className="flex flex-wrap gap-3">
+            <Link to="/formats" className="text-sm text-link hover:text-link-hover transition-colors">
+              Les formats →
+            </Link>
+            <Link to="/programmes" className="text-sm text-link hover:text-link-hover transition-colors">
+              Nos programmes →
+            </Link>
+          </div>
+          <div className="flex items-center justify-between">
+            <Link
+              to="/exercices"
+              className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
             >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-            Nos exercices
-          </Link>
-          <Link to="/formats" className="text-sm text-link hover:text-link-hover transition-colors">
-            Les formats →
-          </Link>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+              Nos exercices
+            </Link>
+            <Link to="/" className="text-sm text-link hover:text-link-hover transition-colors">
+              Séance du jour →
+            </Link>
+          </div>
         </div>
       </div>
     </>

@@ -67,7 +67,7 @@ export function Exercises() {
                 >
                   {/* Image */}
                   <div className="relative h-28 overflow-hidden">
-                    <img src={ex.image} alt="" className="w-full h-full object-cover" loading="lazy" />
+                    <img src={ex.image} alt={ex.name} className="w-full h-full object-cover" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
                       <h3 className="font-bold text-white text-base drop-shadow-sm">{ex.name}</h3>
