@@ -6,7 +6,7 @@ import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { useProgram } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import type { Session } from '../types/session.ts';
-import { getProgramImage } from '../utils/programImage.ts';
+import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
 
@@ -14,6 +14,28 @@ const FITNESS_LABELS: Record<string, string> = {
   beginner: 'Débutant',
   intermediate: 'Intermédiaire',
   advanced: 'Avancé',
+};
+
+const GOAL_LABELS: Record<string, string> = {
+  perte_poids: 'Perte de poids',
+  prise_muscle: 'Prise de muscle',
+  remise_forme: 'Remise en forme',
+  force: 'Force',
+  endurance: 'Endurance',
+  performance_sportive: 'Performance sportive',
+  bien_etre: 'Bien-être',
+  souplesse: 'Souplesse',
+};
+
+const GOAL_COLORS: Record<string, string> = {
+  perte_poids: 'bg-rose-400/80',
+  prise_muscle: 'bg-orange-400/80',
+  remise_forme: 'bg-amber-400/80',
+  force: 'bg-red-400/80',
+  endurance: 'bg-sky-400/80',
+  performance_sportive: 'bg-pink-400/80',
+  bien_etre: 'bg-teal-400/80',
+  souplesse: 'bg-violet-400/80',
 };
 
 const FITNESS_COLORS: Record<string, string> = {
@@ -184,18 +206,12 @@ export function ProgramPage() {
         {/* Hero */}
         <section className="space-y-5 -mx-6 -mt-8 md:mx-0 md:mt-0">
           <div className="relative min-h-[220px] sm:min-h-[280px] md:rounded-2xl overflow-hidden">
-            {isCustom ? (
-              <div className="absolute inset-0 bg-gradient-to-br from-brand/30 via-surface to-brand-secondary/20" />
-            ) : (
-              <>
-                <img
-                  src={getProgramImage(program.slug)}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/75" />
-              </>
-            )}
+            <img
+              src={isCustom ? getAIProgramImage() : getProgramImage(program.slug)}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/75" />
 
             <div className="relative z-10 flex flex-col justify-between min-h-[220px] sm:min-h-[280px] p-6">
               <div className="flex items-start justify-between">
@@ -225,12 +241,12 @@ export function ProgramPage() {
                   {FITNESS_LABELS[program.fitness_level] ?? program.fitness_level}
                 </span>
 
-                <h1 className={`font-display text-3xl md:text-4xl font-black tracking-tight ${isCustom ? 'text-heading' : 'text-white'}`}>
+                <h1 className="font-display text-3xl md:text-4xl font-black tracking-tight text-white">
                   {program.title}
                 </h1>
 
                 {program.description && (
-                  <p className={`text-sm leading-relaxed ${isCustom ? 'text-muted' : 'text-white/70'}`}>{program.description}</p>
+                  <p className="text-sm leading-relaxed text-white/70">{program.description}</p>
                 )}
 
                 <div className={`flex items-center gap-3 text-xs ${isCustom ? 'text-faint' : 'text-white/50'}`}>
@@ -256,13 +272,9 @@ export function ProgramPage() {
                     {program.goals.map((goal) => (
                       <li
                         key={goal}
-                        className={`text-xs font-medium px-2.5 py-1 rounded-full border ${
-                          isCustom
-                            ? 'bg-white/5 border-divider text-muted'
-                            : 'bg-white/10 border-white/15 text-white/70'
-                        }`}
+                        className={`text-xs font-bold px-2.5 py-1 rounded-full text-white ${GOAL_COLORS[goal] ?? 'bg-rose-400/80'}`}
                       >
-                        {goal}
+                        {GOAL_LABELS[goal] ?? goal}
                       </li>
                     ))}
                   </ul>

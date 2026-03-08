@@ -22,9 +22,9 @@ export function AuthButton() {
 
   return (
     <Link
-      to="/profil"
+      to="/parametres"
       className="w-8 h-8 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand shrink-0"
-      aria-label="Mon profil"
+      aria-label="Parametres"
     >
       {initials}
     </Link>
