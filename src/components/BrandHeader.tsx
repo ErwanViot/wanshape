@@ -10,6 +10,7 @@ const NAV_ITEMS = [
     match: (p: string) => p === '/decouvrir' || p.startsWith('/formats') || p.startsWith('/exercices'),
   },
   { to: '/programmes', label: 'Programmes', match: (p: string) => p.startsWith('/programme') },
+  { to: '/tarifs', label: 'Tarifs', match: (p: string) => p === '/tarifs' },
   { to: '/suivi', label: 'Suivi', match: (p: string) => p === '/suivi', requiresAuth: true },
 ] as const;
 

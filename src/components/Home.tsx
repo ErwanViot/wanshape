@@ -199,7 +199,7 @@ function ConnectedContent({
             </div>
 
             {/* 2 — Crée ma propre séance / Découvre les formats */}
-            {FEATURE_CUSTOM_SESSION ? (
+            {(profile?.subscription_tier === 'premium' || FEATURE_CUSTOM_SESSION) ? (
               <Link
                 to="/seance/custom"
                 className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-accent/30 hover:shadow-lg hover:shadow-accent/10"
@@ -632,15 +632,13 @@ function VisitorContent({
                   </li>
                 ))}
               </ul>
-              {FEATURE_CUSTOM_SESSION && (
-                <Link
-                  to="/seance/custom"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors"
-                >
-                  Découvrir
-                  <ChevronRight className="w-4 h-4" aria-hidden="true" />
-                </Link>
-              )}
+              <Link
+                to="/tarifs"
+                className="inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors"
+              >
+                Découvrir Premium
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </div>

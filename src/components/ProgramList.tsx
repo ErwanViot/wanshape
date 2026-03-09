@@ -11,7 +11,7 @@ import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
 import { ProgramCard } from './ProgramCard.tsx';
 
 export function ProgramList() {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const { programs, loading } = usePrograms();
   const { programs: userPrograms, loading: userLoading } = useUserPrograms();
   const { activeProgram, loading: activeProgramLoading } = useActiveProgram(user?.id);
@@ -125,8 +125,8 @@ export function ProgramList() {
         </section>
       )}
 
-      {/* ── My programs (logged-in, feature-flagged) ── */}
-      {FEATURE_CUSTOM_SESSION && user && (
+      {/* ── My programs (logged-in, premium or feature-flagged) ── */}
+      {(profile?.subscription_tier === 'premium' || FEATURE_CUSTOM_SESSION) && user && (
         <section className="space-y-4">
           <h2 className="text-xs font-bold uppercase tracking-wider text-subtle">Mes programmes</h2>
 
@@ -190,7 +190,7 @@ export function ProgramList() {
 
       {/* ── Fixed programs ── */}
       <section className="space-y-4">
-        {FEATURE_CUSTOM_SESSION && user && (
+        {(profile?.subscription_tier === 'premium' || FEATURE_CUSTOM_SESSION) && user && (
           <h2 className="text-xs font-bold uppercase tracking-wider text-subtle">Programmes guidés</h2>
         )}
 
