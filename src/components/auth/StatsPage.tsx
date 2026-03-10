@@ -45,7 +45,7 @@ export function StatsPage() {
 
   useDocumentHead({
     title: 'Suivi',
-    description: 'Tableau de bord sportif WanShape.',
+    description: 'Tableau de bord sportif Wan2Fit.',
   });
 
   const firstName = (profile?.display_name ?? user?.user_metadata?.display_name ?? '')

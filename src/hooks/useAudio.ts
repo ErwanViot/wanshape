@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const STORAGE_KEY = 'wanshape-audio-enabled';
+const STORAGE_KEY = 'wan2fit-audio-enabled';
 
 function getStoredAudio(): boolean {
   try {

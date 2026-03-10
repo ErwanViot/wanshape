@@ -12,7 +12,7 @@ export function ResetPasswordPage() {
 
   useDocumentHead({
     title: 'Mot de passe oublié',
-    description: 'Réinitialise ton mot de passe WanShape.',
+    description: 'Réinitialise ton mot de passe Wan2Fit.',
   });
 
   if (!loading && user) return <Navigate to="/profil" replace />;

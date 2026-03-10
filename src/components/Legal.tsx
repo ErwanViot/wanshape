@@ -24,7 +24,7 @@ export function Legal() {
 
   useDocumentHead({
     title: TAB_TITLES[tab],
-    description: `${TAB_TITLES[tab]} du site WAN SHAPE, édité par WAN SOFT.`,
+    description: `${TAB_TITLES[tab]} du site WAN2FIT, édité par WAN SOFT.`,
   });
 
   return (
@@ -95,7 +95,7 @@ function MentionsLegales() {
 
       <Section title="Éditeur du site">
         <p>
-          Le site <strong className="text-strong">WAN SHAPE</strong> (ci-après « le Site ») est édité par :
+          Le site <strong className="text-strong">WAN2FIT</strong> (ci-après « le Site ») est édité par :
         </p>
         <p>
           <strong className="text-strong">WAN SOFT</strong>
@@ -199,7 +199,7 @@ function PolitiqueConfidentialite() {
           </li>
         </ul>
         <p>
-          <strong className="text-strong">WanShape ne stocke jamais vos données bancaires.</strong> Les informations
+          <strong className="text-strong">Wan2Fit ne stocke jamais vos données bancaires.</strong> Les informations
           de paiement (numéro de carte, IBAN) sont collectées et traitées exclusivement par Stripe. Nous ne conservons
           que l'identifiant client Stripe et le statut de votre abonnement.
         </p>
@@ -310,14 +310,14 @@ function CGU() {
       <Section title="Objet">
         <p>
           Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») définissent les conditions d'accès et
-          d'utilisation du site WAN SHAPE, édité par WAN SOFT.
+          d'utilisation du site WAN2FIT, édité par WAN SOFT.
         </p>
         <p>L'utilisation du Site implique l'acceptation pleine et entière des présentes CGU.</p>
       </Section>
 
       <Section title="Description du service">
         <p>
-          WAN SHAPE propose une offre gratuite de séances d'exercices physiques quotidiennes et une offre Premium
+          WAN2FIT propose une offre gratuite de séances d'exercices physiques quotidiennes et une offre Premium
           payante donnant accès à des fonctionnalités avancées (séances et programmes personnalisés par IA). Le Site
           met à disposition des suggestions d'exercices guidées avec minuteur intégré, sans équipement nécessaire.
         </p>
@@ -331,7 +331,7 @@ function CGU() {
       <Section title="Nature du contenu">
         <p>
           <strong className="text-strong">
-            WAN SHAPE est un service de contenu éditorial et informationnel relatif à l'activité physique.
+            WAN2FIT est un service de contenu éditorial et informationnel relatif à l'activité physique.
           </strong>
         </p>
         <p>
@@ -385,7 +385,7 @@ function CGU() {
             médical ni une prescription d'activité physique.
           </strong>
         </p>
-        <p>Avant d'utiliser WAN SHAPE, il est indispensable de :</p>
+        <p>Avant d'utiliser WAN2FIT, il est indispensable de :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Consulter un médecin pour vérifier votre aptitude à la pratique sportive</li>
           <li>Vous assurer de ne présenter aucune contre-indication médicale</li>
@@ -414,7 +414,7 @@ function CGU() {
             blessure.
           </strong>
         </p>
-        <p>En utilisant WAN SHAPE, l'utilisateur déclare :</p>
+        <p>En utilisant WAN2FIT, l'utilisateur déclare :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Avoir pris connaissance de l'avertissement santé ci-dessus</li>
           <li>Pratiquer sous sa propre responsabilité et à ses propres risques</li>
@@ -492,7 +492,7 @@ function CGV() {
       <Section title="Objet">
         <p>
           Les présentes Conditions Générales de Vente (ci-après « CGV ») régissent les conditions de souscription et
-          d'utilisation de l'abonnement Premium proposé par WAN SOFT sur le site WAN SHAPE.
+          d'utilisation de l'abonnement Premium proposé par WAN SOFT sur le site WAN2FIT.
         </p>
         <p>
           Toute souscription à l'offre Premium implique l'acceptation pleine et entière des présentes CGV, ainsi que
@@ -505,7 +505,7 @@ function CGV() {
       </Section>
 
       <Section title="Offres et tarifs">
-        <p>WAN SHAPE propose les offres suivantes :</p>
+        <p>WAN2FIT propose les offres suivantes :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>
             <strong className="text-strong">Gratuit</strong> — Séance du jour, bibliothèque exercices et formats, 3
@@ -527,7 +527,7 @@ function CGV() {
 
       <Section title="Souscription et paiement">
         <p>
-          La souscription à l'offre Premium nécessite la création d'un compte sur WAN SHAPE. Le paiement est effectué
+          La souscription à l'offre Premium nécessite la création d'un compte sur WAN2FIT. Le paiement est effectué
           en ligne par carte bancaire, Apple Pay, Google Pay ou prélèvement SEPA, via la plateforme de paiement
           sécurisée <strong className="text-strong">Stripe</strong>.
         </p>

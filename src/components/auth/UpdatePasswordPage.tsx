@@ -13,7 +13,7 @@ export function UpdatePasswordPage() {
 
   useDocumentHead({
     title: 'Nouveau mot de passe',
-    description: 'Choisissez un nouveau mot de passe pour votre compte WanShape.',
+    description: 'Choisissez un nouveau mot de passe pour votre compte Wan2Fit.',
   });
 
   const handleSubmit = async (e: FormEvent) => {

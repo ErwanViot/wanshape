@@ -5,7 +5,7 @@ interface HeadOptions {
   description?: string;
 }
 
-const BASE_TITLE = 'WAN SHAPE';
+const BASE_TITLE = 'WAN2FIT';
 
 export function useDocumentHead({ title, description }: HeadOptions) {
   useEffect(() => {

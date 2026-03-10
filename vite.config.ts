@@ -11,8 +11,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['sessions/*.json'],
       manifest: {
-        name: 'WAN SHAPE',
-        short_name: 'WAN SHAPE',
+        name: 'WAN2FIT',
+        short_name: 'WAN2FIT',
         description: 'Ta séance de sport quotidienne, prête à lancer',
         theme_color: '#ffffff',
         background_color: '#f8f8f8',

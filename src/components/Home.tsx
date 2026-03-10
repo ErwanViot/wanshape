@@ -53,7 +53,7 @@ export function Home() {
   const [showWelcome, setShowWelcome] = useState(shouldShowWelcome);
 
   useDocumentHead({
-    title: 'WAN SHAPE',
+    title: 'WAN2FIT',
     description:
       "Chaque jour, une séance de sport guidée sans matériel. 8 formats d'entraînement, 25-40 min, 100% gratuit.",
   });
@@ -131,7 +131,7 @@ function ConnectedContent({
   return (
     <div className="px-6 md:px-10 lg:px-14 py-8">
       <div className="max-w-5xl mx-auto space-y-10">
-        <h1 className="sr-only">WAN SHAPE — Votre séance de sport quotidienne</h1>
+        <h1 className="sr-only">WAN2FIT — Votre séance de sport quotidienne</h1>
 
         {/* ── Titre + 3 colonnes d'action ── */}
         <section>
@@ -752,7 +752,7 @@ function VisitorContent({
             Prêt à commencer ?
           </h2>
           <p className="text-muted">
-            Ta séance quotidienne t'attend — rejoins WanShape et commence dès aujourd'hui.
+            Ta séance quotidienne t'attend — rejoins Wan2Fit et commence dès aujourd'hui.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             {supabase && (

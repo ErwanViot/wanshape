@@ -18,7 +18,7 @@ export function Exercises() {
   useDocumentHead({
     title: 'Nos exercices',
     description:
-      'Tous les exercices WAN SHAPE : fiches détaillées avec exécution, variantes, conseils et erreurs courantes.',
+      'Tous les exercices WAN2FIT : fiches détaillées avec exécution, variantes, conseils et erreurs courantes.',
   });
 
   const grouped = groupByCategory(EXERCISES_DATA);

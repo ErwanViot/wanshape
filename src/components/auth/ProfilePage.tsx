@@ -29,7 +29,7 @@ export function ProfilePage() {
 
   useDocumentHead({
     title: 'Mon profil',
-    description: 'Votre parcours fitness sur WanShape.',
+    description: 'Votre parcours fitness sur Wan2Fit.',
   });
 
   const displayName = profile?.display_name ?? user?.user_metadata?.display_name;

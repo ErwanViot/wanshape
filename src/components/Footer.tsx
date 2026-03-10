@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="px-6 py-8 border-t border-divider">
       <p className="text-faint text-xs text-center">
-        WAN SHAPE par{' '}
+        WAN2FIT par{' '}
         <a
           href="https://www.wan-soft.fr"
           target="_blank"

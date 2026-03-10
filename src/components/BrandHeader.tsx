@@ -24,11 +24,11 @@ export function BrandHeader() {
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5">
           <img
-            src="/logo-wanshape.png"
+            src="/logo-wan2fit.png"
             alt=""
             className="w-7 h-7 md:w-8 md:h-8 shrink-0"
           />
-          <span className="font-display text-lg font-black tracking-tight gradient-text">Wan Shape</span>
+          <span className="font-display text-lg font-black tracking-tight gradient-text">Wan2Fit</span>
         </Link>
 
         {/* Nav — desktop only, BottomNav handles mobile */}

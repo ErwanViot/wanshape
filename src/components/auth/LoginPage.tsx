@@ -12,7 +12,7 @@ export function LoginPage() {
 
   useDocumentHead({
     title: 'Connexion',
-    description: 'Connecte-toi à ton compte WanShape.',
+    description: 'Connecte-toi à ton compte Wan2Fit.',
   });
 
   if (!loading && user) return <Navigate to="/profil" replace />;
