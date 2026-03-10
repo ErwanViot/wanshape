@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RequireAuth } from './components/auth/RequireAuth.tsx';
-import { FEATURE_CUSTOM_SESSION } from './config/features.ts';
+import { RequirePremium } from './components/auth/RequirePremium.tsx';
 import { Exercises } from './components/Exercises.tsx';
 import { Formats } from './components/Formats.tsx';
 import { Home } from './components/Home.tsx';
@@ -51,6 +51,9 @@ const LazyCustomSessionPreviewPage = lazy(() =>
 );
 const LazyCustomPlayerPage = lazy(() =>
   import('./components/CustomPlayerPage.tsx').then((m) => ({ default: m.CustomPlayerPage })),
+);
+const LazyPricingPage = lazy(() =>
+  import('./components/PricingPage.tsx').then((m) => ({ default: m.PricingPage })),
 );
 
 function Lazy({ children }: { children: React.ReactNode }) {
@@ -188,41 +191,46 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
-      // Custom session routes (feature-flagged)
-      ...(FEATURE_CUSTOM_SESSION
-        ? [
-            {
-              path: 'seance/custom',
-              element: (
-                <Lazy>
-                  <RequireAuth>
-                    <LazyCustomSessionPage />
-                  </RequireAuth>
-                </Lazy>
-              ),
-            },
-            {
-              path: 'seance/custom/:id',
-              element: (
-                <Lazy>
-                  <RequireAuth>
-                    <LazyCustomSessionPreviewPage />
-                  </RequireAuth>
-                </Lazy>
-              ),
-            },
-            {
-              path: 'programme/creer',
-              element: (
-                <Lazy>
-                  <RequireAuth>
-                    <LazyCreateProgramPage />
-                  </RequireAuth>
-                </Lazy>
-              ),
-            },
-          ]
-        : []),
+      // Pricing
+      {
+        path: 'tarifs',
+        element: (
+          <Lazy>
+            <LazyPricingPage />
+          </Lazy>
+        ),
+      },
+      // Premium routes — always registered, guarded by RequirePremium
+      {
+        path: 'seance/custom',
+        element: (
+          <Lazy>
+            <RequirePremium>
+              <LazyCustomSessionPage />
+            </RequirePremium>
+          </Lazy>
+        ),
+      },
+      {
+        path: 'seance/custom/:id',
+        element: (
+          <Lazy>
+            <RequirePremium>
+              <LazyCustomSessionPreviewPage />
+            </RequirePremium>
+          </Lazy>
+        ),
+      },
+      {
+        path: 'programme/creer',
+        element: (
+          <Lazy>
+            <RequirePremium>
+              <LazyCreateProgramPage />
+            </RequirePremium>
+          </Lazy>
+        ),
+      },
     ],
   },
   // Player — full screen, no chrome
@@ -242,19 +250,17 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
-      // Custom session player (feature-flagged)
-      ...(FEATURE_CUSTOM_SESSION
-        ? [
-            {
-              path: 'seance/custom/:id/play',
-              element: (
-                <Lazy>
-                  <LazyCustomPlayerPage />
-                </Lazy>
-              ),
-            },
-          ]
-        : []),
+      // Custom session player
+      {
+        path: 'seance/custom/:id/play',
+        element: (
+          <Lazy>
+            <RequirePremium>
+              <LazyCustomPlayerPage />
+            </RequirePremium>
+          </Lazy>
+        ),
+      },
     ],
   },
   // Catch-all

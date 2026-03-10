@@ -1,7 +1,8 @@
-import { Link } from 'react-router';
-import { Moon, Sun, Monitor } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router';
+import { Moon, Sun, Monitor, Crown, Sparkles } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { useSubscription } from '../../hooks/useSubscription.ts';
 import { useTheme } from '../../hooks/useTheme.ts';
 import { getInitials } from '../../utils/getInitials.ts';
 
@@ -22,6 +23,9 @@ const THEME_OPTIONS = [
 export function SettingsPage() {
   const { user, profile, signOut } = useAuth();
   const { preference, setTheme } = useTheme();
+  const { isPremium, subscription, manageSubscription } = useSubscription();
+  const [searchParams] = useSearchParams();
+  const checkoutSuccess = searchParams.get('checkout') === 'success';
 
   useDocumentHead({
     title: 'Paramètres',
@@ -73,6 +77,69 @@ export function SettingsPage() {
           </div>
         </section>
 
+        {/* Checkout success */}
+        {checkoutSuccess && (
+          <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm text-center">
+            Bienvenue dans Premium ! Ton abonnement est actif.
+          </div>
+        )}
+
+        {/* Subscription */}
+        <section className="space-y-3">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">Abonnement</h2>
+          {isPremium ? (
+            <div className="rounded-xl border border-accent/30 bg-accent/5 p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <Crown className="w-5 h-5 text-accent" aria-hidden="true" />
+                <span className="text-sm font-bold text-heading">Premium</span>
+              </div>
+              {subscription?.cancel_at_period_end && subscription.current_period_end && (
+                <p className="text-xs text-muted">
+                  Se termine le{' '}
+                  {new Date(subscription.current_period_end).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+              )}
+              {!subscription?.cancel_at_period_end && subscription?.current_period_end && (
+                <p className="text-xs text-muted">
+                  Prochain renouvellement le{' '}
+                  {new Date(subscription.current_period_end).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+              )}
+              <button
+                type="button"
+                onClick={() => manageSubscription()}
+                className="w-full py-2.5 rounded-xl border border-accent/30 text-sm font-semibold text-accent hover:bg-accent/10 transition-colors cursor-pointer"
+              >
+                Gérer mon abonnement
+              </button>
+            </div>
+          ) : (
+            <div className="rounded-xl border border-divider bg-surface-card p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-muted">Plan Gratuit</span>
+              </div>
+              <p className="text-xs text-muted">
+                Passe à Premium pour accéder aux séances et programmes IA personnalisés.
+              </p>
+              <Link
+                to="/tarifs"
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-bold text-white bg-accent hover:bg-accent/90 transition-colors"
+              >
+                <Sparkles className="w-4 h-4" aria-hidden="true" />
+                Passer Premium
+              </Link>
+            </div>
+          )}
+        </section>
+
         {/* Legal */}
         <section className="space-y-3">
           <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">Informations</h2>
@@ -82,6 +149,9 @@ export function SettingsPage() {
             </Link>
             <Link to="/legal/privacy" className="block py-2.5 text-sm text-body hover:text-heading transition-colors">
               Politique de confidentialité
+            </Link>
+            <Link to="/legal/cgv" className="block py-2.5 text-sm text-body hover:text-heading transition-colors">
+              Conditions Générales de Vente
             </Link>
           </div>
         </section>

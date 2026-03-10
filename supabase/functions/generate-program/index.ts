@@ -174,6 +174,17 @@ Deno.serve(async (req: Request) => {
     return errorResponse("Non autorise", 401);
   }
 
+  // Check premium tier
+  const { data: userProfile } = await supabaseAdmin
+    .from("profiles")
+    .select("subscription_tier")
+    .eq("id", user.id)
+    .single();
+
+  if (userProfile?.subscription_tier !== "premium") {
+    return errorResponse("Abonnement Premium requis", 403);
+  }
+
   // Parse body
   let body: RequestInput;
   try {

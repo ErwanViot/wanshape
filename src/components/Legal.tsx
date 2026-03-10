@@ -1,24 +1,26 @@
 import { Link, useNavigate, useParams } from 'react-router';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
-type Tab = 'mentions' | 'privacy' | 'cgu';
+type Tab = 'mentions' | 'privacy' | 'cgu' | 'cgv';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'mentions', label: 'Mentions légales' },
   { key: 'privacy', label: 'Confidentialité' },
   { key: 'cgu', label: 'CGU' },
+  { key: 'cgv', label: 'CGV' },
 ];
 
 const TAB_TITLES: Record<Tab, string> = {
   mentions: 'Mentions légales',
   privacy: 'Politique de confidentialité',
   cgu: "Conditions Générales d'Utilisation",
+  cgv: 'Conditions Générales de Vente',
 };
 
 export function Legal() {
   const { tab: tabParam } = useParams<{ tab: string }>();
   const navigate = useNavigate();
-  const tab: Tab = tabParam && ['mentions', 'privacy', 'cgu'].includes(tabParam) ? (tabParam as Tab) : 'mentions';
+  const tab: Tab = tabParam && ['mentions', 'privacy', 'cgu', 'cgv'].includes(tabParam) ? (tabParam as Tab) : 'mentions';
 
   useDocumentHead({
     title: TAB_TITLES[tab],
@@ -70,6 +72,7 @@ export function Legal() {
           {tab === 'mentions' && <MentionsLegales />}
           {tab === 'privacy' && <PolitiqueConfidentialite />}
           {tab === 'cgu' && <CGU />}
+          {tab === 'cgv' && <CGV />}
         </div>
       </div>
     </>
@@ -190,7 +193,16 @@ function PolitiqueConfidentialite() {
             <strong className="text-strong">Historique des séances complétées</strong> — pour le suivi de progression
             (dates, durées)
           </li>
+          <li>
+            <strong className="text-strong">Données de facturation</strong> — pour la gestion de l'abonnement Premium
+            (traitées par Stripe, voir ci-dessous)
+          </li>
         </ul>
+        <p>
+          <strong className="text-strong">WanShape ne stocke jamais vos données bancaires.</strong> Les informations
+          de paiement (numéro de carte, IBAN) sont collectées et traitées exclusivement par Stripe. Nous ne conservons
+          que l'identifiant client Stripe et le statut de votre abonnement.
+        </p>
         <p>
           Nous ne collectons aucune donnée de santé, de localisation, ni de données relatives à votre condition
           physique. Vos données ne sont jamais revendues à des tiers.
@@ -237,6 +249,10 @@ function PolitiqueConfidentialite() {
           <li>
             <strong className="text-strong">Supabase</strong> — authentification et base de données (stockage de votre
             compte et de votre historique)
+          </li>
+          <li>
+            <strong className="text-strong">Stripe</strong> — traitement des paiements et gestion des abonnements
+            (sous-traitant RGPD, données hébergées en UE). Stripe est certifié PCI-DSS niveau 1.
           </li>
         </ul>
         <p>
@@ -301,12 +317,14 @@ function CGU() {
 
       <Section title="Description du service">
         <p>
-          WAN SHAPE est un service gratuit proposant des séances d'exercices physiques quotidiennes. Le Site met à
-          disposition des suggestions d'exercices guidées avec minuteur intégré, sans équipement nécessaire.
+          WAN SHAPE propose une offre gratuite de séances d'exercices physiques quotidiennes et une offre Premium
+          payante donnant accès à des fonctionnalités avancées (séances et programmes personnalisés par IA). Le Site
+          met à disposition des suggestions d'exercices guidées avec minuteur intégré, sans équipement nécessaire.
         </p>
         <p>
           La création d'un compte est optionnelle. Elle permet de sauvegarder son historique de séances et de suivre sa
-          progression.
+          progression. Les conditions de l'abonnement Premium sont détaillées dans les{' '}
+          <Link to="/legal/cgv" className="text-link underline">Conditions Générales de Vente</Link>.
         </p>
       </Section>
 
@@ -339,8 +357,9 @@ function CGU() {
 
       <Section title="Accès au service">
         <p>
-          Le service est accessible gratuitement à toute personne disposant d'un accès à Internet et d'un navigateur web
-          compatible. L'accès aux séances ne nécessite pas de compte. WAN SOFT se réserve le droit de suspendre ou
+          Le service de base est accessible gratuitement à toute personne disposant d'un accès à Internet et d'un
+          navigateur web compatible. L'accès aux séances quotidiennes ne nécessite pas de compte. Les fonctionnalités
+          Premium (séances IA, programmes IA) sont réservées aux abonnés. WAN SOFT se réserve le droit de suspendre ou
           d'interrompre le service à tout moment, sans préavis ni indemnité.
         </p>
       </Section>
@@ -454,6 +473,134 @@ function CGU() {
       <Section title="Contact">
         <p>
           Pour toute question relative aux présentes CGU, vous pouvez nous contacter à :{' '}
+          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
+            erwan.viot@wan-soft.fr
+          </a>
+        </p>
+      </Section>
+    </>
+  );
+}
+
+function CGV() {
+  return (
+    <>
+      <h1 className="text-2xl font-bold text-heading mb-6">Conditions Générales de Vente</h1>
+
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : mars 2026</p>
+
+      <Section title="Objet">
+        <p>
+          Les présentes Conditions Générales de Vente (ci-après « CGV ») régissent les conditions de souscription et
+          d'utilisation de l'abonnement Premium proposé par WAN SOFT sur le site WAN SHAPE.
+        </p>
+        <p>
+          Toute souscription à l'offre Premium implique l'acceptation pleine et entière des présentes CGV, ainsi que
+          des{' '}
+          <Link to="/legal/cgu" className="text-link underline">
+            Conditions Générales d'Utilisation
+          </Link>
+          .
+        </p>
+      </Section>
+
+      <Section title="Offres et tarifs">
+        <p>WAN SHAPE propose les offres suivantes :</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>
+            <strong className="text-strong">Gratuit</strong> — Séance du jour, bibliothèque exercices et formats, 3
+            programmes guidés, historique complet et statistiques
+          </li>
+          <li>
+            <strong className="text-strong">Premium mensuel</strong> — 9,99 € TTC/mois — Tout le contenu gratuit +
+            séances IA sur-mesure + programmes IA personnalisés
+          </li>
+          <li>
+            <strong className="text-strong">Premium annuel</strong> — 99,99 € TTC/an (soit ~8,33 €/mois, environ 17%
+            de remise) — Contenu identique au mensuel
+          </li>
+        </ul>
+        <p>Les prix sont indiqués toutes taxes comprises (TVA 20% incluse). WAN SOFT se réserve le droit de modifier
+          ses tarifs à tout moment. Toute modification tarifaire n'affecte pas les abonnements en cours et prend effet
+          au prochain renouvellement.</p>
+      </Section>
+
+      <Section title="Souscription et paiement">
+        <p>
+          La souscription à l'offre Premium nécessite la création d'un compte sur WAN SHAPE. Le paiement est effectué
+          en ligne par carte bancaire, Apple Pay, Google Pay ou prélèvement SEPA, via la plateforme de paiement
+          sécurisée <strong className="text-strong">Stripe</strong>.
+        </p>
+        <p>
+          WAN SOFT ne collecte ni ne stocke aucune donnée bancaire. L'ensemble des transactions est géré par Stripe
+          (certifié PCI-DSS niveau 1).
+        </p>
+      </Section>
+
+      <Section title="Durée et renouvellement">
+        <p>
+          L'abonnement Premium est conclu pour une durée indéterminée avec des périodes de facturation mensuelles ou
+          annuelles selon l'offre choisie. L'abonnement se renouvelle automatiquement à l'issue de chaque période de
+          facturation, sauf résiliation par l'abonné avant la date de renouvellement.
+        </p>
+      </Section>
+
+      <Section title="Droit de rétractation">
+        <p>
+          Conformément à l'article L.221-28 du Code de la consommation, l'abonné reconnaît et accepte que l'exécution
+          du service Premium commence immédiatement après la validation du paiement, avec son consentement exprès
+          recueilli via la page de paiement Stripe (case « J'accepte les conditions »).
+        </p>
+        <p>
+          En conséquence, l'abonné renonce expressément à son droit de rétractation de 14 jours pour la période en
+          cours.
+        </p>
+      </Section>
+
+      <Section title="Résiliation">
+        <p>
+          L'abonné peut résilier son abonnement à tout moment depuis le portail client accessible dans ses paramètres
+          de compte (bouton « Gérer mon abonnement »).
+        </p>
+        <p>
+          La résiliation prend effet à la fin de la période de facturation en cours. L'accès aux fonctionnalités
+          Premium est maintenu jusqu'à cette date. Aucun remboursement au prorata n'est effectué.
+        </p>
+      </Section>
+
+      <Section title="Médiateur de la consommation">
+        <p>
+          Conformément aux articles L.616-1 et R.616-1 du Code de la consommation, en cas de litige non résolu par le
+          service client, l'abonné peut recourir gratuitement au médiateur de la consommation désigné par WAN SOFT :
+        </p>
+        <p>
+          <strong className="text-strong">[À COMPLÉTER — médiateur à désigner avant mise en production]</strong>
+        </p>
+        <p>
+          Pour contacter notre service client préalablement à toute médiation :{' '}
+          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
+            erwan.viot@wan-soft.fr
+          </a>
+        </p>
+      </Section>
+
+      <Section title="Facturation">
+        <p>
+          Les factures sont disponibles depuis le portail client Stripe, accessible depuis les paramètres du compte.
+          Conformément à la réglementation, les factures sont conservées pendant 6 ans.
+        </p>
+      </Section>
+
+      <Section title="Droit applicable">
+        <p>
+          Les présentes CGV sont soumises au droit français. En cas de litige, et après tentative de résolution amiable
+          et/ou recours au médiateur, les tribunaux français seront compétents.
+        </p>
+      </Section>
+
+      <Section title="Contact">
+        <p>
+          Pour toute question relative aux présentes CGV ou à votre abonnement :{' '}
           <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
             erwan.viot@wan-soft.fr
           </a>
