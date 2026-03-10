@@ -7,6 +7,7 @@ interface AuthContextValue {
   user: User | null;
   profile: Profile | null;
   loading: boolean;
+  refreshProfile: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
   resetPassword: (email: string) => Promise<{ error: string | null }>;
@@ -99,6 +100,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  const refreshProfile = async () => {
+    if (!user) return;
+    try {
+      const p = await fetchProfile(user.id);
+      if (mounted.current) setProfile(p);
+    } catch {
+      // Silently ignore
+    }
+  };
+
   const signIn = async (email: string, password: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: 'Auth non disponible' };
     const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -140,7 +151,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, profile, loading, signIn, signUp, resetPassword, updatePassword, signOut }}
+      value={{ user, profile, loading, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }}
     >
       {children}
     </AuthContext.Provider>

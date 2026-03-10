@@ -55,6 +55,9 @@ const LazyCustomPlayerPage = lazy(() =>
 const LazyPricingPage = lazy(() =>
   import('./components/PricingPage.tsx').then((m) => ({ default: m.PricingPage })),
 );
+const LazyPremiumPromoPage = lazy(() =>
+  import('./components/PremiumPromoPage.tsx').then((m) => ({ default: m.PremiumPromoPage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -197,6 +200,14 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyPricingPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'premium',
+        element: (
+          <Lazy>
+            <LazyPremiumPromoPage />
           </Lazy>
         ),
       },

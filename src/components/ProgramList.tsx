@@ -1,13 +1,15 @@
 import { Link, useSearchParams } from 'react-router';
-import { ChevronRight, Play, Plus } from 'lucide-react';
-import { FEATURE_CUSTOM_SESSION } from '../config/features.ts';
+import { ChevronRight, Play, Rocket, Sparkles } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { useHealthCheck } from '../hooks/useHealthCheck.ts';
+import { useHistory } from '../hooks/useHistory.ts';
 import { useActiveProgram, usePrograms } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import { supabase } from '../lib/supabase.ts';
 import { GOAL_LABELS } from '../utils/labels.ts';
 import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
+import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { ProgramCard } from './ProgramCard.tsx';
 
 export function ProgramList() {
@@ -15,14 +17,18 @@ export function ProgramList() {
   const { programs, loading } = usePrograms();
   const { programs: userPrograms, loading: userLoading } = useUserPrograms();
   const { activeProgram, loading: activeProgramLoading } = useActiveProgram(user?.id);
+  const { totalSessions } = useHistory(user?.id);
+  const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
   const [searchParams] = useSearchParams();
   const justDeleted = searchParams.get('deleted') === '1';
+
+  const isPremium = profile?.subscription_tier === 'premium';
+  const totalActive = userPrograms.length;
 
   const progressPct = activeProgram && activeProgram.totalSessions > 0
     ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
     : 0;
 
-  // Check if active program is an AI program (not in fixed programs list)
   const isActiveAI = activeProgram && !programs.find((p) => p.slug === activeProgram.slug);
   const activeImage = activeProgram
     ? isActiveAI ? getAIProgramImage() : getProgramImage(activeProgram.slug)
@@ -36,13 +42,22 @@ export function ProgramList() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-10 lg:px-14 py-6 md:py-8 space-y-8">
-      {/* Header */}
+      {/* ── Header ── */}
       <div>
-        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">Programmes</h1>
+        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">
+          Passe au niveau supérieur
+        </h1>
         <p className="text-sm text-muted mt-1 max-w-lg">
-          Atteins tes objectifs avec des programmes conçus pour des résultats visibles.
+          Suis tes programmes ou génère-en un nouveau adapté à tes objectifs.
           {!user && ' Crée ton compte gratuit pour suivre ton avancement.'}
         </p>
+        {user && (totalActive > 0 || totalSessions > 0) && (
+          <p className="text-xs text-subtle mt-2">
+            {totalActive > 0 && <>{totalActive} programme{totalActive > 1 ? 's' : ''} actif{totalActive > 1 ? 's' : ''}</>}
+            {totalActive > 0 && totalSessions > 0 && ' · '}
+            {totalSessions > 0 && <>{totalSessions} séance{totalSessions > 1 ? 's' : ''} complétée{totalSessions > 1 ? 's' : ''}</>}
+          </p>
+        )}
       </div>
 
       {/* Deleted confirmation */}
@@ -105,13 +120,14 @@ export function ProgramList() {
             {/* CTA */}
             <div className="flex gap-3 shrink-0">
               {activeProgram.nextSessionOrder != null && (
-                <Link
-                  to={`/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`}
-                  className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-black text-sm font-bold hover:bg-white/90 transition-colors"
+                <button
+                  type="button"
+                  onClick={() => guardNavigation(`/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`)}
+                  className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-black text-sm font-bold hover:bg-white/90 transition-colors cursor-pointer"
                 >
                   <Play className="w-4 h-4" aria-hidden="true" />
                   Continuer
-                </Link>
+                </button>
               )}
               <Link
                 to={`/programme/${activeProgram.slug}/suivi`}
@@ -125,40 +141,81 @@ export function ProgramList() {
         </section>
       )}
 
-      {/* ── My programs (logged-in, premium or feature-flagged) ── */}
-      {(profile?.subscription_tier === 'premium' || FEATURE_CUSTOM_SESSION) && user && (
+      {/* ── AI CTA Banner ── */}
+      {isPremium && user && (
+        <Link
+          to="/programme/creer"
+          className="group relative block rounded-2xl overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-brand via-brand-secondary to-brand" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent_60%)]" />
+          <div className="relative z-10 flex items-center gap-5 p-6">
+            <div className="flex-1 space-y-2">
+              <h2 className="flex items-center gap-2 font-display text-lg md:text-xl font-black text-white">
+                <Sparkles className="w-5 h-5 text-accent" aria-hidden="true" />
+                Générer un programme avec l'IA
+              </h2>
+              <p className="text-sm text-white/70">
+                En 30 secondes, crée un plan d'entraînement adapté à ton niveau.
+              </p>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 border border-accent/30 text-sm font-bold text-white group-hover:bg-accent/30 transition-colors">
+                <Rocket className="w-4 h-4 text-accent" aria-hidden="true" />
+                Créer mon programme
+              </span>
+            </div>
+            <img
+              src="/images/illustration-program.webp"
+              alt=""
+              className="hidden sm:block w-28 h-28 object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity"
+            />
+          </div>
+        </Link>
+      )}
+
+      {/* Non-premium CTA */}
+      {!isPremium && user && (
+        <Link
+          to="/premium"
+          className="group relative block rounded-2xl overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-brand via-brand-secondary to-brand" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent_60%)]" />
+          <div className="relative z-10 flex items-center gap-5 p-6">
+            <div className="flex-1 space-y-2">
+              <h2 className="flex items-center gap-2 font-display text-lg md:text-xl font-black text-white">
+                <Sparkles className="w-5 h-5 text-accent" aria-hidden="true" />
+                Générer un programme avec l'IA
+              </h2>
+              <p className="text-sm text-white/70">
+                En 30 secondes, crée un plan d'entraînement adapté à ton niveau.
+              </p>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 border border-accent/30 text-sm font-bold text-white group-hover:bg-accent/30 transition-colors">
+                <Sparkles className="w-4 h-4 text-accent" aria-hidden="true" />
+                Débloquer avec Premium
+              </span>
+            </div>
+            <img
+              src="/images/illustration-program.webp"
+              alt=""
+              className="hidden sm:block w-28 h-28 object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-opacity"
+            />
+          </div>
+        </Link>
+      )}
+
+      {/* ── My AI programs ── */}
+      {isPremium && user && !userLoading && userPrograms.length > 0 && (
         <section className="space-y-4">
           <h2 className="text-xs font-bold uppercase tracking-wider text-subtle">Mes programmes</h2>
-
-          {/* CTA */}
-          <Link
-            to="/programme/creer"
-            className="group flex items-center gap-3 rounded-xl border border-dashed border-brand/30 hover:border-brand/60 bg-brand/5 hover:bg-brand/10 px-5 py-3 transition-all cursor-pointer"
-          >
-            <div className="w-10 h-10 rounded-xl bg-brand/15 flex items-center justify-center group-hover:bg-brand/25 transition-colors shrink-0">
-              <Plus className="w-5 h-5 text-brand" aria-hidden="true" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-brand">Créer un programme</p>
-              <p className="text-xs text-muted">Généré par IA, adapté à toi</p>
-            </div>
-          </Link>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-            {userLoading && (
-              <div className="rounded-2xl border border-divider bg-surface-card p-6 flex items-center justify-center min-h-[220px]">
-                <div className="w-5 h-5 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
-              </div>
-            )}
-
-            {!userLoading && userPrograms.map((p) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            {userPrograms.map((p) => {
               const goalLabel = GOAL_LABELS[p.goals?.[0] ?? ''] ?? p.goals?.[0] ?? '';
               const image = getAIProgramImage();
               return (
                 <Link
                   key={p.id}
                   to={`/programme/${p.slug}/suivi`}
-                  className="group relative rounded-2xl overflow-hidden cursor-pointer transition-transform hover:scale-[1.01] min-h-[220px] sm:min-h-[260px] flex flex-col"
+                  className="group relative rounded-2xl overflow-hidden cursor-pointer transition-transform hover:scale-[1.01] min-h-[200px] sm:min-h-[240px] flex flex-col"
                 >
                   <img
                     src={image}
@@ -176,7 +233,7 @@ export function ProgramList() {
                         {p.title}
                       </p>
                       <p className="text-xs text-white/50">
-                        {goalLabel && <span>{goalLabel} · </span>}
+                        {goalLabel && <>Objectif : {goalLabel} · </>}
                         {p.duration_weeks} sem · {p.frequency_per_week}x/sem
                       </p>
                     </div>
@@ -190,9 +247,9 @@ export function ProgramList() {
 
       {/* ── Fixed programs ── */}
       <section className="space-y-4">
-        {(profile?.subscription_tier === 'premium' || FEATURE_CUSTOM_SESSION) && user && (
-          <h2 className="text-xs font-bold uppercase tracking-wider text-subtle">Programmes guidés</h2>
-        )}
+        <h2 className="text-xs font-bold uppercase tracking-wider text-subtle">
+          {user ? 'Choisis ton prochain défi' : 'Programmes'}
+        </h2>
 
         {loading && (
           <div className="flex items-center justify-center py-12">
@@ -209,7 +266,7 @@ export function ProgramList() {
         )}
 
         {!loading && programs.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
             {programs.map((p) => (
               <ProgramCard key={p.id} program={p} />
             ))}
@@ -225,6 +282,7 @@ export function ProgramList() {
           </Link>
         </div>
       )}
+      {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
     </div>
   );
 }
