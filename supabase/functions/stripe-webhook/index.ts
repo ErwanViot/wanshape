@@ -19,15 +19,15 @@ function errorResponse(message: string, status = 400) {
   return jsonResponse({ error: message }, status);
 }
 
-// Constant-time comparison to prevent timing attacks (CRITICAL fix #1)
+// Constant-time comparison to prevent timing attacks
 function timingSafeEqual(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
   const encoder = new TextEncoder();
   const aBytes = encoder.encode(a);
   const bBytes = encoder.encode(b);
-  let result = 0;
-  for (let i = 0; i < aBytes.length; i++) {
-    result |= aBytes[i] ^ bBytes[i];
+  const maxLen = Math.max(aBytes.length, bBytes.length);
+  let result = aBytes.length ^ bBytes.length; // non-zero if lengths differ
+  for (let i = 0; i < maxLen; i++) {
+    result |= (aBytes[i] ?? 0) ^ (bBytes[i] ?? 0);
   }
   return result === 0;
 }
@@ -208,8 +208,7 @@ async function handleCheckoutCompleted(
   const customerId = session.customer as string;
 
   if (!userId || !subscriptionId) {
-    console.error("Missing user_id or subscription in checkout session");
-    return;
+    throw new Error("Missing user_id or subscription in checkout session");
   }
 
   // Upsert stripe_customers
@@ -227,8 +226,7 @@ async function handleCheckoutCompleted(
   );
 
   if (!subRes.ok) {
-    console.error("Failed to fetch subscription:", await subRes.text());
-    return;
+    throw new Error(`Failed to fetch subscription: ${await subRes.text()}`);
   }
 
   const sub = await subRes.json();
@@ -346,6 +344,20 @@ async function handlePaymentFailed(
     .from("subscriptions")
     .update({ status: "past_due", updated_at: new Date().toISOString() })
     .eq("stripe_subscription_id", subscriptionId);
+
+  // Downgrade profile tier — past_due should not grant premium access
+  const { data: sub } = await supabase
+    .from("subscriptions")
+    .select("user_id")
+    .eq("stripe_subscription_id", subscriptionId)
+    .maybeSingle();
+
+  if (sub?.user_id) {
+    await supabase
+      .from("profiles")
+      .update({ subscription_tier: "free" })
+      .eq("id", sub.user_id);
+  }
 }
 
 async function handlePaymentSucceeded(

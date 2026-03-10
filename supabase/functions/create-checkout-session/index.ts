@@ -1,42 +1,61 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
+const ALLOWED_ORIGINS = [
+  "https://wan-shape.fr",
+  "https://www.wan-shape.fr",
+  "https://wan2fit.fr",
+  "https://www.wan2fit.fr",
+  "http://localhost:5173",
+  "http://localhost:4173",
+];
 
-function jsonResponse(data: unknown, status = 200) {
+const DEFAULT_ORIGIN = "https://wan-shape.fr";
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get("origin") ?? "";
+  return {
+    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN,
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+}
+
+function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+    headers: { ...getCorsHeaders(req), "Content-Type": "application/json" },
   });
 }
 
-function errorResponse(message: string, status = 400) {
-  return jsonResponse({ error: message }, status);
+function errorResponse(req: Request, message: string, status = 400) {
+  return jsonResponse(req, { error: message }, status);
+}
+
+function getValidOrigin(req: Request): string {
+  const origin = req.headers.get("origin") ?? "";
+  return ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN;
 }
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: CORS_HEADERS });
+    return new Response(null, { status: 204, headers: getCorsHeaders(req) });
   }
 
   if (req.method !== "POST") {
-    return errorResponse("Method not allowed", 405);
+    return errorResponse(req, "Method not allowed", 405);
   }
 
   // Auth
   const authHeader = req.headers.get("Authorization");
   if (!authHeader) {
-    return errorResponse("Missing authorization", 401);
+    return errorResponse(req, "Missing authorization", 401);
   }
 
   const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY");
   if (!stripeSecretKey) {
-    return errorResponse("STRIPE_SECRET_KEY not configured", 500);
+    return errorResponse(req, "STRIPE_SECRET_KEY not configured", 500);
   }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -57,7 +76,7 @@ Deno.serve(async (req: Request) => {
   } = await supabaseAuth.auth.getUser();
 
   if (authError || !user) {
-    return errorResponse("Non autorisé", 401);
+    return errorResponse(req, "Non autorisé", 401);
   }
 
   // Parse body
@@ -65,21 +84,21 @@ Deno.serve(async (req: Request) => {
   try {
     body = await req.json();
   } catch {
-    return errorResponse("JSON invalide");
+    return errorResponse(req, "JSON invalide");
   }
 
   if (!body.priceId || typeof body.priceId !== "string") {
-    return errorResponse("priceId requis");
+    return errorResponse(req, "priceId requis");
   }
 
-  // Validate priceId against allowlist (IMPORTANT: prevent arbitrary price injection)
+  // Validate priceId against allowlist — fail-closed if env vars not set
   const allowedPrices = [
     Deno.env.get("STRIPE_PRICE_MONTHLY"),
     Deno.env.get("STRIPE_PRICE_YEARLY"),
   ].filter(Boolean);
 
-  if (allowedPrices.length > 0 && !allowedPrices.includes(body.priceId)) {
-    return errorResponse("Price non reconnu", 400);
+  if (allowedPrices.length === 0 || !allowedPrices.includes(body.priceId)) {
+    return errorResponse(req, "Price non reconnu", 400);
   }
 
   // Check no active subscription exists
@@ -92,7 +111,7 @@ Deno.serve(async (req: Request) => {
     .maybeSingle();
 
   if (existingSub) {
-    return errorResponse("Vous avez déjà un abonnement actif", 400);
+    return errorResponse(req, "Vous avez déjà un abonnement actif", 400);
   }
 
   // Get or create Stripe customer
@@ -122,7 +141,7 @@ Deno.serve(async (req: Request) => {
 
     if (!customerRes.ok) {
       console.error("Stripe customer creation failed:", await customerRes.text());
-      return errorResponse("Erreur création client Stripe", 500);
+      return errorResponse(req, "Erreur création client Stripe", 500);
     }
 
     const customer = await customerRes.json();
@@ -135,12 +154,12 @@ Deno.serve(async (req: Request) => {
 
     if (insertError) {
       console.error("Insert stripe_customers error:", insertError);
-      return errorResponse("Erreur serveur", 500);
+      return errorResponse(req, "Erreur serveur", 500);
     }
   }
 
-  // Determine origin for redirect URLs
-  const origin = req.headers.get("origin") || "https://wanshape.com";
+  // Validate origin for redirect URLs
+  const origin = getValidOrigin(req);
 
   // Create Checkout Session
   const params = new URLSearchParams({
@@ -169,10 +188,10 @@ Deno.serve(async (req: Request) => {
   if (!sessionRes.ok) {
     const errText = await sessionRes.text();
     console.error("Stripe checkout session error:", errText);
-    return errorResponse("Erreur création session de paiement", 500);
+    return errorResponse(req, "Erreur création session de paiement", 500);
   }
 
   const session = await sessionRes.json();
 
-  return jsonResponse({ url: session.url });
+  return jsonResponse(req, { url: session.url });
 });

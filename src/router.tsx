@@ -255,7 +255,9 @@ export const router = createBrowserRouter([
         path: 'seance/custom/:id/play',
         element: (
           <Lazy>
-            <LazyCustomPlayerPage />
+            <RequirePremium>
+              <LazyCustomPlayerPage />
+            </RequirePremium>
           </Lazy>
         ),
       },
