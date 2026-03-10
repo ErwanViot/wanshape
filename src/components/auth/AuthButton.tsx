@@ -18,15 +18,29 @@ export function AuthButton() {
   }
 
   const displayName = profile?.display_name ?? user.user_metadata?.display_name;
+  const firstName = displayName?.split(' ')[0];
   const initials = getInitials(displayName, user.email);
 
   return (
     <Link
       to="/parametres"
-      className="w-8 h-8 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand shrink-0"
+      className="flex items-center gap-2"
       aria-label="Paramètres"
     >
-      {initials}
+      {profile?.avatar_url ? (
+        <img
+          src={profile.avatar_url}
+          alt=""
+          className="w-8 h-8 rounded-full object-cover shrink-0"
+        />
+      ) : (
+        <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand shrink-0">
+          {initials}
+        </div>
+      )}
+      {firstName && (
+        <span className="hidden md:block text-sm font-medium text-heading">{firstName}</span>
+      )}
     </Link>
   );
 }

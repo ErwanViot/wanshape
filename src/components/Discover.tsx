@@ -35,10 +35,10 @@ export function Discover() {
   const groupedExercises = groupByCategory(EXERCISES_DATA);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 space-y-12">
+    <div className="max-w-6xl mx-auto px-4 md:px-10 lg:px-14 py-6 md:py-8 space-y-10">
       <div>
-        <h1 className="font-display text-2xl font-bold text-heading mb-1">Découvrir</h1>
-        <p className="text-sm text-muted">Formats d'entraînement et exercices</p>
+        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">Explore ton terrain de jeu</h1>
+        <p className="text-sm text-muted mt-1">Formats d'entraînement, exercices et tout ce qu'il faut pour progresser.</p>
       </div>
 
       {/* Formats section — card grid like /formats page */}

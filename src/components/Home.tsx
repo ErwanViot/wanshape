@@ -7,7 +7,6 @@ import {
   ArrowRight,
   Play,
   Target,
-  ClipboardList,
   Dumbbell,
   Clock,
   RotateCcw,
@@ -18,7 +17,6 @@ import {
   ListChecks,
   ChevronRight,
 } from 'lucide-react';
-import { FEATURE_CUSTOM_SESSION } from '../config/features.ts';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
@@ -77,6 +75,7 @@ export function Home() {
           todayKey={todayKey}
           tomorrowKey={tomorrowKey}
           onStart={handleStartSession}
+          guardNavigation={guardNavigation}
         />
       ) : (
         <VisitorContent
@@ -107,6 +106,7 @@ function ConnectedContent({
   tomorrowLoading,
   tomorrowKey,
   onStart,
+  guardNavigation,
 }: {
   session: Session | null;
   loading: boolean;
@@ -116,6 +116,7 @@ function ConnectedContent({
   todayKey: string;
   tomorrowKey: string;
   onStart: () => void;
+  guardNavigation: (path: string) => void;
 }) {
   const { user, profile } = useAuth();
   const { activeProgram, loading: programLoading } = useActiveProgram(user?.id);
@@ -136,20 +137,20 @@ function ConnectedContent({
         {/* ── Titre + 3 colonnes d'action ── */}
         <section>
           {firstName && (
-            <p className="text-sm text-muted mb-1">
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-heading mb-1">
               Salut {firstName}
-            </p>
+            </h2>
           )}
-          <h2 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">
-            Aujourd'hui je &hellip;
-          </h2>
+          <h3 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">
+            Prêt à bouger ?
+          </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
-            {/* 1 — Fais la séance du jour */}
+            {/* 1 — Séance du jour */}
             <div className="flex flex-col rounded-2xl overflow-hidden border border-card-border transition-all hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10">
-              <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
-                &hellip; fais la séance du jour
-              </h3>
+              <h4 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
+                Séance du jour
+              </h4>
               {loading ? (
                 <div className="flex-1 p-5 space-y-3">
                   <div className="skeleton h-36 rounded-xl" />
@@ -198,21 +199,20 @@ function ConnectedContent({
               )}
             </div>
 
-            {/* 2 — Crée ma propre séance / Découvre les formats */}
-            {(profile?.subscription_tier === 'premium' || FEATURE_CUSTOM_SESSION) ? (
+            {/* 2 — Crée ma propre séance (premium) / Découvrir Premium (free) */}
+            {profile?.subscription_tier === 'premium' ? (
               <Link
                 to="/seance/custom"
                 className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-accent/30 hover:shadow-lg hover:shadow-accent/10"
               >
                 <div className="flex items-center gap-2 px-5 py-4 bg-surface-card border-b border-divider">
-                  <h3 className="font-display text-base font-bold text-heading group-hover:text-accent transition-colors">
-                    &hellip; crée ma propre séance
-                  </h3>
+                  <h4 className="font-display text-base font-bold text-heading group-hover:text-accent transition-colors">
+                    Séance sur-mesure
+                  </h4>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-brand/60 bg-brand/8 px-2 py-0.5 rounded-full shrink-0">Premium</span>
                 </div>
                 <div className="relative h-36 overflow-hidden">
                   <img src="/images/illustration-ai-session.webp" alt="Séance personnalisée par IA" className="w-full h-full object-cover object-center" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface-card/80 to-transparent" />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
                   <p className="text-sm text-muted leading-relaxed">
@@ -226,24 +226,25 @@ function ConnectedContent({
               </Link>
             ) : (
               <Link
-                to="/decouvrir"
-                className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10"
+                to="/premium"
+                className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-accent/30 hover:shadow-lg hover:shadow-accent/10"
               >
-                <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider group-hover:text-brand transition-colors">
-                  &hellip; découvre les formats
-                </h3>
-                <div className="relative h-36 bg-gradient-to-br from-surface-3 to-surface-2 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-brand/20 to-accent/20 flex items-center justify-center">
-                    <Sparkles className="w-10 h-10 text-brand" aria-hidden="true" />
-                  </div>
+                <div className="flex items-center gap-2 px-5 py-4 bg-surface-card border-b border-divider">
+                  <h4 className="font-display text-base font-bold text-heading group-hover:text-accent transition-colors">
+                    Séance sur-mesure
+                  </h4>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full shrink-0">Premium</span>
+                </div>
+                <div className="relative h-36 overflow-hidden">
+                  <img src="/images/illustration-ai-session.webp" alt="Séance personnalisée par IA" className="w-full h-full object-cover object-center" />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
                   <p className="text-sm text-muted leading-relaxed">
-                    8 formats d'entraînement variés à explorer.
+                    L'IA génère une séance adaptée à mes envies et mon niveau.
                   </p>
-                  <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient">
-                    <Play className="w-4 h-4" aria-hidden="true" />
-                    C'est parti
+                  <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white bg-accent hover:bg-accent/90 transition-colors">
+                    <Sparkles className="w-4 h-4" aria-hidden="true" />
+                    Débloquer avec Premium
                   </div>
                 </div>
               </Link>
@@ -262,9 +263,9 @@ function ConnectedContent({
               </div>
             ) : activeProgram ? (
               <div className="flex flex-col rounded-2xl overflow-hidden border border-card-border transition-all hover:border-brand-secondary/30 hover:shadow-lg hover:shadow-brand-secondary/10">
-                <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
-                  &hellip; poursuis mon programme
-                </h3>
+                <h4 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
+                  Mon programme
+                </h4>
                 <Link to={`/programme/${activeProgram.slug}/suivi`} className="block relative h-36 group">
                   <img src={getProgramImage(activeProgram.slug)} alt={activeProgram.title} className="w-full h-full object-cover object-[50%_30%]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -290,13 +291,14 @@ function ConnectedContent({
                     </p>
                   )}
                   {activeProgram.nextSessionOrder != null && (
-                    <Link
-                      to={`/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`}
-                      className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white mt-3"
+                    <button
+                      type="button"
+                      onClick={() => guardNavigation(`/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`)}
+                      className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white mt-3 cursor-pointer"
                     >
                       <Play className="w-4 h-4" aria-hidden="true" />
                       C'est parti
-                    </Link>
+                    </button>
                   )}
                 </div>
                 {activeProgram.nextSessionData && (
@@ -308,21 +310,19 @@ function ConnectedContent({
                 to="/programmes"
                 className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-brand-secondary/30 hover:shadow-lg hover:shadow-brand-secondary/10"
               >
-                <h3 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider group-hover:text-brand-secondary transition-colors">
-                  &hellip; suis un programme
-                </h3>
-                <div className="relative h-36 bg-gradient-to-br from-surface-3 to-surface-2 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-brand-secondary/20 to-brand/20 flex items-center justify-center">
-                    <ClipboardList className="w-10 h-10 text-brand-secondary" aria-hidden="true" />
-                  </div>
+                <h4 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider group-hover:text-brand-secondary transition-colors">
+                  Programmes
+                </h4>
+                <div className="relative h-36 overflow-hidden">
+                  <img src="/images/illustration-program.webp" alt="Programmes d'entraînement" className="w-full h-full object-cover object-center" />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
                   <p className="text-sm text-muted leading-relaxed">
                     Un plan structuré sur plusieurs semaines pour progresser.
                   </p>
                   <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient">
-                    <Play className="w-4 h-4" aria-hidden="true" />
-                    C'est parti
+                    <Target className="w-4 h-4" aria-hidden="true" />
+                    Choisir un programme
                   </div>
                 </div>
               </Link>

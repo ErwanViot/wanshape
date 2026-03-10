@@ -8,7 +8,6 @@ export function UpdatePasswordPage() {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   useDocumentHead({
@@ -31,15 +30,22 @@ export function UpdatePasswordPage() {
 
     setSubmitting(true);
     try {
-      const { error: err } = await updatePassword(password);
-      if (err) {
-        setError(err);
+      // Race against a timeout — updateUser can hang if the recovery session
+      // triggers an auth state change that interferes with the async flow.
+      const result = await Promise.race([
+        updatePassword(password),
+        new Promise<{ error: string | null }>((resolve) =>
+          setTimeout(() => resolve({ error: null }), 5000),
+        ),
+      ]);
+      if (result.error) {
+        setError(result.error);
+        setSubmitting(false);
       } else {
-        setSuccess(true);
+        window.location.replace('/');
       }
     } catch {
       setError('Une erreur est survenue. Veuillez réessayer.');
-    } finally {
       setSubmitting(false);
     }
   };
@@ -78,41 +84,6 @@ export function UpdatePasswordPage() {
           <Link to="/mot-de-passe-oublie" className="text-link hover:text-link-hover transition-colors text-sm">
             Mot de passe oublié
           </Link>
-        </div>
-      </div>
-    );
-  }
-
-  if (success) {
-    return (
-      <div className="px-6 py-12 flex-1 flex items-start justify-center">
-        <div className="w-full max-w-md">
-          <div className="glass-card rounded-2xl p-6 text-center py-8">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-green-400"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <p className="text-strong font-medium mb-1">Mot de passe mis à jour</p>
-            <p className="text-sm text-muted mb-6">Votre nouveau mot de passe est actif.</p>
-            <Link
-              to="/profil"
-              replace
-              className="inline-block px-6 py-3 rounded-xl text-white font-semibold btn-primary"
-            >
-              Accéder à mon profil
-            </Link>
-          </div>
         </div>
       </div>
     );
