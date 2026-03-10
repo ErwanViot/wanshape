@@ -11,7 +11,7 @@ import type {
   ProgramOnboardingInput,
 } from '../types/custom-program.ts';
 
-const DRAFT_KEY = 'wan-shape-create-program-draft';
+const DRAFT_KEY = 'wan2fit-create-program-draft';
 const MAX_ACTIVE = 3;
 
 const OBJECTIF_OPTIONS = [
@@ -111,7 +111,7 @@ const DEFAULT_DRAFT: DraftState = {
 };
 
 export function CreateProgramPage() {
-  useDocumentHead({ title: 'Créer mon programme — WAN SHAPE' });
+  useDocumentHead({ title: 'Créer mon programme — WAN2FIT' });
 
   const navigate = useNavigate();
   const { generate, loading: generating, error: generateError } = useGenerateProgram();

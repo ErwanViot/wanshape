@@ -93,7 +93,7 @@ export function WelcomeModal({ onClose }: Props) {
             className="w-full h-32 object-contain rounded-xl mx-auto"
           />
           <h2 id="welcome-title" className="text-xl font-bold text-heading">
-            Bienvenue sur WanShape !
+            Bienvenue sur Wan2Fit !
           </h2>
           <p className="text-sm text-muted">
             Prêt(e) à te dépasser ? Voici comment commencer :

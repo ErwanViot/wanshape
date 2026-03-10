@@ -81,7 +81,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
   );
 }
 
-const NUDGE_STORAGE_KEY = 'wan-shape-nudge-dismissed';
+const NUDGE_STORAGE_KEY = 'wan2fit-nudge-dismissed';
 const NUDGE_COOLDOWN_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 function SignupNudge() {

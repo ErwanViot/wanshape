@@ -10,7 +10,7 @@ const ALLOWED_ORIGINS = [
   "http://localhost:4173",
 ];
 
-const DEFAULT_ORIGIN = "https://wan-shape.fr";
+const DEFAULT_ORIGIN = "https://wan2fit.fr";
 
 function getCorsHeaders(req: Request) {
   const origin = req.headers.get("origin") ?? "";

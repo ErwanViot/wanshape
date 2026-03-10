@@ -35,7 +35,7 @@ export function PricingPage() {
 
   useDocumentHead({
     title: 'Tarifs',
-    description: 'Découvrez les offres WanShape : gratuit pour commencer, Premium pour aller plus loin avec l\'IA.',
+    description: 'Découvrez les offres Wan2Fit : gratuit pour commencer, Premium pour aller plus loin avec l\'IA.',
   });
 
   const handleCheckout = async () => {

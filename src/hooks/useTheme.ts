@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 type ThemePreference = 'system' | 'dark' | 'light';
 type ResolvedTheme = 'dark' | 'light';
 
-const STORAGE_KEY = 'wan-shape-theme';
+const STORAGE_KEY = 'wan2fit-theme';
 const THEME_COLORS: Record<ResolvedTheme, string> = {
   dark: '#1a1a22',
   light: '#f5f5f7',

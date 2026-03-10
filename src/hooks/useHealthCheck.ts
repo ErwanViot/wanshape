@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-const STORAGE_KEY = 'wanshape-health-accepted';
+const STORAGE_KEY = 'wan2fit-health-accepted';
 
 export function isHealthAccepted(): boolean {
   return localStorage.getItem(STORAGE_KEY) === '1';

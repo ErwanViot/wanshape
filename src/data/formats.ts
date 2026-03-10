@@ -258,7 +258,7 @@ export const FORMATS_DATA: FormatData[] = [
     principle:
       "Le protocole Tabata, développé par le Dr Izumi Tabata en 1996, est un format d'entraînement par intervalles ultra-courts. Le ratio travail/repos de 2:1 (20s d'effort / 10s de repos) est conçu pour pousser le corps à son maximum absolu. En seulement 4 minutes par set (8 rounds de 30 secondes), ce protocole développe simultanément les filières aérobie et anaérobie.",
     protocol:
-      "Un set Tabata classique : 8 rounds de 20 secondes d'effort maximal suivies de 10 secondes de repos. Total : 4 minutes. Sur WAN SHAPE, les séances Tabata incluent 1 à 2 sets avec un repos de 60 secondes entre les sets. L'effort pendant les 20 secondes doit être maximal : si vous pouvez parler, vous n'allez pas assez fort.",
+      "Un set Tabata classique : 8 rounds de 20 secondes d'effort maximal suivies de 10 secondes de repos. Total : 4 minutes. Sur WAN2FIT, les séances Tabata incluent 1 à 2 sets avec un repos de 60 secondes entre les sets. L'effort pendant les 20 secondes doit être maximal : si vous pouvez parler, vous n'allez pas assez fort.",
     benefits: [
       'Format le plus court : 4 minutes de travail intense par set',
       'Amélioration prouvée scientifiquement des capacités aérobie et anaérobie',

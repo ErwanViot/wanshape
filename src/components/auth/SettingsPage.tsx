@@ -29,7 +29,7 @@ export function SettingsPage() {
 
   useDocumentHead({
     title: 'Paramètres',
-    description: 'Gérez votre compte WanShape.',
+    description: 'Gérez votre compte Wan2Fit.',
   });
 
   const displayName = profile?.display_name ?? user?.user_metadata?.display_name;

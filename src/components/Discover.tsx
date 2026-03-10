@@ -28,7 +28,7 @@ function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, Exercise
 
 export function Discover() {
   useDocumentHead({
-    title: 'Découvrir — WAN SHAPE',
+    title: 'Découvrir — WAN2FIT',
     description: "Explorez nos 8 formats d'entraînement et notre bibliothèque d'exercices.",
   });
 
