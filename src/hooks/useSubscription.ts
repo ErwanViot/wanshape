@@ -47,26 +47,27 @@ export function useSubscription() {
     async (priceId: string) => {
       if (!supabase || !user) return;
 
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return;
+      const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+        body: { priceId },
+      });
 
-      const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout-session`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${session.access_token}`,
-          },
-          body: JSON.stringify({ priceId }),
-        },
-      );
+      if (error) {
+        // Extract actual error from function response body
+        let message = 'Erreur lors de la création de la session de paiement';
+        try {
+          const ctx = (error as Record<string, unknown>).context;
+          if (ctx && typeof (ctx as Response).json === 'function') {
+            const body = await (ctx as Response).json();
+            if (body?.error && typeof body.error === 'string') message = body.error;
+          }
+        } catch { /* keep default */ }
+        throw new Error(message);
+      }
 
-      const data = await res.json();
-      if (data.url) {
+      if (data?.url) {
         window.location.href = data.url;
       } else {
-        throw new Error(data.error || 'Erreur lors de la création de la session de paiement');
+        throw new Error(data?.error || 'Erreur lors de la création de la session de paiement');
       }
     },
     [user],
@@ -75,25 +76,16 @@ export function useSubscription() {
   const manageSubscription = useCallback(async () => {
     if (!supabase || !user) return;
 
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return;
+    const { data, error } = await supabase.functions.invoke('create-portal-session');
 
-    const res = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-portal-session`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${session.access_token}`,
-        },
-      },
-    );
+    if (error) {
+      throw new Error(error.message || 'Erreur lors de l\'ouverture du portail');
+    }
 
-    const data = await res.json();
-    if (data.url) {
+    if (data?.url) {
       window.location.href = data.url;
     } else {
-      throw new Error(data.error || 'Erreur lors de l\'ouverture du portail');
+      throw new Error(data?.error || 'Erreur lors de l\'ouverture du portail');
     }
   }, [user]);
 

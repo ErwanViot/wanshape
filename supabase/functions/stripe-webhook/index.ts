@@ -19,6 +19,19 @@ function errorResponse(message: string, status = 400) {
   return jsonResponse({ error: message }, status);
 }
 
+// Constant-time comparison to prevent timing attacks (CRITICAL fix #1)
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  const encoder = new TextEncoder();
+  const aBytes = encoder.encode(a);
+  const bBytes = encoder.encode(b);
+  let result = 0;
+  for (let i = 0; i < aBytes.length; i++) {
+    result |= aBytes[i] ^ bBytes[i];
+  }
+  return result === 0;
+}
+
 // Verify Stripe webhook signature using crypto.subtle (Deno-compatible)
 async function verifyStripeSignature(
   payload: string,
@@ -63,12 +76,32 @@ async function verifyStripeSignature(
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
 
-  return parts.signatures.some((sig) => sig === expectedSig);
+  // Use constant-time comparison (CRITICAL fix #1)
+  return parts.signatures.some((sig) => timingSafeEqual(sig, expectedSig));
 }
 
 // Determine subscription tier from Stripe status
 function tierFromStatus(status: string): "premium" | "free" {
-  return ["active", "trialing", "past_due"].includes(status) ? "premium" : "free";
+  return ["active", "trialing"].includes(status) ? "premium" : "free";
+}
+
+// Resolve user_id from subscription metadata, with DB fallback (CRITICAL fix #4)
+async function resolveUserId(
+  supabase: ReturnType<typeof createClient>,
+  metadata: Record<string, string> | undefined,
+  stripeSubscriptionId: string,
+): Promise<string | null> {
+  const userId = metadata?.user_id;
+  if (userId) return userId;
+
+  // Fallback: look up from subscriptions table
+  const { data } = await supabase
+    .from("subscriptions")
+    .select("user_id")
+    .eq("stripe_subscription_id", stripeSubscriptionId)
+    .maybeSingle();
+
+  return data?.user_id ?? null;
 }
 
 Deno.serve(async (req: Request) => {
@@ -99,48 +132,52 @@ Deno.serve(async (req: Request) => {
     return errorResponse("Invalid signature", 401);
   }
 
-  const event = JSON.parse(body);
+  // Safe JSON parse (MINOR fix #13)
+  let event: Record<string, unknown>;
+  try {
+    event = JSON.parse(body);
+  } catch {
+    return errorResponse("Invalid JSON body", 400);
+  }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
-  // Idempotency check
-  const { data: existing } = await supabaseAdmin
+  // Atomic idempotency: INSERT ON CONFLICT DO NOTHING (CRITICAL fix #2 + #3)
+  // If the insert succeeds, we process. If it conflicts, it's a duplicate.
+  const { data: inserted } = await supabaseAdmin
     .from("stripe_webhook_events")
-    .select("id")
-    .eq("id", event.id)
-    .maybeSingle();
+    .upsert(
+      { id: event.id, type: event.type },
+      { onConflict: "id", ignoreDuplicates: true },
+    )
+    .select("id");
 
-  if (existing) {
+  if (!inserted || inserted.length === 0) {
     return jsonResponse({ received: true, duplicate: true });
   }
-
-  // Record event for idempotency
-  await supabaseAdmin
-    .from("stripe_webhook_events")
-    .insert({ id: event.id, type: event.type });
 
   try {
     switch (event.type) {
       case "checkout.session.completed": {
-        await handleCheckoutCompleted(supabaseAdmin, stripeSecretKey, event.data.object);
+        await handleCheckoutCompleted(supabaseAdmin, stripeSecretKey, (event as Record<string, Record<string, unknown>>).data.object as Record<string, unknown>);
         break;
       }
       case "customer.subscription.updated": {
-        await handleSubscriptionUpdated(supabaseAdmin, event.data.object);
+        await handleSubscriptionUpdated(supabaseAdmin, (event as Record<string, Record<string, unknown>>).data.object as Record<string, unknown>);
         break;
       }
       case "customer.subscription.deleted": {
-        await handleSubscriptionDeleted(supabaseAdmin, event.data.object);
+        await handleSubscriptionDeleted(supabaseAdmin, (event as Record<string, Record<string, unknown>>).data.object as Record<string, unknown>);
         break;
       }
       case "invoice.payment_failed": {
-        await handlePaymentFailed(supabaseAdmin, event.data.object);
+        await handlePaymentFailed(supabaseAdmin, (event as Record<string, Record<string, unknown>>).data.object as Record<string, unknown>);
         break;
       }
       case "invoice.payment_succeeded": {
-        await handlePaymentSucceeded(supabaseAdmin, event.data.object);
+        await handlePaymentSucceeded(supabaseAdmin, (event as Record<string, Record<string, unknown>>).data.object as Record<string, unknown>);
         break;
       }
       default:
@@ -148,6 +185,11 @@ Deno.serve(async (req: Request) => {
     }
   } catch (err) {
     console.error(`Error processing ${event.type}:`, err);
+    // Delete idempotency record so Stripe can retry (CRITICAL fix #3)
+    await supabaseAdmin
+      .from("stripe_webhook_events")
+      .delete()
+      .eq("id", event.id as string);
     return errorResponse("Webhook processing error", 500);
   }
 
@@ -220,9 +262,14 @@ async function handleSubscriptionUpdated(
   supabase: ReturnType<typeof createClient>,
   sub: Record<string, unknown>,
 ) {
-  const userId = (sub.metadata as Record<string, string>)?.user_id;
+  // CRITICAL fix #4: fallback to DB lookup if metadata missing
+  const userId = await resolveUserId(
+    supabase,
+    sub.metadata as Record<string, string> | undefined,
+    sub.id as string,
+  );
   if (!userId) {
-    console.error("Missing user_id in subscription metadata");
+    console.error("Cannot resolve user_id for subscription", sub.id);
     return;
   }
 
@@ -262,9 +309,14 @@ async function handleSubscriptionDeleted(
   supabase: ReturnType<typeof createClient>,
   sub: Record<string, unknown>,
 ) {
-  const userId = (sub.metadata as Record<string, string>)?.user_id;
+  // CRITICAL fix #4: fallback to DB lookup if metadata missing
+  const userId = await resolveUserId(
+    supabase,
+    sub.metadata as Record<string, string> | undefined,
+    sub.id as string,
+  );
   if (!userId) {
-    console.error("Missing user_id in subscription metadata");
+    console.error("Cannot resolve user_id for subscription", sub.id);
     return;
   }
 

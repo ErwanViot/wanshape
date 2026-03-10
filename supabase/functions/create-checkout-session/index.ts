@@ -72,6 +72,16 @@ Deno.serve(async (req: Request) => {
     return errorResponse("priceId requis");
   }
 
+  // Validate priceId against allowlist (IMPORTANT: prevent arbitrary price injection)
+  const allowedPrices = [
+    Deno.env.get("STRIPE_PRICE_MONTHLY"),
+    Deno.env.get("STRIPE_PRICE_YEARLY"),
+  ].filter(Boolean);
+
+  if (allowedPrices.length > 0 && !allowedPrices.includes(body.priceId)) {
+    return errorResponse("Price non reconnu", 400);
+  }
+
   // Check no active subscription exists
   const { data: existingSub } = await supabaseAdmin
     .from("subscriptions")
@@ -140,12 +150,11 @@ Deno.serve(async (req: Request) => {
     "line_items[0][quantity]": "1",
     "allow_promotion_codes": "true",
     "billing_address_collection": "auto",
-    "tax_id_collection[enabled]": "true",
-    "consent_collection[terms_of_service]": "required",
     "metadata[user_id]": user.id,
     "subscription_data[metadata][user_id]": user.id,
     "success_url": `${origin}/parametres?checkout=success`,
     "cancel_url": `${origin}/tarifs`,
+    "locale": "fr",
   });
 
   const sessionRes = await fetch("https://api.stripe.com/v1/checkout/sessions", {
