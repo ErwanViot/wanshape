@@ -22,7 +22,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
   const { save, saved } = useSaveCompletion();
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !durationSeconds) return;
     save({
       sessionDate: programSessionId || customSessionId ? undefined : session.date,
       programSessionId,

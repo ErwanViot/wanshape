@@ -28,6 +28,8 @@ export function WeeklyBarChart({ data }: { data: WeeklyData[] }) {
               key={week.label}
               type="button"
               onClick={() => setActiveIdx(isActive ? null : i)}
+              onMouseEnter={() => setActiveIdx(i)}
+              onMouseLeave={() => setActiveIdx(null)}
               aria-label={`${week.label} : ${week.minutes} minutes, ${week.sessions} séance${week.sessions > 1 ? 's' : ''}`}
               className="flex-1 flex flex-col items-center gap-1.5 cursor-pointer group"
             >
