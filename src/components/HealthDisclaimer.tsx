@@ -60,9 +60,6 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
       onClick={(e) => {
         if (e.target === e.currentTarget && onCancel) onCancel();
       }}
-      onKeyDown={(e) => {
-        if (e.key === 'Escape' && onCancel) onCancel();
-      }}
     >
       <div
         ref={dialogRef}

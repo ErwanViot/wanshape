@@ -31,10 +31,11 @@ export function useCustomSessions() {
       if (fetchError) {
         setError('Impossible de charger l\u2019historique.');
       } else {
-        setSessions(data as unknown as CustomSessionRecord[]);
+        setSessions(data as CustomSessionRecord[]);
         setError(null);
       }
-    } catch {
+    } catch (err) {
+      console.error('Custom sessions fetch error:', err);
       setError('Impossible de charger l\u2019historique.');
     } finally {
       setLoading(false);
@@ -72,10 +73,10 @@ export function useCustomSession(id: string | undefined) {
           .single();
 
         if (!cancelled && !error && data) {
-          setSession(data as unknown as CustomSessionRecord);
+          setSession(data as CustomSessionRecord);
         }
-      } catch {
-        // silently fail
+      } catch (err) {
+        console.error('Custom session fetch error:', err);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -102,7 +103,8 @@ export async function confirmCustomSession(id: string): Promise<boolean> {
       .eq('id', id)
       .eq('user_id', user.id);
     return !error;
-  } catch {
+  } catch (err) {
+    console.error('Confirm custom session error:', err);
     return false;
   }
 }

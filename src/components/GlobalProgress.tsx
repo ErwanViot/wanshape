@@ -38,7 +38,10 @@ export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
     currentDuration += step.estimatedDuration;
   }
 
-  void currentStepIndex; // used for reactivity
+  // currentStepIndex is not used in the render output directly, but React needs it
+  // as a prop dependency to re-render this component when the active step changes,
+  // which updates the progress bar fill via the `progress` prop calculation.
+  void currentStepIndex;
 
   return (
     <div className="w-full h-2 flex bg-white/5 overflow-hidden">

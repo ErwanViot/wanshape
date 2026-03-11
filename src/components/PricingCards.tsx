@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Check, Sparkles, Crown } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSubscription } from '../hooks/useSubscription.ts';
+import { formatDate } from '../utils/date.ts';
 
 const PRICE_IDS = {
   monthly: import.meta.env.VITE_STRIPE_PRICE_MONTHLY as string | undefined,
@@ -24,15 +25,6 @@ const PREMIUM_FEATURES = [
   'Programmes IA personnalisés',
   'Progression adaptée à ton niveau',
 ];
-
-function formatDate(dateStr: string | null): string {
-  if (!dateStr) return '';
-  return new Date(dateStr).toLocaleDateString('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-}
 
 export function PricingCards() {
   const { user } = useAuth();
@@ -69,9 +61,11 @@ export function PricingCards() {
     <div>
       {/* Billing toggle */}
       {!isPremium && (
-        <div className="flex items-center justify-center gap-3 mb-10">
+        <div className="flex items-center justify-center gap-3 mb-10" role="radiogroup" aria-label="Fréquence de facturation">
           <button
             type="button"
+            role="radio"
+            aria-checked={billing === 'monthly'}
             onClick={() => setBilling('monthly')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
               billing === 'monthly'
@@ -83,6 +77,8 @@ export function PricingCards() {
           </button>
           <button
             type="button"
+            role="radio"
+            aria-checked={billing === 'yearly'}
             onClick={() => setBilling('yearly')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
               billing === 'yearly'

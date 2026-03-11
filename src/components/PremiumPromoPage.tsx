@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import {
   Sparkles,
@@ -14,55 +13,7 @@ import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useSubscription } from '../hooks/useSubscription.ts';
 import { PricingCards } from './PricingCards.tsx';
-
-/* ────────────────────────────────────────────
-   Screenshot Carousel (repris de Home)
-   ──────────────────────────────────────────── */
-
-function ScreenshotCarousel({ images, fit = 'contain', interval = 4000 }: { images: { src: string; alt: string }[]; fit?: 'cover' | 'contain'; interval?: number }) {
-  const [active, setActive] = useState(0);
-
-  const next = useCallback(() => setActive((i) => (i + 1) % images.length), [images.length]);
-
-  useEffect(() => {
-    if (images.length <= 1) return;
-    const id = window.setInterval(next, interval);
-    return () => clearInterval(id);
-  }, [next, interval, images.length]);
-
-  return (
-    <div className="relative w-full">
-      <div className="relative aspect-[4/5] max-h-[420px] mx-auto overflow-hidden rounded-2xl border border-card-border shadow-2xl">
-        {images.map((img, i) => (
-          <img
-            key={img.src}
-            src={img.src}
-            alt={img.alt}
-            loading="lazy"
-            className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${fit === 'contain' ? 'object-contain' : 'object-cover object-top'} ${i === active ? 'opacity-100' : 'opacity-0'}`}
-          />
-        ))}
-      </div>
-      {images.length > 1 && (
-        <div className="flex justify-center gap-2 mt-3">
-          {images.map((img, i) => (
-            <button
-              key={img.src}
-              type="button"
-              onClick={() => setActive(i)}
-              className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${i === active ? 'bg-accent' : 'bg-muted/30'}`}
-              aria-label={img.alt}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* ────────────────────────────────────────────
-   Premium Promo Page
-   ──────────────────────────────────────────── */
+import { ScreenshotCarousel } from './ScreenshotCarousel.tsx';
 
 export function PremiumPromoPage() {
   const { user } = useAuth();
@@ -123,6 +74,9 @@ export function PremiumPromoPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-2 md:order-1">
               <ScreenshotCarousel
+                maxHeight="max-h-[420px]"
+                fit="contain"
+                dotColor="accent"
                 images={[
                   { src: '/images/screenshot-custom-session.webp', alt: 'Créer une séance — Mode Rapide' },
                   { src: '/images/screenshot-custom-detailed.webp', alt: 'Créer une séance — Mode Détaillé' },
@@ -187,6 +141,9 @@ export function PremiumPromoPage() {
             </div>
 
             <ScreenshotCarousel
+              maxHeight="max-h-[420px]"
+              fit="contain"
+              dotColor="accent"
               images={[
                 { src: '/images/screenshot-program-objectif.webp', alt: 'Création de programme — Objectif' },
                 { src: '/images/screenshot-program-profil.webp', alt: 'Création de programme — Profil' },

@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { ChevronLeft } from 'lucide-react';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
@@ -56,18 +57,7 @@ export function Formats() {
             className="p-1 -ml-1 text-muted hover:text-strong transition-colors"
             aria-label="Retour à l'accueil"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
+            <ChevronLeft className="w-5 h-5" />
           </Link>
           <h1 className="font-display font-bold text-lg text-heading">Les formats de séance</h1>
         </div>
@@ -106,7 +96,7 @@ export function Formats() {
                 {/* Content (below image) */}
                 <div className="p-4 flex-1 flex flex-col gap-3">
                   {/* Intensity dots */}
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5" aria-label={`Intensité : ${format.intensity} sur 5`}>
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
                     ))}

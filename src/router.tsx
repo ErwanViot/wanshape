@@ -2,15 +2,18 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RequireAuth } from './components/auth/RequireAuth.tsx';
 import { RequirePremium } from './components/auth/RequirePremium.tsx';
-import { Exercises } from './components/Exercises.tsx';
-import { Formats } from './components/Formats.tsx';
-import { Home } from './components/Home.tsx';
 import { LoadingFallback } from './components/LoadingFallback.tsx';
-import { PlayerPage } from './components/Player.tsx';
 import { PlayerLayout } from './components/PlayerLayout.tsx';
 import { PublicLayout } from './components/PublicLayout.tsx';
 
-// Lazy-loaded secondary routes
+// Lazy-loaded routes
+const LazyHome = lazy(() => import('./components/Home.tsx').then((m) => ({ default: m.Home })));
+const LazyFormats = lazy(() => import('./components/Formats.tsx').then((m) => ({ default: m.Formats })));
+const LazyExercises = lazy(() => import('./components/Exercises.tsx').then((m) => ({ default: m.Exercises })));
+const LazyPlayerPage = lazy(() => import('./components/Player.tsx').then((m) => ({ default: m.PlayerPage })));
+const LazyNotFoundPage = lazy(() =>
+  import('./components/NotFoundPage.tsx').then((m) => ({ default: m.NotFoundPage })),
+);
 const LazyLegal = lazy(() => import('./components/Legal.tsx').then((m) => ({ default: m.Legal })));
 const LazyFormatPage = lazy(() => import('./components/FormatPage.tsx').then((m) => ({ default: m.FormatPage })));
 const LazyExercisePage = lazy(() => import('./components/ExercisePage.tsx').then((m) => ({ default: m.ExercisePage })));
@@ -68,7 +71,14 @@ export const router = createBrowserRouter([
   {
     element: <PublicLayout />,
     children: [
-      { index: true, element: <Home /> },
+      {
+        index: true,
+        element: (
+          <Lazy>
+            <LazyHome />
+          </Lazy>
+        ),
+      },
       {
         path: 'decouvrir',
         element: (
@@ -77,7 +87,14 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
-      { path: 'formats', element: <Formats /> },
+      {
+        path: 'formats',
+        element: (
+          <Lazy>
+            <LazyFormats />
+          </Lazy>
+        ),
+      },
       {
         path: 'formats/:slug',
         element: (
@@ -86,7 +103,14 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
-      { path: 'exercices', element: <Exercises /> },
+      {
+        path: 'exercices',
+        element: (
+          <Lazy>
+            <LazyExercises />
+          </Lazy>
+        ),
+      },
       {
         path: 'exercices/:slug',
         element: (
@@ -248,9 +272,23 @@ export const router = createBrowserRouter([
   {
     element: <PlayerLayout />,
     children: [
-      { path: 'seance/play', element: <PlayerPage /> },
+      {
+        path: 'seance/play',
+        element: (
+          <Lazy>
+            <LazyPlayerPage />
+          </Lazy>
+        ),
+      },
       // Legacy URLs with date → redirect to dateless route
-      { path: 'seance/:dateKey/play', element: <PlayerPage /> },
+      {
+        path: 'seance/:dateKey/play',
+        element: (
+          <Lazy>
+            <LazyPlayerPage />
+          </Lazy>
+        ),
+      },
       { path: 'seance/:dateKey', element: <Navigate to="/seance/play" replace /> },
       // Programme player
       {
@@ -274,6 +312,13 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  // Catch-all
-  { path: '*', element: <Navigate to="/" replace /> },
+  // Catch-all — 404
+  {
+    path: '*',
+    element: (
+      <Lazy>
+        <LazyNotFoundPage />
+      </Lazy>
+    ),
+  },
 ]);

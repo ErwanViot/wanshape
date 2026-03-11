@@ -64,14 +64,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           try {
             const p = await fetchProfile(currentUser.id);
             if (mounted.current) setProfile(p);
-          } catch {
-            // Profile fetch failed — continue without profile
+          } catch (err) {
+            console.error('Profile fetch error (initial):', err);
           }
         }
         if (mounted.current) setLoading(false);
       })
-      .catch(() => {
-        // Session retrieval failed — mark as loaded with no user
+      .catch((err) => {
+        console.error('Session retrieval error:', err);
         if (mounted.current) setLoading(false);
       });
 
@@ -86,8 +86,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
           const p = await fetchProfile(currentUser.id);
           if (mounted.current) setProfile(p);
-        } catch {
-          // Profile fetch failed — continue without profile
+        } catch (err) {
+          console.error('Profile fetch error (auth change):', err);
         }
       } else {
         setProfile(null);
@@ -105,8 +105,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const p = await fetchProfile(user.id);
       if (mounted.current) setProfile(p);
-    } catch {
-      // Silently ignore
+    } catch (err) {
+      console.error('Profile refresh error:', err);
     }
   };
 

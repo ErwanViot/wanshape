@@ -1,82 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.wan-shape.fr/</loc>
+    <loc>https://www.wan2fit.fr/</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats</loc>
+    <loc>https://www.wan2fit.fr/formats</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats/upper</loc>
+    <loc>https://www.wan2fit.fr/formats/upper</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats/lower</loc>
+    <loc>https://www.wan2fit.fr/formats/lower</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats/cardio</loc>
+    <loc>https://www.wan2fit.fr/formats/cardio</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats/full-body</loc>
+    <loc>https://www.wan2fit.fr/formats/full-body</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats/core</loc>
+    <loc>https://www.wan2fit.fr/formats/core</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats/stretching</loc>
+    <loc>https://www.wan2fit.fr/formats/stretching</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats/hiit</loc>
+    <loc>https://www.wan2fit.fr/formats/hiit</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/formats/mobilite</loc>
+    <loc>https://www.wan2fit.fr/formats/mobilite</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/exercices</loc>
+    <loc>https://www.wan2fit.fr/exercices</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/programmes</loc>
+    <loc>https://www.wan2fit.fr/programmes</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/programme/debutant-4-semaines</loc>
+    <loc>https://www.wan2fit.fr/programme/debutant-4-semaines</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/programme/remise-en-forme</loc>
+    <loc>https://www.wan2fit.fr/programme/remise-en-forme</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/programme/cardio-express</loc>
+    <loc>https://www.wan2fit.fr/programme/cardio-express</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.wan-shape.fr/decouvrir</loc>
+    <loc>https://www.wan2fit.fr/tarifs</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wan2fit.fr/premium</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wan2fit.fr/decouvrir</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

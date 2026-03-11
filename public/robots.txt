@@ -13,4 +13,4 @@ Disallow: /profil
 Disallow: /login
 Disallow: /signup
 
-Sitemap: https://www.wan-shape.fr/sitemap.xml
+Sitemap: https://www.wan2fit.fr/sitemap.xml

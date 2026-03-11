@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { ProgramOnboardingInput, GenerateProgramResponse } from '../types/custom-program.ts';
+import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 
 export function useGenerateProgram() {
   const [loading, setLoading] = useState(false);
@@ -21,18 +22,10 @@ export function useGenerateProgram() {
       });
 
       if (fnError) {
-        let message = 'Une erreur est survenue. Reessaye.';
-        try {
-          const ctx = (fnError as Record<string, unknown>).context;
-          if (ctx && typeof (ctx as Response).json === 'function') {
-            const body = await (ctx as Response).json();
-            if (body?.error && typeof body.error === 'string') {
-              message = body.error;
-            }
-          }
-        } catch {
-          // Ignore parsing errors
-        }
+        const message = await extractEdgeFunctionError(
+          fnError as unknown as Record<string, unknown>,
+          'Une erreur est survenue. Reessaye.',
+        );
         setError(message);
         return null;
       }

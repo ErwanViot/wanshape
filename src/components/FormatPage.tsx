@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router';
-import { AlertTriangle, CheckCircle, Clock, Lightbulb, Users } from 'lucide-react';
+import { AlertTriangle, CheckCircle, ChevronLeft, Clock, Lightbulb, Users } from 'lucide-react';
 import { getFormatBySlug } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { ContentSection } from './ContentSection.tsx';
@@ -33,17 +33,7 @@ export function FormatPage() {
           className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white"
           aria-label="Retour aux formats"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
+          <ChevronLeft className="w-5 h-5" />
         </Link>
 
         <div className="absolute bottom-4 left-5 right-5">
@@ -56,7 +46,7 @@ export function FormatPage() {
               <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full">
                 {format.duration} min
               </span>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1" aria-label={`Intensité : ${format.intensity} sur 5`}>
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
                 ))}
@@ -133,17 +123,7 @@ export function FormatPage() {
           </div>
           <div className="flex items-center justify-between">
             <Link to="/formats" className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              >
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
+              <ChevronLeft className="w-4 h-4" />
               Tous les formats
             </Link>
             <Link to="/" className="text-sm text-link hover:text-link-hover transition-colors">

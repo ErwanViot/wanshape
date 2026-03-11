@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { Program, ProgramSession, SessionCompletion } from '../types/completion.ts';
+import type { Session } from '../types/session.ts';
 
 export interface ProgramWithSessions extends Program {
   sessions: ProgramSession[];
@@ -14,11 +15,12 @@ export interface ActiveProgramInfo {
   totalSessions: number;
   nextSessionTitle: string | null;
   nextSessionOrder: number | null;
-  nextSessionData: Record<string, unknown> | null;
+  nextSessionData: Session | null;
 }
 
 /** Returns the most recently active program for the given user (if any),
- *  including progression and next session info. */
+ *  including progression and next session info.
+ *  Uses a single RPC call instead of 5 sequential queries. */
 export function useActiveProgram(userId: string | undefined) {
   const [activeProgram, setActiveProgram] = useState<ActiveProgramInfo | null>(null);
   const [loading, setLoading] = useState(true);
@@ -33,87 +35,45 @@ export function useActiveProgram(userId: string | undefined) {
 
     (async () => {
       try {
-        // Find the user's most recent program completion
-        const { data: completion } = await supabase
-          .from('session_completions')
-          .select('program_session_id')
-          .eq('user_id', userId)
-          .not('program_session_id', 'is', null)
-          .order('completed_at', { ascending: false })
-          .limit(1)
-          .single();
-
-        if (cancelled || !completion?.program_session_id) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-
-        // Get the program session → program
-        const { data: ps } = await supabase
-          .from('program_sessions')
-          .select('program_id')
-          .eq('id', completion.program_session_id)
-          .single();
-
-        if (cancelled || !ps) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-
-        const { data: pgm } = await supabase
-          .from('programs')
-          .select('slug, title')
-          .eq('id', ps.program_id)
-          .single();
-
-        if (cancelled || !pgm) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-
-        // Fetch all sessions for this program
-        const { data: allSessions } = await supabase
-          .from('program_sessions')
-          .select('id, session_order, session_data')
-          .eq('program_id', ps.program_id)
-          .order('session_order');
-
-        const sessions = (allSessions as ProgramSession[] | null) ?? [];
-
-        // Fetch user's completions for this program
-        const sessionIds = sessions.map((s) => s.id);
-        let completedIds = new Set<string>();
-        if (sessionIds.length > 0) {
-          const { data: completions } = await supabase
-            .from('session_completions')
-            .select('program_session_id')
-            .eq('user_id', userId)
-            .in('program_session_id', sessionIds);
-
-          completedIds = new Set(
-            (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
-              ?.map((c) => c.program_session_id)
-              .filter((id): id is string => id !== null) ?? [],
-          );
-        }
+        const { data, error } = await supabase.rpc('get_active_program', {
+          p_user_id: userId,
+        });
 
         if (cancelled) return;
 
-        // Find next uncompleted session
-        const nextSession = sessions.find((s) => !completedIds.has(s.id));
-        const nextData = nextSession?.session_data as Record<string, unknown> | undefined;
+        if (error) {
+          console.error('Active program RPC error:', error);
+          setLoading(false);
+          return;
+        }
+
+        if (!data) {
+          setLoading(false);
+          return;
+        }
+
+        const d = data as {
+          slug: string;
+          title: string;
+          totalSessions: number;
+          completedCount: number;
+          nextSessionOrder: number | null;
+          nextSessionTitle: string | null;
+          nextSessionData: Session | null;
+        };
 
         setActiveProgram({
-          slug: pgm.slug,
-          title: pgm.title,
-          completedCount: completedIds.size,
-          totalSessions: sessions.length,
-          nextSessionTitle: (nextData?.title as string) ?? null,
-          nextSessionOrder: nextSession?.session_order ?? null,
-          nextSessionData: nextData ?? null,
+          slug: d.slug,
+          title: d.title,
+          completedCount: d.completedCount,
+          totalSessions: d.totalSessions,
+          nextSessionTitle: d.nextSessionTitle,
+          nextSessionOrder: d.nextSessionOrder,
+          nextSessionData: d.nextSessionData,
         });
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('Active program fetch error:', err);
         if (!cancelled) setLoading(false);
       }
     })();
@@ -145,7 +105,8 @@ export function usePrograms() {
         if (cancelled) return;
         setPrograms((data as Program[]) ?? []);
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('Programs fetch error:', err);
         if (!cancelled) setLoading(false);
       }
     })();
@@ -225,7 +186,8 @@ export function useProgram(slug: string | undefined) {
           completedSessionIds: completedIds,
         });
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('Program fetch error:', err);
         if (!cancelled) setLoading(false);
       }
     })();
@@ -276,7 +238,8 @@ export function useProgramSession(slug: string | undefined, order: number | unde
         if (cancelled) return;
         setSession((ps as ProgramSession) ?? null);
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('Program session fetch error:', err);
         if (!cancelled) setLoading(false);
       }
     })();

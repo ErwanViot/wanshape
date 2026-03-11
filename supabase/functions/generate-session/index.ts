@@ -3,12 +3,24 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.ts";
 import { validateSession } from "./validate.ts";
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
+const ALLOWED_ORIGINS = [
+  "https://wan2fit.fr",
+  "https://www.wan2fit.fr",
+  "http://localhost:5173",
+  "http://localhost:4173",
+];
+
+const DEFAULT_ORIGIN = "https://wan2fit.fr";
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get("origin") ?? "";
+  return {
+    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN,
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+}
 
 const MAX_DAILY_GENERATIONS = 10;
 const MODEL = "claude-haiku-4-5-20251001";
@@ -30,15 +42,15 @@ const VALID_INTENSITIES = ["douce", "moderee", "intense"];
 const VALID_BODY_FOCUS = ["upper", "lower", "core", "full"];
 const VALID_DURATIONS = [15, 20, 25, 30, 40];
 
-function jsonResponse(data: unknown, status = 200) {
+function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+    headers: { ...getCorsHeaders(req), "Content-Type": "application/json" },
   });
 }
 
-function errorResponse(message: string, status = 400) {
-  return jsonResponse({ error: message }, status);
+function errorResponse(req: Request, message: string, status = 400) {
+  return jsonResponse(req, { error: message }, status);
 }
 
 interface RequestInput {
@@ -112,17 +124,17 @@ function getTodayKey(): string {
 Deno.serve(async (req: Request) => {
   // CORS preflight
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: CORS_HEADERS });
+    return new Response(null, { status: 204, headers: getCorsHeaders(req) });
   }
 
   if (req.method !== "POST") {
-    return errorResponse("Method not allowed", 405);
+    return errorResponse(req, "Method not allowed", 405);
   }
 
   // Auth
   const authHeader = req.headers.get("Authorization");
   if (!authHeader) {
-    return errorResponse("Missing authorization", 401);
+    return errorResponse(req, "Missing authorization", 401);
   }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -130,7 +142,7 @@ Deno.serve(async (req: Request) => {
   const anthropicApiKey = Deno.env.get("ANTHROPIC_API_KEY");
 
   if (!anthropicApiKey) {
-    return errorResponse("ANTHROPIC_API_KEY not configured", 500);
+    return errorResponse(req, "ANTHROPIC_API_KEY not configured", 500);
   }
 
   // Create admin client for DB operations
@@ -147,7 +159,7 @@ Deno.serve(async (req: Request) => {
   } = await supabaseAuth.auth.getUser();
 
   if (authError || !user) {
-    return errorResponse("Non autorisé", 401);
+    return errorResponse(req, "Non autorisé", 401);
   }
 
   // Check premium tier
@@ -158,7 +170,7 @@ Deno.serve(async (req: Request) => {
     .single();
 
   if (profile?.subscription_tier !== "premium") {
-    return errorResponse("Abonnement Premium requis", 403);
+    return errorResponse(req, "Abonnement Premium requis", 403);
   }
 
   // Parse body
@@ -166,13 +178,13 @@ Deno.serve(async (req: Request) => {
   try {
     body = await req.json();
   } catch {
-    return errorResponse("JSON invalide");
+    return errorResponse(req, "JSON invalide");
   }
 
   // Validate input
   const inputError = validateInput(body);
   if (inputError) {
-    return errorResponse(inputError);
+    return errorResponse(req, inputError);
   }
 
   // Rate limit: max generations per 24h
@@ -183,11 +195,12 @@ Deno.serve(async (req: Request) => {
     .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
 
   if (countError) {
-    return errorResponse("Erreur serveur", 500);
+    return errorResponse(req, "Erreur serveur", 500);
   }
 
   if ((count ?? 0) >= MAX_DAILY_GENERATIONS) {
     return errorResponse(
+      req,
       `Limite atteinte : ${MAX_DAILY_GENERATIONS} séances par 24h. Réessayez plus tard.`,
       429,
     );
@@ -214,13 +227,13 @@ Deno.serve(async (req: Request) => {
       }),
     });
   } catch {
-    return errorResponse("Erreur de communication avec l'IA", 502);
+    return errorResponse(req, "Erreur de communication avec l'IA", 502);
   }
 
   if (!aiResponse.ok) {
     const errText = await aiResponse.text().catch(() => "Unknown error");
     console.error("Anthropic API error:", aiResponse.status, errText);
-    return errorResponse("Erreur de génération", 502);
+    return errorResponse(req, "Erreur de génération", 502);
   }
 
   const aiData = await aiResponse.json();
@@ -242,7 +255,7 @@ Deno.serve(async (req: Request) => {
     sessionJson = JSON.parse(cleaned);
   } catch {
     console.error("Failed to parse AI response:", rawContent.slice(0, 500));
-    return errorResponse("Réponse IA invalide, réessayez", 502);
+    return errorResponse(req, "Réponse IA invalide, réessayez", 502);
   }
 
   // Check for off-topic
@@ -252,6 +265,7 @@ Deno.serve(async (req: Request) => {
     (sessionJson as Record<string, unknown>).error === "off_topic"
   ) {
     return errorResponse(
+      req,
       "Cette demande ne concerne pas le fitness. Veuillez décrire un entraînement.",
       422,
     );
@@ -261,7 +275,7 @@ Deno.serve(async (req: Request) => {
   const validation = validateSession(sessionJson);
   if (!validation.valid) {
     console.error("Session validation failed:", validation.error);
-    return errorResponse("La séance générée est invalide, réessayez", 502);
+    return errorResponse(req, "La séance générée est invalide, réessayez", 502);
   }
 
   // Set date to today (server-side)
@@ -290,10 +304,10 @@ Deno.serve(async (req: Request) => {
 
   if (insertError || !insertedRow) {
     console.error("Insert error:", insertError);
-    return errorResponse("Erreur de sauvegarde", 500);
+    return errorResponse(req, "Erreur de sauvegarde", 500);
   }
 
-  return jsonResponse({
+  return jsonResponse(req, {
     session: sessionJson,
     customSessionId: insertedRow.id,
   });

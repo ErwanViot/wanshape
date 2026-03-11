@@ -11,6 +11,7 @@ import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
 
+/** Pure helper: finds the coaching note matching a given week number from range-keyed consignes. */
 function getConsigneForWeek(consignes: Record<string, string> | null, week: number): string | null {
   if (!consignes) return null;
   for (const [range, text] of Object.entries(consignes)) {
@@ -327,7 +328,7 @@ export function ProgramPage() {
               {!isCollapsed && (
                 <div className="space-y-3">
                   {sessions.map((ps) => {
-                    const data = ps.session_data as unknown as Session;
+                    const data = ps.session_data as Session;
                     const isDone = user ? program.completedSessionIds.has(ps.id) : false;
                     const isSuggested = user && ps.session_order === nextSessionOrder;
 

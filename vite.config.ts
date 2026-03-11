@@ -14,8 +14,8 @@ export default defineConfig({
         name: 'WAN2FIT',
         short_name: 'WAN2FIT',
         description: 'Ta séance de sport quotidienne, prête à lancer',
-        theme_color: '#ffffff',
-        background_color: '#f8f8f8',
+        theme_color: '#0f0f17',
+        background_color: '#0f0f17',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',
@@ -69,4 +69,15 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'router': ['react-router'],
+          'supabase': ['@supabase/supabase-js'],
+        },
+      },
+    },
+  },
 })

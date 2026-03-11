@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Trophy } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import { STORAGE_KEYS } from '../config/storage-keys.ts';
 import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
@@ -81,12 +82,11 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
   );
 }
 
-const NUDGE_STORAGE_KEY = 'wan2fit-nudge-dismissed';
 const NUDGE_COOLDOWN_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 function SignupNudge() {
   const [visible, setVisible] = useState(() => {
-    const dismissed = localStorage.getItem(NUDGE_STORAGE_KEY);
+    const dismissed = localStorage.getItem(STORAGE_KEYS.NUDGE_DISMISSED);
     if (!dismissed) return true;
     return Date.now() - Number(dismissed) > NUDGE_COOLDOWN_MS;
   });
@@ -94,7 +94,7 @@ function SignupNudge() {
   if (!visible) return null;
 
   const dismiss = () => {
-    localStorage.setItem(NUDGE_STORAGE_KEY, String(Date.now()));
+    localStorage.setItem(STORAGE_KEYS.NUDGE_DISMISSED, String(Date.now()));
     setVisible(false);
   };
 

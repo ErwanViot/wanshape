@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router';
-import { AlertTriangle, CheckCircle, Dumbbell, GitBranch, Lightbulb, Wind } from 'lucide-react';
+import { AlertTriangle, CheckCircle, ChevronLeft, Dumbbell, GitBranch, Lightbulb, Wind } from 'lucide-react';
 import { getExerciseBySlug } from '../data/exercises.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { CATEGORY_LABELS, DIFFICULTY_COLORS, DIFFICULTY_LABELS } from '../types/exercise.ts';
@@ -23,11 +23,9 @@ export function ExercisePage() {
   useEffect(() => {
     if (!hash) return;
     const id = hash.slice(1);
-    // Small delay so DOM is painted
-    const timer = setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
-    return () => clearTimeout(timer);
   }, [hash]);
 
   if (!exercise) {
@@ -48,17 +46,7 @@ export function ExercisePage() {
           className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white"
           aria-label="Retour aux exercices"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
+          <ChevronLeft className="w-5 h-5" />
         </Link>
 
         <div className="absolute bottom-4 left-5 right-5">
@@ -167,17 +155,7 @@ export function ExercisePage() {
               to="/exercices"
               className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              >
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
+              <ChevronLeft className="w-4 h-4" />
               Nos exercices
             </Link>
             <Link to="/" className="text-sm text-link hover:text-link-hover transition-colors">

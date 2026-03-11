@@ -1,5 +1,6 @@
 import { type FormEvent, useState } from 'react';
 import { Link, Navigate } from 'react-router';
+import { ChevronLeft } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 
@@ -15,7 +16,7 @@ export function ResetPasswordPage() {
     description: 'Réinitialise ton mot de passe Wan2Fit.',
   });
 
-  if (!loading && user) return <Navigate to="/profil" replace />;
+  if (!loading && user) return <Navigate to="/suivi" replace />;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -42,18 +43,7 @@ export function ResetPasswordPage() {
           to="/login"
           className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-strong transition-colors mb-8"
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
+          <ChevronLeft className="w-4 h-4" />
           Retour à la connexion
         </Link>
 
