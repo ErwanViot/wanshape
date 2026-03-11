@@ -13,7 +13,7 @@ export function ProgramPlayerPage() {
   const orderNum = order ? Number.parseInt(order, 10) : undefined;
   const { session: programSession, loading } = useProgramSession(slug, orderNum);
 
-  const sessionData = programSession?.session_data as unknown as Session | undefined;
+  const sessionData = programSession?.session_data as Session | undefined;
 
   useDocumentHead({
     title: sessionData ? `${sessionData.title} — En cours` : 'Séance programme',

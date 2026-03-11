@@ -1,3 +1,5 @@
+import type { Session } from './session.ts';
+
 export interface SessionCompletion {
   id: string;
   user_id: string;
@@ -32,6 +34,6 @@ export interface ProgramSession {
   program_id: string;
   session_order: number;
   week_number: number;
-  session_data: Record<string, unknown>;
+  session_data: Session;
   created_at: string;
 }

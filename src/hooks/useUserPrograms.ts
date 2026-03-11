@@ -23,8 +23,8 @@ export function useUserPrograms() {
         .order('created_at', { ascending: false });
 
       setPrograms((data as Program[]) ?? []);
-    } catch {
-      // Silently fail
+    } catch (err) {
+      console.error('User programs fetch error:', err);
     } finally {
       setLoading(false);
     }
@@ -45,7 +45,8 @@ export function useUserPrograms() {
       }
       setPrograms((prev) => prev.filter((p) => p.id !== id));
       return true;
-    } catch {
+    } catch (err) {
+      console.error('Delete program error:', err);
       return false;
     }
   }, []);

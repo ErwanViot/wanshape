@@ -2,8 +2,6 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
 const ALLOWED_ORIGINS = [
-  "https://wan-shape.fr",
-  "https://www.wan-shape.fr",
   "https://wan2fit.fr",
   "https://www.wan2fit.fr",
   "http://localhost:5173",

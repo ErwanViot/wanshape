@@ -34,3 +34,19 @@ export function formatDurationLong(seconds: number): string {
   const s = seconds % 60;
   return s > 0 ? `${m}min ${s}s` : `${m} min`;
 }
+
+export function formatDate(dateStr: string | null): string {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+export function formatShortDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'short',
+  });
+}

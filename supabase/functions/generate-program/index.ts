@@ -3,12 +3,24 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.ts";
 import { validateProgram } from "./validate.ts";
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
+const ALLOWED_ORIGINS = [
+  "https://wan2fit.fr",
+  "https://www.wan2fit.fr",
+  "http://localhost:5173",
+  "http://localhost:4173",
+];
+
+const DEFAULT_ORIGIN = "https://wan2fit.fr";
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get("origin") ?? "";
+  return {
+    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN,
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+}
 
 const MAX_ACTIVE_PROGRAMS = 3;
 const MAX_DAILY_GENERATIONS = 3;
@@ -28,15 +40,15 @@ const VALID_MATERIEL = [
 ];
 const VALID_DUREES = [4, 8, 12];
 
-function jsonResponse(data: unknown, status = 200) {
+function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+    headers: { ...getCorsHeaders(req), "Content-Type": "application/json" },
   });
 }
 
-function errorResponse(message: string, status = 400) {
-  return jsonResponse({ error: message }, status);
+function errorResponse(req: Request, message: string, status = 400) {
+  return jsonResponse(req, { error: message }, status);
 }
 
 const VALID_BLESSURES = [
@@ -139,16 +151,16 @@ interface CalendrierEntry {
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: CORS_HEADERS });
+    return new Response(null, { status: 204, headers: getCorsHeaders(req) });
   }
 
   if (req.method !== "POST") {
-    return errorResponse("Method not allowed", 405);
+    return errorResponse(req, "Method not allowed", 405);
   }
 
   const authHeader = req.headers.get("Authorization");
   if (!authHeader) {
-    return errorResponse("Missing authorization", 401);
+    return errorResponse(req, "Missing authorization", 401);
   }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -156,7 +168,7 @@ Deno.serve(async (req: Request) => {
   const anthropicApiKey = Deno.env.get("ANTHROPIC_API_KEY");
 
   if (!anthropicApiKey) {
-    return errorResponse("ANTHROPIC_API_KEY not configured", 500);
+    return errorResponse(req, "ANTHROPIC_API_KEY not configured", 500);
   }
 
   const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
@@ -171,7 +183,7 @@ Deno.serve(async (req: Request) => {
   } = await supabaseAuth.auth.getUser();
 
   if (authError || !user) {
-    return errorResponse("Non autorise", 401);
+    return errorResponse(req, "Non autorise", 401);
   }
 
   // Check premium tier
@@ -182,7 +194,7 @@ Deno.serve(async (req: Request) => {
     .single();
 
   if (userProfile?.subscription_tier !== "premium") {
-    return errorResponse("Abonnement Premium requis", 403);
+    return errorResponse(req, "Abonnement Premium requis", 403);
   }
 
   // Parse body
@@ -190,13 +202,13 @@ Deno.serve(async (req: Request) => {
   try {
     body = await req.json();
   } catch {
-    return errorResponse("JSON invalide");
+    return errorResponse(req, "JSON invalide");
   }
 
   // Validate input
   const inputError = validateInput(body);
   if (inputError) {
-    return errorResponse(inputError);
+    return errorResponse(req, inputError);
   }
 
   // Business rule: cap seances_par_semaine for beginners
@@ -212,11 +224,12 @@ Deno.serve(async (req: Request) => {
     .eq("is_fixed", false);
 
   if (activeError) {
-    return errorResponse("Erreur serveur", 500);
+    return errorResponse(req, "Erreur serveur", 500);
   }
 
   if ((activeCount ?? 0) >= MAX_ACTIVE_PROGRAMS) {
     return errorResponse(
+      req,
       `Limite atteinte : ${MAX_ACTIVE_PROGRAMS} programmes actifs maximum. Supprime un programme existant pour en creer un nouveau.`,
       429,
     );
@@ -231,11 +244,12 @@ Deno.serve(async (req: Request) => {
     .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
 
   if (dailyError) {
-    return errorResponse("Erreur serveur", 500);
+    return errorResponse(req, "Erreur serveur", 500);
   }
 
   if ((dailyCount ?? 0) >= MAX_DAILY_GENERATIONS) {
     return errorResponse(
+      req,
       `Limite atteinte : ${MAX_DAILY_GENERATIONS} programmes par 24h. Reessaye plus tard.`,
       429,
     );
@@ -301,7 +315,7 @@ Deno.serve(async (req: Request) => {
     totalInputTokens = result.inputTokens;
     totalOutputTokens = result.outputTokens;
   } catch {
-    return errorResponse("Erreur de communication avec l'IA", 502);
+    return errorResponse(req, "Erreur de communication avec l'IA", 502);
   }
 
   // Validate
@@ -320,12 +334,12 @@ Deno.serve(async (req: Request) => {
       totalOutputTokens += retryResult.outputTokens;
       validation = validateProgram(programJson, body.duree_semaines, body.seances_par_semaine);
     } catch {
-      return errorResponse("La generation a echoue apres retry, reessayez", 502);
+      return errorResponse(req, "La generation a echoue apres retry, reessayez", 502);
     }
 
     if (!validation.valid) {
       console.error("Retry validation failed:", validation.error);
-      return errorResponse("Le programme genere est invalide, reessayez", 502);
+      return errorResponse(req, "Le programme genere est invalide, reessayez", 502);
     }
   }
 
@@ -371,7 +385,7 @@ Deno.serve(async (req: Request) => {
 
   if (insertError || !insertedProgram) {
     console.error("Program insert error:", insertError);
-    return errorResponse("Erreur de sauvegarde du programme", 500);
+    return errorResponse(req, "Erreur de sauvegarde du programme", 500);
   }
 
   // Build program_sessions rows
@@ -406,8 +420,8 @@ Deno.serve(async (req: Request) => {
     console.error("Program sessions insert error:", sessionsError);
     // Rollback: delete the program
     await supabaseAdmin.from("programs").delete().eq("id", insertedProgram.id);
-    return errorResponse("Erreur de sauvegarde des seances", 502);
+    return errorResponse(req, "Erreur de sauvegarde des seances", 502);
   }
 
-  return jsonResponse({ programId: insertedProgram.id, slug });
+  return jsonResponse(req, { programId: insertedProgram.id, slug });
 });

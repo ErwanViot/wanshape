@@ -32,10 +32,11 @@ export function UpdatePasswordPage() {
     try {
       // Race against a timeout — updateUser can hang if the recovery session
       // triggers an auth state change that interferes with the async flow.
+      // On timeout we show an error instead of falsely reporting success.
       const result = await Promise.race([
         updatePassword(password),
         new Promise<{ error: string | null }>((resolve) =>
-          setTimeout(() => resolve({ error: null }), 5000),
+          setTimeout(() => resolve({ error: 'Le serveur met trop de temps à répondre. Veuillez réessayer.' }), 30_000),
         ),
       ]);
       if (result.error) {

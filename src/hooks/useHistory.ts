@@ -162,18 +162,24 @@ export function useHistory(userId: string | undefined): HistoryStats {
 
         if (cancelled) return;
 
-        const enriched: CompletionWithTitle[] = ((data as Record<string, unknown>[]) ?? []).map((row) => {
-          const ps = row.program_sessions as { session_data?: { title?: string } } | null;
-          const metaTitle = (row.metadata as Record<string, unknown>)?.session_title as string | undefined;
-          return {
-            ...(row as unknown as SessionCompletion),
-            session_title: metaTitle ?? ps?.session_data?.title ?? null,
-          };
-        });
+        // Supabase returns joined data (with program_sessions) as a generic shape.
+        // We cast via unknown because the joined row type doesn't directly overlap
+        // with SessionCompletion (which excludes the join field).
+        const rows = (data ?? []) as unknown as (SessionCompletion & {
+          program_sessions: { session_data?: { title?: string } } | null;
+        })[];
+        const enriched: CompletionWithTitle[] = rows.map((row) => ({
+          ...row,
+          session_title:
+            (row.metadata as Record<string, unknown>)?.session_title as string | undefined
+            ?? row.program_sessions?.session_data?.title
+            ?? null,
+        }));
 
         setCompletions(enriched);
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('History fetch error:', err);
         if (!cancelled) setLoading(false);
       }
     })();

@@ -183,6 +183,7 @@ export function CustomSessionPage() {
                   key={e.value}
                   type="button"
                   onClick={() => toggleChip(equipment, e.value, setEquipment)}
+                  aria-pressed={equipment.includes(e.value)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer ${
                     equipment.includes(e.value)
                       ? 'border-brand bg-brand/10 text-brand'
@@ -204,6 +205,7 @@ export function CustomSessionPage() {
                   key={i.value}
                   type="button"
                   onClick={() => setIntensity(i.value)}
+                  aria-pressed={intensity === i.value}
                   className={`flex-1 py-2.5 rounded-xl border text-sm font-semibold transition-colors cursor-pointer ${
                     intensity === i.value
                       ? 'border-brand bg-brand/10 text-brand'
@@ -226,6 +228,7 @@ export function CustomSessionPage() {
                   key={f.value}
                   type="button"
                   onClick={() => toggleChip(bodyFocus, f.value, setBodyFocus)}
+                  aria-pressed={bodyFocus.includes(f.value)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer ${
                     bodyFocus.includes(f.value)
                       ? 'border-brand bg-brand/10 text-brand'

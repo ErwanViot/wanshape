@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import type { Subscription } from '../types/subscription.ts';
+import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 
 export function useSubscription() {
   const { profile, user } = useAuth();
@@ -33,8 +34,8 @@ export function useSubscription() {
           .maybeSingle();
 
         if (!cancelled) setSubscription(data as Subscription | null);
-      } catch {
-        // Subscription fetch failed — non-critical
+      } catch (err) {
+        console.error('Subscription fetch error:', err);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -52,15 +53,10 @@ export function useSubscription() {
       });
 
       if (error) {
-        // Extract actual error from function response body
-        let message = 'Erreur lors de la création de la session de paiement';
-        try {
-          const ctx = (error as Record<string, unknown>).context;
-          if (ctx && typeof (ctx as Response).json === 'function') {
-            const body = await (ctx as Response).json();
-            if (body?.error && typeof body.error === 'string') message = body.error;
-          }
-        } catch { /* keep default */ }
+        const message = await extractEdgeFunctionError(
+          error as unknown as Record<string, unknown>,
+          'Erreur lors de la création de la session de paiement',
+        );
         throw new Error(message);
       }
 

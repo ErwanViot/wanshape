@@ -37,13 +37,13 @@ export function AuthCallback() {
           // Code exchange failed — session may already be active via onAuthStateChange
           client.auth.getSession().then(({ data: { session } }) => {
             if (session) {
-              navigate('/profil', { replace: true });
+              navigate('/suivi', { replace: true });
             } else {
               setError(err.message);
             }
           });
         } else {
-          navigate('/profil', { replace: true });
+          navigate('/suivi', { replace: true });
         }
       });
     } else {
@@ -51,7 +51,7 @@ export function AuthCallback() {
       client.auth.getSession().then(({ data: { session } }) => {
         clearTimeout(timeout);
         if (session) {
-          navigate('/profil', { replace: true });
+          navigate('/suivi', { replace: true });
         } else {
           setError('Code de vérification manquant');
         }

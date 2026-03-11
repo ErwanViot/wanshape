@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import {
+  ChevronLeft,
   ClipboardList,
   Dumbbell,
   Flame,
@@ -176,17 +177,7 @@ export function CustomSessionPreviewPage() {
         to="/seance/custom"
         className="inline-flex items-center gap-1 text-sm text-muted hover:text-heading transition-colors mb-6"
       >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        >
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
+        <ChevronLeft className="w-4 h-4" />
         Retour
       </Link>
 
@@ -276,6 +267,7 @@ export function CustomSessionPreviewPage() {
           maxLength={300}
           rows={2}
           placeholder="Ce que je voudrais changer..."
+          aria-label="Modifications souhaitées"
           className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand mb-3"
         />
 

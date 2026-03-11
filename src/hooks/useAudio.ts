@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-
-const STORAGE_KEY = 'wan2fit-audio-enabled';
+import { STORAGE_KEYS } from '../config/storage-keys.ts';
 
 function getStoredAudio(): boolean {
   try {
-    const v = localStorage.getItem(STORAGE_KEY);
+    const v = localStorage.getItem(STORAGE_KEYS.AUDIO_ENABLED);
     return v !== 'false';
   } catch {
     return true;
@@ -16,7 +15,7 @@ export function useAudio() {
   const ctxRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, String(enabled));
+    localStorage.setItem(STORAGE_KEYS.AUDIO_ENABLED, String(enabled));
   }, [enabled]);
 
   const getCtx = useCallback(() => {
@@ -79,10 +78,6 @@ export function useAudio() {
     setTimeout(() => playTone(1047, 0.4, 'sine'), 600);
   }, [playTone]);
 
-  const speak = useCallback((_text: string) => {
-    // Voice disabled — beeps only
-  }, []);
-
   const speakCountdown = useCallback(
     (remaining: number) => {
       if (!enabled) return;
@@ -109,6 +104,5 @@ export function useAudio() {
     beepSessionEnd,
     speakCountdown,
     speakGo,
-    speak,
   };
 }

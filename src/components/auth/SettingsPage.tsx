@@ -6,15 +6,8 @@ import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { useSubscription } from '../../hooks/useSubscription.ts';
 import { useTheme } from '../../hooks/useTheme.ts';
 import { getInitials } from '../../utils/getInitials.ts';
+import { formatDate } from '../../utils/date.ts';
 import { supabase } from '../../lib/supabase.ts';
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-}
 
 const THEME_OPTIONS = [
   { value: 'light' as const, label: 'Clair', Icon: Sun },

@@ -5,14 +5,17 @@ import type { Block, Session } from '../types/session.ts';
 import { getExerciseLink } from '../utils/exerciseLinks.ts';
 import { computeTimeline } from '../utils/sessionTimeline.ts';
 
-export function SessionAccordion({ session }: { session: Session }) {
+export function SessionAccordion({ session, index = 0 }: { session: Session; index?: number }) {
   const [open, setOpen] = useState(false);
+  const panelId = `session-accordion-panel-${index}`;
 
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={panelId}
         className="w-full px-5 py-3 flex items-center justify-between bg-surface-card border-t border-divider text-sm cursor-pointer"
       >
         <span className="text-muted font-medium">Contenu de la séance</span>
@@ -32,7 +35,11 @@ export function SessionAccordion({ session }: { session: Session }) {
         </svg>
       </button>
 
-      {open && <SessionDetail session={session} />}
+      {open && (
+        <div id={panelId} role="region" aria-label="Contenu de la séance">
+          <SessionDetail session={session} />
+        </div>
+      )}
     </>
   );
 }

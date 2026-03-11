@@ -26,6 +26,11 @@ dist-ssr
 # Working files
 work/
 
+# Environment variables
+.env
+.env.*
+!.env.example
+
 # AI tooling
 .claude/
 .serena/
