@@ -15,7 +15,6 @@ export interface WeeklyData {
 
 export interface HistoryStats {
   completions: CompletionWithTitle[];
-  consecutiveDays: number;
   totalSessions: number;
   totalDuration: number;
   weekDots: boolean[];
@@ -26,40 +25,6 @@ export interface HistoryStats {
 
 function toDateString(date: Date): string {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-}
-
-function computeConsecutiveDays(completions: SessionCompletion[]): number {
-  if (completions.length === 0) return 0;
-
-  const completionDays = new Set(
-    completions.map((c) => {
-      const d = new Date(c.completed_at);
-      return toDateString(d);
-    }),
-  );
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const todayStr = toDateString(today);
-
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-  const yesterdayStr = toDateString(yesterday);
-
-  // Must include today or yesterday to be active
-  if (!completionDays.has(todayStr) && !completionDays.has(yesterdayStr)) return 0;
-
-  // Start counting from the most recent day that has a completion
-  const startDate = completionDays.has(todayStr) ? new Date(today) : new Date(yesterday);
-  let count = 0;
-  const cursor = new Date(startDate);
-
-  while (completionDays.has(toDateString(cursor))) {
-    count++;
-    cursor.setDate(cursor.getDate() - 1);
-  }
-
-  return count;
 }
 
 function computeWeekDots(completions: SessionCompletion[]): boolean[] {
@@ -190,13 +155,12 @@ export function useHistory(userId: string | undefined): HistoryStats {
   }, [userId]);
 
   const derived = useMemo(() => {
-    const consecutiveDays = computeConsecutiveDays(completions);
     const totalSessions = completions.length;
     const totalDuration = completions.reduce((sum, c) => sum + (c.duration_seconds ?? 0), 0);
     const weekDots = computeWeekDots(completions);
     const weeklyChart = computeWeeklyChart(completions);
     const thisWeekSessions = weekDots.filter(Boolean).length;
-    return { consecutiveDays, totalSessions, totalDuration, weekDots, weeklyChart, thisWeekSessions };
+    return { totalSessions, totalDuration, weekDots, weeklyChart, thisWeekSessions };
   }, [completions]);
 
   return { completions, ...derived, loading };

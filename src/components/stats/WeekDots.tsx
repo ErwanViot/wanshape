@@ -16,7 +16,7 @@ export function WeekDots({ weekDots }: { weekDots: boolean[] }) {
               className={`w-full aspect-square max-w-[44px] rounded-xl flex items-center justify-center transition-colors ${
                 done
                   ? 'bg-emerald-500/20 border-2 border-emerald-500'
-                  : 'bg-surface-2 border-2 border-transparent'
+                  : 'bg-surface-2 border-2 border-divider-strong'
               }`}
             >
               {done && (

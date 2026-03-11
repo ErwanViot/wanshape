@@ -3,7 +3,6 @@ import { ChevronRight, Play, Rocket, Sparkles } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
-import { useHistory } from '../hooks/useHistory.ts';
 import { useActiveProgram, usePrograms } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import { supabase } from '../lib/supabase.ts';
@@ -17,13 +16,11 @@ export function ProgramList() {
   const { programs, loading } = usePrograms();
   const { programs: userPrograms, loading: userLoading } = useUserPrograms();
   const { activeProgram, loading: activeProgramLoading } = useActiveProgram(user?.id);
-  const { totalSessions } = useHistory(user?.id);
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
   const [searchParams] = useSearchParams();
   const justDeleted = searchParams.get('deleted') === '1';
 
   const isPremium = profile?.subscription_tier === 'premium';
-  const totalActive = userPrograms.length;
 
   const progressPct = activeProgram && activeProgram.totalSessions > 0
     ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
@@ -51,13 +48,6 @@ export function ProgramList() {
           Suis tes programmes ou génère-en un nouveau adapté à tes objectifs.
           {!user && ' Crée ton compte gratuit pour suivre ton avancement.'}
         </p>
-        {user && (totalActive > 0 || totalSessions > 0) && (
-          <p className="text-xs text-subtle mt-2">
-            {totalActive > 0 && <>{totalActive} programme{totalActive > 1 ? 's' : ''} actif{totalActive > 1 ? 's' : ''}</>}
-            {totalActive > 0 && totalSessions > 0 && ' · '}
-            {totalSessions > 0 && <>{totalSessions} séance{totalSessions > 1 ? 's' : ''} complétée{totalSessions > 1 ? 's' : ''}</>}
-          </p>
-        )}
       </div>
 
       {/* Deleted confirmation */}
