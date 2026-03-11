@@ -23,9 +23,9 @@ export function ExercisePage() {
   useEffect(() => {
     if (!hash) return;
     const id = hash.slice(1);
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    }, 100);
   }, [hash]);
 
   if (!exercise) {

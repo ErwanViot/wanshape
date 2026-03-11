@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { Link } from 'react-router';
 import { BLOCK_COLORS } from '../engine/constants.ts';
 import type { Block, Session } from '../types/session.ts';
 import { getExerciseLink } from '../utils/exerciseLinks.ts';
 import { computeTimeline } from '../utils/sessionTimeline.ts';
 
-export function SessionAccordion({ session, index = 0 }: { session: Session; index?: number }) {
+export function SessionAccordion({ session }: { session: Session }) {
   const [open, setOpen] = useState(false);
-  const panelId = `session-accordion-panel-${index}`;
+  const panelId = useId();
 
   return (
     <>

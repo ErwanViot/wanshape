@@ -13,6 +13,10 @@ DECLARE
   v_program_id uuid;
   result jsonb;
 BEGIN
+  -- Authorization: only allow users to query their own data
+  IF p_user_id != auth.uid() THEN
+    RAISE EXCEPTION 'Unauthorized';
+  END IF;
   -- 1. Find the most recent completion linked to a program session
   SELECT sc.program_session_id
   INTO v_last_ps_id

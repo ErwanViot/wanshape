@@ -59,10 +59,8 @@ export function Home() {
         <VisitorContent
           session={session}
           loading={loading}
-          error={error}
           tomorrowSession={tomorrowSession}
           tomorrowLoading={tomorrowLoading}
-          todayKey={todayKey}
           tomorrowKey={tomorrowKey}
           onStart={handleStartSession}
           formatShortDate={formatShortDate}

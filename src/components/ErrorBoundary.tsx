@@ -28,15 +28,16 @@ export class ErrorBoundary extends Component<Props, State> {
         <div className="min-h-screen flex items-center justify-center bg-surface-0 px-4">
           <div className="text-center max-w-md">
             <h1 className="text-2xl font-bold text-heading mb-4">Une erreur est survenue</h1>
-            <p className="text-body mb-6">L'application a rencontr&eacute; un probl&egrave;me inattendu.</p>
+            <p className="text-body mb-6">L'application a rencontré un problème inattendu.</p>
             <button
+              type="button"
               onClick={() => {
                 this.setState({ hasError: false });
                 window.location.href = '/';
               }}
               className="cta-gradient px-6 py-3 rounded-xl font-semibold"
             >
-              Retour &agrave; l'accueil
+              Retour à l'accueil
             </button>
           </div>
         </div>

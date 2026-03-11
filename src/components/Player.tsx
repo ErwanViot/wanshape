@@ -164,7 +164,10 @@ export function Player({
         <GlobalProgress steps={steps} currentStepIndex={workout.currentStepIndex} progress={workout.globalProgress} />
         <button
           type="button"
-          onClick={() => setShowQuitConfirm(true)}
+          onClick={() => {
+            if (workout.status !== 'paused') workout.togglePause();
+            setShowQuitConfirm(true);
+          }}
           className="absolute top-2 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/50 hover:text-white/80 hover:bg-white/20 transition-colors"
           aria-label="Quitter la séance"
         >
@@ -206,15 +209,35 @@ export function Player({
 
       {/* Quit confirmation overlay */}
       {showQuitConfirm && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+        <div
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="quit-dialog-title"
+          className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setShowQuitConfirm(false);
+              workout.togglePause();
+            }
+          }}
+        >
           <div className="text-center px-6">
-            <p className="text-xl font-bold text-white mb-2">Quitter la séance ?</p>
+            <p id="quit-dialog-title" className="text-xl font-bold text-white mb-2">Quitter la séance ?</p>
             <p className="text-white/70 mb-6">Ta progression ne sera pas enregistrée.</p>
             <div className="flex gap-3 justify-center">
-              <button onClick={() => setShowQuitConfirm(false)} className="px-6 py-3 rounded-xl bg-white/10 text-white font-semibold">
+              <button
+                type="button"
+                onClick={() => { setShowQuitConfirm(false); workout.togglePause(); }}
+                className="px-6 py-3 rounded-xl bg-white/10 text-white font-semibold"
+              >
                 Continuer
               </button>
-              <button onClick={() => navigate(backTo)} className="px-6 py-3 rounded-xl bg-white text-black font-semibold">
+              <button
+                type="button"
+                autoFocus
+                onClick={() => navigate(backTo)}
+                className="px-6 py-3 rounded-xl bg-white text-black font-semibold"
+              >
                 Quitter
               </button>
             </div>

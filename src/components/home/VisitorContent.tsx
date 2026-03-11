@@ -32,10 +32,8 @@ export function VisitorContent({
 }: {
   session: Session | null;
   loading: boolean;
-  error: string | null;
   tomorrowSession: Session | null;
   tomorrowLoading: boolean;
-  todayKey: string;
   tomorrowKey: string;
   onStart: () => void;
   formatShortDate: (key: string) => string;
