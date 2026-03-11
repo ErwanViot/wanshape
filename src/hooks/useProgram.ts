@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import type { Program, ProgramSession, SessionCompletion } from '../types/completion.ts';
 import type { Session } from '../types/session.ts';
@@ -87,14 +88,13 @@ export function useActiveProgram(userId: string | undefined) {
 }
 
 export function usePrograms() {
+  const { loading: authLoading } = useAuth();
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!supabase) {
-      setLoading(false);
-      return;
-    }
+    // Wait for auth to settle so the Supabase client is fully initialized
+    if (!supabase || authLoading) return;
 
     let cancelled = false;
 
@@ -104,9 +104,9 @@ export function usePrograms() {
 
         if (cancelled) return;
         setPrograms((data as Program[]) ?? []);
-        setLoading(false);
       } catch (err) {
         console.error('Programs fetch error:', err);
+      } finally {
         if (!cancelled) setLoading(false);
       }
     })();
@@ -114,7 +114,7 @@ export function usePrograms() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [authLoading]);
 
   return { programs, loading };
 }
