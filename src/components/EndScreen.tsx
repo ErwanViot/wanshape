@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { Trophy } from 'lucide-react';
+import { Trophy, Share2, Check, Download } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { STORAGE_KEYS } from '../config/storage-keys.ts';
 import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
+import { shareSession } from '../utils/share.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
 
@@ -33,6 +34,20 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
   }, [user, save, session.date, programSessionId, customSessionId, durationSeconds, amrapRounds]);
 
   const realMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
+
+  const [shareState, setShareState] = useState<'idle' | 'loading' | 'shared' | 'copied'>('idle');
+
+  const handleShare = useCallback(async () => {
+    setShareState('loading');
+    try {
+      const result = await shareSession({ session, realMinutes, amrapRounds });
+      setShareState(result);
+      setTimeout(() => setShareState('idle'), 3000);
+    } catch (err) {
+      // User cancelled share sheet or other error
+      setShareState('idle');
+    }
+  }, [session, realMinutes, amrapRounds]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center bg-[#0a0a0a]">
@@ -71,13 +86,44 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 
       {!user && supabase && <SignupNudge />}
 
-      <button
-        type="button"
-        onClick={onBack}
-        className="mt-4 px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
-      >
-        {programSessionId ? 'Retour au programme' : customSessionId ? 'Retour à la séance' : "Retour à l'accueil"}
-      </button>
+      <div className="flex flex-col gap-3 mt-4 w-full max-w-xs">
+        <button
+          type="button"
+          onClick={handleShare}
+          disabled={shareState === 'loading'}
+          className="flex items-center justify-center gap-2 px-8 py-4 rounded-2xl btn-primary font-bold text-lg text-white active:scale-95 transition-transform disabled:opacity-60"
+        >
+          {shareState === 'loading' ? (
+            <>
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              Génération…
+            </>
+          ) : shareState === 'shared' ? (
+            <>
+              <Check className="w-5 h-5" aria-hidden="true" />
+              Partagé !
+            </>
+          ) : shareState === 'copied' ? (
+            <>
+              <Download className="w-5 h-5" aria-hidden="true" />
+              Image téléchargée &amp; lien copié !
+            </>
+          ) : (
+            <>
+              <Share2 className="w-5 h-5" aria-hidden="true" />
+              Partager ma séance
+            </>
+          )}
+        </button>
+
+        <button
+          type="button"
+          onClick={onBack}
+          className="px-8 py-4 rounded-2xl bg-white/10 text-white font-bold text-lg active:scale-95 transition-transform"
+        >
+          {programSessionId ? 'Retour au programme' : customSessionId ? 'Retour à la séance' : "Retour à l'accueil"}
+        </button>
+      </div>
     </div>
   );
 }
