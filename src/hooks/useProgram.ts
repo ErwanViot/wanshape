@@ -100,9 +100,10 @@ export function usePrograms() {
 
     (async () => {
       try {
-        const { data } = await supabase.from('programs').select('*').eq('is_fixed', true).order('created_at');
+        const { data, error } = await supabase.from('programs').select('*').eq('is_fixed', true).order('created_at');
 
         if (cancelled) return;
+        if (error) throw error;
         setPrograms((data as Program[]) ?? []);
       } catch (err) {
         console.error('Programs fetch error:', err);

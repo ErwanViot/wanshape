@@ -136,21 +136,21 @@ export function StatsPage() {
           </div>
 
           {/* This week: dots + contextual message */}
-          <div className={`col-span-2 rounded-2xl p-5 border bg-gradient-to-br ${weekCardStyle(thisWeekSessions).bg} ${weekCardStyle(thisWeekSessions).border}`}>
-            <WeekDots weekDots={weekDots} />
-            {(() => {
-              const msg = getWeekMessage(thisWeekSessions);
-              const style = weekCardStyle(thisWeekSessions);
-              return (
+          {(() => {
+            const style = weekCardStyle(thisWeekSessions);
+            const msg = getWeekMessage(thisWeekSessions);
+            return (
+              <div className={`col-span-2 rounded-2xl p-5 border bg-gradient-to-br ${style.bg} ${style.border}`}>
+                <WeekDots weekDots={weekDots} />
                 <div className="mt-4 rounded-xl border border-divider px-4 py-3 shadow-sm bg-surface-0">
                   <p className={`text-sm font-bold ${style.text}`}>
                     {msg.emoji}{'  '}{msg.title}
                   </p>
                   <p className="text-xs text-body mt-0.5">{msg.subtitle}</p>
                 </div>
-              );
-            })()}
-          </div>
+              </div>
+            );
+          })()}
 
           {/* Programme progress */}
           {activeProgram ? (

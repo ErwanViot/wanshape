@@ -3,7 +3,6 @@ import { ChevronRight, Play, Rocket, Sparkles } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
-import { useHistory } from '../hooks/useHistory.ts';
 import { useActiveProgram, usePrograms } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import { supabase } from '../lib/supabase.ts';
@@ -17,7 +16,6 @@ export function ProgramList() {
   const { programs, loading } = usePrograms();
   const { programs: userPrograms, loading: userLoading } = useUserPrograms();
   const { activeProgram, loading: activeProgramLoading } = useActiveProgram(user?.id);
-  useHistory(user?.id);
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
   const [searchParams] = useSearchParams();
   const justDeleted = searchParams.get('deleted') === '1';
