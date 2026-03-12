@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { CustomSessionInput, GenerateSessionResponse } from '../types/custom-session.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
@@ -7,12 +7,16 @@ export function useGenerateSession() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const inflightRef = useRef(false);
+
   const generate = useCallback(async (input: CustomSessionInput): Promise<GenerateSessionResponse | null> => {
+    if (inflightRef.current) return null;
     if (!supabase) {
       setError('Service indisponible');
       return null;
     }
 
+    inflightRef.current = true;
     setLoading(true);
     setError(null);
 
@@ -41,6 +45,7 @@ export function useGenerateSession() {
       return null;
     } finally {
       setLoading(false);
+      inflightRef.current = false;
     }
   }, []);
 

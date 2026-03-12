@@ -3,12 +3,12 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.ts";
 import { validateProgram } from "./validate.ts";
 
-const ALLOWED_ORIGINS = [
+const PROD_ORIGINS = [
   "https://wan2fit.fr",
   "https://www.wan2fit.fr",
-  "http://localhost:5173",
-  "http://localhost:4173",
 ];
+const DEV_ORIGINS = ["http://localhost:5173", "http://localhost:4173"];
+const ALLOWED_ORIGINS = Deno.env.get("ENVIRONMENT") === "production" ? PROD_ORIGINS : [...PROD_ORIGINS, ...DEV_ORIGINS];
 
 const DEFAULT_ORIGIN = "https://wan2fit.fr";
 
@@ -36,7 +36,8 @@ const VALID_FREQUENCE = ['jamais', 'une_deux', 'trois_quatre', 'cinq_plus'];
 const VALID_MATERIEL = [
   'poids_du_corps', 'halteres', 'barre_disques', 'kettlebell',
   'elastiques', 'banc', 'barre_traction', 'trx',
-  'corde_a_sauter', 'medecine_ball',
+  'corde_a_sauter', 'medecine_ball', 'swiss_ball', 'tapis',
+  'step', 'foam_roller', 'anneaux',
 ];
 const VALID_DUREES = [4, 8, 12];
 
@@ -139,9 +140,10 @@ function slugify(text: string): string {
 }
 
 function nanoid(size: number): string {
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  const chars = 'abcdefghijklmnopqrstuvwxyz234567'; // 32 chars = power of 2
+  const mask = 0x1f; // 5 bits → indices 0-31, no modulo bias
   const bytes = crypto.getRandomValues(new Uint8Array(size));
-  return Array.from(bytes, (b) => chars[b % chars.length]).join('');
+  return Array.from(bytes, (b) => chars[b & mask]).join('');
 }
 
 interface CalendrierEntry {
@@ -278,6 +280,7 @@ Deno.serve(async (req: Request) => {
         system: SYSTEM_PROMPT,
         messages,
       }),
+      signal: AbortSignal.timeout(60_000),
     });
 
     if (!aiResponse.ok) {
@@ -418,8 +421,11 @@ Deno.serve(async (req: Request) => {
 
   if (sessionsError) {
     console.error("Program sessions insert error:", sessionsError);
-    // Rollback: delete the program
-    await supabaseAdmin.from("programs").delete().eq("id", insertedProgram.id);
+    // Rollback: delete the program, verify success
+    const { error: rollbackError } = await supabaseAdmin.from("programs").delete().eq("id", insertedProgram.id).eq("user_id", user.id);
+    if (rollbackError) {
+      console.error("Rollback failed — orphaned program:", insertedProgram.id, rollbackError);
+    }
     return errorResponse(req, "Erreur de sauvegarde des seances", 502);
   }
 

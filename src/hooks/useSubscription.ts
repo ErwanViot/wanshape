@@ -45,8 +45,8 @@ export function useSubscription() {
   }, [user, isPremium]);
 
   const checkout = useCallback(
-    async (priceId: string) => {
-      if (!supabase || !user) return;
+    async (priceId: string): Promise<string | null> => {
+      if (!supabase || !user) return 'Non connecté';
 
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
         body: { priceId },
@@ -57,32 +57,33 @@ export function useSubscription() {
           error as unknown as Record<string, unknown>,
           'Erreur lors de la création de la session de paiement',
         );
-        throw new Error(message);
+        return message;
       }
 
       if (data?.url) {
         window.location.href = data.url;
-      } else {
-        throw new Error(data?.error || 'Erreur lors de la création de la session de paiement');
+        return null;
       }
+      return data?.error || 'Erreur lors de la création de la session de paiement';
     },
     [user],
   );
 
-  const manageSubscription = useCallback(async () => {
-    if (!supabase || !user) return;
+  const manageSubscription = useCallback(async (): Promise<string | null> => {
+    if (!supabase || !user) return 'Non connecté';
 
     const { data, error } = await supabase.functions.invoke('create-portal-session');
 
     if (error) {
-      throw new Error(error.message || 'Erreur lors de l\'ouverture du portail');
+      const msg = error.message || 'Erreur lors de l\'ouverture du portail';
+      return msg;
     }
 
     if (data?.url) {
       window.location.href = data.url;
-    } else {
-      throw new Error(data?.error || 'Erreur lors de l\'ouverture du portail');
+      return null;
     }
+    return data?.error || 'Erreur lors de l\'ouverture du portail';
   }, [user]);
 
   return { tier, isPremium, subscription, loading, checkout, manageSubscription };

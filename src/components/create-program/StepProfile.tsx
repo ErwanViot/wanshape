@@ -53,6 +53,7 @@ export function StepProfile({
               key={e.value}
               type="button"
               onClick={() => onChangeExperience(e.value)}
+              aria-pressed={experienceDuree === e.value}
               className={`px-3 py-3 rounded-xl border text-center transition-colors cursor-pointer ${
                 experienceDuree === e.value
                   ? 'border-brand bg-brand/10'
@@ -74,6 +75,7 @@ export function StepProfile({
               key={f.value}
               type="button"
               onClick={() => onChangeFrequence(f.value)}
+              aria-pressed={frequenceActuelle === f.value}
               className={`px-3 py-3 rounded-xl border text-center transition-colors cursor-pointer ${
                 frequenceActuelle === f.value
                   ? 'border-brand bg-brand/10'

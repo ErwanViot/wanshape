@@ -42,7 +42,7 @@ export function useUserPrograms() {
     if (!supabase) return false;
 
     try {
-      const { error } = await supabase.from('programs').delete().eq('id', id);
+      const { error } = await supabase.from('programs').delete().eq('id', id).eq('user_id', user?.id ?? '');
       if (error) {
         console.error('Delete program error:', error);
         return false;
@@ -53,7 +53,7 @@ export function useUserPrograms() {
       console.error('Delete program error:', err);
       return false;
     }
-  }, []);
+  }, [user]);
 
   return { programs, loading, deleteProgram, refresh: fetchPrograms };
 }

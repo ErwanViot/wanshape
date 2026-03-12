@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import {
   ChevronLeft,
@@ -15,9 +15,11 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import { BLOCK_COLORS, BLOCK_LABELS } from '../engine/constants.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { confirmCustomSession, useCustomSession } from '../hooks/useCustomSessions.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
-import type { CustomSessionMode, Equipment, Intensity, BodyFocus } from '../types/custom-session.ts';
+import type { CustomSessionMode, Intensity, BodyFocus } from '../types/custom-session.ts';
+import type { Equipment } from '../types/equipment.ts';
 import type { Block, Session } from '../types/session.ts';
 
 const BLOCK_ICONS: Record<string, LucideIcon> = {
@@ -122,6 +124,7 @@ export function CustomSessionPreviewPage() {
   const [refinementNote, setRefinementNote] = useState('');
   const [confirming, setConfirming] = useState(false);
   const [confirmError, setConfirmError] = useState(false);
+  const confirmingRef = useRef(false);
 
   const session = record?.session_data as Session | undefined;
 
@@ -132,7 +135,7 @@ export function CustomSessionPreviewPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <LoadingSpinner />
       </div>
     );
   }
@@ -191,7 +194,7 @@ export function CustomSessionPreviewPage() {
           <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand/10 border border-brand/20 text-brand">
             ~{session.estimatedDuration} min
           </span>
-          {session.focus.map((f) => (
+          {session.focus?.map((f) => (
             <span
               key={f}
               className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-card border border-divider text-muted"
@@ -218,13 +221,15 @@ export function CustomSessionPreviewPage() {
         type="button"
         disabled={confirming}
         onClick={async () => {
-          if (!id) return;
+          if (!id || confirmingRef.current) return;
+          confirmingRef.current = true;
           setConfirming(true);
           setConfirmError(false);
           const ok = await confirmCustomSession(id).catch(() => false);
           if (ok) {
             navigate(`/seance/custom/${id}/play`);
           } else {
+            confirmingRef.current = false;
             setConfirming(false);
             setConfirmError(true);
           }

@@ -2,6 +2,8 @@ import { type FormEvent, useState } from 'react';
 import { Link } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { LoadingSpinner } from '../LoadingSpinner.tsx';
+import { FormInput } from './FormInput.tsx';
 
 export function UpdatePasswordPage() {
   const { user, loading, updatePassword } = useAuth();
@@ -19,8 +21,8 @@ export function UpdatePasswordPage() {
     e.preventDefault();
     setError(null);
 
-    if (password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères.');
+    if (password.length < 8) {
+      setError('Le mot de passe doit contenir au moins 8 caractères.');
       return;
     }
     if (password !== confirm) {
@@ -54,7 +56,7 @@ export function UpdatePasswordPage() {
   if (loading) {
     return (
       <div className="px-6 py-12 flex-1 flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <LoadingSpinner />
       </div>
     );
   }
@@ -97,39 +99,29 @@ export function UpdatePasswordPage() {
 
         <div className="glass-card rounded-2xl p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="new-password" className="block text-sm font-medium text-strong mb-1.5">
-                Nouveau mot de passe
-              </label>
-              <input
-                id="new-password"
-                type="password"
-                required
-                minLength={6}
-                autoComplete="new-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="6 caractères minimum"
-                className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
-              />
-            </div>
+            <FormInput
+              label="Nouveau mot de passe"
+              inputId="new-password"
+              type="password"
+              required
+              minLength={8}
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="8 caractères minimum"
+            />
 
-            <div>
-              <label htmlFor="confirm-password" className="block text-sm font-medium text-strong mb-1.5">
-                Confirmer le mot de passe
-              </label>
-              <input
-                id="confirm-password"
-                type="password"
-                required
-                minLength={6}
-                autoComplete="new-password"
-                value={confirm}
-                onChange={(e) => setConfirm(e.target.value)}
-                placeholder="Retapez le mot de passe"
-                className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
-              />
-            </div>
+            <FormInput
+              label="Confirmer le mot de passe"
+              inputId="confirm-password"
+              type="password"
+              required
+              minLength={8}
+              autoComplete="new-password"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              placeholder="Retapez le mot de passe"
+            />
 
             {error && (
               <p className="text-sm text-red-400" role="alert">

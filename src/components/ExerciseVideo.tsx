@@ -53,8 +53,8 @@ export function ExerciseVideo({ src, fallbackImage, alt = '', className = '' }: 
   return (
     <div ref={containerRef} className={className} role="presentation">
       {isVisible ? (
-        <video ref={videoRef} autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover">
-          <source src={src} type="video/mp4" onError={handleError} />
+        <video ref={videoRef} autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover" onError={handleError}>
+          <source src={src} type="video/mp4" />
         </video>
       ) : (
         <img src={fallbackImage} alt={alt} className="w-full h-full object-cover" loading="lazy" />

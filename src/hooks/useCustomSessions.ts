@@ -71,14 +71,17 @@ export function useCustomSession(id: string | undefined) {
       try {
         const { data: { user } } = await supabase!.auth.getUser();
         if (!user) { if (!cancelled) setLoading(false); return; }
-        const { data, error } = await supabase!
-          .from('custom_sessions')
-          .select('*')
-          .eq('id', id)
-          .eq('user_id', user.id)
-          .single();
+        const { data, sessionExpired } = await supabaseQuery(() =>
+          supabase!
+            .from('custom_sessions')
+            .select('*')
+            .eq('id', id)
+            .eq('user_id', user.id)
+            .single(),
+        );
 
-        if (!cancelled && !error && data) {
+        if (sessionExpired) { notifySessionExpired(); }
+        if (!cancelled && data) {
           setSession(data as CustomSessionRecord);
         }
       } catch (err) {

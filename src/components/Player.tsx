@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router';
-import { HeartPulse, Moon } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Navigate, useNavigate, useParams } from 'react-router';
+import { HeartPulse } from 'lucide-react';
 import { BLOCK_LABELS } from '../engine/constants.ts';
 import { compileSession } from '../engine/interpreter.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -18,8 +18,11 @@ import { EMOMView } from './EMOMView.tsx';
 import { EndScreen } from './EndScreen.tsx';
 import { ExerciseView } from './ExerciseView.tsx';
 import { GlobalProgress } from './GlobalProgress.tsx';
+import { PlayerLoader } from './LoadingSpinner.tsx';
+import { PlayerErrorBoundary } from './PlayerErrorBoundary.tsx';
 import { RepsView } from './RepsView.tsx';
 import { RestView } from './RestView.tsx';
+import { SessionNotFound } from './SessionNotFound.tsx';
 
 export function PlayerPage() {
   const { dateKey: paramDateKey } = useParams<{ dateKey?: string }>();
@@ -34,29 +37,14 @@ export function PlayerPage() {
     return <Navigate to="/" replace />;
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-white/20 border-t-brand rounded-full animate-spin" />
-      </div>
-    );
-  }
+  if (loading) return <PlayerLoader />;
+  if (!session) return <SessionNotFound />;
 
-  if (!session) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6">
-        <div className="text-center">
-          <Moon className="w-12 h-12 text-white/40 mb-4 mx-auto" aria-hidden="true" />
-          <p className="text-white/60 text-lg font-medium">Séance introuvable.</p>
-          <Link to="/" className="text-link hover:text-link-hover underline mt-4 inline-block">
-            Retour à l'accueil
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  return <Player session={session} />;
+  return (
+    <PlayerErrorBoundary>
+      <Player session={session} />
+    </PlayerErrorBoundary>
+  );
 }
 
 function getBlockProgress(step: AtomicStep): string {
@@ -113,16 +101,24 @@ export function Player({
   const steps = useMemo(() => compileSession(session), [session]);
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
   const resumeButtonRef = useRef<HTMLButtonElement>(null);
+  const quitDialogRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
 
   const workout = useWorkout(steps);
 
   useWakeLock(workout.status !== 'idle' && workout.status !== 'complete');
 
+  const startOnce = useCallback(() => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    workout.start();
+  }, [workout.start]);
+
   useEffect(() => {
     if (workout.status === 'idle' && steps.length > 0) {
-      workout.start();
+      startOnce();
     }
-  }, [steps.length, workout.start, workout.status]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [steps.length, startOnce, workout.status]);
 
   // Focus the "Reprendre" button when pause overlay is shown
   useEffect(() => {
@@ -192,7 +188,16 @@ export function Player({
 
       {/* Paused overlay */}
       {workout.status === 'paused' && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Pause"
+          className="absolute inset-0 z-10 flex items-center justify-center bg-black/70"
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') workout.togglePause();
+            if (e.key === 'Tab') { e.preventDefault(); resumeButtonRef.current?.focus(); }
+          }}
+        >
           <div className="text-center">
             <div className="text-4xl font-bold text-white mb-4">Pause</div>
             <button
@@ -210,14 +215,24 @@ export function Player({
       {/* Quit confirmation overlay */}
       {showQuitConfirm && (
         <div
+          ref={quitDialogRef}
           role="alertdialog"
           aria-modal="true"
           aria-labelledby="quit-dialog-title"
           className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          tabIndex={-1}
           onKeyDown={(e) => {
             if (e.key === 'Escape') {
               setShowQuitConfirm(false);
               workout.togglePause();
+            }
+            if (e.key === 'Tab') {
+              const focusable = quitDialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled)');
+              if (!focusable || focusable.length === 0) return;
+              const first = focusable[0];
+              const last = focusable[focusable.length - 1];
+              if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+              else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
             }
           }}
         >

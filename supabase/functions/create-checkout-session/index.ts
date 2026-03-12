@@ -1,12 +1,12 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
-const ALLOWED_ORIGINS = [
+const PROD_ORIGINS = [
   "https://wan2fit.fr",
   "https://www.wan2fit.fr",
-  "http://localhost:5173",
-  "http://localhost:4173",
 ];
+const DEV_ORIGINS = ["http://localhost:5173", "http://localhost:4173"];
+const ALLOWED_ORIGINS = Deno.env.get("ENVIRONMENT") === "production" ? PROD_ORIGINS : [...PROD_ORIGINS, ...DEV_ORIGINS];
 
 const DEFAULT_ORIGIN = "https://wan2fit.fr";
 
@@ -135,6 +135,7 @@ Deno.serve(async (req: Request) => {
         email: user.email ?? "",
         "metadata[user_id]": user.id,
       }),
+      signal: AbortSignal.timeout(10_000),
     });
 
     if (!customerRes.ok) {
@@ -181,6 +182,7 @@ Deno.serve(async (req: Request) => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body: params,
+    signal: AbortSignal.timeout(10_000),
   });
 
   if (!sessionRes.ok) {

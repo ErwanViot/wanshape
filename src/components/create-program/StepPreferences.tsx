@@ -1,12 +1,12 @@
 import type { RefObject } from 'react';
-import type { Materiel } from '../../types/custom-program.ts';
+import type { Equipment } from '../../types/equipment.ts';
 import { MATERIEL_OPTIONS, DUREE_OPTIONS } from './formOptions.ts';
 
 export interface StepPreferencesProps {
   seancesParSemaine: number;
   maxSeances: number;
   dureeSeanceMinutes: number;
-  materiel: (Materiel | 'salle')[];
+  materiel: (Equipment | 'salle')[];
   materielDetail: string;
   dureeSemaines: 4 | 8 | 12;
   isValid: boolean;
@@ -15,7 +15,7 @@ export interface StepPreferencesProps {
   stepHeadingRef: RefObject<HTMLHeadingElement | null>;
   onChangeSeances: (value: number) => void;
   onChangeDureeSeance: (value: number) => void;
-  onToggleMateriel: (value: Materiel | 'salle') => void;
+  onToggleMateriel: (value: Equipment | 'salle') => void;
   onChangeMaterielDetail: (value: string) => void;
   onChangeDureeSemaines: (value: 4 | 8 | 12) => void;
   onBack: () => void;
@@ -137,6 +137,7 @@ export function StepPreferences({
               key={d.value}
               type="button"
               onClick={() => onChangeDureeSemaines(d.value)}
+              aria-pressed={dureeSemaines === d.value}
               className={`px-3 py-3 rounded-xl border text-center transition-colors cursor-pointer relative ${
                 dureeSemaines === d.value
                   ? 'border-brand bg-brand/10'

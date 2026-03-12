@@ -1,22 +1,31 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, stripe-signature",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
+const ALLOWED_ORIGINS = [
+  "https://wan2fit.fr",
+  "https://www.wan2fit.fr",
+];
 
-function jsonResponse(data: unknown, status = 200) {
+const DEFAULT_ORIGIN = "https://wan2fit.fr";
+
+function getCorsHeaders(origin?: string) {
+  return {
+    "Access-Control-Allow-Origin": origin && ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN,
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type, stripe-signature",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+}
+
+function jsonResponse(data: unknown, status = 200, origin?: string) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+    headers: { ...getCorsHeaders(origin), "Content-Type": "application/json" },
   });
 }
 
-function errorResponse(message: string, status = 400) {
-  return jsonResponse({ error: message }, status);
+function errorResponse(message: string, status = 400, origin?: string) {
+  return jsonResponse({ error: message }, status, origin);
 }
 
 // Constant-time comparison to prevent timing attacks
@@ -105,23 +114,25 @@ async function resolveUserId(
 }
 
 Deno.serve(async (req: Request) => {
+  const origin = req.headers.get("origin") ?? undefined;
+
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: CORS_HEADERS });
+    return new Response(null, { status: 204, headers: getCorsHeaders(origin) });
   }
 
   if (req.method !== "POST") {
-    return errorResponse("Method not allowed", 405);
+    return errorResponse("Method not allowed", 405, origin);
   }
 
   const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET");
   const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY");
   if (!webhookSecret || !stripeSecretKey) {
-    return errorResponse("Stripe secrets not configured", 500);
+    return errorResponse("Stripe secrets not configured", 500, origin);
   }
 
   const sigHeader = req.headers.get("stripe-signature");
   if (!sigHeader) {
-    return errorResponse("Missing stripe-signature header", 400);
+    return errorResponse("Missing stripe-signature header", 400, origin);
   }
 
   const body = await req.text();
@@ -129,7 +140,7 @@ Deno.serve(async (req: Request) => {
   // Verify signature
   const isValid = await verifyStripeSignature(body, sigHeader, webhookSecret);
   if (!isValid) {
-    return errorResponse("Invalid signature", 401);
+    return errorResponse("Invalid signature", 401, origin);
   }
 
   // Safe JSON parse (MINOR fix #13)
@@ -137,7 +148,7 @@ Deno.serve(async (req: Request) => {
   try {
     event = JSON.parse(body);
   } catch {
-    return errorResponse("Invalid JSON body", 400);
+    return errorResponse("Invalid JSON body", 400, origin);
   }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -155,7 +166,7 @@ Deno.serve(async (req: Request) => {
     .select("id");
 
   if (!inserted || inserted.length === 0) {
-    return jsonResponse({ received: true, duplicate: true });
+    return jsonResponse({ received: true, duplicate: true }, 200, origin);
   }
 
   try {
@@ -190,10 +201,10 @@ Deno.serve(async (req: Request) => {
       .from("stripe_webhook_events")
       .delete()
       .eq("id", event.id as string);
-    return errorResponse("Webhook processing error", 500);
+    return errorResponse("Webhook processing error", 500, origin);
   }
 
-  return jsonResponse({ received: true });
+  return jsonResponse({ received: true }, 200, origin);
 });
 
 async function handleCheckoutCompleted(
@@ -222,6 +233,7 @@ async function handleCheckoutCompleted(
     `https://api.stripe.com/v1/subscriptions/${subscriptionId}`,
     {
       headers: { Authorization: `Bearer ${stripeSecretKey}` },
+      signal: AbortSignal.timeout(10_000),
     },
   );
 
@@ -321,8 +333,10 @@ async function handleSubscriptionDeleted(
   await supabase
     .from("subscriptions")
     .update({
-      status: "canceled",
-      canceled_at: new Date().toISOString(),
+      status: (sub.status as string) || "canceled",
+      canceled_at: sub.canceled_at
+        ? new Date((sub.canceled_at as number) * 1000).toISOString()
+        : new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })
     .eq("stripe_subscription_id", sub.id as string);
@@ -374,7 +388,7 @@ async function handlePaymentSucceeded(
     .eq("stripe_subscription_id", subscriptionId)
     .maybeSingle();
 
-  if (sub && sub.status === "past_due") {
+  if (sub && ["past_due", "unpaid", "incomplete"].includes(sub.status)) {
     await supabase
       .from("subscriptions")
       .update({ status: "active", updated_at: new Date().toISOString() })

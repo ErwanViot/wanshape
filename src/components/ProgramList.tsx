@@ -9,6 +9,7 @@ import { supabase } from '../lib/supabase.ts';
 import { GOAL_LABELS } from '../utils/labels.ts';
 import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
+import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { ProgramCard } from './ProgramCard.tsx';
 
 export function ProgramList() {
@@ -243,7 +244,7 @@ export function ProgramList() {
 
         {loading && (
           <div className="flex items-center justify-center py-12">
-            <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+            <LoadingSpinner />
           </div>
         )}
 

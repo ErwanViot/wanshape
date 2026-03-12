@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { supabase } from '../../lib/supabase.ts';
+import { LoadingSpinner } from '../LoadingSpinner.tsx';
 
 const TIMEOUT_MS = 15_000;
 
@@ -95,7 +96,7 @@ export function AuthCallback() {
   return (
     <div className="px-6 py-12 flex-1 flex items-center justify-center">
       <output className="flex flex-col items-center gap-3">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <LoadingSpinner />
         <p className="text-sm text-muted">Connexion en cours...</p>
       </output>
     </div>

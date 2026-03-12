@@ -252,6 +252,11 @@ const MATERIEL_LABELS: Record<string, string> = {
   'trx': 'TRX / sangles de suspension',
   'corde_a_sauter': 'Corde a sauter',
   'medecine_ball': 'Medicine ball',
+  'swiss_ball': 'Swiss ball',
+  'tapis': 'Tapis de sol',
+  'step': 'Step',
+  'foam_roller': 'Foam roller',
+  'anneaux': 'Anneaux de gymnastique',
 };
 
 const BLESSURE_LABELS: Record<string, string> = {

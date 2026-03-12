@@ -1,8 +1,9 @@
 import { type FormEvent, useState } from 'react';
-import { Link, Navigate } from 'react-router';
-import { ChevronLeft } from 'lucide-react';
+import { Navigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { BackLink } from './BackLink.tsx';
+import { FormInput } from './FormInput.tsx';
 
 export function ResetPasswordPage() {
   const { user, loading, resetPassword } = useAuth();
@@ -39,13 +40,7 @@ export function ResetPasswordPage() {
   return (
     <div className="px-6 py-12 flex-1 flex items-start justify-center">
       <div className="w-full max-w-md">
-        <Link
-          to="/login"
-          className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-strong transition-colors mb-8"
-        >
-          <ChevronLeft className="w-4 h-4" />
-          Retour à la connexion
-        </Link>
+        <BackLink to="/login" label="Retour à la connexion" />
 
         <h1 className="text-2xl font-bold text-heading mb-8">Mot de passe oublié</h1>
 
@@ -78,21 +73,16 @@ export function ResetPasswordPage() {
                 Saisis ton adresse email et on t'enverra un lien pour réinitialiser ton mot de passe.
               </p>
 
-              <div>
-                <label htmlFor="reset-email" className="block text-sm font-medium text-strong mb-1.5">
-                  Email
-                </label>
-                <input
-                  id="reset-email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="toi@exemple.com"
-                  className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
-                />
-              </div>
+              <FormInput
+                label="Email"
+                inputId="reset-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="toi@exemple.com"
+              />
 
               {error && (
                 <p className="text-sm text-red-400" role="alert">

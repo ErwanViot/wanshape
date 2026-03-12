@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { ProgramOnboardingInput, GenerateProgramResponse } from '../types/custom-program.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
@@ -7,12 +7,16 @@ export function useGenerateProgram() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const inflightRef = useRef(false);
+
   const generate = useCallback(async (input: ProgramOnboardingInput): Promise<GenerateProgramResponse | null> => {
+    if (inflightRef.current) return null;
     if (!supabase) {
       setError('Service indisponible');
       return null;
     }
 
+    inflightRef.current = true;
     setLoading(true);
     setError(null);
 
@@ -24,7 +28,7 @@ export function useGenerateProgram() {
       if (fnError) {
         const message = await extractEdgeFunctionError(
           fnError as unknown as Record<string, unknown>,
-          'Une erreur est survenue. Reessaye.',
+          'Une erreur est survenue. Réessaye.',
         );
         setError(message);
         return null;
@@ -41,6 +45,7 @@ export function useGenerateProgram() {
       return null;
     } finally {
       setLoading(false);
+      inflightRef.current = false;
     }
   }, []);
 

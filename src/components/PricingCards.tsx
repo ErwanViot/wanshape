@@ -51,20 +51,16 @@ export function PricingCards() {
     }
     setCheckoutLoading(true);
     setError(null);
-    try {
-      await checkout(priceId);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+    const err = await checkout(priceId);
+    if (err) {
+      setError(err);
       setCheckoutLoading(false);
     }
   };
 
   const handleManage = async () => {
-    try {
-      await manageSubscription();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
-    }
+    const err = await manageSubscription();
+    if (err) setError(err);
   };
 
   // Already premium — simplified view
@@ -147,6 +143,7 @@ export function PricingCards() {
         <button
           type="button"
           onClick={() => setSelectedPlan('yearly')}
+          aria-pressed={selectedPlan === 'yearly'}
           className={`relative rounded-2xl p-6 flex flex-col text-left transition-all cursor-pointer ${
             selectedPlan === 'yearly'
               ? 'bg-gradient-to-br from-accent/20 to-brand/10 border-2 border-accent shadow-lg shadow-accent/10'
@@ -209,6 +206,7 @@ export function PricingCards() {
         <button
           type="button"
           onClick={() => setSelectedPlan('monthly')}
+          aria-pressed={selectedPlan === 'monthly'}
           className={`relative rounded-2xl p-6 flex flex-col text-left transition-all cursor-pointer ${
             selectedPlan === 'monthly'
               ? 'bg-gradient-to-br from-brand/10 to-accent/5 border-2 border-brand shadow-lg shadow-brand/10'
