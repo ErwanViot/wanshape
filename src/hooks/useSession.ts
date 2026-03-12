@@ -19,7 +19,7 @@ async function fetchSession(dateKey: string, source: SessionSource = DEFAULT_SOU
 
 export function useSession(dateKey: string | null) {
   const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(!!dateKey);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

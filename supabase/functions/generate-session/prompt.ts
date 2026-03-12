@@ -15,7 +15,14 @@ interface DetailedInput {
   refinementNote?: string;
 }
 
-type PromptInput = QuickInput | DetailedInput;
+interface ExpertInput {
+  mode: 'expert';
+  duration: number;
+  preferences: string;
+  refinementNote?: string;
+}
+
+type PromptInput = QuickInput | DetailedInput | ExpertInput;
 
 const PRESET_DESCRIPTIONS: Record<string, string> = {
   transpirer: 'HIIT et Tabata, haute intensité, cardio explosif',
@@ -107,6 +114,10 @@ export function buildUserPrompt(input: PromptInput): string {
     const desc = PRESET_DESCRIPTIONS[input.preset] ?? input.preset;
     parts.push(
       `Crée une séance axée ${desc} d'environ ${input.duration} minutes.`,
+    );
+  } else if (input.mode === 'expert') {
+    parts.push(
+      `Crée une séance d'environ ${input.duration} minutes selon les instructions suivantes :\n${input.preferences}`,
     );
   } else {
     parts.push(`Crée une séance de ${input.duration} minutes.`);

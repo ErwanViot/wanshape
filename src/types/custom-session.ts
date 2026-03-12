@@ -1,25 +1,9 @@
+import type { Equipment } from './equipment.ts';
 import type { Session } from './session.ts';
 
 export type CustomSessionPreset = 'transpirer' | 'renfo' | 'express' | 'mobilite';
 
 export type CustomSessionMode = 'quick' | 'detailed' | 'expert';
-
-export type Equipment =
-  | 'halteres'
-  | 'elastiques'
-  | 'kettlebell'
-  | 'tapis'
-  | 'barre-traction'
-  | 'banc'
-  | 'corde-a-sauter'
-  | 'medecine-ball'
-  | 'swiss-ball'
-  | 'trx'
-  | 'step'
-  | 'foam-roller'
-  | 'barre-musculation'
-  | 'anneaux'
-  | 'aucun';
 
 export type Intensity = 'douce' | 'moderee' | 'intense';
 
@@ -43,9 +27,9 @@ export interface CustomSessionRecord {
   mode: CustomSessionMode;
   preset: CustomSessionPreset | null;
   duration_minutes: number;
-  equipment: string[];
-  intensity: string | null;
-  body_focus: string[];
+  equipment: Equipment[];
+  intensity: Intensity | null;
+  body_focus: BodyFocus[];
   preferences: string | null;
   refinement_note: string | null;
   status: 'draft' | 'confirmed';

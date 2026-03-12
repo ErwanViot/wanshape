@@ -63,7 +63,7 @@ export function ScreenshotCarousel({
               type="button"
               onClick={() => setActive(i)}
               className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${i === active ? activeDotClass : 'bg-muted/30'}`}
-              aria-label={img.alt}
+              aria-label={`Aller au slide ${i + 1} sur ${images.length}`}
             />
           ))}
         </div>

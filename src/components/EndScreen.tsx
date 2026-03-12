@@ -19,7 +19,7 @@ interface Props {
 
 export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId, customSessionId }: Props) {
   const { user } = useAuth();
-  const { save, saved } = useSaveCompletion();
+  const { save, saved, error: saveError } = useSaveCompletion();
 
   useEffect(() => {
     if (!user || !durationSeconds) return;
@@ -64,6 +64,26 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
         <div className="flex items-center gap-2 text-accent text-sm font-medium">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
           Séance enregistrée
+        </div>
+      )}
+
+      {user && saveError && !saved && (
+        <div className="flex flex-col items-center gap-2 text-sm">
+          <p className="text-red-400">Enregistrement échoué</p>
+          <button
+            type="button"
+            onClick={() => save({
+              sessionDate: programSessionId || customSessionId ? undefined : session.date,
+              programSessionId,
+              customSessionId,
+              durationSeconds,
+              amrapRounds,
+              sessionTitle: session.title,
+            })}
+            className="text-brand hover:text-brand-secondary font-semibold transition-colors cursor-pointer"
+          >
+            Réessayer
+          </button>
         </div>
       )}
 
@@ -132,15 +152,19 @@ const NUDGE_COOLDOWN_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 function SignupNudge() {
   const [visible, setVisible] = useState(() => {
-    const dismissed = localStorage.getItem(STORAGE_KEYS.NUDGE_DISMISSED);
-    if (!dismissed) return true;
-    return Date.now() - Number(dismissed) > NUDGE_COOLDOWN_MS;
+    try {
+      const dismissed = localStorage.getItem(STORAGE_KEYS.NUDGE_DISMISSED);
+      if (!dismissed) return true;
+      return Date.now() - Number(dismissed) > NUDGE_COOLDOWN_MS;
+    } catch {
+      return true;
+    }
   });
 
   if (!visible) return null;
 
   const dismiss = () => {
-    localStorage.setItem(STORAGE_KEYS.NUDGE_DISMISSED, String(Date.now()));
+    try { localStorage.setItem(STORAGE_KEYS.NUDGE_DISMISSED, String(Date.now())); } catch { /* ignore */ }
     setVisible(false);
   };
 

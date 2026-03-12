@@ -3,12 +3,12 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.ts";
 import { validateSession } from "./validate.ts";
 
-const ALLOWED_ORIGINS = [
+const PROD_ORIGINS = [
   "https://wan2fit.fr",
   "https://www.wan2fit.fr",
-  "http://localhost:5173",
-  "http://localhost:4173",
 ];
+const DEV_ORIGINS = ["http://localhost:5173", "http://localhost:4173"];
+const ALLOWED_ORIGINS = Deno.env.get("ENVIRONMENT") === "production" ? PROD_ORIGINS : [...PROD_ORIGINS, ...DEV_ORIGINS];
 
 const DEFAULT_ORIGIN = "https://wan2fit.fr";
 
@@ -26,21 +26,28 @@ const MAX_DAILY_GENERATIONS = 10;
 const MODEL = "claude-haiku-4-5-20251001";
 const MAX_TOKENS = 4096;
 
-const VALID_MODES = ["quick", "detailed"];
+const VALID_MODES = ["quick", "detailed", "expert"];
 const VALID_PRESETS = ["transpirer", "renfo", "express", "mobilite"];
 const VALID_EQUIPMENT = [
+  "poids_du_corps",
   "halteres",
-  "elastiques",
+  "barre_disques",
   "kettlebell",
-  "tapis",
-  "barre-traction",
+  "elastiques",
   "banc",
-  "corde-a-sauter",
-  "aucun",
+  "barre_traction",
+  "trx",
+  "corde_a_sauter",
+  "medecine_ball",
+  "swiss_ball",
+  "tapis",
+  "step",
+  "foam_roller",
+  "anneaux",
 ];
 const VALID_INTENSITIES = ["douce", "moderee", "intense"];
 const VALID_BODY_FOCUS = ["upper", "lower", "core", "full"];
-const VALID_DURATIONS = [15, 20, 25, 30, 40];
+const VALID_DURATIONS = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90];
 
 function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -70,7 +77,7 @@ function validateInput(body: RequestInput): string | null {
   }
 
   if (!body.duration || !VALID_DURATIONS.includes(body.duration)) {
-    return "duration invalide (15, 20, 25, 30 ou 40)";
+    return "duration invalide (10-90 par pas de 5)";
   }
 
   if (body.mode === "quick") {
@@ -98,8 +105,17 @@ function validateInput(body: RequestInput): string | null {
     if (body.preferences && typeof body.preferences !== "string") {
       return "preferences doit être une chaîne";
     }
-    if (body.preferences && body.preferences.length > 200) {
-      return "preferences: 200 caractères max";
+    if (body.preferences && body.preferences.length > 2000) {
+      return "preferences: 2000 caractères max";
+    }
+  }
+
+  if (body.mode === "expert") {
+    if (!body.preferences || typeof body.preferences !== "string" || body.preferences.trim().length === 0) {
+      return "preferences requis en mode expert";
+    }
+    if (body.preferences.length > 2000) {
+      return "preferences: 2000 caractères max";
     }
   }
 
@@ -225,6 +241,7 @@ Deno.serve(async (req: Request) => {
         system: SYSTEM_PROMPT,
         messages: [{ role: "user", content: userPrompt }],
       }),
+      signal: AbortSignal.timeout(30_000),
     });
   } catch {
     return errorResponse(req, "Erreur de communication avec l'IA", 502);

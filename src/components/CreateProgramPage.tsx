@@ -5,12 +5,13 @@ import { STORAGE_KEYS } from '../config/storage-keys.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useGenerateProgram } from '../hooks/useGenerateProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
+import { toggleArrayElement } from '../utils/array.ts';
 import type {
   ExperienceDuree,
   FrequenceActuelle,
-  Materiel,
   ProgramOnboardingInput,
 } from '../types/custom-program.ts';
+import type { Equipment } from '../types/equipment.ts';
 import { LOADING_PHASES } from './create-program/formOptions.ts';
 import { StepObjective } from './create-program/StepObjective.tsx';
 import { StepProfile } from './create-program/StepProfile.tsx';
@@ -31,7 +32,7 @@ interface DraftState {
   sexe: string;
   seances_par_semaine: number;
   duree_seance_minutes: number;
-  materiel: (Materiel | 'salle')[];
+  materiel: (Equipment | 'salle')[];
   materiel_detail: string;
   duree_semaines: 4 | 8 | 12;
 }
@@ -108,8 +109,7 @@ export function CreateProgramPage() {
   }, []);
 
   const toggleChip = <T extends string>(arr: T[], val: T, key: keyof DraftState) => {
-    const newArr = arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
-    update(key, newArr as DraftState[typeof key]);
+    update(key, toggleArrayElement(arr, val) as DraftState[typeof key]);
   };
 
   const goToStep = (step: number) => update('step', step);
@@ -148,9 +148,9 @@ export function CreateProgramPage() {
       seances_par_semaine: effectiveSeances,
       duree_seance_minutes: draft.duree_seance_minutes,
       materiel: (() => {
-        const filtered = draft.materiel.filter((m): m is Materiel => m !== 'salle');
+        const filtered = draft.materiel.filter((m): m is Equipment => m !== 'salle');
         if (filtered.length === 0 && draft.materiel.includes('salle'))
-          return ['halteres', 'barre_disques', 'banc', 'elastiques'] as Materiel[];
+          return ['halteres', 'barre_disques', 'banc', 'elastiques'] as Equipment[];
         return filtered;
       })(),
       duree_semaines: draft.duree_semaines,

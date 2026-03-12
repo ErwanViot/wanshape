@@ -1,8 +1,8 @@
 import type {
   ExperienceDuree,
   FrequenceActuelle,
-  Materiel,
 } from '../../types/custom-program.ts';
+import type { Equipment } from '../../types/equipment.ts';
 
 export const OBJECTIF_OPTIONS = [
   { value: 'perte_poids', label: 'Perte de poids' },
@@ -39,7 +39,8 @@ export const BLESSURE_OPTIONS = [
   { value: 'autre', label: 'Autre' },
 ];
 
-export const MATERIEL_OPTIONS: { value: Materiel | 'salle'; label: string }[] = [
+/** Equipment options for program creation — subset relevant for structured programs + gym option */
+export const MATERIEL_OPTIONS: { value: Equipment | 'salle'; label: string }[] = [
   { value: 'poids_du_corps', label: 'Poids du corps' },
   { value: 'halteres', label: 'Haltères' },
   { value: 'barre_disques', label: 'Barre & disques' },

@@ -18,27 +18,30 @@ export function useWorkout(steps: AtomicStep[]) {
   const currentStep = steps[currentStepIndex] ?? null;
 
   const advanceToNext = useCallback(() => {
-    const nextIndex = currentStepIndex + 1;
-    if (nextIndex >= stepsRef.current.length) {
-      setStatus('complete');
-      audio.beepSessionEnd();
-      return;
-    }
+    setCurrentStepIndex((prev) => {
+      const nextIndex = prev + 1;
+      if (nextIndex >= stepsRef.current.length) {
+        setStatus('complete');
+        audio.beepSessionEnd();
+        return prev;
+      }
 
-    const nextStep = stepsRef.current[nextIndex];
-    setCurrentStepIndex(nextIndex);
-    setAmrapRounds(0);
+      const nextStep = stepsRef.current[nextIndex];
+      setAmrapRounds(0);
 
-    if (nextStep.phase === 'transition') {
-      setStatus('transition');
-    } else if (nextStep.phase === 'prepare') {
-      setStatus('countdown');
-    } else if (nextStep.phase === 'rest') {
-      setStatus('rest');
-    } else {
-      setStatus('active');
-    }
-  }, [currentStepIndex, audio]);
+      if (nextStep.phase === 'transition') {
+        setStatus('transition');
+      } else if (nextStep.phase === 'prepare') {
+        setStatus('countdown');
+      } else if (nextStep.phase === 'rest') {
+        setStatus('rest');
+      } else {
+        setStatus('active');
+      }
+
+      return nextIndex;
+    });
+  }, [audio]);
 
   const onTimerComplete = useCallback(() => {
     if (!currentStep) return;
@@ -69,12 +72,14 @@ export function useWorkout(steps: AtomicStep[]) {
     }
 
     if (currentStep.timerMode === 'amrap') {
-      timer.start(currentStep.duration!, 'down');
+      if (currentStep.duration == null || currentStep.duration <= 0) return;
+      timer.start(currentStep.duration, 'down');
       return;
     }
 
     if (currentStep.timerMode === 'emom') {
-      timer.start(currentStep.duration!, 'down');
+      if (currentStep.duration == null || currentStep.duration <= 0) return;
+      timer.start(currentStep.duration, 'down');
       return;
     }
 

@@ -1,5 +1,5 @@
 import type { User } from '@supabase/supabase-js';
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import { sessionEvents } from '../lib/supabaseQuery.ts';
 import type { Profile } from '../types/auth.ts';
@@ -116,7 +116,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const refreshProfile = async () => {
+  const refreshProfile = useCallback(async () => {
     if (!user) return;
     try {
       const p = await fetchProfile(user.id);
@@ -124,15 +124,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (err) {
       console.error('Profile refresh error:', err);
     }
-  };
+  }, [user]);
 
-  const signIn = async (email: string, password: string): Promise<{ error: string | null }> => {
+  const signIn = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: 'Auth non disponible' };
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     return { error: translateError(error?.message) };
-  };
+  }, []);
 
-  const signUp = async (email: string, password: string, displayName: string): Promise<{ error: string | null }> => {
+  const signUp = useCallback(async (email: string, password: string, displayName: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: 'Auth non disponible' };
     const { error } = await supabase.auth.signUp({
       email,
@@ -142,23 +142,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
     });
     return { error: translateError(error?.message) };
-  };
+  }, []);
 
-  const resetPassword = async (email: string): Promise<{ error: string | null }> => {
+  const resetPassword = useCallback(async (email: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: 'Auth non disponible' };
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
     return { error: translateError(error?.message) };
-  };
+  }, []);
 
-  const updatePassword = async (password: string): Promise<{ error: string | null }> => {
+  const updatePassword = useCallback(async (password: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: 'Auth non disponible' };
     const { error } = await supabase.auth.updateUser({ password });
     return { error: translateError(error?.message) };
-  };
+  }, []);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     if (!supabase) return;
     try {
       await supabase.auth.signOut();
@@ -168,12 +168,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     setProfile(null);
     setSessionExpired(false);
-  };
+  }, []);
+
+  const value = useMemo<AuthContextValue>(
+    () => ({ user, profile, loading, sessionExpired, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }),
+    [user, profile, loading, sessionExpired, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut],
+  );
 
   return (
-    <AuthContext.Provider
-      value={{ user, profile, loading, sessionExpired, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

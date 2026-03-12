@@ -6,7 +6,7 @@ CREATE OR REPLACE FUNCTION get_active_program(p_user_id uuid)
 RETURNS jsonb
 LANGUAGE plpgsql
 SECURITY DEFINER
-SET search_path = public
+SET search_path = ''
 AS $$
 DECLARE
   v_last_ps_id uuid;
@@ -20,7 +20,7 @@ BEGIN
   -- 1. Find the most recent completion linked to a program session
   SELECT sc.program_session_id
   INTO v_last_ps_id
-  FROM session_completions sc
+  FROM public.session_completions sc
   WHERE sc.user_id = p_user_id
     AND sc.program_session_id IS NOT NULL
   ORDER BY sc.completed_at DESC
@@ -33,7 +33,7 @@ BEGIN
   -- 2. Resolve program_id from that program_session
   SELECT ps.program_id
   INTO v_program_id
-  FROM program_sessions ps
+  FROM public.program_sessions ps
   WHERE ps.id = v_last_ps_id;
 
   IF v_program_id IS NULL THEN
@@ -43,14 +43,14 @@ BEGIN
   -- 3. Build the full response in one query using CTEs
   WITH completed AS (
     SELECT DISTINCT sc.program_session_id
-    FROM session_completions sc
-    JOIN program_sessions ps ON ps.id = sc.program_session_id
+    FROM public.session_completions sc
+    JOIN public.program_sessions ps ON ps.id = sc.program_session_id
     WHERE sc.user_id = p_user_id
       AND ps.program_id = v_program_id
   ),
   all_sessions AS (
     SELECT ps.id, ps.session_order, ps.session_data
-    FROM program_sessions ps
+    FROM public.program_sessions ps
     WHERE ps.program_id = v_program_id
     ORDER BY ps.session_order
   ),
@@ -72,7 +72,7 @@ BEGIN
     'nextSessionData', (SELECT session_data FROM next_session)
   )
   INTO result
-  FROM programs p
+  FROM public.programs p
   WHERE p.id = v_program_id;
 
   RETURN result;

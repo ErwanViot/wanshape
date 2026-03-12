@@ -1,7 +1,4 @@
-export type Materiel =
-  | 'poids_du_corps' | 'halteres' | 'barre_disques' | 'kettlebell'
-  | 'elastiques' | 'banc' | 'barre_traction' | 'trx'
-  | 'corde_a_sauter' | 'medecine_ball';
+import type { Equipment } from './equipment.ts';
 
 export type ExperienceDuree = 'debutant' | 'six_mois_deux_ans' | 'plus_deux_ans';
 export type FrequenceActuelle = 'jamais' | 'une_deux' | 'trois_quatre' | 'cinq_plus';
@@ -17,7 +14,7 @@ export interface ProgramOnboardingInput {
   sexe?: 'homme' | 'femme' | 'autre';
   seances_par_semaine: number;
   duree_seance_minutes: number;
-  materiel: Materiel[];
+  materiel: Equipment[];
   duree_semaines: 4 | 8 | 12;
 }
 

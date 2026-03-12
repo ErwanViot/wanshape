@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { useHistory } from '../../hooks/useHistory.ts';
 import { useActiveProgram } from '../../hooks/useProgram.ts';
+import { LoadingSpinner } from '../LoadingSpinner.tsx';
 import { WeeklyBarChart } from '../stats/WeeklyBarChart.tsx';
 import { WeekDots } from '../stats/WeekDots.tsx';
 import { ProgramCard } from '../stats/ProgramCard.tsx';
@@ -77,7 +78,7 @@ export function StatsPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[60vh]">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <LoadingSpinner />
       </div>
     );
   }

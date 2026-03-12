@@ -13,13 +13,28 @@ function getStoredAudio(): boolean {
 export function useAudio() {
   const [enabled, setEnabled] = useState(getStoredAudio);
   const ctxRef = useRef<AudioContext | null>(null);
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.AUDIO_ENABLED, String(enabled));
   }, [enabled]);
 
+  // Cleanup AudioContext and pending timeouts on unmount
+  useEffect(() => {
+    return () => {
+      for (const id of timeoutsRef.current) clearTimeout(id);
+      timeoutsRef.current = [];
+      ctxRef.current?.close().catch(() => {});
+      ctxRef.current = null;
+    };
+  }, []);
+
+  const scheduleTone = useCallback((fn: () => void, delay: number) => {
+    timeoutsRef.current.push(setTimeout(fn, delay));
+  }, []);
+
   const getCtx = useCallback(() => {
-    if (!ctxRef.current) {
+    if (!ctxRef.current || ctxRef.current.state === 'closed') {
       ctxRef.current = new AudioContext();
     }
     if (ctxRef.current.state === 'suspended') {
@@ -56,27 +71,27 @@ export function useAudio() {
 
   const beepGo = useCallback(() => {
     playTone(330, 0.15, 'square');
-    setTimeout(() => playTone(330, 0.2, 'square'), 200);
-  }, [playTone]);
+    scheduleTone(() => playTone(330, 0.2, 'square'), 200);
+  }, [playTone, scheduleTone]);
 
   const beepRoundEnd = useCallback(() => {
     playTone(440, 0.1, 'square');
-    setTimeout(() => playTone(440, 0.1, 'square'), 150);
-    setTimeout(() => playTone(440, 0.1, 'square'), 300);
-  }, [playTone]);
+    scheduleTone(() => playTone(440, 0.1, 'square'), 150);
+    scheduleTone(() => playTone(440, 0.1, 'square'), 300);
+  }, [playTone, scheduleTone]);
 
   const beepBlockEnd = useCallback(() => {
     playTone(523, 0.3, 'sine');
-    setTimeout(() => playTone(659, 0.3, 'sine'), 200);
-    setTimeout(() => playTone(784, 0.4, 'sine'), 400);
-  }, [playTone]);
+    scheduleTone(() => playTone(659, 0.3, 'sine'), 200);
+    scheduleTone(() => playTone(784, 0.4, 'sine'), 400);
+  }, [playTone, scheduleTone]);
 
   const beepSessionEnd = useCallback(() => {
     playTone(523, 0.2, 'sine');
-    setTimeout(() => playTone(659, 0.2, 'sine'), 200);
-    setTimeout(() => playTone(784, 0.2, 'sine'), 400);
-    setTimeout(() => playTone(1047, 0.4, 'sine'), 600);
-  }, [playTone]);
+    scheduleTone(() => playTone(659, 0.2, 'sine'), 200);
+    scheduleTone(() => playTone(784, 0.2, 'sine'), 400);
+    scheduleTone(() => playTone(1047, 0.4, 'sine'), 600);
+  }, [playTone, scheduleTone]);
 
   const speakCountdown = useCallback(
     (remaining: number) => {

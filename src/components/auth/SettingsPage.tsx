@@ -27,6 +27,7 @@ export function SettingsPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [avatarError, setAvatarError] = useState<string | null>(null);
+  const [portalError, setPortalError] = useState<string | null>(null);
 
   useDocumentHead({
     title: 'Paramètres',
@@ -120,6 +121,8 @@ export function SettingsPage() {
               accept="image/jpeg,image/png,image/webp"
               onChange={handleAvatarChange}
               className="hidden"
+              aria-hidden="true"
+              tabIndex={-1}
             />
           </button>
           <div className="min-w-0 flex-1">
@@ -144,6 +147,7 @@ export function SettingsPage() {
                 key={value}
                 type="button"
                 onClick={() => setTheme(value)}
+                aria-pressed={preference === value}
                 className={`flex-1 flex flex-col items-center gap-2 py-3 rounded-xl border transition-colors cursor-pointer ${
                   preference === value
                     ? 'border-brand bg-brand/10 text-brand'
@@ -195,11 +199,14 @@ export function SettingsPage() {
               )}
               <button
                 type="button"
-                onClick={() => manageSubscription()}
+                onClick={async () => { setPortalError(null); const err = await manageSubscription(); if (err) setPortalError(err); }}
                 className="w-full py-2.5 rounded-xl border border-accent/30 text-sm font-semibold text-accent hover:bg-accent/10 transition-colors cursor-pointer"
               >
                 Gérer mon abonnement
               </button>
+              {portalError && (
+                <p className="text-xs text-red-400 mt-2">{portalError}</p>
+              )}
             </div>
           ) : (
             <div className="rounded-xl border border-divider bg-surface-card p-4 space-y-3">

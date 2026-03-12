@@ -6,21 +6,12 @@ import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { useProgram } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import type { Session } from '../types/session.ts';
+import { getConsigneForWeek } from '../utils/coaching.ts';
 import { FITNESS_COLORS, FITNESS_LABELS, GOAL_COLORS, GOAL_LABELS } from '../utils/labels.ts';
 import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
+import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
-
-/** Pure helper: finds the coaching note matching a given week number from range-keyed consignes. */
-function getConsigneForWeek(consignes: Record<string, string> | null, week: number): string | null {
-  if (!consignes) return null;
-  for (const [range, text] of Object.entries(consignes)) {
-    const parts = range.split('-').map(Number);
-    if (parts.length === 1 && parts[0] === week) return text;
-    if (parts.length === 2 && week >= parts[0] && week <= parts[1]) return text;
-  }
-  return null;
-}
 
 export function ProgramPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -59,7 +50,9 @@ export function ProgramPage() {
   // Find current week (week containing next uncompleted session)
   const currentWeek = program?.sessions.find((s) => s.session_order === nextSessionOrder)?.week_number ?? 1;
 
-  // Initialize collapsed weeks: future weeks collapsed by default for custom programs
+  // Initialize collapsed weeks: future weeks collapsed by default for custom programs.
+  // All used values (isCustom, byWeek, currentWeek) are derived deterministically from
+  // program — so re-running only when the program identity changes is correct.
   useEffect(() => {
     if (!program || !isCustom) return;
     const weeks = [...byWeek.keys()];
@@ -79,7 +72,15 @@ export function ProgramPage() {
     if (focusable.length > 0) focusable[0].focus();
 
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') setShowDeleteModal(false);
+      if (e.key === 'Escape') { setShowDeleteModal(false); return; }
+      if (e.key === 'Tab') {
+        const focusableEls = dialog?.querySelectorAll<HTMLElement>('button:not(:disabled)');
+        if (!focusableEls || focusableEls.length === 0) return;
+        const first = focusableEls[0];
+        const last = focusableEls[focusableEls.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     }
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
@@ -90,7 +91,7 @@ export function ProgramPage() {
   if (loading) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <LoadingSpinner />
       </div>
     );
   }
