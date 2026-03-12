@@ -1,5 +1,5 @@
 -- 005_stripe_subscriptions.sql
--- Stripe subscription infrastructure for WanShape Premium
+-- Stripe subscription infrastructure for Wan2Fit Premium
 
 -- ─── stripe_customers: mapping user ↔ Stripe customer ───
 CREATE TABLE IF NOT EXISTS stripe_customers (

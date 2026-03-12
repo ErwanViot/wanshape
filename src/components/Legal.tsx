@@ -100,9 +100,15 @@ function MentionsLegales() {
         <p>
           <strong className="text-strong">WAN SOFT</strong>
           <br />
-          SARL (Société à Responsabilité Limitée)
+          SARL (Société à Responsabilité Limitée) au capital de 1 000 €
+          <br />
+          Siège social : 8 impasse des Musiciens, 44880 Sautron
+          <br />
+          RCS Nantes 831 188 586
           <br />
           SIRET : 831 188 586 00026
+          <br />
+          TVA intracommunautaire : FR 76 831188586
           <br />
           Directeur de la publication : Erwan VIOT
           <br />
@@ -165,7 +171,7 @@ function PolitiqueConfidentialite() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Politique de confidentialité</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : février 2026</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : mars 2026</p>
 
       <Section title="Responsable du traitement">
         <p>
@@ -197,6 +203,16 @@ function PolitiqueConfidentialite() {
             <strong className="text-strong">Données de facturation</strong> — pour la gestion de l'abonnement Premium
             (traitées par Stripe, voir ci-dessous)
           </li>
+          <li>
+            <strong className="text-strong">Photo de profil (avatar)</strong> — pour personnaliser votre compte
+            (stockée sur Supabase Storage)
+          </li>
+          <li>
+            <strong className="text-strong">Préférences d'entraînement</strong> — pour la génération IA de séances et
+            programmes personnalisés : objectifs, expérience sportive, équipement, durée, intensité, zones ciblées,
+            blessures déclarées, âge et sexe si renseignés. Ces données sont transmises à Anthropic pour la génération
+            du contenu (voir « Services tiers » ci-dessous).
+          </li>
         </ul>
         <p>
           <strong className="text-strong">Wan2Fit ne stocke jamais vos données bancaires.</strong> Les informations
@@ -204,17 +220,21 @@ function PolitiqueConfidentialite() {
           que l'identifiant client Stripe et le statut de votre abonnement.
         </p>
         <p>
-          Nous ne collectons aucune donnée de santé, de localisation, ni de données relatives à votre condition
-          physique. Vos données ne sont jamais revendues à des tiers.
+          Les déclarations de blessures renseignées lors de la création d'un programme IA ne constituent pas des
+          données de santé au sens de l'article 9 du RGPD — il s'agit de déclarations volontaires de l'utilisateur
+          à des fins de personnalisation. Vos données ne sont jamais revendues à des tiers.
         </p>
       </Section>
 
-      <Section title="Finalités du traitement">
-        <p>Vos données sont utilisées exclusivement pour :</p>
+      <Section title="Finalités du traitement et bases légales">
+        <p>Vos données sont utilisées pour les finalités suivantes :</p>
         <ul className="list-disc list-inside space-y-1">
-          <li>Gérer votre compte et votre authentification</li>
-          <li>Sauvegarder votre progression et votre historique de séances</li>
-          <li>Vous envoyer des emails transactionnels (confirmation de compte, réinitialisation de mot de passe)</li>
+          <li>Gérer votre compte et votre authentification — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Sauvegarder votre progression et votre historique de séances — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Vous envoyer des emails transactionnels (confirmation, réinitialisation) — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Gérer votre abonnement Premium et traiter les paiements — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Générer des séances et programmes personnalisés par IA — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Conserver les factures et données de facturation — <em>obligation légale (art. 6.1.c RGPD)</em></li>
         </ul>
         <p>Nous n'envoyons aucun email marketing ni newsletter.</p>
       </Section>
@@ -233,9 +253,10 @@ function PolitiqueConfidentialite() {
           fonctionnement de l'authentification.
         </p>
         <p>
-          Le Site peut également utiliser des <strong className="text-strong">cookies publicitaires</strong> déposés par
-          des régies tierces pour financer le service. Vous pouvez gérer vos préférences de cookies à tout moment via le
-          bandeau de consentement.
+          Le Site peut utiliser des <strong className="text-strong">cookies publicitaires</strong> déposés par Google
+          AdSense pour financer le service. Le consentement est géré par le mécanisme de consentement Google (Google
+          Consent Mode). Vous pouvez modifier vos préférences à tout moment via les paramètres de confidentialité
+          proposés par Google.
         </p>
       </Section>
 
@@ -254,6 +275,16 @@ function PolitiqueConfidentialite() {
             <strong className="text-strong">Stripe</strong> — traitement des paiements et gestion des abonnements
             (sous-traitant RGPD, données hébergées en UE). Stripe est certifié PCI-DSS niveau 1.
           </li>
+          <li>
+            <strong className="text-strong">Anthropic</strong> — génération de séances et programmes personnalisés par
+            intelligence artificielle (modèles Claude). Les données de personnalisation (objectifs, équipement,
+            blessures déclarées, âge et sexe si renseignés) sont transmises à l'API Anthropic pour la génération du
+            contenu. Anthropic ne réutilise pas ces données pour l'entraînement de ses modèles. Siège aux États-Unis.
+          </li>
+          <li>
+            <strong className="text-strong">Google AdSense</strong> — affichage publicitaire pour financer le service
+            gratuit. Peut déposer des cookies publicitaires avec votre consentement.
+          </li>
         </ul>
         <p>
           Ces prestataires sont soumis à leurs propres politiques de confidentialité et offrent des garanties conformes
@@ -261,10 +292,36 @@ function PolitiqueConfidentialite() {
         </p>
       </Section>
 
+      <Section title="Transferts de données hors Union européenne">
+        <p>Certains de nos sous-traitants sont situés aux États-Unis :</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>
+            <strong className="text-strong">Vercel Inc.</strong> (hébergement) — transferts encadrés par les clauses
+            contractuelles types (CCT) de la Commission européenne
+          </li>
+          <li>
+            <strong className="text-strong">Supabase Inc.</strong> (base de données et authentification) — transferts
+            encadrés par le Data Privacy Framework UE-US et les CCT
+          </li>
+          <li>
+            <strong className="text-strong">Anthropic PBC</strong> (génération IA) — transferts encadrés par les CCT.
+            Les données transmises sont limitées aux paramètres de personnalisation et ne sont pas utilisées pour
+            l'entraînement des modèles d'IA.
+          </li>
+        </ul>
+        <p>
+          Stripe héberge les données de paiement dans l'Union européenne.
+        </p>
+      </Section>
+
       <Section title="Durée de conservation">
         <p>
           Vos données sont conservées tant que votre compte est actif. En cas de suppression de compte, vos données
           personnelles sont effacées dans un délai de 30 jours.
+        </p>
+        <p>
+          Les données de facturation et justificatifs de paiement sont conservés pendant 6 ans conformément aux
+          obligations fiscales et comptables, même en cas de suppression de compte.
         </p>
       </Section>
 
@@ -277,6 +334,7 @@ function PolitiqueConfidentialite() {
           <li>Droit d'accès à vos données</li>
           <li>Droit de rectification</li>
           <li>Droit à l'effacement (suppression de compte)</li>
+          <li>Droit à la limitation du traitement</li>
           <li>Droit à la portabilité</li>
           <li>Droit d'opposition</li>
         </ul>
@@ -286,6 +344,14 @@ function PolitiqueConfidentialite() {
             erwan.viot@wan-soft.fr
           </a>
           . Nous nous engageons à répondre dans un délai de 30 jours.
+        </p>
+        <p>
+          Vous disposez également du droit d'introduire une réclamation auprès de la Commission Nationale de
+          l'Informatique et des Libertés (CNIL) —{' '}
+          <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-link underline">
+            www.cnil.fr
+          </a>{' '}
+          — si vous estimez que le traitement de vos données constitue une violation du RGPD.
         </p>
       </Section>
 
@@ -305,7 +371,7 @@ function CGU() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Conditions Générales d'Utilisation</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : février 2026</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : mars 2026</p>
 
       <Section title="Objet">
         <p>
@@ -355,6 +421,25 @@ function CGU() {
         </p>
       </Section>
 
+      <Section title="Contenu généré par intelligence artificielle">
+        <p>
+          Les fonctionnalités Premium de génération de séances et de programmes utilisent des modèles d'intelligence
+          artificielle (Anthropic Claude) pour créer du contenu personnalisé à partir des paramètres renseignés par
+          l'utilisateur.
+        </p>
+        <p>Le contenu généré par IA :</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Constitue des suggestions d'exercices à caractère général, au même titre que le contenu éditorial du Site</li>
+          <li>Ne constitue en aucun cas un programme de coaching sportif personnalisé au sens de l'article L.212-1 du Code du sport, ni un avis médical</li>
+          <li>Peut contenir des imperfections ou des suggestions inadaptées à une situation particulière</li>
+          <li>Ne se substitue pas aux conseils d'un professionnel de santé ou d'un éducateur sportif diplômé</li>
+        </ul>
+        <p>
+          L'utilisateur reste entièrement responsable de l'adaptation et de l'exécution des exercices suggérés par
+          l'IA. L'avertissement santé s'applique de la même manière au contenu généré par IA et au contenu éditorial.
+        </p>
+      </Section>
+
       <Section title="Accès au service">
         <p>
           Le service de base est accessible gratuitement à toute personne disposant d'un accès à Internet et d'un
@@ -365,6 +450,10 @@ function CGU() {
       </Section>
 
       <Section title="Compte utilisateur">
+        <p>
+          Le Site s'adresse aux personnes âgées de 16 ans et plus. Les mineurs de 16 à 18 ans doivent obtenir
+          l'accord de leur représentant légal avant toute création de compte.
+        </p>
         <p>
           La création d'un compte est facultative et gratuite. Elle nécessite une adresse email valide et un mot de
           passe. L'utilisateur est responsable de la confidentialité de ses identifiants.
@@ -397,7 +486,7 @@ function CGU() {
           <li>Un état de grossesse</li>
           <li>Toute condition médicale pouvant être aggravée par l'exercice physique</li>
         </ul>
-        <p>Les mineurs doivent obtenir l'accord de leur représentant légal avant toute utilisation.</p>
+        <p>Les conditions d'âge sont précisées dans la section « Compte utilisateur » ci-dessus.</p>
         <p>Pendant la pratique, l'utilisateur s'engage à :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Adapter les exercices à sa condition physique</li>
@@ -509,7 +598,7 @@ function CGV() {
         <ul className="list-disc list-inside space-y-1">
           <li>
             <strong className="text-strong">Gratuit</strong> — Séance du jour, bibliothèque exercices et formats, 3
-            programmes guidés, historique complet et statistiques
+            programmes guidés, historique complet et statistiques (avec compte gratuit)
           </li>
           <li>
             <strong className="text-strong">Premium mensuel</strong> — 9,99 € TTC/mois — Tout le contenu gratuit +
@@ -535,6 +624,9 @@ function CGV() {
           WAN SOFT ne collecte ni ne stocke aucune donnée bancaire. L'ensemble des transactions est géré par Stripe
           (certifié PCI-DSS niveau 1).
         </p>
+        <p>
+          L'accès aux fonctionnalités Premium est activé immédiatement après confirmation du paiement par Stripe.
+        </p>
       </Section>
 
       <Section title="Durée et renouvellement">
@@ -547,13 +639,13 @@ function CGV() {
 
       <Section title="Droit de rétractation">
         <p>
-          Conformément à l'article L.221-28 du Code de la consommation, l'abonné reconnaît et accepte que l'exécution
-          du service Premium commence immédiatement après la validation du paiement, avec son consentement exprès
-          recueilli via la page de paiement Stripe (case « J'accepte les conditions »).
+          Conformément aux articles L.221-18 et L.221-28-1° du Code de la consommation, le consommateur dispose d'un
+          droit de rétractation de 14 jours. Toutefois, en souscrivant à l'offre Premium, l'abonné demande
+          expressément l'exécution immédiate du service et reconnaît renoncer à son droit de rétractation pour la
+          période en cours, dès lors que l'exécution a commencé avec son accord préalable exprès.
         </p>
         <p>
-          En conséquence, l'abonné renonce expressément à son droit de rétractation de 14 jours pour la période en
-          cours.
+          Un email de confirmation de souscription rappelant cette renonciation est adressé à l'abonné par Stripe.
         </p>
       </Section>
 

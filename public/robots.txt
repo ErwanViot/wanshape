@@ -6,9 +6,13 @@ Allow: /exercices
 Allow: /exercices/
 Allow: /programmes
 Allow: /programme/
+Allow: /legal/
 Disallow: /seance/
 Disallow: /sessions/
-Disallow: /legal/
+Disallow: /seance/custom/
+Disallow: /programme/creer
+Disallow: /suivi
+Disallow: /parametres
 Disallow: /profil
 Disallow: /login
 Disallow: /signup

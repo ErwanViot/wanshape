@@ -6,14 +6,14 @@
 
     <!-- SEO -->
     <title>WAN2FIT — Séance de sport gratuite chaque jour, sans matériel</title>
-    <meta name="description" content="Ton programme sport 100% gratuit. Chaque jour, une séance complète t'attend : échauffement, exercices, repos, étirements — tout est guidé et timé. 30-45 min, sans matériel." />
-    <meta name="keywords" content="sport maison, séance sport gratuite, exercices sans matériel, coach sportif gratuit, entraînement quotidien, fitness maison, sport à la maison" />
+    <meta name="description" content="Ton programme sport gratuit. Chaque jour, une séance complète t'attend : échauffement, exercices, repos, étirements — tout est guidé et timé. 25-40 min, sans matériel." />
+    <meta name="keywords" content="sport maison, séance sport gratuite, exercices sans matériel, entraînement guidé gratuit, entraînement quotidien, fitness maison, sport à la maison" />
     <link rel="canonical" href="https://www.wan2fit.fr/" />
 
     <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="WAN2FIT — Sport gratuit chaque jour, guidé et sans matériel" />
-    <meta property="og:description" content="Une séance complète chaque jour : échauffement, renforcement, étirements. Programmes personnalisés par IA. 100% gratuit, zéro matériel." />
+    <meta property="og:description" content="Une séance complète chaque jour : échauffement, renforcement, étirements. Gratuit pour commencer, programmes IA personnalisés avec Premium." />
     <meta property="og:image" content="https://www.wan2fit.fr/og-image.png" />
     <meta property="og:url" content="https://www.wan2fit.fr/" />
     <meta property="og:locale" content="fr_FR" />
@@ -22,7 +22,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="WAN2FIT — Sport gratuit chaque jour, guidé et sans matériel" />
-    <meta name="twitter:description" content="Séance de sport complète chaque jour. Programmes IA personnalisés. Sans matériel, 100% gratuit." />
+    <meta name="twitter:description" content="Séance de sport complète chaque jour, sans matériel. Gratuit pour commencer, programmes IA personnalisés avec Premium." />
     <meta name="twitter:image" content="https://www.wan2fit.fr/og-image.png" />
 
     <!-- Structured Data -->
@@ -35,11 +35,30 @@
       "description": "Séance de sport gratuite chaque jour. Programmes guidés et personnalisés par IA. Sans matériel.",
       "applicationCategory": "HealthApplication",
       "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
-      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Gratuit",
+          "price": "0",
+          "priceCurrency": "EUR"
+        },
+        {
+          "@type": "Offer",
+          "name": "Premium mensuel",
+          "price": "9.99",
+          "priceCurrency": "EUR",
+          "billingIncrement": 1,
+          "billingDuration": "P1M"
+        },
+        {
+          "@type": "Offer",
+          "name": "Premium annuel",
+          "price": "99.99",
+          "priceCurrency": "EUR",
+          "billingIncrement": 1,
+          "billingDuration": "P1Y"
+        }
+      ],
       "inLanguage": "fr",
       "creator": {
         "@type": "Organization",

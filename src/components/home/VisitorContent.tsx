@@ -63,7 +63,7 @@ export function VisitorContent({
             <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.05] max-w-xl stagger-fade-in stagger-2">
               Progresse
               <br />
-              <span className="gradient-text">chaque jour</span>
+              <span className="gradient-text">à ton rythme</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/70 max-w-lg leading-relaxed stagger-fade-in stagger-3">
