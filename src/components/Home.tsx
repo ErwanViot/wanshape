@@ -4,7 +4,7 @@ import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { useSession } from '../hooks/useSession.ts';
 import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
-import { Footer } from './Footer.tsx';
+
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { WelcomeModal, useShowWelcome } from './WelcomeModal.tsx';
 import { ConnectedContent } from './home/ConnectedContent.tsx';
@@ -67,7 +67,6 @@ export function Home() {
         />
       )}
 
-      <Footer />
     </>
   );
 }

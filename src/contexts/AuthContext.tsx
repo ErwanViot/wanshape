@@ -1,12 +1,14 @@
 import type { User } from '@supabase/supabase-js';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
+import { sessionEvents } from '../lib/supabaseQuery.ts';
 import type { Profile } from '../types/auth.ts';
 
 interface AuthContextValue {
   user: User | null;
   profile: Profile | null;
   loading: boolean;
+  sessionExpired: boolean;
   refreshProfile: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
@@ -47,6 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(!!supabase);
+  const [sessionExpired, setSessionExpired] = useState(false);
   const mounted = useRef(true);
 
   useEffect(() => {
@@ -80,6 +83,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted.current || event === 'INITIAL_SESSION') return;
+
+      // Session successfully refreshed — clear expired state
+      if (event === 'TOKEN_REFRESHED') {
+        setSessionExpired(false);
+      }
+
       const currentUser = session?.user ?? null;
       setUser(currentUser);
       if (currentUser) {
@@ -94,9 +103,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     });
 
+    // Listen for session-expired events from supabaseQuery helper
+    const onSessionExpired = () => {
+      if (mounted.current) setSessionExpired(true);
+    };
+    sessionEvents.addEventListener('session-expired', onSessionExpired);
+
     return () => {
       mounted.current = false;
       subscription.unsubscribe();
+      sessionEvents.removeEventListener('session-expired', onSessionExpired);
     };
   }, []);
 
@@ -151,7 +167,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, profile, loading, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }}
+      value={{ user, profile, loading, sessionExpired, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }}
     >
       {children}
     </AuthContext.Provider>

@@ -44,6 +44,9 @@ function getClient(): SupabaseClient | null {
 
   const client = createClient(supabaseUrl, supabaseKey, {
     auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true,
       lock: inMemoryLock,
     },
   });
