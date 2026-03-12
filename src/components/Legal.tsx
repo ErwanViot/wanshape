@@ -249,14 +249,9 @@ function PolitiqueConfidentialite() {
 
       <Section title="Cookies">
         <p>
-          Le Site utilise des <strong className="text-strong">cookies techniques</strong> strictement nécessaires au
-          fonctionnement de l'authentification.
-        </p>
-        <p>
-          Le Site peut utiliser des <strong className="text-strong">cookies publicitaires</strong> déposés par Google
-          AdSense pour financer le service. Le consentement est géré par le mécanisme de consentement Google (Google
-          Consent Mode). Vous pouvez modifier vos préférences à tout moment via les paramètres de confidentialité
-          proposés par Google.
+          Le Site utilise uniquement des <strong className="text-strong">cookies techniques</strong> strictement
+          nécessaires au fonctionnement de l'authentification. Aucun cookie publicitaire, analytique ou de suivi
+          n'est déposé.
         </p>
       </Section>
 
@@ -280,10 +275,6 @@ function PolitiqueConfidentialite() {
             intelligence artificielle (modèles Claude). Les données de personnalisation (objectifs, équipement,
             blessures déclarées, âge et sexe si renseignés) sont transmises à l'API Anthropic pour la génération du
             contenu. Anthropic ne réutilise pas ces données pour l'entraînement de ses modèles. Siège aux États-Unis.
-          </li>
-          <li>
-            <strong className="text-strong">Google AdSense</strong> — affichage publicitaire pour financer le service
-            gratuit. Peut déposer des cookies publicitaires avec votre consentement.
           </li>
         </ul>
         <p>
