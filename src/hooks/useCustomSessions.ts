@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
+import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { CustomSessionRecord } from '../types/custom-session.ts';
 
 export function useCustomSessions() {
@@ -20,15 +21,20 @@ export function useCustomSessions() {
         return;
       }
 
-      const { data, error: fetchError } = await supabase
-        .from('custom_sessions')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('status', 'confirmed')
-        .order('created_at', { ascending: false })
-        .limit(20);
+      const { data, error: fetchError, sessionExpired } = await supabaseQuery(() =>
+        supabase!
+          .from('custom_sessions')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('status', 'confirmed')
+          .order('created_at', { ascending: false })
+          .limit(20),
+      );
 
-      if (fetchError) {
+      if (sessionExpired) {
+        notifySessionExpired();
+        setError('Session expirée. Veuillez rafraîchir la page.');
+      } else if (fetchError) {
         setError('Impossible de charger l\u2019historique.');
       } else {
         setSessions(data as CustomSessionRecord[]);

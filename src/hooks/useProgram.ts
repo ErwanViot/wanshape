@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
+import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program, ProgramSession, SessionCompletion } from '../types/completion.ts';
 import type { Session } from '../types/session.ts';
 
@@ -36,19 +37,20 @@ export function useActiveProgram(userId: string | undefined) {
 
     (async () => {
       try {
-        const { data, error } = await supabase.rpc('get_active_program', {
-          p_user_id: userId,
-        });
+        const { data, error, sessionExpired } = await supabaseQuery(() =>
+          supabase!.rpc('get_active_program', { p_user_id: userId }),
+        );
 
         if (cancelled) return;
 
-        if (error) {
-          console.error('Active program RPC error:', error);
+        if (sessionExpired) {
+          notifySessionExpired();
           setLoading(false);
           return;
         }
 
-        if (!data) {
+        if (error || !data) {
+          if (error) console.error('Active program RPC error:', error);
           setLoading(false);
           return;
         }
@@ -100,9 +102,12 @@ export function usePrograms() {
 
     (async () => {
       try {
-        const { data, error } = await supabase.from('programs').select('*').eq('is_fixed', true).order('created_at');
+        const { data, error, sessionExpired } = await supabaseQuery(() =>
+          supabase!.from('programs').select('*').eq('is_fixed', true).order('created_at'),
+        );
 
         if (cancelled) return;
+        if (sessionExpired) { notifySessionExpired(); return; }
         if (error) throw error;
         setPrograms((data as Program[]) ?? []);
       } catch (err) {
@@ -135,25 +140,22 @@ export function useProgram(slug: string | undefined) {
 
     (async () => {
       try {
-        // Fetch program
-        // RLS handles access control (fixed programs + own programs)
-        const { data: pgm } = await supabase
-          .from('programs')
-          .select('*')
-          .eq('slug', slug)
-          .single();
+        // Fetch program (RLS handles access control)
+        const { data: pgm, sessionExpired } = await supabaseQuery(() =>
+          supabase!.from('programs').select('*').eq('slug', slug!).single(),
+        );
 
-        if (cancelled || !pgm) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
+        if (cancelled) return;
+        if (sessionExpired) { notifySessionExpired(); setLoading(false); return; }
+        if (!pgm) { setLoading(false); return; }
 
         // Fetch program sessions
-        const { data: sessions } = await supabase
-          .from('program_sessions')
-          .select('*')
-          .eq('program_id', pgm.id)
-          .order('session_order');
+        const { data: sessions, sessionExpired: sessExp } = await supabaseQuery(() =>
+          supabase!.from('program_sessions').select('*').eq('program_id', (pgm as Program).id).order('session_order'),
+        );
+
+        if (cancelled) return;
+        if (sessExp) { notifySessionExpired(); setLoading(false); return; }
 
         // Fetch user's completions for this program's sessions
         const sessionIds = (sessions ?? []).map((s: ProgramSession) => s.id);
@@ -162,14 +164,18 @@ export function useProgram(slug: string | undefined) {
         if (sessionIds.length > 0) {
           const {
             data: { user },
-          } = await supabase.auth.getUser();
+          } = await supabase!.auth.getUser();
 
           if (user) {
-            const { data: completions } = await supabase
-              .from('session_completions')
-              .select('program_session_id')
-              .eq('user_id', user.id)
-              .in('program_session_id', sessionIds);
+            const { data: completions, sessionExpired: compExp } = await supabaseQuery(() =>
+              supabase!
+                .from('session_completions')
+                .select('program_session_id')
+                .eq('user_id', user.id)
+                .in('program_session_id', sessionIds),
+            );
+
+            if (compExp) { notifySessionExpired(); setLoading(false); return; }
 
             completedIds = new Set(
               (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
@@ -216,27 +222,20 @@ export function useProgramSession(slug: string | undefined, order: number | unde
 
     (async () => {
       try {
-        // Find program by slug (RLS handles access control)
-        const { data: pgm } = await supabase
-          .from('programs')
-          .select('id')
-          .eq('slug', slug)
-          .single();
-
-        if (cancelled || !pgm) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-
-        // Find session by order
-        const { data: ps } = await supabase
-          .from('program_sessions')
-          .select('*')
-          .eq('program_id', pgm.id)
-          .eq('session_order', order)
-          .single();
+        const { data: pgm, sessionExpired } = await supabaseQuery(() =>
+          supabase!.from('programs').select('id').eq('slug', slug!).single(),
+        );
 
         if (cancelled) return;
+        if (sessionExpired) { notifySessionExpired(); setLoading(false); return; }
+        if (!pgm) { setLoading(false); return; }
+
+        const { data: ps, sessionExpired: sessExp } = await supabaseQuery(() =>
+          supabase!.from('program_sessions').select('*').eq('program_id', (pgm as { id: string }).id).eq('session_order', order!).single(),
+        );
+
+        if (cancelled) return;
+        if (sessExp) { notifySessionExpired(); setLoading(false); return; }
         setSession((ps as ProgramSession) ?? null);
         setLoading(false);
       } catch (err) {

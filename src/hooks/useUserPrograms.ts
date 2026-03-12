@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
+import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program } from '../types/completion.ts';
 
 export function useUserPrograms() {
@@ -15,13 +16,16 @@ export function useUserPrograms() {
     }
 
     try {
-      const { data } = await supabase
-        .from('programs')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('is_fixed', false)
-        .order('created_at', { ascending: false });
+      const { data, sessionExpired } = await supabaseQuery(() =>
+        supabase!
+          .from('programs')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('is_fixed', false)
+          .order('created_at', { ascending: false }),
+      );
 
+      if (sessionExpired) { notifySessionExpired(); return; }
       setPrograms((data as Program[]) ?? []);
     } catch (err) {
       console.error('User programs fetch error:', err);

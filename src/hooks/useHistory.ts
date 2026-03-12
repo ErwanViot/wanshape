@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
+import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { SessionCompletion } from '../types/completion.ts';
 
 export interface CompletionWithTitle extends SessionCompletion {
@@ -118,18 +119,18 @@ export function useHistory(userId: string | undefined): HistoryStats {
 
     (async () => {
       try {
-        const { data } = await supabase
-          .from('session_completions')
-          .select('*, program_sessions(session_data)')
-          .eq('user_id', userId)
-          .order('completed_at', { ascending: false })
-          .limit(200);
+        const { data, sessionExpired } = await supabaseQuery(() =>
+          supabase!
+            .from('session_completions')
+            .select('*, program_sessions(session_data)')
+            .eq('user_id', userId!)
+            .order('completed_at', { ascending: false })
+            .limit(200),
+        );
 
         if (cancelled) return;
+        if (sessionExpired) { notifySessionExpired(); setLoading(false); return; }
 
-        // Supabase returns joined data (with program_sessions) as a generic shape.
-        // We cast via unknown because the joined row type doesn't directly overlap
-        // with SessionCompletion (which excludes the join field).
         const rows = (data ?? []) as unknown as (SessionCompletion & {
           program_sessions: { session_data?: { title?: string } } | null;
         })[];
