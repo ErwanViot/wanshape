@@ -24,6 +24,9 @@ export function Footer() {
         <Link to="/legal/cgu" className="text-xs text-faint hover:text-subtle transition-colors">
           CGU
         </Link>
+        <Link to="/a-propos" className="text-xs text-faint hover:text-subtle transition-colors">
+          À propos
+        </Link>
       </div>
     </footer>
   );
