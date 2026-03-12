@@ -102,21 +102,21 @@ function MentionsLegales() {
           <br />
           SARL (Société à Responsabilité Limitée) au capital de 1 000 €
           <br />
-          Siège social : 8 impasse des Musiciens, 44880 Sautron
+          Siège social : 33 La Baluère, 35220 Châteaubourg
           <br />
-          RCS Nantes 831 188 586
+          RCS Rennes 831 188 586
           <br />
           SIRET : 831 188 586 00026
           <br />
-          TVA intracommunautaire : FR 76 831188586
+          TVA intracommunautaire : FR59831188586
           <br />
           Directeur de la publication : Erwan VIOT
           <br />
           Téléphone : 06 79 08 40 63
           <br />
           Contact :{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
         </p>
       </Section>
@@ -176,8 +176,8 @@ function PolitiqueConfidentialite() {
       <Section title="Responsable du traitement">
         <p>
           Le responsable du traitement des données est WAN SOFT, joignable à l'adresse :{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
         </p>
       </Section>
@@ -331,8 +331,8 @@ function PolitiqueConfidentialite() {
         </ul>
         <p>
           Pour exercer ces droits, contactez-nous à{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
           . Nous nous engageons à répondre dans un délai de 30 jours.
         </p>
@@ -451,8 +451,8 @@ function CGU() {
         </p>
         <p>
           L'utilisateur peut demander la suppression de son compte à tout moment en contactant{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
           . La suppression entraîne l'effacement de l'ensemble des données associées dans un délai de 30 jours.
         </p>
@@ -553,8 +553,8 @@ function CGU() {
       <Section title="Contact">
         <p>
           Pour toute question relative aux présentes CGU, vous pouvez nous contacter à :{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
         </p>
       </Section>
@@ -661,8 +661,8 @@ function CGV() {
         </p>
         <p>
           Pour contacter notre service client préalablement à toute médiation :{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
         </p>
       </Section>
@@ -684,8 +684,8 @@ function CGV() {
       <Section title="Contact">
         <p>
           Pour toute question relative aux présentes CGV ou à votre abonnement :{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
         </p>
       </Section>

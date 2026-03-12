@@ -154,11 +154,10 @@ export function SignupPage() {
             <div className="rounded-xl bg-surface border border-divider p-3.5 text-xs text-muted space-y-1">
               <p className="font-semibold text-subtle">En bref (pour ceux qui ne lisent pas les CGU) 😉</p>
               <ul className="space-y-0.5 list-inside">
-                <li>C'est gratuit, pas de piège.</li>
-                <li>On stocke ton email, ton prénom et tes séances. C'est tout.</li>
+                <li>Le compte est gratuit, sans engagement.</li>
+                <li>On stocke ton email, ton prénom et tes séances.</li>
                 <li>On ne revend pas tes données.</li>
-                <li>Les exercices sont du contenu éditorial, pas du coaching : libre à toi de les suivre ou non.</li>
-                <li>On n'est pas médecins — consulte le tien avant de suer.</li>
+                <li>Les exercices sont des suggestions, pas du coaching médical.</li>
                 <li>Tu peux supprimer ton compte quand tu veux.</li>
               </ul>
             </div>
