@@ -160,9 +160,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     if (!supabase) return;
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch {
+      // Force local cleanup even if the API call fails (e.g. expired token)
+    }
     setUser(null);
     setProfile(null);
+    setSessionExpired(false);
   };
 
   return (
