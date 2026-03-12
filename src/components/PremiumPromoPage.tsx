@@ -156,7 +156,7 @@ export function PremiumPromoPage() {
 
       {/* ── 4. Tarifs ── */}
       <section id="tarifs" className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50 scroll-mt-20">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <h2 className="font-display text-2xl md:text-3xl font-black text-heading text-center mb-10">
             Choisis ton plan
           </h2>
