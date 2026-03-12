@@ -61,6 +61,9 @@ const LazyPricingPage = lazy(() =>
 const LazyPremiumPromoPage = lazy(() =>
   import('./components/PremiumPromoPage.tsx').then((m) => ({ default: m.PremiumPromoPage })),
 );
+const LazyAboutPage = lazy(() =>
+  import('./components/AboutPage.tsx').then((m) => ({ default: m.AboutPage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -232,6 +235,14 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyPremiumPromoPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'a-propos',
+        element: (
+          <Lazy>
+            <LazyAboutPage />
           </Lazy>
         ),
       },
