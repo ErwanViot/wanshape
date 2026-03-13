@@ -4,7 +4,7 @@ import { FITNESS_COLORS, FITNESS_LABELS } from '../utils/labels.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 
 export function ProgramCard({ program }: { program: Program }) {
-  const image = getProgramImage(program.slug);
+  const image = getProgramImage(program.slug, program.goals);
 
   return (
     <Link

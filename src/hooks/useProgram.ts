@@ -18,6 +18,8 @@ export interface ActiveProgramInfo {
   nextSessionTitle: string | null;
   nextSessionOrder: number | null;
   nextSessionData: Session | null;
+  goals: string[];
+  isFixed: boolean;
 }
 
 /** Returns the most recently active program for the given user (if any),
@@ -63,6 +65,8 @@ export function useActiveProgram(userId: string | undefined) {
           nextSessionOrder: number | null;
           nextSessionTitle: string | null;
           nextSessionData: Session | null;
+          goals: string[];
+          isFixed: boolean;
         };
 
         setActiveProgram({
@@ -73,6 +77,8 @@ export function useActiveProgram(userId: string | undefined) {
           nextSessionTitle: d.nextSessionTitle,
           nextSessionOrder: d.nextSessionOrder,
           nextSessionData: d.nextSessionData,
+          goals: d.goals ?? [],
+          isFixed: d.isFixed ?? true,
         });
         setLoading(false);
       } catch (err) {

@@ -190,7 +190,7 @@ export function ConnectedContent({
                   Mon programme
                 </h4>
                 <Link to={`/programme/${activeProgram.slug}/suivi`} className="block relative h-36 group">
-                  <img src={getProgramImage(activeProgram.slug)} alt={activeProgram.title} className="w-full h-full object-cover object-[50%_30%]" />
+                  <img src={getProgramImage(activeProgram.slug, activeProgram.goals)} alt={activeProgram.title} className="w-full h-full object-cover object-[50%_30%]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4">
                     <p className="font-display text-lg font-bold text-white leading-tight group-hover:text-white/80 transition-colors">
