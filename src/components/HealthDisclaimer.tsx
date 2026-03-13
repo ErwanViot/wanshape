@@ -75,7 +75,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
 
         <div className="px-6 overflow-y-auto flex-1 space-y-3 text-sm text-gray-600 leading-relaxed">
           <p>
-            WAN2FIT propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il
+            Wan2Fit propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il
             ne s'agit pas de coaching sportif personnalisé ni d'encadrement par un éducateur sportif diplômé.
           </p>
           <p>
