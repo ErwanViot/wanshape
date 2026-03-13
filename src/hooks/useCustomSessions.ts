@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
+import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { CustomSessionRecord } from '../types/custom-session.ts';
 
 export function useCustomSessions() {
@@ -20,21 +21,27 @@ export function useCustomSessions() {
         return;
       }
 
-      const { data, error: fetchError } = await supabase
-        .from('custom_sessions')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('status', 'confirmed')
-        .order('created_at', { ascending: false })
-        .limit(20);
+      const { data, error: fetchError, sessionExpired } = await supabaseQuery(() =>
+        supabase!
+          .from('custom_sessions')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('status', 'confirmed')
+          .order('created_at', { ascending: false })
+          .limit(20),
+      );
 
-      if (fetchError) {
+      if (sessionExpired) {
+        notifySessionExpired();
+        setError('Session expirée. Veuillez rafraîchir la page.');
+      } else if (fetchError) {
         setError('Impossible de charger l\u2019historique.');
       } else {
-        setSessions(data as unknown as CustomSessionRecord[]);
+        setSessions(data as CustomSessionRecord[]);
         setError(null);
       }
-    } catch {
+    } catch (err) {
+      console.error('Custom sessions fetch error:', err);
       setError('Impossible de charger l\u2019historique.');
     } finally {
       setLoading(false);
@@ -64,18 +71,21 @@ export function useCustomSession(id: string | undefined) {
       try {
         const { data: { user } } = await supabase!.auth.getUser();
         if (!user) { if (!cancelled) setLoading(false); return; }
-        const { data, error } = await supabase!
-          .from('custom_sessions')
-          .select('*')
-          .eq('id', id)
-          .eq('user_id', user.id)
-          .single();
+        const { data, sessionExpired } = await supabaseQuery(() =>
+          supabase!
+            .from('custom_sessions')
+            .select('*')
+            .eq('id', id)
+            .eq('user_id', user.id)
+            .single(),
+        );
 
-        if (!cancelled && !error && data) {
-          setSession(data as unknown as CustomSessionRecord);
+        if (sessionExpired) { notifySessionExpired(); }
+        if (!cancelled && data) {
+          setSession(data as CustomSessionRecord);
         }
-      } catch {
-        // silently fail
+      } catch (err) {
+        console.error('Custom session fetch error:', err);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -102,7 +112,8 @@ export async function confirmCustomSession(id: string): Promise<boolean> {
       .eq('id', id)
       .eq('user_id', user.id);
     return !error;
-  } catch {
+  } catch (err) {
+    console.error('Confirm custom session error:', err);
     return false;
   }
 }

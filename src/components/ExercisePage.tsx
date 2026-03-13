@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router';
+import { AlertTriangle, CheckCircle, ChevronLeft, Dumbbell, GitBranch, Lightbulb, Wind } from 'lucide-react';
 import { getExerciseBySlug } from '../data/exercises.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { CATEGORY_LABELS, DIFFICULTY_COLORS, DIFFICULTY_LABELS } from '../types/exercise.ts';
@@ -22,11 +23,9 @@ export function ExercisePage() {
   useEffect(() => {
     if (!hash) return;
     const id = hash.slice(1);
-    // Small delay so DOM is painted
-    const timer = setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
-    return () => clearTimeout(timer);
   }, [hash]);
 
   if (!exercise) {
@@ -38,7 +37,7 @@ export function ExercisePage() {
       {/* Hero */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
-          <img src={exercise.image} alt="" className="w-full h-full object-cover" loading="eager" />
+          <img src={exercise.image} alt={exercise.name} className="w-full h-full object-cover" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-surface/20" />
         </div>
 
@@ -47,23 +46,13 @@ export function ExercisePage() {
           className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white"
           aria-label="Retour aux exercices"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
+          <ChevronLeft className="w-5 h-5" />
         </Link>
 
         <div className="absolute bottom-4 left-5 right-5">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <h1 className="text-3xl font-extrabold text-white drop-shadow-sm leading-tight">{exercise.name}</h1>
+              <h1 className="font-display text-3xl font-black text-white drop-shadow-sm leading-tight">{exercise.name}</h1>
               <p className="text-sm text-white/60 mt-1">{CATEGORY_LABELS[exercise.category]}</p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
@@ -90,17 +79,17 @@ export function ExercisePage() {
         </div>
 
         {/* Exécution */}
-        <ContentSection title="Exécution" icon="🏋️">
+        <ContentSection title="Exécution" icon={<Dumbbell className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <p className="text-sm text-subtle leading-relaxed">{exercise.execution}</p>
         </ContentSection>
 
         {/* Respiration */}
-        <ContentSection title="Respiration" icon="💨">
+        <ContentSection title="Respiration" icon={<Wind className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <p className="text-sm text-subtle leading-relaxed">{exercise.breathing}</p>
         </ContentSection>
 
         {/* Bénéfices */}
-        <ContentSection title="Bénéfices" icon="✅">
+        <ContentSection title="Bénéfices" icon={<CheckCircle className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <ul className="space-y-2">
             {exercise.benefits.map((b, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
@@ -112,7 +101,7 @@ export function ExercisePage() {
         </ContentSection>
 
         {/* Variantes */}
-        <ContentSection title="Variantes" icon="🔄">
+        <ContentSection title="Variantes" icon={<GitBranch className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <div className="space-y-4">
             {exercise.variants.map((v, i) => (
               <div
@@ -128,7 +117,7 @@ export function ExercisePage() {
         </ContentSection>
 
         {/* Conseils */}
-        <ContentSection title="Nos conseils" icon="💬">
+        <ContentSection title="Nos conseils" icon={<Lightbulb className="w-4 h-4 text-brand" aria-hidden="true" />}>
           <ul className="space-y-2">
             {exercise.tips.map((t, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
@@ -140,7 +129,7 @@ export function ExercisePage() {
         </ContentSection>
 
         {/* Erreurs courantes */}
-        <ContentSection title="Erreurs courantes" icon="⚠️">
+        <ContentSection title="Erreurs courantes" icon={<AlertTriangle className="w-4 h-4 text-amber-400" aria-hidden="true" />}>
           <ul className="space-y-2">
             {exercise.commonMistakes.map((m, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
@@ -151,28 +140,28 @@ export function ExercisePage() {
           </ul>
         </ContentSection>
 
-        {/* Navigation */}
-        <div className="pt-4 border-t border-divider flex items-center justify-between">
-          <Link
-            to="/exercices"
-            className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
+        {/* Cross-links */}
+        <div className="pt-4 border-t border-divider space-y-3">
+          <div className="flex flex-wrap gap-3">
+            <Link to="/formats" className="text-sm text-link hover:text-link-hover transition-colors">
+              Les formats →
+            </Link>
+            <Link to="/programmes" className="text-sm text-link hover:text-link-hover transition-colors">
+              Nos programmes →
+            </Link>
+          </div>
+          <div className="flex items-center justify-between">
+            <Link
+              to="/exercices"
+              className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
             >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-            Nos exercices
-          </Link>
-          <Link to="/formats" className="text-sm text-link hover:text-link-hover transition-colors">
-            Les formats →
-          </Link>
+              <ChevronLeft className="w-4 h-4" />
+              Nos exercices
+            </Link>
+            <Link to="/" className="text-sm text-link hover:text-link-hover transition-colors">
+              Séance du jour →
+            </Link>
+          </div>
         </div>
       </div>
     </>

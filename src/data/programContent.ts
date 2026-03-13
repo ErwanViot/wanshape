@@ -1,0 +1,160 @@
+export interface ProgramWeekOverview {
+  week: number;
+  title: string;
+  description: string;
+  formats: string[];
+}
+
+export interface ProgramContent {
+  slug: string;
+  headline: string;
+  intro: string;
+  audience: string;
+  duration: string;
+  frequency: string;
+  sessionLength: string;
+  approach: string;
+  weeks: ProgramWeekOverview[];
+  benefits: string[];
+  tip: string;
+}
+
+export const PROGRAM_CONTENT: Record<string, ProgramContent> = {
+  'debutant-4-semaines': {
+    slug: 'debutant-4-semaines',
+    headline: 'Construis tes fondations',
+    intro:
+      "Tu reprends le sport ou tu débutes ? Ce programme de 4 semaines t'accompagne pas à pas. Chaque semaine ajoute un peu d'intensité pour que tu progresses sans jamais te sentir dépassé.",
+    audience: 'Reprise d\'activité, vrai débutant, ou toute personne qui veut (re)partir sur de bonnes bases.',
+    duration: '4 semaines',
+    frequency: '3 séances par semaine',
+    sessionLength: '~25 min',
+    approach:
+      "La progression est pensée pour que tu ne brûles pas les étapes. On commence par des mouvements simples avec beaucoup de repos, puis on raccourcit les pauses et on ajoute des variantes plus complètes au fil des semaines.",
+    weeks: [
+      {
+        week: 1,
+        title: 'Découverte',
+        description: 'Mouvements de base, 2 séries, repos généreux. On apprend les gestes fondamentaux : squats, pompes adaptées, gainage.',
+        formats: ['Classic', 'Pyramide'],
+      },
+      {
+        week: 2,
+        title: 'Installation',
+        description: 'Mêmes patterns améliorés, 2-3 séries, reps en hausse. Le corps commence à mémoriser les mouvements.',
+        formats: ['Classic', 'Circuit'],
+      },
+      {
+        week: 3,
+        title: 'Progression',
+        description: 'Variantes complètes (planche pieds, pompes standard), 3 séries. On introduit le format EMOM pour apprendre à gérer son effort.',
+        formats: ['Classic', 'EMOM'],
+      },
+      {
+        week: 4,
+        title: 'Consolidation',
+        description: 'Circuits combinés, supersets, volume augmenté. Tu maîtrises les bases et tu es prêt pour la suite.',
+        formats: ['Circuit', 'Superset'],
+      },
+    ],
+    benefits: [
+      'Apprendre les mouvements fondamentaux en toute sécurité',
+      'Créer une habitude sportive régulière',
+      'Gagner en confiance et en mobilité',
+      'Préparer le corps pour des programmes plus intenses',
+    ],
+    tip: 'Pas besoin de forcer dès le début. Le plus important, c\'est la régularité. 3 séances par semaine suffisent pour voir des résultats concrets en un mois.',
+  },
+
+  'remise-en-forme': {
+    slug: 'remise-en-forme',
+    headline: 'Retrouve ton rythme',
+    intro:
+      "Tu as déjà fait du sport mais tu as décroché ? Ce programme remet les choses en place. Formats variés dès la première semaine, intensité progressive — tu retrouves tes sensations rapidement.",
+    audience: 'Ancien sportif en reprise, ou niveau intermédiaire qui veut structurer son entraînement.',
+    duration: '4 semaines',
+    frequency: '4 séances par semaine',
+    sessionLength: '~30 min',
+    approach:
+      "Pas de phase de découverte ici : on attaque directement avec des formats variés. Chaque semaine alterne haut du corps, bas du corps, full-body et cardio pour un travail complet et équilibré.",
+    weeks: [
+      {
+        week: 1,
+        title: 'Reprise active',
+        description: 'Renforcement ciblé et premiers circuits. On réveille les groupes musculaires avec des séances structurées.',
+        formats: ['Classic', 'Circuit'],
+      },
+      {
+        week: 2,
+        title: 'Montée en charge',
+        description: 'Volume et intensité augmentent. Supersets et EMOM pour travailler l\'endurance musculaire.',
+        formats: ['Superset', 'EMOM'],
+      },
+      {
+        week: 3,
+        title: 'Pic d\'intensité',
+        description: 'Formats exigeants : AMRAP, HIIT. Le corps est prêt à être poussé. Les séances sont plus courtes mais plus intenses.',
+        formats: ['AMRAP', 'HIIT'],
+      },
+      {
+        week: 4,
+        title: 'Maîtrise',
+        description: 'Combinaisons avancées, circuits complexes. Tu termines le programme en pleine forme, prêt pour un nouveau challenge.',
+        formats: ['Circuit', 'Pyramide'],
+      },
+    ],
+    benefits: [
+      'Retrouver rapidement un bon niveau de condition physique',
+      'Travailler tout le corps de manière équilibrée',
+      'Découvrir plusieurs formats d\'entraînement',
+      'Relancer le métabolisme et l\'endurance',
+    ],
+    tip: 'Si une séance te semble facile, c\'est normal — c\'est le signe que tu es en forme pour ça. La semaine suivante ajustera le curseur.',
+  },
+
+  'cardio-express': {
+    slug: 'cardio-express',
+    headline: 'Court, intense, efficace',
+    intro:
+      "Pas le temps de faire une heure de sport ? Ce programme mise sur des séances courtes à haute intensité. 20 minutes suffisent pour transpirer, progresser et repartir.",
+    audience: 'Emploi du temps chargé, sportif qui veut du résultat sans y passer des heures.',
+    duration: '4 semaines',
+    frequency: '3 séances par semaine',
+    sessionLength: '~20 min',
+    approach:
+      "Chaque séance utilise des formats conçus pour maximiser l'effort en peu de temps : HIIT, Tabata, EMOM. L'intensité monte progressivement pour que ton cardio et ton explosivité s'améliorent semaine après semaine.",
+    weeks: [
+      {
+        week: 1,
+        title: 'Mise en route',
+        description: 'HIIT et intervalles classiques. On calibre l\'intensité et on installe le rythme.',
+        formats: ['HIIT', 'Circuit'],
+      },
+      {
+        week: 2,
+        title: 'Accélération',
+        description: 'Tabata et EMOM entrent en jeu. Les repos se raccourcissent, le cardio monte d\'un cran.',
+        formats: ['Tabata', 'EMOM'],
+      },
+      {
+        week: 3,
+        title: 'Haute intensité',
+        description: 'Séances plus denses, combinaisons explosives. Le cœur travaille à plein régime.',
+        formats: ['HIIT', 'Tabata'],
+      },
+      {
+        week: 4,
+        title: 'Full throttle',
+        description: 'Les séances les plus intenses du programme. Tu mesures tes progrès avec des formats chronométrés.',
+        formats: ['AMRAP', 'Tabata', 'HIIT'],
+      },
+    ],
+    benefits: [
+      'Améliorer son cardio en moins de temps',
+      'Brûler un maximum de calories en 20 minutes',
+      'Développer l\'explosivité et la résistance',
+      'S\'entraîner même avec un planning chargé',
+    ],
+    tip: 'L\'intensité est la clé. Mieux vaut 20 minutes à fond que 45 minutes à mi-régime. Donne tout pendant les phases d\'effort, récupère à fond pendant les pauses.',
+  },
+};

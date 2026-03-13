@@ -1,17 +1,22 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import type { CustomSessionInput, GenerateSessionResponse } from '../types/custom-session.ts';
+import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 
 export function useGenerateSession() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const inflightRef = useRef(false);
+
   const generate = useCallback(async (input: CustomSessionInput): Promise<GenerateSessionResponse | null> => {
+    if (inflightRef.current) return null;
     if (!supabase) {
       setError('Service indisponible');
       return null;
     }
 
+    inflightRef.current = true;
     setLoading(true);
     setError(null);
 
@@ -21,19 +26,10 @@ export function useGenerateSession() {
       });
 
       if (fnError) {
-        // Extract our custom error message from the response body
-        let message = 'Une erreur est survenue. Réessayez.';
-        try {
-          const ctx = (fnError as Record<string, unknown>).context;
-          if (ctx && typeof (ctx as Response).json === 'function') {
-            const body = await (ctx as Response).json();
-            if (body?.error && typeof body.error === 'string') {
-              message = body.error;
-            }
-          }
-        } catch {
-          // Ignore parsing errors, keep default message
-        }
+        const message = await extractEdgeFunctionError(
+          fnError as unknown as Record<string, unknown>,
+          'Une erreur est survenue. Réessayez.',
+        );
         setError(message);
         return null;
       }
@@ -49,6 +45,7 @@ export function useGenerateSession() {
       return null;
     } finally {
       setLoading(false);
+      inflightRef.current = false;
     }
   }, []);
 

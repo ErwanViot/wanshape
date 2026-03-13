@@ -18,27 +18,30 @@ export function useWorkout(steps: AtomicStep[]) {
   const currentStep = steps[currentStepIndex] ?? null;
 
   const advanceToNext = useCallback(() => {
-    const nextIndex = currentStepIndex + 1;
-    if (nextIndex >= stepsRef.current.length) {
-      setStatus('complete');
-      audio.beepSessionEnd();
-      return;
-    }
+    setCurrentStepIndex((prev) => {
+      const nextIndex = prev + 1;
+      if (nextIndex >= stepsRef.current.length) {
+        setStatus('complete');
+        audio.beepSessionEnd();
+        return prev;
+      }
 
-    const nextStep = stepsRef.current[nextIndex];
-    setCurrentStepIndex(nextIndex);
-    setAmrapRounds(0);
+      const nextStep = stepsRef.current[nextIndex];
+      setAmrapRounds(0);
 
-    if (nextStep.phase === 'transition') {
-      setStatus('transition');
-    } else if (nextStep.phase === 'prepare') {
-      setStatus('countdown');
-    } else if (nextStep.phase === 'rest') {
-      setStatus('rest');
-    } else {
-      setStatus('active');
-    }
-  }, [currentStepIndex, audio]);
+      if (nextStep.phase === 'transition') {
+        setStatus('transition');
+      } else if (nextStep.phase === 'prepare') {
+        setStatus('countdown');
+      } else if (nextStep.phase === 'rest') {
+        setStatus('rest');
+      } else {
+        setStatus('active');
+      }
+
+      return nextIndex;
+    });
+  }, [audio]);
 
   const onTimerComplete = useCallback(() => {
     if (!currentStep) return;
@@ -64,38 +67,28 @@ export function useWorkout(steps: AtomicStep[]) {
     if (status === 'paused' || status === 'idle' || status === 'complete') return;
 
     if (currentStep.timerMode === 'manual') {
-      // No timer for manual steps, just announce
-      if (currentStep.phase === 'work') {
-        const repsText =
-          currentStep.repTarget === 'max' ? 'maximum de repetitions' : `${currentStep.repTarget} repetitions`;
-        audio.speak(`${currentStep.exerciseName}, ${repsText}`);
-      }
+      // No timer for manual steps — voice announcements removed (beeps only)
       return;
     }
 
     if (currentStep.timerMode === 'amrap') {
-      timer.start(currentStep.duration!, 'down');
-      audio.speak(currentStep.exerciseName);
+      if (currentStep.duration == null || currentStep.duration <= 0) return;
+      timer.start(currentStep.duration, 'down');
       return;
     }
 
     if (currentStep.timerMode === 'emom') {
-      timer.start(currentStep.duration!, 'down');
-      if (currentStep.roundInfo?.current === 1) {
-        audio.speak(currentStep.instructions);
-      }
+      if (currentStep.duration == null || currentStep.duration <= 0) return;
+      timer.start(currentStep.duration, 'down');
       return;
     }
 
     if (currentStep.duration != null && currentStep.duration > 0) {
       timer.start(currentStep.duration, 'down');
-
-      // Announce exercise for work phases
-      if (currentStep.phase === 'work') {
-        audio.speak(`${currentStep.exerciseName}, ${currentStep.duration} secondes`);
-      }
     }
-  }, [status, audio.speak, currentStep, timer.start]); // eslint-disable-line react-hooks/exhaustive-deps
+    // currentStep and timer.start are the actual reactive deps; status gates execution.
+    // audio beep callbacks are stable refs and don't need to be listed.
+  }, [status, currentStep, timer.start]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Countdown beeps for last 3 seconds
   useEffect(() => {
@@ -106,6 +99,8 @@ export function useWorkout(steps: AtomicStep[]) {
         audio.beepCountdown();
       }
     }
+    // audio.beepCountdown and audio.speakCountdown are stable useCallback refs.
+    // Only timer.remaining changes should trigger beep evaluation.
   }, [timer.remaining, audio.beepCountdown, audio.speakCountdown, status, timer.isRunning]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const start = useCallback(() => {

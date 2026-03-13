@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import { Trophy, Share2, Check, Download } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import { STORAGE_KEYS } from '../config/storage-keys.ts';
 import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
+import { shareSession } from '../utils/share.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
 
@@ -16,10 +19,10 @@ interface Props {
 
 export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId, customSessionId }: Props) {
   const { user } = useAuth();
-  const { save, saved } = useSaveCompletion();
+  const { save, saved, error: saveError } = useSaveCompletion();
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !durationSeconds) return;
     save({
       sessionDate: programSessionId || customSessionId ? undefined : session.date,
       programSessionId,
@@ -32,16 +35,57 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 
   const realMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
 
+  const [shareState, setShareState] = useState<'idle' | 'loading' | 'shared' | 'copied'>('idle');
+
+  const handleShare = useCallback(async () => {
+    setShareState('loading');
+    try {
+      const result = await shareSession({ session, realMinutes, amrapRounds });
+      setShareState(result);
+      setTimeout(() => setShareState('idle'), 3000);
+    } catch (err) {
+      // User cancelled share sheet or other error
+      setShareState('idle');
+    }
+  }, [session, realMinutes, amrapRounds]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center bg-[#0a0a0a]">
       {/* Trophy */}
-      <div className="text-7xl">💪</div>
+      <div className="w-20 h-20 rounded-full bg-brand/15 flex items-center justify-center">
+        <Trophy className="w-10 h-10 text-brand" aria-hidden="true" />
+      </div>
 
-      <h1 className="text-3xl sm:text-4xl font-bold text-white">Séance terminée !</h1>
+      <h1 className="font-display text-3xl sm:text-4xl font-bold text-white">Séance terminée !</h1>
 
       <p className="text-white/60 text-lg">{session.title}</p>
 
-      {user && saved && <p className="text-emerald-400 text-sm font-medium">Séance enregistrée</p>}
+      {user && saved && (
+        <div className="flex items-center gap-2 text-accent text-sm font-medium">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+          Séance enregistrée
+        </div>
+      )}
+
+      {user && saveError && !saved && (
+        <div className="flex flex-col items-center gap-2 text-sm">
+          <p className="text-red-400">Enregistrement échoué</p>
+          <button
+            type="button"
+            onClick={() => save({
+              sessionDate: programSessionId || customSessionId ? undefined : session.date,
+              programSessionId,
+              customSessionId,
+              durationSeconds,
+              amrapRounds,
+              sessionTitle: session.title,
+            })}
+            className="text-brand hover:text-brand-secondary font-semibold transition-colors cursor-pointer"
+          >
+            Réessayer
+          </button>
+        </div>
+      )}
 
       <div className="flex gap-6">
         <div className="text-center">
@@ -62,31 +106,65 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 
       {!user && supabase && <SignupNudge />}
 
-      <button
-        type="button"
-        onClick={onBack}
-        className="mt-4 px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
-      >
-        {programSessionId ? 'Retour au programme' : customSessionId ? 'Retour à la séance' : "Retour à l'accueil"}
-      </button>
+      <div className="flex flex-col gap-3 mt-4 w-full max-w-xs">
+        <button
+          type="button"
+          onClick={handleShare}
+          disabled={shareState === 'loading'}
+          className="flex items-center justify-center gap-2 px-8 py-4 rounded-2xl btn-primary font-bold text-lg text-white active:scale-95 transition-transform disabled:opacity-60"
+        >
+          {shareState === 'loading' ? (
+            <>
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              Génération…
+            </>
+          ) : shareState === 'shared' ? (
+            <>
+              <Check className="w-5 h-5" aria-hidden="true" />
+              Partagé !
+            </>
+          ) : shareState === 'copied' ? (
+            <>
+              <Download className="w-5 h-5" aria-hidden="true" />
+              Image téléchargée &amp; lien copié !
+            </>
+          ) : (
+            <>
+              <Share2 className="w-5 h-5" aria-hidden="true" />
+              Partager ma séance
+            </>
+          )}
+        </button>
+
+        <button
+          type="button"
+          onClick={onBack}
+          className="px-8 py-4 rounded-2xl bg-white/10 text-white font-bold text-lg active:scale-95 transition-transform"
+        >
+          {programSessionId ? 'Retour au programme' : customSessionId ? 'Retour à la séance' : "Retour à l'accueil"}
+        </button>
+      </div>
     </div>
   );
 }
 
-const NUDGE_STORAGE_KEY = 'wan-shape-nudge-dismissed';
 const NUDGE_COOLDOWN_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 function SignupNudge() {
   const [visible, setVisible] = useState(() => {
-    const dismissed = localStorage.getItem(NUDGE_STORAGE_KEY);
-    if (!dismissed) return true;
-    return Date.now() - Number(dismissed) > NUDGE_COOLDOWN_MS;
+    try {
+      const dismissed = localStorage.getItem(STORAGE_KEYS.NUDGE_DISMISSED);
+      if (!dismissed) return true;
+      return Date.now() - Number(dismissed) > NUDGE_COOLDOWN_MS;
+    } catch {
+      return true;
+    }
   });
 
   if (!visible) return null;
 
   const dismiss = () => {
-    localStorage.setItem(NUDGE_STORAGE_KEY, String(Date.now()));
+    try { localStorage.setItem(STORAGE_KEYS.NUDGE_DISMISSED, String(Date.now())); } catch { /* ignore */ }
     setVisible(false);
   };
 

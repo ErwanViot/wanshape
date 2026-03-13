@@ -1,16 +1,19 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RequireAuth } from './components/auth/RequireAuth.tsx';
-import { FEATURE_CUSTOM_SESSION } from './config/features.ts';
-import { Exercises } from './components/Exercises.tsx';
-import { Formats } from './components/Formats.tsx';
-import { Home } from './components/Home.tsx';
+import { RequirePremium } from './components/auth/RequirePremium.tsx';
 import { LoadingFallback } from './components/LoadingFallback.tsx';
-import { PlayerPage } from './components/Player.tsx';
 import { PlayerLayout } from './components/PlayerLayout.tsx';
 import { PublicLayout } from './components/PublicLayout.tsx';
 
-// Lazy-loaded secondary routes
+// Lazy-loaded routes
+const LazyHome = lazy(() => import('./components/Home.tsx').then((m) => ({ default: m.Home })));
+const LazyFormats = lazy(() => import('./components/Formats.tsx').then((m) => ({ default: m.Formats })));
+const LazyExercises = lazy(() => import('./components/Exercises.tsx').then((m) => ({ default: m.Exercises })));
+const LazyPlayerPage = lazy(() => import('./components/Player.tsx').then((m) => ({ default: m.PlayerPage })));
+const LazyNotFoundPage = lazy(() =>
+  import('./components/NotFoundPage.tsx').then((m) => ({ default: m.NotFoundPage })),
+);
 const LazyLegal = lazy(() => import('./components/Legal.tsx').then((m) => ({ default: m.Legal })));
 const LazyFormatPage = lazy(() => import('./components/FormatPage.tsx').then((m) => ({ default: m.FormatPage })));
 const LazyExercisePage = lazy(() => import('./components/ExercisePage.tsx').then((m) => ({ default: m.ExercisePage })));
@@ -19,11 +22,17 @@ const LazySignupPage = lazy(() => import('./components/auth/SignupPage.tsx').the
 const LazyAuthCallback = lazy(() =>
   import('./components/auth/AuthCallback.tsx').then((m) => ({ default: m.AuthCallback })),
 );
-const LazyProfilePage = lazy(() =>
-  import('./components/auth/ProfilePage.tsx').then((m) => ({ default: m.ProfilePage })),
+const LazyStatsPage = lazy(() =>
+  import('./components/auth/StatsPage.tsx').then((m) => ({ default: m.StatsPage })),
+);
+const LazySettingsPage = lazy(() =>
+  import('./components/auth/SettingsPage.tsx').then((m) => ({ default: m.SettingsPage })),
 );
 const LazyDiscover = lazy(() => import('./components/Discover.tsx').then((m) => ({ default: m.Discover })));
 const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
+const LazyProgramContentPage = lazy(() =>
+  import('./components/ProgramContentPage.tsx').then((m) => ({ default: m.ProgramContentPage })),
+);
 const LazyProgramPage = lazy(() => import('./components/ProgramPage.tsx').then((m) => ({ default: m.ProgramPage })));
 const LazyProgramPlayerPage = lazy(() =>
   import('./components/ProgramPlayerPage.tsx').then((m) => ({ default: m.ProgramPlayerPage })),
@@ -37,11 +46,23 @@ const LazyUpdatePasswordPage = lazy(() =>
 const LazyCustomSessionPage = lazy(() =>
   import('./components/CustomSessionPage.tsx').then((m) => ({ default: m.CustomSessionPage })),
 );
+const LazyCreateProgramPage = lazy(() =>
+  import('./components/CreateProgramPage.tsx').then((m) => ({ default: m.CreateProgramPage })),
+);
 const LazyCustomSessionPreviewPage = lazy(() =>
   import('./components/CustomSessionPreviewPage.tsx').then((m) => ({ default: m.CustomSessionPreviewPage })),
 );
 const LazyCustomPlayerPage = lazy(() =>
   import('./components/CustomPlayerPage.tsx').then((m) => ({ default: m.CustomPlayerPage })),
+);
+const LazyPricingPage = lazy(() =>
+  import('./components/PricingPage.tsx').then((m) => ({ default: m.PricingPage })),
+);
+const LazyPremiumPromoPage = lazy(() =>
+  import('./components/PremiumPromoPage.tsx').then((m) => ({ default: m.PremiumPromoPage })),
+);
+const LazyAboutPage = lazy(() =>
+  import('./components/AboutPage.tsx').then((m) => ({ default: m.AboutPage })),
 );
 
 function Lazy({ children }: { children: React.ReactNode }) {
@@ -53,7 +74,14 @@ export const router = createBrowserRouter([
   {
     element: <PublicLayout />,
     children: [
-      { index: true, element: <Home /> },
+      {
+        index: true,
+        element: (
+          <Lazy>
+            <LazyHome />
+          </Lazy>
+        ),
+      },
       {
         path: 'decouvrir',
         element: (
@@ -62,7 +90,14 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
-      { path: 'formats', element: <Formats /> },
+      {
+        path: 'formats',
+        element: (
+          <Lazy>
+            <LazyFormats />
+          </Lazy>
+        ),
+      },
       {
         path: 'formats/:slug',
         element: (
@@ -71,7 +106,14 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
-      { path: 'exercices', element: <Exercises /> },
+      {
+        path: 'exercices',
+        element: (
+          <Lazy>
+            <LazyExercises />
+          </Lazy>
+        ),
+      },
       {
         path: 'exercices/:slug',
         element: (
@@ -130,15 +172,28 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'profil',
+        path: 'suivi',
         element: (
           <Lazy>
             <RequireAuth>
-              <LazyProfilePage />
+              <LazyStatsPage />
             </RequireAuth>
           </Lazy>
         ),
       },
+      { path: 'stats', element: <Navigate to="/suivi" replace /> },
+      {
+        path: 'parametres',
+        element: (
+          <Lazy>
+            <RequireAuth>
+              <LazySettingsPage />
+            </RequireAuth>
+          </Lazy>
+        ),
+      },
+      // Legacy redirects
+      { path: 'profil', element: <Navigate to="/suivi" replace /> },
       // Programme routes
       {
         path: 'programmes',
@@ -152,44 +207,99 @@ export const router = createBrowserRouter([
         path: 'programme/:slug',
         element: (
           <Lazy>
-            <LazyProgramPage />
+            <LazyProgramContentPage />
           </Lazy>
         ),
       },
-      // Custom session routes (feature-flagged)
-      ...(FEATURE_CUSTOM_SESSION
-        ? [
-            {
-              path: 'seance/custom',
-              element: (
-                <Lazy>
-                  <RequireAuth>
-                    <LazyCustomSessionPage />
-                  </RequireAuth>
-                </Lazy>
-              ),
-            },
-            {
-              path: 'seance/custom/:id',
-              element: (
-                <Lazy>
-                  <RequireAuth>
-                    <LazyCustomSessionPreviewPage />
-                  </RequireAuth>
-                </Lazy>
-              ),
-            },
-          ]
-        : []),
+      {
+        path: 'programme/:slug/suivi',
+        element: (
+          <Lazy>
+            <RequireAuth>
+              <LazyProgramPage />
+            </RequireAuth>
+          </Lazy>
+        ),
+      },
+      // Pricing
+      {
+        path: 'tarifs',
+        element: (
+          <Lazy>
+            <LazyPricingPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'premium',
+        element: (
+          <Lazy>
+            <LazyPremiumPromoPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'a-propos',
+        element: (
+          <Lazy>
+            <LazyAboutPage />
+          </Lazy>
+        ),
+      },
+      // Premium routes — always registered, guarded by RequirePremium
+      {
+        path: 'seance/custom',
+        element: (
+          <Lazy>
+            <RequirePremium>
+              <LazyCustomSessionPage />
+            </RequirePremium>
+          </Lazy>
+        ),
+      },
+      {
+        path: 'seance/custom/:id',
+        element: (
+          <Lazy>
+            <RequirePremium>
+              <LazyCustomSessionPreviewPage />
+            </RequirePremium>
+          </Lazy>
+        ),
+      },
+      {
+        path: 'programme/creer',
+        element: (
+          <Lazy>
+            <RequirePremium>
+              <LazyCreateProgramPage />
+            </RequirePremium>
+          </Lazy>
+        ),
+      },
     ],
   },
   // Player — full screen, no chrome
   {
     element: <PlayerLayout />,
     children: [
-      { path: 'seance/play', element: <PlayerPage /> },
+      {
+        path: 'seance/play',
+        element: (
+          <Lazy>
+            <LazyPlayerPage />
+          </Lazy>
+        ),
+      },
       // Legacy URLs with date → redirect to dateless route
-      { path: 'seance/:dateKey/play', element: <PlayerPage /> },
+      {
+        path: 'seance/:dateKey/play',
+        element: (
+          <Lazy>
+            <LazyPlayerPage />
+          </Lazy>
+        ),
+      },
       { path: 'seance/:dateKey', element: <Navigate to="/seance/play" replace /> },
       // Programme player
       {
@@ -200,21 +310,26 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
-      // Custom session player (feature-flagged)
-      ...(FEATURE_CUSTOM_SESSION
-        ? [
-            {
-              path: 'seance/custom/:id/play',
-              element: (
-                <Lazy>
-                  <LazyCustomPlayerPage />
-                </Lazy>
-              ),
-            },
-          ]
-        : []),
+      // Custom session player
+      {
+        path: 'seance/custom/:id/play',
+        element: (
+          <Lazy>
+            <RequirePremium>
+              <LazyCustomPlayerPage />
+            </RequirePremium>
+          </Lazy>
+        ),
+      },
     ],
   },
-  // Catch-all
-  { path: '*', element: <Navigate to="/" replace /> },
+  // Catch-all — 404
+  {
+    path: '*',
+    element: (
+      <Lazy>
+        <LazyNotFoundPage />
+      </Lazy>
+    ),
+  },
 ]);

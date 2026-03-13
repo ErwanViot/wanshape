@@ -1,18 +1,7 @@
 import { Link } from 'react-router';
 import type { Program } from '../types/completion.ts';
+import { FITNESS_COLORS, FITNESS_LABELS } from '../utils/labels.ts';
 import { getProgramImage } from '../utils/programImage.ts';
-
-const FITNESS_LABELS: Record<string, string> = {
-  beginner: 'Débutant',
-  intermediate: 'Intermédiaire',
-  advanced: 'Avancé',
-};
-
-const FITNESS_COLORS: Record<string, string> = {
-  beginner: 'bg-emerald-500/30 text-emerald-200 border-emerald-400/40',
-  intermediate: 'bg-amber-500/30 text-amber-200 border-amber-400/40',
-  advanced: 'bg-red-500/30 text-red-200 border-red-400/40',
-};
 
 export function ProgramCard({ program }: { program: Program }) {
   const image = getProgramImage(program.slug);
@@ -27,10 +16,10 @@ export function ProgramCard({ program }: { program: Program }) {
         <img
           src={image}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/70 transition-opacity group-hover:opacity-70" />
 
         <div className="relative z-10 flex flex-col justify-between flex-1 p-6">
           {/* Top: badge */}

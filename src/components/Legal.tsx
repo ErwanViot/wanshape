@@ -1,28 +1,30 @@
 import { Link, useNavigate, useParams } from 'react-router';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
-type Tab = 'mentions' | 'privacy' | 'cgu';
+type Tab = 'mentions' | 'privacy' | 'cgu' | 'cgv';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'mentions', label: 'Mentions légales' },
   { key: 'privacy', label: 'Confidentialité' },
   { key: 'cgu', label: 'CGU' },
+  { key: 'cgv', label: 'CGV' },
 ];
 
 const TAB_TITLES: Record<Tab, string> = {
   mentions: 'Mentions légales',
   privacy: 'Politique de confidentialité',
   cgu: "Conditions Générales d'Utilisation",
+  cgv: 'Conditions Générales de Vente',
 };
 
 export function Legal() {
   const { tab: tabParam } = useParams<{ tab: string }>();
   const navigate = useNavigate();
-  const tab: Tab = tabParam && ['mentions', 'privacy', 'cgu'].includes(tabParam) ? (tabParam as Tab) : 'mentions';
+  const tab: Tab = tabParam && ['mentions', 'privacy', 'cgu', 'cgv'].includes(tabParam) ? (tabParam as Tab) : 'mentions';
 
   useDocumentHead({
     title: TAB_TITLES[tab],
-    description: `${TAB_TITLES[tab]} du site WAN SHAPE, édité par WAN SOFT.`,
+    description: `${TAB_TITLES[tab]} du site Wan2Fit, édité par WAN SOFT.`,
   });
 
   return (
@@ -70,6 +72,7 @@ export function Legal() {
           {tab === 'mentions' && <MentionsLegales />}
           {tab === 'privacy' && <PolitiqueConfidentialite />}
           {tab === 'cgu' && <CGU />}
+          {tab === 'cgv' && <CGV />}
         </div>
       </div>
     </>
@@ -92,22 +95,28 @@ function MentionsLegales() {
 
       <Section title="Éditeur du site">
         <p>
-          Le site <strong className="text-strong">WAN SHAPE</strong> (ci-après « le Site ») est édité par :
+          Le site <strong className="text-strong">Wan2Fit</strong> (ci-après « le Site ») est édité par :
         </p>
         <p>
           <strong className="text-strong">WAN SOFT</strong>
           <br />
-          SARL (Société à Responsabilité Limitée)
+          SARL (Société à Responsabilité Limitée) au capital de 1 000 €
+          <br />
+          Siège social : 33 La Baluère, 35220 Châteaubourg
+          <br />
+          RCS Rennes 831 188 586
           <br />
           SIRET : 831 188 586 00026
+          <br />
+          TVA intracommunautaire : FR59831188586
           <br />
           Directeur de la publication : Erwan VIOT
           <br />
           Téléphone : 06 79 08 40 63
           <br />
           Contact :{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
         </p>
       </Section>
@@ -162,13 +171,13 @@ function PolitiqueConfidentialite() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Politique de confidentialité</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : février 2026</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : mars 2026</p>
 
       <Section title="Responsable du traitement">
         <p>
           Le responsable du traitement des données est WAN SOFT, joignable à l'adresse :{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
         </p>
       </Section>
@@ -190,19 +199,42 @@ function PolitiqueConfidentialite() {
             <strong className="text-strong">Historique des séances complétées</strong> — pour le suivi de progression
             (dates, durées)
           </li>
+          <li>
+            <strong className="text-strong">Données de facturation</strong> — pour la gestion de l'abonnement Premium
+            (traitées par Stripe, voir ci-dessous)
+          </li>
+          <li>
+            <strong className="text-strong">Photo de profil (avatar)</strong> — pour personnaliser votre compte
+            (stockée sur Supabase Storage)
+          </li>
+          <li>
+            <strong className="text-strong">Préférences d'entraînement</strong> — pour la génération IA de séances et
+            programmes personnalisés : objectifs, expérience sportive, équipement, durée, intensité, zones ciblées,
+            blessures déclarées, âge et sexe si renseignés. Ces données sont transmises à Anthropic pour la génération
+            du contenu (voir « Services tiers » ci-dessous).
+          </li>
         </ul>
         <p>
-          Nous ne collectons aucune donnée de santé, de localisation, ni de données relatives à votre condition
-          physique. Vos données ne sont jamais revendues à des tiers.
+          <strong className="text-strong">Wan2Fit ne stocke jamais vos données bancaires.</strong> Les informations
+          de paiement (numéro de carte, IBAN) sont collectées et traitées exclusivement par Stripe. Nous ne conservons
+          que l'identifiant client Stripe et le statut de votre abonnement.
+        </p>
+        <p>
+          Les déclarations de blessures renseignées lors de la création d'un programme IA ne constituent pas des
+          données de santé au sens de l'article 9 du RGPD — il s'agit de déclarations volontaires de l'utilisateur
+          à des fins de personnalisation. Vos données ne sont jamais revendues à des tiers.
         </p>
       </Section>
 
-      <Section title="Finalités du traitement">
-        <p>Vos données sont utilisées exclusivement pour :</p>
+      <Section title="Finalités du traitement et bases légales">
+        <p>Vos données sont utilisées pour les finalités suivantes :</p>
         <ul className="list-disc list-inside space-y-1">
-          <li>Gérer votre compte et votre authentification</li>
-          <li>Sauvegarder votre progression et votre historique de séances</li>
-          <li>Vous envoyer des emails transactionnels (confirmation de compte, réinitialisation de mot de passe)</li>
+          <li>Gérer votre compte et votre authentification — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Sauvegarder votre progression et votre historique de séances — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Vous envoyer des emails transactionnels (confirmation, réinitialisation) — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Gérer votre abonnement Premium et traiter les paiements — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Générer des séances et programmes personnalisés par IA — <em>exécution du contrat (art. 6.1.b RGPD)</em></li>
+          <li>Conserver les factures et données de facturation — <em>obligation légale (art. 6.1.c RGPD)</em></li>
         </ul>
         <p>Nous n'envoyons aucun email marketing ni newsletter.</p>
       </Section>
@@ -217,13 +249,9 @@ function PolitiqueConfidentialite() {
 
       <Section title="Cookies">
         <p>
-          Le Site utilise des <strong className="text-strong">cookies techniques</strong> strictement nécessaires au
-          fonctionnement de l'authentification.
-        </p>
-        <p>
-          Le Site peut également utiliser des <strong className="text-strong">cookies publicitaires</strong> déposés par
-          des régies tierces pour financer le service. Vous pouvez gérer vos préférences de cookies à tout moment via le
-          bandeau de consentement.
+          Le Site utilise uniquement des <strong className="text-strong">cookies techniques</strong> strictement
+          nécessaires au fonctionnement de l'authentification. Aucun cookie publicitaire, analytique ou de suivi
+          n'est déposé.
         </p>
       </Section>
 
@@ -238,6 +266,16 @@ function PolitiqueConfidentialite() {
             <strong className="text-strong">Supabase</strong> — authentification et base de données (stockage de votre
             compte et de votre historique)
           </li>
+          <li>
+            <strong className="text-strong">Stripe</strong> — traitement des paiements et gestion des abonnements
+            (sous-traitant RGPD, données hébergées en UE). Stripe est certifié PCI-DSS niveau 1.
+          </li>
+          <li>
+            <strong className="text-strong">Anthropic</strong> — génération de séances et programmes personnalisés par
+            intelligence artificielle (modèles Claude). Les données de personnalisation (objectifs, équipement,
+            blessures déclarées, âge et sexe si renseignés) sont transmises à l'API Anthropic pour la génération du
+            contenu. Anthropic ne réutilise pas ces données pour l'entraînement de ses modèles. Siège aux États-Unis.
+          </li>
         </ul>
         <p>
           Ces prestataires sont soumis à leurs propres politiques de confidentialité et offrent des garanties conformes
@@ -245,10 +283,36 @@ function PolitiqueConfidentialite() {
         </p>
       </Section>
 
+      <Section title="Transferts de données hors Union européenne">
+        <p>Certains de nos sous-traitants sont situés aux États-Unis :</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>
+            <strong className="text-strong">Vercel Inc.</strong> (hébergement) — transferts encadrés par les clauses
+            contractuelles types (CCT) de la Commission européenne
+          </li>
+          <li>
+            <strong className="text-strong">Supabase Inc.</strong> (base de données et authentification) — transferts
+            encadrés par le Data Privacy Framework UE-US et les CCT
+          </li>
+          <li>
+            <strong className="text-strong">Anthropic PBC</strong> (génération IA) — transferts encadrés par les CCT.
+            Les données transmises sont limitées aux paramètres de personnalisation et ne sont pas utilisées pour
+            l'entraînement des modèles d'IA.
+          </li>
+        </ul>
+        <p>
+          Stripe héberge les données de paiement dans l'Union européenne.
+        </p>
+      </Section>
+
       <Section title="Durée de conservation">
         <p>
           Vos données sont conservées tant que votre compte est actif. En cas de suppression de compte, vos données
           personnelles sont effacées dans un délai de 30 jours.
+        </p>
+        <p>
+          Les données de facturation et justificatifs de paiement sont conservés pendant 6 ans conformément aux
+          obligations fiscales et comptables, même en cas de suppression de compte.
         </p>
       </Section>
 
@@ -261,15 +325,24 @@ function PolitiqueConfidentialite() {
           <li>Droit d'accès à vos données</li>
           <li>Droit de rectification</li>
           <li>Droit à l'effacement (suppression de compte)</li>
+          <li>Droit à la limitation du traitement</li>
           <li>Droit à la portabilité</li>
           <li>Droit d'opposition</li>
         </ul>
         <p>
           Pour exercer ces droits, contactez-nous à{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
           . Nous nous engageons à répondre dans un délai de 30 jours.
+        </p>
+        <p>
+          Vous disposez également du droit d'introduire une réclamation auprès de la Commission Nationale de
+          l'Informatique et des Libertés (CNIL) —{' '}
+          <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-link underline">
+            www.cnil.fr
+          </a>{' '}
+          — si vous estimez que le traitement de vos données constitue une violation du RGPD.
         </p>
       </Section>
 
@@ -289,31 +362,33 @@ function CGU() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Conditions Générales d'Utilisation</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : février 2026</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : mars 2026</p>
 
       <Section title="Objet">
         <p>
           Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») définissent les conditions d'accès et
-          d'utilisation du site WAN SHAPE, édité par WAN SOFT.
+          d'utilisation du site Wan2Fit, édité par WAN SOFT.
         </p>
         <p>L'utilisation du Site implique l'acceptation pleine et entière des présentes CGU.</p>
       </Section>
 
       <Section title="Description du service">
         <p>
-          WAN SHAPE est un service gratuit proposant des séances d'exercices physiques quotidiennes. Le Site met à
-          disposition des suggestions d'exercices guidées avec minuteur intégré, sans équipement nécessaire.
+          Wan2Fit propose une offre gratuite de séances d'exercices physiques quotidiennes et une offre Premium
+          payante donnant accès à des fonctionnalités avancées (séances et programmes personnalisés par IA). Le Site
+          met à disposition des suggestions d'exercices guidées avec minuteur intégré, sans équipement nécessaire.
         </p>
         <p>
           La création d'un compte est optionnelle. Elle permet de sauvegarder son historique de séances et de suivre sa
-          progression.
+          progression. Les conditions de l'abonnement Premium sont détaillées dans les{' '}
+          <Link to="/legal/cgv" className="text-link underline">Conditions Générales de Vente</Link>.
         </p>
       </Section>
 
       <Section title="Nature du contenu">
         <p>
           <strong className="text-strong">
-            WAN SHAPE est un service de contenu éditorial et informationnel relatif à l'activité physique.
+            Wan2Fit est un service de contenu éditorial et informationnel relatif à l'activité physique.
           </strong>
         </p>
         <p>
@@ -337,23 +412,47 @@ function CGU() {
         </p>
       </Section>
 
+      <Section title="Contenu généré par intelligence artificielle">
+        <p>
+          Les fonctionnalités Premium de génération de séances et de programmes utilisent des modèles d'intelligence
+          artificielle (Anthropic Claude) pour créer du contenu personnalisé à partir des paramètres renseignés par
+          l'utilisateur.
+        </p>
+        <p>Le contenu généré par IA :</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Constitue des suggestions d'exercices à caractère général, au même titre que le contenu éditorial du Site</li>
+          <li>Ne constitue en aucun cas un programme de coaching sportif personnalisé au sens de l'article L.212-1 du Code du sport, ni un avis médical</li>
+          <li>Peut contenir des imperfections ou des suggestions inadaptées à une situation particulière</li>
+          <li>Ne se substitue pas aux conseils d'un professionnel de santé ou d'un éducateur sportif diplômé</li>
+        </ul>
+        <p>
+          L'utilisateur reste entièrement responsable de l'adaptation et de l'exécution des exercices suggérés par
+          l'IA. L'avertissement santé s'applique de la même manière au contenu généré par IA et au contenu éditorial.
+        </p>
+      </Section>
+
       <Section title="Accès au service">
         <p>
-          Le service est accessible gratuitement à toute personne disposant d'un accès à Internet et d'un navigateur web
-          compatible. L'accès aux séances ne nécessite pas de compte. WAN SOFT se réserve le droit de suspendre ou
+          Le service de base est accessible gratuitement à toute personne disposant d'un accès à Internet et d'un
+          navigateur web compatible. L'accès aux séances quotidiennes ne nécessite pas de compte. Les fonctionnalités
+          Premium (séances IA, programmes IA) sont réservées aux abonnés. WAN SOFT se réserve le droit de suspendre ou
           d'interrompre le service à tout moment, sans préavis ni indemnité.
         </p>
       </Section>
 
       <Section title="Compte utilisateur">
         <p>
+          Le Site s'adresse aux personnes âgées de 16 ans et plus. Les mineurs de 16 à 18 ans doivent obtenir
+          l'accord de leur représentant légal avant toute création de compte.
+        </p>
+        <p>
           La création d'un compte est facultative et gratuite. Elle nécessite une adresse email valide et un mot de
           passe. L'utilisateur est responsable de la confidentialité de ses identifiants.
         </p>
         <p>
           L'utilisateur peut demander la suppression de son compte à tout moment en contactant{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
           . La suppression entraîne l'effacement de l'ensemble des données associées dans un délai de 30 jours.
         </p>
@@ -366,7 +465,7 @@ function CGU() {
             médical ni une prescription d'activité physique.
           </strong>
         </p>
-        <p>Avant d'utiliser WAN SHAPE, il est indispensable de :</p>
+        <p>Avant d'utiliser Wan2Fit, il est indispensable de :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Consulter un médecin pour vérifier votre aptitude à la pratique sportive</li>
           <li>Vous assurer de ne présenter aucune contre-indication médicale</li>
@@ -378,7 +477,7 @@ function CGU() {
           <li>Un état de grossesse</li>
           <li>Toute condition médicale pouvant être aggravée par l'exercice physique</li>
         </ul>
-        <p>Les mineurs doivent obtenir l'accord de leur représentant légal avant toute utilisation.</p>
+        <p>Les conditions d'âge sont précisées dans la section « Compte utilisateur » ci-dessus.</p>
         <p>Pendant la pratique, l'utilisateur s'engage à :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Adapter les exercices à sa condition physique</li>
@@ -395,7 +494,7 @@ function CGU() {
             blessure.
           </strong>
         </p>
-        <p>En utilisant WAN SHAPE, l'utilisateur déclare :</p>
+        <p>En utilisant Wan2Fit, l'utilisateur déclare :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Avoir pris connaissance de l'avertissement santé ci-dessus</li>
           <li>Pratiquer sous sa propre responsabilité et à ses propres risques</li>
@@ -454,8 +553,139 @@ function CGU() {
       <Section title="Contact">
         <p>
           Pour toute question relative aux présentes CGU, vous pouvez nous contacter à :{' '}
-          <a href="mailto:erwan.viot@wan-soft.fr" className="text-link underline">
-            erwan.viot@wan-soft.fr
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
+          </a>
+        </p>
+      </Section>
+    </>
+  );
+}
+
+function CGV() {
+  return (
+    <>
+      <h1 className="text-2xl font-bold text-heading mb-6">Conditions Générales de Vente</h1>
+
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : mars 2026</p>
+
+      <Section title="Objet">
+        <p>
+          Les présentes Conditions Générales de Vente (ci-après « CGV ») régissent les conditions de souscription et
+          d'utilisation de l'abonnement Premium proposé par WAN SOFT sur le site Wan2Fit.
+        </p>
+        <p>
+          Toute souscription à l'offre Premium implique l'acceptation pleine et entière des présentes CGV, ainsi que
+          des{' '}
+          <Link to="/legal/cgu" className="text-link underline">
+            Conditions Générales d'Utilisation
+          </Link>
+          .
+        </p>
+      </Section>
+
+      <Section title="Offres et tarifs">
+        <p>Wan2Fit propose les offres suivantes :</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>
+            <strong className="text-strong">Gratuit</strong> — Séance du jour, bibliothèque exercices et formats, 3
+            programmes guidés, historique complet et statistiques (avec compte gratuit)
+          </li>
+          <li>
+            <strong className="text-strong">Premium mensuel</strong> — 9,99 € TTC/mois — Tout le contenu gratuit +
+            séances IA sur-mesure + programmes IA personnalisés
+          </li>
+          <li>
+            <strong className="text-strong">Premium annuel</strong> — 99,99 € TTC/an (soit ~8,33 €/mois, environ 17%
+            de remise) — Contenu identique au mensuel
+          </li>
+        </ul>
+        <p>Les prix sont indiqués toutes taxes comprises (TVA 20% incluse). WAN SOFT se réserve le droit de modifier
+          ses tarifs à tout moment. Toute modification tarifaire n'affecte pas les abonnements en cours et prend effet
+          au prochain renouvellement.</p>
+      </Section>
+
+      <Section title="Souscription et paiement">
+        <p>
+          La souscription à l'offre Premium nécessite la création d'un compte sur Wan2Fit. Le paiement est effectué
+          en ligne par carte bancaire, Apple Pay, Google Pay ou prélèvement SEPA, via la plateforme de paiement
+          sécurisée <strong className="text-strong">Stripe</strong>.
+        </p>
+        <p>
+          WAN SOFT ne collecte ni ne stocke aucune donnée bancaire. L'ensemble des transactions est géré par Stripe
+          (certifié PCI-DSS niveau 1).
+        </p>
+        <p>
+          L'accès aux fonctionnalités Premium est activé immédiatement après confirmation du paiement par Stripe.
+        </p>
+      </Section>
+
+      <Section title="Durée et renouvellement">
+        <p>
+          L'abonnement Premium est conclu pour une durée indéterminée avec des périodes de facturation mensuelles ou
+          annuelles selon l'offre choisie. L'abonnement se renouvelle automatiquement à l'issue de chaque période de
+          facturation, sauf résiliation par l'abonné avant la date de renouvellement.
+        </p>
+      </Section>
+
+      <Section title="Droit de rétractation">
+        <p>
+          Conformément aux articles L.221-18 et L.221-28-1° du Code de la consommation, le consommateur dispose d'un
+          droit de rétractation de 14 jours. Toutefois, en souscrivant à l'offre Premium, l'abonné demande
+          expressément l'exécution immédiate du service et reconnaît renoncer à son droit de rétractation pour la
+          période en cours, dès lors que l'exécution a commencé avec son accord préalable exprès.
+        </p>
+        <p>
+          Un email de confirmation de souscription rappelant cette renonciation est adressé à l'abonné par Stripe.
+        </p>
+      </Section>
+
+      <Section title="Résiliation">
+        <p>
+          L'abonné peut résilier son abonnement à tout moment depuis le portail client accessible dans ses paramètres
+          de compte (bouton « Gérer mon abonnement »).
+        </p>
+        <p>
+          La résiliation prend effet à la fin de la période de facturation en cours. L'accès aux fonctionnalités
+          Premium est maintenu jusqu'à cette date. Aucun remboursement au prorata n'est effectué.
+        </p>
+      </Section>
+
+      <Section title="Médiateur de la consommation">
+        <p>
+          Conformément aux articles L.616-1 et R.616-1 du Code de la consommation, en cas de litige non résolu par le
+          service client, l'abonné peut recourir gratuitement au médiateur de la consommation désigné par WAN SOFT :
+        </p>
+        <p>
+          <strong className="text-strong">[À COMPLÉTER — médiateur à désigner avant mise en production]</strong>
+        </p>
+        <p>
+          Pour contacter notre service client préalablement à toute médiation :{' '}
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
+          </a>
+        </p>
+      </Section>
+
+      <Section title="Facturation">
+        <p>
+          Les factures sont disponibles depuis le portail client Stripe, accessible depuis les paramètres du compte.
+          Conformément à la réglementation, les factures sont conservées pendant 6 ans.
+        </p>
+      </Section>
+
+      <Section title="Droit applicable">
+        <p>
+          Les présentes CGV sont soumises au droit français. En cas de litige, et après tentative de résolution amiable
+          et/ou recours au médiateur, les tribunaux français seront compétents.
+        </p>
+      </Section>
+
+      <Section title="Contact">
+        <p>
+          Pour toute question relative aux présentes CGV ou à votre abonnement :{' '}
+          <a href="mailto:contact@wan2fit.fr" className="text-link underline">
+            contact@wan2fit.fr
           </a>
         </p>
       </Section>

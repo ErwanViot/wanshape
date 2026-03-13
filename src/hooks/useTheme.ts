@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 type ThemePreference = 'system' | 'dark' | 'light';
 type ResolvedTheme = 'dark' | 'light';
 
-const STORAGE_KEY = 'wan-shape-theme';
+const STORAGE_KEY = 'wan2fit-theme';
 const THEME_COLORS: Record<ResolvedTheme, string> = {
   dark: '#1a1a22',
   light: '#f5f5f7',
@@ -21,7 +21,7 @@ function resolveTheme(pref: ThemePreference): ResolvedTheme {
 function getStoredPreference(): ThemePreference {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === 'dark' || stored === 'light' || stored === 'system') return stored;
-  return 'system';
+  return 'light';
 }
 
 function applyTheme(resolved: ResolvedTheme) {
@@ -62,5 +62,9 @@ export function useTheme() {
     });
   }, []);
 
-  return { preference, theme: resolved, cycleTheme } as const;
+  const setTheme = useCallback((pref: ThemePreference) => {
+    setPreference(pref);
+  }, []);
+
+  return { preference, theme: resolved, cycleTheme, setTheme } as const;
 }

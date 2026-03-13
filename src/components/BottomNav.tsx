@@ -1,6 +1,8 @@
 import { Link, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { getInitials } from '../utils/getInitials.ts';
+import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 
 function HomeIcon() {
   return (
@@ -80,6 +82,41 @@ function UserIcon() {
   );
 }
 
+function ChartIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="18" y1="20" x2="18" y2="10" />
+      <line x1="12" y1="20" x2="12" y2="4" />
+      <line x1="6" y1="20" x2="6" y2="14" />
+    </svg>
+  );
+}
+
+function PlayIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      stroke="none"
+    >
+      <polygon points="6 3 20 12 6 21 6 3" />
+    </svg>
+  );
+}
+
 function NavItem({
   to,
   label,
@@ -94,55 +131,83 @@ function NavItem({
   return (
     <Link
       to={to}
-      className={`flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] px-1.5 py-1.5 transition-colors ${
+      className={`flex flex-col items-center justify-center gap-0.5 min-w-[48px] min-h-[44px] px-1 py-1.5 transition-colors ${
         active ? 'text-brand' : 'text-muted'
       }`}
       aria-current={active ? 'page' : undefined}
     >
       {children}
-      <span className="text-xs font-medium leading-tight">{label}</span>
+      <span className="text-[10px] font-medium leading-tight">{label}</span>
     </Link>
   );
 }
 
 export function BottomNav() {
   const { pathname } = useLocation();
-  const { user, profile, loading } = useAuth();
+  const { user, profile } = useAuth();
+  const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
 
   const isHome = pathname === '/';
   const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
   const isPrograms = pathname.startsWith('/programme');
-  const isProfile = pathname === '/profil' || pathname === '/login' || pathname === '/signup';
+  const isSuivi = pathname === '/suivi';
+  const isProfile = pathname === '/parametres' || pathname === '/profil' || pathname === '/login' || pathname === '/signup';
 
-  const profileTo = user ? '/profil' : '/login';
+  const suiviTo = user ? '/suivi' : '/login';
+  const profileTo = user ? '/parametres' : '/login';
   const profileLabel = user ? 'Profil' : 'Connexion';
 
   return (
-    <nav
-      className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-divider md:hidden"
-      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-      aria-label="Navigation principale"
-    >
-      <div className="flex items-center justify-around h-14 max-w-lg mx-auto">
-        <NavItem to="/" label="Accueil" active={isHome}>
-          <HomeIcon />
-        </NavItem>
-        <NavItem to="/decouvrir" label="Découvrir" active={isDiscover}>
-          <DiscoverIcon />
-        </NavItem>
-        <NavItem to="/programmes" label="Programmes" active={isPrograms}>
-          <ProgramsIcon />
-        </NavItem>
-        <NavItem to={profileTo} label={profileLabel} active={isProfile}>
-          {!loading && user ? (
-            <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand">
-              {getInitials(profile?.display_name ?? user.user_metadata?.display_name, user.email)}
-            </div>
-          ) : (
-            <UserIcon />
+    <>
+      {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
+
+      <nav
+        className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-divider md:hidden"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+        aria-label="Navigation principale"
+      >
+        <div className="flex items-end justify-around h-16 max-w-lg mx-auto relative">
+          <NavItem to="/" label="Accueil" active={isHome}>
+            <HomeIcon />
+          </NavItem>
+          <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
+            <DiscoverIcon />
+          </NavItem>
+
+          {/* Center FAB — Play button */}
+          <div className="flex flex-col items-center -mt-5">
+            <button
+              type="button"
+              onClick={() => guardNavigation('/seance/play')}
+              className="fab-button w-14 h-14 rounded-full flex items-center justify-center text-white cursor-pointer"
+              aria-label="Lancer la séance du jour"
+            >
+              <PlayIcon />
+            </button>
+          </div>
+
+          <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+            <ProgramsIcon />
+          </NavItem>
+          {user && (
+            <NavItem to={suiviTo} label="Suivi" active={isSuivi}>
+              <ChartIcon />
+            </NavItem>
           )}
-        </NavItem>
-      </div>
-    </nav>
+          {!user && (
+          <NavItem to={profileTo} label={profileLabel} active={isProfile}>
+            <UserIcon />
+          </NavItem>
+          )}
+          {user && (
+            <NavItem to={profileTo} label={profileLabel} active={isProfile}>
+              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] text-white font-bold bg-brand">
+                {getInitials(profile?.display_name ?? user.user_metadata?.display_name, user.email)}
+              </div>
+            </NavItem>
+          )}
+        </div>
+      </nav>
+    </>
   );
 }

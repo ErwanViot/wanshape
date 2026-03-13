@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { HeartPulse } from 'lucide-react';
 
 interface Props {
   onAccept: () => void;
@@ -59,16 +60,13 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
       onClick={(e) => {
         if (e.target === e.currentTarget && onCancel) onCancel();
       }}
-      onKeyDown={(e) => {
-        if (e.key === 'Escape' && onCancel) onCancel();
-      }}
     >
       <div
         ref={dialogRef}
         className="bg-white w-full max-w-lg rounded-3xl shadow-2xl max-h-full flex flex-col"
       >
         <div className="p-6 pb-0 shrink-0">
-          <div className="text-3xl mb-3">⚕️</div>
+          <HeartPulse className="w-8 h-8 text-brand mb-3" aria-hidden="true" />
           <h2 id="health-disclaimer-title" className="text-xl font-bold text-gray-900 mb-1">
             Avertissement santé
           </h2>
@@ -77,7 +75,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
 
         <div className="px-6 overflow-y-auto flex-1 space-y-3 text-sm text-gray-600 leading-relaxed">
           <p>
-            WAN SHAPE propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il
+            Wan2Fit propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il
             ne s'agit pas de coaching sportif personnalisé ni d'encadrement par un éducateur sportif diplômé.
           </p>
           <p>

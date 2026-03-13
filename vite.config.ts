@@ -11,11 +11,11 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['sessions/*.json'],
       manifest: {
-        name: 'WAN SHAPE',
-        short_name: 'WAN SHAPE',
+        name: 'Wan2Fit',
+        short_name: 'Wan2Fit',
         description: 'Ta séance de sport quotidienne, prête à lancer',
-        theme_color: '#ffffff',
-        background_color: '#f8f8f8',
+        theme_color: '#0f0f17',
+        background_color: '#0f0f17',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',
@@ -26,7 +26,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,json,png,svg}'],
+        globPatterns: ['**/*.{js,css,html,json,svg,png}'],
+        globIgnores: ['**/og-image.png'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
         runtimeCaching: [
@@ -47,6 +48,15 @@ export default defineConfig({
             handler: 'NetworkOnly',
           },
           {
+            urlPattern: /\/images\/.*\.webp$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'images-cache',
+              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              cacheableResponse: { statuses: [200] },
+            },
+          },
+          {
             urlPattern: /\/videos\/.*\.mp4$/,
             handler: 'CacheFirst',
             options: {
@@ -59,4 +69,15 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'router': ['react-router'],
+          'supabase': ['@supabase/supabase-js'],
+        },
+      },
+    },
+  },
 })

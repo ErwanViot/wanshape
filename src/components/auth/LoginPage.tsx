@@ -2,6 +2,8 @@ import { type FormEvent, useState } from 'react';
 import { Link, Navigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { BackLink } from './BackLink.tsx';
+import { FormInput } from './FormInput.tsx';
 
 export function LoginPage() {
   const { user, loading, signIn } = useAuth();
@@ -12,10 +14,10 @@ export function LoginPage() {
 
   useDocumentHead({
     title: 'Connexion',
-    description: 'Connecte-toi à ton compte WanShape.',
+    description: 'Connecte-toi à ton compte Wan2Fit.',
   });
 
-  if (!loading && user) return <Navigate to="/profil" replace />;
+  if (!loading && user) return <Navigate to="/suivi" replace />;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -34,45 +36,22 @@ export function LoginPage() {
   return (
     <div className="px-6 py-12 flex-1 flex items-start justify-center">
       <div className="w-full max-w-md">
-        {/* Back link */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-strong transition-colors mb-8"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-          Retour
-        </Link>
+        <BackLink />
 
         <h1 className="text-2xl font-bold text-heading mb-8">Connexion</h1>
 
         <div className="glass-card rounded-2xl p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="login-email" className="block text-sm font-medium text-strong mb-1.5">
-                Email
-              </label>
-              <input
-                id="login-email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="toi@exemple.com"
-                className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
-              />
-            </div>
+            <FormInput
+              label="Email"
+              inputId="login-email"
+              type="email"
+              required
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="toi@exemple.com"
+            />
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
