@@ -7,7 +7,7 @@ import { useActiveProgram, usePrograms } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import { supabase } from '../lib/supabase.ts';
 import { GOAL_LABELS } from '../utils/labels.ts';
-import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
+import { getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { ProgramCard } from './ProgramCard.tsx';
@@ -27,9 +27,8 @@ export function ProgramList() {
     ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
     : 0;
 
-  const isActiveAI = activeProgram && !programs.find((p) => p.slug === activeProgram.slug);
   const activeImage = activeProgram
-    ? isActiveAI ? getAIProgramImage() : getProgramImage(activeProgram.slug)
+    ? getProgramImage(activeProgram.slug, activeProgram.goals)
     : '';
 
   useDocumentHead({
@@ -201,7 +200,7 @@ export function ProgramList() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
             {userPrograms.map((p) => {
               const goalLabel = GOAL_LABELS[p.goals?.[0] ?? ''] ?? p.goals?.[0] ?? '';
-              const image = getAIProgramImage();
+              const image = getProgramImage(p.slug, p.goals);
               return (
                 <Link
                   key={p.id}

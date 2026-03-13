@@ -8,7 +8,7 @@ import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import type { Session } from '../types/session.ts';
 import { getConsigneForWeek } from '../utils/coaching.ts';
 import { FITNESS_COLORS, FITNESS_LABELS, GOAL_COLORS, GOAL_LABELS } from '../utils/labels.ts';
-import { getAIProgramImage, getProgramImage } from '../utils/programImage.ts';
+import { getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
@@ -176,7 +176,7 @@ export function ProgramPage() {
         <section className="space-y-5 -mx-6 -mt-8 md:mx-0 md:mt-0">
           <div className="relative min-h-[220px] sm:min-h-[280px] md:rounded-2xl overflow-hidden">
             <img
-              src={isCustom ? getAIProgramImage() : getProgramImage(program.slug)}
+              src={getProgramImage(program.slug, program.goals)}
               alt=""
               className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
             />
