@@ -108,8 +108,8 @@ function validateInput(body: RequestInput): string | null {
   }
 
   if (body.age !== undefined && body.age !== null) {
-    if (typeof body.age !== 'number' || body.age < 14 || body.age > 99)
-      return "age doit etre un nombre entre 14 et 99";
+    if (typeof body.age !== 'number' || body.age < 18 || body.age > 99)
+      return "age doit etre un nombre entre 18 et 99";
   }
 
   if (body.sexe !== undefined && body.sexe !== null && body.sexe !== '') {
