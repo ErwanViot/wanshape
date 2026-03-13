@@ -1,31 +1,30 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { CustomSessionRecord } from '../types/custom-session.ts';
 
-export function useCustomSessions() {
+export function useCustomSessions(userId: string | undefined) {
+  const { dataGeneration } = useAuth();
   const [sessions, setSessions] = useState<CustomSessionRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
-    if (!supabase) {
+    if (!supabase || !userId) {
+      setSessions([]);
+      setError(null);
       setLoading(false);
       return;
     }
 
+    setLoading(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
       const { data, error: fetchError, sessionExpired } = await supabaseQuery(() =>
         supabase!
           .from('custom_sessions')
           .select('*')
-          .eq('user_id', user.id)
+          .eq('user_id', userId)
           .eq('status', 'confirmed')
           .order('created_at', { ascending: false })
           .limit(20),
@@ -46,7 +45,7 @@ export function useCustomSessions() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [userId, dataGeneration]);
 
   useEffect(() => {
     refresh();
@@ -55,28 +54,29 @@ export function useCustomSessions() {
   return { sessions, loading, error, refresh };
 }
 
-export function useCustomSession(id: string | undefined) {
+export function useCustomSession(id: string | undefined, userId: string | undefined) {
+  const { dataGeneration } = useAuth();
   const [session, setSession] = useState<CustomSessionRecord | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!id || !supabase) {
+    if (!id || !userId || !supabase) {
+      setSession(null);
       setLoading(false);
       return;
     }
 
     let cancelled = false;
+    setLoading(true);
 
     async function load() {
       try {
-        const { data: { user } } = await supabase!.auth.getUser();
-        if (!user) { if (!cancelled) setLoading(false); return; }
         const { data, sessionExpired } = await supabaseQuery(() =>
           supabase!
             .from('custom_sessions')
             .select('*')
             .eq('id', id)
-            .eq('user_id', user.id)
+            .eq('user_id', userId)
             .single(),
         );
 
@@ -96,7 +96,7 @@ export function useCustomSession(id: string | undefined) {
     return () => {
       cancelled = true;
     };
-  }, [id]);
+  }, [id, userId, dataGeneration]);
 
   return { session, loading };
 }

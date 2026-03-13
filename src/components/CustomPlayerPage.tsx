@@ -12,7 +12,7 @@ import { SessionNotFound } from './SessionNotFound.tsx';
 export function CustomPlayerPage() {
   const { id } = useParams<{ id: string }>();
   const { user, loading: authLoading } = useAuth();
-  const { session: record, loading } = useCustomSession(id);
+  const { session: record, loading } = useCustomSession(id, user?.id);
 
   const sessionData = record?.session_data as Session | undefined;
 

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { SessionCompletion } from '../types/completion.ts';
@@ -104,6 +105,7 @@ function getISOWeekNumber(date: Date): number {
 }
 
 export function useHistory(userId: string | undefined): HistoryStats {
+  const { dataGeneration } = useAuth();
   const [completions, setCompletions] = useState<CompletionWithTitle[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -153,7 +155,7 @@ export function useHistory(userId: string | undefined): HistoryStats {
     return () => {
       cancelled = true;
     };
-  }, [userId]);
+  }, [userId, dataGeneration]);
 
   const derived = useMemo(() => {
     const totalSessions = completions.length;

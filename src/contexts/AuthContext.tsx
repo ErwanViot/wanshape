@@ -9,6 +9,7 @@ interface AuthContextValue {
   profile: Profile | null;
   loading: boolean;
   sessionExpired: boolean;
+  dataGeneration: number;
   refreshProfile: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
@@ -45,12 +46,41 @@ async function fetchProfile(userId: string): Promise<Profile | null> {
   return data as Profile | null;
 }
 
+/** After this duration in background, force a session refresh + data refetch */
+const STALE_THRESHOLD_MS = 5 * 60 * 1000; // 5 minutes
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(!!supabase);
   const [sessionExpired, setSessionExpired] = useState(false);
+  const [dataGeneration, setDataGeneration] = useState(0);
   const mounted = useRef(true);
+  const lastVisibleAt = useRef(Date.now());
+
+  // Refresh session + bump dataGeneration when returning from background after inactivity
+  useEffect(() => {
+    function handleVisibilityChange() {
+      if (document.visibilityState === 'visible') {
+        const elapsed = Date.now() - lastVisibleAt.current;
+        if (elapsed > STALE_THRESHOLD_MS && supabase) {
+          supabase.auth.refreshSession().then(() => {
+            if (mounted.current) {
+              setDataGeneration((g) => g + 1);
+            }
+          }).catch(() => {
+            // Refresh failed — session may be truly expired
+          });
+        }
+        lastVisibleAt.current = Date.now();
+      } else {
+        lastVisibleAt.current = Date.now();
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
 
   useEffect(() => {
     mounted.current = true;
@@ -171,8 +201,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value = useMemo<AuthContextValue>(
-    () => ({ user, profile, loading, sessionExpired, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }),
-    [user, profile, loading, sessionExpired, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut],
+    () => ({ user, profile, loading, sessionExpired, dataGeneration, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }),
+    [user, profile, loading, sessionExpired, dataGeneration, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut],
   );
 
   return (
