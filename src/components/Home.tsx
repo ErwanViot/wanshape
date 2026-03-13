@@ -28,9 +28,9 @@ export function Home() {
   const [showWelcome, setShowWelcome] = useState(shouldShowWelcome);
 
   useDocumentHead({
-    title: 'WAN2FIT',
+    title: 'Wan2Fit',
     description:
-      "Chaque jour, une séance de sport guidée sans matériel. 8 formats d'entraînement, 25-40 min, 100% gratuit.",
+      "Chaque jour, une séance de sport guidée sans matériel. 8 formats d'entraînement, 25-40 min. Gratuit pour commencer, premium pour aller plus loin.",
   });
 
   const handleStartSession = () => {

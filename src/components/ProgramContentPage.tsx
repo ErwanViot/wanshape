@@ -11,7 +11,7 @@ export function ProgramContentPage() {
   const content = slug ? PROGRAM_CONTENT[slug] : undefined;
 
   useDocumentHead({
-    title: content ? `${content.headline} — Programme WAN2FIT` : 'Programme',
+    title: content ? `${content.headline} — Programme Wan2Fit` : 'Programme',
     description: content?.intro,
   });
 

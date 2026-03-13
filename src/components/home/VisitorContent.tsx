@@ -221,8 +221,56 @@ export function VisitorContent({
         </div>
       </section>
 
-      {/* ── 4. Feature : IA sur-mesure (Premium) ── */}
+      {/* ── 4. Feature : Le player ── */}
       <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Texte */}
+            <div className="space-y-5">
+              <span className="text-xs font-bold tracking-widest uppercase text-brand">Entraînement guidé</span>
+              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
+                Tu n'as qu'à<br />suivre le rythme
+              </h2>
+              <p className="text-muted leading-relaxed">
+                Chrono, compteur de reps, transitions automatiques — le player gère tout pour que tu restes concentré sur l'effort.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { icon: Play, text: 'Timer et reps guidés en temps réel' },
+                  { icon: Shuffle, text: 'Enchaînement automatique des blocs' },
+                  { icon: Zap, text: 'Signal sonore à chaque transition' },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-start gap-3">
+                    <item.icon className="w-5 h-5 text-brand shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-sm text-body">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={onStart}
+                className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand/80 transition-colors cursor-pointer"
+              >
+                Lancer une séance
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Visuel : carrousel player */}
+            <ScreenshotCarousel
+              images={[
+                { src: '/images/screenshot-player-reps.webp', alt: 'Player — exercice en reps' },
+                { src: '/images/screenshot-player-emom.webp', alt: 'Player — EMOM avec timer' },
+                { src: '/images/screenshot-player-hiit.webp', alt: 'Player — HIIT Mountain climbers' },
+                { src: '/images/screenshot-player-cooldown.webp', alt: 'Player — Retour au calme' },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Feature : IA sur-mesure (Premium) ── */}
+      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Visuel : carrousel 3 modes de création (à gauche en desktop) */}
@@ -269,54 +317,6 @@ export function VisitorContent({
                 <ChevronRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. Feature : Le player ── */}
-      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Texte */}
-            <div className="space-y-5">
-              <span className="text-xs font-bold tracking-widest uppercase text-brand">Entraînement guidé</span>
-              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                Tu n'as qu'à<br />suivre le rythme
-              </h2>
-              <p className="text-muted leading-relaxed">
-                Chrono, compteur de reps, transitions automatiques — le player gère tout pour que tu restes concentré sur l'effort.
-              </p>
-              <ul className="space-y-3">
-                {[
-                  { icon: Play, text: 'Timer et reps guidés en temps réel' },
-                  { icon: Shuffle, text: 'Enchaînement automatique des blocs' },
-                  { icon: Zap, text: 'Signal sonore à chaque transition' },
-                ].map((item) => (
-                  <li key={item.text} className="flex items-start gap-3">
-                    <item.icon className="w-5 h-5 text-brand shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-sm text-body">{item.text}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                onClick={onStart}
-                className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand/80 transition-colors cursor-pointer"
-              >
-                Lancer une séance
-                <ChevronRight className="w-4 h-4" aria-hidden="true" />
-              </button>
-            </div>
-
-            {/* Visuel : carrousel player */}
-            <ScreenshotCarousel
-              images={[
-                { src: '/images/screenshot-player-reps.webp', alt: 'Player — exercice en reps' },
-                { src: '/images/screenshot-player-emom.webp', alt: 'Player — EMOM avec timer' },
-                { src: '/images/screenshot-player-hiit.webp', alt: 'Player — HIIT Mountain climbers' },
-                { src: '/images/screenshot-player-cooldown.webp', alt: 'Player — Retour au calme' },
-              ]}
-            />
           </div>
         </div>
       </section>
@@ -374,8 +374,33 @@ export function VisitorContent({
         </div>
       </section>
 
-      {/* ── 6. CTA final ── */}
-      <section className="px-6 md:px-10 lg:px-14 py-16 md:py-20">
+      {/* ── 7. À propos — encart discret ── */}
+      <section className="px-6 md:px-10 lg:px-14 pt-12 pb-0">
+        <div className="max-w-md mx-auto">
+          <Link
+            to="/a-propos"
+            className="flex items-center gap-4 px-5 py-4 rounded-2xl border border-card-border hover:border-divider-strong bg-surface-card/50 hover:bg-surface-card transition-all group"
+          >
+            <img
+              src="/photo-wan.png"
+              alt="Wan"
+              className="w-10 h-10 rounded-full object-cover shrink-0"
+            />
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-body group-hover:text-heading transition-colors">
+                Pourquoi Wan2Fit ?
+              </p>
+              <p className="text-xs text-muted truncate">
+                L'histoire derrière le projet — par Wan
+              </p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-muted group-hover:text-subtle transition-colors shrink-0 ml-auto" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      {/* ── 8. CTA final ── */}
+      <section className="px-6 md:px-10 lg:px-14 pt-10 pb-16 md:pt-12 md:pb-20">
         <div className="max-w-2xl mx-auto text-center space-y-6">
           <h2 className="font-display text-3xl md:text-4xl font-black text-heading">
             Prêt à commencer ?
