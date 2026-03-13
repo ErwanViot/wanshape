@@ -127,7 +127,7 @@ export function StepProfile({
           <input
             id="age"
             type="number"
-            min={14}
+            min={18}
             max={99}
             value={age}
             onChange={(e) => onChangeAge(e.target.value)}

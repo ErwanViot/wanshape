@@ -92,8 +92,8 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
           </div>
           <p className="text-gray-400 text-xs">
             Service déconseillé sans avis médical pour les personnes présentant des pathologies cardiaques, des troubles
-            articulaires, un état de grossesse ou toute condition pouvant être aggravée par l'exercice. Mineurs : accord
-            parental requis.
+            articulaires, un état de grossesse ou toute condition pouvant être aggravée par l'exercice. Réservé aux
+            personnes majeures (18 ans et plus).
           </p>
         </div>
 

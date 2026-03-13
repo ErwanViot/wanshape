@@ -442,8 +442,8 @@ function CGU() {
 
       <Section title="Compte utilisateur">
         <p>
-          Le Site s'adresse aux personnes âgées de 16 ans et plus. Les mineurs de 16 à 18 ans doivent obtenir
-          l'accord de leur représentant légal avant toute création de compte.
+          Le Site s'adresse exclusivement aux personnes majeures (18 ans et plus). En créant un compte,
+          l'utilisateur déclare être âgé d'au moins 18 ans.
         </p>
         <p>
           La création d'un compte est facultative et gratuite. Elle nécessite une adresse email valide et un mot de
