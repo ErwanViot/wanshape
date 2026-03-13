@@ -141,6 +141,13 @@ body {
   background-clip: text;
 }
 
+/* Text outline for readability on images */
+.text-outline {
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.8),
+    0 0 1px rgba(0, 0, 0, 0.6);
+}
+
 /* CTA gradient button */
 .cta-gradient {
   background: linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary));

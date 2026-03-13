@@ -213,16 +213,16 @@ export function ProgramList() {
                     className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70 transition-opacity group-hover:opacity-70" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/50 transition-opacity group-hover:opacity-50" />
                   <div className="relative z-10 flex flex-col justify-between flex-1 p-5">
                     <span className="self-start text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand/30 border border-brand/40 text-white backdrop-blur-sm">
                       IA
                     </span>
-                    <div className="mt-auto space-y-1.5">
+                    <div className="mt-auto space-y-1.5 text-outline">
                       <p className="text-lg font-bold text-white group-hover:text-white/90 transition-colors line-clamp-2">
                         {p.title}
                       </p>
-                      <p className="text-xs text-white/50">
+                      <p className="text-xs text-white">
                         {goalLabel && <>Objectif : {goalLabel} · </>}
                         {p.duration_weeks} sem · {p.frequency_per_week}x/sem
                       </p>
