@@ -19,7 +19,7 @@ export function ProgramCard({ program }: { program: Program }) {
           className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/70 transition-opacity group-hover:opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/50 transition-opacity group-hover:opacity-50" />
 
         <div className="relative z-10 flex flex-col justify-between flex-1 p-6">
           {/* Top: badge */}
@@ -32,16 +32,16 @@ export function ProgramCard({ program }: { program: Program }) {
           </div>
 
           {/* Bottom: info */}
-          <div className="space-y-2 mt-auto">
+          <div className="space-y-2 mt-auto text-outline">
             <h3 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors">
               {program.title}
             </h3>
 
             {program.description && (
-              <p className="text-sm text-white/70 leading-relaxed line-clamp-2">{program.description}</p>
+              <p className="text-sm text-white leading-relaxed line-clamp-2">{program.description}</p>
             )}
 
-            <div className="flex items-center gap-3 text-xs text-white/50 pt-1">
+            <div className="flex items-center gap-3 text-xs text-white pt-1">
               <span className="flex items-center gap-1.5">
                 <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
@@ -64,7 +64,7 @@ export function ProgramCard({ program }: { program: Program }) {
                 {program.goals.map((goal) => (
                   <li
                     key={goal}
-                    className="text-xs font-medium px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-white/70"
+                    className="text-xs font-medium px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-white"
                   >
                     {goal}
                   </li>
