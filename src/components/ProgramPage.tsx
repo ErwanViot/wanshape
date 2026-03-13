@@ -17,7 +17,7 @@ export function ProgramPage() {
   const { slug } = useParams<{ slug: string }>();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { program, loading } = useProgram(slug);
+  const { program, loading } = useProgram(slug, user?.id);
   const { deleteProgram } = useUserPrograms();
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
   const [showDeleteModal, setShowDeleteModal] = useState(false);

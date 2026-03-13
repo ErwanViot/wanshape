@@ -24,16 +24,19 @@ export interface ActiveProgramInfo {
  *  including progression and next session info.
  *  Uses a single RPC call instead of 5 sequential queries. */
 export function useActiveProgram(userId: string | undefined) {
+  const { dataGeneration } = useAuth();
   const [activeProgram, setActiveProgram] = useState<ActiveProgramInfo | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!userId || !supabase) {
+      setActiveProgram(null);
       setLoading(false);
       return;
     }
 
     let cancelled = false;
+    setLoading(true);
 
     (async () => {
       try {
@@ -84,13 +87,13 @@ export function useActiveProgram(userId: string | undefined) {
     return () => {
       cancelled = true;
     };
-  }, [userId]);
+  }, [userId, dataGeneration]);
 
   return { activeProgram, loading };
 }
 
 export function usePrograms() {
-  const { loading: authLoading } = useAuth();
+  const { loading: authLoading, dataGeneration } = useAuth();
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -120,12 +123,13 @@ export function usePrograms() {
     return () => {
       cancelled = true;
     };
-  }, [authLoading]);
+  }, [authLoading, dataGeneration]);
 
   return { programs, loading };
 }
 
-export function useProgram(slug: string | undefined) {
+export function useProgram(slug: string | undefined, userId: string | undefined) {
+  const { dataGeneration } = useAuth();
   const [program, setProgram] = useState<ProgramWithSessions | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -161,28 +165,22 @@ export function useProgram(slug: string | undefined) {
         const sessionIds = (sessions ?? []).map((s: ProgramSession) => s.id);
         let completedIds = new Set<string>();
 
-        if (sessionIds.length > 0) {
-          const {
-            data: { user },
-          } = await supabase!.auth.getUser();
+        if (sessionIds.length > 0 && userId) {
+          const { data: completions, sessionExpired: compExp } = await supabaseQuery(() =>
+            supabase!
+              .from('session_completions')
+              .select('program_session_id')
+              .eq('user_id', userId)
+              .in('program_session_id', sessionIds),
+          );
 
-          if (user) {
-            const { data: completions, sessionExpired: compExp } = await supabaseQuery(() =>
-              supabase!
-                .from('session_completions')
-                .select('program_session_id')
-                .eq('user_id', user.id)
-                .in('program_session_id', sessionIds),
-            );
+          if (compExp) { notifySessionExpired(); setLoading(false); return; }
 
-            if (compExp) { notifySessionExpired(); setLoading(false); return; }
-
-            completedIds = new Set(
-              (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
-                ?.map((c) => c.program_session_id)
-                .filter((id): id is string => id !== null) ?? [],
-            );
-          }
+          completedIds = new Set(
+            (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
+              ?.map((c) => c.program_session_id)
+              .filter((id): id is string => id !== null) ?? [],
+          );
         }
 
         if (cancelled) return;
@@ -202,12 +200,13 @@ export function useProgram(slug: string | undefined) {
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, userId, dataGeneration]);
 
   return { program, loading };
 }
 
 export function useProgramSession(slug: string | undefined, order: number | undefined) {
+  const { dataGeneration } = useAuth();
   const [session, setSession] = useState<ProgramSession | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -247,7 +246,7 @@ export function useProgramSession(slug: string | undefined, order: number | unde
     return () => {
       cancelled = true;
     };
-  }, [slug, order]);
+  }, [slug, order, dataGeneration]);
 
   return { session, loading };
 }

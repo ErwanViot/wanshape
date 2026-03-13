@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import {
   ChevronLeft,
   ClipboardList,
@@ -117,7 +118,8 @@ function BlockDetail({ block, index }: { block: Block; index: number }) {
 
 export function CustomSessionPreviewPage() {
   const { id } = useParams<{ id: string }>();
-  const { session: record, loading } = useCustomSession(id);
+  const { user } = useAuth();
+  const { session: record, loading } = useCustomSession(id, user?.id);
   const navigate = useNavigate();
   const { generate, loading: regenerating, error: regenError } = useGenerateSession();
 

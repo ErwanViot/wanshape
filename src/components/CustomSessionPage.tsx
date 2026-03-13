@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Dumbbell, Flame, Heart, Zap } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useCustomSessions } from '../hooks/useCustomSessions.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
@@ -45,9 +46,10 @@ const BODY_FOCUS_OPTIONS: { value: BodyFocus; label: string }[] = [
 export function CustomSessionPage() {
   useDocumentHead({ title: 'Créer ma séance — Wan2Fit' });
 
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { generate, loading, error } = useGenerateSession();
-  const { sessions: history, loading: historyLoading, error: historyError, refresh } = useCustomSessions();
+  const { sessions: history, loading: historyLoading, error: historyError, refresh } = useCustomSessions(user?.id);
 
   const [mode, setMode] = useState<CustomSessionMode>('quick');
   const [preset, setPreset] = useState<CustomSessionPreset>('transpirer');
