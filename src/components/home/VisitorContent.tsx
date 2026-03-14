@@ -95,21 +95,22 @@ export function VisitorContent({
       {/* ── 2. Comment ça marche — 3 étapes ── */}
       <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-display text-2xl md:text-3xl font-black text-heading text-center mb-10">
+          <h2 className="font-display text-2xl md:text-3xl font-black text-heading text-center mb-12">
             Comment ça marche
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 text-center">
+
             {[
-              { step: '1', icon: Calendar, title: 'Ouvre l\'app', desc: 'Ta séance du jour est prête. Pas besoin de réfléchir.' },
-              { step: '2', icon: Play, title: 'Suis ta séance', desc: 'Exercices guidés, chrono intégré, transitions automatiques.' },
-              { step: '3', icon: Target, title: 'Progresse', desc: 'Statistiques, régularité et programmes pour aller plus loin.' },
+              { step: '1', icon: Calendar, title: 'Choisis ta séance', desc: 'Séance du jour, format libre ou programme : c\'est toi qui décides.' },
+              { step: '2', icon: Play, title: 'Lance-toi', desc: 'Exercices guidés, chrono intégré, transitions automatiques.' },
+              { step: '3', icon: TrendingUp, title: 'Suis ta progression', desc: 'Historique, stats et programmes pour aller toujours plus loin.' },
             ].map((item) => (
               <div key={item.step} className="flex flex-col items-center gap-4">
                 <div className="relative">
-                  <div className="w-16 h-16 rounded-2xl bg-brand/10 flex items-center justify-center">
-                    <item.icon className="w-7 h-7 text-brand" aria-hidden="true" />
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand/20 to-brand/5 border border-brand/20 flex items-center justify-center shadow-lg shadow-brand/10">
+                    <item.icon className="w-8 h-8 text-brand" aria-hidden="true" />
                   </div>
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-brand text-white text-xs font-bold flex items-center justify-center">
+                  <span className="absolute -top-2.5 -right-2.5 w-7 h-7 rounded-full bg-gradient-to-br from-brand to-brand-secondary text-white text-xs font-bold flex items-center justify-center shadow-md">
                     {item.step}
                   </span>
                 </div>
@@ -225,8 +226,8 @@ export function VisitorContent({
       <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Texte */}
-            <div className="space-y-5">
+            {/* Texte (à droite en desktop) */}
+            <div className="space-y-5 order-1 md:order-2">
               <span className="text-xs font-bold tracking-widest uppercase text-brand">Entraînement guidé</span>
               <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
                 Tu n'as qu'à<br />suivre le rythme
@@ -256,7 +257,7 @@ export function VisitorContent({
               </button>
             </div>
 
-            {/* Visuel : carrousel player */}
+            {/* Visuel : carrousel player (à gauche en desktop) */}
             <ScreenshotCarousel
               images={[
                 { src: '/images/screenshot-player-reps.webp', alt: 'Player — exercice en reps' },
@@ -273,20 +274,8 @@ export function VisitorContent({
       <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Visuel : carrousel 3 modes de création (à gauche en desktop) */}
-            <div className="order-2 md:order-1">
-              <ScreenshotCarousel
-                fit="contain"
-                images={[
-                  { src: '/images/screenshot-custom-session.webp', alt: 'Créer une séance — Mode Rapide' },
-                  { src: '/images/screenshot-custom-detailed.webp', alt: 'Créer une séance — Mode Détaillé' },
-                  { src: '/images/screenshot-custom-expert.webp', alt: 'Créer une séance — Mode Expert' },
-                ]}
-              />
-            </div>
-
-            {/* Texte (à droite en desktop) */}
-            <div className="space-y-5 order-1 md:order-2">
+            {/* Texte */}
+            <div className="space-y-5">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold tracking-widest uppercase text-accent">IA sur-mesure</span>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full">Premium</span>
@@ -317,6 +306,16 @@ export function VisitorContent({
                 <ChevronRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
+
+            {/* Visuel : carrousel 3 modes de création */}
+            <ScreenshotCarousel
+              fit="contain"
+              images={[
+                { src: '/images/screenshot-custom-session.webp', alt: 'Créer une séance — Mode Rapide' },
+                { src: '/images/screenshot-custom-detailed.webp', alt: 'Créer une séance — Mode Détaillé' },
+                { src: '/images/screenshot-custom-expert.webp', alt: 'Créer une séance — Mode Expert' },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -325,8 +324,8 @@ export function VisitorContent({
       <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Texte */}
-            <div className="space-y-5">
+            {/* Texte (à droite en desktop) */}
+            <div className="space-y-5 order-1 md:order-2">
               <span className="text-xs font-bold tracking-widest uppercase text-brand-secondary">Programmes guidés</span>
               <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
                 Un plan structuré<br />pour progresser
@@ -360,8 +359,9 @@ export function VisitorContent({
               </Link>
             </div>
 
-            {/* Visuel : carrousel programmes */}
-            <ScreenshotCarousel
+            {/* Visuel : carrousel programmes (à gauche en desktop) */}
+            <div className="order-2 md:order-1">
+              <ScreenshotCarousel
               fit="contain"
               images={[
                 { src: '/images/screenshot-program-list.webp', alt: 'Liste des programmes disponibles' },
@@ -369,7 +369,8 @@ export function VisitorContent({
                 { src: '/images/screenshot-program-profil.webp', alt: 'Création de programme — Profil' },
                 { src: '/images/screenshot-program-config.webp', alt: 'Création de programme — Configuration' },
               ]}
-            />
+              />
+            </div>
           </div>
         </div>
       </section>
