@@ -1,0 +1,104 @@
+{
+  "date": "20260221",
+  "title": "Circuit Decouverte",
+  "description": "Circuit de renforcement complet avec des exercices classiques au poids du corps",
+  "estimatedDuration": 30,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine a rythme modere"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 35,
+          "instructions": "Course sur place, talons vers les fessiers"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Renforcement",
+      "rounds": 3,
+      "restBetweenExercises": 30,
+      "restBetweenRounds": 90,
+      "exercises": [
+        {
+          "name": "Pompes classiques",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+        },
+        {
+          "name": "Squats",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+        },
+        {
+          "name": "Fentes avant",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Grand pas en avant, genou arriere frole le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Gainage planche",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Sur les avant-bras, corps parfaitement aligne, serrer les abdos"
+        },
+        {
+          "name": "Crunchs",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 25,
+          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

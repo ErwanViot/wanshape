@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { useSession } from '../hooks/useSession.ts';
-import { getTodayKey, getTomorrowKey, parseDDMMYYYY } from '../utils/date.ts';
+import { getTodayKey, getTomorrowKey, parseDateKey } from '../utils/date.ts';
 
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { WelcomeModal, useShowWelcome } from './WelcomeModal.tsx';
@@ -11,7 +11,7 @@ import { ConnectedContent } from './home/ConnectedContent.tsx';
 import { VisitorContent } from './home/VisitorContent.tsx';
 
 function formatShortDate(dateKey: string): string {
-  const d = parseDDMMYYYY(dateKey);
+  const d = parseDateKey(dateKey);
   const dd = String(d.getDate()).padStart(2, '0');
   const mm = String(d.getMonth() + 1).padStart(2, '0');
   return `${dd}.${mm}.${d.getFullYear()}`;
