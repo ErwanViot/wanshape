@@ -48,7 +48,7 @@ export function ConnectedContent({
   return (
     <div className="px-6 md:px-10 lg:px-14 py-8">
       <div className="max-w-5xl mx-auto space-y-10">
-        <h1 className="sr-only">Wan2Fit — Votre séance de sport quotidienne</h1>
+        <h1 className="sr-only">Wan2Fit — Ta séance de sport quotidienne</h1>
 
         {/* ── Titre + 3 colonnes d'action ── */}
         <section>

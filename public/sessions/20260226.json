@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Jumping jacks",
@@ -42,13 +42,13 @@
           "name": "Squats",
           "mode": "reps",
           "reps": 12,
-          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
         },
         {
           "name": "Pompes classiques",
           "mode": "reps",
           "reps": 10,
-          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+          "instructions": "Mains largeur épaules, corps gaine, descendre poitrine au sol"
         },
         {
           "name": "Fentes alternees",

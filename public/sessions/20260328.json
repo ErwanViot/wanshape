@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Marche rapide sur place",
@@ -58,17 +58,17 @@
           "instructions": "Dos au sol, bras et jambes en l'air, etendre bras/jambe opposes en alternant"
         },
         {
-          "name": "Fentes arriere",
+          "name": "Fentes arrière",
           "mode": "reps",
           "reps": 10,
-          "instructions": "Grand pas en arriere, descendre le genou",
+          "instructions": "Grand pas en arrière, descendre le genou",
           "bilateral": true
         },
         {
           "name": "Burpees sans pompe",
           "mode": "reps",
           "reps": 6,
-          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+          "instructions": "Descendre, sauter les pieds en arrière, revenir, sauter debout"
         }
       ]
     },

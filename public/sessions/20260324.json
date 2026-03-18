@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Marche rapide sur place",
@@ -43,7 +43,7 @@
           "name": "Pompes larges",
           "mode": "reps",
           "reps": 10,
-          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+          "instructions": "Mains plus larges que les épaules, focus pectoraux"
         },
         {
           "name": "Goblet squat (sans poids)",
@@ -52,10 +52,10 @@
           "instructions": "Mains devant la poitrine, descendre profond"
         },
         {
-          "name": "Planche epaule",
+          "name": "Planche épaule",
           "mode": "timed",
           "duration": 30,
-          "instructions": "En planche haute, toucher l'epaule opposee en alternant"
+          "instructions": "En planche haute, toucher l'épaule opposée en alternant"
         },
         {
           "name": "Fentes laterales",
@@ -97,13 +97,13 @@
         {
           "name": "Pigeon stretch",
           "duration": 35,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {
           "name": "Scorpion stretch",
           "duration": 30,
-          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
           "bilateral": true
         },
         {

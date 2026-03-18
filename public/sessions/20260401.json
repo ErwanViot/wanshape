@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Jumping jacks",
@@ -57,7 +57,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "Sur une jambe, pencher le buste en avant, jambe arriere tendue",
+          "instructions": "Sur une jambe, pencher le buste en avant, jambe arrière tendue",
           "bilateral": true
         },
         {
@@ -112,7 +112,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 35,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

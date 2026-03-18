@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 60,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Talon-fesses",
@@ -49,20 +49,20 @@
       "duration": 480,
       "exercises": [
         {
-          "name": "Fentes arriere",
+          "name": "Fentes arrière",
           "reps": 10,
-          "instructions": "Grand pas en arriere, descendre le genou",
+          "instructions": "Grand pas en arrière, descendre le genou",
           "bilateral": true
         },
         {
           "name": "Crunchs",
           "reps": 12,
-          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+          "instructions": "Dos au sol, décoller les épaules, serrer les abdos"
         },
         {
           "name": "Pompes inclinees",
           "reps": 10,
-          "instructions": "Mains sur un support sureleve, plus facile"
+          "instructions": "Mains sur un support surélevé, plus facile"
         }
       ]
     },

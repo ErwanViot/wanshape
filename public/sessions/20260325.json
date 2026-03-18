@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Jumping jacks",
@@ -43,7 +43,7 @@
             {
               "name": "Pompes classiques",
               "reps": 10,
-              "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+              "instructions": "Mains largeur épaules, corps gaine, descendre poitrine au sol"
             },
             {
               "name": "Superman alterne",
@@ -57,7 +57,7 @@
             {
               "name": "Pompes declinees",
               "reps": 8,
-              "instructions": "Pieds sureleves sur une chaise, corps gaine"
+              "instructions": "Pieds surélevés sur une chaise, corps gaine"
             },
             {
               "name": "Prone T raises",
@@ -71,12 +71,12 @@
             {
               "name": "Dips sur chaise",
               "reps": 10,
-              "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+              "instructions": "Mains sur le bord, coudes vers l'arrière, descendre a 90 degres"
             },
             {
               "name": "Face pulls au sol",
               "reps": 12,
-              "instructions": "A plat ventre, coudes a 90 degres, tirer vers l'arriere"
+              "instructions": "A plat ventre, coudes a 90 degres, tirer vers l'arrière"
             }
           ]
         }
@@ -101,7 +101,7 @@
         {
           "name": "Scorpion stretch",
           "duration": 30,
-          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
           "bilateral": true
         },
         {

@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Jumping jacks",
@@ -49,7 +49,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 75,
-          "instructions": "Pencher le buste, une jambe se leve derriere, garder l'equilibre",
+          "instructions": "Pencher le buste, une jambe se leve derriere, garder l'équilibre",
           "bilateral": true
         },
         {
@@ -57,7 +57,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "Dos contre le mur, cuisses paralleles, maintenir la position"
+          "instructions": "Dos contre le mur, cuisses parallèles, maintenir la position"
         },
         {
           "name": "Glute bridge marche",
@@ -92,7 +92,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+          "instructions": "Dos au sol, lever bras et jambes simultanément pour toucher les pieds"
         }
       ]
     },
@@ -115,7 +115,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 35,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

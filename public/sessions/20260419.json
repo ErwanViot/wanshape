@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Jumping jacks",
@@ -39,7 +39,7 @@
         {
           "name": "Fentes avant",
           "reps": 10,
-          "instructions": "Grand pas en avant, genou arriere frole le sol"
+          "instructions": "Grand pas en avant, genou arrière frôle le sol"
         },
         {
           "name": "Pompes diamant",
@@ -54,7 +54,7 @@
         {
           "name": "Squats",
           "reps": 12,
-          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
         }
       ]
     },
@@ -71,13 +71,13 @@
         {
           "name": "Pigeon stretch",
           "duration": 35,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {
           "name": "Scorpion stretch",
           "duration": 30,
-          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
           "bilateral": true
         },
         {

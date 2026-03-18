@@ -34,7 +34,7 @@ export function ProgramList() {
   useDocumentHead({
     title: 'Programmes',
     description:
-      "Programmes d'entraînement structurés sur plusieurs semaines. Progressez à votre rythme avec des séances guidées.",
+      "Programmes d'entraînement structurés sur plusieurs semaines. Progresse à ton rythme avec des séances guidées.",
   });
 
   return (

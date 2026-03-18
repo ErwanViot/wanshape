@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 60,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Marche rapide sur place",
@@ -44,7 +44,7 @@
         {
           "name": "Squats",
           "reps": 10,
-          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
         }
       ]
     },
@@ -56,7 +56,7 @@
         {
           "name": "Fentes avant",
           "reps": 8,
-          "instructions": "Grand pas en avant, genou arriere frole le sol"
+          "instructions": "Grand pas en avant, genou arrière frôle le sol"
         },
         {
           "name": "Toe touches",
@@ -66,7 +66,7 @@
         {
           "name": "Pompes larges",
           "reps": 8,
-          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+          "instructions": "Mains plus larges que les épaules, focus pectoraux"
         }
       ]
     },

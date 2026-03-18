@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Jumping jacks",
@@ -42,20 +42,20 @@
           "name": "Fentes avant",
           "mode": "reps",
           "reps": 10,
-          "instructions": "Grand pas en avant, genou arriere frole le sol",
+          "instructions": "Grand pas en avant, genou arrière frôle le sol",
           "bilateral": true
         },
         {
           "name": "Pompes declinees",
           "mode": "reps",
           "reps": 8,
-          "instructions": "Pieds sureleves sur une chaise, corps gaine"
+          "instructions": "Pieds surélevés sur une chaise, corps gaine"
         },
         {
           "name": "Gainage Superman",
           "mode": "timed",
           "duration": 25,
-          "instructions": "En planche, lever un bras et la jambe opposee, alterner"
+          "instructions": "En planche, lever un bras et la jambe opposée, alterner"
         },
         {
           "name": "Good morning",
@@ -79,7 +79,7 @@
       "exercises": [
         {
           "name": "Pompes classiques",
-          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+          "instructions": "Mains largeur épaules, corps gaine, descendre poitrine au sol"
         },
         {
           "name": "Squats sautes",

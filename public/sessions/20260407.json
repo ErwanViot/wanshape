@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Jumping jacks",
@@ -48,7 +48,7 @@
           "name": "Pompes classiques",
           "mode": "reps",
           "reps": 10,
-          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+          "instructions": "Mains largeur épaules, corps gaine, descendre poitrine au sol"
         },
         {
           "name": "Mountain climbers",
@@ -78,11 +78,11 @@
       "exercises": [
         {
           "name": "Burpees sans pompe",
-          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+          "instructions": "Descendre, sauter les pieds en arrière, revenir, sauter debout"
         },
         {
           "name": "V-ups",
-          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+          "instructions": "Dos au sol, lever bras et jambes simultanément pour toucher les pieds"
         }
       ]
     },

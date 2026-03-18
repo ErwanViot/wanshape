@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 60,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Montees de genoux moderees",
@@ -41,14 +41,14 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "Se pencher en arriere, genoux vers l'avant, quadriceps en feu"
+          "instructions": "Se pencher en arrière, genoux vers l'avant, quadriceps en feu"
         },
         {
           "name": "Fentes avant",
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "Grand pas en avant, genou arriere frole le sol",
+          "instructions": "Grand pas en avant, genou arrière frôle le sol",
           "bilateral": true
         },
         {
@@ -63,7 +63,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "Sur une jambe, pencher le buste en avant, jambe arriere tendue",
+          "instructions": "Sur une jambe, pencher le buste en avant, jambe arrière tendue",
           "bilateral": true
         }
       ]
@@ -78,7 +78,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "En planche, lever un bras et la jambe opposee, alterner"
+          "instructions": "En planche, lever un bras et la jambe opposée, alterner"
         },
         {
           "name": "Leg raises",
@@ -92,7 +92,7 @@
           "sets": 3,
           "reps": 12,
           "restBetweenSets": 60,
-          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+          "instructions": "Dos au sol, décoller les épaules, serrer les abdos"
         }
       ]
     },
@@ -115,7 +115,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 30,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

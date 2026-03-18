@@ -55,7 +55,7 @@ const DEFAULT_DRAFT: DraftState = {
 };
 
 export function CreateProgramPage() {
-  useDocumentHead({ title: 'Créer mon programme — Wan2Fit' });
+  useDocumentHead({ title: 'Créer mon programme' });
 
   const navigate = useNavigate();
   const { generate, loading: generating, error: generateError } = useGenerateProgram();

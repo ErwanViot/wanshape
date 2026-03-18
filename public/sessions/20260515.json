@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 60,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Jumping jacks",
@@ -40,7 +40,7 @@
       "exercises": [
         {
           "name": "Burpees sans pompe",
-          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+          "instructions": "Descendre, sauter les pieds en arrière, revenir, sauter debout"
         },
         {
           "name": "Tuck jumps",
@@ -83,7 +83,7 @@
         {
           "name": "Scorpion stretch",
           "duration": 30,
-          "instructions": "A plat ventre, amener le pied vers la main opposee en tournant",
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
           "bilateral": true
         },
         {
