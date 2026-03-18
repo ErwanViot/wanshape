@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 60,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Talon-fesses",
@@ -56,7 +56,7 @@
           "sets": 3,
           "reps": 8,
           "restBetweenSets": 60,
-          "instructions": "Pousser fort pour decoller les mains du sol"
+          "instructions": "Pousser fort pour décoller les mains du sol"
         }
       ]
     },
@@ -77,7 +77,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "A plat ventre, coudes a 90 degres, tirer vers l'arriere"
+          "instructions": "A plat ventre, coudes a 90 degres, tirer vers l'arrière"
         },
         {
           "name": "Reverse snow angels",

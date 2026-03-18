@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Talon-fesses",
@@ -39,7 +39,7 @@
         {
           "name": "Pompes classiques",
           "reps": 8,
-          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+          "instructions": "Mains largeur épaules, corps gaine, descendre poitrine au sol"
         },
         {
           "name": "Squats sautes",
@@ -66,7 +66,7 @@
         {
           "name": "V-ups",
           "reps": 10,
-          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+          "instructions": "Dos au sol, lever bras et jambes simultanément pour toucher les pieds"
         }
       ]
     },

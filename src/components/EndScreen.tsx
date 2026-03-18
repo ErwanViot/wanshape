@@ -33,7 +33,9 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
     });
   }, [user, save, session.date, programSessionId, customSessionId, durationSeconds, amrapRounds]);
 
-  const realMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
+  const rawMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
+  const realMinutes = rawMinutes > 0 ? rawMinutes : 1;
+  const displayMinutes = (durationSeconds > 0 && durationSeconds < 60) ? '< 1' : String(realMinutes);
 
   const [shareState, setShareState] = useState<'idle' | 'loading' | 'shared' | 'copied'>('idle');
 
@@ -89,7 +91,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 
       <div className="flex gap-6">
         <div className="text-center">
-          <div className="text-3xl font-bold text-white">{realMinutes}</div>
+          <div className="text-3xl font-bold text-white">{displayMinutes}</div>
           <div className="text-white/50 text-sm">minutes</div>
         </div>
         <div className="text-center">

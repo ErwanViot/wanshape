@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 60,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Montees de genoux moderees",
@@ -42,7 +42,7 @@
           "name": "Pompes explosives",
           "mode": "reps",
           "reps": 8,
-          "instructions": "Pousser fort pour decoller les mains du sol"
+          "instructions": "Pousser fort pour décoller les mains du sol"
         },
         {
           "name": "Squats sautes",
@@ -82,7 +82,7 @@
         },
         {
           "name": "Squats",
-          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
         }
       ]
     },
@@ -105,7 +105,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 30,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

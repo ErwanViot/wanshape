@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Marche rapide sur place",
@@ -40,7 +40,7 @@
       "exercises": [
         {
           "name": "Burpees sans pompe",
-          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+          "instructions": "Descendre, sauter les pieds en arrière, revenir, sauter debout"
         },
         {
           "name": "Squat jumps",
@@ -79,7 +79,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 30,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

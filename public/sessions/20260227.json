@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Marche rapide sur place",
@@ -55,7 +55,7 @@
           "sets": 3,
           "reps": 12,
           "restBetweenSets": 60,
-          "instructions": "Mains sur le bord, coudes vers l'arriere, descendre a 90 degres"
+          "instructions": "Mains sur le bord, coudes vers l'arrière, descendre a 90 degres"
         }
       ]
     },
@@ -83,7 +83,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "A plat ventre, lever bras et jambes simultanement, maintenir 2s"
+          "instructions": "A plat ventre, lever bras et jambes simultanément, maintenir 2s"
         }
       ]
     },

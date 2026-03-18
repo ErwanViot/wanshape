@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Talon-fesses",
@@ -49,7 +49,7 @@
           "name": "Pompes declinees",
           "mode": "reps",
           "reps": 8,
-          "instructions": "Pieds sureleves sur une chaise, corps gaine"
+          "instructions": "Pieds surélevés sur une chaise, corps gaine"
         },
         {
           "name": "Planche epaule",
@@ -67,7 +67,7 @@
           "name": "Superman",
           "mode": "reps",
           "reps": 12,
-          "instructions": "A plat ventre, lever bras et jambes simultanement, maintenir 2s"
+          "instructions": "A plat ventre, lever bras et jambes simultanément, maintenir 2s"
         }
       ]
     },
@@ -79,11 +79,11 @@
       "exercises": [
         {
           "name": "Burpees sans pompe",
-          "instructions": "Descendre, sauter les pieds en arriere, revenir, sauter debout"
+          "instructions": "Descendre, sauter les pieds en arrière, revenir, sauter debout"
         },
         {
           "name": "Crunchs",
-          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+          "instructions": "Dos au sol, décoller les épaules, serrer les abdos"
         }
       ]
     },
@@ -106,7 +106,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 35,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

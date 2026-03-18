@@ -44,7 +44,7 @@ const BODY_FOCUS_OPTIONS: { value: BodyFocus; label: string }[] = [
 ];
 
 export function CustomSessionPage() {
-  useDocumentHead({ title: 'Créer ma séance — Wan2Fit' });
+  useDocumentHead({ title: 'Créer ma séance' });
 
   const { user } = useAuth();
   const navigate = useNavigate();

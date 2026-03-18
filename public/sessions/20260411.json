@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Marche rapide sur place",
@@ -39,17 +39,17 @@
         {
           "name": "Pompes explosives",
           "reps": 8,
-          "instructions": "Pousser fort pour decoller les mains du sol"
+          "instructions": "Pousser fort pour décoller les mains du sol"
         },
         {
           "name": "Squats",
           "reps": 12,
-          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
         },
         {
           "name": "V-ups",
           "reps": 10,
-          "instructions": "Dos au sol, lever bras et jambes simultanement pour toucher les pieds"
+          "instructions": "Dos au sol, lever bras et jambes simultanément pour toucher les pieds"
         }
       ]
     },

@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Montees de genoux moderees",
@@ -48,7 +48,7 @@
           "name": "Pompes larges",
           "mode": "reps",
           "reps": 10,
-          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+          "instructions": "Mains plus larges que les épaules, focus pectoraux"
         },
         {
           "name": "Planche epaule",
@@ -90,7 +90,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 35,
-          "instructions": "Jambe avant pliee devant, jambe arriere tendue, se pencher",
+          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

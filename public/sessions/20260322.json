@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Pas chasses",
@@ -39,12 +39,12 @@
         {
           "name": "Squats",
           "reps": 10,
-          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
         },
         {
           "name": "Pompes inclinees",
           "reps": 8,
-          "instructions": "Mains sur un support sureleve, plus facile"
+          "instructions": "Mains sur un support surélevé, plus facile"
         },
         {
           "name": "Fentes alternees",
@@ -54,7 +54,7 @@
         {
           "name": "Crunchs",
           "reps": 12,
-          "instructions": "Dos au sol, decoller les epaules, serrer les abdos"
+          "instructions": "Dos au sol, décoller les épaules, serrer les abdos"
         }
       ]
     },

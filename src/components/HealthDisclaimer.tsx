@@ -79,15 +79,15 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
             ne s'agit pas de coaching sportif personnalisé ni d'encadrement par un éducateur sportif diplômé.
           </p>
           <p>
-            Les séances sont des suggestions d'exercices à caractère général. Vous êtes seul responsable de leur
-            exécution et de leur adaptation à votre condition physique.
+            Les séances sont des suggestions d'exercices à caractère général. Tu es seul responsable de leur
+            exécution et de leur adaptation à ta condition physique.
           </p>
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
             <p className="font-semibold text-amber-800">Avant de pratiquer :</p>
             <ul className="list-disc list-inside space-y-1 text-amber-700">
-              <li>Consultez un médecin pour vérifier votre aptitude sportive</li>
-              <li>Ne pratiquez pas en cas de contre-indication médicale</li>
-              <li>Arrêtez immédiatement en cas de douleur ou de malaise</li>
+              <li>Consulte un médecin pour vérifier ton aptitude sportive</li>
+              <li>Ne pratique pas en cas de contre-indication médicale</li>
+              <li>Arrête immédiatement en cas de douleur ou de malaise</li>
             </ul>
           </div>
           <p className="text-gray-400 text-xs">

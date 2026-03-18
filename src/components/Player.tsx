@@ -319,7 +319,7 @@ export function Player({
       <div className="px-6 pb-3 text-center">
         <p className="text-xs text-white inline-flex items-center gap-1.5">
           <HeartPulse className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-          Écoutez votre corps. En cas de douleur, arrêtez immédiatement.
+          Écoute ton corps. En cas de douleur, arrête immédiatement.
         </p>
       </div>
     </div>

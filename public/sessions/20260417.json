@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Marche rapide sur place",
@@ -40,11 +40,11 @@
       "exercises": [
         {
           "name": "Pompes inclinees",
-          "instructions": "Mains sur un support sureleve, plus facile"
+          "instructions": "Mains sur un support surélevé, plus facile"
         },
         {
           "name": "Squats",
-          "instructions": "Pieds largeur epaules, descendre cuisses paralleles au sol"
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
         }
       ]
     },

@@ -12,7 +12,7 @@
         {
           "name": "Rotations articulaires",
           "duration": 45,
-          "instructions": "Cou, epaules, poignets, hanches, chevilles - lents et controles"
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
         },
         {
           "name": "Marche rapide sur place",
@@ -39,7 +39,7 @@
         {
           "name": "Pompes larges",
           "reps": 10,
-          "instructions": "Mains plus larges que les epaules, focus pectoraux"
+          "instructions": "Mains plus larges que les épaules, focus pectoraux"
         },
         {
           "name": "Squats sumo",
@@ -59,14 +59,14 @@
       "duration": 480,
       "exercises": [
         {
-          "name": "Fentes arriere",
+          "name": "Fentes arrière",
           "reps": 10,
-          "instructions": "Grand pas en arriere, descendre le genou"
+          "instructions": "Grand pas en arrière, descendre le genou"
         },
         {
           "name": "Pompes classiques",
           "reps": 10,
-          "instructions": "Mains largeur epaules, corps gaine, descendre poitrine au sol"
+          "instructions": "Mains largeur épaules, corps gaine, descendre poitrine au sol"
         },
         {
           "name": "Bicycle crunchs",
