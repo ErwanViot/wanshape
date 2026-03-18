@@ -305,7 +305,7 @@ export function CustomSessionPage() {
       {loading && (
         <div className="mt-4 flex items-center justify-center gap-3">
           <div className="w-5 h-5 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
-          <p className="text-sm text-muted">L'IA prépare votre séance...</p>
+          <p className="text-sm text-muted">L'IA prépare ta séance...</p>
         </div>
       )}
 

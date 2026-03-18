@@ -51,10 +51,10 @@
           "instructions": "Squat explosif avec saut, amortir a la reception"
         },
         {
-          "name": "Planche epaule",
+          "name": "Planche épaule",
           "mode": "timed",
           "duration": 30,
-          "instructions": "En planche haute, toucher l'epaule opposee en alternant"
+          "instructions": "En planche haute, toucher l'épaule opposée en alternant"
         },
         {
           "name": "Fentes sautees",

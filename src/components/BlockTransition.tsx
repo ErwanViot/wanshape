@@ -14,9 +14,9 @@ function HealthDisclaimer() {
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl px-5 py-4 max-w-sm text-left space-y-2">
       <p className="text-white/90 text-sm font-medium">Avant de commencer :</p>
       <ul className="text-white/70 text-sm space-y-1.5">
-        <li className="flex items-center gap-2"><Cross className="w-4 h-4 shrink-0 text-white/50" aria-hidden="true" /> Consultez un médecin en cas de doute</li>
-        <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 shrink-0 text-white/50" aria-hidden="true" /> Assurez-vous de n'avoir aucune contre-indication</li>
-        <li className="flex items-center gap-2"><OctagonX className="w-4 h-4 shrink-0 text-white/50" aria-hidden="true" /> Arrêtez immédiatement en cas de douleur</li>
+        <li className="flex items-center gap-2"><Cross className="w-4 h-4 shrink-0 text-white/50" aria-hidden="true" /> Consulte un médecin en cas de doute</li>
+        <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 shrink-0 text-white/50" aria-hidden="true" /> Assure-toi de n'avoir aucune contre-indication</li>
+        <li className="flex items-center gap-2"><OctagonX className="w-4 h-4 shrink-0 text-white/50" aria-hidden="true" /> Arrête immédiatement en cas de douleur</li>
       </ul>
     </div>
   );
