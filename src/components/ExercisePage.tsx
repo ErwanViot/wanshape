@@ -71,10 +71,10 @@ export function ExercisePage() {
           <video
             src={`${exercise.video}#t=0.1`}
             controls
-            loop
             muted
             playsInline
             preload="metadata"
+            aria-label={`Démonstration : ${exercise.name}`}
             className="w-full rounded-xl"
           />
         )}
@@ -128,10 +128,10 @@ export function ExercisePage() {
                   <video
                     src={`${v.video}#t=0.1`}
                     controls
-                    loop
                     muted
                     playsInline
                     preload="metadata"
+                    aria-label={`Démonstration : ${v.name}`}
                     className="w-full rounded-lg mt-2"
                   />
                 )}

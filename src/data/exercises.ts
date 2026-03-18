@@ -1170,11 +1170,6 @@ export const EXERCISES_DATA: ExerciseData[] = [
         video: '/videos/scorpion-stretch.mp4',
       },
       {
-        name: "Child's pose",
-        description:
-          "À genoux, asseyez-vous sur les talons et penchez le buste vers l'avant, bras tendus devant vous, front au sol. Genoux serrés pour cibler le bas du dos, ou écartés pour ouvrir les hanches. Maintien passif de 30 à 60 secondes en respirant profondément. Posture de récupération fondamentale.",
-      },
-      {
         name: "World's greatest stretch",
         description:
           "En position de fente basse, posez la main intérieure au sol, puis effectuez une rotation du buste en levant l'autre bras vers le ciel. Combine fente, rotation thoracique et ouverture de hanche en un seul mouvement complet. Le roi des échauffements.",
