@@ -44,7 +44,7 @@ export function VisitorContent({
       <section className="relative min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/hero-landing.webp"
+            src="/images/hero-landing-couple.webp"
             alt=""
             className="w-full h-full object-cover"
           />
@@ -61,12 +61,12 @@ export function VisitorContent({
             </div>
 
             <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.05] max-w-xl stagger-fade-in stagger-2">
-              Progresse
+              <span className="text-outline">Progresse</span>
               <br />
               <span className="gradient-text">à ton rythme</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-white/70 max-w-lg leading-relaxed stagger-fade-in stagger-3">
+            <p className="text-lg md:text-xl text-white/70 max-w-lg leading-relaxed text-outline stagger-fade-in stagger-3">
               Une séance guidée chaque jour, 8 formats variés, 25-40 min. Gratuit pour commencer, premium pour aller plus loin.
             </p>
 
@@ -314,6 +314,7 @@ export function VisitorContent({
                 { src: '/images/screenshot-custom-session.webp', alt: 'Créer une séance — Mode Rapide' },
                 { src: '/images/screenshot-custom-detailed.webp', alt: 'Créer une séance — Mode Détaillé' },
                 { src: '/images/screenshot-custom-expert.webp', alt: 'Créer une séance — Mode Expert' },
+                { src: '/images/screenshot-custom-detail.webp', alt: 'Détail d\'une séance personnalisée' },
               ]}
             />
           </div>
