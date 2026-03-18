@@ -27,7 +27,7 @@
         {
           "name": "Hip 90/90",
           "duration": 30,
-          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un cote a l'autre"
         }
       ]
     },
@@ -61,7 +61,7 @@
           "name": "Good morning",
           "mode": "reps",
           "reps": 12,
-          "instructions": "Mains derriere la tete, pencher le buste en gardant le dos droit"
+          "instructions": "Mains derrière la tete, pencher le buste en gardant le dos droit"
         },
         {
           "name": "High knees",
@@ -94,13 +94,13 @@
         {
           "name": "Etirement quadriceps debout",
           "duration": 30,
-          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
           "bilateral": true
         },
         {
           "name": "Etirement pectoraux",
           "duration": 25,
-          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
           "bilateral": true
         },
         {

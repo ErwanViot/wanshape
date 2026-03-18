@@ -65,7 +65,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 60,
-          "instructions": "Mains sur le bord, coudes vers l'arrière, descendre a 90 degres"
+          "instructions": "Mains sur le bord, coudes vers l'arrière, descendre à 90 degrés"
         },
         {
           "name": "Russian twists",
@@ -89,13 +89,13 @@
         {
           "name": "Etirement pectoraux",
           "duration": 25,
-          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
           "bilateral": true
         },
         {
           "name": "Pigeon stretch",
           "duration": 30,
-          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

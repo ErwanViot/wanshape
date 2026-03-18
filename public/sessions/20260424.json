@@ -57,7 +57,7 @@
           "sets": 3,
           "reps": 12,
           "restBetweenSets": 60,
-          "instructions": "Ventre sur le bord, lever les jambes derriere soi"
+          "instructions": "Ventre sur le bord, lever les jambes derrière soi"
         },
         {
           "name": "Glute bridge",
@@ -115,7 +115,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 35,
-          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

@@ -34,7 +34,7 @@ describe('expandCircuit', () => {
 
     expect(steps[1].phase).toBe('prepare');
     expect(steps[1].duration).toBe(PREPARE_COUNTDOWN);
-    expect(steps[1].instructions).toBe('Préparez-vous !');
+    expect(steps[1].instructions).toBe('Prépare-toi !');
   });
 
   it('does not add prepare countdown when first exercise is reps-based', () => {

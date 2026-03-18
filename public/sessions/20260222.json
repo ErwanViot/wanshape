@@ -81,7 +81,7 @@
         {
           "name": "Etirement quadriceps debout",
           "duration": 30,
-          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
           "bilateral": true
         },
         {
@@ -93,7 +93,7 @@
         {
           "name": "Etirement pectoraux",
           "duration": 25,
-          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
           "bilateral": true
         },
         {

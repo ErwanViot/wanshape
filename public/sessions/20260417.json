@@ -58,7 +58,7 @@
           "sets": 3,
           "reps": 12,
           "restBetweenSets": 60,
-          "instructions": "Mains derriere la tete, pencher le buste en gardant le dos droit"
+          "instructions": "Mains derrière la tete, pencher le buste en gardant le dos droit"
         },
         {
           "name": "Gainage planche",
@@ -89,7 +89,7 @@
         {
           "name": "Etirement pectoraux",
           "duration": 30,
-          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
           "bilateral": true
         },
         {

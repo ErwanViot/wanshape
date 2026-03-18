@@ -22,7 +22,7 @@
         {
           "name": "Hip 90/90",
           "duration": 40,
-          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un cote a l'autre"
         },
         {
           "name": "Deep squat hold",
@@ -41,7 +41,7 @@
           "sets": 3,
           "reps": 12,
           "restBetweenSets": 60,
-          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+          "instructions": "Pieds tres largement écartés, pointes vers l'extérieur"
         },
         {
           "name": "Fentes arrière",
@@ -103,7 +103,7 @@
         {
           "name": "Etirement quadriceps debout",
           "duration": 30,
-          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
           "bilateral": true
         },
         {
@@ -115,7 +115,7 @@
         {
           "name": "Pigeon stretch",
           "duration": 30,
-          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {

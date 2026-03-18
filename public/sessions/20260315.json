@@ -22,7 +22,7 @@
         {
           "name": "Hip 90/90",
           "duration": 35,
-          "instructions": "Assis, jambes a 90 degres, pivoter d'un cote a l'autre"
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un cote a l'autre"
         },
         {
           "name": "Inchworms",
@@ -49,7 +49,7 @@
           "sets": 3,
           "reps": 10,
           "restBetweenSets": 75,
-          "instructions": "Pencher le buste, une jambe se leve derriere, garder l'équilibre",
+          "instructions": "Pencher le buste, une jambe se lève derrière, garder l'équilibre",
           "bilateral": true
         },
         {
@@ -109,13 +109,13 @@
         {
           "name": "Etirement quadriceps debout",
           "duration": 30,
-          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
           "bilateral": true
         },
         {
           "name": "Pigeon stretch",
           "duration": 35,
-          "instructions": "Jambe avant pliee devant, jambe arrière tendue, se pencher",
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
           "bilateral": true
         },
         {
