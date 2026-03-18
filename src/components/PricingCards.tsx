@@ -41,7 +41,7 @@ export function PricingCards() {
 
   const handleCheckout = async () => {
     if (!acceptedCgv) {
-      setError('Veuillez accepter les CGV pour continuer.');
+      setError('Accepte les CGV pour continuer.');
       return;
     }
     const priceId = PRICE_IDS[selectedPlan];
