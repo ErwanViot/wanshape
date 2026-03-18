@@ -64,6 +64,9 @@ const LazyPremiumPromoPage = lazy(() =>
 const LazyAboutPage = lazy(() =>
   import('./components/AboutPage.tsx').then((m) => ({ default: m.AboutPage })),
 );
+const LazySeancesPage = lazy(() =>
+  import('./components/SeancesPage.tsx').then((m) => ({ default: m.SeancesPage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -182,6 +185,16 @@ export const router = createBrowserRouter([
         ),
       },
       { path: 'stats', element: <Navigate to="/suivi" replace /> },
+      {
+        path: 'seances',
+        element: (
+          <Lazy>
+            <RequireAuth>
+              <LazySeancesPage />
+            </RequireAuth>
+          </Lazy>
+        ),
+      },
       {
         path: 'parametres',
         element: (

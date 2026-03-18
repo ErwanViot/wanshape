@@ -4,6 +4,7 @@ import { AuthButton } from './auth/AuthButton.tsx';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Accueil', match: (p: string) => p === '/' },
+  { to: '/seances', label: 'Séances', match: (p: string) => p === '/seances' || p.startsWith('/seance'), requiresAuth: true },
   {
     to: '/decouvrir',
     label: 'Explorer',

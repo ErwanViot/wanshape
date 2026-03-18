@@ -1,10 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { useHealthCheck } from '../hooks/useHealthCheck.ts';
-import { getInitials } from '../utils/getInitials.ts';
-import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 
-function HomeIcon() {
+function DumbbellIcon() {
   return (
     <svg
       aria-hidden="true"
@@ -17,8 +14,8 @@ function HomeIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
+      <path d="M6.5 6.5h11M6.5 17.5h11" />
+      <path d="M4 10v4M8 8v8M16 8v8M20 10v4" />
     </svg>
   );
 }
@@ -63,6 +60,25 @@ function ProgramsIcon() {
   );
 }
 
+function HomeIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  );
+}
+
 function UserIcon() {
   return (
     <svg
@@ -102,21 +118,6 @@ function ChartIcon() {
   );
 }
 
-function PlayIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      stroke="none"
-    >
-      <polygon points="6 3 20 12 6 21 6 3" />
-    </svg>
-  );
-}
-
 function NavItem({
   to,
   label,
@@ -144,70 +145,54 @@ function NavItem({
 
 export function BottomNav() {
   const { pathname } = useLocation();
-  const { user, profile } = useAuth();
-  const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
+  const { user } = useAuth();
 
   const isHome = pathname === '/';
-  const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
+  const isSeances = pathname === '/seances' || pathname.startsWith('/seance');
   const isPrograms = pathname.startsWith('/programme');
+  const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
   const isSuivi = pathname === '/suivi';
-  const isProfile = pathname === '/parametres' || pathname === '/profil' || pathname === '/login' || pathname === '/signup';
-
-  const suiviTo = user ? '/suivi' : '/login';
-  const profileTo = user ? '/parametres' : '/login';
-  const profileLabel = user ? 'Profil' : 'Connexion';
+  const isLogin = pathname === '/login' || pathname === '/signup';
 
   return (
-    <>
-      {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
-
-      <nav
-        className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-divider md:hidden"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-        aria-label="Navigation principale"
-      >
-        <div className="flex items-end justify-around h-16 max-w-lg mx-auto relative">
-          <NavItem to="/" label="Accueil" active={isHome}>
-            <HomeIcon />
-          </NavItem>
-          <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
-            <DiscoverIcon />
-          </NavItem>
-
-          {/* Center FAB — Play button */}
-          <div className="flex flex-col items-center -mt-5">
-            <button
-              type="button"
-              onClick={() => guardNavigation('/seance/play')}
-              className="fab-button w-14 h-14 rounded-full flex items-center justify-center text-white cursor-pointer"
-              aria-label="Lancer la séance du jour"
-            >
-              <PlayIcon />
-            </button>
-          </div>
-
-          <NavItem to="/programmes" label="Programmes" active={isPrograms}>
-            <ProgramsIcon />
-          </NavItem>
-          {user && (
-            <NavItem to={suiviTo} label="Suivi" active={isSuivi}>
+    <nav
+      className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-divider md:hidden"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+      aria-label="Navigation principale"
+    >
+      <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
+        {user ? (
+          <>
+            <NavItem to="/seances" label="Séances" active={isSeances}>
+              <DumbbellIcon />
+            </NavItem>
+            <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+              <ProgramsIcon />
+            </NavItem>
+            <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
+              <DiscoverIcon />
+            </NavItem>
+            <NavItem to="/suivi" label="Suivi" active={isSuivi}>
               <ChartIcon />
             </NavItem>
-          )}
-          {!user && (
-          <NavItem to={profileTo} label={profileLabel} active={isProfile}>
-            <UserIcon />
-          </NavItem>
-          )}
-          {user && (
-            <NavItem to={profileTo} label={profileLabel} active={isProfile}>
-              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] text-white font-bold bg-brand">
-                {getInitials(profile?.display_name ?? user.user_metadata?.display_name, user.email)}
-              </div>
+          </>
+        ) : (
+          <>
+            <NavItem to="/" label="Accueil" active={isHome}>
+              <HomeIcon />
             </NavItem>
-          )}
-        </div>
-      </nav>
-    </>
+            <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+              <ProgramsIcon />
+            </NavItem>
+            <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
+              <DiscoverIcon />
+            </NavItem>
+            <NavItem to="/login" label="Connexion" active={isLogin}>
+              <UserIcon />
+            </NavItem>
+          </>
+        )}
+      </div>
+    </nav>
   );
 }
