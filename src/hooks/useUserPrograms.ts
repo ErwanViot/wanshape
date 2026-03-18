@@ -5,7 +5,7 @@ import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program } from '../types/completion.ts';
 
 export function useUserPrograms() {
-  const { user } = useAuth();
+  const { user, dataGeneration } = useAuth();
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,9 +35,6 @@ export function useUserPrograms() {
     }
   }, [user]);
 
-  // Refetch on mount (key={pathname} in PublicLayout forces remount on navigation)
-  // and when user or dataGeneration changes (idle return)
-  const { dataGeneration } = useAuth();
   useEffect(() => {
     fetchPrograms();
   }, [fetchPrograms, dataGeneration]);
