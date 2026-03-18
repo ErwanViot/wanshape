@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
+import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Subscription } from '../types/subscription.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 
 export function useSubscription() {
-  const { profile, user } = useAuth();
+  const { profile, user, dataGeneration } = useAuth();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -24,15 +25,18 @@ export function useSubscription() {
 
     (async () => {
       try {
-        const { data } = await supabase
-          .from('subscriptions')
-          .select('*')
-          .eq('user_id', user.id)
-          .in('status', ['active', 'past_due', 'trialing'])
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .maybeSingle();
+        const { data, sessionExpired } = await supabaseQuery(() =>
+          supabase!
+            .from('subscriptions')
+            .select('*')
+            .eq('user_id', user.id)
+            .in('status', ['active', 'past_due', 'trialing'])
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .maybeSingle(),
+        );
 
+        if (sessionExpired) { notifySessionExpired(); return; }
         if (!cancelled) setSubscription(data as Subscription | null);
       } catch (err) {
         console.error('Subscription fetch error:', err);
@@ -42,7 +46,7 @@ export function useSubscription() {
     })();
 
     return () => { cancelled = true; };
-  }, [user, isPremium]);
+  }, [user, isPremium, dataGeneration]);
 
   const checkout = useCallback(
     async (priceId: string): Promise<string | null> => {

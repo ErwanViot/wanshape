@@ -15,6 +15,7 @@ export function useUserPrograms() {
       return;
     }
 
+    setLoading(true);
     try {
       const { data, sessionExpired } = await supabaseQuery(() =>
         supabase!
@@ -34,9 +35,12 @@ export function useUserPrograms() {
     }
   }, [user]);
 
+  // Refetch on mount (key={pathname} in PublicLayout forces remount on navigation)
+  // and when user or dataGeneration changes (idle return)
+  const { dataGeneration } = useAuth();
   useEffect(() => {
     fetchPrograms();
-  }, [fetchPrograms]);
+  }, [fetchPrograms, dataGeneration]);
 
   const deleteProgram = useCallback(async (id: string) => {
     if (!supabase) return false;
