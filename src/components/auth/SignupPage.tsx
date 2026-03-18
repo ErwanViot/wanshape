@@ -69,7 +69,7 @@ export function SignupPage() {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <p className="text-strong font-medium mb-1">Vérifiez votre boîte mail</p>
+              <p className="text-strong font-medium mb-1">Vérifie ta boîte mail</p>
               <p className="text-sm text-muted">
                 Un lien de confirmation a été envoyé à <strong className="text-strong">{email}</strong>
               </p>

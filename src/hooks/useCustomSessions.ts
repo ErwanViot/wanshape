@@ -32,7 +32,7 @@ export function useCustomSessions(userId: string | undefined) {
 
       if (sessionExpired) {
         notifySessionExpired();
-        setError('Session expirée. Veuillez rafraîchir la page.');
+        setError('Session expirée. Rafraîchis la page.');
       } else if (fetchError) {
         setError('Impossible de charger l\u2019historique.');
       } else {

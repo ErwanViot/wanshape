@@ -44,7 +44,7 @@
         {
           "name": "Squats sumo",
           "reps": 12,
-          "instructions": "Pieds tres largement ecartes, pointes vers l'exterieur"
+          "instructions": "Pieds tres largement écartés, pointes vers l'extérieur"
         },
         {
           "name": "Planche to downward dog",
@@ -60,7 +60,7 @@
         {
           "name": "Etirement pectoraux",
           "duration": 25,
-          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
           "bilateral": true
         },
         {

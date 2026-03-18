@@ -23,14 +23,14 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 const ERROR_FR: Record<string, string> = {
   'Invalid login credentials': 'Email ou mot de passe incorrect.',
-  'Email not confirmed': 'Veuillez confirmer votre adresse email avant de vous connecter.',
+  'Email not confirmed': 'Confirme ton adresse email avant de te connecter.',
   'User already registered': 'Un compte existe déjà avec cet email.',
   'Password should be at least 6 characters': 'Le mot de passe doit contenir au moins 6 caractères.',
-  'For security purposes, you can only request this after': 'Veuillez patienter avant de réessayer.',
+  'For security purposes, you can only request this after': 'Patiente avant de réessayer.',
   'Unable to validate email address: invalid format': 'Adresse email invalide.',
   'New password should be different from the old password': 'Le nouveau mot de passe doit être différent de l\u2019ancien.',
-  'Auth session missing': 'Session expirée. Veuillez vous reconnecter.',
-  'Email rate limit exceeded': 'Trop de tentatives. Veuillez patienter quelques minutes.',
+  'Auth session missing': 'Session expirée. Reconnecte-toi.',
+  'Email rate limit exceeded': 'Trop de tentatives. Patiente quelques minutes.',
 };
 
 function translateError(message: string | undefined): string | null {
@@ -38,7 +38,7 @@ function translateError(message: string | undefined): string | null {
   for (const [en, fr] of Object.entries(ERROR_FR)) {
     if (message.includes(en)) return fr;
   }
-  return 'Une erreur est survenue. Veuillez réessayer.';
+  return 'Une erreur est survenue. Réessaye.';
 }
 
 async function fetchProfile(userId: string): Promise<Profile | null> {

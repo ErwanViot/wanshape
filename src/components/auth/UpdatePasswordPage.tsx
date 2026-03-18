@@ -14,7 +14,7 @@ export function UpdatePasswordPage() {
 
   useDocumentHead({
     title: 'Nouveau mot de passe',
-    description: 'Choisissez un nouveau mot de passe pour votre compte Wan2Fit.',
+    description: 'Choisis un nouveau mot de passe pour ton compte Wan2Fit.',
   });
 
   const handleSubmit = async (e: FormEvent) => {
@@ -38,7 +38,7 @@ export function UpdatePasswordPage() {
       const result = await Promise.race([
         updatePassword(password),
         new Promise<{ error: string | null }>((resolve) =>
-          setTimeout(() => resolve({ error: 'Le serveur met trop de temps à répondre. Veuillez réessayer.' }), 30_000),
+          setTimeout(() => resolve({ error: 'Le serveur met trop de temps à répondre. Réessaye.' }), 30_000),
         ),
       ]);
       if (result.error) {
@@ -48,7 +48,7 @@ export function UpdatePasswordPage() {
         window.location.replace('/');
       }
     } catch {
-      setError('Une erreur est survenue. Veuillez réessayer.');
+      setError('Une erreur est survenue. Réessaye.');
       setSubmitting(false);
     }
   };
@@ -83,7 +83,7 @@ export function UpdatePasswordPage() {
             </svg>
           </div>
           <p className="text-strong font-medium mb-1">Lien expiré ou invalide</p>
-          <p className="text-sm text-muted mb-6">Veuillez refaire une demande de réinitialisation.</p>
+          <p className="text-sm text-muted mb-6">Refais une demande de réinitialisation.</p>
           <Link to="/mot-de-passe-oublie" className="text-link hover:text-link-hover transition-colors text-sm">
             Mot de passe oublié
           </Link>

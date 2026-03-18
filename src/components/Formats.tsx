@@ -28,7 +28,7 @@ const FORMAT_DESCRIPTIONS: Record<string, { description: string; benefit: string
     benefit: 'Combine renforcement et cardio pour un travail complet.',
   },
   amrap: {
-    description: 'Enchaîner un circuit le plus de fois possible dans un temps imparti. Vous gérez votre rythme.',
+    description: 'Enchaîner un circuit le plus de fois possible dans un temps imparti. Tu gères ton rythme.',
     benefit: 'Liberté de rythme. Idéal pour mesurer sa progression.',
   },
   hiit: {

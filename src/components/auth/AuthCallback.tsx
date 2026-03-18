@@ -25,7 +25,7 @@ export function AuthCallback() {
     const client = supabase;
 
     const timeout = setTimeout(() => {
-      setError('La connexion prend trop de temps. Veuillez réessayer.');
+      setError('La connexion prend trop de temps. Réessaye.');
     }, TIMEOUT_MS);
 
     const params = new URLSearchParams(window.location.search);

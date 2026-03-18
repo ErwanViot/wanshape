@@ -10,7 +10,7 @@ export function SessionExpiredBanner() {
     <div className="bg-amber-500/10 border-b border-amber-500/30 px-4 py-3 text-center">
       <p className="text-sm text-amber-200 inline-flex items-center gap-2 flex-wrap justify-center">
         <RefreshCw className="w-4 h-4" />
-        Votre session a expiré.
+        Ta session a expiré.
         <button
           type="button"
           onClick={() => window.location.reload()}

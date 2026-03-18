@@ -25,7 +25,7 @@ export function expandHIIT(block: HIITBlock, blockIndex: number, totalBlocks: nu
     timerMode: 'countdown',
     duration: PREPARE_COUNTDOWN,
     exerciseName: block.exercises[0].name,
-    instructions: 'Préparez-vous !',
+    instructions: 'Prépare-toi !',
     ...base,
     estimatedDuration: PREPARE_COUNTDOWN,
   });

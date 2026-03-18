@@ -22,7 +22,7 @@
         {
           "name": "Scapular push-ups",
           "duration": 35,
-          "instructions": "En planche, serrer et ecarter les omoplates sans plier les coudes"
+          "instructions": "En planche, serrer et écartér les omoplates sans plier les coudes"
         },
         {
           "name": "Cat-cow",
@@ -57,7 +57,7 @@
             {
               "name": "Dips sur chaise",
               "reps": 10,
-              "instructions": "Mains sur le bord, coudes vers l'arrière, descendre a 90 degres"
+              "instructions": "Mains sur le bord, coudes vers l'arrière, descendre à 90 degrés"
             },
             {
               "name": "Prone Y raises",
@@ -89,13 +89,13 @@
         {
           "name": "Etirement pectoraux",
           "duration": 30,
-          "instructions": "Bras contre un mur a 90 degres, pivoter le corps",
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
           "bilateral": true
         },
         {
           "name": "Etirement triceps",
           "duration": 25,
-          "instructions": "Bras derriere la tete, tirer le coude avec l'autre main",
+          "instructions": "Bras derrière la tete, tirer le coude avec l'autre main",
           "bilateral": true
         },
         {

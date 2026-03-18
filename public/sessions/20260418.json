@@ -48,7 +48,7 @@
         },
         {
           "name": "Pop squats",
-          "instructions": "Sauter pieds ecartes en squat, sauter pieds joints"
+          "instructions": "Sauter pieds écartés en squat, sauter pieds joints"
         },
         {
           "name": "Burpees sans pompe",
@@ -63,7 +63,7 @@
         {
           "name": "Etirement quadriceps debout",
           "duration": 30,
-          "instructions": "Attraper le pied derriere soi, genou vers le sol",
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
           "bilateral": true
         },
         {
