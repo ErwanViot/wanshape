@@ -1,4 +1,5 @@
 import type { AtomicStep } from '../types/player.ts';
+import { ExerciseVideoButton } from './ExerciseVideoButton.tsx';
 import { NextPreview } from './NextPreview.tsx';
 import { TimerDisplay } from './TimerDisplay.tsx';
 
@@ -6,9 +7,11 @@ interface Props {
   step: AtomicStep;
   remaining: number;
   progress: number;
+  showVideos: boolean;
+  onToggleShowVideos: () => void;
 }
 
-export function ExerciseView({ step, remaining, progress }: Props) {
+export function ExerciseView({ step, remaining, progress, showVideos, onToggleShowVideos }: Props) {
   const pulse = remaining <= 3 && remaining > 0;
 
   return (
@@ -43,6 +46,13 @@ export function ExerciseView({ step, remaining, progress }: Props) {
 
       {/* Tempo */}
       {step.tempo && <p className="text-white/40 text-sm font-mono">Tempo {step.tempo}</p>}
+
+      {/* Video demo */}
+      <ExerciseVideoButton
+        exerciseName={step.exerciseName}
+        alwaysShow={showVideos}
+        onToggleAlwaysShow={onToggleShowVideos}
+      />
 
       {/* Next preview */}
       {step.nextStepPreview && <NextPreview preview={step.nextStepPreview} />}

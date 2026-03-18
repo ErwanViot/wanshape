@@ -1,12 +1,15 @@
 import type { AtomicStep } from '../types/player.ts';
+import { ExerciseVideoButton } from './ExerciseVideoButton.tsx';
 import { NextPreview } from './NextPreview.tsx';
 
 interface Props {
   step: AtomicStep;
   onDone: () => void;
+  showVideos: boolean;
+  onToggleShowVideos: () => void;
 }
 
-export function RepsView({ step, onDone }: Props) {
+export function RepsView({ step, onDone, showVideos, onToggleShowVideos }: Props) {
   const repsLabel = step.repTarget === 'max' ? 'MAX' : step.repTarget;
 
   return (
@@ -39,6 +42,13 @@ export function RepsView({ step, onDone }: Props) {
 
       {/* Tempo */}
       {step.tempo && <p className="text-white/40 text-sm font-mono">Tempo {step.tempo}</p>}
+
+      {/* Video demo */}
+      <ExerciseVideoButton
+        exerciseName={step.exerciseName}
+        alwaysShow={showVideos}
+        onToggleAlwaysShow={onToggleShowVideos}
+      />
 
       {/* Done button */}
       <button
