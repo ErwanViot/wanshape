@@ -28,6 +28,7 @@ export function SeancesPage() {
   });
 
   const difficulty = session ? computeDifficulty(session) : null;
+  const tomorrowDifficulty = tomorrowSession ? computeDifficulty(tomorrowSession) : null;
 
   return (
     <>
@@ -205,25 +206,22 @@ export function SeancesPage() {
                       {tomorrowSession.focus.slice(0, 2).map((f) => (
                         <span key={f} className="text-xs text-muted">· {f}</span>
                       ))}
-                      {(() => {
-                        const d = computeDifficulty(tomorrowSession);
-                        return (
-                          <>
-                            <span className="text-xs text-muted">·</span>
-                            <span
-                              className={`text-xs font-semibold ${
-                                d.level === 'accessible'
-                                  ? 'text-emerald-400'
-                                  : d.level === 'modere'
-                                    ? 'text-amber-400'
-                                    : 'text-red-400'
-                              }`}
-                            >
-                              {d.label}
-                            </span>
-                          </>
-                        );
-                      })()}
+                      {tomorrowDifficulty && (
+                        <>
+                          <span className="text-xs text-muted">·</span>
+                          <span
+                            className={`text-xs font-semibold ${
+                              tomorrowDifficulty.level === 'accessible'
+                                ? 'text-emerald-400'
+                                : tomorrowDifficulty.level === 'modere'
+                                  ? 'text-amber-400'
+                                  : 'text-red-400'
+                            }`}
+                          >
+                            {tomorrowDifficulty.label}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
