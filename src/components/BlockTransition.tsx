@@ -49,8 +49,19 @@ export function BlockTransition({ step, remaining, progress }: Props) {
       {/* Health disclaimer on first block */}
       {isFirstBlock && <HealthDisclaimer />}
 
-      {/* Timer */}
-      <TimerDisplay remaining={remaining} progress={progress} color={step.blockColor} size="small" />
+      {/* Timer — branded countdown "Wan..2..Fit!" on first block */}
+      {isFirstBlock && remaining <= 3 && remaining > 0 ? (
+        <div className="relative flex items-center justify-center" style={{ width: 120, height: 120 }}>
+          <span
+            className="font-bold text-4xl sm:text-5xl animate-countdown"
+            style={{ color: step.blockColor }}
+          >
+            {({ 3: 'Wan', 2: '2', 1: 'Fit!' } as Record<number, string>)[remaining]}
+          </span>
+        </div>
+      ) : (
+        <TimerDisplay remaining={remaining} progress={progress} color={step.blockColor} size="small" />
+      )}
     </div>
   );
 }

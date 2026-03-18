@@ -90,6 +90,13 @@ export function useWorkout(steps: AtomicStep[]) {
     // audio beep callbacks are stable refs and don't need to be listed.
   }, [status, currentStep, timer.start]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Branded countdown on first block transition (Wan..2..Fit!)
+  useEffect(() => {
+    if (status === 'transition' && currentStep?.blockIndex === 0 && timer.remaining > 0 && timer.remaining <= 3) {
+      audio.playBrandedCountdown(timer.remaining);
+    }
+  }, [timer.remaining]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Countdown beeps for last 3 seconds
   useEffect(() => {
     if (timer.remaining > 0 && timer.remaining <= 3 && timer.isRunning) {
@@ -105,6 +112,8 @@ export function useWorkout(steps: AtomicStep[]) {
 
   const start = useCallback(() => {
     if (steps.length === 0) return;
+    audio.unlock();
+    audio.preloadBrandedSounds();
     startedAtRef.current = Date.now();
     setCurrentStepIndex(0);
     setAmrapRounds(0);

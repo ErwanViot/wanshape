@@ -43,6 +43,18 @@ export function useAudio() {
     return ctxRef.current;
   }, []);
 
+  // Must be called synchronously inside a user gesture (click/touch) handler
+  // to unlock AudioContext on Safari/iOS
+  const unlock = useCallback(() => {
+    const ctx = getCtx();
+    // Play a silent buffer to warm up the context (Safari workaround)
+    const buffer = ctx.createBuffer(1, 1, 22050);
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(ctx.destination);
+    source.start(0);
+  }, [getCtx]);
+
   const playTone = useCallback(
     (freq: number, duration: number, type: OscillatorType = 'sine') => {
       if (!enabled) return;
@@ -101,6 +113,46 @@ export function useAudio() {
     [enabled, beepCountdown],
   );
 
+  const brandedBuffersRef = useRef<Record<number, AudioBuffer | null>>({ 3: null, 2: null, 1: null });
+  const brandedLoadedRef = useRef(false);
+
+  const preloadBrandedSounds = useCallback(async () => {
+    if (brandedLoadedRef.current) return;
+    brandedLoadedRef.current = true;
+    const ctx = getCtx();
+    const files: Record<number, string> = { 3: '/sounds/Wan.mp3', 2: '/sounds/2.mp3', 1: '/sounds/Fit.mp3' };
+    for (const [key, url] of Object.entries(files)) {
+      try {
+        const res = await fetch(url);
+        const buf = await res.arrayBuffer();
+        brandedBuffersRef.current[Number(key)] = await ctx.decodeAudioData(buf);
+      } catch {
+        // Sound not available
+      }
+    }
+  }, [getCtx]);
+
+  const playBrandedCountdown = useCallback(
+    (remaining: number) => {
+      if (!enabled) return;
+      const buffer = brandedBuffersRef.current[remaining];
+      if (!buffer) return;
+      try {
+        const ctx = getCtx();
+        const source = ctx.createBufferSource();
+        const gain = ctx.createGain();
+        source.buffer = buffer;
+        gain.gain.value = 0.8;
+        source.connect(gain);
+        gain.connect(ctx.destination);
+        source.start();
+      } catch {
+        // Audio not available
+      }
+    },
+    [enabled, getCtx],
+  );
+
   const speakGo = useCallback(() => {
     beepGo();
   }, [beepGo]);
@@ -112,12 +164,15 @@ export function useAudio() {
   return {
     enabled,
     toggle,
+    unlock,
     beepCountdown,
     beepGo,
     beepRoundEnd,
     beepBlockEnd,
     beepSessionEnd,
     speakCountdown,
+    playBrandedCountdown,
+    preloadBrandedSounds,
     speakGo,
   };
 }
