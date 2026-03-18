@@ -8,47 +8,69 @@ function normalize(name: string): string {
     .toLowerCase();
 }
 
+/** Exact lookup: normalized name → video URL */
+const exactMap = new Map<string, string>();
+
+/** Prefix lookup: sorted longest-first for fuzzy matching */
+const prefixCandidates: { name: string; video: string }[] = [];
+
+// Build lookup tables once at module load
+for (const ex of EXERCISES_DATA) {
+  const mainVideo = ex.video;
+
+  // Main name + aliases → exercise video
+  if (mainVideo) {
+    exactMap.set(normalize(ex.name), mainVideo);
+    for (const a of ex.aliases) {
+      exactMap.set(normalize(a), mainVideo);
+    }
+  }
+
+  // Variants → variant video (or parent fallback)
+  for (const v of ex.variants) {
+    const video = v.video ?? mainVideo;
+    if (video) {
+      exactMap.set(normalize(v.name), video);
+    }
+  }
+
+  // Prefix candidates (aliases are typically short/generic, best for prefix matching)
+  if (mainVideo) {
+    prefixCandidates.push({ name: normalize(ex.name), video: mainVideo });
+    for (const a of ex.aliases) {
+      prefixCandidates.push({ name: normalize(a), video: mainVideo });
+    }
+  }
+  for (const v of ex.variants) {
+    const video = v.video ?? mainVideo;
+    if (video) {
+      prefixCandidates.push({ name: normalize(v.name), video });
+    }
+  }
+}
+
+prefixCandidates.sort((a, b) => b.name.length - a.name.length);
+
 /**
  * Returns the video URL for an exercise name by searching:
- * 1. Exact match on exercise name or alias → exercise video
- * 2. Exact match on variant name → variant video (or parent video)
- * 3. Fuzzy prefix match on known names
- * Returns null if no match or no video found.
+ * 1. Exact match on exercise name, alias, or variant → specific video
+ * 2. Fuzzy prefix match (longest known name that is a prefix of input)
+ *
+ * Note: prefix matching can produce false positives for exercises sharing
+ * a common prefix (e.g. "Planche laterale" matching "Planche"). This is
+ * acceptable as a v1 heuristic since most session names match exactly.
  */
 export function getExerciseVideoUrl(exerciseName: string): string | null {
   const key = normalize(exerciseName);
 
-  for (const ex of EXERCISES_DATA) {
-    // Check main name and aliases
-    if (normalize(ex.name) === key || ex.aliases.some((a) => normalize(a) === key)) {
-      return ex.video ?? null;
-    }
+  // 1. Exact match (O(1))
+  const exact = exactMap.get(key);
+  if (exact) return exact;
 
-    // Check variants — return variant-specific video if available
-    for (const v of ex.variants) {
-      if (normalize(v.name) === key) {
-        return v.video ?? ex.video ?? null;
-      }
-    }
-  }
-
-  // Fuzzy prefix: "Pompes sur genoux" → match "Pompes" alias → pompes-classiques
-  // Build a list of all names with their video, sorted longest first
-  const candidates: { name: string; video: string | undefined }[] = [];
-  for (const ex of EXERCISES_DATA) {
-    candidates.push({ name: normalize(ex.name), video: ex.video });
-    for (const a of ex.aliases) {
-      candidates.push({ name: normalize(a), video: ex.video });
-    }
-    for (const v of ex.variants) {
-      candidates.push({ name: normalize(v.name), video: v.video ?? ex.video });
-    }
-  }
-  candidates.sort((a, b) => b.name.length - a.name.length);
-
-  for (const c of candidates) {
+  // 2. Fuzzy prefix match
+  for (const c of prefixCandidates) {
     if (key.startsWith(c.name) && (key.length === c.name.length || key[c.name.length] === ' ')) {
-      return c.video ?? null;
+      return c.video;
     }
   }
 

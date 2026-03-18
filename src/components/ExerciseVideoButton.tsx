@@ -19,27 +19,29 @@ export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysSh
 
   return (
     <div className="w-full max-w-sm flex flex-col items-center gap-3">
-      {/* Toggle button */}
-      <button
-        type="button"
-        onClick={() => setExpanded(!expanded)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 text-white/60 text-sm hover:bg-white/15 hover:text-white/80 transition-colors"
-      >
-        {visible ? (
-          <>
-            <X className="w-3.5 h-3.5" aria-hidden="true" />
-            Masquer
-          </>
-        ) : (
-          <>
-            <Play className="w-3.5 h-3.5" aria-hidden="true" />
-            Voir l'exemple
-          </>
-        )}
-      </button>
+      {/* Toggle button — hidden when alwaysShow is active (video is auto-displayed) */}
+      {!alwaysShow && (
+        <button
+          type="button"
+          onClick={() => setExpanded(!expanded)}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 text-white/60 text-sm hover:bg-white/15 hover:text-white/80 transition-colors"
+        >
+          {expanded ? (
+            <>
+              <X className="w-3.5 h-3.5" aria-hidden="true" />
+              Masquer
+            </>
+          ) : (
+            <>
+              <Play className="w-3.5 h-3.5" aria-hidden="true" />
+              Voir l'exemple
+            </>
+          )}
+        </button>
+      )}
 
       {/* Video */}
-      {visible && <PlayerVideoDemo videoUrl={videoUrl} />}
+      {visible && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={exerciseName} />}
 
       {/* Always-show toggle — only shown when video is visible */}
       {visible && (
