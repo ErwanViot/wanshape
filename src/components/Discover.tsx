@@ -29,7 +29,7 @@ function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, Exercise
 export function Discover() {
   useDocumentHead({
     title: 'Découvrir',
-    description: "Explorez nos 8 formats d'entraînement et notre bibliothèque d'exercices.",
+    description: "Explore nos 8 formats d'entraînement et notre bibliothèque d'exercices.",
   });
 
   const groupedExercises = groupByCategory(EXERCISES_DATA);

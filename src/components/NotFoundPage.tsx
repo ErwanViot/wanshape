@@ -6,7 +6,7 @@ export function NotFoundPage() {
       <div className="text-center max-w-md">
         <p className="text-6xl font-bold text-brand mb-4">404</p>
         <h1 className="text-2xl font-bold text-heading mb-2">Page introuvable</h1>
-        <p className="text-body mb-8">La page que vous cherchez n'existe pas ou a été déplacée.</p>
+        <p className="text-body mb-8">La page que tu cherches n'existe pas ou a été déplacée.</p>
         <Link to="/" className="cta-gradient inline-block px-6 py-3 rounded-xl font-semibold">
           Retour à l'accueil
         </Link>
