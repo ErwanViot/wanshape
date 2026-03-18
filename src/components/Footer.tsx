@@ -33,6 +33,9 @@ export function Footer() {
           <Link to="/legal/cgv" className="text-xs text-faint hover:text-subtle transition-colors">
             CGV
           </Link>
+          <a href="mailto:contact@wan2fit.fr" className="text-xs text-faint hover:text-subtle transition-colors">
+            Contact
+          </a>
         </div>
       </div>
     </footer>

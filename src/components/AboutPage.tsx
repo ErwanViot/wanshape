@@ -52,6 +52,17 @@ export function AboutPage() {
         />
         <span className="text-subtle text-lg italic">— Wan</span>
       </div>
+
+      {/* Contact */}
+      <p className="mt-8 text-subtle text-sm">
+        Une question, une suggestion ? Écris-moi à{' '}
+        <a
+          href="mailto:contact@wan2fit.fr"
+          className="text-link hover:text-link-hover underline transition-colors"
+        >
+          contact@wan2fit.fr
+        </a>
+      </p>
     </div>
   );
 }
