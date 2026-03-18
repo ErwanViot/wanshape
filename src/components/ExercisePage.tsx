@@ -66,6 +66,19 @@ export function ExercisePage() {
         {/* Intro */}
         <p className="text-base text-body leading-relaxed">{exercise.shortDescription}</p>
 
+        {/* Vidéo */}
+        {exercise.video && (
+          <video
+            src={`${exercise.video}#t=0.1`}
+            controls
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full rounded-xl"
+          />
+        )}
+
         {/* Muscles ciblés */}
         <div className="flex flex-wrap gap-2">
           {exercise.muscles.map((m) => (
@@ -111,6 +124,17 @@ export function ExercisePage() {
               >
                 <h3 className="text-sm font-bold text-strong mb-1">{v.name}</h3>
                 <p className="text-sm text-subtle leading-relaxed">{v.description}</p>
+                {v.video && (
+                  <video
+                    src={`${v.video}#t=0.1`}
+                    controls
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="w-full rounded-lg mt-2"
+                  />
+                )}
               </div>
             ))}
           </div>
