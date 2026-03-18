@@ -3,6 +3,8 @@ import { BLOCK_LABELS } from '../engine/constants.ts';
 import type { AtomicStep } from '../types/player.ts';
 import { TimerDisplay } from './TimerDisplay.tsx';
 
+const BRANDED_COUNTDOWN: Record<number, string> = { 3: 'Wan', 2: '2', 1: 'Fit!' };
+
 interface Props {
   step: AtomicStep;
   remaining: number;
@@ -56,7 +58,7 @@ export function BlockTransition({ step, remaining, progress }: Props) {
             className="font-bold text-4xl sm:text-5xl animate-countdown"
             style={{ color: step.blockColor }}
           >
-            {({ 3: 'Wan', 2: '2', 1: 'Fit!' } as Record<number, string>)[remaining]}
+            {BRANDED_COUNTDOWN[remaining]}
           </span>
         </div>
       ) : (

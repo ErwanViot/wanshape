@@ -95,9 +95,11 @@ export function useWorkout(steps: AtomicStep[]) {
     if (status === 'transition' && currentStep?.blockIndex === 0 && timer.remaining > 0 && timer.remaining <= 3) {
       audio.playBrandedCountdown(timer.remaining);
     }
-  }, [timer.remaining]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [timer.remaining, status, currentStep?.blockIndex, audio.playBrandedCountdown]);
 
   // Countdown beeps for last 3 seconds
+  // NB: 'transition' status is NOT handled here — branded countdown audio
+  // is played by the dedicated effect above for first-block transitions.
   useEffect(() => {
     if (timer.remaining > 0 && timer.remaining <= 3 && timer.isRunning) {
       if (status === 'countdown') {

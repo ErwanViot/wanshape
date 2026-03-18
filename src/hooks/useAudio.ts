@@ -46,6 +46,7 @@ export function useAudio() {
   // Must be called synchronously inside a user gesture (click/touch) handler
   // to unlock AudioContext on Safari/iOS
   const unlock = useCallback(() => {
+    if (!enabled) return;
     const ctx = getCtx();
     // Play a silent buffer to warm up the context (Safari workaround)
     const buffer = ctx.createBuffer(1, 1, 22050);
@@ -53,7 +54,7 @@ export function useAudio() {
     source.buffer = buffer;
     source.connect(ctx.destination);
     source.start(0);
-  }, [getCtx]);
+  }, [enabled, getCtx]);
 
   const playTone = useCallback(
     (freq: number, duration: number, type: OscillatorType = 'sine') => {
@@ -117,20 +118,25 @@ export function useAudio() {
   const brandedLoadedRef = useRef(false);
 
   const preloadBrandedSounds = useCallback(async () => {
-    if (brandedLoadedRef.current) return;
+    if (!enabled || brandedLoadedRef.current) return;
     brandedLoadedRef.current = true;
     const ctx = getCtx();
     const files: Record<number, string> = { 3: '/sounds/Wan.mp3', 2: '/sounds/2.mp3', 1: '/sounds/Fit.mp3' };
-    for (const [key, url] of Object.entries(files)) {
-      try {
-        const res = await fetch(url);
-        const buf = await res.arrayBuffer();
-        brandedBuffersRef.current[Number(key)] = await ctx.decodeAudioData(buf);
-      } catch {
-        // Sound not available
-      }
-    }
-  }, [getCtx]);
+    await Promise.all(
+      Object.entries(files).map(async ([key, url]) => {
+        try {
+          const res = await fetch(url);
+          const buf = await res.arrayBuffer();
+          brandedBuffersRef.current[Number(key)] = await ctx.decodeAudioData(buf);
+        } catch {
+          // Sound not available
+        }
+      }),
+    );
+    // Allow retry if all fetches failed (e.g. offline)
+    const anyLoaded = Object.values(brandedBuffersRef.current).some((b) => b !== null);
+    if (!anyLoaded) brandedLoadedRef.current = false;
+  }, [enabled, getCtx]);
 
   const playBrandedCountdown = useCallback(
     (remaining: number) => {
