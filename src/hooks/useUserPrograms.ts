@@ -5,7 +5,7 @@ import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program } from '../types/completion.ts';
 
 export function useUserPrograms() {
-  const { user } = useAuth();
+  const { user, dataGeneration } = useAuth();
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,6 +15,7 @@ export function useUserPrograms() {
       return;
     }
 
+    setLoading(true);
     try {
       const { data, sessionExpired } = await supabaseQuery(() =>
         supabase!
@@ -36,7 +37,7 @@ export function useUserPrograms() {
 
   useEffect(() => {
     fetchPrograms();
-  }, [fetchPrograms]);
+  }, [fetchPrograms, dataGeneration]);
 
   const deleteProgram = useCallback(async (id: string) => {
     if (!supabase) return false;

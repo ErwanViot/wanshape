@@ -10,6 +10,7 @@ interface AuthContextValue {
   loading: boolean;
   sessionExpired: boolean;
   dataGeneration: number;
+  bumpDataGeneration: () => void;
   refreshProfile: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
@@ -200,9 +201,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setSessionExpired(false);
   }, []);
 
+  const bumpDataGeneration = useCallback(() => setDataGeneration((g) => g + 1), []);
+
   const value = useMemo<AuthContextValue>(
-    () => ({ user, profile, loading, sessionExpired, dataGeneration, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }),
-    [user, profile, loading, sessionExpired, dataGeneration, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut],
+    () => ({ user, profile, loading, sessionExpired, dataGeneration, bumpDataGeneration, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }),
+    [user, profile, loading, sessionExpired, dataGeneration, bumpDataGeneration, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut],
   );
 
   return (
