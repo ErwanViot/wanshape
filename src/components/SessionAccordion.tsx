@@ -5,8 +5,8 @@ import type { Block, Session } from '../types/session.ts';
 import { getExerciseLink } from '../utils/exerciseLinks.ts';
 import { computeTimeline } from '../utils/sessionTimeline.ts';
 
-export function SessionAccordion({ session }: { session: Session }) {
-  const [open, setOpen] = useState(false);
+export function SessionAccordion({ session, defaultOpen = false }: { session: Session; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
   const panelId = useId();
 
   return (
