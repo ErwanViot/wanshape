@@ -92,7 +92,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       <div className="flex gap-6">
         <div className="text-center">
           <div className="text-3xl font-bold text-white">{displayMinutes}</div>
-          <div className="text-white/50 text-sm">minutes</div>
+          <div className="text-white/50 text-sm">{displayMinutes === '< 1' ? 'minute' : 'minutes'}</div>
         </div>
         <div className="text-center">
           <div className="text-3xl font-bold text-white">{session.blocks.length}</div>
