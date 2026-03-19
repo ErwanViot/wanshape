@@ -5,6 +5,7 @@ export interface SessionCompletion {
   user_id: string;
   session_date: string | null;
   program_session_id: string | null;
+  custom_session_id: string | null;
   completed_at: string;
   duration_seconds: number | null;
   amrap_rounds: number | null;

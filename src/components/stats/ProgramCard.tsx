@@ -1,5 +1,6 @@
 import { ChevronRight } from 'lucide-react';
 import type { useActiveProgram } from '../../hooks/useProgram.ts';
+import { AnimatedNumber } from './AnimatedNumber.tsx';
 
 export interface ProgramCardProps {
   activeProgram: NonNullable<ReturnType<typeof useActiveProgram>['activeProgram']>;
@@ -7,14 +8,13 @@ export interface ProgramCardProps {
 }
 
 export function ProgramCard({ activeProgram, progressPct }: ProgramCardProps) {
-  // SVG donut chart
   const radius = 32;
   const circumference = 2 * Math.PI * radius;
   const dashOffset = circumference * (1 - progressPct / 100);
 
   return (
     <div className="flex items-center gap-5">
-      {/* Donut */}
+      {/* SVG donut */}
       <div className="relative shrink-0">
         <svg width="80" height="80" viewBox="0 0 80 80" className="-rotate-90">
           <circle cx="40" cy="40" r={radius} fill="none" stroke="var(--color-divider-strong)" strokeWidth="6" />
@@ -28,11 +28,16 @@ export function ProgramCard({ activeProgram, progressPct }: ProgramCardProps) {
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className="transition-all duration-500"
+            className="transition-all duration-700"
+            style={{ transitionTimingFunction: 'cubic-bezier(0.33, 1, 0.68, 1)' }}
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-display text-lg font-black text-heading">{progressPct}%</span>
+          <AnimatedNumber
+            value={progressPct}
+            formatter={(n) => `${Math.round(n)}%`}
+            className="font-display text-lg font-black text-heading"
+          />
         </div>
       </div>
 
