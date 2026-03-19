@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     tailwindcss(),
@@ -69,22 +69,23 @@ export default defineConfig({
         ],
       },
     }),
-    sentryVitePlugin({
+    mode === 'production' && sentryVitePlugin({
       org: 'wan-soft',
       project: 'wan2fit',
       authToken: process.env.SENTRY_AUTH_TOKEN,
     }),
-  ],
+  ].filter(Boolean),
   build: {
-    sourcemap: true,
+    sourcemap: 'hidden',
     rollupOptions: {
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'router': ['react-router'],
           'supabase': ['@supabase/supabase-js'],
+          'sentry': ['@sentry/react'],
         },
       },
     },
   },
-})
+}))

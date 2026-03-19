@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react';
 import { Component } from 'react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router';
@@ -19,7 +20,7 @@ export class PlayerErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: unknown) {
-    console.error('Player error boundary caught:', error);
+    Sentry.captureException(error);
   }
 
   render() {
