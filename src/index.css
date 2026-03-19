@@ -461,12 +461,23 @@ body {
 .stagger-4 { animation-delay: 240ms; }
 .stagger-5 { animation-delay: 320ms; }
 .stagger-6 { animation-delay: 400ms; }
+.stagger-7 { animation-delay: 480ms; }
 
 @keyframes stagger-enter {
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Number pop animation for metric cards */
+@keyframes number-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-number-pop {
+  animation: number-pop 0.5s ease-out;
 }
 
 /* ─── Skeleton loading ─── */

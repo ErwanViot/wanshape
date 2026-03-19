@@ -6,6 +6,9 @@ import type { SessionCompletion } from '../types/completion.ts';
 
 export interface CompletionWithTitle extends SessionCompletion {
   session_title: string | null;
+  session_description: string | null;
+  session_focus: string[];
+  block_types: string[];
 }
 
 export interface WeeklyData {
@@ -19,9 +22,11 @@ export interface HistoryStats {
   completions: CompletionWithTitle[];
   totalSessions: number;
   totalDuration: number;
+  avgDuration: number;
   weekDots: boolean[];
   weeklyChart: WeeklyData[];
   thisWeekSessions: number;
+  thisWeekDuration: number;
   loading: boolean;
 }
 
@@ -96,6 +101,19 @@ function computeWeeklyChart(completions: SessionCompletion[]): WeeklyData[] {
   return weeks;
 }
 
+function computeThisWeekDuration(completions: SessionCompletion[]): number {
+  const today = new Date();
+  const monday = getMonday(today);
+  let total = 0;
+  for (const c of completions) {
+    const d = new Date(c.completed_at);
+    if (d >= monday) {
+      total += c.duration_seconds ?? 0;
+    }
+  }
+  return total;
+}
+
 function getISOWeekNumber(date: Date): number {
   const d = new Date(date);
   d.setHours(0, 0, 0, 0);
@@ -104,11 +122,19 @@ function getISOWeekNumber(date: Date): number {
   return Math.round(((d.getTime() - yearStart.getTime()) / 86400000 - 3 + ((yearStart.getDay() + 6) % 7)) / 7) + 1;
 }
 
+interface SessionData {
+  title?: string;
+  description?: string;
+  focus?: string[];
+  blocks?: { type: string }[];
+}
+
 export function useHistory(userId: string | undefined): HistoryStats {
   const { dataGeneration } = useAuth();
   const [completions, setCompletions] = useState<CompletionWithTitle[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: dataGeneration forces re-fetch on auth state change
   useEffect(() => {
     if (!userId || !supabase) {
       setCompletions([]);
@@ -124,25 +150,37 @@ export function useHistory(userId: string | undefined): HistoryStats {
         const { data, sessionExpired } = await supabaseQuery(() =>
           supabase!
             .from('session_completions')
-            .select('*, program_sessions(session_data)')
+            .select('*, program_sessions(session_data), custom_sessions(session_data)')
             .eq('user_id', userId!)
             .order('completed_at', { ascending: false })
             .limit(200),
         );
 
         if (cancelled) return;
-        if (sessionExpired) { notifySessionExpired(); setLoading(false); return; }
+        if (sessionExpired) {
+          notifySessionExpired();
+          setLoading(false);
+          return;
+        }
 
         const rows = (data ?? []) as unknown as (SessionCompletion & {
-          program_sessions: { session_data?: { title?: string } } | null;
+          program_sessions: { session_data?: SessionData } | null;
+          custom_sessions: { session_data?: SessionData } | null;
         })[];
-        const enriched: CompletionWithTitle[] = rows.map((row) => ({
-          ...row,
-          session_title:
-            (row.metadata as Record<string, unknown>)?.session_title as string | undefined
-            ?? row.program_sessions?.session_data?.title
-            ?? null,
-        }));
+
+        const enriched: CompletionWithTitle[] = rows.map((row) => {
+          const meta = row.metadata as Record<string, unknown>;
+          const sd = row.program_sessions?.session_data ?? row.custom_sessions?.session_data;
+          return {
+            ...row,
+            session_title: (meta?.session_title as string | undefined) ?? sd?.title ?? null,
+            session_description: (meta?.session_description as string | undefined) ?? sd?.description ?? null,
+            session_focus: (meta?.session_focus as string[] | undefined) ?? sd?.focus ?? [],
+            block_types: (meta?.block_types as string[] | undefined) ?? [
+              ...new Set((sd?.blocks ?? []).map((b) => b.type).filter((t) => t !== 'warmup' && t !== 'cooldown')),
+            ],
+          };
+        });
 
         setCompletions(enriched);
         setLoading(false);
@@ -160,10 +198,20 @@ export function useHistory(userId: string | undefined): HistoryStats {
   const derived = useMemo(() => {
     const totalSessions = completions.length;
     const totalDuration = completions.reduce((sum, c) => sum + (c.duration_seconds ?? 0), 0);
+    const avgDuration = totalSessions > 0 ? Math.round(totalDuration / totalSessions) : 0;
     const weekDots = computeWeekDots(completions);
     const weeklyChart = computeWeeklyChart(completions);
     const thisWeekSessions = weekDots.filter(Boolean).length;
-    return { totalSessions, totalDuration, weekDots, weeklyChart, thisWeekSessions };
+    const thisWeekDuration = computeThisWeekDuration(completions);
+    return {
+      totalSessions,
+      totalDuration,
+      avgDuration,
+      weekDots,
+      weeklyChart,
+      thisWeekSessions,
+      thisWeekDuration,
+    };
   }, [completions]);
 
   return { completions, ...derived, loading };

@@ -1,12 +1,12 @@
+import { Check, Download, Share2, Trophy } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { Trophy, Share2, Check, Download } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext.tsx';
 import { STORAGE_KEYS } from '../config/storage-keys.ts';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
-import { shareSession } from '../utils/share.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
+import { shareSession } from '../utils/share.ts';
 
 interface Props {
   session: Session;
@@ -30,12 +30,27 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       durationSeconds,
       amrapRounds,
       sessionTitle: session.title,
+      sessionDescription: session.description,
+      sessionFocus: session.focus,
+      blockTypes: [...new Set(session.blocks.map((b) => b.type).filter((t) => t !== 'warmup' && t !== 'cooldown'))],
     });
-  }, [user, save, session.date, programSessionId, customSessionId, durationSeconds, amrapRounds]);
+  }, [
+    user,
+    save,
+    session.date,
+    session.title,
+    session.description,
+    session.focus,
+    session.blocks,
+    programSessionId,
+    customSessionId,
+    durationSeconds,
+    amrapRounds,
+  ]);
 
   const rawMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
   const realMinutes = rawMinutes > 0 ? rawMinutes : 1;
-  const displayMinutes = (durationSeconds > 0 && durationSeconds < 60) ? '< 1' : String(realMinutes);
+  const displayMinutes = durationSeconds > 0 && durationSeconds < 60 ? '< 1' : String(realMinutes);
 
   const [shareState, setShareState] = useState<'idle' | 'loading' | 'shared' | 'copied'>('idle');
 
@@ -64,7 +79,19 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 
       {user && saved && (
         <div className="flex items-center gap-2 text-accent text-sm font-medium">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
           Séance enregistrée
         </div>
       )}
@@ -74,14 +101,21 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
           <p className="text-red-400">Enregistrement échoué</p>
           <button
             type="button"
-            onClick={() => save({
-              sessionDate: programSessionId || customSessionId ? undefined : session.date,
-              programSessionId,
-              customSessionId,
-              durationSeconds,
-              amrapRounds,
-              sessionTitle: session.title,
-            })}
+            onClick={() =>
+              save({
+                sessionDate: programSessionId || customSessionId ? undefined : session.date,
+                programSessionId,
+                customSessionId,
+                durationSeconds,
+                amrapRounds,
+                sessionTitle: session.title,
+                sessionDescription: session.description,
+                sessionFocus: session.focus,
+                blockTypes: [
+                  ...new Set(session.blocks.map((b) => b.type).filter((t) => t !== 'warmup' && t !== 'cooldown')),
+                ],
+              })
+            }
             className="text-brand hover:text-brand-secondary font-semibold transition-colors cursor-pointer"
           >
             Réessayer
@@ -166,7 +200,11 @@ function SignupNudge() {
   if (!visible) return null;
 
   const dismiss = () => {
-    try { localStorage.setItem(STORAGE_KEYS.NUDGE_DISMISSED, String(Date.now())); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(STORAGE_KEYS.NUDGE_DISMISSED, String(Date.now()));
+    } catch {
+      /* ignore */
+    }
     setVisible(false);
   };
 
