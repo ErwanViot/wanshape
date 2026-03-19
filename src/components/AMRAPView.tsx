@@ -1,4 +1,5 @@
 import type { AtomicStep } from '../types/player.ts';
+import { ExerciseListWithVideos } from './ExerciseListWithVideos.tsx';
 import { TimerDisplay } from './TimerDisplay.tsx';
 
 interface Props {
@@ -7,9 +8,11 @@ interface Props {
   progress: number;
   rounds: number;
   onIncrementRound: () => void;
+  showVideos: boolean;
+  onToggleShowVideos: () => void;
 }
 
-export function AMRAPView({ step, remaining, progress, rounds, onIncrementRound }: Props) {
+export function AMRAPView({ step, remaining, progress, rounds, onIncrementRound, showVideos, onToggleShowVideos }: Props) {
   return (
     <div className="flex flex-col items-center justify-center flex-1 gap-5 px-6 text-center">
       {/* Block name */}
@@ -18,17 +21,15 @@ export function AMRAPView({ step, remaining, progress, rounds, onIncrementRound 
       {/* Timer */}
       <TimerDisplay remaining={remaining} progress={progress} color={step.blockColor} />
 
-      {/* Exercise list */}
-      <div className="w-full max-w-sm space-y-2">
-        {step.amrapExercises?.map((ex, i) => (
-          <div key={i} className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/10">
-            <span className="text-white font-medium">{ex.name}</span>
-            <span className="text-lg font-bold" style={{ color: step.blockColor }}>
-              x{ex.reps}
-            </span>
-          </div>
-        ))}
-      </div>
+      {/* Exercise list with video demos */}
+      {step.amrapExercises && (
+        <ExerciseListWithVideos
+          exercises={step.amrapExercises}
+          blockColor={step.blockColor}
+          showVideos={showVideos}
+          onToggleShowVideos={onToggleShowVideos}
+        />
+      )}
 
       {/* Round counter + button */}
       <div className="flex items-center gap-6">

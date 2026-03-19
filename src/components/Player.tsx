@@ -100,6 +100,9 @@ export function Player({
   const navigate = useNavigate();
   const steps = useMemo(() => compileSession(session), [session]);
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
+  const [showVideos, setShowVideos] = useState(
+    () => localStorage.getItem('wan2fit-show-exercise-videos') === 'true',
+  );
   const resumeButtonRef = useRef<HTMLButtonElement>(null);
   const quitDialogRef = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
@@ -126,6 +129,14 @@ export function Player({
       resumeButtonRef.current.focus();
     }
   }, [workout.status]);
+
+  const toggleShowVideos = useCallback(() => {
+    setShowVideos((prev) => {
+      const next = !prev;
+      localStorage.setItem('wan2fit-show-exercise-videos', String(next));
+      return next;
+    });
+  }, []);
 
   const goBack = () => navigate(backTo);
 
@@ -277,7 +288,7 @@ export function Player({
         )}
 
         {step.phase === 'work' && step.timerMode === 'emom' && (
-          <EMOMView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} />
+          <EMOMView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
         )}
 
         {step.phase === 'work' && step.timerMode === 'amrap' && (
@@ -287,14 +298,16 @@ export function Player({
             progress={workout.timer.progress}
             rounds={workout.amrapRounds}
             onIncrementRound={workout.incrementAmrap}
+            showVideos={showVideos}
+            onToggleShowVideos={toggleShowVideos}
           />
         )}
 
         {step.phase === 'work' && step.timerMode === 'countdown' && (
-          <ExerciseView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} />
+          <ExerciseView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
         )}
 
-        {step.phase === 'work' && step.timerMode === 'manual' && <RepsView step={step} onDone={workout.done} />}
+        {step.phase === 'work' && step.timerMode === 'manual' && <RepsView step={step} onDone={workout.done} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />}
 
         {step.phase === 'rest' && (
           <RestView
