@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -68,8 +69,14 @@ export default defineConfig({
         ],
       },
     }),
+    sentryVitePlugin({
+      org: 'wan-soft',
+      project: 'wan2fit',
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+    }),
   ],
   build: {
+    sourcemap: true,
     rollupOptions: {
       output: {
         manualChunks: {
