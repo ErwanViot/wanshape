@@ -25,7 +25,7 @@ function formatDurationUnit(totalSeconds: number): string {
 }
 
 function durationFormatter(seconds: number) {
-  return (n: number) => formatDuration(Math.round((n * seconds) / (seconds || 1)));
+  return (n: number) => formatDuration(seconds > 0 ? Math.round(n) : 0);
 }
 
 interface WeekMessage {

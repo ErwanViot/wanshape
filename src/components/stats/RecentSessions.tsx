@@ -125,9 +125,10 @@ function SessionCard({ completion: c }: { completion: CompletionWithTitle }) {
   const isCustom = c.custom_session_id != null;
   const hasDetails = c.session_description || c.block_types.length > 0 || c.session_focus.length > 0;
 
+  const isFree = !isCustom && !isProgram;
   const Icon = isCustom ? Sparkles : isProgram ? Dumbbell : Zap;
-  const iconBg = isCustom ? 'bg-brand/10' : isProgram ? 'bg-brand/10' : 'bg-emerald-500/10';
-  const iconColor = isCustom ? 'text-brand' : isProgram ? 'text-brand' : 'text-emerald-500';
+  const iconBg = isFree ? 'bg-emerald-500/10' : 'bg-brand/10';
+  const iconColor = isFree ? 'text-emerald-500' : 'text-brand';
 
   return (
     <div className="rounded-xl border border-divider bg-surface-card/50 px-4 py-3 hover:border-divider-strong transition-colors group/card">

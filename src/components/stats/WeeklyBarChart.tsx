@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { WeeklyData } from '../../hooks/useHistory.ts';
 
 export function WeeklyBarChart({ data }: { data: WeeklyData[] }) {
   const maxMinutes = Math.max(...data.map((d) => d.minutes), 1);
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const [animated, setAnimated] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Animate bars on mount
   useEffect(() => {
@@ -14,7 +13,7 @@ export function WeeklyBarChart({ data }: { data: WeeklyData[] }) {
   }, []);
 
   return (
-    <div className="h-full flex flex-col" ref={containerRef}>
+    <div className="h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm font-bold text-heading">Volume hebdo</p>
         <p className="text-xs text-muted">
@@ -43,7 +42,7 @@ export function WeeklyBarChart({ data }: { data: WeeklyData[] }) {
             >
               <div className="w-full flex items-end relative" style={{ height: '100px' }}>
                 <div
-                  className={`w-full rounded-t-lg transition-all ${
+                  className={`w-full transition-all ${
                     week.isCurrent
                       ? 'bg-brand shadow-sm shadow-brand/30'
                       : isActive

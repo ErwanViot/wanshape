@@ -10,11 +10,7 @@ export function useAnimatedValue(target: number, duration = 800): number {
   const startRef = useRef<number | null>(null);
   const fromRef = useRef(0);
   const valueRef = useRef(0);
-  const prefersReducedMotion = useRef(false);
-
-  useEffect(() => {
-    prefersReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }, []);
+  const prefersReducedMotion = useRef(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   // Keep valueRef in sync without triggering effect
   valueRef.current = value;

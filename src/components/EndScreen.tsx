@@ -34,7 +34,19 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       sessionFocus: session.focus,
       blockTypes: [...new Set(session.blocks.map((b) => b.type).filter((t) => t !== 'warmup' && t !== 'cooldown'))],
     });
-  }, [user, save, session, programSessionId, customSessionId, durationSeconds, amrapRounds]);
+  }, [
+    user,
+    save,
+    session.date,
+    session.title,
+    session.description,
+    session.focus,
+    session.blocks,
+    programSessionId,
+    customSessionId,
+    durationSeconds,
+    amrapRounds,
+  ]);
 
   const rawMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
   const realMinutes = rawMinutes > 0 ? rawMinutes : 1;
