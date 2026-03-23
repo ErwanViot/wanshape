@@ -244,6 +244,10 @@ export function validateProgram(
 
   const program = data as Record<string, unknown>;
 
+  // Check for off-topic response
+  if (program.error === 'off_topic')
+    return { valid: false, error: 'off_topic' };
+
   // Top-level fields
   if (!isString(program.titre)) return { valid: false, error: 'titre is required' };
   if (!isString(program.description)) return { valid: false, error: 'description is required' };

@@ -273,7 +273,7 @@ export function PricingCards() {
             </label>
 
             {error && (
-              <p className="text-xs text-red-400 text-center">{error}</p>
+              <p role="alert" className="text-xs text-red-400 text-center">{error}</p>
             )}
 
             <button

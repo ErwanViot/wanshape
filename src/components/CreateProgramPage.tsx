@@ -143,7 +143,7 @@ export function CreateProgramPage() {
       frequence_actuelle: draft.frequence_actuelle as FrequenceActuelle,
       blessures: draft.blessures.filter((b) => b !== 'autre'),
       blessure_detail: draft.blessure_detail || undefined,
-      age: draft.age ? parseInt(draft.age) : undefined,
+      age: draft.age ? parseInt(draft.age, 10) : undefined,
       sexe: (draft.sexe as ProgramOnboardingInput['sexe']) || undefined,
       seances_par_semaine: effectiveSeances,
       duree_seance_minutes: draft.duree_seance_minutes,
