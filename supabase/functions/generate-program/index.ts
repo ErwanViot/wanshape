@@ -280,7 +280,7 @@ Deno.serve(async (req: Request) => {
         system: SYSTEM_PROMPT,
         messages,
       }),
-      signal: AbortSignal.timeout(60_000),
+      signal: AbortSignal.timeout(120_000),
     });
 
     if (!aiResponse.ok) {

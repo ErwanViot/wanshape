@@ -323,7 +323,10 @@ export function ProgramPage() {
               </button>
 
               {consigne && !isCollapsed && (
-                <p className="text-xs text-muted italic">{consigne}</p>
+                <div className="flex gap-2.5 items-start rounded-lg bg-accent/10 border border-accent/20 px-3 py-2.5">
+                  <span className="text-accent text-sm mt-0.5" aria-hidden="true">💡</span>
+                  <p className="text-sm text-body leading-relaxed">{consigne}</p>
+                </div>
               )}
 
               {!isCollapsed && (
