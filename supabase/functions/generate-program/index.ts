@@ -170,7 +170,7 @@ Deno.serve(async (req: Request) => {
   const anthropicApiKey = Deno.env.get("ANTHROPIC_API_KEY");
 
   if (!anthropicApiKey) {
-    return errorResponse(req, "ANTHROPIC_API_KEY not configured", 500);
+    return errorResponse(req, "Erreur de configuration serveur", 500);
   }
 
   const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
@@ -328,8 +328,9 @@ Deno.serve(async (req: Request) => {
   if (!validation.valid) {
     console.error("First attempt validation failed:", validation.error);
     try {
+      const truncatedPrev = JSON.stringify(programJson).slice(0, 2000);
       const retryResult = await callAnthropic([
-        { role: "assistant", content: JSON.stringify(programJson) },
+        { role: "assistant", content: truncatedPrev },
         { role: "user", content: `Ta reponse precedente etait invalide: ${validation.error}. Corrige et renvoie le JSON complet.` },
       ]);
       programJson = retryResult.data;

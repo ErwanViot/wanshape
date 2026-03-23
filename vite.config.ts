@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,json,svg,png}'],
-        globIgnores: ['**/og-image.png'],
+        globIgnores: ['**/og-image.jpg'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
         runtimeCaching: [

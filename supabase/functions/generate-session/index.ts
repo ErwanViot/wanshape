@@ -158,7 +158,7 @@ Deno.serve(async (req: Request) => {
   const anthropicApiKey = Deno.env.get("ANTHROPIC_API_KEY");
 
   if (!anthropicApiKey) {
-    return errorResponse(req, "ANTHROPIC_API_KEY not configured", 500);
+    return errorResponse(req, "Erreur de configuration serveur", 500);
   }
 
   // Create admin client for DB operations
@@ -289,7 +289,7 @@ Deno.serve(async (req: Request) => {
   }
 
   // Validate session structure
-  const validation = validateSession(sessionJson);
+  const validation = validateSession(sessionJson, body.duration);
   if (!validation.valid) {
     console.error("Session validation failed:", validation.error);
     return errorResponse(req, "La séance générée est invalide, réessayez", 502);

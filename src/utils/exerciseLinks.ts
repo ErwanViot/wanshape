@@ -3,6 +3,7 @@ import { EXERCISES_DATA } from '../data/exercises.ts';
 /** Lowercase, strip accents */
 function normalize(name: string): string {
   return name
+    .trim()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();

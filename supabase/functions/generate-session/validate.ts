@@ -280,6 +280,7 @@ function validateBlockExercises(
 
 export function validateSession(
   data: unknown,
+  requestedDuration?: number,
 ): ValidationResult {
   if (!data || typeof data !== 'object')
     return { valid: false, error: 'Session must be an object' };
@@ -297,6 +298,8 @@ export function validateSession(
     return { valid: false, error: 'description is required' };
   if (!isNumber(session.estimatedDuration))
     return { valid: false, error: 'estimatedDuration is required' };
+  if (requestedDuration && Math.abs((session.estimatedDuration as number) - requestedDuration) > 10)
+    return { valid: false, error: `estimatedDuration ${session.estimatedDuration} is too far from requested ${requestedDuration}` };
   if (!isArray(session.focus) || session.focus.length === 0)
     return { valid: false, error: 'focus array is required' };
   if (!isArray(session.blocks) || session.blocks.length < 2)
