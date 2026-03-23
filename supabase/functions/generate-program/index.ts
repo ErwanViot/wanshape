@@ -261,7 +261,8 @@ Deno.serve(async (req: Request) => {
   const userPrompt = buildUserPrompt(body);
 
   // Call Anthropic API
-  async function callAnthropic(extraMessages: { role: string; content: string }[] = []): Promise<{ data: unknown; inputTokens: number; outputTokens: number }> {
+  // Sonnet with 12K tokens needs more time than Haiku session generation
+  async function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = 120_000): Promise<{ data: unknown; inputTokens: number; outputTokens: number }> {
     const messages = [
       { role: "user", content: userPrompt },
       ...extraMessages,
@@ -280,7 +281,7 @@ Deno.serve(async (req: Request) => {
         system: SYSTEM_PROMPT,
         messages,
       }),
-      signal: AbortSignal.timeout(120_000),
+      signal: AbortSignal.timeout(timeoutMs),
     });
 
     if (!aiResponse.ok) {
@@ -332,7 +333,7 @@ Deno.serve(async (req: Request) => {
       const retryResult = await callAnthropic([
         { role: "assistant", content: truncatedPrev },
         { role: "user", content: `Ta reponse precedente etait invalide: ${validation.error}. Corrige et renvoie le JSON complet.` },
-      ]);
+      ], 30_000);
       programJson = retryResult.data;
       totalInputTokens += retryResult.inputTokens;
       totalOutputTokens += retryResult.outputTokens;
