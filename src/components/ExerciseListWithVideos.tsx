@@ -52,6 +52,9 @@ export function ExerciseListWithVideos({ exercises, blockColor, showVideos, onTo
                 </span>
               </div>
               {visible && videoUrl && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={ex.name} />}
+              {!videoUrl && showVideos && (
+                <span className="inline-flex items-center gap-1 ml-4 px-2.5 py-1 rounded-full text-[11px] bg-amber-500/10 text-white/50">🚧 Pas encore de vidéo pour cet exercice</span>
+              )}
             </div>
           );
         })}

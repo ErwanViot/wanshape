@@ -13,7 +13,12 @@ export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysSh
   const videoUrl = getExerciseVideoUrl(exerciseName);
   const [expanded, setExpanded] = useState(false);
 
-  if (!videoUrl) return null;
+  if (!videoUrl) {
+    if (!alwaysShow) return null;
+    return (
+      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] bg-amber-500/10 text-white/50">🚧 Pas encore de vidéo pour cet exercice</span>
+    );
+  }
 
   const visible = expanded || alwaysShow;
 
