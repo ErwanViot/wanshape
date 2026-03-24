@@ -266,6 +266,16 @@ async function handleCheckoutCompleted(
     .from("profiles")
     .update({ subscription_tier: tierFromStatus(sub.status) })
     .eq("id", userId);
+
+  // Send welcome email (non-blocking)
+  try {
+    const { data: { user } } = await supabase.auth.admin.getUserById(userId);
+    if (user?.email) {
+      await sendWelcomeEmail(user.email, user.user_metadata?.display_name ?? null);
+    }
+  } catch (emailErr) {
+    console.error("Welcome email failed (non-blocking):", emailErr);
+  }
 }
 
 async function handleSubscriptionUpdated(
@@ -398,5 +408,95 @@ async function handlePaymentSucceeded(
       .from("profiles")
       .update({ subscription_tier: "premium" })
       .eq("id", sub.user_id);
+  }
+}
+
+async function sendWelcomeEmail(email: string, displayName: string | null) {
+  const resendApiKey = Deno.env.get("RESEND_API_KEY");
+  if (!resendApiKey) {
+    console.error("RESEND_API_KEY not configured, skipping welcome email");
+    return;
+  }
+
+  const name = displayName || "sportif";
+
+  const html = `<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:40px auto;background:#ffffff;border-radius:16px;overflow:hidden;">
+    <tr>
+      <td style="background:#0f0f17;padding:32px 40px;text-align:center;">
+        <img src="https://www.wan2fit.fr/logo-wan2fit.png" alt="Wan2Fit" width="48" height="48" style="display:inline-block;vertical-align:middle;">
+        <span style="color:#ffffff;font-size:24px;font-weight:800;margin-left:12px;vertical-align:middle;">Wan2Fit</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:40px 40px 24px;">
+        <h1 style="margin:0 0 16px;font-size:22px;color:#1a1a2e;">Salut ${name} !</h1>
+        <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#444;">
+          Merci de ta confiance. Ton abonnement Wan2Fit est actif — tu as maintenant accès à tout ce qu'il faut pour progresser à ton rythme.
+        </p>
+        <h2 style="margin:0 0 12px;font-size:16px;color:#1a1a2e;">Ce qui t'attend :</h2>
+        <table cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
+          <tr>
+            <td style="padding:8px 12px 8px 0;vertical-align:top;font-size:20px;">🎯</td>
+            <td style="padding:8px 0;font-size:14px;line-height:1.5;color:#444;">
+              <strong style="color:#1a1a2e;">Séances sur mesure</strong><br>L'IA crée ta séance selon tes envies et ton niveau.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px 8px 0;vertical-align:top;font-size:20px;">📋</td>
+            <td style="padding:8px 0;font-size:14px;line-height:1.5;color:#444;">
+              <strong style="color:#1a1a2e;">Programmes personnalisés</strong><br>Un plan multi-semaines adapté à tes objectifs, avec progression intégrée.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px 8px 0;vertical-align:top;font-size:20px;">📈</td>
+            <td style="padding:8px 0;font-size:14px;line-height:1.5;color:#444;">
+              <strong style="color:#1a1a2e;">Suivi de progression</strong><br>Chaque séance est enregistrée. Suis tes stats semaine après semaine.
+            </td>
+          </tr>
+        </table>
+        <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#444;">
+          Un conseil : commence par <strong>créer ton premier programme</strong>. C'est le meilleur moyen de rester régulier.
+        </p>
+        <a href="https://www.wan2fit.fr/programme/creer" style="display:inline-block;padding:14px 32px;background:#6366f1;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;border-radius:12px;">
+          Créer mon programme →
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:24px 40px 32px;border-top:1px solid #eee;">
+        <p style="margin:0 0 8px;font-size:13px;color:#888;line-height:1.5;">
+          Une question ou suggestion ? <a href="mailto:contact@wan2fit.fr" style="color:#6366f1;text-decoration:none;">contact@wan2fit.fr</a>
+        </p>
+        <p style="margin:0;font-size:13px;color:#888;">
+          À très vite sur le tapis,<br>L'équipe Wan2Fit 💪
+        </p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${resendApiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "Wan2Fit <noreply@wan2fit.fr>",
+      to: email,
+      subject: `Bienvenue ${name} ! Ton accès complet Wan2Fit est prêt`,
+      html,
+    }),
+    signal: AbortSignal.timeout(10_000),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => "Unknown");
+    console.error("Resend API error:", res.status, errText);
   }
 }
