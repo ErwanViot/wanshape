@@ -14,18 +14,11 @@ export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysSh
   const videoUrl = getExerciseVideoUrl(exerciseName);
   const [expanded, setExpanded] = useState(false);
 
-  if (!videoUrl) {
-    if (!alwaysShow) return null;
-    return (
-      <NoVideoTag />
-    );
-  }
-
   const visible = expanded || alwaysShow;
 
   return (
     <div className="w-full max-w-sm flex flex-col items-center gap-3">
-      {/* Toggle button — hidden when alwaysShow is active (video is auto-displayed) */}
+      {/* Toggle button — hidden when alwaysShow is active */}
       {!alwaysShow && (
         <button
           type="button"
@@ -46,11 +39,12 @@ export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysSh
         </button>
       )}
 
-      {/* Video */}
-      {visible && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={exerciseName} />}
+      {/* Video or no-video tag */}
+      {visible && videoUrl && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={exerciseName} />}
+      {visible && !videoUrl && <NoVideoTag />}
 
       {/* Always-show toggle — only shown when video is visible */}
-      {visible && (
+      {visible && videoUrl && (
         <label className="inline-flex items-center gap-2 text-white/40 text-xs cursor-pointer select-none">
           <input
             type="checkbox"

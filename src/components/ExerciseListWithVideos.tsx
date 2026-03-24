@@ -17,45 +17,47 @@ interface Props {
 }
 
 export function ExerciseListWithVideos({ exercises, blockColor, showVideos, onToggleShowVideos }: Props) {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const firstVideoIndex = exercises.findIndex((ex) => getExerciseVideoUrl(ex.name));
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(firstVideoIndex >= 0 ? firstVideoIndex : null);
 
   const hasAnyVideo = exercises.some((ex) => getExerciseVideoUrl(ex.name));
+
+  const toggleExercise = (i: number) => {
+    setExpandedIndex(expandedIndex === i ? null : i);
+  };
 
   return (
     <>
       <div className="w-full max-w-sm space-y-3">
         {exercises.map((ex, i) => {
           const videoUrl = getExerciseVideoUrl(ex.name);
-          const visible = videoUrl && (showVideos || expandedIndex === i);
+          const isExpanded = expandedIndex === i;
 
           return (
             <div key={`${i}-${ex.name}`} className="space-y-2">
-              <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/10">
+              <button
+                type="button"
+                onClick={() => videoUrl && toggleExercise(i)}
+                className={`flex items-center justify-between w-full px-4 py-3 rounded-xl bg-white/10 ${videoUrl ? 'cursor-pointer' : ''}`}
+              >
                 <div className="flex items-center gap-2">
                   <span className="text-white font-medium">{ex.name}</span>
                   {videoUrl && (
-                    <button
-                      type="button"
-                      onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
-                      className="p-1 rounded-md bg-white/5 text-white/40 hover:text-white/70 transition-colors"
-                      aria-label={visible ? "Masquer l'exemple" : "Voir l'exemple"}
-                    >
-                      {visible ? (
+                    <span className="p-1 rounded-md bg-white/5 text-white/40">
+                      {isExpanded ? (
                         <X className="w-3.5 h-3.5" aria-hidden="true" />
                       ) : (
                         <Play className="w-3.5 h-3.5" aria-hidden="true" />
                       )}
-                    </button>
+                    </span>
                   )}
                 </div>
                 <span className="text-lg font-bold" style={{ color: blockColor }}>
                   x{ex.reps}
                 </span>
-              </div>
-              {visible && videoUrl && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={ex.name} />}
-              {!videoUrl && showVideos && (
-                <NoVideoTag className="ml-4" />
-              )}
+              </button>
+              {isExpanded && videoUrl && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={ex.name} />}
+              {!videoUrl && <NoVideoTag className="ml-4" />}
             </div>
           );
         })}
