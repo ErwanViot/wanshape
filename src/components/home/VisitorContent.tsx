@@ -17,6 +17,7 @@ import {
 import { supabase } from '../../lib/supabase.ts';
 import type { Session } from '../../types/session.ts';
 import { getSessionImage } from '../../utils/sessionImage.ts';
+import { DifficultyBadge } from '../DifficultyBadge.tsx';
 import { ScreenshotCarousel } from '../ScreenshotCarousel.tsx';
 import { SessionAccordion } from '../SessionAccordion.tsx';
 import { TomorrowCard } from './TomorrowCard.tsx';
@@ -185,6 +186,7 @@ export function VisitorContent({
                           {session.focus.slice(0, 2).map((f) => (
                             <span key={f} className="text-xs text-white/70">· {f}</span>
                           ))}
+                          <DifficultyBadge session={session} />
                         </div>
                       </div>
                     </button>
