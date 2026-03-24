@@ -329,11 +329,12 @@ export function Player({
       />
 
       {/* Health reminder */}
-      <div className="px-6 pb-3 text-center">
-        <p className="text-xs text-white inline-flex items-center gap-1.5">
-          <HeartPulse className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-          Écoute ton corps. En cas de douleur, arrête immédiatement.
+      <div className="px-6 pb-3 text-center space-y-0.5">
+        <p className="text-sm text-white/70 inline-flex items-center gap-1.5">
+          <HeartPulse className="w-4 h-4 shrink-0" aria-hidden="true" />
+          Écoute ton corps. Adapte l'effort, la qualité prime sur la quantité.
         </p>
+        <p className="text-sm text-white/70">En cas de douleur, arrête immédiatement.</p>
       </div>
     </div>
   );

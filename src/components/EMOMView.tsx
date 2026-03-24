@@ -18,8 +18,11 @@ export function EMOMView({ step, remaining, progress, showVideos, onToggleShowVi
         {step.roundInfo && `Minute ${step.roundInfo.current}/${step.roundInfo.total}`}
       </div>
 
-      {/* Block name */}
-      <h2 className="text-2xl font-bold text-white">{step.blockName}</h2>
+      {/* Block name + explanation */}
+      <div className="space-y-1">
+        <h2 className="text-2xl font-bold text-white">{step.blockName}</h2>
+        <p className="text-white/60 text-sm">Réalise les exercices dans la minute. Le temps restant est ta récupération.</p>
+      </div>
 
       {/* Timer */}
       <TimerDisplay remaining={remaining} progress={progress} color={step.blockColor} />
@@ -34,7 +37,6 @@ export function EMOMView({ step, remaining, progress, showVideos, onToggleShowVi
         />
       )}
 
-      <p className="text-white/40 text-xs">Faites les exercices puis récupérez jusqu'à la prochaine minute</p>
     </div>
   );
 }

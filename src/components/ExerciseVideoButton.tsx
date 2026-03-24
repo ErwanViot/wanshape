@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Play, X } from 'lucide-react';
 import { getExerciseVideoUrl } from '../utils/exerciseVideo.ts';
+import { NoVideoTag } from './NoVideoTag.tsx';
 import { PlayerVideoDemo } from './PlayerVideoDemo.tsx';
 
 interface Props {
@@ -13,13 +14,13 @@ export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysSh
   const videoUrl = getExerciseVideoUrl(exerciseName);
   const [expanded, setExpanded] = useState(false);
 
-  if (!videoUrl) return null;
+  if (!videoUrl) return <NoVideoTag />;
 
   const visible = expanded || alwaysShow;
 
   return (
     <div className="w-full max-w-sm flex flex-col items-center gap-3">
-      {/* Toggle button — hidden when alwaysShow is active (video is auto-displayed) */}
+      {/* Toggle button — hidden when alwaysShow is active */}
       {!alwaysShow && (
         <button
           type="button"
