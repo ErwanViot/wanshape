@@ -17,8 +17,10 @@ interface Props {
 }
 
 export function ExerciseListWithVideos({ exercises, blockColor, showVideos, onToggleShowVideos }: Props) {
-  const firstVideoIndex = exercises.findIndex((ex) => getExerciseVideoUrl(ex.name));
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(firstVideoIndex >= 0 ? firstVideoIndex : null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(() => {
+    const idx = exercises.findIndex((ex) => getExerciseVideoUrl(ex.name));
+    return idx >= 0 ? idx : null;
+  });
 
   const hasAnyVideo = exercises.some((ex) => getExerciseVideoUrl(ex.name));
 
@@ -35,14 +37,14 @@ export function ExerciseListWithVideos({ exercises, blockColor, showVideos, onTo
 
           return (
             <div key={`${i}-${ex.name}`} className="space-y-2">
-              <button
-                type="button"
-                onClick={() => videoUrl && toggleExercise(i)}
-                className={`flex items-center justify-between w-full px-4 py-3 rounded-xl bg-white/10 ${videoUrl ? 'cursor-pointer' : ''}`}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-white font-medium">{ex.name}</span>
-                  {videoUrl && (
+              {videoUrl ? (
+                <button
+                  type="button"
+                  onClick={() => toggleExercise(i)}
+                  className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-white/10 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-white font-medium">{ex.name}</span>
                     <span className="p-1 rounded-md bg-white/5 text-white/40">
                       {isExpanded ? (
                         <X className="w-3.5 h-3.5" aria-hidden="true" />
@@ -50,14 +52,21 @@ export function ExerciseListWithVideos({ exercises, blockColor, showVideos, onTo
                         <Play className="w-3.5 h-3.5" aria-hidden="true" />
                       )}
                     </span>
-                  )}
+                  </div>
+                  <span className="text-lg font-bold" style={{ color: blockColor }}>
+                    x{ex.reps}
+                  </span>
+                </button>
+              ) : (
+                <div className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-white/10">
+                  <span className="text-white font-medium">{ex.name}</span>
+                  <span className="text-lg font-bold" style={{ color: blockColor }}>
+                    x{ex.reps}
+                  </span>
                 </div>
-                <span className="text-lg font-bold" style={{ color: blockColor }}>
-                  x{ex.reps}
-                </span>
-              </button>
+              )}
               {isExpanded && videoUrl && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={ex.name} />}
-              {!videoUrl && <NoVideoTag className="ml-4" />}
+              {!videoUrl && showVideos && <NoVideoTag className="ml-4" />}
             </div>
           );
         })}
