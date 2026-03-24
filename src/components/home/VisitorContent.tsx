@@ -16,8 +16,8 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase.ts';
 import type { Session } from '../../types/session.ts';
-import { computeDifficulty } from '../../utils/sessionDifficulty.ts';
 import { getSessionImage } from '../../utils/sessionImage.ts';
+import { DifficultyBadge } from '../DifficultyBadge.tsx';
 import { ScreenshotCarousel } from '../ScreenshotCarousel.tsx';
 import { SessionAccordion } from '../SessionAccordion.tsx';
 import { TomorrowCard } from './TomorrowCard.tsx';
@@ -186,25 +186,7 @@ export function VisitorContent({
                           {session.focus.slice(0, 2).map((f) => (
                             <span key={f} className="text-xs text-white/70">· {f}</span>
                           ))}
-                          {(() => {
-                            const difficulty = computeDifficulty(session);
-                            return (
-                              <>
-                                <span className="text-xs text-white/70">·</span>
-                                <span
-                                  className={`text-xs font-semibold ${
-                                    difficulty.level === 'accessible'
-                                      ? 'text-emerald-300'
-                                      : difficulty.level === 'modere'
-                                        ? 'text-amber-300'
-                                        : 'text-red-300'
-                                  }`}
-                                >
-                                  {difficulty.label}
-                                </span>
-                              </>
-                            );
-                          })()}
+                          <DifficultyBadge session={session} />
                         </div>
                       </div>
                     </button>
