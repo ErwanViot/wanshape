@@ -267,15 +267,17 @@ async function handleCheckoutCompleted(
     .update({ subscription_tier: tierFromStatus(sub.status) })
     .eq("id", userId);
 
-  // Send welcome email (non-blocking)
-  try {
-    const { data: { user } } = await supabase.auth.admin.getUserById(userId);
-    if (user?.email) {
-      await sendWelcomeEmail(user.email, user.user_metadata?.display_name ?? null);
+  // Send welcome email — fire-and-forget, failure logged but won't delay webhook response
+  void (async () => {
+    try {
+      const { data: { user } } = await supabase.auth.admin.getUserById(userId);
+      if (user?.email) {
+        await sendWelcomeEmail(user.email, user.user_metadata?.display_name ?? null);
+      }
+    } catch (emailErr) {
+      console.error("Welcome email failed:", emailErr);
     }
-  } catch (emailErr) {
-    console.error("Welcome email failed (non-blocking):", emailErr);
-  }
+  })();
 }
 
 async function handleSubscriptionUpdated(
@@ -418,7 +420,13 @@ async function sendWelcomeEmail(email: string, displayName: string | null) {
     return;
   }
 
-  const name = displayName || "sportif";
+  const rawName = (displayName || "sportif").replace(/[\r\n\t]/g, "").slice(0, 50);
+  const name = rawName
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+  const subjectName = rawName;
 
   const html = `<!DOCTYPE html>
 <html lang="fr">
@@ -489,7 +497,7 @@ async function sendWelcomeEmail(email: string, displayName: string | null) {
     body: JSON.stringify({
       from: "Wan2Fit <noreply@wan2fit.fr>",
       to: email,
-      subject: `Bienvenue ${name} ! Ton accès complet Wan2Fit est prêt`,
+      subject: `Bienvenue ${subjectName} ! Ton accès complet Wan2Fit est prêt`,
       html,
     }),
     signal: AbortSignal.timeout(10_000),
