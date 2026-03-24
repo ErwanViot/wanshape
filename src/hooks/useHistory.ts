@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
@@ -133,6 +133,7 @@ export function useHistory(userId: string | undefined): HistoryStats {
   const { dataGeneration } = useAuth();
   const [completions, setCompletions] = useState<CompletionWithTitle[]>([]);
   const [loading, setLoading] = useState(true);
+  const hasFetchedOnce = useRef(false);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: dataGeneration forces re-fetch on auth state change
   useEffect(() => {
@@ -143,7 +144,10 @@ export function useHistory(userId: string | undefined): HistoryStats {
     }
 
     let cancelled = false;
-    setLoading(true);
+    // Only show loading on initial fetch — keep stale data visible during refetch
+    if (!hasFetchedOnce.current) {
+      setLoading(true);
+    }
 
     (async () => {
       try {
@@ -183,6 +187,7 @@ export function useHistory(userId: string | undefined): HistoryStats {
         });
 
         setCompletions(enriched);
+        hasFetchedOnce.current = true;
         setLoading(false);
       } catch (err) {
         console.error('History fetch error:', err);

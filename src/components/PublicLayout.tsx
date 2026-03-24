@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { BottomNav } from './BottomNav.tsx';
@@ -9,10 +9,19 @@ import { SessionExpiredBanner } from './SessionExpiredBanner.tsx';
 export function PublicLayout() {
   const { pathname } = useLocation();
   const { user, bumpDataGeneration } = useAuth();
+  const prevPathname = useRef(pathname);
 
+  // Scroll to top and refresh data on ROUTE changes only.
+  // We deliberately depend on pathname (string) instead of user (object ref)
+  // because Supabase fires SIGNED_IN on every visibilitychange, creating a new
+  // user object reference. That was causing spurious dataGeneration bumps and
+  // full data re-fetches on every tab return — even after 1 second.
   useEffect(() => {
-    window.scrollTo(0, 0);
-    if (user) bumpDataGeneration();
+    if (prevPathname.current !== pathname) {
+      window.scrollTo(0, 0);
+      if (user) bumpDataGeneration();
+      prevPathname.current = pathname;
+    }
   }, [pathname, user, bumpDataGeneration]);
 
   return (

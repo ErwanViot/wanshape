@@ -1,7 +1,7 @@
 import type { User } from '@supabase/supabase-js';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
-import { sessionEvents } from '../lib/supabaseQuery.ts';
+import { sessionEvents, setVisibilityRefreshPromise } from '../lib/supabaseQuery.ts';
 import type { Profile } from '../types/auth.ts';
 
 interface AuthContextValue {
@@ -47,8 +47,8 @@ async function fetchProfile(userId: string): Promise<Profile | null> {
   return data as Profile | null;
 }
 
-/** After this duration in background, force a session refresh + data refetch */
-const STALE_THRESHOLD_MS = 5 * 60 * 1000; // 5 minutes
+/** Minimum background time before triggering a proactive refresh */
+const STALE_THRESHOLD_MS = 10 * 1000; // 10 seconds
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -59,19 +59,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const mounted = useRef(true);
   const lastVisibleAt = useRef(Date.now());
 
-  // Refresh session + bump dataGeneration when returning from background after inactivity
+  // Refresh session + bump dataGeneration when returning from background
+  // The refresh promise is shared with supabaseQuery so queries wait for it
   useEffect(() => {
     function handleVisibilityChange() {
       if (document.visibilityState === 'visible') {
         const elapsed = Date.now() - lastVisibleAt.current;
         if (elapsed > STALE_THRESHOLD_MS && supabase) {
-          supabase.auth.refreshSession().then(() => {
+          const refreshDone = (async () => {
+            try {
+              await supabase.auth.refreshSession();
+            } catch {
+              // Refresh failed — session may be truly expired
+            } finally {
+              setVisibilityRefreshPromise(null);
+            }
             if (mounted.current) {
               setDataGeneration((g) => g + 1);
             }
-          }).catch(() => {
-            // Refresh failed — session may be truly expired
-          });
+          })();
+          // Block supabaseQuery calls until refresh completes
+          setVisibilityRefreshPromise(refreshDone);
         }
         lastVisibleAt.current = Date.now();
       } else {

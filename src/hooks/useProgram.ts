@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
@@ -29,6 +29,7 @@ export function useActiveProgram(userId: string | undefined) {
   const { dataGeneration } = useAuth();
   const [activeProgram, setActiveProgram] = useState<ActiveProgramInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const hasFetchedOnce = useRef(false);
 
   useEffect(() => {
     if (!userId || !supabase) {
@@ -38,7 +39,12 @@ export function useActiveProgram(userId: string | undefined) {
     }
 
     let cancelled = false;
-    setLoading(true);
+    // Only show loading spinner on initial fetch. Subsequent refetches
+    // (e.g. from dataGeneration bumps) keep stale data visible to avoid
+    // flashing the skeleton on every tab return.
+    if (!hasFetchedOnce.current) {
+      setLoading(true);
+    }
 
     (async () => {
       try {
@@ -83,6 +89,7 @@ export function useActiveProgram(userId: string | undefined) {
           goals: d.goals ?? [],
           isFixed: d.isFixed ?? true,
         });
+        hasFetchedOnce.current = true;
         setLoading(false);
       } catch (err) {
         console.error('Active program fetch error:', err);
@@ -138,6 +145,7 @@ export function useProgram(slug: string | undefined, userId: string | undefined)
   const { dataGeneration } = useAuth();
   const [program, setProgram] = useState<ProgramWithSessions | null>(null);
   const [loading, setLoading] = useState(true);
+  const hasFetchedOnce = useRef(false);
 
   useEffect(() => {
     if (!slug || !supabase) {
@@ -146,7 +154,10 @@ export function useProgram(slug: string | undefined, userId: string | undefined)
     }
 
     let cancelled = false;
-    setLoading(true);
+    // Only show loading on initial fetch — keep stale data visible during refetch
+    if (!hasFetchedOnce.current) {
+      setLoading(true);
+    }
 
     (async () => {
       try {
@@ -196,6 +207,7 @@ export function useProgram(slug: string | undefined, userId: string | undefined)
           sessions: (sessions as ProgramSession[]) ?? [],
           completedSessionIds: completedIds,
         });
+        hasFetchedOnce.current = true;
         setLoading(false);
       } catch (err) {
         console.error('Program fetch error:', err);
@@ -215,6 +227,7 @@ export function useProgramSession(slug: string | undefined, order: number | unde
   const { dataGeneration } = useAuth();
   const [session, setSession] = useState<ProgramSession | null>(null);
   const [loading, setLoading] = useState(true);
+  const hasFetchedOnce = useRef(false);
 
   useEffect(() => {
     if (!slug || order == null || !supabase) {
@@ -223,7 +236,9 @@ export function useProgramSession(slug: string | undefined, order: number | unde
     }
 
     let cancelled = false;
-    setLoading(true);
+    if (!hasFetchedOnce.current) {
+      setLoading(true);
+    }
 
     (async () => {
       try {
@@ -242,6 +257,7 @@ export function useProgramSession(slug: string | undefined, order: number | unde
         if (cancelled) return;
         if (sessExp) { notifySessionExpired(); setLoading(false); return; }
         setSession((ps as ProgramSession) ?? null);
+        hasFetchedOnce.current = true;
         setLoading(false);
       } catch (err) {
         console.error('Program session fetch error:', err);

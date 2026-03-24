@@ -41,22 +41,30 @@ async function tryRefreshSession(): Promise<boolean> {
 }
 
 /**
+ * Gate that blocks queries while a visibility-triggered refresh is in progress.
+ * This prevents queries from firing with a stale token when returning to the tab.
+ */
+let visibilityRefreshPromise: Promise<void> | null = null;
+
+export function setVisibilityRefreshPromise(p: Promise<void> | null) {
+  visibilityRefreshPromise = p;
+}
+
+/**
  * Execute a Supabase query with automatic session recovery.
  *
- * If the query fails with an auth-related error, it will attempt to refresh
- * the session once and retry. If the retry also fails, it returns the error
- * and sets `sessionExpired` to true so the UI can react.
- *
- * Usage:
- * ```ts
- * const { data, error, sessionExpired } = await supabaseQuery(() =>
- *   supabase.from('programs').select('*').eq('slug', slug).single()
- * );
- * ```
+ * Before executing, ensures the token is fresh (waits for any pending
+ * visibility refresh and checks token expiry). If the query still fails
+ * with an auth error, retries once after a forced refresh.
  */
 export async function supabaseQuery<T>(
   queryFn: () => PromiseLike<{ data: T; error: { message?: string; code?: string } | null }>,
 ): Promise<{ data: T | null; error: { message?: string; code?: string } | null; sessionExpired: boolean }> {
+  // Wait for any ongoing visibility-triggered refresh before querying
+  if (visibilityRefreshPromise) {
+    await visibilityRefreshPromise;
+  }
+
   const result = await queryFn();
 
   if (!isAuthError(result.error)) {
