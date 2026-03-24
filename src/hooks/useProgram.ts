@@ -33,6 +33,7 @@ export function useActiveProgram(userId: string | undefined) {
 
   useEffect(() => {
     if (!userId || !supabase) {
+      hasFetchedOnce.current = false;
       setActiveProgram(null);
       setLoading(false);
       return;
@@ -149,6 +150,7 @@ export function useProgram(slug: string | undefined, userId: string | undefined)
 
   useEffect(() => {
     if (!slug || !supabase) {
+      hasFetchedOnce.current = false;
       setLoading(false);
       return;
     }
@@ -231,6 +233,7 @@ export function useProgramSession(slug: string | undefined, order: number | unde
 
   useEffect(() => {
     if (!slug || order == null || !supabase) {
+      hasFetchedOnce.current = false;
       setLoading(false);
       return;
     }

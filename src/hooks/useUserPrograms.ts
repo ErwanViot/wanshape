@@ -16,6 +16,7 @@ export function useUserPrograms() {
 
   const fetchPrograms = useCallback(async () => {
     if (!userId || !supabase) {
+      hasFetchedOnce.current = false;
       setLoading(false);
       return;
     }

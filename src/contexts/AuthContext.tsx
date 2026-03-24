@@ -69,13 +69,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           const refreshDone = (async () => {
             try {
               await supabase.auth.refreshSession();
+              if (mounted.current) {
+                setDataGeneration((g) => g + 1);
+              }
             } catch {
-              // Refresh failed — session may be truly expired
+              // Refresh failed — don't bump dataGeneration with a bad session
             } finally {
               setVisibilityRefreshPromise(null);
-            }
-            if (mounted.current) {
-              setDataGeneration((g) => g + 1);
             }
           })();
           // Block supabaseQuery calls until refresh completes

@@ -138,6 +138,7 @@ export function useHistory(userId: string | undefined): HistoryStats {
   // biome-ignore lint/correctness/useExhaustiveDependencies: dataGeneration forces re-fetch on auth state change
   useEffect(() => {
     if (!userId || !supabase) {
+      hasFetchedOnce.current = false;
       setCompletions([]);
       setLoading(false);
       return;
