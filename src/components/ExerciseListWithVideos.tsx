@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Play, X } from 'lucide-react';
 import { getExerciseVideoUrl } from '../utils/exerciseVideo.ts';
+import { NoVideoTag } from './NoVideoTag.tsx';
 import { PlayerVideoDemo } from './PlayerVideoDemo.tsx';
 
 interface Exercise {
@@ -53,7 +54,7 @@ export function ExerciseListWithVideos({ exercises, blockColor, showVideos, onTo
               </div>
               {visible && videoUrl && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={ex.name} />}
               {!videoUrl && showVideos && (
-                <span className="inline-flex items-center gap-1 ml-4 px-2.5 py-1 rounded-full text-[11px] bg-amber-500/10 text-white/50">🚧 Pas encore de vidéo pour cet exercice</span>
+                <NoVideoTag className="ml-4" />
               )}
             </div>
           );
