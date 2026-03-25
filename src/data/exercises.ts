@@ -1079,7 +1079,6 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Étirement pectoraux',
         description:
           "Bras tendu contre un mur ou un encadrement de porte à 90°, pivotez lentement le buste vers l'extérieur jusqu'à sentir l'étirement dans la poitrine et l'avant de l'épaule. Maintenez 20 à 30 secondes de chaque côté.",
-        video: '/videos/etirement-pectoraux.mp4',
       },
       {
         name: 'Étirement psoas',
