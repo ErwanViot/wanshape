@@ -129,7 +129,7 @@ export function CustomSessionPage() {
             onChange={(e) => setPreferences(e.target.value)}
             maxLength={2000}
             rows={6}
-            placeholder={'Ex : Séance push 45min, haltères + banc. 5min échauffement mobilité épaules. Bloc principal développé couché 5x5, développé incliné 3x10, élévations latérales 4x12. Finir avec un AMRAP 6min pompes/dips. Cooldown stretching pecs et épaules.'}
+            placeholder="Je veux une séance haut du corps de 45min avec haltères. J'aimerais du développé couché en force et des supersets pour les épaules. Pas de dips, j'ai mal au coude."
             className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand"
           />
           <p className="text-xs text-faint mt-1 text-right">{preferences.length}/2000</p>
