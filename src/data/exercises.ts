@@ -29,7 +29,6 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Pompes inclinées',
         description:
           "Mains sur un support surélevé (chaise, marche). Réduit la charge et facilite le mouvement — idéal pour débuter ou en fin de série quand la fatigue s'installe.",
-        video: '/videos/pompes-inclinees.mp4',
       },
       {
         name: 'Pompes diamant',
@@ -40,6 +39,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Pompes déclinées',
         description:
           'Pieds surélevés sur un support. Augmente la charge sur les épaules et la partie haute des pectoraux. Réservé aux pratiquants qui maîtrisent les pompes classiques.',
+        video: '/videos/pompes-declinees.mp4',
       },
       {
         name: 'Pompes explosives',
@@ -60,11 +60,13 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Pompes Hindu',
         description:
           "Départ en position du chien tête en bas, le corps plonge vers l'avant en rasant le sol puis remonte en cobra. Mouvement dynamique qui combine souplesse, force et mobilité de la colonne.",
+        video: '/videos/pompes-hindu.mp4',
       },
       {
         name: 'Pompes larges',
         description:
           "Mains placées nettement plus larges que les épaules. Augmente le recrutement des pectoraux et réduit l'implication des triceps — idéal pour cibler la poitrine au poids du corps.",
+        video: '/videos/pompes-larges.mp4',
       },
       {
         name: 'Pike push-ups',
@@ -75,6 +77,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Pompes scapulaires',
         description:
           'En position de planche bras tendus, seules les omoplates bougent (protraction et rétraction) sans fléchir les coudes. Renforce le dentelé antérieur et améliore la stabilité scapulaire.',
+        video: '/videos/scapular-push-ups.mp4',
       },
     ],
     tips: [
@@ -99,6 +102,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
     muscles: ['Triceps', 'Deltoïdes antérieurs', 'Pectoraux (partie basse)'],
     difficulty: 2,
     image: '/images/upper.webp',
+    video: '/videos/dips-sur-chaise.mp4',
     shortDescription:
       "Un exercice de poussée verticale qui cible les triceps en utilisant une chaise ou un support stable. Les dips sur chaise sont l'un des meilleurs mouvements au poids du corps pour sculpter l'arrière des bras et renforcer la poussée.",
     execution:
@@ -153,6 +157,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Face pulls au sol',
         description:
           "Allongé sur le ventre, bras tendus devant vous, tirez les coudes vers l'arrière en serrant les omoplates. Isole le travail des rhomboïdes et des deltoïdes postérieurs sans aucun matériel. Excellent pour la posture et l'activation du haut du dos.",
+        video: '/videos/face-pulls-au-sol.mp4',
       },
     ],
     tips: [
@@ -179,7 +184,6 @@ export const EXERCISES_DATA: ExerciseData[] = [
     muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers', 'Core (stabilisation)'],
     difficulty: 1,
     image: '/images/explosive.webp',
-    video: '/videos/squats.mp4',
     shortDescription:
       "Le mouvement roi du bas du corps. Le squat est un patron moteur fondamental qui sollicite l'ensemble de la chaîne inférieure : cuisses, fessiers et tronc. C'est le mouvement que vous faites chaque fois que vous vous asseyez et vous relevez.",
     execution:
@@ -218,6 +222,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Squats 1.5',
         description:
           'Descente complète, remontée à mi-chemin, redescente, puis remontée complète — ça compte pour une seule répétition. Augmente considérablement le temps sous tension dans la partie basse du mouvement.',
+        video: '/videos/squats-1-5.mp4',
       },
       {
         name: 'Pop squats',
@@ -310,6 +315,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Fentes marchées',
         description:
           "Enchaînez les fentes en avançant à chaque pas, comme une marche. Le mouvement continu ajoute un défi d'équilibre dynamique et augmente la composante cardiovasculaire de l'exercice. Nécessite un espace de quelques mètres.",
+        video: '/videos/fentes-marchees.mp4',
       },
       {
         name: 'Fentes sautées',
@@ -339,6 +345,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
     muscles: ['Fessiers', 'Ischio-jambiers', 'Core (stabilisation)'],
     difficulty: 1,
     image: '/images/lower.webp',
+    video: '/videos/glute-bridge.mp4',
     shortDescription:
       'Le mouvement de référence pour activer et renforcer les fessiers. Allongé au sol, vous soulevez le bassin en contractant les fessiers — un exercice simple, efficace et accessible à tous les niveaux.',
     execution:
@@ -592,11 +599,13 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Sit-ups',
         description:
           "Remontée complète du buste jusqu'en position assise, le dos décolle entièrement du sol. Mouvement plus complet qui recrute les fléchisseurs de hanche en plus des abdominaux, mais plus exigeant pour le bas du dos.",
+        video: '/videos/sit-ups.mp4',
       },
       {
         name: 'V-ups',
         description:
           'Les jambes et le buste montent simultanément pour former un V, les mains cherchent à toucher les pieds. Variante avancée qui demande force abdominale et souplesse des ischio-jambiers.',
+        video: '/videos/v-ups.mp4',
       },
       {
         name: 'Russian twists',
@@ -649,6 +658,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Superman alterné',
         description:
           'Soulevez le bras droit et la jambe gauche simultanément, puis alternez. Réduit la difficulté et ajoute un travail de stabilisation anti-rotation du bassin.',
+        video: '/videos/superman-alterne.mp4',
       },
       {
         name: 'Back extensions',
@@ -669,6 +679,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Prone T raises',
         description:
           'Face au sol, bras écartés sur les côtés, soulevez-les pour former un T. Cible spécifiquement les trapèzes moyens et les rhomboïdes, parfait pour corriger les épaules enroulées.',
+        video: '/videos/prone-t-raises.mp4',
       },
       {
         name: 'Prone Y raises',
@@ -819,6 +830,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
     muscles: ['Deltoïdes', 'Mollets', 'Quadriceps', 'Adducteurs'],
     difficulty: 1,
     image: '/images/cardio.webp',
+    video: '/videos/jumping-jacks.mp4',
     shortDescription:
       "L'échauffement par excellence. Les jumping jacks combinent un saut avec un écartement simultané des bras et des jambes dans un mouvement rythmique qui active rapidement le système cardiovasculaire. Simple, efficace et accessible à tous les niveaux.",
     execution:
@@ -926,6 +938,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Pas chassés',
         description:
           "Déplacement latéral en pas glissés sans phase de vol. Réduit l'impact articulaire tout en travaillant les adducteurs et la coordination latérale. Idéal pour l'échauffement ou les débutants.",
+        video: '/videos/pas-chasses.mp4',
       },
     ],
     tips: [
@@ -1004,6 +1017,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
     muscles: ['Épaules', 'Core', 'Ischio-jambiers (souplesse)', 'Pectoraux'],
     difficulty: 1,
     image: '/images/fullbody.webp',
+    video: '/videos/inchworms.mp4',
     shortDescription:
       "Un exercice de mobilité dynamique qui combine marche des mains et étirement des ischio-jambiers. L'inchworm réchauffe tout le corps en passant de la position debout à la planche et retour — parfait en échauffement ou en récupération active.",
     execution:
@@ -1065,11 +1079,13 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Étirement pectoraux',
         description:
           "Bras tendu contre un mur ou un encadrement de porte à 90°, pivotez lentement le buste vers l'extérieur jusqu'à sentir l'étirement dans la poitrine et l'avant de l'épaule. Maintenez 20 à 30 secondes de chaque côté.",
+        video: '/videos/etirement-pectoraux.mp4',
       },
       {
         name: 'Étirement psoas',
         description:
           "En position de fente basse, genou arrière au sol, poussez les hanches vers l'avant jusqu'à sentir l'étirement à l'avant de la hanche arrière. Le buste reste droit. Maintenez 20 à 30 secondes de chaque côté.",
+        video: '/videos/etirement-psoas.mp4',
       },
       {
         name: 'Étirement quadriceps debout',
@@ -1080,6 +1096,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Étirement triceps',
         description:
           "Bras levé, pliez le coude pour amener la main derrière la tête entre les omoplates. Avec l'autre main, poussez doucement le coude vers le bas. Maintenez 20 à 30 secondes de chaque côté.",
+        video: '/videos/etirement-triceps.mp4',
       },
     ],
     tips: [
@@ -1122,16 +1139,19 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Cat-cow',
         description:
           'À quatre pattes, alternez lentement entre dos rond (chat : tête baissée, nombril rentré, dos vers le plafond) et dos creux (vache : tête levée, ventre vers le sol, poitrine ouverte). Mobilise toute la colonne vertébrale segment par segment.',
+        video: '/videos/cat-cow.mp4',
       },
       {
         name: "Child's pose",
         description:
           "À genoux, asseyez-vous sur les talons et tendez les bras devant vous, front au sol. Respirez profondément dans le bas du dos. Position de repos et d'étirement qui relâche les lombaires, les épaules et les hanches.",
+        video: '/videos/childs-pose.mp4',
       },
       {
         name: 'Deep squat hold',
         description:
           "Maintenez un squat profond (fesses près du sol), pieds à plat, coudes contre l'intérieur des genoux pour les pousser vers l'extérieur. Améliore la mobilité des hanches, des chevilles et du bas du dos. Maintenez 30 à 60 secondes.",
+        video: '/videos/deep-squat-hold.mp4',
       },
       {
         name: 'Hip 90/90',
@@ -1147,16 +1167,13 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Scorpion stretch',
         description:
           'Allongé sur le ventre, bras écartés en croix. Amenez le pied droit vers la main gauche en tournant le bassin, puis alternez. Mobilise la colonne thoracique en rotation et étire les fléchisseurs de hanche.',
-      },
-      {
-        name: "Child's pose",
-        description:
-          "À genoux, asseyez-vous sur les talons et penchez le buste vers l'avant, bras tendus devant vous, front au sol. Genoux serrés pour cibler le bas du dos, ou écartés pour ouvrir les hanches. Maintien passif de 30 à 60 secondes en respirant profondément. Posture de récupération fondamentale.",
+        video: '/videos/scorpion-stretch.mp4',
       },
       {
         name: "World's greatest stretch",
         description:
           "En position de fente basse, posez la main intérieure au sol, puis effectuez une rotation du buste en levant l'autre bras vers le ciel. Combine fente, rotation thoracique et ouverture de hanche en un seul mouvement complet. Le roi des échauffements.",
+        video: '/videos/worlds-greatest-stretch.mp4',
       },
     ],
     tips: [
@@ -1199,6 +1216,7 @@ export const EXERCISES_DATA: ExerciseData[] = [
         name: 'Rotations articulaires',
         description:
           'Effectuez des cercles lents et contrôlés avec chaque articulation : cou, épaules, coudes, poignets, hanches, genoux et chevilles. Commencez petit et agrandissez progressivement les cercles. 10 rotations dans chaque sens par articulation.',
+        video: '/videos/rotations-articulaires.mp4',
       },
       {
         name: 'Marche rapide sur place',

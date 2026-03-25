@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
+
 import { supabase } from '../lib/supabase.ts';
 import type { User } from '@supabase/supabase-js';
 
@@ -86,9 +87,13 @@ export function WelcomeModal({ onClose }: Props) {
         className="glass-card w-full max-w-md rounded-3xl shadow-2xl p-6 space-y-6"
       >
         <div className="text-center space-y-2">
-          <div className="text-4xl">🎉</div>
+          <img
+            src="/images/illustration-onboarding.webp"
+            alt=""
+            className="w-full h-32 object-contain rounded-xl mx-auto"
+          />
           <h2 id="welcome-title" className="text-xl font-bold text-heading">
-            Bienvenue sur WanShape !
+            Bienvenue sur Wan2Fit !
           </h2>
           <p className="text-sm text-muted">
             Prêt(e) à te dépasser ? Voici comment commencer :

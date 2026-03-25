@@ -1,10 +1,13 @@
-import { Link, Navigate, useParams } from 'react-router';
+import { Navigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
 import { useProgramSession } from '../hooks/useProgram.ts';
 import type { Session } from '../types/session.ts';
+import { PlayerLoader } from './LoadingSpinner.tsx';
 import { Player } from './Player.tsx';
+import { PlayerErrorBoundary } from './PlayerErrorBoundary.tsx';
+import { SessionNotFound } from './SessionNotFound.tsx';
 
 export function ProgramPlayerPage() {
   const { slug, order } = useParams<{ slug: string; order: string }>();
@@ -12,7 +15,7 @@ export function ProgramPlayerPage() {
   const orderNum = order ? Number.parseInt(order, 10) : undefined;
   const { session: programSession, loading } = useProgramSession(slug, orderNum);
 
-  const sessionData = programSession?.session_data as unknown as Session | undefined;
+  const sessionData = programSession?.session_data as Session | undefined;
 
   useDocumentHead({
     title: sessionData ? `${sessionData.title} — En cours` : 'Séance programme',
@@ -26,30 +29,20 @@ export function ProgramPlayerPage() {
     return <Navigate to="/" replace />;
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-white/20 border-t-brand rounded-full animate-spin" />
-      </div>
-    );
-  }
+  if (loading) return <PlayerLoader />;
 
   if (!programSession || !sessionData) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6">
-        <div className="text-center">
-          <div className="text-5xl mb-4">😴</div>
-          <p className="text-white/60 text-lg font-medium">Séance introuvable.</p>
-          <Link
-            to={slug ? `/programme/${slug}` : '/programmes'}
-            className="text-link hover:text-link-hover underline mt-4 inline-block"
-          >
-            Retour au programme
-          </Link>
-        </div>
-      </div>
+      <SessionNotFound
+        linkTo={slug ? `/programme/${slug}/suivi` : '/programmes'}
+        linkLabel="Retour au programme"
+      />
     );
   }
 
-  return <Player session={sessionData} programSessionId={programSession.id} backTo={`/programme/${slug}`} />;
+  return (
+    <PlayerErrorBoundary backTo={slug ? `/programme/${slug}/suivi` : '/programmes'}>
+      <Player session={sessionData} programSessionId={programSession.id} backTo={`/programme/${slug}/suivi`} />
+    </PlayerErrorBoundary>
+  );
 }

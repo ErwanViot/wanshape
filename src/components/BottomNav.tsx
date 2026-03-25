@@ -1,8 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { getInitials } from '../utils/getInitials.ts';
 
-function HomeIcon() {
+function DumbbellIcon() {
   return (
     <svg
       aria-hidden="true"
@@ -15,8 +14,8 @@ function HomeIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
+      <path d="M6.5 6.5h11M6.5 17.5h11" />
+      <path d="M4 10v4M8 8v8M16 8v8M20 10v4" />
     </svg>
   );
 }
@@ -61,6 +60,25 @@ function ProgramsIcon() {
   );
 }
 
+function HomeIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  );
+}
+
 function UserIcon() {
   return (
     <svg
@@ -80,6 +98,26 @@ function UserIcon() {
   );
 }
 
+function ChartIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="18" y1="20" x2="18" y2="10" />
+      <line x1="12" y1="20" x2="12" y2="4" />
+      <line x1="6" y1="20" x2="6" y2="14" />
+    </svg>
+  );
+}
+
 function NavItem({
   to,
   label,
@@ -94,28 +132,27 @@ function NavItem({
   return (
     <Link
       to={to}
-      className={`flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] px-1.5 py-1.5 transition-colors ${
+      className={`flex flex-col items-center justify-center gap-0.5 min-w-[48px] min-h-[44px] px-1 py-1.5 transition-colors ${
         active ? 'text-brand' : 'text-muted'
       }`}
       aria-current={active ? 'page' : undefined}
     >
       {children}
-      <span className="text-xs font-medium leading-tight">{label}</span>
+      <span className="text-[10px] font-medium leading-tight">{label}</span>
     </Link>
   );
 }
 
 export function BottomNav() {
   const { pathname } = useLocation();
-  const { user, profile, loading } = useAuth();
+  const { user } = useAuth();
 
   const isHome = pathname === '/';
-  const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
+  const isSeances = pathname === '/seances' || pathname.startsWith('/seance');
   const isPrograms = pathname.startsWith('/programme');
-  const isProfile = pathname === '/profil' || pathname === '/login' || pathname === '/signup';
-
-  const profileTo = user ? '/profil' : '/login';
-  const profileLabel = user ? 'Profil' : 'Connexion';
+  const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
+  const isSuivi = pathname === '/suivi';
+  const isLogin = pathname === '/login' || pathname === '/signup';
 
   return (
     <nav
@@ -123,25 +160,38 @@ export function BottomNav() {
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       aria-label="Navigation principale"
     >
-      <div className="flex items-center justify-around h-14 max-w-lg mx-auto">
-        <NavItem to="/" label="Accueil" active={isHome}>
-          <HomeIcon />
-        </NavItem>
-        <NavItem to="/decouvrir" label="Découvrir" active={isDiscover}>
-          <DiscoverIcon />
-        </NavItem>
-        <NavItem to="/programmes" label="Programmes" active={isPrograms}>
-          <ProgramsIcon />
-        </NavItem>
-        <NavItem to={profileTo} label={profileLabel} active={isProfile}>
-          {!loading && user ? (
-            <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs text-white font-bold bg-brand">
-              {getInitials(profile?.display_name ?? user.user_metadata?.display_name, user.email)}
-            </div>
-          ) : (
-            <UserIcon />
-          )}
-        </NavItem>
+      <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
+        {user ? (
+          <>
+            <NavItem to="/seances" label="Séances" active={isSeances}>
+              <DumbbellIcon />
+            </NavItem>
+            <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+              <ProgramsIcon />
+            </NavItem>
+            <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
+              <DiscoverIcon />
+            </NavItem>
+            <NavItem to="/suivi" label="Suivi" active={isSuivi}>
+              <ChartIcon />
+            </NavItem>
+          </>
+        ) : (
+          <>
+            <NavItem to="/" label="Accueil" active={isHome}>
+              <HomeIcon />
+            </NavItem>
+            <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+              <ProgramsIcon />
+            </NavItem>
+            <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
+              <DiscoverIcon />
+            </NavItem>
+            <NavItem to="/login" label="Connexion" active={isLogin}>
+              <UserIcon />
+            </NavItem>
+          </>
+        )}
       </div>
     </nav>
   );

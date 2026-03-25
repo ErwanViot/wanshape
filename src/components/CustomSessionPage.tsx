@@ -1,50 +1,39 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { Dumbbell, Flame, Heart, Zap } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useCustomSessions } from '../hooks/useCustomSessions.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
+import { toggleArrayElement } from '../utils/array.ts';
+import { EQUIPMENT_OPTIONS } from '../types/equipment.ts';
 import type {
   BodyFocus,
   CustomSessionInput,
   CustomSessionMode,
   CustomSessionPreset,
-  Equipment,
   Intensity,
 } from '../types/custom-session.ts';
+import type { Equipment } from '../types/equipment.ts';
 
-const PRESETS: { value: CustomSessionPreset; emoji: string; label: string; desc: string }[] = [
-  { value: 'transpirer', emoji: '🔥', label: 'Objectif : transpirer', desc: 'HIIT + Tabata, haute intensité' },
-  { value: 'renfo', emoji: '💪', label: 'Renfo complet', desc: 'Renforcement musculaire structuré' },
-  { value: 'express', emoji: '⚡', label: 'Full body express', desc: 'Circuit rapide, zéro temps mort' },
-  { value: 'mobilite', emoji: '🌿', label: 'Détente & mobilité', desc: 'Stretching et récupération active' },
+const PRESETS: { value: CustomSessionPreset; Icon: LucideIcon; label: string; desc: string }[] = [
+  { value: 'transpirer', Icon: Flame, label: 'Objectif : transpirer', desc: 'HIIT + Tabata, haute intensité' },
+  { value: 'renfo', Icon: Dumbbell, label: 'Renfo complet', desc: 'Renforcement musculaire structuré' },
+  { value: 'express', Icon: Zap, label: 'Full body express', desc: 'Circuit rapide, zéro temps mort' },
+  { value: 'mobilite', Icon: Heart, label: 'Détente & mobilité', desc: 'Stretching et récupération active' },
 ];
 
 const DURATION_MIN = 10;
 const DURATION_MAX = 90;
 const DURATION_STEP = 5;
 
-const EQUIPMENT_OPTIONS: { value: Equipment; label: string }[] = [
-  { value: 'halteres', label: 'Haltères' },
-  { value: 'elastiques', label: 'Élastiques' },
-  { value: 'kettlebell', label: 'Kettlebell' },
-  { value: 'barre-musculation', label: 'Barre & disques' },
-  { value: 'banc', label: 'Banc' },
-  { value: 'barre-traction', label: 'Barre de traction' },
-  { value: 'trx', label: 'TRX / Sangles' },
-  { value: 'anneaux', label: 'Anneaux' },
-  { value: 'corde-a-sauter', label: 'Corde à sauter' },
-  { value: 'medecine-ball', label: 'Medicine ball' },
-  { value: 'swiss-ball', label: 'Swiss ball' },
-  { value: 'step', label: 'Step' },
-  { value: 'tapis', label: 'Tapis' },
-  { value: 'foam-roller', label: 'Foam roller' },
-  { value: 'aucun', label: 'Sans matériel' },
-];
+// EQUIPMENT_OPTIONS imported from types/equipment.ts
 
-const INTENSITY_OPTIONS: { value: Intensity; label: string; emoji: string }[] = [
-  { value: 'douce', label: 'Douce', emoji: '🟢' },
-  { value: 'moderee', label: 'Modérée', emoji: '🟡' },
-  { value: 'intense', label: 'Intense', emoji: '🔴' },
+const INTENSITY_OPTIONS: { value: Intensity; label: string; color: string }[] = [
+  { value: 'douce', label: 'Douce', color: 'bg-green-500' },
+  { value: 'moderee', label: 'Modérée', color: 'bg-yellow-500' },
+  { value: 'intense', label: 'Intense', color: 'bg-red-500' },
 ];
 
 const BODY_FOCUS_OPTIONS: { value: BodyFocus; label: string }[] = [
@@ -55,11 +44,12 @@ const BODY_FOCUS_OPTIONS: { value: BodyFocus; label: string }[] = [
 ];
 
 export function CustomSessionPage() {
-  useDocumentHead({ title: 'Créer ma séance — WAN SHAPE' });
+  useDocumentHead({ title: 'Créer ma séance' });
 
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { generate, loading, error } = useGenerateSession();
-  const { sessions: history, loading: historyLoading, error: historyError, refresh } = useCustomSessions();
+  const { sessions: history, loading: historyLoading, error: historyError, refresh } = useCustomSessions(user?.id);
 
   const [mode, setMode] = useState<CustomSessionMode>('quick');
   const [preset, setPreset] = useState<CustomSessionPreset>('transpirer');
@@ -70,7 +60,7 @@ export function CustomSessionPage() {
   const [preferences, setPreferences] = useState('');
 
   const toggleChip = <T extends string>(arr: T[], val: T, setter: React.Dispatch<React.SetStateAction<T[]>>) => {
-    setter(arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val]);
+    setter(toggleArrayElement(arr, val));
   };
 
   const canSubmit = mode !== 'expert' || preferences.trim().length > 0;
@@ -100,7 +90,11 @@ export function CustomSessionPage() {
 
   return (
     <div className="px-6 md:px-10 lg:px-14 pb-12 max-w-2xl mx-auto pt-6 md:pt-4">
-      <h1 className="text-2xl sm:text-3xl font-bold text-heading mb-6">Créer ma séance</h1>
+      <div className="relative rounded-2xl overflow-hidden mb-6">
+        <img src="/images/illustration-ai-session.webp" alt="Créer une séance personnalisée par IA" className="w-full h-32 sm:h-40 object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
+        <h1 className="absolute bottom-4 left-4 text-2xl sm:text-3xl font-bold text-white drop-shadow-sm">Créer ma séance</h1>
+      </div>
 
       {/* Mode toggle */}
       <div className="flex rounded-xl overflow-hidden border border-divider mb-6">
@@ -113,6 +107,7 @@ export function CustomSessionPage() {
             key={m.value}
             type="button"
             onClick={() => setMode(m.value)}
+            aria-pressed={mode === m.value}
             className={`flex-1 py-2.5 text-sm font-semibold transition-colors cursor-pointer ${
               mode === m.value ? 'bg-brand text-white' : 'bg-surface-card text-muted hover:text-heading'
             }`}
@@ -134,7 +129,7 @@ export function CustomSessionPage() {
             onChange={(e) => setPreferences(e.target.value)}
             maxLength={2000}
             rows={6}
-            placeholder={'Ex : Séance push 45min, haltères + banc. 5min échauffement mobilité épaules. Bloc principal développé couché 5x5, développé incliné 3x10, élévations latérales 4x12. Finir avec un AMRAP 6min pompes/dips. Cooldown stretching pecs et épaules.'}
+            placeholder="Je veux une séance haut du corps de 45min avec haltères. J'aimerais du développé couché en force et des supersets pour les épaules. Pas de dips, j'ai mal au coude."
             className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand"
           />
           <p className="text-xs text-faint mt-1 text-right">{preferences.length}/2000</p>
@@ -149,13 +144,16 @@ export function CustomSessionPage() {
               key={p.value}
               type="button"
               onClick={() => setPreset(p.value)}
+              aria-pressed={preset === p.value}
               className={`w-full text-left px-4 py-3.5 rounded-xl border transition-colors cursor-pointer ${
                 preset === p.value
                   ? 'border-brand bg-brand/10'
                   : 'border-divider bg-surface-card hover:border-brand/30'
               }`}
             >
-              <span className="text-lg mr-2">{p.emoji}</span>
+              <span className="inline-flex items-center mr-2">
+                <p.Icon className="w-5 h-5 text-brand" aria-hidden="true" />
+              </span>
               <span className="font-semibold text-heading">{p.label}</span>
               <p className="text-sm text-muted mt-0.5 ml-8">{p.desc}</p>
             </button>
@@ -175,6 +173,7 @@ export function CustomSessionPage() {
                   key={e.value}
                   type="button"
                   onClick={() => toggleChip(equipment, e.value, setEquipment)}
+                  aria-pressed={equipment.includes(e.value)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer ${
                     equipment.includes(e.value)
                       ? 'border-brand bg-brand/10 text-brand'
@@ -196,13 +195,15 @@ export function CustomSessionPage() {
                   key={i.value}
                   type="button"
                   onClick={() => setIntensity(i.value)}
+                  aria-pressed={intensity === i.value}
                   className={`flex-1 py-2.5 rounded-xl border text-sm font-semibold transition-colors cursor-pointer ${
                     intensity === i.value
                       ? 'border-brand bg-brand/10 text-brand'
                       : 'border-divider text-muted hover:border-brand/30'
                   }`}
                 >
-                  {i.emoji} {i.label}
+                  <span className={`inline-block w-2.5 h-2.5 rounded-full ${i.color} mr-1.5`} aria-hidden="true" />
+                  {i.label}
                 </button>
               ))}
             </div>
@@ -217,6 +218,7 @@ export function CustomSessionPage() {
                   key={f.value}
                   type="button"
                   onClick={() => toggleChip(bodyFocus, f.value, setBodyFocus)}
+                  aria-pressed={bodyFocus.includes(f.value)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer ${
                     bodyFocus.includes(f.value)
                       ? 'border-brand bg-brand/10 text-brand'
@@ -262,6 +264,7 @@ export function CustomSessionPage() {
             type="button"
             onClick={() => setDuration((d) => Math.max(DURATION_MIN, d - DURATION_STEP))}
             disabled={duration <= DURATION_MIN}
+            aria-label="Diminuer la durée"
             className="w-10 h-10 rounded-full border border-divider text-heading font-bold text-lg flex items-center justify-center cursor-pointer hover:border-brand/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             &minus;
@@ -273,6 +276,7 @@ export function CustomSessionPage() {
             type="button"
             onClick={() => setDuration((d) => Math.min(DURATION_MAX, d + DURATION_STEP))}
             disabled={duration >= DURATION_MAX}
+            aria-label="Augmenter la durée"
             className="w-10 h-10 rounded-full border border-divider text-heading font-bold text-lg flex items-center justify-center cursor-pointer hover:border-brand/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             +
@@ -301,7 +305,7 @@ export function CustomSessionPage() {
       {loading && (
         <div className="mt-4 flex items-center justify-center gap-3">
           <div className="w-5 h-5 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
-          <p className="text-sm text-muted">L'IA prépare votre séance...</p>
+          <p className="text-sm text-muted">L'IA prépare ta séance...</p>
         </div>
       )}
 

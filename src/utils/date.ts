@@ -1,25 +1,25 @@
-export function formatDateToDDMMYYYY(date: Date): string {
+export function formatDateKey(date: Date): string {
   const dd = String(date.getDate()).padStart(2, '0');
   const mm = String(date.getMonth() + 1).padStart(2, '0');
   const yyyy = String(date.getFullYear());
-  return `${dd}${mm}${yyyy}`;
+  return `${yyyy}${mm}${dd}`;
 }
 
-export function parseDDMMYYYY(str: string): Date {
-  const dd = parseInt(str.slice(0, 2), 10);
-  const mm = parseInt(str.slice(2, 4), 10) - 1;
-  const yyyy = parseInt(str.slice(4, 8), 10);
+export function parseDateKey(str: string): Date {
+  const yyyy = parseInt(str.slice(0, 4), 10);
+  const mm = parseInt(str.slice(4, 6), 10) - 1;
+  const dd = parseInt(str.slice(6, 8), 10);
   return new Date(yyyy, mm, dd);
 }
 
 export function getTodayKey(): string {
-  return formatDateToDDMMYYYY(new Date());
+  return formatDateKey(new Date());
 }
 
 export function getTomorrowKey(): string {
   const d = new Date();
   d.setDate(d.getDate() + 1);
-  return formatDateToDDMMYYYY(d);
+  return formatDateKey(d);
 }
 
 export function formatDuration(seconds: number): string {
@@ -33,4 +33,20 @@ export function formatDurationLong(seconds: number): string {
   if (m < 1) return `${seconds}s`;
   const s = seconds % 60;
   return s > 0 ? `${m}min ${s}s` : `${m} min`;
+}
+
+export function formatDate(dateStr: string | null): string {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+export function formatShortDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'short',
+  });
 }

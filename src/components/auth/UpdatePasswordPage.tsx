@@ -2,26 +2,27 @@ import { type FormEvent, useState } from 'react';
 import { Link } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { LoadingSpinner } from '../LoadingSpinner.tsx';
+import { FormInput } from './FormInput.tsx';
 
 export function UpdatePasswordPage() {
   const { user, loading, updatePassword } = useAuth();
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   useDocumentHead({
     title: 'Nouveau mot de passe',
-    description: 'Choisissez un nouveau mot de passe pour votre compte WanShape.',
+    description: 'Choisis un nouveau mot de passe pour ton compte Wan2Fit.',
   });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères.');
+    if (password.length < 8) {
+      setError('Le mot de passe doit contenir au moins 8 caractères.');
       return;
     }
     if (password !== confirm) {
@@ -31,15 +32,23 @@ export function UpdatePasswordPage() {
 
     setSubmitting(true);
     try {
-      const { error: err } = await updatePassword(password);
-      if (err) {
-        setError(err);
+      // Race against a timeout — updateUser can hang if the recovery session
+      // triggers an auth state change that interferes with the async flow.
+      // On timeout we show an error instead of falsely reporting success.
+      const result = await Promise.race([
+        updatePassword(password),
+        new Promise<{ error: string | null }>((resolve) =>
+          setTimeout(() => resolve({ error: 'Le serveur met trop de temps à répondre. Réessaye.' }), 30_000),
+        ),
+      ]);
+      if (result.error) {
+        setError(result.error);
+        setSubmitting(false);
       } else {
-        setSuccess(true);
+        window.location.replace('/');
       }
     } catch {
-      setError('Une erreur est survenue. Veuillez réessayer.');
-    } finally {
+      setError('Une erreur est survenue. Réessaye.');
       setSubmitting(false);
     }
   };
@@ -47,7 +56,7 @@ export function UpdatePasswordPage() {
   if (loading) {
     return (
       <div className="px-6 py-12 flex-1 flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <LoadingSpinner />
       </div>
     );
   }
@@ -74,45 +83,10 @@ export function UpdatePasswordPage() {
             </svg>
           </div>
           <p className="text-strong font-medium mb-1">Lien expiré ou invalide</p>
-          <p className="text-sm text-muted mb-6">Veuillez refaire une demande de réinitialisation.</p>
+          <p className="text-sm text-muted mb-6">Refais une demande de réinitialisation.</p>
           <Link to="/mot-de-passe-oublie" className="text-link hover:text-link-hover transition-colors text-sm">
             Mot de passe oublié
           </Link>
-        </div>
-      </div>
-    );
-  }
-
-  if (success) {
-    return (
-      <div className="px-6 py-12 flex-1 flex items-start justify-center">
-        <div className="w-full max-w-md">
-          <div className="glass-card rounded-2xl p-6 text-center py-8">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-green-400"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <p className="text-strong font-medium mb-1">Mot de passe mis à jour</p>
-            <p className="text-sm text-muted mb-6">Votre nouveau mot de passe est actif.</p>
-            <Link
-              to="/profil"
-              replace
-              className="inline-block px-6 py-3 rounded-xl text-white font-semibold btn-primary"
-            >
-              Accéder à mon profil
-            </Link>
-          </div>
         </div>
       </div>
     );
@@ -125,39 +99,29 @@ export function UpdatePasswordPage() {
 
         <div className="glass-card rounded-2xl p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="new-password" className="block text-sm font-medium text-strong mb-1.5">
-                Nouveau mot de passe
-              </label>
-              <input
-                id="new-password"
-                type="password"
-                required
-                minLength={6}
-                autoComplete="new-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="6 caractères minimum"
-                className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
-              />
-            </div>
+            <FormInput
+              label="Nouveau mot de passe"
+              inputId="new-password"
+              type="password"
+              required
+              minLength={8}
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="8 caractères minimum"
+            />
 
-            <div>
-              <label htmlFor="confirm-password" className="block text-sm font-medium text-strong mb-1.5">
-                Confirmer le mot de passe
-              </label>
-              <input
-                id="confirm-password"
-                type="password"
-                required
-                minLength={6}
-                autoComplete="new-password"
-                value={confirm}
-                onChange={(e) => setConfirm(e.target.value)}
-                placeholder="Retapez le mot de passe"
-                className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
-              />
-            </div>
+            <FormInput
+              label="Confirmer le mot de passe"
+              inputId="confirm-password"
+              type="password"
+              required
+              minLength={8}
+              autoComplete="new-password"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              placeholder="Retapez le mot de passe"
+            />
 
             {error && (
               <p className="text-sm text-red-400" role="alert">

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { supabase } from '../../lib/supabase.ts';
+import { LoadingSpinner } from '../LoadingSpinner.tsx';
 
 const TIMEOUT_MS = 15_000;
 
@@ -24,7 +25,7 @@ export function AuthCallback() {
     const client = supabase;
 
     const timeout = setTimeout(() => {
-      setError('La connexion prend trop de temps. Veuillez réessayer.');
+      setError('La connexion prend trop de temps. Réessaye.');
     }, TIMEOUT_MS);
 
     const params = new URLSearchParams(window.location.search);
@@ -37,13 +38,13 @@ export function AuthCallback() {
           // Code exchange failed — session may already be active via onAuthStateChange
           client.auth.getSession().then(({ data: { session } }) => {
             if (session) {
-              navigate('/profil', { replace: true });
+              navigate('/suivi', { replace: true });
             } else {
               setError(err.message);
             }
           });
         } else {
-          navigate('/profil', { replace: true });
+          navigate('/suivi', { replace: true });
         }
       });
     } else {
@@ -51,7 +52,7 @@ export function AuthCallback() {
       client.auth.getSession().then(({ data: { session } }) => {
         clearTimeout(timeout);
         if (session) {
-          navigate('/profil', { replace: true });
+          navigate('/suivi', { replace: true });
         } else {
           setError('Code de vérification manquant');
         }
@@ -95,7 +96,7 @@ export function AuthCallback() {
   return (
     <div className="px-6 py-12 flex-1 flex items-center justify-center">
       <output className="flex flex-col items-center gap-3">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <LoadingSpinner />
         <p className="text-sm text-muted">Connexion en cours...</p>
       </output>
     </div>

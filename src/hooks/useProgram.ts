@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
+import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program, ProgramSession, SessionCompletion } from '../types/completion.ts';
+import type { Session } from '../types/session.ts';
 
 export interface ProgramWithSessions extends Program {
   sessions: ProgramSession[];
@@ -14,104 +17,75 @@ export interface ActiveProgramInfo {
   totalSessions: number;
   nextSessionTitle: string | null;
   nextSessionOrder: number | null;
+  nextSessionData: Session | null;
+  goals: string[];
+  isFixed: boolean;
 }
 
 /** Returns the most recently active program for the given user (if any),
- *  including progression and next session info. */
+ *  including progression and next session info.
+ *  Uses a single RPC call instead of 5 sequential queries. */
 export function useActiveProgram(userId: string | undefined) {
+  const { dataGeneration } = useAuth();
   const [activeProgram, setActiveProgram] = useState<ActiveProgramInfo | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!userId || !supabase) {
+      setActiveProgram(null);
       setLoading(false);
       return;
     }
 
     let cancelled = false;
+    setLoading(true);
 
     (async () => {
       try {
-        // Find the user's most recent program completion
-        const { data: completion } = await supabase
-          .from('session_completions')
-          .select('program_session_id')
-          .eq('user_id', userId)
-          .not('program_session_id', 'is', null)
-          .order('completed_at', { ascending: false })
-          .limit(1)
-          .single();
-
-        if (cancelled || !completion?.program_session_id) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-
-        // Get the program session → program
-        const { data: ps } = await supabase
-          .from('program_sessions')
-          .select('program_id')
-          .eq('id', completion.program_session_id)
-          .single();
-
-        if (cancelled || !ps) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-
-        const { data: pgm } = await supabase
-          .from('programs')
-          .select('slug, title')
-          .eq('id', ps.program_id)
-          .single();
-
-        if (cancelled || !pgm) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-
-        // Fetch all sessions for this program
-        const { data: allSessions } = await supabase
-          .from('program_sessions')
-          .select('id, session_order, session_data')
-          .eq('program_id', ps.program_id)
-          .order('session_order');
-
-        const sessions = (allSessions as ProgramSession[] | null) ?? [];
-
-        // Fetch user's completions for this program
-        const sessionIds = sessions.map((s) => s.id);
-        let completedIds = new Set<string>();
-        if (sessionIds.length > 0) {
-          const { data: completions } = await supabase
-            .from('session_completions')
-            .select('program_session_id')
-            .eq('user_id', userId)
-            .in('program_session_id', sessionIds);
-
-          completedIds = new Set(
-            (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
-              ?.map((c) => c.program_session_id)
-              .filter((id): id is string => id !== null) ?? [],
-          );
-        }
+        const { data, error, sessionExpired } = await supabaseQuery(() =>
+          supabase!.rpc('get_active_program', { p_user_id: userId }),
+        );
 
         if (cancelled) return;
 
-        // Find next uncompleted session
-        const nextSession = sessions.find((s) => !completedIds.has(s.id));
-        const nextData = nextSession?.session_data as Record<string, unknown> | undefined;
+        if (sessionExpired) {
+          notifySessionExpired();
+          setLoading(false);
+          return;
+        }
+
+        if (error || !data) {
+          if (error) console.error('Active program RPC error:', error);
+          setLoading(false);
+          return;
+        }
+
+        const d = data as {
+          slug: string;
+          title: string;
+          totalSessions: number;
+          completedCount: number;
+          nextSessionOrder: number | null;
+          nextSessionTitle: string | null;
+          nextSessionData: Session | null;
+          goals: string[];
+          isFixed: boolean;
+        };
 
         setActiveProgram({
-          slug: pgm.slug,
-          title: pgm.title,
-          completedCount: completedIds.size,
-          totalSessions: sessions.length,
-          nextSessionTitle: (nextData?.title as string) ?? null,
-          nextSessionOrder: nextSession?.session_order ?? null,
+          slug: d.slug,
+          title: d.title,
+          completedCount: d.completedCount,
+          totalSessions: d.totalSessions,
+          nextSessionTitle: d.nextSessionTitle,
+          nextSessionOrder: d.nextSessionOrder,
+          nextSessionData: d.nextSessionData,
+          goals: d.goals ?? [],
+          isFixed: d.isFixed ?? true,
         });
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('Active program fetch error:', err);
         if (!cancelled) setLoading(false);
       }
     })();
@@ -119,31 +93,35 @@ export function useActiveProgram(userId: string | undefined) {
     return () => {
       cancelled = true;
     };
-  }, [userId]);
+  }, [userId, dataGeneration]);
 
   return { activeProgram, loading };
 }
 
 export function usePrograms() {
+  const { loading: authLoading, dataGeneration } = useAuth();
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!supabase) {
-      setLoading(false);
-      return;
-    }
+    // Wait for auth to settle so the Supabase client is fully initialized
+    if (!supabase || authLoading) return;
 
     let cancelled = false;
 
     (async () => {
       try {
-        const { data } = await supabase.from('programs').select('*').eq('is_fixed', true).order('created_at');
+        const { data, error, sessionExpired } = await supabaseQuery(() =>
+          supabase!.from('programs').select('*').eq('is_fixed', true).order('created_at'),
+        );
 
         if (cancelled) return;
+        if (sessionExpired) { notifySessionExpired(); return; }
+        if (error) throw error;
         setPrograms((data as Program[]) ?? []);
-        setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('Programs fetch error:', err);
+      } finally {
         if (!cancelled) setLoading(false);
       }
     })();
@@ -151,12 +129,13 @@ export function usePrograms() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [authLoading, dataGeneration]);
 
   return { programs, loading };
 }
 
-export function useProgram(slug: string | undefined) {
+export function useProgram(slug: string | undefined, userId: string | undefined) {
+  const { dataGeneration } = useAuth();
   const [program, setProgram] = useState<ProgramWithSessions | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -171,48 +150,43 @@ export function useProgram(slug: string | undefined) {
 
     (async () => {
       try {
-        // Fetch program
-        const { data: pgm } = await supabase
-          .from('programs')
-          .select('*')
-          .eq('slug', slug)
-          .eq('is_fixed', true)
-          .single();
+        // Fetch program (RLS handles access control)
+        const { data: pgm, sessionExpired } = await supabaseQuery(() =>
+          supabase!.from('programs').select('*').eq('slug', slug!).single(),
+        );
 
-        if (cancelled || !pgm) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
+        if (cancelled) return;
+        if (sessionExpired) { notifySessionExpired(); setLoading(false); return; }
+        if (!pgm) { setLoading(false); return; }
 
         // Fetch program sessions
-        const { data: sessions } = await supabase
-          .from('program_sessions')
-          .select('*')
-          .eq('program_id', pgm.id)
-          .order('session_order');
+        const { data: sessions, sessionExpired: sessExp } = await supabaseQuery(() =>
+          supabase!.from('program_sessions').select('*').eq('program_id', (pgm as Program).id).order('session_order'),
+        );
+
+        if (cancelled) return;
+        if (sessExp) { notifySessionExpired(); setLoading(false); return; }
 
         // Fetch user's completions for this program's sessions
         const sessionIds = (sessions ?? []).map((s: ProgramSession) => s.id);
         let completedIds = new Set<string>();
 
-        if (sessionIds.length > 0) {
-          const {
-            data: { user },
-          } = await supabase.auth.getUser();
-
-          if (user) {
-            const { data: completions } = await supabase
+        if (sessionIds.length > 0 && userId) {
+          const { data: completions, sessionExpired: compExp } = await supabaseQuery(() =>
+            supabase!
               .from('session_completions')
               .select('program_session_id')
-              .eq('user_id', user.id)
-              .in('program_session_id', sessionIds);
+              .eq('user_id', userId)
+              .in('program_session_id', sessionIds),
+          );
 
-            completedIds = new Set(
-              (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
-                ?.map((c) => c.program_session_id)
-                .filter((id): id is string => id !== null) ?? [],
-            );
-          }
+          if (compExp) { notifySessionExpired(); setLoading(false); return; }
+
+          completedIds = new Set(
+            (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
+              ?.map((c) => c.program_session_id)
+              .filter((id): id is string => id !== null) ?? [],
+          );
         }
 
         if (cancelled) return;
@@ -223,7 +197,8 @@ export function useProgram(slug: string | undefined) {
           completedSessionIds: completedIds,
         });
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('Program fetch error:', err);
         if (!cancelled) setLoading(false);
       }
     })();
@@ -231,12 +206,13 @@ export function useProgram(slug: string | undefined) {
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, userId, dataGeneration]);
 
   return { program, loading };
 }
 
 export function useProgramSession(slug: string | undefined, order: number | undefined) {
+  const { dataGeneration } = useAuth();
   const [session, setSession] = useState<ProgramSession | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -251,31 +227,24 @@ export function useProgramSession(slug: string | undefined, order: number | unde
 
     (async () => {
       try {
-        // Find program by slug
-        const { data: pgm } = await supabase
-          .from('programs')
-          .select('id')
-          .eq('slug', slug)
-          .eq('is_fixed', true)
-          .single();
-
-        if (cancelled || !pgm) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-
-        // Find session by order
-        const { data: ps } = await supabase
-          .from('program_sessions')
-          .select('*')
-          .eq('program_id', pgm.id)
-          .eq('session_order', order)
-          .single();
+        const { data: pgm, sessionExpired } = await supabaseQuery(() =>
+          supabase!.from('programs').select('id').eq('slug', slug!).single(),
+        );
 
         if (cancelled) return;
+        if (sessionExpired) { notifySessionExpired(); setLoading(false); return; }
+        if (!pgm) { setLoading(false); return; }
+
+        const { data: ps, sessionExpired: sessExp } = await supabaseQuery(() =>
+          supabase!.from('program_sessions').select('*').eq('program_id', (pgm as { id: string }).id).eq('session_order', order!).single(),
+        );
+
+        if (cancelled) return;
+        if (sessExp) { notifySessionExpired(); setLoading(false); return; }
         setSession((ps as ProgramSession) ?? null);
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error('Program session fetch error:', err);
         if (!cancelled) setLoading(false);
       }
     })();
@@ -283,7 +252,7 @@ export function useProgramSession(slug: string | undefined, order: number | unde
     return () => {
       cancelled = true;
     };
-  }, [slug, order]);
+  }, [slug, order, dataGeneration]);
 
   return { session, loading };
 }

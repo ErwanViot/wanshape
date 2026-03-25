@@ -1,4 +1,4 @@
-# Wan Shape
+# Wan2Fit
 
 Application de sport gratuite avec des séances guidées, des programmes structurés et un suivi de progression.
 

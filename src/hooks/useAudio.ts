@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-
-const STORAGE_KEY = 'wanshape-audio-enabled';
+import { STORAGE_KEYS } from '../config/storage-keys.ts';
 
 function getStoredAudio(): boolean {
   try {
-    const v = localStorage.getItem(STORAGE_KEY);
+    const v = localStorage.getItem(STORAGE_KEYS.AUDIO_ENABLED);
     return v !== 'false';
   } catch {
     return true;
@@ -14,13 +13,28 @@ function getStoredAudio(): boolean {
 export function useAudio() {
   const [enabled, setEnabled] = useState(getStoredAudio);
   const ctxRef = useRef<AudioContext | null>(null);
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, String(enabled));
+    localStorage.setItem(STORAGE_KEYS.AUDIO_ENABLED, String(enabled));
   }, [enabled]);
 
+  // Cleanup AudioContext and pending timeouts on unmount
+  useEffect(() => {
+    return () => {
+      for (const id of timeoutsRef.current) clearTimeout(id);
+      timeoutsRef.current = [];
+      ctxRef.current?.close().catch(() => {});
+      ctxRef.current = null;
+    };
+  }, []);
+
+  const scheduleTone = useCallback((fn: () => void, delay: number) => {
+    timeoutsRef.current.push(setTimeout(fn, delay));
+  }, []);
+
   const getCtx = useCallback(() => {
-    if (!ctxRef.current) {
+    if (!ctxRef.current || ctxRef.current.state === 'closed') {
       ctxRef.current = new AudioContext();
     }
     if (ctxRef.current.state === 'suspended') {
@@ -28,6 +42,19 @@ export function useAudio() {
     }
     return ctxRef.current;
   }, []);
+
+  // Must be called synchronously inside a user gesture (click/touch) handler
+  // to unlock AudioContext on Safari/iOS
+  const unlock = useCallback(() => {
+    if (!enabled) return;
+    const ctx = getCtx();
+    // Play a silent buffer to warm up the context (Safari workaround)
+    const buffer = ctx.createBuffer(1, 1, 22050);
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(ctx.destination);
+    source.start(0);
+  }, [enabled, getCtx]);
 
   const playTone = useCallback(
     (freq: number, duration: number, type: OscillatorType = 'sine') => {
@@ -57,31 +84,27 @@ export function useAudio() {
 
   const beepGo = useCallback(() => {
     playTone(330, 0.15, 'square');
-    setTimeout(() => playTone(330, 0.2, 'square'), 200);
-  }, [playTone]);
+    scheduleTone(() => playTone(330, 0.2, 'square'), 200);
+  }, [playTone, scheduleTone]);
 
   const beepRoundEnd = useCallback(() => {
     playTone(440, 0.1, 'square');
-    setTimeout(() => playTone(440, 0.1, 'square'), 150);
-    setTimeout(() => playTone(440, 0.1, 'square'), 300);
-  }, [playTone]);
+    scheduleTone(() => playTone(440, 0.1, 'square'), 150);
+    scheduleTone(() => playTone(440, 0.1, 'square'), 300);
+  }, [playTone, scheduleTone]);
 
   const beepBlockEnd = useCallback(() => {
     playTone(523, 0.3, 'sine');
-    setTimeout(() => playTone(659, 0.3, 'sine'), 200);
-    setTimeout(() => playTone(784, 0.4, 'sine'), 400);
-  }, [playTone]);
+    scheduleTone(() => playTone(659, 0.3, 'sine'), 200);
+    scheduleTone(() => playTone(784, 0.4, 'sine'), 400);
+  }, [playTone, scheduleTone]);
 
   const beepSessionEnd = useCallback(() => {
     playTone(523, 0.2, 'sine');
-    setTimeout(() => playTone(659, 0.2, 'sine'), 200);
-    setTimeout(() => playTone(784, 0.2, 'sine'), 400);
-    setTimeout(() => playTone(1047, 0.4, 'sine'), 600);
-  }, [playTone]);
-
-  const speak = useCallback((_text: string) => {
-    // Voice disabled — beeps only
-  }, []);
+    scheduleTone(() => playTone(659, 0.2, 'sine'), 200);
+    scheduleTone(() => playTone(784, 0.2, 'sine'), 400);
+    scheduleTone(() => playTone(1047, 0.4, 'sine'), 600);
+  }, [playTone, scheduleTone]);
 
   const speakCountdown = useCallback(
     (remaining: number) => {
@@ -89,6 +112,51 @@ export function useAudio() {
       if (remaining <= 3) beepCountdown();
     },
     [enabled, beepCountdown],
+  );
+
+  const brandedBuffersRef = useRef<Record<number, AudioBuffer | null>>({ 3: null, 2: null, 1: null });
+  const brandedLoadedRef = useRef(false);
+
+  const preloadBrandedSounds = useCallback(async () => {
+    if (!enabled || brandedLoadedRef.current) return;
+    brandedLoadedRef.current = true;
+    const ctx = getCtx();
+    const files: Record<number, string> = { 3: '/sounds/Wan.mp3', 2: '/sounds/2.mp3', 1: '/sounds/Fit.mp3' };
+    await Promise.all(
+      Object.entries(files).map(async ([key, url]) => {
+        try {
+          const res = await fetch(url);
+          const buf = await res.arrayBuffer();
+          brandedBuffersRef.current[Number(key)] = await ctx.decodeAudioData(buf);
+        } catch {
+          // Sound not available
+        }
+      }),
+    );
+    // Allow retry if all fetches failed (e.g. offline)
+    const anyLoaded = Object.values(brandedBuffersRef.current).some((b) => b !== null);
+    if (!anyLoaded) brandedLoadedRef.current = false;
+  }, [enabled, getCtx]);
+
+  const playBrandedCountdown = useCallback(
+    (remaining: number) => {
+      if (!enabled) return;
+      const buffer = brandedBuffersRef.current[remaining];
+      if (!buffer) return;
+      try {
+        const ctx = getCtx();
+        const source = ctx.createBufferSource();
+        const gain = ctx.createGain();
+        source.buffer = buffer;
+        gain.gain.value = 0.8;
+        source.connect(gain);
+        gain.connect(ctx.destination);
+        source.start();
+      } catch {
+        // Audio not available
+      }
+    },
+    [enabled, getCtx],
   );
 
   const speakGo = useCallback(() => {
@@ -102,13 +170,15 @@ export function useAudio() {
   return {
     enabled,
     toggle,
+    unlock,
     beepCountdown,
     beepGo,
     beepRoundEnd,
     beepBlockEnd,
     beepSessionEnd,
     speakCountdown,
+    playBrandedCountdown,
+    preloadBrandedSounds,
     speakGo,
-    speak,
   };
 }

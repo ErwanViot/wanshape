@@ -1,7 +1,9 @@
 import { type FormEvent, useState } from 'react';
-import { Link, Navigate } from 'react-router';
+import { Navigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { BackLink } from './BackLink.tsx';
+import { FormInput } from './FormInput.tsx';
 
 export function ResetPasswordPage() {
   const { user, loading, resetPassword } = useAuth();
@@ -12,10 +14,10 @@ export function ResetPasswordPage() {
 
   useDocumentHead({
     title: 'Mot de passe oublié',
-    description: 'Réinitialise ton mot de passe WanShape.',
+    description: 'Réinitialise ton mot de passe Wan2Fit.',
   });
 
-  if (!loading && user) return <Navigate to="/profil" replace />;
+  if (!loading && user) return <Navigate to="/suivi" replace />;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -38,24 +40,7 @@ export function ResetPasswordPage() {
   return (
     <div className="px-6 py-12 flex-1 flex items-start justify-center">
       <div className="w-full max-w-md">
-        <Link
-          to="/login"
-          className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-strong transition-colors mb-8"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-          Retour à la connexion
-        </Link>
+        <BackLink to="/login" label="Retour à la connexion" />
 
         <h1 className="text-2xl font-bold text-heading mb-8">Mot de passe oublié</h1>
 
@@ -77,7 +62,7 @@ export function ResetPasswordPage() {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <p className="text-strong font-medium mb-1">Vérifiez votre boîte mail</p>
+              <p className="text-strong font-medium mb-1">Vérifie ta boîte mail</p>
               <p className="text-sm text-muted">
                 Un lien de réinitialisation a été envoyé à <strong className="text-strong">{email}</strong>
               </p>
@@ -88,21 +73,16 @@ export function ResetPasswordPage() {
                 Saisis ton adresse email et on t'enverra un lien pour réinitialiser ton mot de passe.
               </p>
 
-              <div>
-                <label htmlFor="reset-email" className="block text-sm font-medium text-strong mb-1.5">
-                  Email
-                </label>
-                <input
-                  id="reset-email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="toi@exemple.com"
-                  className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-brand focus:outline-none transition-colors"
-                />
-              </div>
+              <FormInput
+                label="Email"
+                inputId="reset-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="toi@exemple.com"
+              />
 
               {error && (
                 <p className="text-sm text-red-400" role="alert">

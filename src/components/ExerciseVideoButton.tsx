@@ -1,0 +1,61 @@
+import { useState } from 'react';
+import { Play, X } from 'lucide-react';
+import { getExerciseVideoUrl } from '../utils/exerciseVideo.ts';
+import { NoVideoTag } from './NoVideoTag.tsx';
+import { PlayerVideoDemo } from './PlayerVideoDemo.tsx';
+
+interface Props {
+  exerciseName: string;
+  alwaysShow: boolean;
+  onToggleAlwaysShow: () => void;
+}
+
+export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysShow }: Props) {
+  const videoUrl = getExerciseVideoUrl(exerciseName);
+  const [expanded, setExpanded] = useState(false);
+
+  if (!videoUrl) return <NoVideoTag />;
+
+  const visible = expanded || alwaysShow;
+
+  return (
+    <div className="w-full max-w-sm flex flex-col items-center gap-3">
+      {/* Toggle button — hidden when alwaysShow is active */}
+      {!alwaysShow && (
+        <button
+          type="button"
+          onClick={() => setExpanded(!expanded)}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 text-white/60 text-sm hover:bg-white/15 hover:text-white/80 transition-colors"
+        >
+          {expanded ? (
+            <>
+              <X className="w-3.5 h-3.5" aria-hidden="true" />
+              Masquer
+            </>
+          ) : (
+            <>
+              <Play className="w-3.5 h-3.5" aria-hidden="true" />
+              Voir l'exemple
+            </>
+          )}
+        </button>
+      )}
+
+      {/* Video */}
+      {visible && <PlayerVideoDemo videoUrl={videoUrl} exerciseName={exerciseName} />}
+
+      {/* Always-show toggle — only shown when video is visible */}
+      {visible && (
+        <label className="inline-flex items-center gap-2 text-white/40 text-xs cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={alwaysShow}
+            onChange={onToggleAlwaysShow}
+            className="w-3.5 h-3.5 rounded accent-white/60"
+          />
+          Toujours montrer les exemples
+        </label>
+      )}
+    </div>
+  );
+}

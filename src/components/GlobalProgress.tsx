@@ -38,10 +38,20 @@ export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
     currentDuration += step.estimatedDuration;
   }
 
-  void currentStepIndex; // used for reactivity
+  // currentStepIndex is not used in the render output directly, but React needs it
+  // as a prop dependency to re-render this component when the active step changes,
+  // which updates the progress bar fill via the `progress` prop calculation.
+  void currentStepIndex;
 
   return (
-    <div className="w-full h-2 flex bg-white/5 overflow-hidden">
+    <div
+      className="w-full h-2 flex bg-white/5 overflow-hidden"
+      role="progressbar"
+      aria-valuenow={Math.round(progress * 100)}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label="Progression de la séance"
+    >
       {segments.map((seg, i) => (
         <div key={i} className="h-full relative" style={{ width: `${seg.widthPercent}%` }}>
           <div className="absolute inset-0 opacity-30" style={{ backgroundColor: seg.color }} />
@@ -49,7 +59,9 @@ export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
             className="absolute inset-0 transition-all duration-300"
             style={{
               backgroundColor: seg.color,
-              clipPath: `inset(0 ${Math.max(0, 100 - ((progress * 100 - seg.startPercent) / seg.widthPercent) * 100)}% 0 0)`,
+              clipPath: seg.widthPercent > 0
+                ? `inset(0 ${Math.max(0, 100 - ((progress * 100 - seg.startPercent) / seg.widthPercent) * 100)}% 0 0)`
+                : 'inset(0 100% 0 0)',
             }}
           />
         </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { HeartPulse } from 'lucide-react';
 
 interface Props {
   onAccept: () => void;
@@ -59,16 +60,13 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
       onClick={(e) => {
         if (e.target === e.currentTarget && onCancel) onCancel();
       }}
-      onKeyDown={(e) => {
-        if (e.key === 'Escape' && onCancel) onCancel();
-      }}
     >
       <div
         ref={dialogRef}
         className="bg-white w-full max-w-lg rounded-3xl shadow-2xl max-h-full flex flex-col"
       >
         <div className="p-6 pb-0 shrink-0">
-          <div className="text-3xl mb-3">⚕️</div>
+          <HeartPulse className="w-8 h-8 text-brand mb-3" aria-hidden="true" />
           <h2 id="health-disclaimer-title" className="text-xl font-bold text-gray-900 mb-1">
             Avertissement santé
           </h2>
@@ -77,25 +75,25 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
 
         <div className="px-6 overflow-y-auto flex-1 space-y-3 text-sm text-gray-600 leading-relaxed">
           <p>
-            WAN SHAPE propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il
+            Wan2Fit propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il
             ne s'agit pas de coaching sportif personnalisé ni d'encadrement par un éducateur sportif diplômé.
           </p>
           <p>
-            Les séances sont des suggestions d'exercices à caractère général. Vous êtes seul responsable de leur
-            exécution et de leur adaptation à votre condition physique.
+            Les séances sont des suggestions d'exercices à caractère général. Tu es seul responsable de leur
+            exécution et de leur adaptation à ta condition physique.
           </p>
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
             <p className="font-semibold text-amber-800">Avant de pratiquer :</p>
             <ul className="list-disc list-inside space-y-1 text-amber-700">
-              <li>Consultez un médecin pour vérifier votre aptitude sportive</li>
-              <li>Ne pratiquez pas en cas de contre-indication médicale</li>
-              <li>Arrêtez immédiatement en cas de douleur ou de malaise</li>
+              <li>Consulte un médecin pour vérifier ton aptitude sportive</li>
+              <li>Ne pratique pas en cas de contre-indication médicale</li>
+              <li>Arrête immédiatement en cas de douleur ou de malaise</li>
             </ul>
           </div>
           <p className="text-gray-400 text-xs">
             Service déconseillé sans avis médical pour les personnes présentant des pathologies cardiaques, des troubles
-            articulaires, un état de grossesse ou toute condition pouvant être aggravée par l'exercice. Mineurs : accord
-            parental requis.
+            articulaires, un état de grossesse ou toute condition pouvant être aggravée par l'exercice. Réservé aux
+            personnes majeures (18 ans et plus).
           </p>
         </div>
 

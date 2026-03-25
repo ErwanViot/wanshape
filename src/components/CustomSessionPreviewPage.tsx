@@ -1,34 +1,51 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
+import { useAuth } from '../contexts/AuthContext.tsx';
+import {
+  ChevronLeft,
+  ClipboardList,
+  Dumbbell,
+  Flame,
+  Moon,
+  RefreshCw,
+  RotateCcw,
+  Sun,
+  Timer,
+  Zap,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { BLOCK_COLORS, BLOCK_LABELS } from '../engine/constants.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { confirmCustomSession, useCustomSession } from '../hooks/useCustomSessions.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
-import type { CustomSessionMode, Equipment, Intensity, BodyFocus } from '../types/custom-session.ts';
+import type { CustomSessionMode, Intensity, BodyFocus } from '../types/custom-session.ts';
+import type { Equipment } from '../types/equipment.ts';
 import type { Block, Session } from '../types/session.ts';
+
+const BLOCK_ICONS: Record<string, LucideIcon> = {
+  warmup: Sun,
+  cooldown: Moon,
+  classic: Dumbbell,
+  circuit: RefreshCw,
+  hiit: Flame,
+  tabata: Timer,
+  emom: Timer,
+  amrap: RotateCcw,
+  superset: Zap,
+  pyramid: Dumbbell,
+};
 
 function BlockDetail({ block, index }: { block: Block; index: number }) {
   const color = BLOCK_COLORS[block.type];
   const label = BLOCK_LABELS[block.type];
 
-  const BLOCK_EMOJIS: Record<string, string> = {
-    warmup: '☀️',
-    cooldown: '🧘',
-    classic: '🏋️',
-    circuit: '🔁',
-    hiit: '🔥',
-    tabata: '⏱️',
-    emom: '⏰',
-    amrap: '💪',
-    superset: '🔄',
-    pyramid: '📐',
-  };
-  const emoji = BLOCK_EMOJIS[block.type] ?? '📋';
+  const IconComponent = BLOCK_ICONS[block.type] ?? ClipboardList;
 
   return (
     <div className="glass-card rounded-xl border border-card-border p-4">
       <div className="flex items-center gap-2 mb-3">
-        <span className="text-lg">{emoji}</span>
+        <IconComponent className="w-5 h-5 shrink-0" style={{ color }} aria-hidden="true" />
         <span className="text-sm font-bold" style={{ color }}>
           {index + 1}. {label}
         </span>
@@ -101,13 +118,15 @@ function BlockDetail({ block, index }: { block: Block; index: number }) {
 
 export function CustomSessionPreviewPage() {
   const { id } = useParams<{ id: string }>();
-  const { session: record, loading } = useCustomSession(id);
+  const { user } = useAuth();
+  const { session: record, loading } = useCustomSession(id, user?.id);
   const navigate = useNavigate();
   const { generate, loading: regenerating, error: regenError } = useGenerateSession();
 
   const [refinementNote, setRefinementNote] = useState('');
   const [confirming, setConfirming] = useState(false);
   const [confirmError, setConfirmError] = useState(false);
+  const confirmingRef = useRef(false);
 
   const session = record?.session_data as Session | undefined;
 
@@ -118,7 +137,7 @@ export function CustomSessionPreviewPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-6 h-6 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
+        <LoadingSpinner />
       </div>
     );
   }
@@ -127,7 +146,7 @@ export function CustomSessionPreviewPage() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="text-5xl mb-4">😴</div>
+          <Moon className="w-12 h-12 text-muted mb-4 mx-auto" aria-hidden="true" />
           <p className="text-body text-lg font-medium">Séance introuvable.</p>
           <Link to="/seance/custom" className="text-brand hover:text-brand-secondary underline mt-4 inline-block">
             Créer une séance
@@ -163,31 +182,21 @@ export function CustomSessionPreviewPage() {
         to="/seance/custom"
         className="inline-flex items-center gap-1 text-sm text-muted hover:text-heading transition-colors mb-6"
       >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        >
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
+        <ChevronLeft className="w-4 h-4" />
         Retour
       </Link>
 
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-heading mb-2">
-          🎯 {session.title}
+          {session.title}
         </h1>
         <p className="text-muted text-sm mb-3">{session.description}</p>
         <div className="flex items-center gap-2 flex-wrap">
           <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand/10 border border-brand/20 text-brand">
             ~{session.estimatedDuration} min
           </span>
-          {session.focus.map((f) => (
+          {session.focus?.map((f) => (
             <span
               key={f}
               className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-card border border-divider text-muted"
@@ -199,7 +208,10 @@ export function CustomSessionPreviewPage() {
       </div>
 
       {/* Blocks detail */}
-      <h2 className="text-sm font-bold text-heading mb-3">📋 Détail des blocs</h2>
+      <h2 className="text-sm font-bold text-heading mb-3 flex items-center gap-1.5">
+        <ClipboardList className="w-4 h-4" aria-hidden="true" />
+        Détail des blocs
+      </h2>
       <div className="space-y-3 mb-8">
         {session.blocks.map((block, i) => (
           <BlockDetail key={i} block={block} index={i} />
@@ -211,13 +223,15 @@ export function CustomSessionPreviewPage() {
         type="button"
         disabled={confirming}
         onClick={async () => {
-          if (!id) return;
+          if (!id || confirmingRef.current) return;
+          confirmingRef.current = true;
           setConfirming(true);
           setConfirmError(false);
           const ok = await confirmCustomSession(id).catch(() => false);
           if (ok) {
             navigate(`/seance/custom/${id}/play`);
           } else {
+            confirmingRef.current = false;
             setConfirming(false);
             setConfirmError(true);
           }
@@ -230,7 +244,7 @@ export function CustomSessionPreviewPage() {
             Préparation...
           </span>
         ) : (
-          '🚀 Lancer la séance'
+          'Lancer la séance'
         )}
       </button>
 
@@ -250,13 +264,17 @@ export function CustomSessionPreviewPage() {
 
       {/* Regenerate */}
       <div className="mt-8 pt-6 border-t border-divider">
-        <p className="text-sm font-semibold text-heading mb-3">🔄 Pas satisfait ?</p>
+        <p className="text-sm font-semibold text-heading mb-3 flex items-center gap-1.5">
+          <RefreshCw className="w-4 h-4" aria-hidden="true" />
+          Pas satisfait ?
+        </p>
         <textarea
           value={refinementNote}
           onChange={(e) => setRefinementNote(e.target.value)}
           maxLength={300}
           rows={2}
           placeholder="Ce que je voudrais changer..."
+          aria-label="Modifications souhaitées"
           className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand mb-3"
         />
 

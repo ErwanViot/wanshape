@@ -7,6 +7,31 @@ if (!supabaseUrl || !supabaseKey) {
   console.warn('Supabase env vars missing — auth features disabled');
 }
 
+// In-memory mutex that serializes auth operations without Navigator Locks.
+// Navigator Locks get stuck when a tab/module is disposed without releasing
+// the lock (HMR, crashes, dev reloads). This mutex avoids that while still
+// properly serializing concurrent auth state reads/writes.
+const locks = new Map<string, Promise<unknown>>();
+
+async function inMemoryLock<T>(name: string, _acquireTimeout: number, fn: () => Promise<T>): Promise<T> {
+  const prev = locks.get(name) ?? Promise.resolve();
+  let resolve!: () => void;
+  const next = new Promise<void>((r) => {
+    resolve = r;
+  });
+  locks.set(name, next);
+
+  await prev;
+  try {
+    return await fn();
+  } finally {
+    resolve();
+    if (locks.get(name) === next) {
+      locks.delete(name);
+    }
+  }
+}
+
 function getClient(): SupabaseClient | null {
   if (!supabaseUrl || !supabaseKey) return null;
 
@@ -19,11 +44,10 @@ function getClient(): SupabaseClient | null {
 
   const client = createClient(supabaseUrl, supabaseKey, {
     auth: {
-      // Replace Navigator Lock with a simple no-contention lock.
-      // Navigator Locks coordinate across tabs but get stuck when a tab/module
-      // is disposed without releasing the lock (HMR, crashes, dev reloads).
-      // A simple passthrough is safe for a single-tab PWA.
-      lock: async (_name, _acquireTimeout, fn) => fn(),
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true,
+      lock: inMemoryLock,
     },
   });
 

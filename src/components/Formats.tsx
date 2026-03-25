@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { ChevronLeft } from 'lucide-react';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
@@ -27,7 +28,7 @@ const FORMAT_DESCRIPTIONS: Record<string, { description: string; benefit: string
     benefit: 'Combine renforcement et cardio pour un travail complet.',
   },
   amrap: {
-    description: 'Enchaîner un circuit le plus de fois possible dans un temps imparti. Vous gérez votre rythme.',
+    description: 'Enchaîner un circuit le plus de fois possible dans un temps imparti. Tu gères ton rythme.',
     benefit: 'Liberté de rythme. Idéal pour mesurer sa progression.',
   },
   hiit: {
@@ -56,20 +57,9 @@ export function Formats() {
             className="p-1 -ml-1 text-muted hover:text-strong transition-colors"
             aria-label="Retour à l'accueil"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
+            <ChevronLeft className="w-5 h-5" />
           </Link>
-          <h1 className="font-bold text-lg text-heading">Les formats de séance</h1>
+          <h1 className="font-display font-bold text-lg text-heading">Les formats de séance</h1>
         </div>
       </header>
 
@@ -90,7 +80,7 @@ export function Formats() {
               >
                 {/* Image — text stays white (over image) */}
                 <div className="relative h-28 overflow-hidden">
-                  <img src={format.image} alt="" className="w-full h-full object-cover" />
+                  <img src={format.image} alt={`Format ${format.name}`} className="w-full h-full object-cover object-[50%_30%]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
                     <div>
@@ -106,7 +96,7 @@ export function Formats() {
                 {/* Content (below image) */}
                 <div className="p-4 flex-1 flex flex-col gap-3">
                   {/* Intensity dots */}
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5" aria-label={`Intensité : ${format.intensity} sur 5`}>
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
                     ))}

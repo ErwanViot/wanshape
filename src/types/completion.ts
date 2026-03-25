@@ -1,8 +1,11 @@
+import type { Session } from './session.ts';
+
 export interface SessionCompletion {
   id: string;
   user_id: string;
   session_date: string | null;
   program_session_id: string | null;
+  custom_session_id: string | null;
   completed_at: string;
   duration_seconds: number | null;
   amrap_rounds: number | null;
@@ -20,6 +23,11 @@ export interface Program {
   fitness_level: 'beginner' | 'intermediate' | 'advanced';
   is_fixed: boolean;
   created_at: string;
+  user_id: string | null;
+  note_coach: string | null;
+  progression: import('./custom-program.ts').ProgramProgression | null;
+  consignes_semaine: Record<string, string> | null;
+  onboarding_data: import('./custom-program.ts').ProgramOnboardingInput | null;
 }
 
 export interface ProgramSession {
@@ -27,6 +35,6 @@ export interface ProgramSession {
   program_id: string;
   session_order: number;
   week_number: number;
-  session_data: Record<string, unknown>;
+  session_data: Session;
   created_at: string;
 }

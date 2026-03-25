@@ -35,7 +35,7 @@ export function expandCircuit(block: CircuitBlock, blockIndex: number, totalBloc
           timerMode: 'countdown',
           duration: PREPARE_COUNTDOWN,
           exerciseName: ex.name,
-          instructions: 'Préparez-vous !',
+          instructions: 'Prépare-toi !',
           ...base,
           roundInfo,
           estimatedDuration: PREPARE_COUNTDOWN,

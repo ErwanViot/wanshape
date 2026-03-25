@@ -1,0 +1,131 @@
+{
+  "date": "20260327",
+  "title": "Jambes & Core",
+  "description": "Renforcement bas du corps avec fentes curtsy, sissy squat et travail de gainage intense",
+  "estimatedDuration": 33,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Échauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 35,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un cote a l'autre"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 35,
+          "instructions": "Sauter en ecartant bras et jambes, revenir pieds joints"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Force",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Squats pulse",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Rester en bas du squat, petits mouvements de montee-descente"
+        },
+        {
+          "name": "Fentes curtsy",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Croiser la jambe derrière en diagonale",
+          "bilateral": true
+        },
+        {
+          "name": "Hip thrust unilateral",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hip thrust sur une seule jambe, l'autre en l'air",
+          "bilateral": true
+        },
+        {
+          "name": "Sissy squat",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Se pencher en arrière, genoux vers l'avant, quadriceps en feu"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Dynamique",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Leg raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever les jambes tendues a la verticale"
+        },
+        {
+          "name": "Gainage lateral",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Sur un avant-bras, corps aligne, hanches hautes",
+          "bilateral": true,
+          "tempo": "25s hold"
+        },
+        {
+          "name": "Flutter kicks",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes tendues, battements rapides"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

@@ -1,28 +1,28 @@
 import { describe, expect, it } from 'vitest';
-import { formatDateToDDMMYYYY, formatDuration, formatDurationLong, parseDDMMYYYY } from './date.ts';
+import { formatDateKey, formatDuration, formatDurationLong, parseDateKey } from './date.ts';
 
-describe('formatDateToDDMMYYYY', () => {
+describe('formatDateKey', () => {
   it('formats a date correctly', () => {
-    expect(formatDateToDDMMYYYY(new Date(2026, 1, 24))).toBe('24022026');
+    expect(formatDateKey(new Date(2026, 1, 24))).toBe('20260224');
   });
 
   it('pads single-digit day and month', () => {
-    expect(formatDateToDDMMYYYY(new Date(2026, 0, 5))).toBe('05012026');
+    expect(formatDateKey(new Date(2026, 0, 5))).toBe('20260105');
   });
 });
 
-describe('parseDDMMYYYY', () => {
-  it('parses a DDMMYYYY string to Date', () => {
-    const d = parseDDMMYYYY('24022026');
+describe('parseDateKey', () => {
+  it('parses a YYYYMMDD string to Date', () => {
+    const d = parseDateKey('20260224');
     expect(d.getDate()).toBe(24);
     expect(d.getMonth()).toBe(1); // Feb = 1
     expect(d.getFullYear()).toBe(2026);
   });
 
-  it('roundtrips with formatDateToDDMMYYYY', () => {
+  it('roundtrips with formatDateKey', () => {
     const original = new Date(2025, 11, 31);
-    const key = formatDateToDDMMYYYY(original);
-    const parsed = parseDDMMYYYY(key);
+    const key = formatDateKey(original);
+    const parsed = parseDateKey(key);
     expect(parsed.getDate()).toBe(31);
     expect(parsed.getMonth()).toBe(11);
     expect(parsed.getFullYear()).toBe(2025);

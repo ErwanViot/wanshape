@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="px-6 py-8 border-t border-divider">
       <p className="text-faint text-xs text-center">
-        WAN SHAPE par{' '}
+        Wan2Fit par{' '}
         <a
           href="https://www.wan-soft.fr"
           target="_blank"
@@ -14,16 +14,29 @@ export function Footer() {
           WAN SOFT
         </a>
       </p>
-      <div className="flex justify-center gap-4 mt-3">
-        <Link to="/legal/mentions" className="text-xs text-faint hover:text-subtle transition-colors">
-          Mentions légales
-        </Link>
-        <Link to="/legal/privacy" className="text-xs text-faint hover:text-subtle transition-colors">
-          Confidentialité
-        </Link>
-        <Link to="/legal/cgu" className="text-xs text-faint hover:text-subtle transition-colors">
-          CGU
-        </Link>
+      <div className="mt-3 space-y-2">
+        <div className="flex justify-center">
+          <Link to="/a-propos" className="text-xs text-link hover:text-link-hover transition-colors">
+            À propos
+          </Link>
+        </div>
+        <div className="flex justify-center gap-4">
+          <Link to="/legal/mentions" className="text-xs text-faint hover:text-subtle transition-colors">
+            Mentions légales
+          </Link>
+          <Link to="/legal/privacy" className="text-xs text-faint hover:text-subtle transition-colors">
+            Confidentialité
+          </Link>
+          <Link to="/legal/cgu" className="text-xs text-faint hover:text-subtle transition-colors">
+            CGU
+          </Link>
+          <Link to="/legal/cgv" className="text-xs text-faint hover:text-subtle transition-colors">
+            CGV
+          </Link>
+          <a href="mailto:contact@wan2fit.fr" className="text-xs text-faint hover:text-subtle transition-colors">
+            Contact
+          </a>
+        </div>
       </div>
     </footer>
   );

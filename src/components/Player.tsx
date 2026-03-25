@@ -1,5 +1,6 @@
-import { useEffect, useMemo } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Navigate, useNavigate, useParams } from 'react-router';
+import { HeartPulse } from 'lucide-react';
 import { BLOCK_LABELS } from '../engine/constants.ts';
 import { compileSession } from '../engine/interpreter.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -17,8 +18,11 @@ import { EMOMView } from './EMOMView.tsx';
 import { EndScreen } from './EndScreen.tsx';
 import { ExerciseView } from './ExerciseView.tsx';
 import { GlobalProgress } from './GlobalProgress.tsx';
+import { PlayerLoader } from './LoadingSpinner.tsx';
+import { PlayerErrorBoundary } from './PlayerErrorBoundary.tsx';
 import { RepsView } from './RepsView.tsx';
 import { RestView } from './RestView.tsx';
+import { SessionNotFound } from './SessionNotFound.tsx';
 
 export function PlayerPage() {
   const { dateKey: paramDateKey } = useParams<{ dateKey?: string }>();
@@ -33,29 +37,14 @@ export function PlayerPage() {
     return <Navigate to="/" replace />;
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-white/20 border-t-brand rounded-full animate-spin" />
-      </div>
-    );
-  }
+  if (loading) return <PlayerLoader />;
+  if (!session) return <SessionNotFound />;
 
-  if (!session) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6">
-        <div className="text-center">
-          <div className="text-5xl mb-4">😴</div>
-          <p className="text-white/60 text-lg font-medium">Séance introuvable.</p>
-          <Link to="/" className="text-link hover:text-link-hover underline mt-4 inline-block">
-            Retour à l'accueil
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  return <Player session={session} />;
+  return (
+    <PlayerErrorBoundary>
+      <Player session={session} />
+    </PlayerErrorBoundary>
+  );
 }
 
 function getBlockProgress(step: AtomicStep): string {
@@ -110,16 +99,44 @@ export function Player({
 }) {
   const navigate = useNavigate();
   const steps = useMemo(() => compileSession(session), [session]);
+  const [showQuitConfirm, setShowQuitConfirm] = useState(false);
+  const [showVideos, setShowVideos] = useState(
+    () => localStorage.getItem('wan2fit-show-exercise-videos') === 'true',
+  );
+  const resumeButtonRef = useRef<HTMLButtonElement>(null);
+  const quitDialogRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
 
   const workout = useWorkout(steps);
 
   useWakeLock(workout.status !== 'idle' && workout.status !== 'complete');
 
+  const startOnce = useCallback(() => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    workout.start();
+  }, [workout.start]);
+
   useEffect(() => {
     if (workout.status === 'idle' && steps.length > 0) {
-      workout.start();
+      startOnce();
     }
-  }, [steps.length, workout.start, workout.status]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [steps.length, startOnce, workout.status]);
+
+  // Focus the "Reprendre" button when pause overlay is shown
+  useEffect(() => {
+    if (workout.status === 'paused' && resumeButtonRef.current) {
+      resumeButtonRef.current.focus();
+    }
+  }, [workout.status]);
+
+  const toggleShowVideos = useCallback(() => {
+    setShowVideos((prev) => {
+      const next = !prev;
+      localStorage.setItem('wan2fit-show-exercise-videos', String(next));
+      return next;
+    });
+  }, []);
 
   const goBack = () => navigate(backTo);
 
@@ -154,7 +171,10 @@ export function Player({
         <GlobalProgress steps={steps} currentStepIndex={workout.currentStepIndex} progress={workout.globalProgress} />
         <button
           type="button"
-          onClick={goBack}
+          onClick={() => {
+            if (workout.status !== 'paused') workout.togglePause();
+            setShowQuitConfirm(true);
+          }}
           className="absolute top-2 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/50 hover:text-white/80 hover:bg-white/20 transition-colors"
           aria-label="Quitter la séance"
         >
@@ -179,16 +199,74 @@ export function Player({
 
       {/* Paused overlay */}
       {workout.status === 'paused' && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Pause"
+          className="absolute inset-0 z-10 flex items-center justify-center bg-black/70"
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') workout.togglePause();
+            if (e.key === 'Tab') { e.preventDefault(); resumeButtonRef.current?.focus(); }
+          }}
+        >
           <div className="text-center">
             <div className="text-4xl font-bold text-white mb-4">Pause</div>
             <button
+              ref={resumeButtonRef}
               type="button"
               onClick={workout.togglePause}
               className="px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
             >
               Reprendre
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Quit confirmation overlay */}
+      {showQuitConfirm && (
+        <div
+          ref={quitDialogRef}
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="quit-dialog-title"
+          className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          tabIndex={-1}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setShowQuitConfirm(false);
+              workout.togglePause();
+            }
+            if (e.key === 'Tab') {
+              const focusable = quitDialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled)');
+              if (!focusable || focusable.length === 0) return;
+              const first = focusable[0];
+              const last = focusable[focusable.length - 1];
+              if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+              else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+            }
+          }}
+        >
+          <div className="text-center px-6">
+            <p id="quit-dialog-title" className="text-xl font-bold text-white mb-2">Quitter la séance ?</p>
+            <p className="text-white/70 mb-6">Ta progression ne sera pas enregistrée.</p>
+            <div className="flex gap-3 justify-center">
+              <button
+                type="button"
+                onClick={() => { setShowQuitConfirm(false); workout.togglePause(); }}
+                className="px-6 py-3 rounded-xl bg-white/10 text-white font-semibold"
+              >
+                Continuer
+              </button>
+              <button
+                type="button"
+                autoFocus
+                onClick={() => navigate(backTo)}
+                className="px-6 py-3 rounded-xl bg-white text-black font-semibold"
+              >
+                Quitter
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -210,7 +288,7 @@ export function Player({
         )}
 
         {step.phase === 'work' && step.timerMode === 'emom' && (
-          <EMOMView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} />
+          <EMOMView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
         )}
 
         {step.phase === 'work' && step.timerMode === 'amrap' && (
@@ -220,14 +298,16 @@ export function Player({
             progress={workout.timer.progress}
             rounds={workout.amrapRounds}
             onIncrementRound={workout.incrementAmrap}
+            showVideos={showVideos}
+            onToggleShowVideos={toggleShowVideos}
           />
         )}
 
         {step.phase === 'work' && step.timerMode === 'countdown' && (
-          <ExerciseView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} />
+          <ExerciseView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
         )}
 
-        {step.phase === 'work' && step.timerMode === 'manual' && <RepsView step={step} onDone={workout.done} />}
+        {step.phase === 'work' && step.timerMode === 'manual' && <RepsView step={step} onDone={workout.done} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />}
 
         {step.phase === 'rest' && (
           <RestView
@@ -249,8 +329,12 @@ export function Player({
       />
 
       {/* Health reminder */}
-      <div className="px-6 pb-3 text-center">
-        <p className="text-xs text-white">⚕️ Écoutez votre corps. En cas de douleur, arrêtez immédiatement.</p>
+      <div className="px-6 pb-3 text-center space-y-0.5">
+        <p className="text-sm text-white/70 inline-flex items-center gap-1.5">
+          <HeartPulse className="w-4 h-4 shrink-0" aria-hidden="true" />
+          Écoute ton corps. Adapte l'effort, la qualité prime sur la quantité.
+        </p>
+        <p className="text-sm text-white/70">En cas de douleur, arrête immédiatement.</p>
       </div>
     </div>
   );
