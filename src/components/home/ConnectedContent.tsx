@@ -62,7 +62,7 @@ export function ConnectedContent({
             Prêt à bouger ?
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
             {/* 1 — Séance du jour */}
             <div className="flex flex-col rounded-2xl overflow-hidden border border-card-border transition-all hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10">
               <h4 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
