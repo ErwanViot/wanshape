@@ -34,3 +34,8 @@ work/
 # AI tooling
 .claude/
 .serena/
+
+# External datasets (downloaded on-demand, cf. data/ciqual/README.md)
+data/**/*.csv
+data/**/*.xls
+data/**/*.xlsx
