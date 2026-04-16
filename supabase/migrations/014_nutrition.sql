@@ -49,10 +49,21 @@ create trigger trg_nutrition_profiles_updated_at
 -- =====================================================================
 -- meal_logs — journal of meals per user
 -- =====================================================================
+-- Convention logged_date: text YYYYMMDD (aligned with session_completions.session_date,
+-- cf. migration 013). Client is responsible for computing the user's LOCAL date
+-- (never toISOString which is UTC). This avoids timezone drift for users outside
+-- UTC±1h (e.g. a 23h dinner in Paris would otherwise land on the next day).
+--
+-- Idempotency: duplicate submissions (double-click / network retry) are prevented
+-- client-side via inflightRef pattern (see hooks/useGenerateSession.ts). Same
+-- approach as session_completions and custom_sessions; no DB-level constraint.
+--
+-- source enum: 'ai_text' and 'overflow_insight' are declared upfront to avoid an
+-- ALTER TABLE in the PR that introduces the estimate-nutrition edge function.
 create table if not exists public.meal_logs (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
-  logged_date date not null,
+  logged_date text not null check (logged_date ~ '^[0-9]{8}$'),
   meal_type text not null check (meal_type in ('breakfast', 'lunch', 'snack', 'dinner', 'extra')),
   source text not null check (source in ('manual', 'ciqual', 'barcode', 'ai_text', 'overflow_insight')),
   name text not null check (char_length(name) between 1 and 200),
@@ -87,6 +98,10 @@ create index if not exists idx_meal_logs_user_ai_created
 -- =====================================================================
 -- food_reference — CIQUAL (ANSES) public dataset, read-only
 -- =====================================================================
+-- Writes (insert/update/delete) are restricted to service_role only.
+-- The seed is performed out-of-band by scripts/seed-food-reference.ts (PR 2)
+-- using SUPABASE_SERVICE_ROLE_KEY. No INSERT/UPDATE/DELETE policy is declared
+-- on purpose: RLS enabled + no policy = service_role only can write.
 create table if not exists public.food_reference (
   id text primary key,
   name_fr text not null,

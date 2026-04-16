@@ -1,5 +1,12 @@
-import { ACTIVITY_MULTIPLIERS, GOAL_CALORIE_DELTA, GOAL_MACRO_SPLIT, TDEE_BOUNDS } from '../config/nutrition.ts';
-import type { BiologicalSex, TdeeInputs, TdeeResult } from '../types/nutrition.ts';
+import {
+  ACTIVITY_LEVELS,
+  ACTIVITY_MULTIPLIERS,
+  GOAL_CALORIE_DELTA,
+  GOAL_MACRO_SPLIT,
+  NUTRITION_GOALS,
+  TDEE_BOUNDS,
+} from '../config/nutrition.ts';
+import type { ActivityLevel, BiologicalSex, NutritionGoal, TdeeInputs, TdeeResult } from '../types/nutrition.ts';
 
 const KCAL_PER_G_PROTEIN = 4;
 const KCAL_PER_G_CARBS = 4;
@@ -28,6 +35,11 @@ export type TdeeValidationError =
   | 'invalid_activity'
   | 'invalid_goal';
 
+/**
+ * Validates ephemeral TDEE inputs before computation. Returns the first
+ * validation error found, or null when all fields are within safe bounds.
+ * Uses `includes` rather than `in` to avoid matching inherited Object props.
+ */
 export function validateTdeeInputs(inputs: TdeeInputs): TdeeValidationError | null {
   if (
     !Number.isFinite(inputs.ageYears) ||
@@ -51,11 +63,29 @@ export function validateTdeeInputs(inputs: TdeeInputs): TdeeValidationError | nu
     return 'invalid_weight';
   }
   if (inputs.sex !== 'female' && inputs.sex !== 'male') return 'invalid_sex';
-  if (!(inputs.activityLevel in ACTIVITY_MULTIPLIERS)) return 'invalid_activity';
-  if (!(inputs.goal in GOAL_CALORIE_DELTA)) return 'invalid_goal';
+  if (!(ACTIVITY_LEVELS as readonly string[]).includes(inputs.activityLevel as ActivityLevel)) {
+    return 'invalid_activity';
+  }
+  if (!(NUTRITION_GOALS as readonly string[]).includes(inputs.goal as NutritionGoal)) {
+    return 'invalid_goal';
+  }
   return null;
 }
 
+/**
+ * Computes BMR (Mifflin-St Jeor), TDEE (BMR × PAL) and a calorie target with
+ * a per-goal fixed delta (see GOAL_CALORIE_DELTA).
+ *
+ * Design note — fixed kcal delta vs percentage: we chose a fixed delta for
+ * simplicity. Relative severity varies by body size (e.g. -400 kcal is 25%
+ * for a 1600-kcal TDEE but 14% for a 2800-kcal TDEE). TDEE_BOUNDS.targetCalories
+ * clamps the result to a safe range; review if users report aggressive deficits.
+ *
+ * Fat is computed by difference to avoid macro drift after rounding /clamping,
+ * so P_kcal + C_kcal + F_kcal ≈ targetCalories within ±4 kcal.
+ *
+ * @throws Error when inputs are invalid (see validateTdeeInputs).
+ */
 export function computeTdee(inputs: TdeeInputs): TdeeResult {
   const validation = validateTdeeInputs(inputs);
   if (validation !== null) {
@@ -70,7 +100,8 @@ export function computeTdee(inputs: TdeeInputs): TdeeResult {
   const split = GOAL_MACRO_SPLIT[inputs.goal];
   const targetProteinG = Math.round((targetCalories * split.protein) / KCAL_PER_G_PROTEIN);
   const targetCarbsG = Math.round((targetCalories * split.carbs) / KCAL_PER_G_CARBS);
-  const targetFatG = Math.round((targetCalories * split.fat) / KCAL_PER_G_FAT);
+  const remainingKcal = targetCalories - (targetProteinG * KCAL_PER_G_PROTEIN + targetCarbsG * KCAL_PER_G_CARBS);
+  const targetFatG = Math.max(0, Math.round(remainingKcal / KCAL_PER_G_FAT));
 
   return {
     bmr: Math.round(bmr),

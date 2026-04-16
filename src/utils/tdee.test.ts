@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { GOAL_MACRO_SPLIT } from '../config/nutrition.ts';
 import { computeBmr, computeTdee, validateTdeeInputs } from './tdee.ts';
 
 describe('computeBmr (Mifflin-St Jeor)', () => {
@@ -98,7 +99,7 @@ describe('computeTdee', () => {
     expect(result.targetCalories - result.tdee).toBe(300);
   });
 
-  it('clamps extreme targets within safe bounds', () => {
+  it('clamps extreme low targets to min 1000', () => {
     const result = computeTdee({
       sex: 'female',
       ageYears: 95,
@@ -110,7 +111,21 @@ describe('computeTdee', () => {
     expect(result.targetCalories).toBeGreaterThanOrEqual(1000);
   });
 
-  it('macros sum (in kcal) approximately match targetCalories', () => {
+  it('clamps extreme high targets to max 5000', () => {
+    const result = computeTdee({
+      sex: 'male',
+      ageYears: 22,
+      heightCm: 200,
+      weightKg: 150,
+      activityLevel: 'very_active',
+      goal: 'gain',
+    });
+    expect(result.targetCalories).toBeLessThanOrEqual(5000);
+  });
+
+  it('macros sum (in kcal) match targetCalories within rounding precision', () => {
+    // With fat computed by difference, drift is bounded by ±4 kcal
+    // (half-kcal of rounding across the two 4-kcal macros and one 9-kcal fat).
     const result = computeTdee({
       sex: 'male',
       ageYears: 30,
@@ -120,8 +135,7 @@ describe('computeTdee', () => {
       goal: 'maintenance',
     });
     const fromMacros = result.targetProteinG * 4 + result.targetCarbsG * 4 + result.targetFatG * 9;
-    // Allow <1% rounding drift from the per-gram integer rounding.
-    expect(Math.abs(fromMacros - result.targetCalories)).toBeLessThan(result.targetCalories * 0.01);
+    expect(Math.abs(fromMacros - result.targetCalories)).toBeLessThanOrEqual(4);
   });
 
   it('throws on invalid inputs', () => {
@@ -135,5 +149,14 @@ describe('computeTdee', () => {
         goal: 'maintenance',
       }),
     ).toThrow();
+  });
+});
+
+describe('GOAL_MACRO_SPLIT invariants', () => {
+  it('each goal split sums to 1.0', () => {
+    for (const [goal, split] of Object.entries(GOAL_MACRO_SPLIT)) {
+      const sum = split.protein + split.carbs + split.fat;
+      expect(sum, `GOAL_MACRO_SPLIT[${goal}] must sum to 1`).toBeCloseTo(1, 5);
+    }
   });
 });

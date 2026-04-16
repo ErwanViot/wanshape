@@ -1,5 +1,7 @@
 import type { ActivityLevel, MealType, NutritionGoal } from '../types/nutrition.ts';
 
+// MEAL_TYPES must stay in sync with the meal_logs.meal_type check constraint
+// in supabase/migrations/014_nutrition.sql.
 export const MEAL_TYPES: readonly MealType[] = ['breakfast', 'lunch', 'snack', 'dinner', 'extra'] as const;
 
 export const MEAL_TYPE_LABELS: Record<MealType, string> = {
@@ -7,7 +9,7 @@ export const MEAL_TYPE_LABELS: Record<MealType, string> = {
   lunch: 'Déjeuner',
   snack: 'Goûter',
   dinner: 'Dîner',
-  extra: 'Collation',
+  extra: 'Autre',
 };
 
 export const MEAL_TYPE_ORDER: Record<MealType, number> = {
@@ -27,7 +29,7 @@ export const ACTIVITY_LEVELS: readonly ActivityLevel[] = [
 ] as const;
 
 export const ACTIVITY_LEVEL_LABELS: Record<ActivityLevel, string> = {
-  sedentary: 'Sédentaire (peu ou pas d\u2019exercice)',
+  sedentary: "Sédentaire (peu ou pas d'exercice)",
   light: 'Légère (1 à 3 séances/semaine)',
   moderate: 'Modérée (3 à 5 séances/semaine)',
   active: 'Active (6 à 7 séances/semaine)',
@@ -51,23 +53,31 @@ export const NUTRITION_GOAL_LABELS: Record<NutritionGoal, string> = {
   gain: 'Prise de masse progressive',
 };
 
-/** Calorie delta applied to TDEE per goal (moderate / sustainable approach). */
+/**
+ * Calorie delta applied to TDEE per goal (moderate / sustainable approach).
+ * Fixed (not %): keeps the math explicit and simple. TDEE_BOUNDS.targetCalories
+ * clamps the result so small-stature users don't get an unsafe deficit.
+ */
 export const GOAL_CALORIE_DELTA: Record<NutritionGoal, number> = {
   loss: -400,
   maintenance: 0,
   gain: 300,
 };
 
-/** Macro split per goal (must sum to 1). */
+/** Macro split per goal (sum must equal 1.0; guarded by tdee.test.ts). */
 export const GOAL_MACRO_SPLIT: Record<NutritionGoal, { protein: number; carbs: number; fat: number }> = {
   loss: { protein: 0.3, carbs: 0.4, fat: 0.3 },
   maintenance: { protein: 0.25, carbs: 0.5, fat: 0.25 },
   gain: { protein: 0.25, carbs: 0.5, fat: 0.25 },
 };
 
-/** Safety bounds used by client-side validation of the ephemeral TDEE form. */
+/**
+ * Safety bounds for the ephemeral TDEE form (client-only validation).
+ * age.min = 16 aligns with French RGPD digital-consent age (15+1 buffer) and
+ * avoids exposing minors to calorie tracking without a dedicated onboarding.
+ */
 export const TDEE_BOUNDS = {
-  age: { min: 14, max: 100 },
+  age: { min: 16, max: 100 },
   heightCm: { min: 120, max: 230 },
   weightKg: { min: 30, max: 250 },
   targetCalories: { min: 1000, max: 5000 },

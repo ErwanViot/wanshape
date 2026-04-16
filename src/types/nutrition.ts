@@ -1,3 +1,5 @@
+// The following unions must stay in sync with the check constraints declared in
+// supabase/migrations/014_nutrition.sql (meal_type, source, goal, activity_level).
 export type MealType = 'breakfast' | 'lunch' | 'snack' | 'dinner' | 'extra';
 
 export type MealSource = 'manual' | 'ciqual' | 'barcode' | 'ai_text' | 'overflow_insight';
@@ -63,6 +65,7 @@ export type AiMetadata = {
 export type MealLog = {
   id: string;
   user_id: string;
+  /** YYYYMMDD (user's LOCAL date). Must never be computed via toISOString(). */
   logged_date: string;
   meal_type: MealType;
   source: MealSource;
@@ -102,9 +105,11 @@ export type DailyNutritionTotals = {
 };
 
 export type DailyNutritionSummary = {
+  /** YYYYMMDD in the user's local timezone. */
   date: string;
   totals: DailyNutritionTotals;
-  byMealType: Record<MealType, MealLog[]>;
+  /** Partial: only meal_type keys with at least one log are present. */
+  byMealType: Partial<Record<MealType, MealLog[]>>;
   target: {
     calories: number | null;
     protein_g: number | null;
