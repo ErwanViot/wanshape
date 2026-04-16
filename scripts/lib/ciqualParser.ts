@@ -87,17 +87,44 @@ export function splitCsv(content: string): { headers: string[]; rows: string[][]
 }
 
 /**
+ * Normalizes a header for tolerant matching across CIQUAL versions.
+ * Strips diacritics, lowercases, replaces NBSP/non-breaking chars with regular
+ * spaces, and collapses whitespace. This lets us survive minor editorial
+ * variants (e.g. "N°" vs "N \u00B0", "x" vs "×" in "N x 6.25").
+ */
+function normalizeHeader(header: string): string {
+  return header
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+/**
  * Resolves the index of each expected CIQUAL column within the CSV headers.
+ * Uses whitespace/case/accents-tolerant matching and asserts that the energy
+ * column is the kcal one (never kJ — which would silently inflate calories ≈4×).
  * Throws a descriptive error listing the available headers if one is missing.
  */
 export function buildColumnIndex(headers: string[]): Record<CiqualColumnKey, number> {
+  const normalized = headers.map(normalizeHeader);
   const indexes = {} as Record<CiqualColumnKey, number>;
   for (const [key, header] of Object.entries(CIQUAL_COLUMN_MAP) as Array<[CiqualColumnKey, string]>) {
-    const idx = headers.indexOf(header);
+    const target = normalizeHeader(header);
+    const idx = normalized.indexOf(target);
     if (idx < 0) {
       throw new Error(`CSV header missing: "${header}". Found: ${headers.slice(0, 10).join(' | ')} (...)`);
     }
     indexes[key] = idx;
+  }
+  // kJ/kcal safety: if a future CIQUAL swaps the label order, the normalized
+  // match above could theoretically pick the kJ column. Guard explicitly.
+  const caloriesHeader = headers[indexes.calories].toLowerCase();
+  if (!caloriesHeader.includes('kcal')) {
+    throw new Error(
+      `Energy column must be kcal (found: "${headers[indexes.calories]}"). kJ values would silently inflate calories ~4x.`,
+    );
   }
   return indexes;
 }

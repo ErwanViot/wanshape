@@ -59,12 +59,15 @@ async function main() {
       failed += batch.length;
     } else {
       inserted += batch.length;
-      console.log(`  ✓ upserted ${inserted}/${records.length}`);
+      console.log(`  ✓ processed ${inserted}/${records.length}`);
     }
   }
 
-  console.log(`Done. Upserted: ${inserted}, failed: ${failed}`);
-  if (failed > 0) process.exit(1);
+  console.log(`Done. Processed: ${inserted}, failed: ${failed}`);
+  if (failed > 0) {
+    console.error('Some batches failed. The seed is idempotent (upsert by id) — re-run to retry.');
+    process.exit(1);
+  }
 }
 
 main().catch((err) => {

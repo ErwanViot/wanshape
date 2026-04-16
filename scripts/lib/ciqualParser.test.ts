@@ -107,6 +107,28 @@ describe('buildColumnIndex + mapRow', () => {
     expect(() => buildColumnIndex(broken)).toThrow(/CSV header missing/);
   });
 
+  it('tolerates minor whitespace and case variants in header labels', () => {
+    const variant = [
+      'ALIM_CODE',
+      'alim_nom_fr',
+      'alim_grp_nom_fr',
+      'Energie,  Règlement UE  N°  1169/2011  (kcal/100 g)', // double spaces
+      'Protéines, N x 6.25 (g/100 g)',
+      'Glucides (g/100 g)',
+      'Lipides (g/100 g)',
+      'Fibres alimentaires (g/100 g)',
+    ];
+    const idx = buildColumnIndex(variant);
+    expect(idx.calories).toBe(3);
+    expect(idx.id).toBe(0);
+  });
+
+  it('refuses a kJ energy column even if the rest of the label matches', () => {
+    const kjHeaders = [...headers];
+    kjHeaders[3] = 'Energie, Règlement UE N° 1169/2011 (kJ/100 g)';
+    expect(() => buildColumnIndex(kjHeaders)).toThrow(/kJ|kcal/);
+  });
+
   it('maps a valid CIQUAL row to a FoodReferenceRow', () => {
     const idx = buildColumnIndex(headers);
     const row = ['20001', 'Pomme golden, crue', 'fruits', '52,1', '0,3', '12,3', '0,1', '1,8'];

@@ -34,6 +34,23 @@ npx tsx scripts/seed-food-reference.ts path/to/other.csv
 
 Le script upsert les ~3 000 lignes dans la table `food_reference` par batch de 500.
 
+### Recovery et rafraîchissement
+
+Le seed est **idempotent** : l'upsert par `id` (alim_code CIQUAL) permet de relancer
+sans risque si un batch échoue au milieu.
+
+En revanche, si une version ultérieure du CIQUAL **retire** des aliments, les
+lignes orphelines restent en base (le script ne fait que upsert, pas delete).
+Pour un refresh complet :
+
+```sql
+-- Via Supabase SQL editor (service role uniquement)
+TRUNCATE public.food_reference;
+```
+
+puis relancer le seed. Cette opération ne peut pas être exécutée via la clé anon
+(RLS + policy SELECT-only de la migration 014).
+
 ## Licence et attribution
 
 - **Licence** : [Etalab Open License 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/)
