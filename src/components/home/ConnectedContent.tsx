@@ -1,15 +1,12 @@
+import { Play, Sparkles, Target } from 'lucide-react';
 import { Link } from 'react-router';
-import {
-  Sparkles,
-  Play,
-  Target,
-} from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useActiveProgram } from '../../hooks/useProgram.ts';
 import type { Session } from '../../types/session.ts';
+import { getProgramImage } from '../../utils/programImage.ts';
 import { getSessionImage } from '../../utils/sessionImage.ts';
 import { DifficultyBadge } from '../DifficultyBadge.tsx';
-import { getProgramImage } from '../../utils/programImage.ts';
+import { NutritionWidget } from '../nutrition/NutritionWidget.tsx';
 import { SessionAccordion } from '../SessionAccordion.tsx';
 import { TomorrowCard } from './TomorrowCard.tsx';
 
@@ -43,8 +40,7 @@ export function ConnectedContent({
       ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
       : 0;
 
-  const firstName = (profile?.display_name ?? user?.user_metadata?.display_name ?? '')
-    .split(' ')[0];
+  const firstName = (profile?.display_name ?? user?.user_metadata?.display_name ?? '').split(' ')[0];
 
   return (
     <div className="px-6 md:px-10 lg:px-14 py-8">
@@ -54,13 +50,9 @@ export function ConnectedContent({
         {/* ── Titre + 3 colonnes d'action ── */}
         <section>
           {firstName && (
-            <h2 className="font-display text-xl sm:text-2xl font-bold text-heading mb-1">
-              Salut {firstName}
-            </h2>
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-heading mb-1">Salut {firstName}</h2>
           )}
-          <h3 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">
-            Prêt à bouger ?
-          </h3>
+          <h3 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">Prêt à bouger ?</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
             {/* 1 — Séance du jour */}
@@ -77,7 +69,11 @@ export function ConnectedContent({
               ) : session ? (
                 <>
                   <button type="button" onClick={onStart} className="relative h-36 w-full cursor-pointer text-left">
-                    <img src={getSessionImage(session)} alt={`Séance du jour : ${session.title}`} className="w-full h-full object-cover object-[50%_30%]" />
+                    <img
+                      src={getSessionImage(session)}
+                      alt={`Séance du jour : ${session.title}`}
+                      className="w-full h-full object-cover object-[50%_30%]"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
                       <p className="font-display text-lg font-bold text-white leading-tight">
@@ -86,16 +82,16 @@ export function ConnectedContent({
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-xs text-white/70">~{session.estimatedDuration} min</span>
                         {session.focus.slice(0, 2).map((f) => (
-                          <span key={f} className="text-xs text-white/70">· {f}</span>
+                          <span key={f} className="text-xs text-white/70">
+                            · {f}
+                          </span>
                         ))}
                         <DifficultyBadge session={session} />
                       </div>
                     </div>
                   </button>
                   <div className="flex-1 flex flex-col justify-end px-5 py-4 bg-surface-card space-y-3">
-                    {session.description && (
-                      <p className="text-sm text-muted leading-relaxed">{session.description}</p>
-                    )}
+                    {session.description && <p className="text-sm text-muted leading-relaxed">{session.description}</p>}
                     <button
                       type="button"
                       onClick={onStart}
@@ -117,7 +113,11 @@ export function ConnectedContent({
               ) : (
                 <div className="flex-1 p-6 flex items-center justify-center">
                   <div className="text-center">
-                    <img src="/images/illustration-empty-state.webp" alt="Pas de séance prévue" className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80" />
+                    <img
+                      src="/images/illustration-empty-state.webp"
+                      alt="Pas de séance prévue"
+                      className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80"
+                    />
                     <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
                   </div>
                 </div>
@@ -134,10 +134,16 @@ export function ConnectedContent({
                   <h4 className="font-display text-base font-bold text-heading group-hover:text-accent transition-colors">
                     Séance sur-mesure
                   </h4>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-brand/60 bg-brand/8 px-2 py-0.5 rounded-full shrink-0">Premium</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-brand/60 bg-brand/8 px-2 py-0.5 rounded-full shrink-0">
+                    Premium
+                  </span>
                 </div>
                 <div className="relative h-36 overflow-hidden">
-                  <img src="/images/illustration-ai-session.webp" alt="Séance personnalisée par IA" className="w-full h-full object-cover object-center" />
+                  <img
+                    src="/images/illustration-ai-session.webp"
+                    alt="Séance personnalisée par IA"
+                    className="w-full h-full object-cover object-center"
+                  />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
                   <p className="text-sm text-muted leading-relaxed">
@@ -158,10 +164,16 @@ export function ConnectedContent({
                   <h4 className="font-display text-base font-bold text-heading group-hover:text-accent transition-colors">
                     Séance sur-mesure
                   </h4>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full shrink-0">Premium</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full shrink-0">
+                    Premium
+                  </span>
                 </div>
                 <div className="relative h-36 overflow-hidden">
-                  <img src="/images/illustration-ai-session.webp" alt="Séance personnalisée par IA" className="w-full h-full object-cover object-center" />
+                  <img
+                    src="/images/illustration-ai-session.webp"
+                    alt="Séance personnalisée par IA"
+                    className="w-full h-full object-cover object-center"
+                  />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
                   <p className="text-sm text-muted leading-relaxed">
@@ -192,7 +204,11 @@ export function ConnectedContent({
                   Mon programme
                 </h4>
                 <Link to={`/programme/${activeProgram.slug}/suivi`} className="block relative h-36 group">
-                  <img src={getProgramImage(activeProgram.slug, activeProgram.goals)} alt={activeProgram.title} className="w-full h-full object-cover object-[50%_30%]" />
+                  <img
+                    src={getProgramImage(activeProgram.slug, activeProgram.goals)}
+                    alt={activeProgram.title}
+                    className="w-full h-full object-cover object-[50%_30%]"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4">
                     <p className="font-display text-lg font-bold text-white leading-tight group-hover:text-white/80 transition-colors">
@@ -203,11 +219,16 @@ export function ConnectedContent({
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card">
                   <div>
                     <div className="flex items-center justify-between text-xs text-muted mb-1.5">
-                      <span>{activeProgram.completedCount}/{activeProgram.totalSessions} séances</span>
+                      <span>
+                        {activeProgram.completedCount}/{activeProgram.totalSessions} séances
+                      </span>
                       <span>{progressPct}%</span>
                     </div>
                     <div className="h-1.5 rounded-full bg-divider overflow-hidden">
-                      <div className="h-full rounded-full bg-brand-secondary transition-all" style={{ width: `${progressPct}%` }} />
+                      <div
+                        className="h-full rounded-full bg-brand-secondary transition-all"
+                        style={{ width: `${progressPct}%` }}
+                      />
                     </div>
                   </div>
                   {activeProgram.nextSessionTitle && (
@@ -218,7 +239,11 @@ export function ConnectedContent({
                   {activeProgram.nextSessionOrder != null && (
                     <button
                       type="button"
-                      onClick={() => guardNavigation(`/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`)}
+                      onClick={() =>
+                        guardNavigation(
+                          `/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`,
+                        )
+                      }
                       className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white mt-3 cursor-pointer"
                     >
                       <Play className="w-4 h-4" aria-hidden="true" />
@@ -226,9 +251,7 @@ export function ConnectedContent({
                     </button>
                   )}
                 </div>
-                {activeProgram.nextSessionData && (
-                  <SessionAccordion session={activeProgram.nextSessionData} />
-                )}
+                {activeProgram.nextSessionData && <SessionAccordion session={activeProgram.nextSessionData} />}
               </div>
             ) : (
               <Link
@@ -239,7 +262,11 @@ export function ConnectedContent({
                   Programmes
                 </h4>
                 <div className="relative h-36 overflow-hidden">
-                  <img src="/images/illustration-program.webp" alt="Programmes d'entraînement" className="w-full h-full object-cover object-center" />
+                  <img
+                    src="/images/illustration-program.webp"
+                    alt="Programmes d'entraînement"
+                    className="w-full h-full object-cover object-center"
+                  />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
                   <p className="text-sm text-muted leading-relaxed">
@@ -253,6 +280,11 @@ export function ConnectedContent({
               </Link>
             )}
           </div>
+        </section>
+
+        {/* ── Nutrition du jour ── */}
+        <section>
+          <NutritionWidget />
         </section>
 
         {/* ── Séance de demain ── */}

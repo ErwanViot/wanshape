@@ -11,9 +11,7 @@ const LazyHome = lazy(() => import('./components/Home.tsx').then((m) => ({ defau
 const LazyFormats = lazy(() => import('./components/Formats.tsx').then((m) => ({ default: m.Formats })));
 const LazyExercises = lazy(() => import('./components/Exercises.tsx').then((m) => ({ default: m.Exercises })));
 const LazyPlayerPage = lazy(() => import('./components/Player.tsx').then((m) => ({ default: m.PlayerPage })));
-const LazyNotFoundPage = lazy(() =>
-  import('./components/NotFoundPage.tsx').then((m) => ({ default: m.NotFoundPage })),
-);
+const LazyNotFoundPage = lazy(() => import('./components/NotFoundPage.tsx').then((m) => ({ default: m.NotFoundPage })));
 const LazyLegal = lazy(() => import('./components/Legal.tsx').then((m) => ({ default: m.Legal })));
 const LazyFormatPage = lazy(() => import('./components/FormatPage.tsx').then((m) => ({ default: m.FormatPage })));
 const LazyExercisePage = lazy(() => import('./components/ExercisePage.tsx').then((m) => ({ default: m.ExercisePage })));
@@ -22,9 +20,7 @@ const LazySignupPage = lazy(() => import('./components/auth/SignupPage.tsx').the
 const LazyAuthCallback = lazy(() =>
   import('./components/auth/AuthCallback.tsx').then((m) => ({ default: m.AuthCallback })),
 );
-const LazyStatsPage = lazy(() =>
-  import('./components/auth/StatsPage.tsx').then((m) => ({ default: m.StatsPage })),
-);
+const LazyStatsPage = lazy(() => import('./components/auth/StatsPage.tsx').then((m) => ({ default: m.StatsPage })));
 const LazySettingsPage = lazy(() =>
   import('./components/auth/SettingsPage.tsx').then((m) => ({ default: m.SettingsPage })),
 );
@@ -55,17 +51,17 @@ const LazyCustomSessionPreviewPage = lazy(() =>
 const LazyCustomPlayerPage = lazy(() =>
   import('./components/CustomPlayerPage.tsx').then((m) => ({ default: m.CustomPlayerPage })),
 );
-const LazyPricingPage = lazy(() =>
-  import('./components/PricingPage.tsx').then((m) => ({ default: m.PricingPage })),
-);
+const LazyPricingPage = lazy(() => import('./components/PricingPage.tsx').then((m) => ({ default: m.PricingPage })));
 const LazyPremiumPromoPage = lazy(() =>
   import('./components/PremiumPromoPage.tsx').then((m) => ({ default: m.PremiumPromoPage })),
 );
-const LazyAboutPage = lazy(() =>
-  import('./components/AboutPage.tsx').then((m) => ({ default: m.AboutPage })),
+const LazyAboutPage = lazy(() => import('./components/AboutPage.tsx').then((m) => ({ default: m.AboutPage })));
+const LazySeancesPage = lazy(() => import('./components/SeancesPage.tsx').then((m) => ({ default: m.SeancesPage })));
+const LazyNutritionPage = lazy(() =>
+  import('./components/NutritionPage.tsx').then((m) => ({ default: m.NutritionPage })),
 );
-const LazySeancesPage = lazy(() =>
-  import('./components/SeancesPage.tsx').then((m) => ({ default: m.SeancesPage })),
+const LazyNutritionSetupPage = lazy(() =>
+  import('./components/NutritionSetupPage.tsx').then((m) => ({ default: m.NutritionSetupPage })),
 );
 
 function Lazy({ children }: { children: React.ReactNode }) {
@@ -191,6 +187,26 @@ export const router = createBrowserRouter([
           <Lazy>
             <RequireAuth>
               <LazySeancesPage />
+            </RequireAuth>
+          </Lazy>
+        ),
+      },
+      {
+        path: 'nutrition',
+        element: (
+          <Lazy>
+            <RequireAuth>
+              <LazyNutritionPage />
+            </RequireAuth>
+          </Lazy>
+        ),
+      },
+      {
+        path: 'nutrition/setup',
+        element: (
+          <Lazy>
+            <RequireAuth>
+              <LazyNutritionSetupPage />
             </RequireAuth>
           </Lazy>
         ),
