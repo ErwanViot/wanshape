@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.ts";
+import { sanitizeOnboardingForPersistence } from "./sanitize.ts";
 import { validateProgram } from "./validate.ts";
 
 const PROD_ORIGINS = [
@@ -379,7 +380,10 @@ Deno.serve(async (req: Request) => {
       note_coach: pgm.note_coach,
       progression: pgm.progression,
       consignes_semaine: pgm.consignes_semaine,
-      onboarding_data: body,
+      // Strip age/sexe before persistence — RGPD art. 5(1)(c) minimization.
+      // Both are still sent to Anthropic at generation time (declared in the
+      // Privacy Policy) but never re-read by the app afterwards.
+      onboarding_data: sanitizeOnboardingForPersistence(body),
       generation_metadata: pgm,
       input_tokens: totalInputTokens,
       output_tokens: totalOutputTokens,
