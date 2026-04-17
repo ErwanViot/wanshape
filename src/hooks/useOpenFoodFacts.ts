@@ -29,8 +29,11 @@ export function useOpenFoodFacts(): UseOpenFoodFactsResult {
       setError(err);
       return p;
     } finally {
+      // Only clear loading if this call wasn't superseded (aborted) — avoids
+      // a racing completed-but-aborted request from flipping state after the
+      // consumer reset or started a new scan.
+      if (!controller.signal.aborted) setLoading(false);
       if (abortRef.current === controller) abortRef.current = null;
-      setLoading(false);
     }
   }, []);
 

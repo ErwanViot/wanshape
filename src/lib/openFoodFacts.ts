@@ -43,8 +43,13 @@ export interface OpenFoodFactsResult {
   error: OpenFoodFactsError | null;
 }
 
+/**
+ * Accepts barcode lengths matching real standards only:
+ * EAN-8 (8), UPC-A (12), EAN-13 (13), ITF-14 (14). UPC-E is normalized to 8 by
+ * scanners. Rejects exotic lengths (9/10/11) that would always miss OFF anyway.
+ */
 function isValidBarcode(barcode: string): boolean {
-  return /^[0-9]{8,14}$/.test(barcode);
+  return /^[0-9]+$/.test(barcode) && [8, 12, 13, 14].includes(barcode.length);
 }
 
 function pickNumber(source: Record<string, unknown>, keys: string[]): number | null {
@@ -102,7 +107,9 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
   const p = payload.product;
   const nutr = p.nutriments ?? {};
   const name = p.product_name_fr?.trim() || p.product_name?.trim() || null;
-  const calories = pickNumber(nutr, ['energy-kcal_100g', 'energy-kcal', 'energy_100g']);
+  // Only accept kcal-typed keys; `energy_100g` is in kJ on OFF and would
+  // otherwise inflate calories by ~4.184x with no unit check.
+  const calories = pickNumber(nutr, ['energy-kcal_100g', 'energy-kcal']);
 
   if (!name || calories == null) {
     return { product: null, error: 'missing_nutrition' };

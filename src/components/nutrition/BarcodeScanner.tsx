@@ -30,6 +30,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const rafRef = useRef<number | null>(null);
+  const mountedRef = useRef(true);
   const [status, setStatus] = useState<DetectorStatus>('idle');
   const [manualBarcode, setManualBarcode] = useState('');
   const [manualError, setManualError] = useState<string | null>(null);
@@ -46,6 +47,9 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
   }, []);
 
   const startCamera = useCallback(async () => {
+    const releaseTracks = (s: MediaStream) => {
+      for (const track of s.getTracks()) track.stop();
+    };
     const g = globalThis as unknown as GlobalWithBarcodeDetector;
     if (!g.BarcodeDetector) {
       setStatus('unsupported');
@@ -57,14 +61,25 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
         video: { facingMode: { ideal: 'environment' } },
         audio: false,
       });
+      // Unmount-during-await guard: release the stream instead of attaching it
+      // to a ref that nothing will stop.
+      if (!mountedRef.current) {
+        releaseTracks(stream);
+        return;
+      }
       streamRef.current = stream;
       const video = videoRef.current;
       if (!video) {
-        for (const track of stream.getTracks()) track.stop();
+        releaseTracks(stream);
+        streamRef.current = null;
         return;
       }
       video.srcObject = stream;
       await video.play();
+      if (!mountedRef.current) {
+        stopCamera();
+        return;
+      }
       setStatus('scanning');
 
       const DetectorCtor = g.BarcodeDetector;
@@ -76,13 +91,13 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
       const detector = new DetectorCtor({ formats: SUPPORTED_FORMATS });
 
       const tick = async () => {
-        if (!videoRef.current || !streamRef.current) return;
+        if (!mountedRef.current || !videoRef.current || !streamRef.current) return;
         try {
           const results = await detector.detect(videoRef.current);
           if (results.length > 0) {
             const barcode = results[0].rawValue;
             stopCamera();
-            onDetected(barcode);
+            if (mountedRef.current) onDetected(barcode);
             return;
           }
         } catch {
@@ -92,6 +107,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
       };
       rafRef.current = requestAnimationFrame(tick);
     } catch (err) {
+      if (!mountedRef.current) return;
       const name = err instanceof Error ? err.name : '';
       if (name === 'NotAllowedError' || name === 'SecurityError') {
         setStatus('permission_denied');
@@ -103,8 +119,10 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
   }, [onDetected, stopCamera]);
 
   useEffect(() => {
+    mountedRef.current = true;
     startCamera();
     return () => {
+      mountedRef.current = false;
       stopCamera();
     };
   }, [startCamera, stopCamera]);
@@ -148,9 +166,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
             playsInline
             muted
             aria-label="Aperçu caméra pour scan de code-barres"
-          >
-            <track kind="captions" />
-          </video>
+          />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-3/4 h-20 border-2 border-brand/80 rounded-lg" />
           </div>

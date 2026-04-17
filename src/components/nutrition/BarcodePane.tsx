@@ -29,7 +29,8 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => reset, [reset]);
+  // Cancel in-flight OFF fetch + clear state when the pane unmounts.
+  useEffect(() => () => reset(), [reset]);
 
   const handleDetected = useCallback(
     (barcode: string) => {
