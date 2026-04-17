@@ -1,7 +1,7 @@
 import { type FormEvent, useCallback, useEffect, useState } from 'react';
+import { MEAL_TYPE_LABELS } from '../../config/nutrition.ts';
 import { useOpenFoodFacts } from '../../hooks/useOpenFoodFacts.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
-import { MEAL_TYPE_LABELS } from '../../config/nutrition.ts';
 import type { MealType } from '../../types/nutrition.ts';
 import { BarcodeScanner } from './BarcodeScanner.tsx';
 
