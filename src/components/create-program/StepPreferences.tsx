@@ -101,7 +101,7 @@ export function StepPreferences({
 
       <fieldset>
         <legend className="text-sm font-semibold text-heading mb-3">Matériel disponible</legend>
-        <div className="flex flex-wrap gap-2" role="group">
+        <div className="flex flex-wrap gap-2">
           {MATERIEL_OPTIONS.map((m) => (
             <button
               key={m.value}

@@ -71,6 +71,7 @@ export function WelcomeModal({ onClose }: Props) {
   };
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Escape is wired in the keydown effect above; the click here is the pointer-only click-outside dismissal.
     <div
       className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
       role="dialog"

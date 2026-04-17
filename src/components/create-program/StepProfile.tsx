@@ -86,7 +86,7 @@ export function StepProfile({
 
       <fieldset>
         <legend className="text-sm font-semibold text-heading mb-3">Blessures / sensibilités</legend>
-        <div className="flex flex-wrap gap-2" role="group">
+        <div className="flex flex-wrap gap-2">
           {BLESSURE_OPTIONS.map((b) => (
             <button
               key={b.value}

@@ -8,9 +8,8 @@ export function GeneratingOverlay({ phase }: GeneratingOverlayProps) {
   const progressPct = Math.min(95, ((phase + 1) / LOADING_PHASES.length) * 100);
 
   return (
-    <div
+    <output
       className="fixed inset-0 z-50 flex items-center justify-center bg-surface/95 backdrop-blur-sm"
-      role="status"
       aria-live="polite"
     >
       <div className="text-center space-y-6 px-6 max-w-sm">
@@ -24,6 +23,6 @@ export function GeneratingOverlay({ phase }: GeneratingOverlayProps) {
         </div>
         <p className="text-xs text-faint">Estimation : 30-60 secondes</p>
       </div>
-    </div>
+    </output>
   );
 }

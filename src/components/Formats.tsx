@@ -100,7 +100,11 @@ export function Formats() {
                 {/* Content (below image) */}
                 <div className="p-4 flex-1 flex flex-col gap-3">
                   {/* Intensity dots */}
-                  <div className="flex items-center gap-1.5" aria-label={`Intensité : ${format.intensity} sur 5`}>
+                  <div
+                    className="flex items-center gap-1.5"
+                    role="img"
+                    aria-label={`Intensité : ${format.intensity} sur 5`}
+                  >
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
                     ))}

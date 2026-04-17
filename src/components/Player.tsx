@@ -271,6 +271,7 @@ export function Player({
               </button>
               <button
                 type="button"
+                // biome-ignore lint/a11y/noAutofocus: alertdialog pattern — focus must land on the confirmation CTA to let the user cancel via Escape or confirm with Enter without hunting for the button.
                 autoFocus
                 onClick={() => navigate(backTo)}
                 className="px-6 py-3 rounded-xl bg-white text-black font-semibold"

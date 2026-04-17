@@ -52,7 +52,7 @@ export function FormatPage() {
               <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full">
                 {format.duration} min
               </span>
-              <div className="flex items-center gap-1" aria-label={`Intensité : ${format.intensity} sur 5`}>
+              <div className="flex items-center gap-1" role="img" aria-label={`Intensité : ${format.intensity} sur 5`}>
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
                 ))}
