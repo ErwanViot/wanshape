@@ -1,13 +1,16 @@
 import { Settings2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
+import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDailyNutrition } from '../hooks/useDailyNutrition.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useNutritionProfile } from '../hooks/useNutritionProfile.ts';
+import { useTodayInsight } from '../hooks/useTodayInsight.ts';
 import type { OpenFoodFactsProduct } from '../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../types/nutrition.ts';
 import { CalorieRing } from './nutrition/CalorieRing.tsx';
 import { DailyFeed } from './nutrition/DailyFeed.tsx';
+import { InsightCard } from './nutrition/InsightCard.tsx';
 import { MealEntryForm } from './nutrition/MealEntryForm.tsx';
 
 export function NutritionPage() {
@@ -16,8 +19,11 @@ export function NutritionPage() {
     description: 'Suis tes apports caloriques et macros au fil de la journée.',
   });
 
+  const { profile: authProfile } = useAuth();
+  const isPremium = authProfile?.subscription_tier === 'premium';
   const { profile } = useNutritionProfile();
   const { summary, loading, error, addMeal, deleteMeal } = useDailyNutrition();
+  const { insight, setInsight } = useTodayInsight();
   const [formOpen, setFormOpen] = useState(false);
   const [initialMealType, setInitialMealType] = useState<MealType>('breakfast');
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -145,6 +151,8 @@ export function NutritionPage() {
           </div>
         </section>
 
+        <InsightCard insight={insight} isPremium={isPremium} onGenerated={setInsight} />
+
         {loading ? (
           <div className="space-y-3">
             <div className="skeleton h-8 w-1/3 rounded-lg" />
@@ -175,6 +183,7 @@ export function NutritionPage() {
             >
               <MealEntryForm
                 initialMealType={initialMealType}
+                isPremium={isPremium}
                 onSubmit={handleSubmit}
                 onSearchSelect={handleSearchSelect}
                 onBarcodeSelect={handleBarcodeSelect}

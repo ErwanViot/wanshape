@@ -3,19 +3,22 @@ import { type FormEvent, useState } from 'react';
 import { MEAL_TYPE_LABELS, MEAL_TYPES } from '../../config/nutrition.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../../types/nutrition.ts';
+import { AiTextPane } from './AiTextPane.tsx';
 import { BarcodePane } from './BarcodePane.tsx';
 import { FoodSearchInput } from './FoodSearchInput.tsx';
 
-type Mode = 'manual' | 'search' | 'barcode';
+type Mode = 'manual' | 'search' | 'barcode' | 'ai';
 
 const MODE_LABELS: Record<Mode, string> = {
   manual: 'Saisie libre',
   search: 'Rechercher',
   barcode: 'Scanner',
+  ai: 'IA',
 };
 
 interface MealEntryFormProps {
   initialMealType: MealType;
+  isPremium: boolean;
   onSubmit: (input: Omit<MealLogInsert, 'user_id' | 'logged_date'>) => Promise<boolean>;
   onCancel: () => void;
   onSearchSelect?: (food: FoodReference, quantityGrams: number, mealType: MealType) => Promise<boolean>;
@@ -37,12 +40,14 @@ function scaleByPortion(per100g: number | null | undefined, grams: number): numb
 
 export function MealEntryForm({
   initialMealType,
+  isPremium,
   onSubmit,
   onCancel,
   onSearchSelect,
   onBarcodeSelect,
 }: MealEntryFormProps) {
   const [mode, setMode] = useState<Mode>('manual');
+  const modes: Mode[] = isPremium ? ['manual', 'search', 'barcode', 'ai'] : ['manual', 'search', 'barcode'];
   const [mealType, setMealType] = useState<MealType>(initialMealType);
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
@@ -128,7 +133,7 @@ export function MealEntryForm({
       </header>
 
       <div className="flex gap-1 p-1 rounded-xl bg-surface border border-divider w-full">
-        {(['manual', 'search', 'barcode'] as const).map((m) => (
+        {modes.map((m) => (
           <button
             key={m}
             type="button"
@@ -165,7 +170,9 @@ export function MealEntryForm({
         </div>
       </fieldset>
 
-      {mode === 'barcode' ? (
+      {mode === 'ai' ? (
+        <AiTextPane mealType={mealType} onSubmit={onSubmit} onCancel={onCancel} />
+      ) : mode === 'barcode' ? (
         <BarcodePane
           mealType={mealType}
           onCancel={onCancel}
