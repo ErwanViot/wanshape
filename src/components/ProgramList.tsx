@@ -1,5 +1,5 @@
-import { Link, useSearchParams } from 'react-router';
 import { ChevronRight, Play, Rocket, Sparkles } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
@@ -23,13 +23,12 @@ export function ProgramList() {
 
   const isPremium = profile?.subscription_tier === 'premium';
 
-  const progressPct = activeProgram && activeProgram.totalSessions > 0
-    ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
-    : 0;
+  const progressPct =
+    activeProgram && activeProgram.totalSessions > 0
+      ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
+      : 0;
 
-  const activeImage = activeProgram
-    ? getProgramImage(activeProgram.slug, activeProgram.goals)
-    : '';
+  const activeImage = activeProgram ? getProgramImage(activeProgram.slug, activeProgram.goals) : '';
 
   useDocumentHead({
     title: 'Programmes',
@@ -41,9 +40,7 @@ export function ProgramList() {
     <div className="max-w-6xl mx-auto px-4 md:px-10 lg:px-14 py-6 md:py-8 space-y-8">
       {/* ── Header ── */}
       <div>
-        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">
-          Passe au niveau supérieur
-        </h1>
+        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">Passe au niveau supérieur</h1>
         <p className="text-sm text-muted mt-1 max-w-lg">
           Suis tes programmes ou génère-en un nouveau adapté à tes objectifs.
           {!user && ' Crée ton compte gratuit pour suivre ton avancement.'}
@@ -60,11 +57,7 @@ export function ProgramList() {
       {/* ── Active program hero ── */}
       {user && !activeProgramLoading && activeProgram && (
         <section className="relative rounded-2xl overflow-hidden">
-          <img
-            src={activeImage}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
-          />
+          <img src={activeImage} alt="" className="absolute inset-0 w-full h-full object-cover object-[50%_30%]" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
           <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 p-6 md:p-8">
             {/* Donut */}
@@ -72,8 +65,13 @@ export function ProgramList() {
               <svg width="100" height="100" viewBox="0 0 100 100" className="-rotate-90">
                 <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="7" />
                 <circle
-                  cx="50" cy="50" r="40"
-                  fill="none" stroke="white" strokeWidth="7" strokeLinecap="round"
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="7"
+                  strokeLinecap="round"
                   strokeDasharray={2 * Math.PI * 40}
                   strokeDashoffset={2 * Math.PI * 40 * (1 - progressPct / 100)}
                   className="transition-all duration-500"
@@ -91,7 +89,9 @@ export function ProgramList() {
                 {activeProgram.title}
               </h2>
               <div className="flex items-center gap-4 text-sm text-white/60">
-                <span>{activeProgram.completedCount}/{activeProgram.totalSessions} séances</span>
+                <span>
+                  {activeProgram.completedCount}/{activeProgram.totalSessions} séances
+                </span>
                 {activeProgram.nextSessionTitle && (
                   <span className="truncate">
                     Prochaine : <span className="text-white/90 font-semibold">{activeProgram.nextSessionTitle}</span>
@@ -112,7 +112,9 @@ export function ProgramList() {
               {activeProgram.nextSessionOrder != null && (
                 <button
                   type="button"
-                  onClick={() => guardNavigation(`/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`)}
+                  onClick={() =>
+                    guardNavigation(`/programme/${activeProgram.slug}/seance/${activeProgram.nextSessionOrder}/play`)
+                  }
                   className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-black text-sm font-bold hover:bg-white/90 transition-colors cursor-pointer"
                 >
                   <Play className="w-4 h-4" aria-hidden="true" />
@@ -133,10 +135,7 @@ export function ProgramList() {
 
       {/* ── AI CTA Banner ── */}
       {isPremium && user && (
-        <Link
-          to="/programme/creer"
-          className="group relative block rounded-2xl overflow-hidden"
-        >
+        <Link to="/programme/creer" className="group relative block rounded-2xl overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-brand via-brand-secondary to-brand" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent_60%)]" />
           <div className="relative z-10 flex items-center gap-5 p-6">
@@ -145,9 +144,7 @@ export function ProgramList() {
                 <Sparkles className="w-5 h-5 text-accent" aria-hidden="true" />
                 Générer un programme avec l'IA
               </h2>
-              <p className="text-sm text-white/70">
-                En 30 secondes, crée un plan d'entraînement adapté à ton niveau.
-              </p>
+              <p className="text-sm text-white/70">En 30 secondes, crée un plan d'entraînement adapté à ton niveau.</p>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 border border-accent/30 text-sm font-bold text-white group-hover:bg-accent/30 transition-colors">
                 <Rocket className="w-4 h-4 text-accent" aria-hidden="true" />
                 Créer mon programme
@@ -164,10 +161,7 @@ export function ProgramList() {
 
       {/* Non-premium CTA */}
       {!isPremium && user && (
-        <Link
-          to="/premium"
-          className="group relative block rounded-2xl overflow-hidden"
-        >
+        <Link to="/premium" className="group relative block rounded-2xl overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-brand via-brand-secondary to-brand" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent_60%)]" />
           <div className="relative z-10 flex items-center gap-5 p-6">
@@ -176,9 +170,7 @@ export function ProgramList() {
                 <Sparkles className="w-5 h-5 text-accent" aria-hidden="true" />
                 Générer un programme avec l'IA
               </h2>
-              <p className="text-sm text-white/70">
-                En 30 secondes, crée un plan d'entraînement adapté à ton niveau.
-              </p>
+              <p className="text-sm text-white/70">En 30 secondes, crée un plan d'entraînement adapté à ton niveau.</p>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 border border-accent/30 text-sm font-bold text-white group-hover:bg-accent/30 transition-colors">
                 <Sparkles className="w-4 h-4 text-accent" aria-hidden="true" />
                 Débloquer avec Premium
@@ -267,7 +259,10 @@ export function ProgramList() {
       {/* CTA for visitors */}
       {!user && supabase && !loading && programs.length > 0 && (
         <div className="text-center pt-4">
-          <Link to="/signup" className="cta-gradient inline-block px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer">
+          <Link
+            to="/signup"
+            className="cta-gradient inline-block px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer"
+          >
             Commencer gratuitement
           </Link>
         </div>

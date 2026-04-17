@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { AMRAPBlock } from '../../types/session.ts';
-import { expandAMRAP } from '../interpreters/amrap.ts';
 import { BLOCK_COLORS, TRANSITION_DURATION } from '../constants.ts';
+import { expandAMRAP } from '../interpreters/amrap.ts';
 
 function makeAMRAPBlock(overrides?: Partial<AMRAPBlock>): AMRAPBlock {
   return {

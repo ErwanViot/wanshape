@@ -38,7 +38,9 @@ export function Discover() {
     <div className="max-w-6xl mx-auto px-4 md:px-10 lg:px-14 py-6 md:py-8 space-y-10">
       <div>
         <h1 className="font-display text-2xl md:text-3xl font-black text-heading">Explore ton terrain de jeu</h1>
-        <p className="text-sm text-muted mt-1">Formats d'entraînement, exercices et tout ce qu'il faut pour progresser.</p>
+        <p className="text-sm text-muted mt-1">
+          Formats d'entraînement, exercices et tout ce qu'il faut pour progresser.
+        </p>
       </div>
 
       {/* Formats section — card grid like /formats page */}

@@ -60,7 +60,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       const result = await shareSession({ session, realMinutes, amrapRounds });
       setShareState(result);
       setTimeout(() => setShareState('idle'), 3000);
-    } catch (err) {
+    } catch {
       // User cancelled share sheet or other error
       setShareState('idle');
     }

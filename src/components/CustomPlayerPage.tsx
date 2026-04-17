@@ -1,8 +1,8 @@
 import { Navigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import { useCustomSession } from '../hooks/useCustomSessions.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
-import { useCustomSession } from '../hooks/useCustomSessions.ts';
 import type { Session } from '../types/session.ts';
 import { PlayerLoader } from './LoadingSpinner.tsx';
 import { Player } from './Player.tsx';
@@ -36,11 +36,7 @@ export function CustomPlayerPage() {
 
   return (
     <PlayerErrorBoundary backTo={`/seance/custom/${id}`}>
-      <Player
-        session={sessionData}
-        customSessionId={id}
-        backTo={`/seance/custom/${id}`}
-      />
+      <Player session={sessionData} customSessionId={id} backTo={`/seance/custom/${id}`} />
     </PlayerErrorBoundary>
   );
 }

@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
 import type { Equipment } from '../../types/equipment.ts';
-import { MATERIEL_OPTIONS, DUREE_OPTIONS } from './formOptions.ts';
+import { DUREE_OPTIONS, MATERIEL_OPTIONS } from './formOptions.ts';
 
 export interface StepPreferencesProps {
   seancesParSemaine: number;
@@ -70,9 +70,7 @@ export function StepPreferences({
             +
           </button>
         </div>
-        {maxSeances < 5 && (
-          <p className="text-xs text-faint mt-1">Adapté à ton rythme actuel</p>
-        )}
+        {maxSeances < 5 && <p className="text-xs text-faint mt-1">Adapté à ton rythme actuel</p>}
       </fieldset>
 
       <fieldset>
@@ -87,7 +85,8 @@ export function StepPreferences({
             &minus;
           </button>
           <span className="text-2xl font-bold text-heading tabular-nums min-w-[5rem] text-center">
-            {dureeSeanceMinutes}<span className="text-sm font-medium text-muted ml-1">min</span>
+            {dureeSeanceMinutes}
+            <span className="text-sm font-medium text-muted ml-1">min</span>
           </span>
           <button
             type="button"
@@ -102,7 +101,7 @@ export function StepPreferences({
 
       <fieldset>
         <legend className="text-sm font-semibold text-heading mb-3">Matériel disponible</legend>
-        <div className="flex flex-wrap gap-2" role="group">
+        <div className="flex flex-wrap gap-2">
           {MATERIEL_OPTIONS.map((m) => (
             <button
               key={m.value}
@@ -139,15 +138,11 @@ export function StepPreferences({
               onClick={() => onChangeDureeSemaines(d.value)}
               aria-pressed={dureeSemaines === d.value}
               className={`px-3 py-3 rounded-xl border text-center transition-colors cursor-pointer relative ${
-                dureeSemaines === d.value
-                  ? 'border-brand bg-brand/10'
-                  : 'border-divider hover:border-brand/30'
+                dureeSemaines === d.value ? 'border-brand bg-brand/10' : 'border-divider hover:border-brand/30'
               }`}
             >
               <span className="text-sm font-semibold text-heading">{d.label}</span>
-              {d.recommended && (
-                <span className="block text-xs text-brand mt-0.5">Recommandé</span>
-              )}
+              {d.recommended && <span className="block text-xs text-brand mt-0.5">Recommandé</span>}
             </button>
           ))}
         </div>

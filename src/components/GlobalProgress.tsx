@@ -59,9 +59,10 @@ export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
             className="absolute inset-0 transition-all duration-300"
             style={{
               backgroundColor: seg.color,
-              clipPath: seg.widthPercent > 0
-                ? `inset(0 ${Math.max(0, 100 - ((progress * 100 - seg.startPercent) / seg.widthPercent) * 100)}% 0 0)`
-                : 'inset(0 100% 0 0)',
+              clipPath:
+                seg.widthPercent > 0
+                  ? `inset(0 ${Math.max(0, 100 - ((progress * 100 - seg.startPercent) / seg.widthPercent) * 100)}% 0 0)`
+                  : 'inset(0 100% 0 0)',
             }}
           />
         </div>

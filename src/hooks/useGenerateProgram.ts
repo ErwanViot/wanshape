@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
-import type { ProgramOnboardingInput, GenerateProgramResponse } from '../types/custom-program.ts';
+import type { GenerateProgramResponse, ProgramOnboardingInput } from '../types/custom-program.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 
 export function useGenerateProgram() {

@@ -28,7 +28,8 @@ const ERROR_FR: Record<string, string> = {
   'Password should be at least 6 characters': 'Le mot de passe doit contenir au moins 6 caractères.',
   'For security purposes, you can only request this after': 'Patiente avant de réessayer.',
   'Unable to validate email address: invalid format': 'Adresse email invalide.',
-  'New password should be different from the old password': 'Le nouveau mot de passe doit être différent de l\u2019ancien.',
+  'New password should be different from the old password':
+    'Le nouveau mot de passe doit être différent de l\u2019ancien.',
   'Auth session missing': 'Session expirée. Reconnecte-toi.',
   'Email rate limit exceeded': 'Trop de tentatives. Patiente quelques minutes.',
 };
@@ -65,13 +66,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (document.visibilityState === 'visible') {
         const elapsed = Date.now() - lastVisibleAt.current;
         if (elapsed > STALE_THRESHOLD_MS && supabase) {
-          supabase.auth.refreshSession().then(() => {
-            if (mounted.current) {
-              setDataGeneration((g) => g + 1);
-            }
-          }).catch(() => {
-            // Refresh failed — session may be truly expired
-          });
+          supabase.auth
+            .refreshSession()
+            .then(() => {
+              if (mounted.current) {
+                setDataGeneration((g) => g + 1);
+              }
+            })
+            .catch(() => {
+              // Refresh failed — session may be truly expired
+            });
         }
         lastVisibleAt.current = Date.now();
       } else {
@@ -163,17 +167,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error: translateError(error?.message) };
   }, []);
 
-  const signUp = useCallback(async (email: string, password: string, displayName: string): Promise<{ error: string | null }> => {
-    if (!supabase) return { error: 'Auth non disponible' };
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { display_name: displayName },
-      },
-    });
-    return { error: translateError(error?.message) };
-  }, []);
+  const signUp = useCallback(
+    async (email: string, password: string, displayName: string): Promise<{ error: string | null }> => {
+      if (!supabase) return { error: 'Auth non disponible' };
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { display_name: displayName },
+        },
+      });
+      return { error: translateError(error?.message) };
+    },
+    [],
+  );
 
   const resetPassword = useCallback(async (email: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: 'Auth non disponible' };
@@ -204,15 +211,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const bumpDataGeneration = useCallback(() => setDataGeneration((g) => g + 1), []);
 
   const value = useMemo<AuthContextValue>(
-    () => ({ user, profile, loading, sessionExpired, dataGeneration, bumpDataGeneration, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut }),
-    [user, profile, loading, sessionExpired, dataGeneration, bumpDataGeneration, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut],
+    () => ({
+      user,
+      profile,
+      loading,
+      sessionExpired,
+      dataGeneration,
+      bumpDataGeneration,
+      refreshProfile,
+      signIn,
+      signUp,
+      resetPassword,
+      updatePassword,
+      signOut,
+    }),
+    [
+      user,
+      profile,
+      loading,
+      sessionExpired,
+      dataGeneration,
+      bumpDataGeneration,
+      refreshProfile,
+      signIn,
+      signUp,
+      resetPassword,
+      updatePassword,
+      signOut,
+    ],
   );
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth(): AuthContextValue {

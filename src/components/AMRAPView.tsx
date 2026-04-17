@@ -12,13 +12,23 @@ interface Props {
   onToggleShowVideos: () => void;
 }
 
-export function AMRAPView({ step, remaining, progress, rounds, onIncrementRound, showVideos, onToggleShowVideos }: Props) {
+export function AMRAPView({
+  step,
+  remaining,
+  progress,
+  rounds,
+  onIncrementRound,
+  showVideos,
+  onToggleShowVideos,
+}: Props) {
   return (
     <div className="flex flex-col items-center justify-center flex-1 gap-5 px-6 text-center">
       {/* Block name + explanation */}
       <div className="space-y-1">
         <h2 className="text-2xl font-bold text-white">{step.blockName}</h2>
-        <p className="text-white/60 text-sm">Enchaîne les exercices en boucle. Fais un max de tours dans le temps imparti.</p>
+        <p className="text-white/60 text-sm">
+          Enchaîne les exercices en boucle. Fais un max de tours dans le temps imparti.
+        </p>
       </div>
 
       {/* Timer */}

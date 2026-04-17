@@ -1,7 +1,4 @@
-import type {
-  ExperienceDuree,
-  FrequenceActuelle,
-} from '../../types/custom-program.ts';
+import type { ExperienceDuree, FrequenceActuelle } from '../../types/custom-program.ts';
 import type { Equipment } from '../../types/equipment.ts';
 
 export const OBJECTIF_OPTIONS = [

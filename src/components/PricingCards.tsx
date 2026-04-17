@@ -1,6 +1,6 @@
+import { Check, Crown, Sparkles, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { Check, Sparkles, Crown, Zap } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSubscription } from '../hooks/useSubscription.ts';
 import { formatDate } from '../utils/date.ts';
@@ -12,8 +12,8 @@ const PRICE_IDS = {
 
 const FREE_FEATURES = [
   'Séance du jour guidée',
-  '8 formats d\'entraînement',
-  'Bibliothèque d\'exercices',
+  "8 formats d'entraînement",
+  "Bibliothèque d'exercices",
   '3 programmes guidés',
   'Historique complet',
   'Statistiques & suivi',
@@ -26,10 +26,7 @@ const PREMIUM_FEATURES = [
   'Progression adaptée à ton niveau',
 ];
 
-const OFFER_DETAILS = [
-  'Renouvellement automatique',
-  'Résiliable à tout moment',
-];
+const OFFER_DETAILS = ['Renouvellement automatique', 'Résiliable à tout moment'];
 
 export function PricingCards() {
   const { user } = useAuth();
@@ -104,13 +101,10 @@ export function PricingCards() {
     <div>
       {/* Plans — 3 columns */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto items-start">
-
         {/* Free — reference */}
         <div className="rounded-2xl border border-card-border bg-surface-card p-6 flex flex-col">
           <h3 className="font-display text-lg font-bold text-heading mb-2">Gratuit</h3>
-          <p className="text-sm text-muted mb-4">
-            Pour commencer, sans compte ni paiement.
-          </p>
+          <p className="text-sm text-muted mb-4">Pour commencer, sans compte ni paiement.</p>
 
           <p className="mb-6">
             <span className="text-4xl font-black text-heading">0€</span>
@@ -159,9 +153,7 @@ export function PricingCards() {
           </div>
 
           <h3 className="font-display text-lg font-bold text-heading mt-1 mb-2">Abonnement Annuel</h3>
-          <p className="text-sm text-muted mb-4">
-            365 jours pour progresser et atteindre tes objectifs.
-          </p>
+          <p className="text-sm text-muted mb-4">365 jours pour progresser et atteindre tes objectifs.</p>
 
           {/* Price */}
           <p className="mb-2">
@@ -214,9 +206,7 @@ export function PricingCards() {
           }`}
         >
           <h3 className="font-display text-lg font-bold text-heading mb-2">Abonnement Mensuel</h3>
-          <p className="text-sm text-muted mb-4">
-            Un mois pour tester et découvrir tout le potentiel de Wan2Fit.
-          </p>
+          <p className="text-sm text-muted mb-4">Un mois pour tester et découvrir tout le potentiel de Wan2Fit.</p>
 
           {/* Price */}
           <p className="mb-6">
@@ -261,7 +251,10 @@ export function PricingCards() {
               <input
                 type="checkbox"
                 checked={acceptedCgv}
-                onChange={(e) => { setAcceptedCgv(e.target.checked); setError(null); }}
+                onChange={(e) => {
+                  setAcceptedCgv(e.target.checked);
+                  setError(null);
+                }}
                 className="mt-0.5 h-4 w-4 rounded border-divider accent-brand"
               />
               <span className="text-sm text-muted">
@@ -273,7 +266,9 @@ export function PricingCards() {
             </label>
 
             {error && (
-              <p role="alert" className="text-xs text-red-400 text-center">{error}</p>
+              <p role="alert" className="text-xs text-red-400 text-center">
+                {error}
+              </p>
             )}
 
             <button

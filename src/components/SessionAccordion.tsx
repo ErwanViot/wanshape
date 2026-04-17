@@ -36,9 +36,9 @@ export function SessionAccordion({ session, defaultOpen = false }: { session: Se
       </button>
 
       {open && (
-        <div id={panelId} role="region" aria-label="Contenu de la séance">
+        <section id={panelId} aria-label="Contenu de la séance">
           <SessionDetail session={session} />
-        </div>
+        </section>
       )}
     </>
   );

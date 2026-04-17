@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Session } from '../../types/session.ts';
-import { compileSession } from '../interpreter.ts';
 import { FIRST_TRANSITION_DURATION, INTER_BLOCK_REST, TRANSITION_DURATION } from '../constants.ts';
+import { compileSession } from '../interpreter.ts';
 
 function makeSession(blocks: Session['blocks']): Session {
   return {

@@ -1,22 +1,18 @@
+import { ClipboardList } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { ClipboardList } from 'lucide-react';
 import { STORAGE_KEYS } from '../config/storage-keys.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useGenerateProgram } from '../hooks/useGenerateProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
-import { toggleArrayElement } from '../utils/array.ts';
-import type {
-  ExperienceDuree,
-  FrequenceActuelle,
-  ProgramOnboardingInput,
-} from '../types/custom-program.ts';
+import type { ExperienceDuree, FrequenceActuelle, ProgramOnboardingInput } from '../types/custom-program.ts';
 import type { Equipment } from '../types/equipment.ts';
+import { toggleArrayElement } from '../utils/array.ts';
 import { LOADING_PHASES } from './create-program/formOptions.ts';
-import { StepObjective } from './create-program/StepObjective.tsx';
-import { StepProfile } from './create-program/StepProfile.tsx';
-import { StepPreferences } from './create-program/StepPreferences.tsx';
 import { GeneratingOverlay } from './create-program/GeneratingOverlay.tsx';
+import { StepObjective } from './create-program/StepObjective.tsx';
+import { StepPreferences } from './create-program/StepPreferences.tsx';
+import { StepProfile } from './create-program/StepProfile.tsx';
 
 const MAX_ACTIVE = 3;
 
@@ -86,7 +82,10 @@ export function CreateProgramPage() {
       let cumulative = 0;
       for (let i = 0; i < LOADING_PHASES.length; i++) {
         cumulative += LOADING_PHASES[i].duration;
-        if (elapsed < cumulative) { phase = i; break; }
+        if (elapsed < cumulative) {
+          phase = i;
+          break;
+        }
         if (i === LOADING_PHASES.length - 1) phase = i;
       }
       setLoadingPhase(phase);
@@ -190,21 +189,26 @@ export function CreateProgramPage() {
   return (
     <div className="max-w-2xl mx-auto px-6 py-8 pb-12">
       <div className="relative rounded-2xl overflow-hidden mb-6">
-        <img src="/images/illustration-program.webp" alt="Créer un programme sportif personnalisé" className="w-full h-32 sm:h-40 object-cover object-center" />
+        <img
+          src="/images/illustration-program.webp"
+          alt="Créer un programme sportif personnalisé"
+          className="w-full h-32 sm:h-40 object-cover object-center"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
-        <h1 className="absolute bottom-4 left-4 font-display text-2xl sm:text-3xl font-black text-white drop-shadow-sm">Créer mon programme</h1>
+        <h1 className="absolute bottom-4 left-4 font-display text-2xl sm:text-3xl font-black text-white drop-shadow-sm">
+          Créer mon programme
+        </h1>
       </div>
 
       <nav aria-label={`Étape ${draft.step} sur 3`} className="flex items-center gap-1 mb-8">
-        {([
-          { n: 1, label: 'Objectif' },
-          { n: 2, label: 'Profil' },
-          { n: 3, label: 'Programme' },
-        ] as const).map(({ n, label }) => {
-          const canGo =
-            n < draft.step ||
-            (n === 2 && isStep1Valid) ||
-            (n === 3 && isStep1Valid && isStep2Valid);
+        {(
+          [
+            { n: 1, label: 'Objectif' },
+            { n: 2, label: 'Profil' },
+            { n: 3, label: 'Programme' },
+          ] as const
+        ).map(({ n, label }) => {
+          const canGo = n < draft.step || (n === 2 && isStep1Valid) || (n === 3 && isStep1Valid && isStep2Valid);
           return (
             <button
               key={n}
@@ -217,12 +221,10 @@ export function CreateProgramPage() {
               aria-label={`Étape ${n} : ${label}`}
               aria-current={n === draft.step ? 'step' : undefined}
             >
-              <span className={`text-xs font-semibold ${n <= draft.step ? 'text-brand' : 'text-muted'}`}>
-                {label}
-              </span>
-              <span className={`w-full h-1.5 rounded-full transition-colors ${
-                n <= draft.step ? 'bg-brand' : 'bg-divider'
-              }`} />
+              <span className={`text-xs font-semibold ${n <= draft.step ? 'text-brand' : 'text-muted'}`}>{label}</span>
+              <span
+                className={`w-full h-1.5 rounded-full transition-colors ${n <= draft.step ? 'bg-brand' : 'bg-divider'}`}
+              />
             </button>
           );
         })}

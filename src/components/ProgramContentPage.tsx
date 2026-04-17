@@ -1,8 +1,8 @@
+import { ArrowRight, Calendar, ChevronLeft, Clock, Repeat, Target } from 'lucide-react';
 import { Link, Navigate, useParams } from 'react-router';
-import { ArrowRight, Calendar, Clock, Repeat, Target, ChevronLeft } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { PROGRAM_CONTENT } from '../data/programContent.ts';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 
 export function ProgramContentPage() {
@@ -29,7 +29,11 @@ export function ProgramContentPage() {
       {/* Hero */}
       <div className="relative">
         <div className="h-56 sm:h-72 md:h-80 overflow-hidden">
-          <img src={image} alt={`Programme ${content.headline}`} className="w-full h-full object-cover object-[50%_30%]" />
+          <img
+            src={image}
+            alt={`Programme ${content.headline}`}
+            className="w-full h-full object-cover object-[50%_30%]"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-surface/20" />
         </div>
 
@@ -80,10 +84,7 @@ export function ProgramContentPage() {
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </Link>
           {!user && (
-            <Link
-              to={`/programme/${slug}/suivi`}
-              className="text-sm text-link hover:text-link-hover transition-colors"
-            >
+            <Link to={`/programme/${slug}/suivi`} className="text-sm text-link hover:text-link-hover transition-colors">
               Déjà inscrit ? Voir mon suivi
             </Link>
           )}

@@ -116,7 +116,10 @@ export function usePrograms() {
         );
 
         if (cancelled) return;
-        if (sessionExpired) { notifySessionExpired(); return; }
+        if (sessionExpired) {
+          notifySessionExpired();
+          return;
+        }
         if (error) throw error;
         setPrograms((data as Program[]) ?? []);
       } catch (err) {
@@ -156,16 +159,31 @@ export function useProgram(slug: string | undefined, userId: string | undefined)
         );
 
         if (cancelled) return;
-        if (sessionExpired) { notifySessionExpired(); setLoading(false); return; }
-        if (!pgm) { setLoading(false); return; }
+        if (sessionExpired) {
+          notifySessionExpired();
+          setLoading(false);
+          return;
+        }
+        if (!pgm) {
+          setLoading(false);
+          return;
+        }
 
         // Fetch program sessions
         const { data: sessions, sessionExpired: sessExp } = await supabaseQuery(() =>
-          supabase!.from('program_sessions').select('*').eq('program_id', (pgm as Program).id).order('session_order'),
+          supabase!
+            .from('program_sessions')
+            .select('*')
+            .eq('program_id', (pgm as Program).id)
+            .order('session_order'),
         );
 
         if (cancelled) return;
-        if (sessExp) { notifySessionExpired(); setLoading(false); return; }
+        if (sessExp) {
+          notifySessionExpired();
+          setLoading(false);
+          return;
+        }
 
         // Fetch user's completions for this program's sessions
         const sessionIds = (sessions ?? []).map((s: ProgramSession) => s.id);
@@ -180,7 +198,11 @@ export function useProgram(slug: string | undefined, userId: string | undefined)
               .in('program_session_id', sessionIds),
           );
 
-          if (compExp) { notifySessionExpired(); setLoading(false); return; }
+          if (compExp) {
+            notifySessionExpired();
+            setLoading(false);
+            return;
+          }
 
           completedIds = new Set(
             (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
@@ -232,15 +254,31 @@ export function useProgramSession(slug: string | undefined, order: number | unde
         );
 
         if (cancelled) return;
-        if (sessionExpired) { notifySessionExpired(); setLoading(false); return; }
-        if (!pgm) { setLoading(false); return; }
+        if (sessionExpired) {
+          notifySessionExpired();
+          setLoading(false);
+          return;
+        }
+        if (!pgm) {
+          setLoading(false);
+          return;
+        }
 
         const { data: ps, sessionExpired: sessExp } = await supabaseQuery(() =>
-          supabase!.from('program_sessions').select('*').eq('program_id', (pgm as { id: string }).id).eq('session_order', order!).single(),
+          supabase!
+            .from('program_sessions')
+            .select('*')
+            .eq('program_id', (pgm as { id: string }).id)
+            .eq('session_order', order!)
+            .single(),
         );
 
         if (cancelled) return;
-        if (sessExp) { notifySessionExpired(); setLoading(false); return; }
+        if (sessExp) {
+          notifySessionExpired();
+          setLoading(false);
+          return;
+        }
         setSession((ps as ProgramSession) ?? null);
         setLoading(false);
       } catch (err) {

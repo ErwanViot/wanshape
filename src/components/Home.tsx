@@ -6,9 +6,9 @@ import { useSession } from '../hooks/useSession.ts';
 import { getTodayKey, getTomorrowKey, parseDateKey } from '../utils/date.ts';
 
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
-import { WelcomeModal, useShowWelcome } from './WelcomeModal.tsx';
 import { ConnectedContent } from './home/ConnectedContent.tsx';
 import { VisitorContent } from './home/VisitorContent.tsx';
+import { useShowWelcome, WelcomeModal } from './WelcomeModal.tsx';
 
 function formatShortDate(dateKey: string): string {
   const d = parseDateKey(dateKey);
@@ -66,7 +66,6 @@ export function Home() {
           formatShortDate={formatShortDate}
         />
       )}
-
     </>
   );
 }

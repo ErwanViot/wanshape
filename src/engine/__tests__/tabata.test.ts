@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { TabataBlock } from '../../types/session.ts';
-import { expandTabata } from '../interpreters/tabata.ts';
 import { BLOCK_COLORS, TABATA_DEFAULTS, TRANSITION_DURATION } from '../constants.ts';
+import { expandTabata } from '../interpreters/tabata.ts';
 
 function makeTabataBlock(overrides?: Partial<TabataBlock>): TabataBlock {
   return {

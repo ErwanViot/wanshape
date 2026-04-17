@@ -1,13 +1,11 @@
+import type { LucideIcon } from 'lucide-react';
+import { Dumbbell, Flame, Heart, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { Dumbbell, Flame, Heart, Zap } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useCustomSessions } from '../hooks/useCustomSessions.ts';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
-import { toggleArrayElement } from '../utils/array.ts';
-import { EQUIPMENT_OPTIONS } from '../types/equipment.ts';
 import type {
   BodyFocus,
   CustomSessionInput,
@@ -16,6 +14,8 @@ import type {
   Intensity,
 } from '../types/custom-session.ts';
 import type { Equipment } from '../types/equipment.ts';
+import { EQUIPMENT_OPTIONS } from '../types/equipment.ts';
+import { toggleArrayElement } from '../utils/array.ts';
 
 const PRESETS: { value: CustomSessionPreset; Icon: LucideIcon; label: string; desc: string }[] = [
   { value: 'transpirer', Icon: Flame, label: 'Objectif : transpirer', desc: 'HIIT + Tabata, haute intensité' },
@@ -91,18 +91,26 @@ export function CustomSessionPage() {
   return (
     <div className="px-6 md:px-10 lg:px-14 pb-12 max-w-2xl mx-auto pt-6 md:pt-4">
       <div className="relative rounded-2xl overflow-hidden mb-6">
-        <img src="/images/illustration-ai-session.webp" alt="Créer une séance personnalisée par IA" className="w-full h-32 sm:h-40 object-cover object-center" />
+        <img
+          src="/images/illustration-ai-session.webp"
+          alt="Créer une séance personnalisée par IA"
+          className="w-full h-32 sm:h-40 object-cover object-center"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
-        <h1 className="absolute bottom-4 left-4 text-2xl sm:text-3xl font-bold text-white drop-shadow-sm">Créer ma séance</h1>
+        <h1 className="absolute bottom-4 left-4 text-2xl sm:text-3xl font-bold text-white drop-shadow-sm">
+          Créer ma séance
+        </h1>
       </div>
 
       {/* Mode toggle */}
       <div className="flex rounded-xl overflow-hidden border border-divider mb-6">
-        {([
-          { value: 'quick', label: 'Rapide' },
-          { value: 'detailed', label: 'Détaillé' },
-          { value: 'expert', label: 'Expert' },
-        ] as const).map((m) => (
+        {(
+          [
+            { value: 'quick', label: 'Rapide' },
+            { value: 'detailed', label: 'Détaillé' },
+            { value: 'expert', label: 'Expert' },
+          ] as const
+        ).map((m) => (
           <button
             key={m.value}
             type="button"
@@ -146,9 +154,7 @@ export function CustomSessionPage() {
               onClick={() => setPreset(p.value)}
               aria-pressed={preset === p.value}
               className={`w-full text-left px-4 py-3.5 rounded-xl border transition-colors cursor-pointer ${
-                preset === p.value
-                  ? 'border-brand bg-brand/10'
-                  : 'border-divider bg-surface-card hover:border-brand/30'
+                preset === p.value ? 'border-brand bg-brand/10' : 'border-divider bg-surface-card hover:border-brand/30'
               }`}
             >
               <span className="inline-flex items-center mr-2">
@@ -270,7 +276,8 @@ export function CustomSessionPage() {
             &minus;
           </button>
           <span className="text-2xl font-bold text-heading tabular-nums min-w-[4rem] text-center">
-            {duration}<span className="text-sm font-medium text-muted ml-1">min</span>
+            {duration}
+            <span className="text-sm font-medium text-muted ml-1">min</span>
           </span>
           <button
             type="button"
@@ -286,9 +293,7 @@ export function CustomSessionPage() {
 
       {/* Error */}
       {error && (
-        <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          {error}
-        </div>
+        <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">{error}</div>
       )}
 
       {/* Submit */}

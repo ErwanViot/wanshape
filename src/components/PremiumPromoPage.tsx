@@ -1,14 +1,5 @@
+import { ArrowRight, Crown, ListChecks, RotateCcw, Sparkles, Target, TrendingUp, Wand2 } from 'lucide-react';
 import { Link } from 'react-router';
-import {
-  Sparkles,
-  Crown,
-  Wand2,
-  TrendingUp,
-  RotateCcw,
-  Target,
-  ListChecks,
-  ArrowRight,
-} from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useSubscription } from '../hooks/useSubscription.ts';
@@ -37,12 +28,16 @@ export function PremiumPromoPage() {
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-heading leading-[1.1]">
-              L'IA qui s'adapte<br />
-              <span className="bg-gradient-to-r from-accent to-brand bg-clip-text text-transparent">à tes objectifs</span>
+              L'IA qui s'adapte
+              <br />
+              <span className="bg-gradient-to-r from-accent to-brand bg-clip-text text-transparent">
+                à tes objectifs
+              </span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
-              Des séances et des programmes créés sur-mesure par intelligence artificielle, adaptés à ton niveau, tes envies et ta progression.
+              Des séances et des programmes créés sur-mesure par intelligence artificielle, adaptés à ton niveau, tes
+              envies et ta progression.
             </p>
 
             {!user && (
@@ -90,10 +85,13 @@ export function PremiumPromoPage() {
                 <span className="text-xs font-bold tracking-widest uppercase text-accent">Séances IA</span>
               </div>
               <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                Des séances créées<br />rien que pour toi
+                Des séances créées
+                <br />
+                rien que pour toi
               </h2>
               <p className="text-muted leading-relaxed">
-                Choisis tes muscles cibles, ton format préféré, ta durée — l'IA construit une séance complète en quelques secondes.
+                Choisis tes muscles cibles, ton format préféré, ta durée — l'IA construit une séance complète en
+                quelques secondes.
               </p>
               <ul className="space-y-3">
                 {[
@@ -121,10 +119,13 @@ export function PremiumPromoPage() {
                 <span className="text-xs font-bold tracking-widest uppercase text-accent">Programmes IA</span>
               </div>
               <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                Un programme complet<br />en quelques clics
+                Un programme complet
+                <br />
+                en quelques clics
               </h2>
               <p className="text-muted leading-relaxed">
-                Définis ton objectif, ton niveau et tes disponibilités — l'IA génère un programme structuré sur plusieurs semaines avec progression intégrée.
+                Définis ton objectif, ton niveau et tes disponibilités — l'IA génère un programme structuré sur
+                plusieurs semaines avec progression intégrée.
               </p>
               <ul className="space-y-3">
                 {[

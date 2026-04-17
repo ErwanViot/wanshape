@@ -1,8 +1,7 @@
+import type { User } from '@supabase/supabase-js';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
-
 import { supabase } from '../lib/supabase.ts';
-import type { User } from '@supabase/supabase-js';
 
 export function useShowWelcome(user: User | null): boolean {
   if (!user) return false;
@@ -26,8 +25,7 @@ export function WelcomeModal({ onClose }: Props) {
     const dialog = dialogRef.current;
     if (!dialog) return;
 
-    const selector =
-      'button:not(:disabled), [href], input:not(:disabled), [tabindex]:not([tabindex="-1"])';
+    const selector = 'button:not(:disabled), [href], input:not(:disabled), [tabindex]:not([tabindex="-1"])';
     const focusable = dialog.querySelectorAll<HTMLElement>(selector);
     if (focusable.length > 0) focusable[0].focus();
 
@@ -73,6 +71,7 @@ export function WelcomeModal({ onClose }: Props) {
   };
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Escape is wired in the keydown effect above; the click here is the pointer-only click-outside dismissal.
     <div
       className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
       role="dialog"
@@ -82,10 +81,7 @@ export function WelcomeModal({ onClose }: Props) {
         if (e.target === e.currentTarget) handleDismiss();
       }}
     >
-      <div
-        ref={dialogRef}
-        className="glass-card w-full max-w-md rounded-3xl shadow-2xl p-6 space-y-6"
-      >
+      <div ref={dialogRef} className="glass-card w-full max-w-md rounded-3xl shadow-2xl p-6 space-y-6">
         <div className="text-center space-y-2">
           <img
             src="/images/illustration-onboarding.webp"
@@ -95,9 +91,7 @@ export function WelcomeModal({ onClose }: Props) {
           <h2 id="welcome-title" className="text-xl font-bold text-heading">
             Bienvenue sur Wan2Fit !
           </h2>
-          <p className="text-sm text-muted">
-            Prêt(e) à te dépasser ? Voici comment commencer :
-          </p>
+          <p className="text-sm text-muted">Prêt(e) à te dépasser ? Voici comment commencer :</p>
         </div>
 
         <div className="space-y-3">

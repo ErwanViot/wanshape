@@ -33,10 +33,7 @@ export function ProgramPlayerPage() {
 
   if (!programSession || !sessionData) {
     return (
-      <SessionNotFound
-        linkTo={slug ? `/programme/${slug}/suivi` : '/programmes'}
-        linkLabel="Retour au programme"
-      />
+      <SessionNotFound linkTo={slug ? `/programme/${slug}/suivi` : '/programmes'} linkLabel="Retour au programme" />
     );
   }
 

@@ -28,7 +28,7 @@ export function StepObjective({
 
       <fieldset>
         <legend className="text-sm font-semibold text-heading mb-3">Choisis tes objectifs</legend>
-        <div className="flex flex-wrap gap-2" role="group">
+        <div className="flex flex-wrap gap-2">
           {OBJECTIF_OPTIONS.map((o) => (
             <button
               key={o.value}

@@ -24,10 +24,7 @@ export function ScreenshotCarousel({
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 },
-    );
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
@@ -44,7 +41,9 @@ export function ScreenshotCarousel({
 
   return (
     <div ref={containerRef} className="relative w-full">
-      <div className={`relative ${aspectClass} ${maxHClass} mx-auto overflow-hidden rounded-2xl border border-card-border shadow-2xl`}>
+      <div
+        className={`relative ${aspectClass} ${maxHClass} mx-auto overflow-hidden rounded-2xl border border-card-border shadow-2xl`}
+      >
         {images.map((img, i) => (
           <img
             key={img.src}

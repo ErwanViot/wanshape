@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
 import type { ExperienceDuree, FrequenceActuelle } from '../../types/custom-program.ts';
-import { EXPERIENCE_OPTIONS, FREQUENCE_OPTIONS, BLESSURE_OPTIONS } from './formOptions.ts';
+import { BLESSURE_OPTIONS, EXPERIENCE_OPTIONS, FREQUENCE_OPTIONS } from './formOptions.ts';
 
 export interface StepProfileProps {
   experienceDuree: ExperienceDuree | '';
@@ -55,9 +55,7 @@ export function StepProfile({
               onClick={() => onChangeExperience(e.value)}
               aria-pressed={experienceDuree === e.value}
               className={`px-3 py-3 rounded-xl border text-center transition-colors cursor-pointer ${
-                experienceDuree === e.value
-                  ? 'border-brand bg-brand/10'
-                  : 'border-divider hover:border-brand/30'
+                experienceDuree === e.value ? 'border-brand bg-brand/10' : 'border-divider hover:border-brand/30'
               }`}
             >
               <span className="block text-sm font-semibold text-heading">{e.label}</span>
@@ -77,9 +75,7 @@ export function StepProfile({
               onClick={() => onChangeFrequence(f.value)}
               aria-pressed={frequenceActuelle === f.value}
               className={`px-3 py-3 rounded-xl border text-center transition-colors cursor-pointer ${
-                frequenceActuelle === f.value
-                  ? 'border-brand bg-brand/10'
-                  : 'border-divider hover:border-brand/30'
+                frequenceActuelle === f.value ? 'border-brand bg-brand/10' : 'border-divider hover:border-brand/30'
               }`}
             >
               <span className="text-sm font-semibold text-heading">{f.label}</span>
@@ -90,7 +86,7 @@ export function StepProfile({
 
       <fieldset>
         <legend className="text-sm font-semibold text-heading mb-3">Blessures / sensibilités</legend>
-        <div className="flex flex-wrap gap-2" role="group">
+        <div className="flex flex-wrap gap-2">
           {BLESSURE_OPTIONS.map((b) => (
             <button
               key={b.value}
@@ -153,9 +149,7 @@ export function StepProfile({
         </div>
       </div>
 
-      <p className="text-xs text-faint">
-        Ces infos permettent d'affiner le programme — elles restent privées.
-      </p>
+      <p className="text-xs text-faint">Ces infos permettent d'affiner le programme — elles restent privées.</p>
 
       <div className="flex gap-3">
         <button

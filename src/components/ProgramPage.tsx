@@ -72,14 +72,22 @@ export function ProgramPage() {
     if (focusable.length > 0) focusable[0].focus();
 
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') { setShowDeleteModal(false); return; }
+      if (e.key === 'Escape') {
+        setShowDeleteModal(false);
+        return;
+      }
       if (e.key === 'Tab') {
         const focusableEls = dialog?.querySelectorAll<HTMLElement>('button:not(:disabled)');
         if (!focusableEls || focusableEls.length === 0) return;
         const first = focusableEls[0];
         const last = focusableEls[focusableEls.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     }
     document.addEventListener('keydown', handleKeyDown);
@@ -136,14 +144,20 @@ export function ProgramPage() {
 
       {/* Delete modal */}
       {showDeleteModal && (
+        // biome-ignore lint/a11y/useKeyWithClickEvents: Escape is wired in the keydown effect above; the click here is the pointer-only click-outside dismissal.
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-labelledby="delete-program-title"
-          onClick={(e) => { if (e.target === e.currentTarget) setShowDeleteModal(false); }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowDeleteModal(false);
+          }}
         >
-          <div ref={deleteDialogRef} className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4">
+          <div
+            ref={deleteDialogRef}
+            className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4"
+          >
             <h2 id="delete-program-title" className="text-lg font-bold text-heading">
               Supprimer ce programme ?
             </h2>
@@ -188,7 +202,16 @@ export function ProgramPage() {
                   to="/programmes"
                   className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white transition-colors cursor-pointer w-fit"
                 >
-                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <svg
+                    aria-hidden="true"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  >
                     <path d="M15 18l-6-6 6-6" />
                   </svg>
                   Programmes
@@ -214,13 +237,21 @@ export function ProgramPage() {
                   {program.title}
                 </h1>
 
-                {program.description && (
-                  <p className="text-sm leading-relaxed text-white/70">{program.description}</p>
-                )}
+                {program.description && <p className="text-sm leading-relaxed text-white/70">{program.description}</p>}
 
                 <div className={`flex items-center gap-3 text-xs ${isCustom ? 'text-faint' : 'text-white/50'}`}>
                   <span className="flex items-center gap-1.5">
-                    <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                       <line x1="16" y1="2" x2="16" y2="6" />
                       <line x1="8" y1="2" x2="8" y2="6" />
@@ -229,7 +260,17 @@ export function ProgramPage() {
                     {program.duration_weeks} semaines
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                     </svg>
                     {program.frequency_per_week}x / semaine
@@ -256,10 +297,11 @@ export function ProgramPage() {
         {/* Auth gate */}
         {!user && (
           <div className="glass-card rounded-2xl p-6 text-center space-y-4">
-            <p className="text-sm text-subtle">
-              Connecte-toi pour suivre ce programme et enregistrer ta progression.
-            </p>
-            <Link to="/login" className="inline-block cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer">
+            <p className="text-sm text-subtle">Connecte-toi pour suivre ce programme et enregistrer ta progression.</p>
+            <Link
+              to="/login"
+              className="inline-block cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer"
+            >
               Se connecter
             </Link>
           </div>
@@ -324,7 +366,9 @@ export function ProgramPage() {
 
               {consigne && !isCollapsed && (
                 <div className="flex gap-2.5 items-start rounded-lg bg-accent/10 border border-accent/20 px-3 py-2.5">
-                  <span className="text-sm mt-0.5 shrink-0" aria-hidden="true">💡</span>
+                  <span className="text-sm mt-0.5 shrink-0" aria-hidden="true">
+                    💡
+                  </span>
                   <p className="text-sm text-body leading-relaxed">{consigne}</p>
                 </div>
               )}
@@ -354,7 +398,17 @@ export function ProgramPage() {
                             }`}
                           >
                             {isDone ? (
-                              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              <svg
+                                aria-hidden="true"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
                                 <polyline points="20 6 9 17 4 12" />
                               </svg>
                             ) : (
@@ -450,7 +504,16 @@ export function ProgramPage() {
             to="/programmes"
             className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2 cursor-pointer"
           >
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg
+              aria-hidden="true"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
               <path d="M15 18l-6-6 6-6" />
             </svg>
             Tous les programmes

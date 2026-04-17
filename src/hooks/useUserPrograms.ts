@@ -26,7 +26,10 @@ export function useUserPrograms() {
           .order('created_at', { ascending: false }),
       );
 
-      if (sessionExpired) { notifySessionExpired(); return; }
+      if (sessionExpired) {
+        notifySessionExpired();
+        return;
+      }
       setPrograms((data as Program[]) ?? []);
     } catch (err) {
       console.error('User programs fetch error:', err);
@@ -39,22 +42,29 @@ export function useUserPrograms() {
     fetchPrograms();
   }, [fetchPrograms, dataGeneration]);
 
-  const deleteProgram = useCallback(async (id: string) => {
-    if (!supabase) return false;
+  const deleteProgram = useCallback(
+    async (id: string) => {
+      if (!supabase) return false;
 
-    try {
-      const { error } = await supabase.from('programs').delete().eq('id', id).eq('user_id', user?.id ?? '');
-      if (error) {
-        console.error('Delete program error:', error);
+      try {
+        const { error } = await supabase
+          .from('programs')
+          .delete()
+          .eq('id', id)
+          .eq('user_id', user?.id ?? '');
+        if (error) {
+          console.error('Delete program error:', error);
+          return false;
+        }
+        setPrograms((prev) => prev.filter((p) => p.id !== id));
+        return true;
+      } catch (err) {
+        console.error('Delete program error:', err);
         return false;
       }
-      setPrograms((prev) => prev.filter((p) => p.id !== id));
-      return true;
-    } catch (err) {
-      console.error('Delete program error:', err);
-      return false;
-    }
-  }, [user]);
+    },
+    [user],
+  );
 
   return { programs, loading, deleteProgram, refresh: fetchPrograms };
 }
