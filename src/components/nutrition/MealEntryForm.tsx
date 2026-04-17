@@ -1,16 +1,25 @@
 import { X } from 'lucide-react';
 import { type FormEvent, useState } from 'react';
 import { MEAL_TYPE_LABELS, MEAL_TYPES } from '../../config/nutrition.ts';
+import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../../types/nutrition.ts';
+import { BarcodePane } from './BarcodePane.tsx';
 import { FoodSearchInput } from './FoodSearchInput.tsx';
 
-type Mode = 'manual' | 'search';
+type Mode = 'manual' | 'search' | 'barcode';
+
+const MODE_LABELS: Record<Mode, string> = {
+  manual: 'Saisie libre',
+  search: 'Rechercher',
+  barcode: 'Scanner',
+};
 
 interface MealEntryFormProps {
   initialMealType: MealType;
   onSubmit: (input: Omit<MealLogInsert, 'user_id' | 'logged_date'>) => Promise<boolean>;
   onCancel: () => void;
   onSearchSelect?: (food: FoodReference, quantityGrams: number, mealType: MealType) => Promise<boolean>;
+  onBarcodeSelect?: (product: OpenFoodFactsProduct, quantityGrams: number, mealType: MealType) => Promise<boolean>;
 }
 
 function parseMacro(raw: string): number | null {
@@ -26,7 +35,13 @@ function scaleByPortion(per100g: number | null | undefined, grams: number): numb
   return Math.round(value * 10) / 10;
 }
 
-export function MealEntryForm({ initialMealType, onSubmit, onCancel, onSearchSelect }: MealEntryFormProps) {
+export function MealEntryForm({
+  initialMealType,
+  onSubmit,
+  onCancel,
+  onSearchSelect,
+  onBarcodeSelect,
+}: MealEntryFormProps) {
   const [mode, setMode] = useState<Mode>('manual');
   const [mealType, setMealType] = useState<MealType>(initialMealType);
   const [name, setName] = useState('');
@@ -113,7 +128,7 @@ export function MealEntryForm({ initialMealType, onSubmit, onCancel, onSearchSel
       </header>
 
       <div className="flex gap-1 p-1 rounded-xl bg-surface border border-divider w-full">
-        {(['manual', 'search'] as const).map((m) => (
+        {(['manual', 'search', 'barcode'] as const).map((m) => (
           <button
             key={m}
             type="button"
@@ -126,7 +141,7 @@ export function MealEntryForm({ initialMealType, onSubmit, onCancel, onSearchSel
               mode === m ? 'bg-brand text-white' : 'text-body hover:text-heading'
             }`}
           >
-            {m === 'manual' ? 'Saisie libre' : 'Rechercher'}
+            {MODE_LABELS[m]}
           </button>
         ))}
       </div>
@@ -150,7 +165,25 @@ export function MealEntryForm({ initialMealType, onSubmit, onCancel, onSearchSel
         </div>
       </fieldset>
 
-      {mode === 'manual' ? (
+      {mode === 'barcode' ? (
+        <BarcodePane
+          mealType={mealType}
+          onCancel={onCancel}
+          onSubmit={async (product, grams) => {
+            setSubmitting(true);
+            try {
+              if (onBarcodeSelect) {
+                const ok = await onBarcodeSelect(product, grams, mealType);
+                if (ok) onCancel();
+                return ok;
+              }
+              return false;
+            } finally {
+              setSubmitting(false);
+            }
+          }}
+        />
+      ) : mode === 'manual' ? (
         <form onSubmit={handleManualSubmit} className="space-y-3">
           <div>
             <label htmlFor="meal-name" className="block text-xs font-medium text-body mb-1">

@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { useDailyNutrition } from '../hooks/useDailyNutrition.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useNutritionProfile } from '../hooks/useNutritionProfile.ts';
+import type { OpenFoodFactsProduct } from '../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../types/nutrition.ts';
 import { CalorieRing } from './nutrition/CalorieRing.tsx';
 import { DailyFeed } from './nutrition/DailyFeed.tsx';
@@ -62,6 +63,30 @@ export function NutritionPage() {
       fat_g: scaled(food.fat_100g),
       quantity_grams: Math.round(quantityGrams * 10) / 10,
       reference_id: food.id,
+      ai_metadata: null,
+      notes: null,
+    });
+    return result != null;
+  }
+
+  async function handleBarcodeSelect(
+    product: OpenFoodFactsProduct,
+    quantityGrams: number,
+    mealType: MealType,
+  ): Promise<boolean> {
+    const factor = quantityGrams / 100;
+    const scaled = (per100: number | null) => (per100 != null ? Math.round(per100 * factor * 10) / 10 : null);
+    const name = product.brand ? `${product.name} (${product.brand})` : product.name;
+    const result = await addMeal({
+      meal_type: mealType,
+      source: 'barcode',
+      name: name.slice(0, 200),
+      calories: scaled(product.calories_100g) ?? 0,
+      protein_g: scaled(product.protein_100g),
+      carbs_g: scaled(product.carbs_100g),
+      fat_g: scaled(product.fat_100g),
+      quantity_grams: Math.round(quantityGrams * 10) / 10,
+      reference_id: product.barcode,
       ai_metadata: null,
       notes: null,
     });
@@ -152,6 +177,7 @@ export function NutritionPage() {
                 initialMealType={initialMealType}
                 onSubmit={handleSubmit}
                 onSearchSelect={handleSearchSelect}
+                onBarcodeSelect={handleBarcodeSelect}
                 onCancel={() => setFormOpen(false)}
               />
             </div>
