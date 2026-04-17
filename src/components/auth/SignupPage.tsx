@@ -75,87 +75,91 @@ export function SignupPage() {
               </p>
             </div>
           ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <FormInput
-              label="Prénom ou pseudo"
-              inputId="signup-name"
-              type="text"
-              required
-              autoComplete="given-name"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="Alex"
-            />
-
-            <FormInput
-              label="Email"
-              inputId="signup-email"
-              type="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="toi@exemple.com"
-            />
-
-            <FormInput
-              label="Mot de passe"
-              inputId="signup-password"
-              type="password"
-              required
-              minLength={8}
-              autoComplete="new-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="8 caractères minimum"
-            />
-
-            <label className="flex items-start gap-2.5 cursor-pointer">
-              <input
-                type="checkbox"
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <FormInput
+                label="Prénom ou pseudo"
+                inputId="signup-name"
+                type="text"
                 required
-                checked={acceptedCgu}
-                onChange={(e) => setAcceptedCgu(e.target.checked)}
-                className="mt-0.5 h-4 w-4 rounded border-divider accent-brand"
+                autoComplete="given-name"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                placeholder="Alex"
               />
-              <span className="text-sm text-muted">
-                J'accepte les{' '}
-                <Link to="/legal/cgu" target="_blank" className="text-link hover:text-link-hover transition-colors">
-                  Conditions Générales d'Utilisation
-                </Link>{' '}
-                et la{' '}
-                <Link to="/legal/privacy" target="_blank" className="text-link hover:text-link-hover transition-colors">
-                  Politique de confidentialité
-                </Link>
-              </span>
-            </label>
 
-            {/* tl;dr */}
-            <div className="rounded-xl bg-surface border border-divider p-3.5 text-xs text-muted space-y-1">
-              <p className="font-semibold text-subtle">En bref (pour ceux qui ne lisent pas les CGU) 😉</p>
-              <ul className="space-y-0.5 list-inside">
-                <li>Le compte est gratuit, sans engagement.</li>
-                <li>On stocke ton email, ton prénom et tes séances.</li>
-                <li>On ne revend pas tes données.</li>
-                <li>Les exercices sont des suggestions, pas du coaching médical.</li>
-                <li>Tu peux supprimer ton compte quand tu veux.</li>
-              </ul>
-            </div>
+              <FormInput
+                label="Email"
+                inputId="signup-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="toi@exemple.com"
+              />
 
-            {error && (
-              <p className="text-sm text-red-400" role="alert">
-                {error}
-              </p>
-            )}
+              <FormInput
+                label="Mot de passe"
+                inputId="signup-password"
+                type="password"
+                required
+                minLength={8}
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="8 caractères minimum"
+              />
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {submitting ? 'Création...' : 'Créer mon compte'}
-            </button>
-          </form>
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  required
+                  checked={acceptedCgu}
+                  onChange={(e) => setAcceptedCgu(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-divider accent-brand"
+                />
+                <span className="text-sm text-muted">
+                  J'accepte les{' '}
+                  <Link to="/legal/cgu" target="_blank" className="text-link hover:text-link-hover transition-colors">
+                    Conditions Générales d'Utilisation
+                  </Link>{' '}
+                  et la{' '}
+                  <Link
+                    to="/legal/privacy"
+                    target="_blank"
+                    className="text-link hover:text-link-hover transition-colors"
+                  >
+                    Politique de confidentialité
+                  </Link>
+                </span>
+              </label>
+
+              {/* tl;dr */}
+              <div className="rounded-xl bg-surface border border-divider p-3.5 text-xs text-muted space-y-1">
+                <p className="font-semibold text-subtle">En bref (pour ceux qui ne lisent pas les CGU) 😉</p>
+                <ul className="space-y-0.5 list-inside">
+                  <li>Le compte est gratuit, sans engagement.</li>
+                  <li>On stocke ton email, ton prénom et tes séances.</li>
+                  <li>On ne revend pas tes données.</li>
+                  <li>Les exercices sont des suggestions, pas du coaching médical.</li>
+                  <li>Tu peux supprimer ton compte quand tu veux.</li>
+                </ul>
+              </div>
+
+              {error && (
+                <p className="text-sm text-red-400" role="alert">
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {submitting ? 'Création...' : 'Créer mon compte'}
+              </button>
+            </form>
           )}
         </div>
 

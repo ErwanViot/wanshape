@@ -1,5 +1,5 @@
-import { computeDifficulty } from '../utils/sessionDifficulty.ts';
 import type { Session } from '../types/session.ts';
+import { computeDifficulty } from '../utils/sessionDifficulty.ts';
 
 const COLORS: Record<string, string> = {
   accessible: 'text-emerald-400',
@@ -12,9 +12,7 @@ export function DifficultyBadge({ session, separator = true }: { session: Sessio
   return (
     <>
       {separator && <span className="text-xs text-white/70">·</span>}
-      <span className={`text-xs font-semibold ${COLORS[difficulty.level]}`}>
-        {difficulty.label}
-      </span>
+      <span className={`text-xs font-semibold ${COLORS[difficulty.level]}`}>{difficulty.label}</span>
     </>
   );
 }

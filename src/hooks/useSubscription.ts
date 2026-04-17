@@ -36,7 +36,10 @@ export function useSubscription() {
             .maybeSingle(),
         );
 
-        if (sessionExpired) { notifySessionExpired(); return; }
+        if (sessionExpired) {
+          notifySessionExpired();
+          return;
+        }
         if (!cancelled) setSubscription(data as Subscription | null);
       } catch (err) {
         console.error('Subscription fetch error:', err);
@@ -45,7 +48,9 @@ export function useSubscription() {
       }
     })();
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [user, isPremium, dataGeneration]);
 
   const checkout = useCallback(
@@ -79,7 +84,7 @@ export function useSubscription() {
     const { data, error } = await supabase.functions.invoke('create-portal-session');
 
     if (error) {
-      const msg = error.message || 'Erreur lors de l\'ouverture du portail';
+      const msg = error.message || "Erreur lors de l'ouverture du portail";
       return msg;
     }
 
@@ -87,7 +92,7 @@ export function useSubscription() {
       window.location.href = data.url;
       return null;
     }
-    return data?.error || 'Erreur lors de l\'ouverture du portail';
+    return data?.error || "Erreur lors de l'ouverture du portail";
   }, [user]);
 
   return { tier, isPremium, subscription, loading, checkout, manageSubscription };

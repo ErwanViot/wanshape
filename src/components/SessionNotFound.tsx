@@ -1,5 +1,5 @@
-import { Link } from 'react-router';
 import { Moon } from 'lucide-react';
+import { Link } from 'react-router';
 
 interface SessionNotFoundProps {
   linkTo?: string;

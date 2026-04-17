@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import { HeartPulse } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   onAccept: () => void;
@@ -16,7 +16,8 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
     if (!dialog) return;
 
     // Focus the first focusable element
-    const selector = 'button:not(:disabled), [href], input:not(:disabled), select, textarea, [tabindex]:not([tabindex="-1"])';
+    const selector =
+      'button:not(:disabled), [href], input:not(:disabled), select, textarea, [tabindex]:not([tabindex="-1"])';
     const initialFocusable = dialog.querySelectorAll<HTMLElement>(selector);
     if (initialFocusable.length > 0) initialFocusable[0].focus();
 
@@ -61,10 +62,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
         if (e.target === e.currentTarget && onCancel) onCancel();
       }}
     >
-      <div
-        ref={dialogRef}
-        className="bg-white w-full max-w-lg rounded-3xl shadow-2xl max-h-full flex flex-col"
-      >
+      <div ref={dialogRef} className="bg-white w-full max-w-lg rounded-3xl shadow-2xl max-h-full flex flex-col">
         <div className="p-6 pb-0 shrink-0">
           <HeartPulse className="w-8 h-8 text-brand mb-3" aria-hidden="true" />
           <h2 id="health-disclaimer-title" className="text-xl font-bold text-gray-900 mb-1">
@@ -75,12 +73,12 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
 
         <div className="px-6 overflow-y-auto flex-1 space-y-3 text-sm text-gray-600 leading-relaxed">
           <p>
-            Wan2Fit propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il
-            ne s'agit pas de coaching sportif personnalisé ni d'encadrement par un éducateur sportif diplômé.
+            Wan2Fit propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il ne
+            s'agit pas de coaching sportif personnalisé ni d'encadrement par un éducateur sportif diplômé.
           </p>
           <p>
-            Les séances sont des suggestions d'exercices à caractère général. Tu es seul responsable de leur
-            exécution et de leur adaptation à ta condition physique.
+            Les séances sont des suggestions d'exercices à caractère général. Tu es seul responsable de leur exécution
+            et de leur adaptation à ta condition physique.
           </p>
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
             <p className="font-semibold text-amber-800">Avant de pratiquer :</p>

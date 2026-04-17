@@ -1,6 +1,6 @@
+import { HeartPulse } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router';
-import { HeartPulse } from 'lucide-react';
 import { BLOCK_LABELS } from '../engine/constants.ts';
 import { compileSession } from '../engine/interpreter.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -100,9 +100,7 @@ export function Player({
   const navigate = useNavigate();
   const steps = useMemo(() => compileSession(session), [session]);
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
-  const [showVideos, setShowVideos] = useState(
-    () => localStorage.getItem('wan2fit-show-exercise-videos') === 'true',
-  );
+  const [showVideos, setShowVideos] = useState(() => localStorage.getItem('wan2fit-show-exercise-videos') === 'true');
   const resumeButtonRef = useRef<HTMLButtonElement>(null);
   const quitDialogRef = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
@@ -206,7 +204,10 @@ export function Player({
           className="absolute inset-0 z-10 flex items-center justify-center bg-black/70"
           onKeyDown={(e) => {
             if (e.key === 'Escape') workout.togglePause();
-            if (e.key === 'Tab') { e.preventDefault(); resumeButtonRef.current?.focus(); }
+            if (e.key === 'Tab') {
+              e.preventDefault();
+              resumeButtonRef.current?.focus();
+            }
           }}
         >
           <div className="text-center">
@@ -242,18 +243,28 @@ export function Player({
               if (!focusable || focusable.length === 0) return;
               const first = focusable[0];
               const last = focusable[focusable.length - 1];
-              if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-              else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+              if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+              } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+              }
             }
           }}
         >
           <div className="text-center px-6">
-            <p id="quit-dialog-title" className="text-xl font-bold text-white mb-2">Quitter la séance ?</p>
+            <p id="quit-dialog-title" className="text-xl font-bold text-white mb-2">
+              Quitter la séance ?
+            </p>
             <p className="text-white/70 mb-6">Ta progression ne sera pas enregistrée.</p>
             <div className="flex gap-3 justify-center">
               <button
                 type="button"
-                onClick={() => { setShowQuitConfirm(false); workout.togglePause(); }}
+                onClick={() => {
+                  setShowQuitConfirm(false);
+                  workout.togglePause();
+                }}
                 className="px-6 py-3 rounded-xl bg-white/10 text-white font-semibold"
               >
                 Continuer
@@ -288,7 +299,13 @@ export function Player({
         )}
 
         {step.phase === 'work' && step.timerMode === 'emom' && (
-          <EMOMView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
+          <EMOMView
+            step={step}
+            remaining={workout.timer.remaining}
+            progress={workout.timer.progress}
+            showVideos={showVideos}
+            onToggleShowVideos={toggleShowVideos}
+          />
         )}
 
         {step.phase === 'work' && step.timerMode === 'amrap' && (
@@ -304,10 +321,18 @@ export function Player({
         )}
 
         {step.phase === 'work' && step.timerMode === 'countdown' && (
-          <ExerciseView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
+          <ExerciseView
+            step={step}
+            remaining={workout.timer.remaining}
+            progress={workout.timer.progress}
+            showVideos={showVideos}
+            onToggleShowVideos={toggleShowVideos}
+          />
         )}
 
-        {step.phase === 'work' && step.timerMode === 'manual' && <RepsView step={step} onDone={workout.done} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />}
+        {step.phase === 'work' && step.timerMode === 'manual' && (
+          <RepsView step={step} onDone={workout.done} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
+        )}
 
         {step.phase === 'rest' && (
           <RestView

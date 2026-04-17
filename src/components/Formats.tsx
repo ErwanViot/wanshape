@@ -1,5 +1,5 @@
-import { Link } from 'react-router';
 import { ChevronLeft } from 'lucide-react';
+import { Link } from 'react-router';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
@@ -80,7 +80,11 @@ export function Formats() {
               >
                 {/* Image — text stays white (over image) */}
                 <div className="relative h-28 overflow-hidden">
-                  <img src={format.image} alt={`Format ${format.name}`} className="w-full h-full object-cover object-[50%_30%]" />
+                  <img
+                    src={format.image}
+                    alt={`Format ${format.name}`}
+                    className="w-full h-full object-cover object-[50%_30%]"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
                     <div>

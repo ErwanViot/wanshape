@@ -1,13 +1,13 @@
+import { Camera, Crown, Monitor, Moon, Sparkles, Sun } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
-import { Moon, Sun, Monitor, Crown, Sparkles, Camera } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { useSubscription } from '../../hooks/useSubscription.ts';
 import { useTheme } from '../../hooks/useTheme.ts';
-import { getInitials } from '../../utils/getInitials.ts';
-import { formatDate } from '../../utils/date.ts';
 import { supabase } from '../../lib/supabase.ts';
+import { formatDate } from '../../utils/date.ts';
+import { getInitials } from '../../utils/getInitials.ts';
 
 const THEME_OPTIONS = [
   { value: 'light' as const, label: 'Clair', Icon: Sun },
@@ -62,17 +62,14 @@ export function SettingsPage() {
         .upload(path, file, { upsert: true, contentType: file.type });
       if (uploadError) throw uploadError;
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('avatars')
-        .getPublicUrl(path);
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from('avatars').getPublicUrl(path);
 
       // Append timestamp to bust cache
       const url = `${publicUrl}?t=${Date.now()}`;
 
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .update({ avatar_url: url })
-        .eq('id', user.id);
+      const { error: updateError } = await supabase.from('profiles').update({ avatar_url: url }).eq('id', user.id);
       if (updateError) throw updateError;
 
       await refreshProfile();
@@ -98,11 +95,7 @@ export function SettingsPage() {
             aria-label="Changer la photo de profil"
           >
             {profile?.avatar_url ? (
-              <img
-                src={profile.avatar_url}
-                alt=""
-                className="w-14 h-14 rounded-full object-cover"
-              />
+              <img src={profile.avatar_url} alt="" className="w-14 h-14 rounded-full object-cover" />
             ) : (
               <div className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg bg-brand">
                 {initials}
@@ -134,9 +127,7 @@ export function SettingsPage() {
           </div>
         </div>
 
-        {avatarError && (
-          <p className="text-xs text-red-400 text-center -mt-4">{avatarError}</p>
-        )}
+        {avatarError && <p className="text-xs text-red-400 text-center -mt-4">{avatarError}</p>}
 
         {/* Theme */}
         <section className="space-y-3">
@@ -199,14 +190,16 @@ export function SettingsPage() {
               )}
               <button
                 type="button"
-                onClick={async () => { setPortalError(null); const err = await manageSubscription(); if (err) setPortalError(err); }}
+                onClick={async () => {
+                  setPortalError(null);
+                  const err = await manageSubscription();
+                  if (err) setPortalError(err);
+                }}
                 className="w-full py-2.5 rounded-xl border border-accent/30 text-sm font-semibold text-accent hover:bg-accent/10 transition-colors cursor-pointer"
               >
                 Gérer mon abonnement
               </button>
-              {portalError && (
-                <p className="text-xs text-red-400 mt-2">{portalError}</p>
-              )}
+              {portalError && <p className="text-xs text-red-400 mt-2">{portalError}</p>}
             </div>
           ) : (
             <div className="rounded-xl border border-divider bg-surface-card p-4 space-y-3">

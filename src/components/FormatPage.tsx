@@ -1,5 +1,5 @@
-import { Link, Navigate, useParams } from 'react-router';
 import { AlertTriangle, CheckCircle, ChevronLeft, Clock, Lightbulb, Users } from 'lucide-react';
+import { Link, Navigate, useParams } from 'react-router';
 import { getFormatBySlug } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { ContentSection } from './ContentSection.tsx';
@@ -24,7 +24,11 @@ export function FormatPage() {
       {/* Hero — text stays white (over image) */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
-          <img src={format.image} alt={`Format ${format.name}`} className="w-full h-full object-cover object-[50%_30%]" />
+          <img
+            src={format.image}
+            alt={`Format ${format.name}`}
+            className="w-full h-full object-cover object-[50%_30%]"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-surface/20" />
         </div>
 
@@ -39,7 +43,9 @@ export function FormatPage() {
         <div className="absolute bottom-4 left-5 right-5">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <h1 className="font-display text-3xl font-black text-white drop-shadow-sm leading-tight">{format.name}</h1>
+              <h1 className="font-display text-3xl font-black text-white drop-shadow-sm leading-tight">
+                {format.name}
+              </h1>
               <p className="text-sm text-white/60 mt-1">{format.subtitle}</p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
@@ -100,7 +106,10 @@ export function FormatPage() {
         </ContentSection>
 
         {/* Erreurs courantes */}
-        <ContentSection title="Erreurs courantes" icon={<AlertTriangle className="w-4 h-4 text-amber-400" aria-hidden="true" />}>
+        <ContentSection
+          title="Erreurs courantes"
+          icon={<AlertTriangle className="w-4 h-4 text-amber-400" aria-hidden="true" />}
+        >
           <ul className="space-y-2">
             {format.commonMistakes.map((m, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
@@ -122,7 +131,10 @@ export function FormatPage() {
             </Link>
           </div>
           <div className="flex items-center justify-between">
-            <Link to="/formats" className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2">
+            <Link
+              to="/formats"
+              className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
+            >
               <ChevronLeft className="w-4 h-4" />
               Tous les formats
             </Link>

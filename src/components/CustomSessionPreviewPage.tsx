@@ -1,27 +1,16 @@
+import type { LucideIcon } from 'lucide-react';
+import { ChevronLeft, ClipboardList, Dumbbell, Flame, Moon, RefreshCw, RotateCcw, Sun, Timer, Zap } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import {
-  ChevronLeft,
-  ClipboardList,
-  Dumbbell,
-  Flame,
-  Moon,
-  RefreshCw,
-  RotateCcw,
-  Sun,
-  Timer,
-  Zap,
-} from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { BLOCK_COLORS, BLOCK_LABELS } from '../engine/constants.ts';
-import { useDocumentHead } from '../hooks/useDocumentHead.ts';
-import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { confirmCustomSession, useCustomSession } from '../hooks/useCustomSessions.ts';
+import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
-import type { CustomSessionMode, Intensity, BodyFocus } from '../types/custom-session.ts';
+import type { BodyFocus, CustomSessionMode, Intensity } from '../types/custom-session.ts';
 import type { Equipment } from '../types/equipment.ts';
 import type { Block, Session } from '../types/session.ts';
+import { LoadingSpinner } from './LoadingSpinner.tsx';
 
 const BLOCK_ICONS: Record<string, LucideIcon> = {
   warmup: Sun,
@@ -55,17 +44,13 @@ function BlockDetail({ block, index }: { block: Block; index: number }) {
             {block.rounds}R &middot; {block.work}s/{block.rest}s
           </span>
         )}
-        {block.type === 'circuit' && (
-          <span className="text-xs text-faint ml-auto">{block.rounds} tours</span>
-        )}
+        {block.type === 'circuit' && <span className="text-xs text-faint ml-auto">{block.rounds} tours</span>}
         {block.type === 'tabata' && (
           <span className="text-xs text-faint ml-auto">
             {block.rounds ?? 8}R &middot; {block.work ?? 20}s/{block.rest ?? 10}s
           </span>
         )}
-        {block.type === 'emom' && (
-          <span className="text-xs text-faint ml-auto">{block.minutes} min</span>
-        )}
+        {block.type === 'emom' && <span className="text-xs text-faint ml-auto">{block.minutes} min</span>}
         {block.type === 'amrap' && (
           <span className="text-xs text-faint ml-auto">{Math.round(block.duration / 60)} min</span>
         )}
@@ -77,15 +62,9 @@ function BlockDetail({ block, index }: { block: Block; index: number }) {
             <li key={i} className="flex items-baseline gap-2 text-sm">
               <span className="text-faint">-</span>
               <span className="font-medium text-heading">{ex.name as string}</span>
-              {typeof ex.duration === 'number' && (
-                <span className="text-xs text-muted">{ex.duration as number}s</span>
-              )}
-              {typeof ex.reps === 'number' && (
-                <span className="text-xs text-muted">{ex.reps as number} reps</span>
-              )}
-              {typeof ex.sets === 'number' && (
-                <span className="text-xs text-muted">{ex.sets as number} sets</span>
-              )}
+              {typeof ex.duration === 'number' && <span className="text-xs text-muted">{ex.duration as number}s</span>}
+              {typeof ex.reps === 'number' && <span className="text-xs text-muted">{ex.reps as number} reps</span>}
+              {typeof ex.sets === 'number' && <span className="text-xs text-muted">{ex.sets as number} sets</span>}
               {ex.bilateral === true && <span className="text-xs text-faint">(bilatéral)</span>}
             </li>
           ))}
@@ -188,9 +167,7 @@ export function CustomSessionPreviewPage() {
 
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-heading mb-2">
-          {session.title}
-        </h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-heading mb-2">{session.title}</h1>
         <p className="text-muted text-sm mb-3">{session.description}</p>
         <div className="flex items-center gap-2 flex-wrap">
           <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand/10 border border-brand/20 text-brand">

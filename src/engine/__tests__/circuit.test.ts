@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { CircuitBlock } from '../../types/session.ts';
-import { expandCircuit } from '../interpreters/circuit.ts';
 import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, PREPARE_COUNTDOWN, TRANSITION_DURATION } from '../constants.ts';
+import { expandCircuit } from '../interpreters/circuit.ts';
 
 function makeCircuitBlock(overrides?: Partial<CircuitBlock>): CircuitBlock {
   return {
@@ -39,9 +39,7 @@ describe('expandCircuit', () => {
 
   it('does not add prepare countdown when first exercise is reps-based', () => {
     const block = makeCircuitBlock({
-      exercises: [
-        { name: 'Squats', mode: 'reps', reps: 15, instructions: 'Go' },
-      ],
+      exercises: [{ name: 'Squats', mode: 'reps', reps: 15, instructions: 'Go' }],
     });
     const steps = expandCircuit(block, 0, 1);
 
@@ -86,9 +84,7 @@ describe('expandCircuit', () => {
   it('doubles duration for bilateral timed exercises', () => {
     const block = makeCircuitBlock({
       rounds: 1,
-      exercises: [
-        { name: 'Fentes', mode: 'timed', duration: 20, bilateral: true, instructions: 'Alterner' },
-      ],
+      exercises: [{ name: 'Fentes', mode: 'timed', duration: 20, bilateral: true, instructions: 'Alterner' }],
     });
     const steps = expandCircuit(block, 0, 1);
 
@@ -99,9 +95,7 @@ describe('expandCircuit', () => {
   it('sets repTarget for reps-mode exercises', () => {
     const block = makeCircuitBlock({
       rounds: 1,
-      exercises: [
-        { name: 'Squats', mode: 'reps', reps: 15, instructions: 'Deep' },
-      ],
+      exercises: [{ name: 'Squats', mode: 'reps', reps: 15, instructions: 'Deep' }],
     });
     const steps = expandCircuit(block, 0, 1);
 
@@ -123,7 +117,9 @@ describe('expandCircuit', () => {
     const block = makeCircuitBlock({ rounds: 2 });
     const steps = expandCircuit(block, 0, 1);
 
-    const roundRestSteps = steps.filter((s) => s.id.includes('-round-') && s.id.endsWith('-rest') && !s.id.includes('-ex-'));
+    const roundRestSteps = steps.filter(
+      (s) => s.id.includes('-round-') && s.id.endsWith('-rest') && !s.id.includes('-ex-'),
+    );
     expect(roundRestSteps).toHaveLength(1);
     expect(roundRestSteps[0].duration).toBe(60);
     expect(roundRestSteps[0].instructions).toContain('Round 2');
@@ -167,9 +163,7 @@ describe('expandCircuit', () => {
   it('provides nextStepPreview across rounds', () => {
     const block = makeCircuitBlock({
       rounds: 2,
-      exercises: [
-        { name: 'Burpees', mode: 'timed', duration: 30, instructions: 'Go' },
-      ],
+      exercises: [{ name: 'Burpees', mode: 'timed', duration: 30, instructions: 'Go' }],
     });
     const steps = expandCircuit(block, 0, 1);
 
@@ -191,9 +185,7 @@ describe('expandCircuit', () => {
   it('sets estimatedDuration for reps-mode to DEFAULT_REST_FOR_REPS', () => {
     const block = makeCircuitBlock({
       rounds: 1,
-      exercises: [
-        { name: 'Squats', mode: 'reps', reps: 15, instructions: 'Deep' },
-      ],
+      exercises: [{ name: 'Squats', mode: 'reps', reps: 15, instructions: 'Deep' }],
     });
     const steps = expandCircuit(block, 0, 1);
 

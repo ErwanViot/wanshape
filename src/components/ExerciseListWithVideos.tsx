@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { Play, X } from 'lucide-react';
+import { useState } from 'react';
 import { getExerciseVideoUrl } from '../utils/exerciseVideo.ts';
 import { NoVideoTag } from './NoVideoTag.tsx';
 import { PlayerVideoDemo } from './PlayerVideoDemo.tsx';

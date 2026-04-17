@@ -58,10 +58,7 @@ export function LoginPage() {
                 <label htmlFor="login-password" className="block text-sm font-medium text-strong">
                   Mot de passe
                 </label>
-                <Link
-                  to="/mot-de-passe-oublie"
-                  className="text-xs text-link hover:text-link-hover transition-colors"
-                >
+                <Link to="/mot-de-passe-oublie" className="text-xs text-link hover:text-link-hover transition-colors">
                   Mot de passe oublié ?
                 </Link>
               </div>
@@ -91,7 +88,6 @@ export function LoginPage() {
               {submitting ? 'Connexion...' : 'Se connecter'}
             </button>
           </form>
-
         </div>
 
         <p className="text-center text-sm text-muted mt-6">

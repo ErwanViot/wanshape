@@ -20,7 +20,11 @@ export function useCustomSessions(userId: string | undefined) {
 
     setLoading(true);
     try {
-      const { data, error: fetchError, sessionExpired } = await supabaseQuery(() =>
+      const {
+        data,
+        error: fetchError,
+        sessionExpired,
+      } = await supabaseQuery(() =>
         supabase!
           .from('custom_sessions')
           .select('*')
@@ -72,15 +76,12 @@ export function useCustomSession(id: string | undefined, userId: string | undefi
     async function load() {
       try {
         const { data, sessionExpired } = await supabaseQuery(() =>
-          supabase!
-            .from('custom_sessions')
-            .select('*')
-            .eq('id', id)
-            .eq('user_id', userId)
-            .single(),
+          supabase!.from('custom_sessions').select('*').eq('id', id).eq('user_id', userId).single(),
         );
 
-        if (sessionExpired) { notifySessionExpired(); }
+        if (sessionExpired) {
+          notifySessionExpired();
+        }
         if (!cancelled && data) {
           setSession(data as CustomSessionRecord);
         }
@@ -104,7 +105,9 @@ export function useCustomSession(id: string | undefined, userId: string | undefi
 export async function confirmCustomSession(id: string): Promise<boolean> {
   if (!supabase) return false;
   try {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) return false;
     const { error } = await supabase
       .from('custom_sessions')

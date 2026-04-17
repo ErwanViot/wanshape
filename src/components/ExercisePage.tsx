@@ -1,6 +1,6 @@
+import { AlertTriangle, CheckCircle, ChevronLeft, Dumbbell, GitBranch, Lightbulb, Wind } from 'lucide-react';
 import { useEffect } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router';
-import { AlertTriangle, CheckCircle, ChevronLeft, Dumbbell, GitBranch, Lightbulb, Wind } from 'lucide-react';
 import { getExerciseBySlug } from '../data/exercises.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { CATEGORY_LABELS, DIFFICULTY_COLORS, DIFFICULTY_LABELS } from '../types/exercise.ts';
@@ -52,7 +52,9 @@ export function ExercisePage() {
         <div className="absolute bottom-4 left-5 right-5">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <h1 className="font-display text-3xl font-black text-white drop-shadow-sm leading-tight">{exercise.name}</h1>
+              <h1 className="font-display text-3xl font-black text-white drop-shadow-sm leading-tight">
+                {exercise.name}
+              </h1>
               <p className="text-sm text-white/60 mt-1">{CATEGORY_LABELS[exercise.category]}</p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
@@ -153,7 +155,10 @@ export function ExercisePage() {
         </ContentSection>
 
         {/* Erreurs courantes */}
-        <ContentSection title="Erreurs courantes" icon={<AlertTriangle className="w-4 h-4 text-amber-400" aria-hidden="true" />}>
+        <ContentSection
+          title="Erreurs courantes"
+          icon={<AlertTriangle className="w-4 h-4 text-amber-400" aria-hidden="true" />}
+        >
           <ul className="space-y-2">
             {exercise.commonMistakes.map((m, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">

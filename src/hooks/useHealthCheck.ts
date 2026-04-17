@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router';
 const STORAGE_KEY = 'wan2fit-health-accepted';
 
 export function isHealthAccepted(): boolean {
-  try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch { return false; }
+  try {
+    return localStorage.getItem(STORAGE_KEY) === '1';
+  } catch {
+    return false;
+  }
 }
 
 export function useHealthCheck() {
@@ -23,7 +27,11 @@ export function useHealthCheck() {
   );
 
   const acceptAndNavigate = useCallback(() => {
-    try { localStorage.setItem(STORAGE_KEY, '1'); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(STORAGE_KEY, '1');
+    } catch {
+      /* ignore */
+    }
     if (pendingPath) {
       navigate(pendingPath);
       setPendingPath(null);

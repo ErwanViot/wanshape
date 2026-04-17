@@ -7,7 +7,11 @@ interface LoadingSpinnerProps {
 export function LoadingSpinner({ variant = 'themed', className = '' }: LoadingSpinnerProps) {
   const borderClass = variant === 'dark' ? 'border-white/20' : 'border-divider-strong';
   return (
-    <div role="status" aria-label="Chargement" className={`w-6 h-6 border-2 ${borderClass} border-t-brand rounded-full animate-spin ${className}`} />
+    <div
+      role="status"
+      aria-label="Chargement"
+      className={`w-6 h-6 border-2 ${borderClass} border-t-brand rounded-full animate-spin ${className}`}
+    />
   );
 }
 
