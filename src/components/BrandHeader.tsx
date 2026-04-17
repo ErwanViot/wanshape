@@ -4,7 +4,12 @@ import { AuthButton } from './auth/AuthButton.tsx';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Accueil', match: (p: string) => p === '/' },
-  { to: '/seances', label: 'Séances', match: (p: string) => p === '/seances' || p.startsWith('/seance'), requiresAuth: true },
+  {
+    to: '/seances',
+    label: 'Séances',
+    match: (p: string) => p === '/seances' || p.startsWith('/seance'),
+    requiresAuth: true,
+  },
   {
     to: '/decouvrir',
     label: 'Explorer',
@@ -12,6 +17,7 @@ const NAV_ITEMS = [
   },
   { to: '/programmes', label: 'Programmes', match: (p: string) => p.startsWith('/programme') },
   { to: '/tarifs', label: 'Tarifs', match: (p: string) => p === '/tarifs' },
+  { to: '/nutrition', label: 'Nutrition', match: (p: string) => p.startsWith('/nutrition'), requiresAuth: true },
   { to: '/suivi', label: 'Suivi', match: (p: string) => p === '/suivi', requiresAuth: true },
 ] as const;
 
@@ -24,11 +30,7 @@ export function BrandHeader() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5">
-          <img
-            src="/logo-wan2fit.png"
-            alt=""
-            className="w-7 h-7 md:w-8 md:h-8 shrink-0"
-          />
+          <img src="/logo-wan2fit.png" alt="" className="w-7 h-7 md:w-8 md:h-8 shrink-0" />
           <span className="font-display text-lg font-black tracking-tight gradient-text">Wan2Fit</span>
         </Link>
 

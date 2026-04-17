@@ -98,6 +98,26 @@ function UserIcon() {
   );
 }
 
+function UtensilsIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+      <path d="M7 2v20" />
+      <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
+    </svg>
+  );
+}
+
 function ChartIcon() {
   return (
     <svg
@@ -152,6 +172,7 @@ export function BottomNav() {
   const isPrograms = pathname.startsWith('/programme');
   const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
   const isSuivi = pathname === '/suivi';
+  const isNutrition = pathname.startsWith('/nutrition');
   const isLogin = pathname === '/login' || pathname === '/signup';
 
   return (
@@ -169,8 +190,8 @@ export function BottomNav() {
             <NavItem to="/programmes" label="Programmes" active={isPrograms}>
               <ProgramsIcon />
             </NavItem>
-            <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
-              <DiscoverIcon />
+            <NavItem to="/nutrition" label="Nutrition" active={isNutrition}>
+              <UtensilsIcon />
             </NavItem>
             <NavItem to="/suivi" label="Suivi" active={isSuivi}>
               <ChartIcon />
