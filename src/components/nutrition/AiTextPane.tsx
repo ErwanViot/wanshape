@@ -28,10 +28,10 @@ export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
     setEstimate(null);
     const trimmed = description.trim();
     if (trimmed.length < 3) return;
-    const result = await estimateFromText(trimmed);
-    if (result) {
-      setEstimate(result.estimate);
-      setAiUsage({ model: result.usage.model, input: result.usage.input_tokens, output: result.usage.output_tokens });
+    const { data } = await estimateFromText(trimmed);
+    if (data) {
+      setEstimate(data.estimate);
+      setAiUsage({ model: data.usage.model, input: data.usage.input_tokens, output: data.usage.output_tokens });
     }
   }
 
@@ -42,7 +42,8 @@ export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
       const ok = await onSubmit({
         meal_type: mealType,
         source: 'ai_text',
-        name: estimate.name.slice(0, 200),
+        // Server enforces <= 120, keep the client slice aligned.
+        name: estimate.name.slice(0, 120),
         calories: estimate.calories,
         protein_g: estimate.protein_g,
         carbs_g: estimate.carbs_g,

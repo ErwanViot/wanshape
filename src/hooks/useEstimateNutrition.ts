@@ -14,9 +14,14 @@ export interface OverflowResponse {
   loggedDate: string;
 }
 
+export interface CallOutcome<T> {
+  data: T | null;
+  error: string | null;
+}
+
 export interface UseEstimateNutritionResult {
-  estimateFromText: (description: string, loggedDate?: string) => Promise<TextEstimateResponse | null>;
-  generateOverflowInsight: (loggedDate?: string) => Promise<OverflowResponse | null>;
+  estimateFromText: (description: string, loggedDate?: string) => Promise<CallOutcome<TextEstimateResponse>>;
+  generateOverflowInsight: (loggedDate?: string) => Promise<CallOutcome<OverflowResponse>>;
   loading: boolean;
   error: string | null;
   reset: () => void;
@@ -32,9 +37,9 @@ export function useEstimateNutrition(): UseEstimateNutritionResult {
   const [error, setError] = useState<string | null>(null);
   const inflightRef = useRef(false);
 
-  const call = useCallback(async <T>(body: Record<string, unknown>): Promise<T | null> => {
-    if (!supabase) return null;
-    if (inflightRef.current) return null;
+  const call = useCallback(async <T>(body: Record<string, unknown>): Promise<CallOutcome<T>> => {
+    if (!supabase) return { data: null, error: 'Service indisponible.' };
+    if (inflightRef.current) return { data: null, error: null };
     inflightRef.current = true;
     setLoading(true);
     setError(null);
@@ -48,12 +53,13 @@ export function useEstimateNutrition(): UseEstimateNutritionResult {
           'Estimation indisponible.',
         );
         setError(msg);
-        return null;
+        return { data: null, error: msg };
       }
-      return (data ?? null) as T | null;
+      return { data: (data ?? null) as T | null, error: null };
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur inconnue');
-      return null;
+      const msg = err instanceof Error ? err.message : 'Erreur inconnue';
+      setError(msg);
+      return { data: null, error: msg };
     } finally {
       inflightRef.current = false;
       setLoading(false);

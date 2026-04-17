@@ -65,7 +65,16 @@ async function callAnthropic(
   system: string,
   user: string,
   maxTokens: number,
+  assistantPrefill?: string,
 ): Promise<{ json: unknown; usage: { input: number | null; output: number | null } } | Response> {
+  const messages: Array<{ role: string; content: string }> = [{ role: "user", content: user }];
+  if (assistantPrefill) {
+    // Prefilling the assistant turn with the start of the expected JSON forces
+    // the model to complete structured output instead of interpreting
+    // instructions embedded in `user`. Defense-in-depth against jailbreaks.
+    messages.push({ role: "assistant", content: assistantPrefill });
+  }
+
   let aiResponse: Response;
   try {
     aiResponse = await fetch("https://api.anthropic.com/v1/messages", {
@@ -79,7 +88,7 @@ async function callAnthropic(
         model: MODEL,
         max_tokens: maxTokens,
         system,
-        messages: [{ role: "user", content: user }],
+        messages,
       }),
       signal: AbortSignal.timeout(20_000),
     });
@@ -95,7 +104,9 @@ async function callAnthropic(
 
   const aiData = await aiResponse.json();
   const rawContent = aiData.content?.[0]?.text ?? "";
-  const cleaned = rawContent
+  // If we prefilled the assistant, Anthropic only returns the continuation.
+  const combined = assistantPrefill ? `${assistantPrefill}${rawContent}` : rawContent;
+  const cleaned = combined
     .replace(/^```json\s*/i, "")
     .replace(/```\s*$/, "")
     .trim();
@@ -104,7 +115,7 @@ async function callAnthropic(
   try {
     parsed = JSON.parse(cleaned);
   } catch {
-    console.error("Failed to parse AI response:", rawContent.slice(0, 500));
+    console.error("Failed to parse AI response:", combined.slice(0, 500));
     return new Response(JSON.stringify({ error: "Réponse IA invalide, réessayez" }), { status: 502 });
   }
 
@@ -181,19 +192,39 @@ Deno.serve(async (req: Request) => {
     if (!description) return errorResponse(req, "description manquante");
     if (description.length > 1000) return errorResponse(req, "description: 1000 caractères max");
 
-    const { count, error: countError } = await supabaseAdmin
-      .from("meal_logs")
+    // Atomic rate-limit: insert a tracking row first, then count. If we end up
+    // over the quota we delete the just-inserted row and reject. This closes
+    // the race window of "count-then-insert" where parallel calls all observed
+    // a pre-increment count.
+    const { data: trackRow, error: trackInsertErr } = await supabaseAdmin
+      .from("ai_text_calls")
+      .insert({ user_id: user.id })
+      .select("id")
+      .single();
+    if (trackInsertErr || !trackRow) return errorResponse(req, "Erreur serveur", 500);
+
+    const { count: textCount, error: textCountErr } = await supabaseAdmin
+      .from("ai_text_calls")
       .select("*", { count: "exact", head: true })
       .eq("user_id", user.id)
-      .eq("source", "ai_text")
       .gte("created_at", sinceIso);
-    if (countError) return errorResponse(req, "Erreur serveur", 500);
-    if ((count ?? 0) >= TEXT_DAILY_LIMIT) {
+    if (textCountErr) {
+      await supabaseAdmin.from("ai_text_calls").delete().eq("id", trackRow.id);
+      return errorResponse(req, "Erreur serveur", 500);
+    }
+    if ((textCount ?? 0) > TEXT_DAILY_LIMIT) {
+      await supabaseAdmin.from("ai_text_calls").delete().eq("id", trackRow.id);
       return errorResponse(req, `Limite atteinte : ${TEXT_DAILY_LIMIT} estimations IA par 24h.`, 429);
     }
 
     const prompt = buildTextUserPrompt(description);
-    const aiResult = await callAnthropic(anthropicApiKey, TEXT_SYSTEM_PROMPT, prompt, MAX_TOKENS_TEXT);
+    const aiResult = await callAnthropic(
+      anthropicApiKey,
+      TEXT_SYSTEM_PROMPT,
+      prompt,
+      MAX_TOKENS_TEXT,
+      '{"name":"',
+    );
     if (aiResult instanceof Response) {
       const text = await aiResult.text();
       return jsonResponse(req, JSON.parse(text), aiResult.status);
@@ -258,7 +289,9 @@ Deno.serve(async (req: Request) => {
     { calories: 0, protein_g: 0, carbs_g: 0, fat_g: 0 },
   );
 
-  const localHour = typeof body.localHourOfDay === "number" ? body.localHourOfDay : new Date().getHours();
+  const localHourRaw = body.localHourOfDay;
+  const localHour =
+    typeof localHourRaw === "number" && Number.isFinite(localHourRaw) ? localHourRaw : new Date().getHours();
 
   const ctx: OverflowContext = {
     targetCalories: profileData?.target_calories ?? null,

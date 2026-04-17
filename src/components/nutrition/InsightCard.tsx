@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { useEstimateNutrition } from '../../hooks/useEstimateNutrition.ts';
 import type { NutritionInsight } from '../../types/nutrition.ts';
+import { todayYYYYMMDD } from '../../utils/nutritionDate.ts';
 
 interface InsightCardProps {
   insight: NutritionInsight | null;
@@ -16,17 +17,19 @@ interface InsightCardProps {
  * the existing insight or a CTA to generate the 1-per-day analysis.
  */
 export function InsightCard({ insight, isPremium, onGenerated }: InsightCardProps) {
-  const { generateOverflowInsight, loading, error, reset } = useEstimateNutrition();
+  const { generateOverflowInsight, loading, reset } = useEstimateNutrition();
   const [localError, setLocalError] = useState<string | null>(null);
 
   async function handleGenerate() {
     reset();
     setLocalError(null);
-    const result = await generateOverflowInsight();
-    if (result) {
-      onGenerated(result.insight);
-    } else if (error) {
-      setLocalError(error);
+    // Always pass the client-local date so the server-side default (UTC today)
+    // doesn't cross a timezone boundary for users far from UTC.
+    const { data, error: callError } = await generateOverflowInsight(todayYYYYMMDD());
+    if (data) {
+      onGenerated(data.insight);
+    } else if (callError) {
+      setLocalError(callError);
     }
   }
 

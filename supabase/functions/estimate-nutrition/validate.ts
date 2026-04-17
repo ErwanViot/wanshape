@@ -30,9 +30,11 @@ export function validateTextEstimate(json: unknown): ValidationResult<TextEstima
   if (!name) return { ok: false, error: 'missing_name' };
   if (name.length > 120) return { ok: false, error: 'name_too_long' };
   if (!isPositiveNumber(obj.calories, 5000)) return { ok: false, error: 'invalid_calories' };
-  if (!isOptionalPositive(obj.protein_g, 1000)) return { ok: false, error: 'invalid_protein' };
-  if (!isOptionalPositive(obj.carbs_g, 1000)) return { ok: false, error: 'invalid_carbs' };
-  if (!isOptionalPositive(obj.fat_g, 1000)) return { ok: false, error: 'invalid_fat' };
+  // Tight per-meal macro caps (500 g) catch gross hallucinations without
+  // rejecting legitimate outliers (bodybuilder protein shake etc.).
+  if (!isOptionalPositive(obj.protein_g, 500)) return { ok: false, error: 'invalid_protein' };
+  if (!isOptionalPositive(obj.carbs_g, 500)) return { ok: false, error: 'invalid_carbs' };
+  if (!isOptionalPositive(obj.fat_g, 500)) return { ok: false, error: 'invalid_fat' };
   const confidence = obj.confidence;
   if (confidence !== 'low' && confidence !== 'medium' && confidence !== 'high') {
     return { ok: false, error: 'invalid_confidence' };

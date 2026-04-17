@@ -20,10 +20,21 @@ Format de réponse attendu :
 
 confidence = high si la description est précise (quantités chiffrées, nom clair), medium si elle est correcte mais approximative, low si elle laisse trop de place au doute.`;
 
+/**
+ * Sanitizes user-provided description before injection in the prompt:
+ * collapses whitespace/newlines (prevents multi-line injection attempts), hard
+ * cap on length, strips triple quotes used as our delimiter. The JSON prefill
+ * in index.ts also constrains the model output to start mid-JSON which is an
+ * additional defense-in-depth against jailbreaks.
+ */
+export function sanitizeDescription(raw: string): string {
+  return raw.replace(/"""/g, '"').replace(/\s+/g, ' ').trim().slice(0, 1000);
+}
+
 export function buildTextUserPrompt(description: string): string {
   return `Estime les apports nutritionnels du repas suivant. Retourne UNIQUEMENT l'objet JSON.
 
-Repas : """${description.replace(/"""/g, '"')}"""`;
+Repas : """${sanitizeDescription(description)}"""`;
 }
 
 export const OVERFLOW_SYSTEM_PROMPT = `Tu es un assistant nutritionnel francophone bienveillant et non-culpabilisant.
@@ -67,9 +78,9 @@ export function buildOverflowUserPrompt(ctx: OverflowContext): string {
   lines.push('');
   if (ctx.targetCalories != null) {
     lines.push(`Cible quotidienne : ${ctx.targetCalories} kcal`);
-    if (ctx.targetProteinG) lines.push(`Cible protéines : ${ctx.targetProteinG} g`);
-    if (ctx.targetCarbsG) lines.push(`Cible glucides : ${ctx.targetCarbsG} g`);
-    if (ctx.targetFatG) lines.push(`Cible lipides : ${ctx.targetFatG} g`);
+    if (ctx.targetProteinG != null) lines.push(`Cible protéines : ${ctx.targetProteinG} g`);
+    if (ctx.targetCarbsG != null) lines.push(`Cible glucides : ${ctx.targetCarbsG} g`);
+    if (ctx.targetFatG != null) lines.push(`Cible lipides : ${ctx.targetFatG} g`);
   } else {
     lines.push('Aucune cible calorique définie (mode awareness).');
   }
