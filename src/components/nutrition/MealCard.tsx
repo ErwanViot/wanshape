@@ -31,7 +31,9 @@ export function MealCard({ meal, onDelete }: MealCardProps) {
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2">
           <p className="font-medium text-sm text-heading truncate">{meal.name}</p>
-          <span className="shrink-0 font-display text-sm font-bold text-brand">{Math.round(meal.calories)} kcal</span>
+          <span className="shrink-0 font-display text-sm font-bold text-brand">
+            {Math.round(meal.calories ?? 0)} kcal
+          </span>
         </div>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-[11px] text-muted">
           <span className="uppercase tracking-wider">{SOURCE_LABEL[meal.source]}</span>

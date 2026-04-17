@@ -72,7 +72,7 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
   return (
     <div className="space-y-6">
       <div className="rounded-xl bg-surface-card border border-divider p-4 space-y-2">
-        <h2 className="font-display text-base font-bold text-heading">Calcul de ta cible calorique</h2>
+        <h3 className="font-display text-base font-bold text-heading">Calcul de ta cible calorique</h3>
         <p className="text-sm text-body leading-relaxed">
           Les informations ci-dessous sont utilisées <strong>uniquement dans ton navigateur</strong> pour estimer une
           cible calorique indicative. Elles ne sont jamais envoyées sur nos serveurs et seront oubliées dès que tu
@@ -200,7 +200,7 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
 
       {preview && (
         <div className="rounded-xl bg-surface-card border border-brand/30 p-4 space-y-3">
-          <h3 className="font-display text-base font-bold text-heading">Ta cible estimée</h3>
+          <h4 className="font-display text-base font-bold text-heading">Ta cible estimée</h4>
           <p className="text-sm text-body">
             Métabolisme de base : <strong className="text-heading">{preview.bmr} kcal</strong>
             <br />

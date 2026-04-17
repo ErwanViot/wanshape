@@ -13,7 +13,7 @@ interface CalorieRingProps {
 export function CalorieRing({ current, target, size = 160, strokeWidth = 12, label }: CalorieRingProps) {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
-  const progress = target && target > 0 ? Math.min(current / target, 1) : 0;
+  const progress = target != null && target > 0 ? Math.min(current / target, 1) : 0;
   const offset = circumference * (1 - progress);
 
   const remaining = target != null ? Math.round(target - current) : null;
@@ -50,12 +50,10 @@ export function CalorieRing({ current, target, size = 160, strokeWidth = 12, lab
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
         <span className="font-display text-2xl font-black text-heading leading-none">{roundedCurrent}</span>
         <span className="text-[10px] font-medium uppercase tracking-wider text-muted mt-0.5">kcal</span>
-        {target != null ? (
+        {target != null && (
           <span className="text-xs text-body mt-1">
             {remaining != null && remaining > 0 ? `reste ${remaining}` : 'objectif atteint'}
           </span>
-        ) : (
-          <span className="text-xs text-muted mt-1">/ {target ?? '—'}</span>
         )}
       </div>
     </div>

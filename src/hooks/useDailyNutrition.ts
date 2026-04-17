@@ -10,7 +10,6 @@ import type {
   MealType,
 } from '../types/nutrition.ts';
 import { todayYYYYMMDD } from '../utils/nutritionDate.ts';
-import { useNutritionProfile } from './useNutritionProfile.ts';
 
 const EMPTY_TOTALS: DailyNutritionTotals = { calories: 0, protein_g: 0, carbs_g: 0, fat_g: 0 };
 
@@ -52,7 +51,6 @@ export interface UseDailyNutritionResult {
 export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNutritionResult {
   const { user, dataGeneration } = useAuth();
   const userId = user?.id;
-  const { profile } = useNutritionProfile();
   const [logs, setLogs] = useState<MealLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -169,14 +167,11 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
       date: dateKey,
       totals,
       byMealType,
-      target: {
-        calories: profile?.target_calories ?? null,
-        protein_g: profile?.target_protein_g ?? null,
-        carbs_g: profile?.target_carbs_g ?? null,
-        fat_g: profile?.target_fat_g ?? null,
-      },
+      // Target is resolved at the consumer level via useNutritionProfile to
+      // avoid duplicate fetches when both hooks are used on the same page.
+      target: { calories: null, protein_g: null, carbs_g: null, fat_g: null },
     };
-  }, [logs, profile, dateKey]);
+  }, [logs, dateKey]);
 
   return { summary, logs, loading, error, addMeal, deleteMeal, refresh };
 }

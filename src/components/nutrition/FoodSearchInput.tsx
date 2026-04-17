@@ -14,13 +14,16 @@ export function FoodSearchInput({ onSelect, placeholder }: FoodSearchInputProps)
 
   return (
     <div className="space-y-2">
-      <label className="relative block">
-        <span className="sr-only">Rechercher un aliment</span>
+      <label htmlFor="food-search-input" className="sr-only">
+        Rechercher un aliment
+      </label>
+      <div className="relative block">
         <Search
           className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none"
           aria-hidden="true"
         />
         <input
+          id="food-search-input"
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -28,7 +31,7 @@ export function FoodSearchInput({ onSelect, placeholder }: FoodSearchInputProps)
           className="w-full pl-10 pr-4 py-3 rounded-xl bg-surface border border-divider text-sm text-heading placeholder:text-muted focus:outline-none focus:border-brand"
           autoComplete="off"
         />
-      </label>
+      </div>
 
       {query.trim().length > 0 && query.trim().length < 2 && (
         <p className="text-xs text-muted">Tape au moins 2 caractères.</p>

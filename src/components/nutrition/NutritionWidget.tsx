@@ -1,6 +1,7 @@
 import { ChevronRight, Utensils } from 'lucide-react';
 import { Link } from 'react-router';
 import { useDailyNutrition } from '../../hooks/useDailyNutrition.ts';
+import { useNutritionProfile } from '../../hooks/useNutritionProfile.ts';
 import { CalorieRing } from './CalorieRing.tsx';
 
 /**
@@ -8,7 +9,9 @@ import { CalorieRing } from './CalorieRing.tsx';
  * links to /nutrition. Hidden for visitors (no user → no fetch).
  */
 export function NutritionWidget() {
+  const { profile } = useNutritionProfile();
   const { summary, loading } = useDailyNutrition();
+  const targetCalories = profile?.target_calories ?? null;
 
   return (
     <Link
@@ -20,7 +23,7 @@ export function NutritionWidget() {
         {loading ? (
           <div className="w-20 h-20 rounded-full skeleton" />
         ) : (
-          <CalorieRing current={summary.totals.calories} target={summary.target.calories} size={80} strokeWidth={8} />
+          <CalorieRing current={summary.totals.calories} target={targetCalories} size={80} strokeWidth={8} />
         )}
       </div>
       <div className="flex-1 min-w-0">
@@ -28,9 +31,9 @@ export function NutritionWidget() {
           <Utensils className="w-4 h-4 text-brand" aria-hidden="true" />
           <h3 className="font-display text-base font-bold text-heading">Nutrition du jour</h3>
         </div>
-        {summary.target.calories != null ? (
+        {targetCalories != null ? (
           <p className="text-sm text-body">
-            {Math.round(summary.totals.calories)} kcal consommés — cible {summary.target.calories} kcal
+            {Math.round(summary.totals.calories)} kcal consommés — cible {targetCalories} kcal
           </p>
         ) : (
           <p className="text-sm text-body">{Math.round(summary.totals.calories)} kcal consommés aujourd'hui</p>

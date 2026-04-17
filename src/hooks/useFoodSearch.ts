@@ -30,6 +30,12 @@ export function useFoodSearch(query: string): UseFoodSearchResult {
       return;
     }
 
+    // Escape PostgreSQL LIKE wildcards so user-typed % or _ are treated as
+    // literals. PostgREST has no parameterized escape for ilike patterns, so
+    // we prepend a backslash to both special chars and use `\\` as the escape
+    // character — still trigram-indexable for the surrounding `%...%` part.
+    const escaped = trimmed.replace(/\\/g, '\\\\').replace(/%/g, '\\%').replace(/_/g, '\\_');
+
     let cancelled = false;
     setLoading(true);
     const timer = setTimeout(async () => {
@@ -42,7 +48,7 @@ export function useFoodSearch(query: string): UseFoodSearchResult {
           supabase!
             .from('food_reference')
             .select('*')
-            .ilike('name_fr', `%${trimmed}%`)
+            .ilike('name_fr', `%${escaped}%`)
             .order('name_fr', { ascending: true })
             .limit(RESULTS_LIMIT),
         );

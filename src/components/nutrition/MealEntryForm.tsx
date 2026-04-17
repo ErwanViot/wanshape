@@ -10,8 +10,14 @@ interface MealEntryFormProps {
   initialMealType: MealType;
   onSubmit: (input: Omit<MealLogInsert, 'user_id' | 'logged_date'>) => Promise<boolean>;
   onCancel: () => void;
-  searchSlot?: React.ReactNode;
-  onSearchSelect?: (food: FoodReference, quantityGrams: number) => Promise<boolean>;
+  onSearchSelect?: (food: FoodReference, quantityGrams: number, mealType: MealType) => Promise<boolean>;
+}
+
+function parseMacro(raw: string): number | null {
+  if (!raw) return null;
+  const n = Number.parseFloat(raw.replace(',', '.'));
+  if (!Number.isFinite(n) || n < 0) return null;
+  return Math.round(n * 10) / 10;
 }
 
 function scaleByPortion(per100g: number | null | undefined, grams: number): number | null {
@@ -51,9 +57,9 @@ export function MealEntryForm({ initialMealType, onSubmit, onCancel, onSearchSel
         source: 'manual',
         name: name.trim(),
         calories: Math.round(kcal * 10) / 10,
-        protein_g: protein ? Number.parseFloat(protein.replace(',', '.')) : null,
-        carbs_g: carbs ? Number.parseFloat(carbs.replace(',', '.')) : null,
-        fat_g: fat ? Number.parseFloat(fat.replace(',', '.')) : null,
+        protein_g: parseMacro(protein),
+        carbs_g: parseMacro(carbs),
+        fat_g: parseMacro(fat),
         quantity_grams: null,
         reference_id: null,
         ai_metadata: null,
@@ -80,7 +86,7 @@ export function MealEntryForm({ initialMealType, onSubmit, onCancel, onSearchSel
     setSubmitting(true);
     try {
       if (onSearchSelect) {
-        const ok = await onSearchSelect(selectedFood, grams);
+        const ok = await onSearchSelect(selectedFood, grams, mealType);
         if (ok) onCancel();
       }
     } finally {

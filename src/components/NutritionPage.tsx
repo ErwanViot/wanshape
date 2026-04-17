@@ -1,5 +1,5 @@
 import { Settings2 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { useDailyNutrition } from '../hooks/useDailyNutrition.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -19,6 +19,25 @@ export function NutritionPage() {
   const { summary, loading, error, addMeal, deleteMeal } = useDailyNutrition();
   const [formOpen, setFormOpen] = useState(false);
   const [initialMealType, setInitialMealType] = useState<MealType>('breakfast');
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!formOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setFormOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    // Move focus into the modal so keyboard users land inside.
+    modalRef.current?.focus();
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [formOpen]);
+
+  const target = {
+    calories: profile?.target_calories ?? null,
+    protein_g: profile?.target_protein_g ?? null,
+    carbs_g: profile?.target_carbs_g ?? null,
+    fat_g: profile?.target_fat_g ?? null,
+  };
 
   function handleAdd(mealType: MealType) {
     setInitialMealType(mealType);
@@ -30,11 +49,11 @@ export function NutritionPage() {
     return result != null;
   }
 
-  async function handleSearchSelect(food: FoodReference, quantityGrams: number): Promise<boolean> {
+  async function handleSearchSelect(food: FoodReference, quantityGrams: number, mealType: MealType): Promise<boolean> {
     const factor = quantityGrams / 100;
     const scaled = (per100: number | null) => (per100 != null ? Math.round(per100 * factor * 10) / 10 : null);
     const result = await addMeal({
-      meal_type: initialMealType,
+      meal_type: mealType,
       source: 'ciqual',
       name: food.name_fr,
       calories: scaled(food.calories_100g) ?? 0,
@@ -50,9 +69,9 @@ export function NutritionPage() {
   }
 
   const macroRow = [
-    { label: 'Protéines', value: summary.totals.protein_g, target: summary.target.protein_g, suffix: 'g' },
-    { label: 'Glucides', value: summary.totals.carbs_g, target: summary.target.carbs_g, suffix: 'g' },
-    { label: 'Lipides', value: summary.totals.fat_g, target: summary.target.fat_g, suffix: 'g' },
+    { label: 'Protéines', value: summary.totals.protein_g, target: target.protein_g, suffix: 'g' },
+    { label: 'Glucides', value: summary.totals.carbs_g, target: target.carbs_g, suffix: 'g' },
+    { label: 'Lipides', value: summary.totals.fat_g, target: target.fat_g, suffix: 'g' },
   ];
 
   return (
@@ -74,15 +93,10 @@ export function NutritionPage() {
 
         <section className="flex flex-col sm:flex-row items-center sm:items-start gap-6 rounded-2xl bg-surface-card border border-card-border p-6">
           <div className="shrink-0">
-            <CalorieRing
-              current={summary.totals.calories}
-              target={summary.target.calories}
-              size={160}
-              strokeWidth={12}
-            />
+            <CalorieRing current={summary.totals.calories} target={target.calories} size={160} strokeWidth={12} />
           </div>
           <div className="flex-1 w-full space-y-3">
-            {summary.target.calories == null && (
+            {target.calories == null && (
               <p className="text-sm text-body">
                 Awareness mode : tu suis tes apports sans cible fixe. Active-la quand tu veux.
               </p>
@@ -119,8 +133,21 @@ export function NutritionPage() {
         {error && <p className="text-sm text-red-400">{error}</p>}
 
         {formOpen && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6 overflow-y-auto">
-            <div className="w-full max-w-lg rounded-t-2xl sm:rounded-2xl bg-surface border border-card-border p-6 shadow-xl">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 overflow-y-auto">
+            <button
+              type="button"
+              aria-label="Fermer la fenêtre d'ajout"
+              onClick={() => setFormOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-default"
+            />
+            <div
+              ref={modalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Ajouter un repas"
+              tabIndex={-1}
+              className="relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl bg-surface border border-card-border p-6 shadow-xl focus:outline-none"
+            >
               <MealEntryForm
                 initialMealType={initialMealType}
                 onSubmit={handleSubmit}
