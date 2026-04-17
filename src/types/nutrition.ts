@@ -117,3 +117,22 @@ export type DailyNutritionSummary = {
     fat_g: number | null;
   };
 };
+
+export type TextEstimate = {
+  name: string;
+  calories: number;
+  protein_g: number | null;
+  carbs_g: number | null;
+  fat_g: number | null;
+  confidence: 'low' | 'medium' | 'high';
+};
+
+export type NutritionInsight = {
+  id: string;
+  user_id: string;
+  logged_date: string;
+  summary: string;
+  suggestions: string[];
+  ai_metadata: AiMetadata | null;
+  created_at: string;
+};
