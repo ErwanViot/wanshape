@@ -395,7 +395,8 @@ function PolitiqueConfidentialite() {
           Vous pouvez les supprimer à tout moment depuis la page de suivi nutritionnel.
         </p>
         <p>
-          En cas de suppression de compte, l'ensemble de vos données personnelles est effacé dans un délai de 30 jours.
+          En cas de suppression de compte, l'ensemble de vos données personnelles — y compris le journal alimentaire, la
+          cible calorique, les insights IA et toute estimation associée — est effacé dans un délai de 30 jours.
         </p>
         <p>
           Les données de facturation et justificatifs de paiement sont conservés pendant 10 ans conformément à l'article

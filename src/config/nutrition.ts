@@ -73,11 +73,13 @@ export const GOAL_MACRO_SPLIT: Record<NutritionGoal, { protein: number; carbs: n
 
 /**
  * Safety bounds for the ephemeral TDEE form (client-only validation).
- * age.min = 16 aligns with French RGPD digital-consent age (15+1 buffer) and
- * avoids exposing minors to calorie tracking without a dedicated onboarding.
+ * age.min = 18 aligns with the CGU section "Suivi nutritionnel" which restricts
+ * the feature to adults; calorie tracking may qualify as art. 9 RGPD health
+ * data under Lindenapotheke C-21/23 and CNIL guidance for minors is much
+ * stricter.
  */
 export const TDEE_BOUNDS = {
-  age: { min: 16, max: 100 },
+  age: { min: 18, max: 100 },
   heightCm: { min: 120, max: 230 },
   weightKg: { min: 30, max: 250 },
   targetCalories: { min: 1000, max: 5000 },

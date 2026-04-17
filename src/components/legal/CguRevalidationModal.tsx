@@ -1,9 +1,12 @@
 import { AlertTriangle } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { type KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { CGU_VERSION_CHANGES, CURRENT_CGU_VERSION } from '../../config/legal.ts';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useCguStatus } from '../../hooks/useCguStatus.ts';
+
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /**
  * Blocking modal shown at login when `profiles.cgu_version_accepted` does not
@@ -25,6 +28,38 @@ export function CguRevalidationModal() {
     if (!needsRevalidation) return;
     dialogRef.current?.focus();
   }, [needsRevalidation]);
+
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key !== 'Tab') return;
+    // Keyboard focus trap: WCAG 2.1.2 requires no keyboard trap in general, but
+    // for modal dialogs the WAI-ARIA practice is to confine focus inside the
+    // dialog until dismissed. We cycle Tab / Shift+Tab between the first and
+    // last focusable elements of the dialog.
+    const root = dialogRef.current;
+    if (!root) return;
+    const focusable = Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+      (el) => !el.hasAttribute('disabled'),
+    );
+    if (focusable.length === 0) {
+      event.preventDefault();
+      root.focus();
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement as HTMLElement | null;
+    if (event.shiftKey) {
+      if (active === first || active === root) {
+        event.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  }
 
   if (!needsRevalidation) return null;
 
@@ -55,6 +90,7 @@ export function CguRevalidationModal() {
         aria-modal="true"
         aria-labelledby="cgu-revalidation-title"
         tabIndex={-1}
+        onKeyDown={handleKeyDown}
         className="w-full max-w-lg rounded-2xl bg-surface border border-card-border p-6 shadow-2xl space-y-5 focus:outline-none"
       >
         <div className="flex items-center gap-2">
@@ -86,11 +122,11 @@ export function CguRevalidationModal() {
 
         <p className="text-xs text-muted">
           Consulte le détail dans les{' '}
-          <Link to="/legal/cgu" className="text-link underline" target="_blank" rel="noopener">
+          <Link to="/legal/cgu" className="text-link underline" target="_blank" rel="noopener noreferrer">
             CGU
           </Link>{' '}
           et la{' '}
-          <Link to="/legal/privacy" className="text-link underline" target="_blank" rel="noopener">
+          <Link to="/legal/privacy" className="text-link underline" target="_blank" rel="noopener noreferrer">
             Politique de confidentialité
           </Link>
           .

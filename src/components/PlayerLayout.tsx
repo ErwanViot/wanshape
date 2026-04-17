@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
+import { CguRevalidationModal } from './legal/CguRevalidationModal.tsx';
 
 export function PlayerLayout() {
   const { pathname } = useLocation();
@@ -12,6 +13,7 @@ export function PlayerLayout() {
   return (
     <main>
       <Outlet />
+      <CguRevalidationModal />
     </main>
   );
 }

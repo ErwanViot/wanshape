@@ -13,6 +13,10 @@ export const CURRENT_CGU_VERSION = '2026-04';
 /**
  * Short human-readable summary of what changed in the current version.
  * Rendered inside the re-validation modal so users know why they are prompted.
+ *
+ * IMPORTANT: this list MUST be rewritten from scratch at every bump of
+ * CURRENT_CGU_VERSION. Stale items from previous versions would mislead users
+ * and undermine the informed-consent requirement (art. 7 RGPD).
  */
 export const CGU_VERSION_CHANGES: string[] = [
   "Ajout d'un suivi nutritionnel (journal des repas, cible calorique optionnelle).",
