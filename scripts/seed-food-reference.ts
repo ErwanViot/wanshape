@@ -38,12 +38,22 @@ async function main() {
   const idx = buildColumnIndex(headers);
   console.log(`Parsed ${rows.length} rows with ${headers.length} columns`);
 
-  const records: FoodReferenceRow[] = [];
+  // CIQUAL 2020 contains a duplicate alim_code (9621 "Son de blé"); dedupe by id
+  // so the per-batch UPSERT doesn't trip Postgres's "ON CONFLICT DO UPDATE
+  // command cannot affect row a second time" error.
+  // Last-occurrence-wins: acceptable because the known 9621 duplicate has
+  // identical nutrition values. If a future CIQUAL release ships a duplicate
+  // with diverging values, the trailing CSV row will silently win — revisit
+  // this policy (or raise) when it happens.
+  const recordsById = new Map<string, FoodReferenceRow>();
   for (const row of rows) {
     const record = mapRow(row, idx);
-    if (record) records.push(record);
+    if (record) recordsById.set(record.id, record);
   }
-  console.log(`Mapped ${records.length} valid food entries`);
+  const records: FoodReferenceRow[] = [...recordsById.values()];
+  const duplicates = rows.length - records.length;
+  const dupNote = duplicates > 0 ? `, ${duplicates} duplicate(s) collapsed` : '';
+  console.log(`Mapped ${records.length} unique food entries (${rows.length} raw rows${dupNote})`);
 
   const supabase = createClient(url, serviceKey, {
     auth: { persistSession: false, autoRefreshToken: false },

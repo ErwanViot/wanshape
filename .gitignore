@@ -25,6 +25,7 @@ dist-ssr
 
 # Working files
 work/
+tmp/
 
 # Environment variables
 .env

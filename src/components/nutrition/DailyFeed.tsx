@@ -31,7 +31,7 @@ export function DailyFeed({ byMealType, onAdd, onDelete }: DailyFeedProps) {
                 type="button"
                 onClick={() => onAdd(mealType)}
                 className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium text-brand hover:bg-brand/10 transition-colors"
-                aria-label={`Ajouter au ${MEAL_TYPE_LABELS[mealType].toLowerCase()}`}
+                aria-label={`Ajouter un repas — ${MEAL_TYPE_LABELS[mealType]}`}
               >
                 <Plus className="w-4 h-4" aria-hidden="true" />
                 Ajouter
