@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext.tsx';
 import { BottomNav } from './BottomNav.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
 import { Footer } from './Footer.tsx';
+import { CguRevalidationModal } from './legal/CguRevalidationModal.tsx';
 import { SessionExpiredBanner } from './SessionExpiredBanner.tsx';
 
 export function PublicLayout() {
@@ -29,6 +30,7 @@ export function PublicLayout() {
       </main>
       <Footer />
       <BottomNav />
+      <CguRevalidationModal />
     </div>
   );
 }
