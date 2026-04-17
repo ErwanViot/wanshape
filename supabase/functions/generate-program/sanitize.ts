@@ -13,6 +13,18 @@
  * to keep at rest.
  */
 
+/**
+ * Keep in sync with `PersistedProgramOnboarding` in
+ * `src/types/custom-program.ts` — same shape, duplicated because Deno edge
+ * functions cannot import from `src/`.
+ *
+ * `objectif_detail` and `blessure_detail` are free-text fields retained for
+ * future replay/debugging of the AI generation. `blessure_detail` in
+ * particular sits close to RGPD art. 9 (health data); its retention is
+ * justified by the need to reconstruct why the AI produced a given program
+ * and by the explicit user input. Revisit if the feature no longer requires
+ * the replay capability.
+ */
 export interface PersistableOnboarding {
   objectifs: string[];
   objectif_detail?: string;
