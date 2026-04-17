@@ -9,6 +9,7 @@ export function LoadingSpinner({ variant = 'themed', className = '' }: LoadingSp
   return (
     <output
       aria-label="Chargement"
+      aria-live="polite"
       className={`block w-6 h-6 border-2 ${borderClass} border-t-brand rounded-full animate-spin ${className}`}
     />
   );
