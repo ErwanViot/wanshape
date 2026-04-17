@@ -1,6 +1,7 @@
 import { type FormEvent, useCallback, useEffect, useState } from 'react';
 import { useOpenFoodFacts } from '../../hooks/useOpenFoodFacts.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
+import { MEAL_TYPE_LABELS } from '../../config/nutrition.ts';
 import type { MealType } from '../../types/nutrition.ts';
 import { BarcodeScanner } from './BarcodeScanner.tsx';
 
@@ -65,7 +66,7 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <p className="text-xs text-muted">
-          Repas : <span className="text-body font-medium">{mealType}</span>
+          Repas : <span className="text-body font-medium">{MEAL_TYPE_LABELS[mealType]}</span>
         </p>
         <button
           type="button"
