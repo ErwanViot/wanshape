@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
-import { useAuth } from '../contexts/AuthContext.tsx';
 import { BottomNav } from './BottomNav.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
 import { Footer } from './Footer.tsx';
@@ -9,19 +8,13 @@ import { SessionExpiredBanner } from './SessionExpiredBanner.tsx';
 
 export function PublicLayout() {
   const { pathname } = useLocation();
-  const { user, bumpDataGeneration } = useAuth();
 
-  // Navigation bumps the legacy `dataGeneration` counter so hooks still on
-  // the pre-TanStack pattern refetch on every route change (old contract).
-  // Queries already migrated to TanStack Query are NOT invalidated here on
-  // purpose: they rely on `staleTime` + mutation-side invalidation
-  // (useSaveCompletion, etc.) to stay fresh. Mirroring this effect into
-  // `queryClient.invalidateQueries()` would refetch every cache entry on
-  // every navigation and negate the cache benefit we just introduced.
+  // Scroll top on route change. Data freshness is no longer tied to
+  // navigation — every hook is on TanStack Query and relies on its
+  // `staleTime` + mutation-side invalidation contract.
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (user) bumpDataGeneration();
-  }, [pathname, user, bumpDataGeneration]);
+  }, [pathname]);
 
   return (
     <div className="min-h-screen bg-surface flex flex-col">

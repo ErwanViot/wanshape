@@ -10,8 +10,6 @@ interface AuthContextValue {
   profile: Profile | null;
   loading: boolean;
   sessionExpired: boolean;
-  dataGeneration: number;
-  bumpDataGeneration: () => void;
   refreshProfile: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
@@ -57,11 +55,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [sessionLoading, setSessionLoading] = useState(!!supabase);
   const [sessionExpired, setSessionExpired] = useState(false);
-  // Legacy counter still read by hooks not yet migrated to TanStack Query.
-  // New hooks rely on `queryClient.invalidateQueries()` instead. Both are
-  // bumped together from the visibility handler and the legacy
-  // `bumpDataGeneration` helper until migration completes.
-  const [dataGeneration, setDataGeneration] = useState(0);
   const mounted = useRef(true);
   const lastVisibleAt = useRef(Date.now());
 
@@ -79,9 +72,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const profile = profileQuery.data ?? null;
 
   // Refresh session + invalidate all queries when returning from background
-  // after inactivity. Replaces the old pattern that only bumped
-  // `dataGeneration`; we now do both so hooks migrated to TanStack are also
-  // refreshed (invalidateQueries({})) alongside legacy hooks (dataGeneration).
+  // after inactivity. Every data hook now reads through TanStack Query; this
+  // single `invalidateQueries()` call covers them all without the legacy
+  // `dataGeneration` counter.
   useEffect(() => {
     function handleVisibilityChange() {
       if (document.visibilityState === 'visible') {
@@ -91,7 +84,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             .refreshSession()
             .then(() => {
               if (mounted.current) {
-                setDataGeneration((g) => g + 1);
                 queryClient.invalidateQueries();
               }
             })
@@ -205,8 +197,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     queryClient.clear();
   }, [queryClient]);
 
-  const bumpDataGeneration = useCallback(() => setDataGeneration((g) => g + 1), []);
-
   // `loading` stays true until both the initial session is resolved AND —
   // when a user was present — the profile query has finished its first
   // attempt. Keeps the previous invariant: consumers see no flash of
@@ -219,8 +209,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       profile,
       loading,
       sessionExpired,
-      dataGeneration,
-      bumpDataGeneration,
       refreshProfile,
       signIn,
       signUp,
@@ -228,20 +216,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       updatePassword,
       signOut,
     }),
-    [
-      user,
-      profile,
-      loading,
-      sessionExpired,
-      dataGeneration,
-      bumpDataGeneration,
-      refreshProfile,
-      signIn,
-      signUp,
-      resetPassword,
-      updatePassword,
-      signOut,
-    ],
+    [user, profile, loading, sessionExpired, refreshProfile, signIn, signUp, resetPassword, updatePassword, signOut],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

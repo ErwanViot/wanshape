@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
@@ -14,59 +15,31 @@ export interface UseNutritionProfileResult {
 }
 
 export function useNutritionProfile(): UseNutritionProfileResult {
-  const { user, dataGeneration } = useAuth();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
   const userId = user?.id;
-  const [profile, setProfile] = useState<NutritionProfile | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [localGeneration, setLocalGeneration] = useState(0);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: dataGeneration + localGeneration force re-fetch
-  useEffect(() => {
-    if (!userId || !supabase) {
-      setProfile(null);
-      setLoading(false);
-      return;
-    }
-
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-
-    (async () => {
-      try {
-        const {
-          data,
-          error: err,
-          sessionExpired,
-        } = await supabaseQuery(() =>
-          supabase!.from('nutrition_profiles').select('*').eq('user_id', userId).maybeSingle(),
-        );
-        if (cancelled) return;
-        if (sessionExpired) {
-          notifySessionExpired();
-          setLoading(false);
-          return;
-        }
-        if (err) {
-          setError(err.message ?? 'Erreur de chargement du profil');
-          setLoading(false);
-          return;
-        }
-        setProfile((data as NutritionProfile | null) ?? null);
-        setLoading(false);
-      } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Erreur inconnue');
-          setLoading(false);
-        }
+  const query = useQuery<{ profile: NutritionProfile | null; error: string | null }>({
+    queryKey: ['nutritionProfile', userId ?? null],
+    queryFn: async () => {
+      const {
+        data,
+        error: err,
+        sessionExpired,
+      } = await supabaseQuery(() =>
+        supabase!.from('nutrition_profiles').select('*').eq('user_id', userId!).maybeSingle(),
+      );
+      if (sessionExpired) {
+        notifySessionExpired();
+        return { profile: null, error: null };
       }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [userId, dataGeneration, localGeneration]);
+      if (err) {
+        return { profile: null, error: err.message ?? 'Erreur de chargement du profil' };
+      }
+      return { profile: (data as NutritionProfile | null) ?? null, error: null };
+    },
+    enabled: !!userId && !!supabase,
+  });
 
   const upsert = useCallback(
     async (patch: NutritionProfileUpsert) => {
@@ -87,14 +60,15 @@ export function useNutritionProfile(): UseNutritionProfileResult {
         return null;
       }
       if (err) {
-        setError(err.message ?? 'Erreur de sauvegarde');
         return null;
       }
-      const next = data as NutritionProfile | null;
-      setProfile(next);
+      const next = (data as NutritionProfile | null) ?? null;
+      // Update the cache optimistically so subsequent reads see the new value
+      // immediately, then let the next background refetch reconcile.
+      queryClient.setQueryData(['nutritionProfile', userId], { profile: next, error: null });
       return next;
     },
-    [userId],
+    [userId, queryClient],
   );
 
   const clearTarget = useCallback(async () => {
@@ -109,8 +83,15 @@ export function useNutritionProfile(): UseNutritionProfileResult {
   }, [upsert]);
 
   const refresh = useCallback(() => {
-    setLocalGeneration((g) => g + 1);
-  }, []);
+    queryClient.invalidateQueries({ queryKey: ['nutritionProfile', userId] });
+  }, [queryClient, userId]);
 
-  return { profile, loading, error, upsert, clearTarget, refresh };
+  return {
+    profile: query.data?.profile ?? null,
+    loading: query.isPending,
+    error: query.data?.error ?? null,
+    upsert,
+    clearTarget,
+    refresh,
+  };
 }
