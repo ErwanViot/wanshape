@@ -8,6 +8,11 @@
  * This file is loaded via `<script src="/theme-init.js">` (external) rather
  * than inline so the CSP `script-src` can stay free of `'unsafe-inline'`.
  * Keep it framework-free, no import, no module syntax.
+ *
+ * IMPORTANT: the <script> tag referencing this file MUST NOT carry
+ * `defer` or `async` — it has to block the HTML parser so the theme
+ * attribute is set before first paint. Keep the script tag in index.html
+ * bare.
  */
 (function () {
   try {
