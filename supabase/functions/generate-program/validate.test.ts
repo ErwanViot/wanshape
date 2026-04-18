@@ -203,6 +203,21 @@ describe('validateProgram — sanitization', () => {
     const consignes = (program as Record<string, unknown>).consignes_semaine as Record<string, string>;
     expect(consignes['1']).toBe('Attention x');
   });
+
+  it('sanitizes the optional progression.cible_semaine_X fields', () => {
+    const program = baseProgram({
+      progression: {
+        logique: 'ok',
+        cible_semaine_3: 'Objectif <b>clair</b> https://x.y',
+        cible_semaine_8: 'Tenir <i>rythme</i>',
+      },
+    });
+    const result = validateProgram(program, 4, 3);
+    expect(result.valid).toBe(true);
+    const progression = (program as Record<string, unknown>).progression as Record<string, unknown>;
+    expect(progression.cible_semaine_3).toBe('Objectif clair ');
+    expect(progression.cible_semaine_8).toBe('Tenir rythme');
+  });
 });
 
 describe('validateSession (embedded)', () => {

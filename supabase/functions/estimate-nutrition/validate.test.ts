@@ -58,6 +58,12 @@ describe('validateTextEstimate', () => {
     expect(validateTextEstimate({ ...baseValid, name: longName })).toEqual({ ok: false, error: 'name_too_long' });
   });
 
+  it('accepts calories at the zero boundary (water, coffee, etc.)', () => {
+    const result = validateTextEstimate({ ...baseValid, calories: 0 });
+    expect(result.ok).toBe(true);
+    if (result.ok) expect(result.value.calories).toBe(0);
+  });
+
   it('rejects calories that are not a finite positive number ≤ 5000', () => {
     expect(validateTextEstimate({ ...baseValid, calories: -1 }).ok).toBe(false);
     expect(validateTextEstimate({ ...baseValid, calories: 5001 }).ok).toBe(false);

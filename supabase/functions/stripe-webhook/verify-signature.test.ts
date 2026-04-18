@@ -35,7 +35,10 @@ describe('timingSafeEqual', () => {
     expect(timingSafeEqual('abc', 'abd')).toBe(false);
   });
 
-  it('returns false for different lengths (without short-circuiting)', () => {
+  it('returns false for different lengths', () => {
+    // The "constant-time" property is not observable from a JS unit test
+    // (no reliable timing primitive); here we only assert correctness.
+    // The non-short-circuit property is audited in the source.
     expect(timingSafeEqual('abc', 'abcd')).toBe(false);
     expect(timingSafeEqual('abc', '')).toBe(false);
   });
@@ -95,6 +98,11 @@ describe('verifyStripeSignature', () => {
     const payload = '{}';
     const sigHeader = 't=notanumber,v1=deadbeef';
     const ok = await verifyStripeSignature(payload, sigHeader, SECRET, { nowSeconds: FIXED_NOW });
+    expect(ok).toBe(false);
+  });
+
+  it('returns false for an empty sigHeader', async () => {
+    const ok = await verifyStripeSignature('{}', '', SECRET, { nowSeconds: FIXED_NOW });
     expect(ok).toBe(false);
   });
 

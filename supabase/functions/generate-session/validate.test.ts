@@ -81,6 +81,11 @@ describe('validateSession — structural checks', () => {
     expect(validateSession(baseSession({ estimatedDuration: 20 }), 30).valid).toBe(true);
   });
 
+  it('rejects estimatedDuration at exactly diff = 11 (off-by-one guard)', () => {
+    expect(validateSession(baseSession({ estimatedDuration: 41 }), 30).valid).toBe(false);
+    expect(validateSession(baseSession({ estimatedDuration: 19 }), 30).valid).toBe(false);
+  });
+
   it('requires a non-empty focus array', () => {
     expect(validateSession(baseSession({ focus: [] })).valid).toBe(false);
     expect(validateSession(baseSession({ focus: 'cardio' })).valid).toBe(false);
@@ -186,6 +191,72 @@ describe('validateSession — per-block requirements', () => {
       ],
     });
     expect(validateSession(session).error).toContain('pattern required');
+  });
+
+  it('hiit: rounds + work + rest are required', () => {
+    const session = baseSession({
+      blocks: [
+        { type: 'warmup', name: 'W', exercises: [{ name: 'X', duration: 30, instructions: 'Y' }] },
+        {
+          type: 'hiit',
+          name: 'H',
+          // missing `rounds`
+          work: 30,
+          rest: 15,
+          exercises: [{ name: 'Sprints', instructions: 'Fort' }],
+        },
+        { type: 'cooldown', name: 'Cd', exercises: [{ name: 'Stretch', duration: 60, instructions: 'Breathe' }] },
+      ],
+    });
+    expect(validateSession(session).error).toContain('hiit: rounds required');
+  });
+
+  it('tabata: exercise instructions are required', () => {
+    const session = baseSession({
+      blocks: [
+        { type: 'warmup', name: 'W', exercises: [{ name: 'X', duration: 30, instructions: 'Y' }] },
+        {
+          type: 'tabata',
+          name: 'T',
+          exercises: [{ name: 'Burpees' }],
+        },
+        { type: 'cooldown', name: 'Cd', exercises: [{ name: 'Stretch', duration: 60, instructions: 'Breathe' }] },
+      ],
+    });
+    expect(validateSession(session).error).toContain('tabata: exercise instructions required');
+  });
+
+  it('emom: minutes + exercise reps are required', () => {
+    const session = baseSession({
+      blocks: [
+        { type: 'warmup', name: 'W', exercises: [{ name: 'X', duration: 30, instructions: 'Y' }] },
+        {
+          type: 'emom',
+          name: 'E',
+          // missing `minutes`
+          exercises: [{ name: 'Kettlebell swings', reps: 10, instructions: 'Explosif' }],
+        },
+        { type: 'cooldown', name: 'Cd', exercises: [{ name: 'Stretch', duration: 60, instructions: 'Breathe' }] },
+      ],
+    });
+    expect(validateSession(session).error).toContain('emom: minutes required');
+  });
+
+  it('amrap: duration + exercise reps are required', () => {
+    const session = baseSession({
+      blocks: [
+        { type: 'warmup', name: 'W', exercises: [{ name: 'X', duration: 30, instructions: 'Y' }] },
+        {
+          type: 'amrap',
+          name: 'A',
+          duration: 600,
+          // exercise missing `reps`
+          exercises: [{ name: 'Squats', instructions: 'Forme avant vitesse' }],
+        },
+        { type: 'cooldown', name: 'Cd', exercises: [{ name: 'Stretch', duration: 60, instructions: 'Breathe' }] },
+      ],
+    });
+    expect(validateSession(session).error).toContain('amrap: exercise reps required');
   });
 });
 
