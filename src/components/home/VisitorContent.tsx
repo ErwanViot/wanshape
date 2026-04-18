@@ -47,6 +47,8 @@ export function VisitorContent({
           <img
             src="/images/hero-landing-couple.webp"
             alt=""
+            width={1920}
+            height={814}
             fetchPriority="high"
             decoding="async"
             className="w-full h-full object-cover object-[65%_center] md:object-center"
