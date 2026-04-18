@@ -6,8 +6,14 @@ import { verifyStripeSignature } from "./verify-signature.ts";
 // Thin wrapper preserving the existing `(origin?: string)` signature while
 // delegating origin whitelisting to the shared module. `stripe-signature`
 // must be reflected in Allow-Headers for Stripe's preflight.
+//
+// Behavioural note: unlike the pre-refactor version, this now ALSO accepts
+// DEV_ORIGINS (http://localhost:5173 / 4173) in non-production environments.
+// Stripe production webhooks never send `Origin: localhost`, so the prod
+// behaviour is unchanged; the relaxation only benefits manual dev/preview
+// tooling and keeps stripe-webhook in line with the other 5 functions.
 function getCorsHeaders(origin?: string) {
-  const req = new Request("https://edge.local/", {
+  const req = new Request("https://edge.example/", {
     headers: origin ? { origin } : undefined,
   });
   return getSharedCorsHeaders(req, { extraAllowedHeaders: ["stripe-signature"] });

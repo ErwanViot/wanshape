@@ -13,10 +13,6 @@ function errorResponse(req: Request, message: string, status = 400) {
   return jsonResponse(req, { error: message }, status);
 }
 
-function getValidOrigin(req: Request): string {
-  return resolveAllowedOrigin(req);
-}
-
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: getCorsHeaders(req) });
@@ -68,7 +64,7 @@ Deno.serve(async (req: Request) => {
     return errorResponse(req, "Aucun compte de facturation trouvé", 400);
   }
 
-  const origin = getValidOrigin(req);
+  const origin = resolveAllowedOrigin(req);
 
   // Create Billing Portal session
   const portalRes = await fetch(

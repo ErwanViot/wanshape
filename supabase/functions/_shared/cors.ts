@@ -56,7 +56,8 @@ const ALLOWED_METHODS = 'POST, OPTIONS';
  * Builds the CORS response headers for an edge function. Accepts a `Request`
  * so we can reflect the incoming `Origin` if it is on the whitelist (so
  * browsers see their exact origin in `Access-Control-Allow-Origin`, which is
- * required when the server also sets `Access-Control-Allow-Credentials`).
+ * required for authenticated requests carrying the `Authorization` header —
+ * wildcard `*` is not allowed by the spec in that case).
  *
  * Origins outside the whitelist fall back to the canonical production domain
  * — this keeps the response valid without leaking arbitrary origins.

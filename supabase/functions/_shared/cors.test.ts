@@ -69,13 +69,39 @@ describe('getCorsHeaders', () => {
     expect(allow).toContain('content-type');
   });
 
-  it('appends extra allowed headers (e.g. stripe-signature)', () => {
+  it('appends extra allowed headers (e.g. stripe-signature) with an exact header string', () => {
     const headers = getCorsHeaders(requestWithOrigin('https://wan2fit.fr'), {
       environment: 'production',
       extraAllowedHeaders: ['stripe-signature'],
     });
-    expect(headers['Access-Control-Allow-Headers']).toContain('stripe-signature');
-    expect(headers['Access-Control-Allow-Headers']).toContain('authorization');
+    expect(headers['Access-Control-Allow-Headers']).toBe(
+      'authorization, x-client-info, apikey, content-type, stripe-signature',
+    );
+  });
+
+  it('matches the stripe-webhook wrapper contract (synthetic Request construction)', () => {
+    // Mirrors the local wrapper in supabase/functions/stripe-webhook/index.ts:
+    // the wrapper constructs a synthetic Request from an optional origin and
+    // delegates here. Make sure both branches (origin defined / undefined)
+    // behave exactly as the wrapper expects.
+    const buildReq = (origin?: string) =>
+      new Request('https://edge.example/', {
+        headers: origin ? { origin } : undefined,
+      });
+
+    const whitelisted = getCorsHeaders(buildReq('http://localhost:5173'), {
+      environment: 'preview',
+      extraAllowedHeaders: ['stripe-signature'],
+    });
+    expect(whitelisted['Access-Control-Allow-Origin']).toBe('http://localhost:5173');
+    expect(whitelisted['Access-Control-Allow-Headers']).toContain('stripe-signature');
+
+    const noOrigin = getCorsHeaders(buildReq(), {
+      environment: 'production',
+      extraAllowedHeaders: ['stripe-signature'],
+    });
+    expect(noOrigin['Access-Control-Allow-Origin']).toBe(DEFAULT_ORIGIN);
+    expect(noOrigin['Access-Control-Allow-Headers']).toContain('stripe-signature');
   });
 });
 

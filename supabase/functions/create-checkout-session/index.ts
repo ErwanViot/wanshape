@@ -13,10 +13,6 @@ function errorResponse(req: Request, message: string, status = 400) {
   return jsonResponse(req, { error: message }, status);
 }
 
-function getValidOrigin(req: Request): string {
-  return resolveAllowedOrigin(req);
-}
-
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: getCorsHeaders(req) });
@@ -139,7 +135,7 @@ Deno.serve(async (req: Request) => {
   }
 
   // Validate origin for redirect URLs
-  const origin = getValidOrigin(req);
+  const origin = resolveAllowedOrigin(req);
 
   // Create Checkout Session
   const params = new URLSearchParams({
