@@ -18,7 +18,7 @@ interface Props {
 }
 
 export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId, customSessionId }: Props) {
-  const { user, profile } = useAuth();
+  const { user, profile, loading: authLoading } = useAuth();
   const { save, saved, error: saveError } = useSaveCompletion();
   const isPremium = profile?.subscription_tier === 'premium';
 
@@ -142,7 +142,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       </div>
 
       {!user && supabase && <SignupNudge />}
-      {user && !isPremium && <PremiumTeaser />}
+      {user && !authLoading && profile && !isPremium && <PremiumTeaser />}
 
       <div className="flex flex-col gap-3 mt-4 w-full max-w-xs">
         <button
@@ -259,9 +259,8 @@ function PremiumTeaser() {
   };
 
   return (
-    <div className="relative w-full max-w-sm rounded-2xl overflow-hidden">
-      <div className="absolute inset-0 cta-gradient opacity-90" aria-hidden="true" />
-      <div className="relative z-10 p-5 text-left">
+    <div className="relative w-full max-w-sm rounded-2xl overflow-hidden bg-gradient-to-br from-brand via-brand-secondary to-brand">
+      <div className="p-5 text-left">
         <button
           type="button"
           onClick={dismiss}
@@ -274,13 +273,13 @@ function PremiumTeaser() {
           <Sparkles className="w-4 h-4 text-white" aria-hidden="true" />
           <p className="text-white text-sm font-semibold">Tu gères.</p>
         </div>
-        <p className="text-white/85 text-xs leading-relaxed mb-4 pr-4">
+        <p className="text-white/80 text-xs leading-relaxed mb-4 pr-4">
           Avec Premium, ta prochaine séance est générée sur mesure en 30 s, ou pars sur un programme complet adapté à
           tes objectifs.
         </p>
         <Link
           to="/premium"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-sm font-bold text-white hover:bg-white/30 transition-colors backdrop-blur-sm"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-sm font-bold text-white hover:bg-white/30 transition-colors"
         >
           Découvrir Premium
         </Link>
