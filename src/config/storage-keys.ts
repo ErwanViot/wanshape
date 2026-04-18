@@ -4,4 +4,5 @@ export const STORAGE_KEYS = {
   AUDIO_ENABLED: 'wan2fit-audio-enabled',
   NUDGE_DISMISSED: 'wan2fit-nudge-dismissed',
   CREATE_PROGRAM_DRAFT: 'wan2fit-create-program-draft',
+  PREMIUM_TEASER_DISMISSED: 'wan2fit-premium-teaser-dismissed',
 } as const;
