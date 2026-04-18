@@ -53,12 +53,16 @@ export function useSaveCompletion() {
         } else {
           setSaved(true);
           // Every query whose cache is affected by a new completion row must
-          // be invalidated here — TanStack has no way to infer which lists
-          // a mutation touches. Keep this list in sync with the migrated
-          // read hooks:
+          // be invalidated here — TanStack has no way to infer which lists a
+          // mutation touches. Keep this list in sync with the migrated read
+          // hooks:
           //  - useActiveProgram: progress + nextSession
           //  - useHistory: prepends the new row
-          //  - useProgram(slug): completedSessionIds for the matching program
+          //  - useProgram(slug): completedSessionIds for the matching program.
+          //    We invalidate the whole `['program']` prefix rather than a
+          //    specific slug because the save call does not know which slug
+          //    the ProgramPlayer was playing (no slug on the payload). The
+          //    cost is small (rarely more than 1-2 cached programs at a time).
           queryClient.invalidateQueries({ queryKey: ['activeProgram', user.id] });
           queryClient.invalidateQueries({ queryKey: ['history', user.id] });
           queryClient.invalidateQueries({ queryKey: ['program'] });

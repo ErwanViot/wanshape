@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
@@ -23,7 +23,10 @@ export function useTodayInsight(dateKey: string = todayYYYYMMDD()): UseTodayInsi
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const userId = user?.id;
-  const queryKey = ['todayInsight', userId ?? null, dateKey];
+  // Memoised so `useCallback` deps below stay referentially stable — otherwise
+  // consumers passing `setInsight` / `refresh` as props see a new function
+  // every render, cascading into needless re-renders.
+  const queryKey = useMemo(() => ['todayInsight', userId ?? null, dateKey] as const, [userId, dateKey]);
 
   const query = useQuery<{ insight: NutritionInsight | null; error: string | null }>({
     queryKey,

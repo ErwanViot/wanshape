@@ -66,8 +66,6 @@ export function useNutritionProfile(): UseNutritionProfileResult {
       // Update the cache optimistically so subsequent reads see the new value
       // immediately, then let the next background refetch reconcile.
       queryClient.setQueryData(['nutritionProfile', userId], { profile: next, error: null });
-      // Invalidate the daily nutrition view (it reads the target calories).
-      queryClient.invalidateQueries({ queryKey: ['dailyNutrition', userId] });
       return next;
     },
     [userId, queryClient],

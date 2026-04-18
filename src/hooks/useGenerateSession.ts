@@ -8,6 +8,7 @@ import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 export function useGenerateSession() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const userId = user?.id;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,9 +46,11 @@ export function useGenerateSession() {
         }
 
         // The new session row enters `custom_sessions` via the edge function;
-        // invalidate the user's list so the "Mes séances précédentes" section
-        // shows it immediately on the next render.
-        queryClient.invalidateQueries({ queryKey: ['customSessions', user?.id] });
+        // invalidate the user's list so "Mes séances précédentes" shows it
+        // immediately on the next render. Use `userId ?? null` so the key
+        // matches the one the read hook registered for logged-out visitors
+        // (TanStack compares keys with strict ===, so undefined ≠ null).
+        queryClient.invalidateQueries({ queryKey: ['customSessions', userId ?? null] });
 
         return data as GenerateSessionResponse;
       } catch (e) {
@@ -58,7 +61,7 @@ export function useGenerateSession() {
         inflightRef.current = false;
       }
     },
-    [queryClient, user?.id],
+    [queryClient, userId],
   );
 
   return { generate, loading, error };
