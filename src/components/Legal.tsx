@@ -225,6 +225,13 @@ function PolitiqueConfidentialite() {
           de santé au sens de l'article 9 du RGPD — il s'agit de déclarations volontaires de l'utilisateur à des fins de
           personnalisation. Vos données ne sont jamais revendues à des tiers.
         </p>
+        <p>
+          <strong className="text-strong">Données techniques transmises à nos prestataires d'observabilité :</strong> en
+          cas d'erreur applicative, un rejeu d'écran (Session Replay) peut être envoyé à Sentry, pouvant inclure le
+          contenu des champs que vous étiez en train de saisir au moment de l'erreur. Des événements d'audience anonymes
+          (page vue, référent) sont envoyés à Vercel Analytics. Les détails de ces traitements et leurs sous-traitants
+          figurent dans la section « Services tiers » ci-dessous.
+        </p>
       </Section>
 
       <Section title="Suivi nutritionnel (feature optionnel)">
@@ -338,8 +345,9 @@ function PolitiqueConfidentialite() {
           </li>
           <li>
             <strong className="text-strong">Vercel Analytics</strong> — mesure d'audience agrégée et anonyme
-            (cookieless, sans empreinte persistante). Les données collectées (page vue, référent, pays déduit de l'IP)
-            permettent d'évaluer le trafic et l'expérience utilisateur sans identifier un visiteur individuel.
+            (cookieless, sans empreinte persistante). Les données collectées (page vue, référent, pays approximatif
+            déduit de l'adresse IP au moment de la requête — l'IP elle-même n'est pas conservée) permettent d'évaluer le
+            trafic et l'expérience utilisateur sans identifier un visiteur individuel.
           </li>
           <li>
             <strong className="text-strong">Supabase</strong> — authentification et base de données (stockage de votre
@@ -368,7 +376,7 @@ function PolitiqueConfidentialite() {
           <li>
             <strong className="text-strong">Resend</strong> — envoi des emails transactionnels (confirmation
             d'abonnement, notifications liées à votre compte). Adresse email et contenu du message sont transmis pour
-            permettre l'acheminement. Siège aux États-Unis.
+            permettre l'acheminement. Siège aux États-Unis (Resend, Inc.).
           </li>
           <li>
             <strong className="text-strong">Open Food Facts</strong> — base collaborative libre de produits alimentaires
@@ -428,6 +436,12 @@ function PolitiqueConfidentialite() {
         <p>
           Les données de facturation et justificatifs de paiement sont conservés pendant 10 ans conformément à l'article
           L.123-22 du Code de commerce, même en cas de suppression de compte.
+        </p>
+        <p>
+          <strong className="text-strong">Durées chez nos sous-traitants techniques :</strong> Sentry conserve les
+          événements d'erreur et rejeux associés 90 jours, Vercel Analytics conserve les métriques d'audience 30 jours,
+          Resend conserve les logs d'envoi d'emails 30 jours. Passés ces délais, les données sont supprimées par les
+          prestataires selon leurs politiques respectives.
         </p>
       </Section>
 

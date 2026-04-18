@@ -6,7 +6,10 @@
  * Users whose `profiles.cgu_version_accepted` does not match will see the
  * CguRevalidationModal at login until they accept the new version.
  *
- * Format: ISO date `YYYY-MM` to make re-validation cycles explicit.
+ * Format: `YYYY-MM` for the first revision of a given month, with a trailing
+ * letter suffix (`YYYY-MMb`, `YYYY-MMc`, …) for subsequent revisions in the
+ * same month. The comparison in `useCguStatus` is a strict equality, so
+ * lexicographic order does not matter — only uniqueness does.
  */
 export const CURRENT_CGU_VERSION = '2026-04b';
 
