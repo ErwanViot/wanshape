@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
@@ -6,52 +7,33 @@ import type { Subscription } from '../types/subscription.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 
 export function useSubscription() {
-  const { profile, user, dataGeneration } = useAuth();
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { profile, user } = useAuth();
+  const userId = user?.id;
 
   const tier = profile?.subscription_tier ?? 'free';
   const isPremium = tier === 'premium';
 
-  // Fetch subscription details (period, cancel status, etc.)
-  useEffect(() => {
-    if (!supabase || !user || !isPremium) {
-      setSubscription(null);
-      return;
-    }
-
-    let cancelled = false;
-    setLoading(true);
-
-    (async () => {
-      try {
-        const { data, sessionExpired } = await supabaseQuery(() =>
-          supabase!
-            .from('subscriptions')
-            .select('*')
-            .eq('user_id', user.id)
-            .in('status', ['active', 'past_due', 'trialing'])
-            .order('created_at', { ascending: false })
-            .limit(1)
-            .maybeSingle(),
-        );
-
-        if (sessionExpired) {
-          notifySessionExpired();
-          return;
-        }
-        if (!cancelled) setSubscription(data as Subscription | null);
-      } catch (err) {
-        console.error('Subscription fetch error:', err);
-      } finally {
-        if (!cancelled) setLoading(false);
+  const query = useQuery<Subscription | null>({
+    queryKey: ['subscription', userId ?? null],
+    queryFn: async () => {
+      const { data, sessionExpired } = await supabaseQuery(() =>
+        supabase!
+          .from('subscriptions')
+          .select('*')
+          .eq('user_id', userId!)
+          .in('status', ['active', 'past_due', 'trialing'])
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+      );
+      if (sessionExpired) {
+        notifySessionExpired();
+        return null;
       }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [user, isPremium, dataGeneration]);
+      return (data as Subscription | null) ?? null;
+    },
+    enabled: !!userId && !!supabase && isPremium,
+  });
 
   const checkout = useCallback(
     async (priceId: string): Promise<string | null> => {
@@ -95,5 +77,12 @@ export function useSubscription() {
     return data?.error || "Erreur lors de l'ouverture du portail";
   }, [user]);
 
-  return { tier, isPremium, subscription, loading, checkout, manageSubscription };
+  return {
+    tier,
+    isPremium,
+    subscription: query.data ?? null,
+    loading: query.isPending && isPremium,
+    checkout,
+    manageSubscription,
+  };
 }

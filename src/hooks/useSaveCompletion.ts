@@ -52,13 +52,16 @@ export function useSaveCompletion() {
           setError(true);
         } else {
           setSaved(true);
-          // TanStack invariant: a completion mutates the set of rows
-          // behind `useActiveProgram` (progress, nextSession). The legacy
-          // hooks still react via the global `dataGeneration` bumped by
-          // PublicLayout's navigation effect, but TanStack queries must be
-          // invalidated explicitly — otherwise the completed session stays
-          // hidden until the next visibility-change after 5 min.
+          // Every query whose cache is affected by a new completion row must
+          // be invalidated here — TanStack has no way to infer which lists
+          // a mutation touches. Keep this list in sync with the migrated
+          // read hooks:
+          //  - useActiveProgram: progress + nextSession
+          //  - useHistory: prepends the new row
+          //  - useProgram(slug): completedSessionIds for the matching program
           queryClient.invalidateQueries({ queryKey: ['activeProgram', user.id] });
+          queryClient.invalidateQueries({ queryKey: ['history', user.id] });
+          queryClient.invalidateQueries({ queryKey: ['program'] });
         }
       } catch {
         setError(true);

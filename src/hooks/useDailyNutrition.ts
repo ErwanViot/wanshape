@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback, useMemo, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
@@ -49,62 +50,39 @@ export interface UseDailyNutritionResult {
 }
 
 export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNutritionResult {
-  const { user, dataGeneration } = useAuth();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
   const userId = user?.id;
-  const [logs, setLogs] = useState<MealLog[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [localGeneration, setLocalGeneration] = useState(0);
   const inflightRef = useRef(false);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: dataGeneration + localGeneration force re-fetch
-  useEffect(() => {
-    if (!userId || !supabase) {
-      setLogs([]);
-      setLoading(false);
-      return;
-    }
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-    (async () => {
-      try {
-        const {
-          data,
-          error: err,
-          sessionExpired,
-        } = await supabaseQuery(() =>
-          supabase!
-            .from('meal_logs')
-            .select('*')
-            .eq('user_id', userId)
-            .eq('logged_date', dateKey)
-            .order('created_at', { ascending: true }),
-        );
-        if (cancelled) return;
-        if (sessionExpired) {
-          notifySessionExpired();
-          setLoading(false);
-          return;
-        }
-        if (err) {
-          setError(err.message ?? 'Erreur de chargement des repas');
-          setLoading(false);
-          return;
-        }
-        setLogs((data ?? []) as MealLog[]);
-        setLoading(false);
-      } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Erreur inconnue');
-          setLoading(false);
-        }
+  const query = useQuery<{ logs: MealLog[]; error: string | null }>({
+    queryKey: ['dailyNutrition', userId ?? null, dateKey],
+    queryFn: async () => {
+      const {
+        data,
+        error: err,
+        sessionExpired,
+      } = await supabaseQuery(() =>
+        supabase!
+          .from('meal_logs')
+          .select('*')
+          .eq('user_id', userId!)
+          .eq('logged_date', dateKey)
+          .order('created_at', { ascending: true }),
+      );
+      if (sessionExpired) {
+        notifySessionExpired();
+        return { logs: [], error: null };
       }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [userId, dateKey, dataGeneration, localGeneration]);
+      if (err) {
+        return { logs: [], error: err.message ?? 'Erreur de chargement des repas' };
+      }
+      return { logs: (data ?? []) as MealLog[], error: null };
+    },
+    enabled: !!userId && !!supabase,
+  });
+
+  const logs = query.data?.logs ?? [];
 
   const addMeal = useCallback(
     async (input: Omit<MealLogInsert, 'logged_date'> & { logged_date?: string }) => {
@@ -123,17 +101,22 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
           return null;
         }
         if (err) {
-          setError(err.message ?? "Erreur lors de l'ajout du repas");
           return null;
         }
         const inserted = data as MealLog;
-        setLogs((prev) => [...prev, inserted]);
+        // Optimistic update: push to the current cache, then invalidate so
+        // any other day-dependent view (overflow insight) also refreshes.
+        queryClient.setQueryData<{ logs: MealLog[]; error: string | null }>(
+          ['dailyNutrition', userId, payload.logged_date],
+          (prev) => ({ logs: [...(prev?.logs ?? []), inserted], error: null }),
+        );
+        queryClient.invalidateQueries({ queryKey: ['todayInsight', userId] });
         return inserted;
       } finally {
         inflightRef.current = false;
       }
     },
-    [userId, dateKey],
+    [userId, dateKey, queryClient],
   );
 
   const deleteMeal = useCallback(
@@ -147,18 +130,21 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
         return false;
       }
       if (err) {
-        setError(err.message ?? 'Erreur lors de la suppression');
         return false;
       }
-      setLogs((prev) => prev.filter((l) => l.id !== id));
+      queryClient.setQueryData<{ logs: MealLog[]; error: string | null }>(
+        ['dailyNutrition', userId, dateKey],
+        (prev) => ({ logs: (prev?.logs ?? []).filter((l) => l.id !== id), error: null }),
+      );
+      queryClient.invalidateQueries({ queryKey: ['todayInsight', userId] });
       return true;
     },
-    [userId],
+    [userId, dateKey, queryClient],
   );
 
   const refresh = useCallback(() => {
-    setLocalGeneration((g) => g + 1);
-  }, []);
+    queryClient.invalidateQueries({ queryKey: ['dailyNutrition', userId, dateKey] });
+  }, [queryClient, userId, dateKey]);
 
   const summary = useMemo<DailyNutritionSummary>(() => {
     const totals = sumTotals(logs);
@@ -173,5 +159,13 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
     };
   }, [logs, dateKey]);
 
-  return { summary, logs, loading, error, addMeal, deleteMeal, refresh };
+  return {
+    summary,
+    logs,
+    loading: query.isPending,
+    error: query.data?.error ?? null,
+    addMeal,
+    deleteMeal,
+    refresh,
+  };
 }

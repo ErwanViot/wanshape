@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useAuth } from '../contexts/AuthContext.tsx';
+import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { SessionCompletion } from '../types/completion.ts';
@@ -130,70 +130,45 @@ interface SessionData {
 }
 
 export function useHistory(userId: string | undefined): HistoryStats {
-  const { dataGeneration } = useAuth();
-  const [completions, setCompletions] = useState<CompletionWithTitle[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: dataGeneration forces re-fetch on auth state change
-  useEffect(() => {
-    if (!userId || !supabase) {
-      setCompletions([]);
-      setLoading(false);
-      return;
-    }
-
-    let cancelled = false;
-    setLoading(true);
-
-    (async () => {
-      try {
-        const { data, sessionExpired } = await supabaseQuery(() =>
-          supabase!
-            .from('session_completions')
-            .select('*, program_sessions(session_data), custom_sessions(session_data)')
-            .eq('user_id', userId!)
-            .order('completed_at', { ascending: false })
-            .limit(200),
-        );
-
-        if (cancelled) return;
-        if (sessionExpired) {
-          notifySessionExpired();
-          setLoading(false);
-          return;
-        }
-
-        const rows = (data ?? []) as unknown as (SessionCompletion & {
-          program_sessions: { session_data?: SessionData } | null;
-          custom_sessions: { session_data?: SessionData } | null;
-        })[];
-
-        const enriched: CompletionWithTitle[] = rows.map((row) => {
-          const meta = row.metadata as Record<string, unknown>;
-          const sd = row.program_sessions?.session_data ?? row.custom_sessions?.session_data;
-          return {
-            ...row,
-            session_title: (meta?.session_title as string | undefined) ?? sd?.title ?? null,
-            session_description: (meta?.session_description as string | undefined) ?? sd?.description ?? null,
-            session_focus: (meta?.session_focus as string[] | undefined) ?? sd?.focus ?? [],
-            block_types: (meta?.block_types as string[] | undefined) ?? [
-              ...new Set((sd?.blocks ?? []).map((b) => b.type).filter((t) => t !== 'warmup' && t !== 'cooldown')),
-            ],
-          };
-        });
-
-        setCompletions(enriched);
-        setLoading(false);
-      } catch (err) {
-        console.error('History fetch error:', err);
-        if (!cancelled) setLoading(false);
+  const query = useQuery<CompletionWithTitle[]>({
+    queryKey: ['history', userId ?? null],
+    queryFn: async () => {
+      const { data, sessionExpired } = await supabaseQuery(() =>
+        supabase!
+          .from('session_completions')
+          .select('*, program_sessions(session_data), custom_sessions(session_data)')
+          .eq('user_id', userId!)
+          .order('completed_at', { ascending: false })
+          .limit(200),
+      );
+      if (sessionExpired) {
+        notifySessionExpired();
+        return [];
       }
-    })();
+      const rows = (data ?? []) as unknown as (SessionCompletion & {
+        program_sessions: { session_data?: SessionData } | null;
+        custom_sessions: { session_data?: SessionData } | null;
+      })[];
 
-    return () => {
-      cancelled = true;
-    };
-  }, [userId, dataGeneration]);
+      return rows.map((row) => {
+        const meta = row.metadata as Record<string, unknown>;
+        const sd = row.program_sessions?.session_data ?? row.custom_sessions?.session_data;
+        return {
+          ...row,
+          session_title: (meta?.session_title as string | undefined) ?? sd?.title ?? null,
+          session_description: (meta?.session_description as string | undefined) ?? sd?.description ?? null,
+          session_focus: (meta?.session_focus as string[] | undefined) ?? sd?.focus ?? [],
+          block_types: (meta?.block_types as string[] | undefined) ?? [
+            ...new Set((sd?.blocks ?? []).map((b) => b.type).filter((t) => t !== 'warmup' && t !== 'cooldown')),
+          ],
+        };
+      });
+    },
+    enabled: !!userId && !!supabase,
+  });
+
+  const completions = query.data ?? [];
+  const loading = query.isPending;
 
   const derived = useMemo(() => {
     const totalSessions = completions.length;

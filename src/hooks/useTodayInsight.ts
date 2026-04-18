@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
@@ -19,65 +20,56 @@ export interface UseTodayInsightResult {
  * and lets the consumer update it after a generation.
  */
 export function useTodayInsight(dateKey: string = todayYYYYMMDD()): UseTodayInsightResult {
-  const { user, dataGeneration } = useAuth();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
   const userId = user?.id;
-  const [insight, setInsight] = useState<NutritionInsight | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [localGeneration, setLocalGeneration] = useState(0);
+  const queryKey = ['todayInsight', userId ?? null, dateKey];
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: dataGeneration + localGeneration force re-fetch
-  useEffect(() => {
-    if (!userId || !supabase) {
-      setInsight(null);
-      setLoading(false);
-      return;
-    }
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-    (async () => {
-      try {
-        const {
-          data,
-          error: err,
-          sessionExpired,
-        } = await supabaseQuery(() =>
-          supabase!
-            .from('nutrition_insights')
-            .select('*')
-            .eq('user_id', userId)
-            .eq('logged_date', dateKey)
-            .maybeSingle(),
-        );
-        if (cancelled) return;
-        if (sessionExpired) {
-          notifySessionExpired();
-          setLoading(false);
-          return;
-        }
-        if (err) {
-          setError(err.message ?? "Erreur de chargement de l'analyse");
-          setLoading(false);
-          return;
-        }
-        setInsight((data as NutritionInsight | null) ?? null);
-        setLoading(false);
-      } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Erreur inconnue');
-          setLoading(false);
-        }
+  const query = useQuery<{ insight: NutritionInsight | null; error: string | null }>({
+    queryKey,
+    queryFn: async () => {
+      const {
+        data,
+        error: err,
+        sessionExpired,
+      } = await supabaseQuery(() =>
+        supabase!
+          .from('nutrition_insights')
+          .select('*')
+          .eq('user_id', userId!)
+          .eq('logged_date', dateKey)
+          .maybeSingle(),
+      );
+      if (sessionExpired) {
+        notifySessionExpired();
+        return { insight: null, error: null };
       }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [userId, dateKey, dataGeneration, localGeneration]);
+      if (err) {
+        return { insight: null, error: err.message ?? "Erreur de chargement de l'analyse" };
+      }
+      return { insight: (data as NutritionInsight | null) ?? null, error: null };
+    },
+    enabled: !!userId && !!supabase,
+  });
+
+  const setInsight = useCallback(
+    (next: NutritionInsight | null) => {
+      // Direct cache write keeps generateInsight-style consumers trivially
+      // imperative (call setInsight(result) after the AI call resolves).
+      queryClient.setQueryData(queryKey, { insight: next, error: null });
+    },
+    [queryClient, queryKey],
+  );
 
   const refresh = useCallback(() => {
-    setLocalGeneration((g) => g + 1);
-  }, []);
+    queryClient.invalidateQueries({ queryKey });
+  }, [queryClient, queryKey]);
 
-  return { insight, loading, error, setInsight, refresh };
+  return {
+    insight: query.data?.insight ?? null,
+    loading: query.isPending,
+    error: query.data?.error ?? null,
+    setInsight,
+    refresh,
+  };
 }
