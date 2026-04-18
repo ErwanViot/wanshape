@@ -172,7 +172,7 @@ function PolitiqueConfidentialite() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Politique de confidentialité</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04)</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04b)</p>
 
       <Section title="Responsable du traitement">
         <p>
@@ -323,8 +323,9 @@ function PolitiqueConfidentialite() {
       <Section title="Cookies">
         <p>
           Le Site utilise uniquement des <strong className="text-strong">cookies techniques</strong> strictement
-          nécessaires au fonctionnement de l'authentification. Aucun cookie publicitaire, analytique ou de suivi n'est
-          déposé.
+          nécessaires au fonctionnement de l'authentification. Aucun cookie publicitaire ou de suivi comportemental
+          n'est déposé. L'outil de mesure d'audience Vercel Analytics (voir « Services tiers » ci-dessous) fonctionne
+          sans cookie ; aucune empreinte persistante n'est associée à votre navigateur.
         </p>
       </Section>
 
@@ -334,6 +335,11 @@ function PolitiqueConfidentialite() {
           <li>
             <strong className="text-strong">Vercel</strong> — hébergement du site (logs serveur standard : adresse IP,
             navigateur, pages visitées)
+          </li>
+          <li>
+            <strong className="text-strong">Vercel Analytics</strong> — mesure d'audience agrégée et anonyme
+            (cookieless, sans empreinte persistante). Les données collectées (page vue, référent, pays déduit de l'IP)
+            permettent d'évaluer le trafic et l'expérience utilisateur sans identifier un visiteur individuel.
           </li>
           <li>
             <strong className="text-strong">Supabase</strong> — authentification et base de données (stockage de votre
@@ -352,6 +358,19 @@ function PolitiqueConfidentialite() {
             Anthropic ne réutilise pas ces données pour l'entraînement de ses modèles. Siège aux États-Unis.
           </li>
           <li>
+            <strong className="text-strong">Sentry</strong> — surveillance applicative des erreurs et, en cas d'erreur
+            uniquement, enregistrement différé (« Session Replay » déclenché sur erreur, aucune capture continue). Les
+            données techniques transmises sont anonymisées autant que possible : empreinte de l'erreur, trace
+            d'exécution, rejeu des interactions à l'écran. Saisies textuelles et contenus de champs restituables peuvent
+            y figurer — n'entrez jamais d'informations sensibles hors des champs prévus. Siège aux États-Unis
+            (Functional Software, Inc.).
+          </li>
+          <li>
+            <strong className="text-strong">Resend</strong> — envoi des emails transactionnels (confirmation
+            d'abonnement, notifications liées à votre compte). Adresse email et contenu du message sont transmis pour
+            permettre l'acheminement. Siège aux États-Unis.
+          </li>
+          <li>
             <strong className="text-strong">Open Food Facts</strong> — base collaborative libre de produits alimentaires
             (licence ODbL). Utilisée lors du scan de code-barres côté client uniquement. Aucune donnée identifiante
             n'est transmise — seul le code-barres scanné l'est.
@@ -367,8 +386,8 @@ function PolitiqueConfidentialite() {
         <p>Certains de nos sous-traitants sont situés aux États-Unis :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>
-            <strong className="text-strong">Vercel Inc.</strong> (hébergement) — transferts encadrés par les clauses
-            contractuelles types (CCT) de la Commission européenne
+            <strong className="text-strong">Vercel Inc.</strong> (hébergement et mesure d'audience) — transferts
+            encadrés par les clauses contractuelles types (CCT) de la Commission européenne
           </li>
           <li>
             <strong className="text-strong">Supabase Inc.</strong> (base de données et authentification) — transferts
@@ -378,6 +397,14 @@ function PolitiqueConfidentialite() {
             <strong className="text-strong">Anthropic PBC</strong> (génération IA) — transferts encadrés par les CCT.
             Les données transmises sont limitées aux paramètres de personnalisation et ne sont pas utilisées pour
             l'entraînement des modèles d'IA.
+          </li>
+          <li>
+            <strong className="text-strong">Functional Software, Inc. (Sentry)</strong> (surveillance applicative et
+            Session Replay déclenché sur erreur) — transferts encadrés par les CCT
+          </li>
+          <li>
+            <strong className="text-strong">Resend, Inc.</strong> (emails transactionnels) — transferts encadrés par les
+            CCT
           </li>
         </ul>
         <p>Stripe héberge les données de paiement dans l'Union européenne.</p>
@@ -450,7 +477,7 @@ function CGU() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Conditions Générales d'Utilisation</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04)</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04b)</p>
 
       <Section title="Objet">
         <p>
