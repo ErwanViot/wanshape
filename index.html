@@ -92,15 +92,8 @@
 
   </head>
   <body>
-    <script>
-      (function() {
-        var p = localStorage.getItem('wan2fit-theme') || 'light';
-        var t = p === 'system'
-          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-          : p;
-        if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
-      })();
-    </script>
+    <!-- Theme flash prevention: synchronous, external (kept out of inline script-src). -->
+    <script src="/theme-init.js"></script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
