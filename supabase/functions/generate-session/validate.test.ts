@@ -226,7 +226,7 @@ describe('validateSession — per-block requirements', () => {
     expect(validateSession(session).error).toContain('tabata: exercise instructions required');
   });
 
-  it('emom: minutes + exercise reps are required', () => {
+  it('emom: minutes is required', () => {
     const session = baseSession({
       blocks: [
         { type: 'warmup', name: 'W', exercises: [{ name: 'X', duration: 30, instructions: 'Y' }] },
