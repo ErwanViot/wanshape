@@ -1,4 +1,4 @@
-import { Check, Download, Share2, Trophy } from 'lucide-react';
+import { Check, Download, Share2, Sparkles, Trophy, X } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { STORAGE_KEYS } from '../config/storage-keys.ts';
@@ -18,8 +18,9 @@ interface Props {
 }
 
 export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId, customSessionId }: Props) {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const { save, saved, error: saveError } = useSaveCompletion();
+  const isPremium = profile?.subscription_tier === 'premium';
 
   useEffect(() => {
     if (!user || !durationSeconds) return;
@@ -141,6 +142,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       </div>
 
       {!user && supabase && <SignupNudge />}
+      {user && !isPremium && <PremiumTeaser />}
 
       <div className="flex flex-col gap-3 mt-4 w-full max-w-xs">
         <button
@@ -221,6 +223,67 @@ function SignupNudge() {
         <button type="button" onClick={dismiss} className="text-white/40 text-xs hover:text-white/60 transition-colors">
           Plus tard
         </button>
+      </div>
+    </div>
+  );
+}
+
+const PREMIUM_TEASER_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+/**
+ * Shown on the EndScreen to non-premium authenticated users, right after the
+ * rush of completing a session — the highest-engagement moment in the funnel
+ * (audit 2026-04-18 06-business-ux, R2). Cooldown 7d to stay friendly: a
+ * regular exerciser sees it once a week, not at every session.
+ */
+function PremiumTeaser() {
+  const [visible, setVisible] = useState(() => {
+    try {
+      const dismissed = localStorage.getItem(STORAGE_KEYS.PREMIUM_TEASER_DISMISSED);
+      if (!dismissed) return true;
+      return Date.now() - Number(dismissed) > PREMIUM_TEASER_COOLDOWN_MS;
+    } catch {
+      return true;
+    }
+  });
+
+  if (!visible) return null;
+
+  const dismiss = () => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.PREMIUM_TEASER_DISMISSED, String(Date.now()));
+    } catch {
+      /* ignore */
+    }
+    setVisible(false);
+  };
+
+  return (
+    <div className="relative w-full max-w-sm rounded-2xl overflow-hidden">
+      <div className="absolute inset-0 cta-gradient opacity-90" aria-hidden="true" />
+      <div className="relative z-10 p-5 text-left">
+        <button
+          type="button"
+          onClick={dismiss}
+          aria-label="Ignorer pour cette semaine"
+          className="absolute top-2.5 right-2.5 text-white/70 hover:text-white transition-colors"
+        >
+          <X className="w-4 h-4" aria-hidden="true" />
+        </button>
+        <div className="flex items-center gap-2 mb-2">
+          <Sparkles className="w-4 h-4 text-white" aria-hidden="true" />
+          <p className="text-white text-sm font-semibold">Tu gères.</p>
+        </div>
+        <p className="text-white/85 text-xs leading-relaxed mb-4 pr-4">
+          Avec Premium, ta prochaine séance est générée sur mesure en 30 s, ou pars sur un programme complet adapté à
+          tes objectifs.
+        </p>
+        <Link
+          to="/premium"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-sm font-bold text-white hover:bg-white/30 transition-colors backdrop-blur-sm"
+        >
+          Découvrir Premium
+        </Link>
       </div>
     </div>
   );
