@@ -71,7 +71,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const userId = user?.id;
   const profileQuery = useQuery<Profile | null>({
     queryKey: ['profile', userId ?? null],
-    queryFn: () => (userId ? fetchProfile(userId) : Promise.resolve(null)),
+    // `enabled` below guarantees queryFn only runs with a real userId, so the
+    // non-null assertion is safe.
+    queryFn: () => fetchProfile(userId!),
     enabled: !!userId && !!supabase,
   });
   const profile = profileQuery.data ?? null;

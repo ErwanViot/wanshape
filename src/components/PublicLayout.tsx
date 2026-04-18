@@ -11,6 +11,13 @@ export function PublicLayout() {
   const { pathname } = useLocation();
   const { user, bumpDataGeneration } = useAuth();
 
+  // Navigation bumps the legacy `dataGeneration` counter so hooks still on
+  // the pre-TanStack pattern refetch on every route change (old contract).
+  // Queries already migrated to TanStack Query are NOT invalidated here on
+  // purpose: they rely on `staleTime` + mutation-side invalidation
+  // (useSaveCompletion, etc.) to stay fresh. Mirroring this effect into
+  // `queryClient.invalidateQueries()` would refetch every cache entry on
+  // every navigation and negate the cache benefit we just introduced.
   useEffect(() => {
     window.scrollTo(0, 0);
     if (user) bumpDataGeneration();

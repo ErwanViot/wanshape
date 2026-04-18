@@ -35,9 +35,10 @@ export function useActiveProgram(userId: string | undefined) {
   const query = useQuery<ActiveProgramInfo | null>({
     queryKey: ['activeProgram', userId ?? null],
     queryFn: async () => {
-      if (!userId || !supabase) return null;
+      // `enabled` below gates the query on userId + supabase, so these are
+      // both non-null when queryFn runs.
       const { data, error, sessionExpired } = await supabaseQuery(() =>
-        supabase!.rpc('get_active_program', { p_user_id: userId }),
+        supabase!.rpc('get_active_program', { p_user_id: userId! }),
       );
       if (sessionExpired) {
         notifySessionExpired();
