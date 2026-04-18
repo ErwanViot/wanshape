@@ -172,7 +172,7 @@ function PolitiqueConfidentialite() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Politique de confidentialité</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04)</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04b)</p>
 
       <Section title="Responsable du traitement">
         <p>
@@ -224,6 +224,13 @@ function PolitiqueConfidentialite() {
           Les déclarations de blessures renseignées lors de la création d'un programme IA ne constituent pas des données
           de santé au sens de l'article 9 du RGPD — il s'agit de déclarations volontaires de l'utilisateur à des fins de
           personnalisation. Vos données ne sont jamais revendues à des tiers.
+        </p>
+        <p>
+          <strong className="text-strong">Données techniques transmises à nos prestataires d'observabilité :</strong> en
+          cas d'erreur applicative, un rejeu d'écran (Session Replay) peut être envoyé à Sentry, pouvant inclure le
+          contenu des champs que vous étiez en train de saisir au moment de l'erreur. Des événements d'audience anonymes
+          (page vue, référent) sont envoyés à Vercel Analytics. Les détails de ces traitements et leurs sous-traitants
+          figurent dans la section « Services tiers » ci-dessous.
         </p>
       </Section>
 
@@ -323,8 +330,9 @@ function PolitiqueConfidentialite() {
       <Section title="Cookies">
         <p>
           Le Site utilise uniquement des <strong className="text-strong">cookies techniques</strong> strictement
-          nécessaires au fonctionnement de l'authentification. Aucun cookie publicitaire, analytique ou de suivi n'est
-          déposé.
+          nécessaires au fonctionnement de l'authentification. Aucun cookie publicitaire ou de suivi comportemental
+          n'est déposé. L'outil de mesure d'audience Vercel Analytics (voir « Services tiers » ci-dessous) fonctionne
+          sans cookie ; aucune empreinte persistante n'est associée à votre navigateur.
         </p>
       </Section>
 
@@ -334,6 +342,12 @@ function PolitiqueConfidentialite() {
           <li>
             <strong className="text-strong">Vercel</strong> — hébergement du site (logs serveur standard : adresse IP,
             navigateur, pages visitées)
+          </li>
+          <li>
+            <strong className="text-strong">Vercel Analytics</strong> — mesure d'audience agrégée et anonyme
+            (cookieless, sans empreinte persistante). Les données collectées (page vue, référent, pays approximatif
+            déduit de l'adresse IP au moment de la requête — l'IP elle-même n'est pas conservée) permettent d'évaluer le
+            trafic et l'expérience utilisateur sans identifier un visiteur individuel.
           </li>
           <li>
             <strong className="text-strong">Supabase</strong> — authentification et base de données (stockage de votre
@@ -352,6 +366,19 @@ function PolitiqueConfidentialite() {
             Anthropic ne réutilise pas ces données pour l'entraînement de ses modèles. Siège aux États-Unis.
           </li>
           <li>
+            <strong className="text-strong">Sentry</strong> — surveillance applicative des erreurs et, en cas d'erreur
+            uniquement, enregistrement différé (« Session Replay » déclenché sur erreur, aucune capture continue). Les
+            données techniques transmises sont anonymisées autant que possible : empreinte de l'erreur, trace
+            d'exécution, rejeu des interactions à l'écran. Saisies textuelles et contenus de champs restituables peuvent
+            y figurer — n'entrez jamais d'informations sensibles hors des champs prévus. Siège aux États-Unis
+            (Functional Software, Inc.).
+          </li>
+          <li>
+            <strong className="text-strong">Resend</strong> — envoi des emails transactionnels (confirmation
+            d'abonnement, notifications liées à votre compte). Adresse email et contenu du message sont transmis pour
+            permettre l'acheminement. Siège aux États-Unis (Resend, Inc.).
+          </li>
+          <li>
             <strong className="text-strong">Open Food Facts</strong> — base collaborative libre de produits alimentaires
             (licence ODbL). Utilisée lors du scan de code-barres côté client uniquement. Aucune donnée identifiante
             n'est transmise — seul le code-barres scanné l'est.
@@ -367,8 +394,8 @@ function PolitiqueConfidentialite() {
         <p>Certains de nos sous-traitants sont situés aux États-Unis :</p>
         <ul className="list-disc list-inside space-y-1">
           <li>
-            <strong className="text-strong">Vercel Inc.</strong> (hébergement) — transferts encadrés par les clauses
-            contractuelles types (CCT) de la Commission européenne
+            <strong className="text-strong">Vercel Inc.</strong> (hébergement et mesure d'audience) — transferts
+            encadrés par les clauses contractuelles types (CCT) de la Commission européenne
           </li>
           <li>
             <strong className="text-strong">Supabase Inc.</strong> (base de données et authentification) — transferts
@@ -378,6 +405,14 @@ function PolitiqueConfidentialite() {
             <strong className="text-strong">Anthropic PBC</strong> (génération IA) — transferts encadrés par les CCT.
             Les données transmises sont limitées aux paramètres de personnalisation et ne sont pas utilisées pour
             l'entraînement des modèles d'IA.
+          </li>
+          <li>
+            <strong className="text-strong">Functional Software, Inc. (Sentry)</strong> (surveillance applicative et
+            Session Replay déclenché sur erreur) — transferts encadrés par les CCT
+          </li>
+          <li>
+            <strong className="text-strong">Resend, Inc.</strong> (emails transactionnels) — transferts encadrés par les
+            CCT
           </li>
         </ul>
         <p>Stripe héberge les données de paiement dans l'Union européenne.</p>
@@ -401,6 +436,12 @@ function PolitiqueConfidentialite() {
         <p>
           Les données de facturation et justificatifs de paiement sont conservés pendant 10 ans conformément à l'article
           L.123-22 du Code de commerce, même en cas de suppression de compte.
+        </p>
+        <p>
+          <strong className="text-strong">Durées chez nos sous-traitants techniques :</strong> Sentry conserve les
+          événements d'erreur et rejeux associés 90 jours, Vercel Analytics conserve les métriques d'audience 30 jours,
+          Resend conserve les logs d'envoi d'emails 30 jours. Passés ces délais, les données sont supprimées par les
+          prestataires selon leurs politiques respectives.
         </p>
       </Section>
 
@@ -450,7 +491,7 @@ function CGU() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Conditions Générales d'Utilisation</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04)</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04b)</p>
 
       <Section title="Objet">
         <p>
