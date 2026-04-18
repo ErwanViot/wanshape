@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 
@@ -14,6 +15,7 @@ interface SaveParams {
 }
 
 export function useSaveCompletion() {
+  const queryClient = useQueryClient();
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState(false);
   const inflightRef = useRef(false);
@@ -50,6 +52,13 @@ export function useSaveCompletion() {
           setError(true);
         } else {
           setSaved(true);
+          // TanStack invariant: a completion mutates the set of rows
+          // behind `useActiveProgram` (progress, nextSession). The legacy
+          // hooks still react via the global `dataGeneration` bumped by
+          // PublicLayout's navigation effect, but TanStack queries must be
+          // invalidated explicitly — otherwise the completed session stays
+          // hidden until the next visibility-change after 5 min.
+          queryClient.invalidateQueries({ queryKey: ['activeProgram', user.id] });
         }
       } catch {
         setError(true);
@@ -57,7 +66,7 @@ export function useSaveCompletion() {
         inflightRef.current = false;
       }
     },
-    [saved],
+    [saved, queryClient],
   );
 
   return { save, saved, error };

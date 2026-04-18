@@ -1,4 +1,5 @@
 import type { User } from '@supabase/supabase-js';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import { sessionEvents } from '../lib/supabaseQuery.ts';
@@ -52,15 +53,35 @@ async function fetchProfile(userId: string): Promise<Profile | null> {
 const STALE_THRESHOLD_MS = 5 * 60 * 1000; // 5 minutes
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const queryClient = useQueryClient();
   const [user, setUser] = useState<User | null>(null);
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(!!supabase);
+  const [sessionLoading, setSessionLoading] = useState(!!supabase);
   const [sessionExpired, setSessionExpired] = useState(false);
+  // Legacy counter still read by hooks not yet migrated to TanStack Query.
+  // New hooks rely on `queryClient.invalidateQueries()` instead. Both are
+  // bumped together from the visibility handler and the legacy
+  // `bumpDataGeneration` helper until migration completes.
   const [dataGeneration, setDataGeneration] = useState(0);
   const mounted = useRef(true);
   const lastVisibleAt = useRef(Date.now());
 
-  // Refresh session + bump dataGeneration when returning from background after inactivity
+  // Profile is fetched via TanStack Query, keyed on the authenticated user's
+  // id. A null `userId` disables the query — preserves the "no profile when
+  // logged out" invariant without a manual setProfile(null) on sign-out.
+  const userId = user?.id;
+  const profileQuery = useQuery<Profile | null>({
+    queryKey: ['profile', userId ?? null],
+    // `enabled` below guarantees queryFn only runs with a real userId, so the
+    // non-null assertion is safe.
+    queryFn: () => fetchProfile(userId!),
+    enabled: !!userId && !!supabase,
+  });
+  const profile = profileQuery.data ?? null;
+
+  // Refresh session + invalidate all queries when returning from background
+  // after inactivity. Replaces the old pattern that only bumped
+  // `dataGeneration`; we now do both so hooks migrated to TanStack are also
+  // refreshed (invalidateQueries({})) alongside legacy hooks (dataGeneration).
   useEffect(() => {
     function handleVisibilityChange() {
       if (document.visibilityState === 'visible') {
@@ -71,6 +92,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             .then(() => {
               if (mounted.current) {
                 setDataGeneration((g) => g + 1);
+                queryClient.invalidateQueries();
               }
             })
             .catch(() => {
@@ -85,7 +107,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, []);
+  }, [queryClient]);
 
   useEffect(() => {
     mounted.current = true;
@@ -94,29 +116,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Initial session check
     supabase.auth
       .getSession()
-      .then(async ({ data: { session } }) => {
+      .then(({ data: { session } }) => {
         if (!mounted.current) return;
-        const currentUser = session?.user ?? null;
-        setUser(currentUser);
-        if (currentUser) {
-          try {
-            const p = await fetchProfile(currentUser.id);
-            if (mounted.current) setProfile(p);
-          } catch (err) {
-            console.error('Profile fetch error (initial):', err);
-          }
-        }
-        if (mounted.current) setLoading(false);
+        setUser(session?.user ?? null);
+        setSessionLoading(false);
       })
       .catch((err) => {
         console.error('Session retrieval error:', err);
-        if (mounted.current) setLoading(false);
+        if (mounted.current) setSessionLoading(false);
       });
 
-    // Listen for auth changes (skip INITIAL_SESSION to avoid double fetch)
+    // Listen for auth changes (skip INITIAL_SESSION to avoid double update)
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       if (!mounted.current || event === 'INITIAL_SESSION') return;
 
       // Session successfully refreshed — clear expired state
@@ -124,18 +137,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setSessionExpired(false);
       }
 
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      if (currentUser) {
-        try {
-          const p = await fetchProfile(currentUser.id);
-          if (mounted.current) setProfile(p);
-        } catch (err) {
-          console.error('Profile fetch error (auth change):', err);
-        }
-      } else {
-        setProfile(null);
-      }
+      setUser(session?.user ?? null);
     });
 
     // Listen for session-expired events from supabaseQuery helper
@@ -152,14 +154,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const refreshProfile = useCallback(async () => {
-    if (!user) return;
-    try {
-      const p = await fetchProfile(user.id);
-      if (mounted.current) setProfile(p);
-    } catch (err) {
-      console.error('Profile refresh error:', err);
-    }
-  }, [user]);
+    if (!userId) return;
+    await queryClient.invalidateQueries({ queryKey: ['profile', userId] });
+  }, [queryClient, userId]);
 
   const signIn = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: 'Auth non disponible' };
@@ -204,11 +201,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Force local cleanup even if the API call fails (e.g. expired token)
     }
     setUser(null);
-    setProfile(null);
     setSessionExpired(false);
-  }, []);
+    queryClient.clear();
+  }, [queryClient]);
 
   const bumpDataGeneration = useCallback(() => setDataGeneration((g) => g + 1), []);
+
+  // `loading` stays true until both the initial session is resolved AND —
+  // when a user was present — the profile query has finished its first
+  // attempt. Keeps the previous invariant: consumers see no flash of
+  // "authenticated but no profile" while the TanStack fetch is in flight.
+  const loading = sessionLoading || (!!userId && profileQuery.isPending);
 
   const value = useMemo<AuthContextValue>(
     () => ({
