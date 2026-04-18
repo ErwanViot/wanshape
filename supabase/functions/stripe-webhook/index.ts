@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { verifyStripeSignature } from "./verify-signature.ts";
 
 const ALLOWED_ORIGINS = [
   "https://wan2fit.fr",
@@ -26,67 +27,6 @@ function jsonResponse(data: unknown, status = 200, origin?: string) {
 
 function errorResponse(message: string, status = 400, origin?: string) {
   return jsonResponse({ error: message }, status, origin);
-}
-
-// Constant-time comparison to prevent timing attacks
-function timingSafeEqual(a: string, b: string): boolean {
-  const encoder = new TextEncoder();
-  const aBytes = encoder.encode(a);
-  const bBytes = encoder.encode(b);
-  const maxLen = Math.max(aBytes.length, bBytes.length);
-  let result = aBytes.length ^ bBytes.length; // non-zero if lengths differ
-  for (let i = 0; i < maxLen; i++) {
-    result |= (aBytes[i] ?? 0) ^ (bBytes[i] ?? 0);
-  }
-  return result === 0;
-}
-
-// Verify Stripe webhook signature using crypto.subtle (Deno-compatible)
-async function verifyStripeSignature(
-  payload: string,
-  sigHeader: string,
-  secret: string,
-): Promise<boolean> {
-  const parts = sigHeader.split(",").reduce(
-    (acc, part) => {
-      const [key, value] = part.split("=");
-      if (key === "t") acc.timestamp = value;
-      if (key === "v1") acc.signatures.push(value);
-      return acc;
-    },
-    { timestamp: "", signatures: [] as string[] },
-  );
-
-  if (!parts.timestamp || parts.signatures.length === 0) return false;
-
-  // Check timestamp tolerance (5 minutes)
-  const tolerance = 300;
-  const now = Math.floor(Date.now() / 1000);
-  if (Math.abs(now - parseInt(parts.timestamp, 10)) > tolerance) return false;
-
-  const signedPayload = `${parts.timestamp}.${payload}`;
-  const encoder = new TextEncoder();
-
-  const key = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(secret),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"],
-  );
-
-  const signature = await crypto.subtle.sign(
-    "HMAC",
-    key,
-    encoder.encode(signedPayload),
-  );
-
-  const expectedSig = Array.from(new Uint8Array(signature))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-
-  // Use constant-time comparison (CRITICAL fix #1)
-  return parts.signatures.some((sig) => timingSafeEqual(sig, expectedSig));
 }
 
 // Determine subscription tier from Stripe status
