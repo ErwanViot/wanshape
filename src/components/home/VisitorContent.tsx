@@ -47,6 +47,10 @@ export function VisitorContent({
           <img
             src="/images/hero-landing-couple.webp"
             alt=""
+            width={1920}
+            height={814}
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover object-[65%_center] md:object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-black/15 md:from-black/80 md:via-black/50 md:to-black/30" />
