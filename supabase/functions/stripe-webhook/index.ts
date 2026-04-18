@@ -1,21 +1,16 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { getCorsHeaders as getSharedCorsHeaders } from "../_shared/cors.ts";
 import { verifyStripeSignature } from "./verify-signature.ts";
 
-const ALLOWED_ORIGINS = [
-  "https://wan2fit.fr",
-  "https://www.wan2fit.fr",
-];
-
-const DEFAULT_ORIGIN = "https://wan2fit.fr";
-
+// Thin wrapper preserving the existing `(origin?: string)` signature while
+// delegating origin whitelisting to the shared module. `stripe-signature`
+// must be reflected in Allow-Headers for Stripe's preflight.
 function getCorsHeaders(origin?: string) {
-  return {
-    "Access-Control-Allow-Origin": origin && ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN,
-    "Access-Control-Allow-Headers":
-      "authorization, x-client-info, apikey, content-type, stripe-signature",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-  };
+  const req = new Request("https://edge.local/", {
+    headers: origin ? { origin } : undefined,
+  });
+  return getSharedCorsHeaders(req, { extraAllowedHeaders: ["stripe-signature"] });
 }
 
 function jsonResponse(data: unknown, status = 200, origin?: string) {

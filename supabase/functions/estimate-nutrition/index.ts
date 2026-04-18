@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { getCorsHeaders } from "../_shared/cors.ts";
 import {
   buildOverflowUserPrompt,
   buildTextUserPrompt,
@@ -8,21 +9,6 @@ import {
   TEXT_SYSTEM_PROMPT,
 } from "./prompts.ts";
 import { validateOverflowInsight, validateTextEstimate } from "./validate.ts";
-
-const PROD_ORIGINS = ["https://wan2fit.fr", "https://www.wan2fit.fr"];
-const DEV_ORIGINS = ["http://localhost:5173", "http://localhost:4173"];
-const ALLOWED_ORIGINS =
-  Deno.env.get("ENVIRONMENT") === "production" ? PROD_ORIGINS : [...PROD_ORIGINS, ...DEV_ORIGINS];
-const DEFAULT_ORIGIN = "https://wan2fit.fr";
-
-function getCorsHeaders(req: Request) {
-  const origin = req.headers.get("origin") ?? "";
-  return {
-    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN,
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-  };
-}
 
 const MODEL = "claude-haiku-4-5-20251001";
 const MAX_TOKENS_TEXT = 512;

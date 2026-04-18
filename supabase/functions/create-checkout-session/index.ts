@@ -1,24 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
-
-const PROD_ORIGINS = [
-  "https://wan2fit.fr",
-  "https://www.wan2fit.fr",
-];
-const DEV_ORIGINS = ["http://localhost:5173", "http://localhost:4173"];
-const ALLOWED_ORIGINS = Deno.env.get("ENVIRONMENT") === "production" ? PROD_ORIGINS : [...PROD_ORIGINS, ...DEV_ORIGINS];
-
-const DEFAULT_ORIGIN = "https://wan2fit.fr";
-
-function getCorsHeaders(req: Request) {
-  const origin = req.headers.get("origin") ?? "";
-  return {
-    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN,
-    "Access-Control-Allow-Headers":
-      "authorization, x-client-info, apikey, content-type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-  };
-}
+import { getCorsHeaders, resolveAllowedOrigin } from "../_shared/cors.ts";
 
 function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -32,8 +14,7 @@ function errorResponse(req: Request, message: string, status = 400) {
 }
 
 function getValidOrigin(req: Request): string {
-  const origin = req.headers.get("origin") ?? "";
-  return ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN;
+  return resolveAllowedOrigin(req);
 }
 
 Deno.serve(async (req: Request) => {
