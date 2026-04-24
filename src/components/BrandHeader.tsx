@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { AuthButton } from './auth/AuthButton.tsx';
+import { LocaleToggle } from './LocaleToggle.tsx';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Accueil', match: (p: string) => p === '/' },
@@ -54,7 +55,8 @@ export function BrandHeader() {
         </nav>
 
         {/* Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <LocaleToggle />
           <AuthButton />
         </div>
       </div>
