@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 
@@ -166,6 +167,7 @@ function NavItem({
 export function BottomNav() {
   const { pathname } = useLocation();
   const { user } = useAuth();
+  const { t } = useTranslation('nav');
 
   const isHome = pathname === '/';
   const isSeances = pathname === '/seances' || pathname.startsWith('/seance');
@@ -179,36 +181,36 @@ export function BottomNav() {
     <nav
       className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-divider md:hidden"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-      aria-label="Navigation principale"
+      aria-label={t('main_label')}
     >
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
         {user ? (
           <>
-            <NavItem to="/seances" label="Séances" active={isSeances}>
+            <NavItem to="/seances" label={t('sessions')} active={isSeances}>
               <DumbbellIcon />
             </NavItem>
-            <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+            <NavItem to="/programmes" label={t('programs')} active={isPrograms}>
               <ProgramsIcon />
             </NavItem>
-            <NavItem to="/nutrition" label="Nutrition" active={isNutrition}>
+            <NavItem to="/nutrition" label={t('nutrition')} active={isNutrition}>
               <UtensilsIcon />
             </NavItem>
-            <NavItem to="/suivi" label="Suivi" active={isSuivi}>
+            <NavItem to="/suivi" label={t('tracking')} active={isSuivi}>
               <ChartIcon />
             </NavItem>
           </>
         ) : (
           <>
-            <NavItem to="/" label="Accueil" active={isHome}>
+            <NavItem to="/" label={t('home')} active={isHome}>
               <HomeIcon />
             </NavItem>
-            <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+            <NavItem to="/programmes" label={t('programs')} active={isPrograms}>
               <ProgramsIcon />
             </NavItem>
-            <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
+            <NavItem to="/decouvrir" label={t('explore')} active={isDiscover}>
               <DiscoverIcon />
             </NavItem>
-            <NavItem to="/login" label="Connexion" active={isLogin}>
+            <NavItem to="/login" label={t('login')} active={isLogin}>
               <UserIcon />
             </NavItem>
           </>

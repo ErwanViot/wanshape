@@ -1,5 +1,6 @@
 import { Plus } from 'lucide-react';
-import { MEAL_TYPE_LABELS, MEAL_TYPES } from '../../config/nutrition.ts';
+import { useTranslation } from 'react-i18next';
+import { MEAL_TYPES } from '../../config/nutrition.ts';
 import type { MealLog, MealType } from '../../types/nutrition.ts';
 import { MealCard } from './MealCard.tsx';
 
@@ -15,6 +16,7 @@ function sumCalories(logs: MealLog[] | undefined): number {
 }
 
 export function DailyFeed({ byMealType, onAdd, onDelete }: DailyFeedProps) {
+  const { t } = useTranslation('nutrition');
   return (
     <div className="space-y-6">
       {MEAL_TYPES.map((mealType) => {
@@ -24,17 +26,17 @@ export function DailyFeed({ byMealType, onAdd, onDelete }: DailyFeedProps) {
           <section key={mealType} aria-labelledby={`meal-${mealType}`}>
             <header className="flex items-center justify-between mb-2">
               <h3 id={`meal-${mealType}`} className="font-display text-base font-bold text-heading">
-                {MEAL_TYPE_LABELS[mealType]}
+                {t(`meal_type.${mealType}`)}
                 {kcal > 0 && <span className="ml-2 text-xs font-medium text-muted">{kcal} kcal</span>}
               </h3>
               <button
                 type="button"
                 onClick={() => onAdd(mealType)}
                 className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium text-brand hover:bg-brand/10 transition-colors"
-                aria-label={`Ajouter un repas — ${MEAL_TYPE_LABELS[mealType]}`}
+                aria-label={t('daily_feed.add_aria', { mealType: t(`meal_type.${mealType}`) })}
               >
                 <Plus className="w-4 h-4" aria-hidden="true" />
-                Ajouter
+                {t('daily_feed.add_btn')}
               </button>
             </header>
             {logs && logs.length > 0 ? (
@@ -46,7 +48,7 @@ export function DailyFeed({ byMealType, onAdd, onDelete }: DailyFeedProps) {
                 ))}
               </ul>
             ) : (
-              <p className="text-xs text-muted italic pl-1">Rien pour l'instant.</p>
+              <p className="text-xs text-muted italic pl-1">{t('daily_feed.empty')}</p>
             )}
           </section>
         );

@@ -1,5 +1,6 @@
 import { HeartPulse } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   onAccept: () => void;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 export function HealthDisclaimer({ onAccept, onCancel }: Props) {
+  const { t } = useTranslation('player');
   const [checked, setChecked] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -67,33 +69,26 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
         <div className="p-6 pb-0 shrink-0">
           <HeartPulse className="w-8 h-8 text-brand mb-3" aria-hidden="true" />
           <h2 id="health-disclaimer-title" className="text-xl font-bold text-gray-900 mb-1">
-            Avertissement santé
+            {t('health_disclaimer.title')}
           </h2>
-          <p className="text-sm text-gray-400 mb-4">Avant de commencer, merci de lire attentivement.</p>
+          <p className="text-sm text-gray-400 mb-4">{t('health_disclaimer.subtitle')}</p>
         </div>
 
         <div className="px-6 overflow-y-auto flex-1 space-y-3 text-sm text-gray-600 leading-relaxed">
-          <p>
-            Wan2Fit propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il ne
-            s'agit pas de coaching sportif personnalisé ni d'encadrement par un éducateur sportif diplômé.
-          </p>
-          <p>
-            Les séances sont des suggestions d'exercices à caractère général. Tu es seul responsable de leur exécution
-            et de leur adaptation à ta condition physique.
-          </p>
+          <p
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: controlled i18n string with known safe <strong> tag
+            dangerouslySetInnerHTML={{ __html: t('health_disclaimer.body_editorial') }}
+          />
+          <p>{t('health_disclaimer.body_responsibility')}</p>
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
-            <p className="font-semibold text-amber-800">Avant de pratiquer :</p>
+            <p className="font-semibold text-amber-800">{t('health_disclaimer.warning_box_title')}</p>
             <ul className="list-disc list-inside space-y-1 text-amber-700">
-              <li>Consulte un médecin pour vérifier ton aptitude sportive</li>
-              <li>Ne pratique pas en cas de contre-indication médicale</li>
-              <li>Arrête immédiatement en cas de douleur ou de malaise</li>
+              <li>{t('health_disclaimer.warning_consult')}</li>
+              <li>{t('health_disclaimer.warning_no_contraindication')}</li>
+              <li>{t('health_disclaimer.warning_stop_pain')}</li>
             </ul>
           </div>
-          <p className="text-gray-400 text-xs">
-            Service déconseillé sans avis médical pour les personnes présentant des pathologies cardiaques, des troubles
-            articulaires, un état de grossesse ou toute condition pouvant être aggravée par l'exercice. Réservé aux
-            personnes majeures (18 ans et plus).
-          </p>
+          <p className="text-gray-400 text-xs">{t('health_disclaimer.legal_note')}</p>
         </div>
 
         <div className="p-6 pt-4 space-y-4 shrink-0">
@@ -104,10 +99,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
               onChange={(e) => setChecked(e.target.checked)}
               className="mt-0.5 w-5 h-5 rounded border-gray-300 text-brand focus:ring-brand"
             />
-            <span className="text-sm text-gray-700 leading-snug">
-              J'ai lu et compris cet avertissement. Je pratique sous ma propre responsabilité et déclare ne pas
-              présenter de contre-indication médicale.
-            </span>
+            <span className="text-sm text-gray-700 leading-snug">{t('health_disclaimer.checkbox_label')}</span>
           </label>
 
           <button
@@ -120,7 +112,7 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
                 : 'bg-gray-100 text-gray-300 cursor-not-allowed'
             }`}
           >
-            Continuer
+            {t('health_disclaimer.accept_button')}
           </button>
         </div>
       </div>

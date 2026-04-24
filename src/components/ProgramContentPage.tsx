@@ -1,4 +1,5 @@
 import { ArrowRight, Calendar, ChevronLeft, Clock, Repeat, Target } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { PROGRAM_CONTENT } from '../data/programContent.ts';
@@ -6,12 +7,13 @@ import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 
 export function ProgramContentPage() {
+  const { t } = useTranslation('programs');
   const { slug } = useParams<{ slug: string }>();
   const { user } = useAuth();
   const content = slug ? PROGRAM_CONTENT[slug] : undefined;
 
   useDocumentHead({
-    title: content ? `${content.headline} — Programme` : 'Programme',
+    title: content ? `${content.headline} ${t('page.title_suffix')}` : t('page.title_suffix'),
     description: content?.intro,
   });
 
@@ -22,7 +24,7 @@ export function ProgramContentPage() {
 
   const image = getProgramImage(slug);
   const ctaTo = user ? `/programme/${slug}/suivi` : '/signup';
-  const ctaLabel = user ? 'Commencer le programme' : 'S\u2019inscrire pour commencer';
+  const ctaLabel = user ? t('content.cta_start') : t('content.cta_signup');
 
   return (
     <div className="min-h-screen">
@@ -40,7 +42,7 @@ export function ProgramContentPage() {
         <Link
           to="/programmes"
           className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white"
-          aria-label="Retour aux programmes"
+          aria-label={t('content.back_aria')}
         >
           <ChevronLeft className="w-5 h-5" aria-hidden="true" />
         </Link>
@@ -61,10 +63,10 @@ export function ProgramContentPage() {
         {/* Key stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
-            { icon: Calendar, label: 'Durée', value: content.duration },
-            { icon: Repeat, label: 'Fréquence', value: content.frequency },
-            { icon: Clock, label: 'Par séance', value: content.sessionLength },
-            { icon: Target, label: 'Public', value: content.audience.split(',')[0].trim() },
+            { icon: Calendar, label: t('content.stat_duration'), value: content.duration },
+            { icon: Repeat, label: t('content.stat_frequency'), value: content.frequency },
+            { icon: Clock, label: t('content.stat_session_length'), value: content.sessionLength },
+            { icon: Target, label: t('content.stat_audience'), value: content.audience.split(',')[0].trim() },
           ].map((stat) => (
             <div key={stat.label} className="rounded-xl border border-card-border bg-surface-card p-4 space-y-2">
               <stat.icon className="w-5 h-5 text-brand" aria-hidden="true" />
@@ -85,26 +87,26 @@ export function ProgramContentPage() {
           </Link>
           {!user && (
             <Link to={`/programme/${slug}/suivi`} className="text-sm text-link hover:text-link-hover transition-colors">
-              Déjà inscrit ? Voir mon suivi
+              {t('content.cta_already_user')}
             </Link>
           )}
         </div>
 
         {/* Approach */}
         <section className="space-y-3">
-          <h2 className="font-display text-xl font-bold text-heading">L'approche</h2>
+          <h2 className="font-display text-xl font-bold text-heading">{t('content.approach')}</h2>
           <p className="text-body leading-relaxed">{content.approach}</p>
         </section>
 
         {/* Public cible */}
         <section className="space-y-3">
-          <h2 className="font-display text-xl font-bold text-heading">Pour qui ?</h2>
+          <h2 className="font-display text-xl font-bold text-heading">{t('content.for_who')}</h2>
           <p className="text-body leading-relaxed">{content.audience}</p>
         </section>
 
         {/* Week by week */}
         <section className="space-y-4">
-          <h2 className="font-display text-xl font-bold text-heading">Semaine par semaine</h2>
+          <h2 className="font-display text-xl font-bold text-heading">{t('content.week_by_week')}</h2>
           <div className="space-y-3">
             {content.weeks.map((week) => (
               <div key={week.week} className="rounded-xl border border-card-border bg-surface-card p-5 space-y-2">
@@ -129,7 +131,7 @@ export function ProgramContentPage() {
 
         {/* Benefits */}
         <section className="space-y-3">
-          <h2 className="font-display text-xl font-bold text-heading">Ce que tu vas gagner</h2>
+          <h2 className="font-display text-xl font-bold text-heading">{t('content.benefits')}</h2>
           <ul className="space-y-2">
             {content.benefits.map((b) => (
               <li key={b} className="flex items-start gap-3">
@@ -142,20 +144,20 @@ export function ProgramContentPage() {
 
         {/* Tip */}
         <section className="rounded-xl border border-accent/20 bg-accent/5 p-5 space-y-2">
-          <h3 className="font-bold text-heading">Conseil</h3>
+          <h3 className="font-bold text-heading">{t('content.tip')}</h3>
           <p className="text-sm text-body leading-relaxed">{content.tip}</p>
         </section>
 
         {/* Cross-links */}
         <div className="flex flex-wrap gap-3 pt-2">
           <Link to="/formats" className="text-sm text-link hover:text-link-hover transition-colors">
-            Les formats →
+            {t('content.link_formats')}
           </Link>
           <Link to="/exercices" className="text-sm text-link hover:text-link-hover transition-colors">
-            Nos exercices →
+            {t('content.link_exercises')}
           </Link>
           <Link to="/programmes" className="text-sm text-link hover:text-link-hover transition-colors">
-            Tous les programmes →
+            {t('content.link_programs')}
           </Link>
         </div>
 

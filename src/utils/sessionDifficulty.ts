@@ -4,7 +4,6 @@ type DifficultyLevel = 'accessible' | 'modere' | 'intense';
 
 interface Difficulty {
   level: DifficultyLevel;
-  label: string;
   score: number;
 }
 
@@ -17,12 +16,6 @@ const BLOCK_WEIGHTS: Record<string, number> = {
   hiit: 4,
   tabata: 4.5,
   amrap: 4,
-};
-
-const LABELS: Record<DifficultyLevel, string> = {
-  accessible: 'Accessible',
-  modere: 'Modéré',
-  intense: 'Intense',
 };
 
 function getWorkRestRatio(block: Block): number | null {
@@ -39,7 +32,7 @@ export function computeDifficulty(session: Session): Difficulty {
   const activeBlocks = session.blocks.filter((b) => b.type !== 'warmup' && b.type !== 'cooldown');
 
   if (activeBlocks.length === 0) {
-    return { level: 'accessible', label: LABELS.accessible, score: 0 };
+    return { level: 'accessible', score: 0 };
   }
 
   // Weighted average of block weights
@@ -70,5 +63,5 @@ export function computeDifficulty(session: Session): Difficulty {
   else if (score < 4) level = 'modere';
   else level = 'intense';
 
-  return { level, label: LABELS[level], score: Math.round(score * 100) / 100 };
+  return { level, score: Math.round(score * 100) / 100 };
 }

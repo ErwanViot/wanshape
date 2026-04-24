@@ -1,4 +1,5 @@
 import { ChevronLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -42,10 +43,10 @@ const FORMAT_DESCRIPTIONS: Record<string, { description: string; benefit: string
 };
 
 export function Formats() {
+  const { t } = useTranslation('explore');
   useDocumentHead({
-    title: 'Formats de séance',
-    description:
-      "8 formats d'entraînement sans matériel : Pyramide, Renforcement, Superset, EMOM, Circuit, AMRAP, HIIT et Tabata. Découvrez chaque méthode.",
+    title: t('formats.page_title'),
+    description: t('formats.page_description'),
   });
 
   return (
@@ -55,19 +56,20 @@ export function Formats() {
           <Link
             to="/"
             className="p-1 -ml-1 text-muted hover:text-strong transition-colors"
-            aria-label="Retour à l'accueil"
+            aria-label={t('formats.back_aria')}
           >
             <ChevronLeft className="w-5 h-5" />
           </Link>
-          <h1 className="font-display font-bold text-lg text-heading">Les formats de séance</h1>
+          <h1 className="font-display font-bold text-lg text-heading">{t('formats.heading')}</h1>
         </div>
       </header>
 
       <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
-        <p className="text-sm text-subtle leading-relaxed">
-          <strong className="text-strong">8 formats</strong> alternent au fil des jours : les séances intenses sont plus
-          courtes, les séances de renforcement et d'endurance plus longues. Toutes incluent échauffement et étirements.
-        </p>
+        <p
+          className="text-sm text-subtle leading-relaxed"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
+          dangerouslySetInnerHTML={{ __html: t('formats.intro') }}
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {FORMATS_DATA.map((format) => {
@@ -82,7 +84,7 @@ export function Formats() {
                 <div className="relative h-28 overflow-hidden">
                   <img
                     src={format.image}
-                    alt={`Format ${format.name}`}
+                    alt={t('formats.img_alt', { name: format.name })}
                     className="w-full h-full object-cover object-[50%_30%]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
@@ -103,7 +105,7 @@ export function Formats() {
                   <div
                     className="flex items-center gap-1.5"
                     role="img"
-                    aria-label={`Intensité : ${format.intensity} sur 5`}
+                    aria-label={t('formats.intensity_aria', { n: format.intensity })}
                   >
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
@@ -121,9 +123,7 @@ export function Formats() {
           })}
         </div>
 
-        <p className="text-xs text-faint text-center leading-relaxed">
-          Les durées indiquées incluent l'échauffement et les étirements.
-        </p>
+        <p className="text-xs text-faint text-center leading-relaxed">{t('formats.footer_note')}</p>
       </div>
     </>
   );

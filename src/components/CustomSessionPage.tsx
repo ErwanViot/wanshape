@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { Dumbbell, Flame, Heart, Zap } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useCustomSessions } from '../hooks/useCustomSessions.ts';
@@ -14,37 +15,31 @@ import type {
   Intensity,
 } from '../types/custom-session.ts';
 import type { Equipment } from '../types/equipment.ts';
-import { EQUIPMENT_OPTIONS } from '../types/equipment.ts';
+import { EQUIPMENT_VALUES } from '../types/equipment.ts';
 import { toggleArrayElement } from '../utils/array.ts';
 
-const PRESETS: { value: CustomSessionPreset; Icon: LucideIcon; label: string; desc: string }[] = [
-  { value: 'transpirer', Icon: Flame, label: 'Objectif : transpirer', desc: 'HIIT + Tabata, haute intensité' },
-  { value: 'renfo', Icon: Dumbbell, label: 'Renfo complet', desc: 'Renforcement musculaire structuré' },
-  { value: 'express', Icon: Zap, label: 'Full body express', desc: 'Circuit rapide, zéro temps mort' },
-  { value: 'mobilite', Icon: Heart, label: 'Détente & mobilité', desc: 'Stretching et récupération active' },
+const PRESET_META: { value: CustomSessionPreset; Icon: LucideIcon }[] = [
+  { value: 'transpirer', Icon: Flame },
+  { value: 'renfo', Icon: Dumbbell },
+  { value: 'express', Icon: Zap },
+  { value: 'mobilite', Icon: Heart },
 ];
+
+const INTENSITY_META: { value: Intensity; color: string }[] = [
+  { value: 'douce', color: 'bg-green-500' },
+  { value: 'moderee', color: 'bg-yellow-500' },
+  { value: 'intense', color: 'bg-red-500' },
+];
+
+const BODY_FOCUS_VALUES: BodyFocus[] = ['upper', 'lower', 'core', 'full'];
 
 const DURATION_MIN = 10;
 const DURATION_MAX = 90;
 const DURATION_STEP = 5;
 
-// EQUIPMENT_OPTIONS imported from types/equipment.ts
-
-const INTENSITY_OPTIONS: { value: Intensity; label: string; color: string }[] = [
-  { value: 'douce', label: 'Douce', color: 'bg-green-500' },
-  { value: 'moderee', label: 'Modérée', color: 'bg-yellow-500' },
-  { value: 'intense', label: 'Intense', color: 'bg-red-500' },
-];
-
-const BODY_FOCUS_OPTIONS: { value: BodyFocus; label: string }[] = [
-  { value: 'upper', label: 'Haut du corps' },
-  { value: 'lower', label: 'Bas du corps' },
-  { value: 'core', label: 'Core' },
-  { value: 'full', label: 'Full body' },
-];
-
 export function CustomSessionPage() {
-  useDocumentHead({ title: 'Créer ma séance' });
+  const { t, i18n } = useTranslation('sessions');
+  useDocumentHead({ title: t('custom.page_title') });
 
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -93,12 +88,12 @@ export function CustomSessionPage() {
       <div className="relative rounded-2xl overflow-hidden mb-6">
         <img
           src="/images/illustration-ai-session.webp"
-          alt="Créer une séance personnalisée par IA"
+          alt={t('custom.img_alt')}
           className="w-full h-32 sm:h-40 object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
         <h1 className="absolute bottom-4 left-4 text-2xl sm:text-3xl font-bold text-white drop-shadow-sm">
-          Créer ma séance
+          {t('custom.heading')}
         </h1>
       </div>
 
@@ -106,9 +101,9 @@ export function CustomSessionPage() {
       <div className="flex rounded-xl overflow-hidden border border-divider mb-6">
         {(
           [
-            { value: 'quick', label: 'Rapide' },
-            { value: 'detailed', label: 'Détaillé' },
-            { value: 'expert', label: 'Expert' },
+            { value: 'quick', label: t('custom.mode_quick') },
+            { value: 'detailed', label: t('custom.mode_detailed') },
+            { value: 'expert', label: t('custom.mode_expert') },
           ] as const
         ).map((m) => (
           <button
@@ -129,7 +124,7 @@ export function CustomSessionPage() {
       {mode === 'expert' && (
         <div className="mb-6">
           <label htmlFor="preferences" className="text-sm font-semibold text-heading mb-2 block">
-            Décris ta séance
+            {t('custom.expert_label')}
           </label>
           <textarea
             id="preferences"
@@ -137,7 +132,7 @@ export function CustomSessionPage() {
             onChange={(e) => setPreferences(e.target.value)}
             maxLength={2000}
             rows={6}
-            placeholder="Je veux une séance haut du corps de 45min avec haltères. J'aimerais du développé couché en force et des supersets pour les épaules. Pas de dips, j'ai mal au coude."
+            placeholder={t('custom.expert_placeholder')}
             className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand"
           />
           <p className="text-xs text-faint mt-1 text-right">{preferences.length}/2000</p>
@@ -147,7 +142,7 @@ export function CustomSessionPage() {
       {/* Quick mode: presets */}
       {mode === 'quick' && (
         <div className="space-y-3 mb-6">
-          {PRESETS.map((p) => (
+          {PRESET_META.map((p) => (
             <button
               key={p.value}
               type="button"
@@ -160,8 +155,8 @@ export function CustomSessionPage() {
               <span className="inline-flex items-center mr-2">
                 <p.Icon className="w-5 h-5 text-brand" aria-hidden="true" />
               </span>
-              <span className="font-semibold text-heading">{p.label}</span>
-              <p className="text-sm text-muted mt-0.5 ml-8">{p.desc}</p>
+              <span className="font-semibold text-heading">{t(`presets.${p.value}_label`)}</span>
+              <p className="text-sm text-muted mt-0.5 ml-8">{t(`presets.${p.value}_desc`)}</p>
             </button>
           ))}
         </div>
@@ -172,21 +167,21 @@ export function CustomSessionPage() {
         <div className="space-y-6 mb-6">
           {/* Equipment */}
           <fieldset>
-            <legend className="text-sm font-semibold text-heading mb-2">Équipement disponible</legend>
+            <legend className="text-sm font-semibold text-heading mb-2">{t('custom.equipment_legend')}</legend>
             <div className="flex flex-wrap gap-2">
-              {EQUIPMENT_OPTIONS.map((e) => (
+              {EQUIPMENT_VALUES.map((value) => (
                 <button
-                  key={e.value}
+                  key={value}
                   type="button"
-                  onClick={() => toggleChip(equipment, e.value, setEquipment)}
-                  aria-pressed={equipment.includes(e.value)}
+                  onClick={() => toggleChip(equipment, value, setEquipment)}
+                  aria-pressed={equipment.includes(value)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer ${
-                    equipment.includes(e.value)
+                    equipment.includes(value)
                       ? 'border-brand bg-brand/10 text-brand'
                       : 'border-divider text-muted hover:border-brand/30'
                   }`}
                 >
-                  {e.label}
+                  {t(`equipment.${value}`)}
                 </button>
               ))}
             </div>
@@ -194,22 +189,22 @@ export function CustomSessionPage() {
 
           {/* Intensity */}
           <fieldset>
-            <legend className="text-sm font-semibold text-heading mb-2">Intensité</legend>
+            <legend className="text-sm font-semibold text-heading mb-2">{t('custom.intensity_legend')}</legend>
             <div className="flex gap-3">
-              {INTENSITY_OPTIONS.map((i) => (
+              {INTENSITY_META.map((opt) => (
                 <button
-                  key={i.value}
+                  key={opt.value}
                   type="button"
-                  onClick={() => setIntensity(i.value)}
-                  aria-pressed={intensity === i.value}
+                  onClick={() => setIntensity(opt.value)}
+                  aria-pressed={intensity === opt.value}
                   className={`flex-1 py-2.5 rounded-xl border text-sm font-semibold transition-colors cursor-pointer ${
-                    intensity === i.value
+                    intensity === opt.value
                       ? 'border-brand bg-brand/10 text-brand'
                       : 'border-divider text-muted hover:border-brand/30'
                   }`}
                 >
-                  <span className={`inline-block w-2.5 h-2.5 rounded-full ${i.color} mr-1.5`} aria-hidden="true" />
-                  {i.label}
+                  <span className={`inline-block w-2.5 h-2.5 rounded-full ${opt.color} mr-1.5`} aria-hidden="true" />
+                  {t(`intensity.${opt.value}`)}
                 </button>
               ))}
             </div>
@@ -217,21 +212,21 @@ export function CustomSessionPage() {
 
           {/* Body focus */}
           <fieldset>
-            <legend className="text-sm font-semibold text-heading mb-2">Zones ciblées</legend>
+            <legend className="text-sm font-semibold text-heading mb-2">{t('custom.body_focus_legend')}</legend>
             <div className="flex flex-wrap gap-2">
-              {BODY_FOCUS_OPTIONS.map((f) => (
+              {BODY_FOCUS_VALUES.map((value) => (
                 <button
-                  key={f.value}
+                  key={value}
                   type="button"
-                  onClick={() => toggleChip(bodyFocus, f.value, setBodyFocus)}
-                  aria-pressed={bodyFocus.includes(f.value)}
+                  onClick={() => toggleChip(bodyFocus, value, setBodyFocus)}
+                  aria-pressed={bodyFocus.includes(value)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer ${
-                    bodyFocus.includes(f.value)
+                    bodyFocus.includes(value)
                       ? 'border-brand bg-brand/10 text-brand'
                       : 'border-divider text-muted hover:border-brand/30'
                   }`}
                 >
-                  {f.label}
+                  {t(`body_focus.${value}`)}
                 </button>
               ))}
             </div>
@@ -243,7 +238,7 @@ export function CustomSessionPage() {
       {mode !== 'expert' && (
         <div className="mb-6">
           <label htmlFor="preferences-extra" className="text-sm font-semibold text-heading mb-2 block">
-            Précisions
+            {t('custom.preferences_label')}
           </label>
           <textarea
             id="preferences-extra"
@@ -253,8 +248,8 @@ export function CustomSessionPage() {
             rows={3}
             placeholder={
               mode === 'quick'
-                ? 'Optionnel : pas de burpees, focus épaules, niveau débutant...'
-                : 'Optionnel : contraintes, objectifs, exercices préférés...'
+                ? t('custom.preferences_placeholder_quick')
+                : t('custom.preferences_placeholder_detailed')
             }
             className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand"
           />
@@ -264,13 +259,13 @@ export function CustomSessionPage() {
 
       {/* Duration stepper */}
       <fieldset className="mb-6">
-        <legend className="text-sm font-semibold text-heading mb-2">Durée</legend>
+        <legend className="text-sm font-semibold text-heading mb-2">{t('custom.duration_legend')}</legend>
         <div className="flex items-center gap-4">
           <button
             type="button"
             onClick={() => setDuration((d) => Math.max(DURATION_MIN, d - DURATION_STEP))}
             disabled={duration <= DURATION_MIN}
-            aria-label="Diminuer la durée"
+            aria-label={t('custom.duration_decrease_aria')}
             className="w-10 h-10 rounded-full border border-divider text-heading font-bold text-lg flex items-center justify-center cursor-pointer hover:border-brand/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             &minus;
@@ -283,7 +278,7 @@ export function CustomSessionPage() {
             type="button"
             onClick={() => setDuration((d) => Math.min(DURATION_MAX, d + DURATION_STEP))}
             disabled={duration >= DURATION_MAX}
-            aria-label="Augmenter la durée"
+            aria-label={t('custom.duration_increase_aria')}
             className="w-10 h-10 rounded-full border border-divider text-heading font-bold text-lg flex items-center justify-center cursor-pointer hover:border-brand/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             +
@@ -303,14 +298,14 @@ export function CustomSessionPage() {
         disabled={loading || !canSubmit}
         className="cta-gradient w-full py-4 rounded-xl text-sm font-bold text-white tracking-wide cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? 'Génération en cours...' : 'Générer ma séance'}
+        {loading ? t('custom.generating') : t('custom.generate_cta')}
       </button>
 
       {/* Loading overlay */}
       {loading && (
         <div className="mt-4 flex items-center justify-center gap-3">
           <div className="w-5 h-5 border-2 border-divider-strong border-t-brand rounded-full animate-spin" />
-          <p className="text-sm text-muted">L'IA prépare ta séance...</p>
+          <p className="text-sm text-muted">{t('custom.ai_preparing')}</p>
         </div>
       )}
 
@@ -324,12 +319,12 @@ export function CustomSessionPage() {
       {/* History */}
       {!historyLoading && history.length > 0 && (
         <div className="mt-10">
-          <h2 className="text-lg font-bold text-heading mb-4">Mes séances précédentes</h2>
+          <h2 className="text-lg font-bold text-heading mb-4">{t('custom.history_title')}</h2>
           <div className="space-y-3">
             {history.map((s) => {
               const session = s.session_data;
               const date = new Date(s.created_at);
-              const dateStr = date.toLocaleDateString('fr-FR', {
+              const dateStr = date.toLocaleDateString(i18n.language, {
                 day: '2-digit',
                 month: '2-digit',
                 year: 'numeric',
@@ -342,20 +337,20 @@ export function CustomSessionPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-heading truncate">{session.title}</p>
                     <p className="text-xs text-muted">
-                      {dateStr} &middot; ~{session.estimatedDuration} min
+                      {t('custom.history_created', { date: dateStr })} &middot; ~{session.estimatedDuration} min
                     </p>
                   </div>
                   <Link
                     to={`/seance/custom/${s.id}`}
                     className="text-xs font-semibold text-brand hover:text-brand-secondary transition-colors shrink-0"
                   >
-                    Voir
+                    {t('custom.history_see')}
                   </Link>
                   <Link
                     to={`/seance/custom/${s.id}/play`}
                     className="text-xs font-semibold text-brand hover:text-brand-secondary transition-colors shrink-0"
                   >
-                    Rejouer
+                    {t('custom.history_replay')}
                   </Link>
                 </div>
               );

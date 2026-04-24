@@ -1,5 +1,6 @@
 import { Play, X } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getExerciseVideoUrl } from '../utils/exerciseVideo.ts';
 import { NoVideoTag } from './NoVideoTag.tsx';
 import { PlayerVideoDemo } from './PlayerVideoDemo.tsx';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysShow }: Props) {
+  const { t } = useTranslation('exercises_ui');
   const videoUrl = getExerciseVideoUrl(exerciseName);
   const [expanded, setExpanded] = useState(false);
 
@@ -30,12 +32,12 @@ export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysSh
           {expanded ? (
             <>
               <X className="w-3.5 h-3.5" aria-hidden="true" />
-              Masquer
+              {t('video_button.hide')}
             </>
           ) : (
             <>
               <Play className="w-3.5 h-3.5" aria-hidden="true" />
-              Voir l'exemple
+              {t('video_button.show')}
             </>
           )}
         </button>
@@ -53,7 +55,7 @@ export function ExerciseVideoButton({ exerciseName, alwaysShow, onToggleAlwaysSh
             onChange={onToggleAlwaysShow}
             className="w-3.5 h-3.5 rounded accent-white/60"
           />
-          Toujours montrer les exemples
+          {t('video_button.always_show')}
         </label>
       )}
     </div>

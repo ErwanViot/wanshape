@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 interface CalorieRingProps {
   current: number;
   target: number | null;
@@ -11,6 +13,7 @@ interface CalorieRingProps {
  * Gracefully degrades to "Awareness" mode when no target is set.
  */
 export function CalorieRing({ current, target, size = 160, strokeWidth = 12, label }: CalorieRingProps) {
+  const { t } = useTranslation('nutrition');
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const progress = target != null && target > 0 ? Math.min(current / target, 1) : 0;
@@ -26,12 +29,12 @@ export function CalorieRing({ current, target, size = 160, strokeWidth = 12, lab
       role="img"
       aria-label={
         target != null
-          ? `${roundedCurrent} kilocalories sur ${target} aujourd'hui`
-          : `${roundedCurrent} kilocalories aujourd'hui`
+          ? t('calorie_ring.aria_with_target', { current: roundedCurrent, target })
+          : t('calorie_ring.aria_no_target', { current: roundedCurrent })
       }
     >
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <title>{label ?? 'Progression calorique'}</title>
+        <title>{label ?? t('calorie_ring.title')}</title>
         <circle cx={size / 2} cy={size / 2} r={radius} className="fill-none stroke-divider" strokeWidth={strokeWidth} />
         {target != null && target > 0 && (
           <circle
@@ -52,7 +55,9 @@ export function CalorieRing({ current, target, size = 160, strokeWidth = 12, lab
         <span className="text-[10px] font-medium uppercase tracking-wider text-muted mt-0.5">kcal</span>
         {target != null && (
           <span className="text-xs text-body mt-1">
-            {remaining != null && remaining > 0 ? `reste ${remaining}` : 'objectif atteint'}
+            {remaining != null && remaining > 0
+              ? t('calorie_ring.remaining', { n: remaining })
+              : t('calorie_ring.goal_reached')}
           </span>
         )}
       </div>

@@ -1,0 +1,47 @@
+{
+  "page_title": "Settings",
+  "page_description": "Manage your Wan2Fit account.",
+  "avatar": {
+    "change_aria": "Change profile picture",
+    "error_format": "Accepted formats: JPG, PNG or WebP.",
+    "error_size": "Image must not exceed 2 MB.",
+    "error_upload": "Upload error. Please try again."
+  },
+  "member_since": "Member since",
+  "appearance": {
+    "heading": "Appearance",
+    "theme_light": "Light",
+    "theme_dark": "Dark",
+    "theme_system": "System"
+  },
+  "subscription": {
+    "heading": "Subscription",
+    "welcome_premium": "Welcome to Premium! Your subscription is active.",
+    "ends_on": "Ends on",
+    "renews_on": "Next renewal on",
+    "manage": "Manage my subscription",
+    "free_plan": "Free Plan",
+    "free_upsell": "Upgrade to Premium to access AI-powered sessions and personalized programs.",
+    "go_premium": "Go Premium"
+  },
+  "legal": {
+    "heading": "Information",
+    "terms_link": "Terms of Service",
+    "privacy_link": "Privacy Policy",
+    "cgv_link": "General Terms of Sale"
+  },
+  "sign_out": "Log out",
+  "cgu_modal": {
+    "title": "Terms update",
+    "body": "Our Terms of Service and Privacy Policy have been updated (version {{version}}). Access to the app is suspended until you accept them.",
+    "changes_label": "Main changes",
+    "cgu_link": "Terms of Service",
+    "privacy_link": "Privacy Policy",
+    "read_detail": "See the details in the",
+    "read_and": "and the",
+    "error_save": "Could not save. Check your connection and try again.",
+    "btn_sign_out": "Log me out",
+    "btn_accept": "Accept and continue",
+    "btn_accepting": "Saving…"
+  }
+}

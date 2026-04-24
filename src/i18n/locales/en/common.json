@@ -1,7 +1,28 @@
 {
+  "difficulty": {
+    "accessible": "Easy",
+    "modere": "Moderate",
+    "intense": "Intense"
+  },
   "language_switcher": {
     "aria_label": "Switch language",
     "option_fr": "French",
     "option_en": "English"
+  },
+  "layout": {
+    "skip_to_content": "Skip to main content"
+  },
+  "not_found": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or has been moved.",
+    "back_home": "Back to home"
+  },
+  "error_boundary": {
+    "title": "An error occurred",
+    "body": "The application encountered an unexpected problem.",
+    "back_home": "Back to home"
+  },
+  "loading": {
+    "aria": "Loading"
   }
 }

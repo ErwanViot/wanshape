@@ -1,4 +1,5 @@
 import { useId, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { BLOCK_COLORS } from '../engine/constants.ts';
 import type { Block, Session } from '../types/session.ts';
@@ -6,6 +7,7 @@ import { getExerciseLink } from '../utils/exerciseLinks.ts';
 import { computeTimeline } from '../utils/sessionTimeline.ts';
 
 export function SessionAccordion({ session, defaultOpen = false }: { session: Session; defaultOpen?: boolean }) {
+  const { t } = useTranslation('sessions');
   const [open, setOpen] = useState(defaultOpen);
   const panelId = useId();
 
@@ -18,7 +20,7 @@ export function SessionAccordion({ session, defaultOpen = false }: { session: Se
         aria-controls={panelId}
         className="w-full px-5 py-3 flex items-center justify-between bg-surface-card border-t border-divider text-sm cursor-pointer"
       >
-        <span className="text-muted font-medium">Contenu de la séance</span>
+        <span className="text-muted font-medium">{t('accordion.toggle_label')}</span>
         <svg
           aria-hidden="true"
           width="16"
@@ -36,7 +38,7 @@ export function SessionAccordion({ session, defaultOpen = false }: { session: Se
       </button>
 
       {open && (
-        <section id={panelId} aria-label="Contenu de la séance">
+        <section id={panelId} aria-label={t('accordion.section_aria')}>
           <SessionDetail session={session} />
         </section>
       )}
@@ -47,6 +49,7 @@ export function SessionAccordion({ session, defaultOpen = false }: { session: Se
 /* ── Detail content ── */
 
 function SessionDetail({ session }: { session: Session }) {
+  const { t } = useTranslation('sessions');
   const timeline = computeTimeline(session.blocks);
   const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0);
 
@@ -92,7 +95,7 @@ function SessionDetail({ session }: { session: Session }) {
         ))}
       </div>
       <p className="text-xs text-muted">
-        {session.blocks.length} blocs · ~{session.estimatedDuration} min estimées
+        {t('accordion.summary', { blocks: session.blocks.length, duration: session.estimatedDuration })}
       </p>
     </div>
   );

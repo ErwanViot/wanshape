@@ -52,14 +52,26 @@ describe('shiftYYYYMMDD', () => {
 describe('formatDateLabel', () => {
   const now = new Date(2026, 3, 17); // 2026-04-17
 
-  it('returns today/yesterday/tomorrow', () => {
-    expect(formatDateLabel('20260417', now)).toBe("aujourd'hui");
-    expect(formatDateLabel('20260416', now)).toBe('hier');
-    expect(formatDateLabel('20260418', now)).toBe('demain');
+  it('returns default French today/yesterday/tomorrow when no labels provided', () => {
+    expect(formatDateLabel('20260417', { now })).toBe("aujourd'hui");
+    expect(formatDateLabel('20260416', { now })).toBe('hier');
+    expect(formatDateLabel('20260418', { now })).toBe('demain');
   });
 
-  it('falls back to French short date', () => {
-    const label = formatDateLabel('20260410', now);
+  it('uses provided labels when caller supplies them', () => {
+    const labels = { today: 'today', yesterday: 'yesterday', tomorrow: 'tomorrow' };
+    expect(formatDateLabel('20260417', { now, labels })).toBe('today');
+    expect(formatDateLabel('20260416', { now, labels })).toBe('yesterday');
+    expect(formatDateLabel('20260418', { now, labels })).toBe('tomorrow');
+  });
+
+  it('falls back to localized short date for other dates', () => {
+    const label = formatDateLabel('20260410', { now, locale: 'fr' });
     expect(label).toMatch(/avr/i);
+  });
+
+  it('formats short date with provided locale', () => {
+    const label = formatDateLabel('20260410', { now, locale: 'en' });
+    expect(label).toMatch(/apr/i);
   });
 });

@@ -1,5 +1,6 @@
 import { ClipboardList } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router';
 import { STORAGE_KEYS } from '../config/storage-keys.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -8,11 +9,14 @@ import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import type { ExperienceDuree, FrequenceActuelle, ProgramOnboardingInput } from '../types/custom-program.ts';
 import type { Equipment } from '../types/equipment.ts';
 import { toggleArrayElement } from '../utils/array.ts';
-import { LOADING_PHASES } from './create-program/formOptions.ts';
+import { LOADING_PHASES_COUNT } from './create-program/formOptions.ts';
 import { GeneratingOverlay } from './create-program/GeneratingOverlay.tsx';
 import { StepObjective } from './create-program/StepObjective.tsx';
 import { StepPreferences } from './create-program/StepPreferences.tsx';
 import { StepProfile } from './create-program/StepProfile.tsx';
+
+/** Durations in ms for each loading phase — must match LOADING_PHASES_COUNT */
+const LOADING_PHASE_DURATIONS = [5000, 20000, 10000, 10000] as const;
 
 const MAX_ACTIVE = 3;
 
@@ -51,7 +55,8 @@ const DEFAULT_DRAFT: DraftState = {
 };
 
 export function CreateProgramPage() {
-  useDocumentHead({ title: 'Créer mon programme' });
+  const { t } = useTranslation('programs');
+  useDocumentHead({ title: t('create.page_title') });
 
   const navigate = useNavigate();
   const { generate, loading: generating, error: generateError } = useGenerateProgram();
@@ -80,13 +85,13 @@ export function CreateProgramPage() {
     const interval = setInterval(() => {
       elapsed += 1000;
       let cumulative = 0;
-      for (let i = 0; i < LOADING_PHASES.length; i++) {
-        cumulative += LOADING_PHASES[i].duration;
+      for (let i = 0; i < LOADING_PHASES_COUNT; i++) {
+        cumulative += LOADING_PHASE_DURATIONS[i];
         if (elapsed < cumulative) {
           phase = i;
           break;
         }
-        if (i === LOADING_PHASES.length - 1) phase = i;
+        if (i === LOADING_PHASES_COUNT - 1) phase = i;
       }
       setLoadingPhase(phase);
     }, 1000);
@@ -168,15 +173,13 @@ export function CreateProgramPage() {
     return (
       <div className="max-w-2xl mx-auto px-6 py-12 text-center space-y-6">
         <ClipboardList className="w-12 h-12 text-muted mx-auto" aria-hidden="true" />
-        <h1 className="text-2xl font-bold text-heading">Limite atteinte</h1>
-        <p className="text-muted">
-          Tu as déjà {MAX_ACTIVE} programmes actifs. Supprime un programme existant pour en créer un nouveau.
-        </p>
+        <h1 className="text-2xl font-bold text-heading">{t('create.limit_title')}</h1>
+        <p className="text-muted">{t('create.limit_body', { max: MAX_ACTIVE })}</p>
         <Link
           to="/programmes"
           className="inline-block cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white"
         >
-          Voir mes programmes
+          {t('create.limit_cta')}
         </Link>
       </div>
     );
@@ -191,21 +194,21 @@ export function CreateProgramPage() {
       <div className="relative rounded-2xl overflow-hidden mb-6">
         <img
           src="/images/illustration-program.webp"
-          alt="Créer un programme sportif personnalisé"
+          alt={t('create.img_alt')}
           className="w-full h-32 sm:h-40 object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
         <h1 className="absolute bottom-4 left-4 font-display text-2xl sm:text-3xl font-black text-white drop-shadow-sm">
-          Créer mon programme
+          {t('create.page_title')}
         </h1>
       </div>
 
-      <nav aria-label={`Étape ${draft.step} sur 3`} className="flex items-center gap-1 mb-8">
+      <nav aria-label={t('create.nav_aria', { step: draft.step })} className="flex items-center gap-1 mb-8">
         {(
           [
-            { n: 1, label: 'Objectif' },
-            { n: 2, label: 'Profil' },
-            { n: 3, label: 'Programme' },
+            { n: 1, label: t('create.step_objective') },
+            { n: 2, label: t('create.step_profile') },
+            { n: 3, label: t('create.step_program') },
           ] as const
         ).map(({ n, label }) => {
           const canGo = n < draft.step || (n === 2 && isStep1Valid) || (n === 3 && isStep1Valid && isStep2Valid);
@@ -218,7 +221,7 @@ export function CreateProgramPage() {
               className={`flex-1 flex flex-col items-center gap-1 py-2 rounded-lg transition-colors ${
                 canGo || n === draft.step ? 'cursor-pointer' : 'cursor-default opacity-40'
               }`}
-              aria-label={`Étape ${n} : ${label}`}
+              aria-label={t('create.step_aria', { n, label })}
               aria-current={n === draft.step ? 'step' : undefined}
             >
               <span className={`text-xs font-semibold ${n <= draft.step ? 'text-brand' : 'text-muted'}`}>{label}</span>

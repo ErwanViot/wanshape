@@ -1,6 +1,7 @@
 import { X } from 'lucide-react';
 import { type FormEvent, useState } from 'react';
-import { MEAL_TYPE_LABELS, MEAL_TYPES } from '../../config/nutrition.ts';
+import { useTranslation } from 'react-i18next';
+import { MEAL_TYPES } from '../../config/nutrition.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../../types/nutrition.ts';
 import { AiTextPane } from './AiTextPane.tsx';
@@ -8,13 +9,6 @@ import { BarcodePane } from './BarcodePane.tsx';
 import { FoodSearchInput } from './FoodSearchInput.tsx';
 
 type Mode = 'manual' | 'search' | 'barcode' | 'ai';
-
-const MODE_LABELS: Record<Mode, string> = {
-  manual: 'Saisie libre',
-  search: 'Rechercher',
-  barcode: 'Scanner',
-  ai: 'IA',
-};
 
 interface MealEntryFormProps {
   initialMealType: MealType;
@@ -46,6 +40,7 @@ export function MealEntryForm({
   onSearchSelect,
   onBarcodeSelect,
 }: MealEntryFormProps) {
+  const { t } = useTranslation('nutrition');
   const [mode, setMode] = useState<Mode>('manual');
   const modes: Mode[] = isPremium ? ['manual', 'search', 'barcode', 'ai'] : ['manual', 'search', 'barcode'];
   const [mealType, setMealType] = useState<MealType>(initialMealType);
@@ -67,7 +62,7 @@ export function MealEntryForm({
     setError(null);
     const kcal = Number.parseFloat(calories.replace(',', '.'));
     if (!name.trim() || !Number.isFinite(kcal) || kcal < 0) {
-      setError('Nom et calories sont requis.');
+      setError(t('meal_form.error_required'));
       return;
     }
     setSubmitting(true);
@@ -95,12 +90,12 @@ export function MealEntryForm({
     e.preventDefault();
     setError(null);
     if (!selectedFood) {
-      setError('Sélectionne un aliment.');
+      setError(t('meal_form.error_food'));
       return;
     }
     const grams = Number.parseFloat(portionGrams.replace(',', '.'));
     if (!Number.isFinite(grams) || grams <= 0) {
-      setError('La quantité doit être un nombre positif.');
+      setError(t('meal_form.error_qty'));
       return;
     }
     setSubmitting(true);
@@ -121,12 +116,12 @@ export function MealEntryForm({
   return (
     <div className="space-y-4">
       <header className="flex items-center justify-between">
-        <h2 className="font-display text-lg font-bold text-heading">Ajouter un repas</h2>
+        <h2 className="font-display text-lg font-bold text-heading">{t('meal_form.heading')}</h2>
         <button
           type="button"
           onClick={onCancel}
           className="p-2 rounded-lg text-muted hover:text-heading hover:bg-divider"
-          aria-label="Fermer"
+          aria-label={t('meal_form.close_aria')}
         >
           <X className="w-4 h-4" />
         </button>
@@ -146,13 +141,13 @@ export function MealEntryForm({
               mode === m ? 'bg-brand text-white' : 'text-body hover:text-heading'
             }`}
           >
-            {MODE_LABELS[m]}
+            {t(`meal_form.mode_${m}`)}
           </button>
         ))}
       </div>
 
       <fieldset>
-        <legend className="block text-xs font-medium text-body mb-1">Repas</legend>
+        <legend className="block text-xs font-medium text-body mb-1">{t('meal_form.meal_legend')}</legend>
         <div className="flex flex-wrap gap-1.5">
           {MEAL_TYPES.map((mt) => (
             <button
@@ -164,7 +159,7 @@ export function MealEntryForm({
                 mealType === mt ? 'bg-brand text-white' : 'bg-surface border border-divider text-body'
               }`}
             >
-              {MEAL_TYPE_LABELS[mt]}
+              {t(`meal_type.${mt}`)}
             </button>
           ))}
         </div>
@@ -194,14 +189,14 @@ export function MealEntryForm({
         <form onSubmit={handleManualSubmit} className="space-y-3">
           <div>
             <label htmlFor="meal-name" className="block text-xs font-medium text-body mb-1">
-              Nom du repas
+              {t('meal_form.name_label')}
             </label>
             <input
               id="meal-name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Ex. pâtes bolo maison"
+              placeholder={t('meal_form.name_placeholder')}
               maxLength={200}
               className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-sm text-heading placeholder:text-muted focus:outline-none focus:border-brand"
             />
@@ -209,7 +204,7 @@ export function MealEntryForm({
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label htmlFor="meal-calories" className="block text-xs font-medium text-body mb-1">
-                Calories (kcal) <span className="text-red-400">*</span>
+                {t('meal_form.calories_label')} <span className="text-red-400">*</span>
               </label>
               <input
                 id="meal-calories"
@@ -225,7 +220,7 @@ export function MealEntryForm({
             </div>
             <div>
               <label htmlFor="meal-protein" className="block text-xs font-medium text-body mb-1">
-                Protéines (g)
+                {t('meal_form.protein_label')}
               </label>
               <input
                 id="meal-protein"
@@ -241,7 +236,7 @@ export function MealEntryForm({
             </div>
             <div>
               <label htmlFor="meal-carbs" className="block text-xs font-medium text-body mb-1">
-                Glucides (g)
+                {t('meal_form.carbs_label')}
               </label>
               <input
                 id="meal-carbs"
@@ -256,7 +251,7 @@ export function MealEntryForm({
             </div>
             <div>
               <label htmlFor="meal-fat" className="block text-xs font-medium text-body mb-1">
-                Lipides (g)
+                {t('meal_form.fat_label')}
               </label>
               <input
                 id="meal-fat"
@@ -272,7 +267,7 @@ export function MealEntryForm({
           </div>
           <div>
             <label htmlFor="meal-notes" className="block text-xs font-medium text-body mb-1">
-              Notes (optionnel)
+              {t('meal_form.notes_label')}
             </label>
             <input
               id="meal-notes"
@@ -290,14 +285,14 @@ export function MealEntryForm({
               onClick={onCancel}
               className="flex-1 py-3 rounded-xl text-sm font-medium text-body border border-divider hover:bg-divider transition-colors"
             >
-              Annuler
+              {t('meal_form.cancel')}
             </button>
             <button
               type="submit"
               disabled={submitting}
               className="flex-1 py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {submitting ? 'Ajout…' : 'Ajouter'}
+              {submitting ? t('meal_form.adding') : t('meal_form.add')}
             </button>
           </div>
         </form>
@@ -317,14 +312,14 @@ export function MealEntryForm({
               onClick={onCancel}
               className="flex-1 py-3 rounded-xl text-sm font-medium text-body border border-divider hover:bg-divider transition-colors"
             >
-              Annuler
+              {t('meal_form.cancel')}
             </button>
             <button
               type="submit"
               disabled={submitting || !selectedFood}
               className="flex-1 py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {submitting ? 'Ajout…' : 'Ajouter'}
+              {submitting ? t('meal_form.adding') : t('meal_form.add')}
             </button>
           </div>
         </form>
@@ -342,6 +337,7 @@ interface SearchPaneProps {
 }
 
 function SearchPane({ selectedFood, onSelect, portionGrams, onPortionChange, scaledCalories }: SearchPaneProps) {
+  const { t } = useTranslation('nutrition');
   if (selectedFood) {
     return (
       <div className="space-y-3">
@@ -349,20 +345,20 @@ function SearchPane({ selectedFood, onSelect, portionGrams, onPortionChange, sca
           <div className="flex items-start justify-between gap-2">
             <p className="text-sm text-heading font-medium">{selectedFood.name_fr}</p>
             <button type="button" onClick={() => onSelect(null)} className="text-xs text-brand hover:underline">
-              Changer
+              {t('meal_form.change')}
             </button>
           </div>
           <p className="text-xs text-muted">
             Base :{' '}
             {selectedFood.calories_100g != null
-              ? `${Math.round(selectedFood.calories_100g)} kcal / 100 g`
-              : 'calories indisponibles'}
+              ? t('meal_form.kcal_per_100', { kcal: Math.round(selectedFood.calories_100g) })
+              : t('meal_form.calories_unavailable')}
             {selectedFood.group_fr ? ` · ${selectedFood.group_fr}` : ''}
           </p>
         </div>
         <div>
           <label htmlFor="portion-grams" className="block text-xs font-medium text-body mb-1">
-            Quantité (g)
+            {t('meal_form.qty_label')}
           </label>
           <input
             id="portion-grams"
@@ -376,9 +372,11 @@ function SearchPane({ selectedFood, onSelect, portionGrams, onPortionChange, sca
           />
         </div>
         {scaledCalories != null && (
-          <p className="text-sm text-body">
-            Soit <span className="font-bold text-brand">{Math.round(scaledCalories)} kcal</span> pour cette portion.
-          </p>
+          <p
+            className="text-sm text-body"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
+            dangerouslySetInnerHTML={{ __html: t('meal_form.portion_text', { kcal: Math.round(scaledCalories) }) }}
+          />
         )}
       </div>
     );

@@ -1,20 +1,10 @@
 import { Dumbbell, Sparkles, Zap } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { CompletionWithTitle } from '../../hooks/useHistory.ts';
 import { formatShortDate } from '../../utils/date.ts';
 
 type HistoryFilter = 'all' | 'program' | 'free';
-
-const BLOCK_LABELS: Record<string, string> = {
-  classic: 'Classique',
-  circuit: 'Circuit',
-  hiit: 'HIIT',
-  tabata: 'Tabata',
-  emom: 'EMOM',
-  amrap: 'AMRAP',
-  superset: 'Superset',
-  pyramid: 'Pyramide',
-};
 
 const BLOCK_COLORS: Record<string, string> = {
   classic: 'bg-classic/15 text-classic',
@@ -27,14 +17,15 @@ const BLOCK_COLORS: Record<string, string> = {
   pyramid: 'bg-pyramid/15 text-pyramid',
 };
 
-function formatMonthYear(iso: string): string {
-  return new Date(iso).toLocaleDateString('fr-FR', {
+function formatMonthYear(iso: string, locale: string): string {
+  return new Date(iso).toLocaleDateString(locale, {
     month: 'long',
     year: 'numeric',
   });
 }
 
 export function RecentSessions({ completions }: { completions: CompletionWithTitle[] }) {
+  const { t, i18n } = useTranslation('stats');
   const [filter, setFilter] = useState<HistoryFilter>('all');
   const [limit, setLimit] = useState(10);
 
@@ -50,7 +41,7 @@ export function RecentSessions({ completions }: { completions: CompletionWithTit
   const grouped = useMemo(() => {
     const groups: { month: string; items: CompletionWithTitle[] }[] = [];
     for (const c of visible) {
-      const month = formatMonthYear(c.completed_at);
+      const month = formatMonthYear(c.completed_at, i18n.language);
       const last = groups[groups.length - 1];
       if (last && last.month === month) {
         last.items.push(c);
@@ -59,18 +50,20 @@ export function RecentSessions({ completions }: { completions: CompletionWithTit
       }
     }
     return groups;
-  }, [visible]);
+  }, [visible, i18n.language]);
 
   return (
     <>
       <div className="flex items-center justify-between mb-4">
-        <p className="text-sm font-bold text-heading">Historique</p>
+        <p className="text-sm font-bold text-heading">{t('recent_sessions.history')}</p>
         <div className="flex items-center gap-1.5">
-          {[
-            { value: 'all' as const, label: 'Tout' },
-            { value: 'program' as const, label: 'Prog' },
-            { value: 'free' as const, label: 'Libre' },
-          ].map(({ value, label }) => (
+          {(
+            [
+              { value: 'all' as const, labelKey: 'recent_sessions.filter_all' },
+              { value: 'program' as const, labelKey: 'recent_sessions.filter_program' },
+              { value: 'free' as const, labelKey: 'recent_sessions.filter_free' },
+            ] as { value: HistoryFilter; labelKey: string }[]
+          ).map(({ value, labelKey }) => (
             <button
               key={value}
               type="button"
@@ -82,14 +75,14 @@ export function RecentSessions({ completions }: { completions: CompletionWithTit
                 filter === value ? 'bg-brand text-white' : 'bg-surface-2 text-muted hover:text-heading'
               }`}
             >
-              {label}
+              {t(labelKey)}
             </button>
           ))}
         </div>
       </div>
 
       {grouped.length === 0 ? (
-        <p className="text-sm text-muted text-center py-4">Aucune séance dans cette catégorie.</p>
+        <p className="text-sm text-muted text-center py-4">{t('recent_sessions.empty')}</p>
       ) : (
         <div className="space-y-5">
           {grouped.map(({ month, items }) => (
@@ -111,7 +104,7 @@ export function RecentSessions({ completions }: { completions: CompletionWithTit
           onClick={() => setLimit((l) => l + 20)}
           className="w-full py-2.5 mt-3 rounded-xl border border-divider text-xs font-semibold text-muted hover:text-heading hover:border-divider-strong transition-colors cursor-pointer"
         >
-          Charger plus
+          {t('recent_sessions.load_more')}
         </button>
       )}
     </>
@@ -119,8 +112,9 @@ export function RecentSessions({ completions }: { completions: CompletionWithTit
 }
 
 function SessionCard({ completion: c }: { completion: CompletionWithTitle }) {
+  const { t, i18n } = useTranslation('stats');
   const minutes = c.duration_seconds ? Math.round(c.duration_seconds / 60) : null;
-  const title = c.session_title ?? 'Séance';
+  const title = c.session_title ?? t('recent_sessions.default_title');
   const isProgram = c.program_session_id != null;
   const isCustom = c.custom_session_id != null;
   const hasDetails = c.session_description || c.block_types.length > 0 || c.session_focus.length > 0;
@@ -144,7 +138,7 @@ function SessionCard({ completion: c }: { completion: CompletionWithTitle }) {
         </div>
         <div className="flex items-center gap-3 shrink-0 text-right">
           {minutes != null && <span className="text-xs font-semibold text-heading tabular-nums">{minutes} min</span>}
-          <span className="text-[11px] text-muted w-14">{formatShortDate(c.completed_at)}</span>
+          <span className="text-[11px] text-muted w-14">{formatShortDate(c.completed_at, i18n.language)}</span>
         </div>
       </div>
 
@@ -159,7 +153,7 @@ function SessionCard({ completion: c }: { completion: CompletionWithTitle }) {
                   key={type}
                   className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold ${BLOCK_COLORS[type] ?? 'bg-surface-2 text-muted'}`}
                 >
-                  {BLOCK_LABELS[type] ?? type}
+                  {t(`block_label.${type}`, type)}
                 </span>
               ))}
               {c.session_focus.map((f) => (
@@ -179,7 +173,7 @@ function SessionCard({ completion: c }: { completion: CompletionWithTitle }) {
       {c.amrap_rounds != null && c.amrap_rounds > 0 && (
         <div className="mt-1.5 ml-11">
           <span className="text-[10px] font-semibold text-amrap">
-            {c.amrap_rounds} round{c.amrap_rounds > 1 ? 's' : ''}
+            {t(c.amrap_rounds === 1 ? 'amrap_rounds_one' : 'amrap_rounds_other', { n: c.amrap_rounds })}
           </span>
         </div>
       )}

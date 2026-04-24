@@ -1,5 +1,6 @@
 import { ArrowLeft, Trash2 } from 'lucide-react';
 import { type FormEvent, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useNutritionProfile } from '../hooks/useNutritionProfile.ts';
@@ -7,9 +8,10 @@ import type { ActivityLevel, NutritionGoal, TdeeResult } from '../types/nutritio
 import { TdeeCalculatorForm } from './nutrition/TdeeCalculatorForm.tsx';
 
 export function NutritionSetupPage() {
+  const { t } = useTranslation('nutrition');
   useDocumentHead({
-    title: 'Cible nutritionnelle · Wan2Fit',
-    description: 'Définis ta cible calorique quotidienne sans partager tes données corporelles.',
+    title: t('setup.title'),
+    description: t('setup.description'),
   });
 
   const navigate = useNavigate();
@@ -41,7 +43,7 @@ export function NutritionSetupPage() {
     setManualError(null);
     const kcal = Number.parseInt(manualTarget.replace(/[^\d]/g, ''), 10);
     if (!Number.isFinite(kcal) || kcal < 1000 || kcal > 5000) {
-      setManualError('La cible doit être entre 1000 et 5000 kcal.');
+      setManualError(t('setup.target_error'));
       return;
     }
     setSaving(true);
@@ -70,25 +72,25 @@ export function NutritionSetupPage() {
           className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-heading transition-colors"
         >
           <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-          Retour au suivi
+          {t('setup.back')}
         </Link>
 
         <header>
-          <h1 className="font-display text-2xl sm:text-3xl font-black text-heading">Ta cible calorique</h1>
-          <p className="text-sm text-body mt-2 leading-relaxed">
-            Définir une cible est <strong>facultatif</strong>. Le suivi marche très bien en awareness pur (tu regardes
-            ce que tu consommes, sans objectif). Si tu veux en avoir une, tu peux soit la calculer avec tes données
-            morphologiques (qui restent dans ton navigateur), soit taper directement un chiffre.
-          </p>
+          <h1 className="font-display text-2xl sm:text-3xl font-black text-heading">{t('setup.heading')}</h1>
+          <p
+            className="text-sm text-body mt-2 leading-relaxed"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
+            dangerouslySetInnerHTML={{ __html: t('setup.intro') }}
+          />
         </header>
 
         <section className="rounded-2xl bg-surface-card border border-card-border p-6 space-y-4">
-          <h2 className="font-display text-lg font-bold text-heading">Option 1 — Saisir un chiffre</h2>
-          <p className="text-sm text-muted">Tu sais déjà ce que tu vises. On stocke juste ce nombre, rien d'autre.</p>
+          <h2 className="font-display text-lg font-bold text-heading">{t('setup.option1_title')}</h2>
+          <p className="text-sm text-muted">{t('setup.option1_desc')}</p>
           <form onSubmit={handleManualSubmit} className="space-y-3">
             <div>
               <label htmlFor="manual-target" className="block text-xs font-medium text-body mb-1">
-                Cible quotidienne (kcal)
+                {t('setup.target_label')}
               </label>
               <input
                 id="manual-target"
@@ -109,25 +111,30 @@ export function NutritionSetupPage() {
               disabled={saving || loading}
               className="w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50"
             >
-              {saving ? 'Sauvegarde…' : 'Enregistrer cette cible'}
+              {saving ? t('setup.saving') : t('setup.save')}
             </button>
           </form>
         </section>
 
         <section className="rounded-2xl bg-surface-card border border-card-border p-6 space-y-4">
-          <h2 className="font-display text-lg font-bold text-heading">Option 2 — Calcul assisté (éphémère)</h2>
+          <h2 className="font-display text-lg font-bold text-heading">{t('setup.option2_title')}</h2>
           <TdeeCalculatorForm onAccept={handleTdeeAccept} onCancel={() => navigate('/nutrition')} />
         </section>
 
         {profile?.target_calories != null && (
           <section className="rounded-2xl bg-surface-card border border-divider p-6 space-y-3">
-            <h2 className="font-display text-base font-bold text-heading">Cible actuelle</h2>
+            <h2 className="font-display text-base font-bold text-heading">{t('setup.current_target_title')}</h2>
             <p className="text-sm text-body">
-              {profile.target_calories} kcal / jour
+              {t('setup.current_target', { kcal: profile.target_calories })}
               {profile.goal && (
                 <span className="text-muted">
                   {' '}
-                  · {profile.goal === 'loss' ? 'perte' : profile.goal === 'gain' ? 'prise' : 'maintien'}
+                  ·{' '}
+                  {profile.goal === 'loss'
+                    ? t('setup.goal_loss')
+                    : profile.goal === 'gain'
+                      ? t('setup.goal_gain')
+                      : t('setup.goal_maintenance')}
                 </span>
               )}
             </p>
@@ -138,7 +145,7 @@ export function NutritionSetupPage() {
               className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-red-400 border border-red-400/30 hover:bg-red-400/10 transition-colors disabled:opacity-50"
             >
               <Trash2 className="w-3.5 h-3.5" aria-hidden="true" />
-              Supprimer la cible
+              {t('setup.delete_target')}
             </button>
           </section>
         )}

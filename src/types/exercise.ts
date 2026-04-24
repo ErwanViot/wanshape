@@ -18,18 +18,7 @@ export interface ExerciseData {
   commonMistakes: string[];
 }
 
-export const CATEGORY_LABELS: Record<ExerciseCategory, string> = {
-  upper: 'Haut du corps',
-  lower: 'Bas du corps',
-  core: 'Core',
-  cardio: 'Cardio',
-  'full-body': 'Full body',
-  mobility: 'Mobilité',
-};
-
 export const CATEGORY_ORDER: ExerciseCategory[] = ['upper', 'lower', 'core', 'cardio', 'full-body', 'mobility'];
-
-export const DIFFICULTY_LABELS = ['Accessible', 'Intermédiaire', 'Avancé'] as const;
 
 export const DIFFICULTY_COLORS = [
   'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',

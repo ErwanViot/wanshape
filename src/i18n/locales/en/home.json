@@ -1,0 +1,140 @@
+{
+  "page_description": "Every day, a guided workout with no equipment. 8 training formats, 25-40 min. Free to start, premium to go further.",
+  "sr_title": "Wan2Fit — Your daily workout",
+  "connected": {
+    "greeting": "Hey {{firstName}}",
+    "ready": "Ready to move?",
+    "today_card": {
+      "heading": "Today's session",
+      "session_alt": "Today's session: {{title}}",
+      "duration": "~{{duration}} min",
+      "cta": "Let's go",
+      "load_error": "Could not load the session",
+      "load_error_hint": "Check your connection and try again.",
+      "empty_alt": "No session scheduled",
+      "empty": "No session today"
+    },
+    "ai_card": {
+      "heading": "Custom session",
+      "badge_premium": "Premium",
+      "session_alt": "AI-personalized session",
+      "description": "AI generates a session tailored to your preferences and level.",
+      "cta_play": "Let's go",
+      "cta_unlock": "Unlock with Premium"
+    },
+    "program_card": {
+      "heading_active": "My program",
+      "heading_empty": "Programs",
+      "program_alt": "Training programs",
+      "progress": "{{completed}}/{{total}} sessions",
+      "next_session": "Next:",
+      "cta_play": "Let's go",
+      "cta_choose": "Choose a program",
+      "description": "A structured plan over several weeks to keep progressing."
+    }
+  },
+  "visitor": {
+    "hero": {
+      "badge": "No equipment, anywhere",
+      "headline_1": "Progress",
+      "headline_2": "at your own pace",
+      "subtitle": "A guided session every day, 8 varied formats, 25-40 min. Free to start, premium to go further.",
+      "cta_signup": "Start for free",
+      "cta_try": "Try without signing up"
+    },
+    "how_it_works": {
+      "heading": "How it works",
+      "step_1_title": "Choose your session",
+      "step_1_desc": "Today's session, free format, or a program — you decide.",
+      "step_2_title": "Get started",
+      "step_2_desc": "Guided exercises, built-in timer, automatic transitions.",
+      "step_3_title": "Track your progress",
+      "step_3_desc": "History, stats, and programs to keep pushing further."
+    },
+    "feature_today": {
+      "label": "Today's session",
+      "heading_1": "Every day,",
+      "heading_2": "a new session",
+      "body": "No need to think. You open the app, your session is waiting — with a different format every day.",
+      "bullet_1": "8 varied formats: HIIT, EMOM, Circuit, Tabata…",
+      "bullet_2": "25 to 40 min, fits your schedule",
+      "bullet_3": "100% equipment-free, doable anywhere",
+      "cta": "Try now",
+      "session_alt": "Today's session: {{title}}",
+      "duration": "~{{duration}} min",
+      "today_label": "Today",
+      "empty_alt": "No session scheduled",
+      "empty": "No session today",
+      "play_cta": "Let's go"
+    },
+    "feature_player": {
+      "label": "Guided workout",
+      "heading_1": "All you have to do",
+      "heading_2": "is follow the pace",
+      "body": "Timer, rep counter, automatic transitions — the player handles everything so you can stay focused on the effort.",
+      "bullet_1": "Real-time guided timer and reps",
+      "bullet_2": "Automatic block transitions",
+      "bullet_3": "Audio cue at each transition",
+      "cta": "Start a session",
+      "carousel_reps_alt": "Player — rep exercise",
+      "carousel_emom_alt": "Player — EMOM with timer",
+      "carousel_hiit_alt": "Player — HIIT Mountain climbers",
+      "carousel_cooldown_alt": "Player — Cool down"
+    },
+    "feature_ai": {
+      "label": "Custom AI",
+      "badge": "Premium",
+      "heading_1": "Sessions created",
+      "heading_2": "just for you",
+      "body": "Artificial intelligence generates sessions and programs tailored to your preferences, level, and goals.",
+      "bullet_1": "Personalized sessions in seconds",
+      "bullet_2": "Custom programs with built-in progression",
+      "bullet_3": "Adapts to your feedback and current form",
+      "cta": "Discover Premium",
+      "carousel_quick_alt": "Create a session — Quick mode",
+      "carousel_detailed_alt": "Create a session — Detailed mode",
+      "carousel_expert_alt": "Create a session — Expert mode",
+      "carousel_detail_alt": "Detail of a personalized session"
+    },
+    "feature_programs": {
+      "label": "Guided programs",
+      "heading_1": "A structured plan",
+      "heading_2": "to keep progressing",
+      "body": "Follow a complete program with built-in progression, detailed tracking, and sessions adapted to each stage.",
+      "bullet_1": "3 included programs to get started",
+      "bullet_2": "Completion tracking and clear goals",
+      "bullet_3": "Custom programs to reach your goals",
+      "cta": "See programs",
+      "carousel_list_alt": "Available programs list",
+      "carousel_goal_alt": "Create program — Goal",
+      "carousel_profile_alt": "Create program — Profile",
+      "carousel_config_alt": "Create program — Configuration"
+    },
+    "about_teaser": {
+      "photo_alt": "Wan",
+      "question": "Why Wan2Fit?",
+      "subtitle": "The story behind the project — by Wan"
+    },
+    "cta_section": {
+      "heading": "Ready to start?",
+      "body": "Your daily session is waiting — join Wan2Fit and begin today.",
+      "signup": "Create my free account",
+      "explore": "Explore the formats"
+    }
+  },
+  "tomorrow": {
+    "label": "Tomorrow",
+    "session_alt": "Tomorrow's session: {{title}}",
+    "duration": "~{{duration}} min"
+  },
+  "welcome_modal": {
+    "image_alt": "",
+    "title": "Welcome to Wan2Fit!",
+    "subtitle": "Ready to push yourself? Here's how to get started:",
+    "option_today_title": "Start today's session",
+    "option_today_desc": "25-40 min, no equipment",
+    "option_program_title": "Choose a program",
+    "option_program_desc": "Several weeks, visible results",
+    "dismiss": "I'll explore on my own"
+  }
+}

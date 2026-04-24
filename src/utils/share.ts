@@ -1,10 +1,24 @@
 import type { Session } from '../types/session';
 import { computeDifficulty } from './sessionDifficulty';
 
+interface ShareLabels {
+  minutes: string;
+  blocks: string;
+  difficulty: string;
+  rounds: string;
+  trophyMessage: string;
+  joinCta: string;
+  amrapSuffix: string;
+}
+
 interface ShareData {
   session: Session;
   realMinutes: number;
   amrapRounds: number;
+  /** Already-translated label for difficulty (e.g. "Easy" / "Accessible") */
+  difficultyLabel: string;
+  /** Translated strings used inside the canvas and share text */
+  labels: ShareLabels;
 }
 
 const CARD_SIZE = 1080;
@@ -54,7 +68,13 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: numbe
 }
 
 /** Generate the branded share card as a Blob */
-export async function generateShareCard({ session, realMinutes, amrapRounds }: ShareData): Promise<Blob> {
+export async function generateShareCard({
+  session,
+  realMinutes,
+  amrapRounds,
+  difficultyLabel,
+  labels,
+}: ShareData): Promise<Blob> {
   const canvas = document.createElement('canvas');
   canvas.width = CARD_SIZE;
   canvas.height = CARD_SIZE;
@@ -153,12 +173,12 @@ export async function generateShareCard({ session, realMinutes, amrapRounds }: S
   const diffColor = DIFFICULTY_COLORS[difficulty.level] ?? ACCENT;
 
   const stats: { value: string; label: string; color: string }[] = [
-    { value: `${realMinutes}`, label: 'minutes', color: WHITE },
-    { value: `${session.blocks.length}`, label: 'blocs', color: WHITE },
-    { value: difficulty.label, label: 'difficulté', color: diffColor },
+    { value: `${realMinutes}`, label: labels.minutes, color: WHITE },
+    { value: `${session.blocks.length}`, label: labels.blocks, color: WHITE },
+    { value: difficultyLabel, label: labels.difficulty, color: diffColor },
   ];
   if (amrapRounds > 0) {
-    stats.push({ value: `${amrapRounds}`, label: 'rounds', color: '#FBBF24' });
+    stats.push({ value: `${amrapRounds}`, label: labels.rounds, color: '#FBBF24' });
   }
 
   const statsY = 560;
@@ -210,12 +230,12 @@ export async function generateShareCard({ session, realMinutes, amrapRounds }: S
   ctx.fillStyle = WHITE;
   ctx.font = 'bold 34px Satoshi, Inter, system-ui, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('🏆  +1 séance dans la boîte !', CARD_SIZE / 2, 860);
+  ctx.fillText(`🏆  ${labels.trophyMessage}`, CARD_SIZE / 2, 860);
 
   // --- CTA ---
   ctx.fillStyle = MUTED;
   ctx.font = '24px Inter, system-ui, sans-serif';
-  ctx.fillText('Rejoins le mouvement → wan2fit.fr', CARD_SIZE / 2, 940);
+  ctx.fillText(`${labels.joinCta} → wan2fit.fr`, CARD_SIZE / 2, 940);
   ctx.textAlign = 'left';
 
   // --- Border frame ---
@@ -230,14 +250,14 @@ export async function generateShareCard({ session, realMinutes, amrapRounds }: S
 }
 
 /** Build the share text message */
-function buildShareText({ session, realMinutes, amrapRounds }: ShareData): string {
+function buildShareText({ session, realMinutes, amrapRounds, difficultyLabel, labels }: ShareData): string {
   const difficulty = computeDifficulty(session);
   const emoji = DIFFICULTY_EMOJI[difficulty.level] ?? '💪';
-  let stats = `${session.title} · ${realMinutes} min · ${difficulty.label}`;
+  let stats = `${session.title} · ${realMinutes} min · ${difficultyLabel}`;
   if (amrapRounds > 0) {
-    stats += ` · ${amrapRounds} rounds AMRAP`;
+    stats += ` · ${amrapRounds} ${labels.amrapSuffix}`;
   }
-  return `🏆 +1 séance dans la boîte !\n${emoji} ${stats}\nRejoins le mouvement →`;
+  return `🏆 ${labels.trophyMessage}\n${emoji} ${stats}\n${labels.joinCta} →`;
 }
 
 const SHARE_URL = 'https://wan2fit.fr';

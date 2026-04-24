@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { AtomicStep } from '../types/player.ts';
 import { ExerciseListWithVideos } from './ExerciseListWithVideos.tsx';
 import { TimerDisplay } from './TimerDisplay.tsx';
@@ -11,19 +12,19 @@ interface Props {
 }
 
 export function EMOMView({ step, remaining, progress, showVideos, onToggleShowVideos }: Props) {
+  const { t } = useTranslation('player');
+
   return (
     <div className="flex flex-col items-center justify-center flex-1 gap-6 px-6 text-center">
       {/* Minute indicator */}
       <div className="text-white/50 text-sm font-medium">
-        {step.roundInfo && `Minute ${step.roundInfo.current}/${step.roundInfo.total}`}
+        {step.roundInfo && t('emom_view.minute', { current: step.roundInfo.current, total: step.roundInfo.total })}
       </div>
 
       {/* Block name + explanation */}
       <div className="space-y-1">
         <h2 className="text-2xl font-bold text-white">{step.blockName}</h2>
-        <p className="text-white/60 text-sm">
-          Réalise les exercices dans la minute. Le temps restant est ta récupération.
-        </p>
+        <p className="text-white/60 text-sm">{t('emom_view.explanation')}</p>
       </div>
 
       {/* Timer */}

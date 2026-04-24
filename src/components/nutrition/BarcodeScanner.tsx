@@ -1,5 +1,6 @@
 import { ScanLine } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface BarcodeScannerProps {
   onDetected: (barcode: string) => void;
@@ -27,6 +28,7 @@ const SUPPORTED_FORMATS = ['ean_13', 'ean_8', 'upc_a', 'upc_e'];
  * we only decode locally and forward the decoded string.
  */
 export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
+  const { t } = useTranslation('nutrition');
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -131,7 +133,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
     e.preventDefault();
     const trimmed = manualBarcode.replace(/\s+/g, '');
     if (!/^[0-9]{8,14}$/.test(trimmed)) {
-      setManualError('Le code-barres doit contenir 8 à 14 chiffres.');
+      setManualError(t('barcode_scanner.manual_error'));
       return;
     }
     setManualError(null);
@@ -144,7 +146,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ScanLine className="w-4 h-4 text-brand" aria-hidden="true" />
-          <h3 className="font-display text-base font-bold text-heading">Scanner un code-barres</h3>
+          <h3 className="font-display text-base font-bold text-heading">{t('barcode_scanner.heading')}</h3>
         </div>
         <button
           type="button"
@@ -154,7 +156,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
           }}
           className="text-xs text-muted hover:text-heading"
         >
-          Fermer
+          {t('barcode_scanner.close')}
         </button>
       </header>
 
@@ -165,35 +167,26 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
             className="w-full h-full object-cover"
             playsInline
             muted
-            aria-label="Aperçu caméra pour scan de code-barres"
+            aria-label={t('barcode_scanner.camera_aria')}
           />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-3/4 h-20 border-2 border-brand/80 rounded-lg" />
           </div>
           {status === 'scanning' && (
             <p className="absolute bottom-2 left-0 right-0 text-center text-xs text-white/80">
-              Aligne le code-barres dans le cadre…
+              {t('barcode_scanner.frame_hint')}
             </p>
           )}
         </div>
       )}
 
-      {status === 'unsupported' && (
-        <p className="text-sm text-body">
-          Le scan automatique n'est pas pris en charge par ce navigateur (iOS Safari notamment). Saisis le code
-          manuellement ci-dessous.
-        </p>
-      )}
-      {status === 'permission_denied' && (
-        <p className="text-sm text-body">Accès à la caméra refusé. Tu peux saisir le code manuellement.</p>
-      )}
-      {status === 'error' && (
-        <p className="text-sm text-red-400">Impossible d'ouvrir la caméra. Saisis le code manuellement.</p>
-      )}
+      {status === 'unsupported' && <p className="text-sm text-body">{t('barcode_scanner.unsupported')}</p>}
+      {status === 'permission_denied' && <p className="text-sm text-body">{t('barcode_scanner.permission_denied')}</p>}
+      {status === 'error' && <p className="text-sm text-red-400">{t('barcode_scanner.error')}</p>}
 
       <form onSubmit={handleManualSubmit} className="space-y-2">
         <label htmlFor="manual-barcode" className="block text-xs font-medium text-body">
-          Saisie manuelle du code-barres
+          {t('barcode_scanner.manual_label')}
         </label>
         <div className="flex gap-2">
           <input
@@ -204,17 +197,17 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
             autoComplete="off"
             value={manualBarcode}
             onChange={(e) => setManualBarcode(e.target.value)}
-            placeholder="3017620422003"
+            placeholder={t('barcode_scanner.manual_placeholder')}
             className="flex-1 px-4 py-3 rounded-xl bg-surface border border-divider text-sm text-heading placeholder:text-muted focus:outline-none focus:border-brand"
           />
           <button type="submit" className="px-4 py-3 rounded-xl text-sm font-bold text-white cta-gradient">
-            Valider
+            {t('barcode_scanner.validate')}
           </button>
         </div>
         {manualError && <p className="text-xs text-red-400">{manualError}</p>}
       </form>
 
-      <p className="text-[11px] text-muted italic">Données fournies via Open Food Facts (licence ODbL).</p>
+      <p className="text-[11px] text-muted italic">{t('barcode_scanner.source_credit')}</p>
     </div>
   );
 }

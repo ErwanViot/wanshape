@@ -1,4 +1,5 @@
 import { ChevronRight, Utensils } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useDailyNutrition } from '../../hooks/useDailyNutrition.ts';
 import { useNutritionProfile } from '../../hooks/useNutritionProfile.ts';
@@ -9,6 +10,7 @@ import { CalorieRing } from './CalorieRing.tsx';
  * links to /nutrition. Hidden for visitors (no user → no fetch).
  */
 export function NutritionWidget() {
+  const { t } = useTranslation('nutrition');
   const { profile } = useNutritionProfile();
   const { summary, loading } = useDailyNutrition();
   const targetCalories = profile?.target_calories ?? null;
@@ -17,7 +19,7 @@ export function NutritionWidget() {
     <Link
       to="/nutrition"
       className="flex items-center gap-4 rounded-2xl border border-card-border bg-surface-card px-5 py-4 group hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10 transition-all"
-      aria-label="Suivi nutritionnel du jour"
+      aria-label={t('widget.aria')}
     >
       <div className="shrink-0">
         {loading ? (
@@ -29,16 +31,18 @@ export function NutritionWidget() {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
           <Utensils className="w-4 h-4 text-brand" aria-hidden="true" />
-          <h3 className="font-display text-base font-bold text-heading">Nutrition du jour</h3>
+          <h3 className="font-display text-base font-bold text-heading">{t('widget.heading')}</h3>
         </div>
         {targetCalories != null ? (
           <p className="text-sm text-body">
-            {Math.round(summary.totals.calories)} kcal consommés — cible {targetCalories} kcal
+            {t('widget.consumed_with_target', { current: Math.round(summary.totals.calories), target: targetCalories })}
           </p>
         ) : (
-          <p className="text-sm text-body">{Math.round(summary.totals.calories)} kcal consommés aujourd'hui</p>
+          <p className="text-sm text-body">
+            {t('widget.consumed_no_target', { current: Math.round(summary.totals.calories) })}
+          </p>
         )}
-        <p className="text-xs text-muted mt-1">Ajouter un repas →</p>
+        <p className="text-xs text-muted mt-1">{t('widget.add_hint')}</p>
       </div>
       <ChevronRight
         className="w-5 h-5 text-muted shrink-0 group-hover:text-brand transition-colors"

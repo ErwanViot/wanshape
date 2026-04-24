@@ -1,4 +1,5 @@
 import type { RefObject } from 'react';
+import { useTranslation } from 'react-i18next';
 import { OBJECTIF_OPTIONS } from './formOptions.ts';
 
 export interface StepObjectiveProps {
@@ -20,14 +21,15 @@ export function StepObjective({
   onChangeDetail,
   onNext,
 }: StepObjectiveProps) {
+  const { t } = useTranslation('programs');
   return (
     <div className="space-y-6">
       <h1 ref={stepHeadingRef} tabIndex={-1} className="text-2xl sm:text-3xl font-bold text-heading outline-none">
-        Qu'est-ce qui te motive ?
+        {t('step_objective.title')}
       </h1>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-heading mb-3">Choisis tes objectifs</legend>
+        <legend className="text-sm font-semibold text-heading mb-3">{t('step_objective.legend')}</legend>
         <div className="flex flex-wrap gap-2">
           {OBJECTIF_OPTIONS.map((o) => (
             <button
@@ -41,7 +43,7 @@ export function StepObjective({
                   : 'border-divider text-muted hover:border-brand/30'
               }`}
             >
-              {o.label}
+              {t(`goal.${o.value}`)}
             </button>
           ))}
         </div>
@@ -49,16 +51,16 @@ export function StepObjective({
 
       <div>
         <label htmlFor="objectif-detail" className="text-sm font-semibold text-heading mb-1 block">
-          Dis-nous en plus
+          {t('step_objective.detail_label')}
         </label>
-        <p className="text-xs text-muted mb-2">Plus tu précises, plus ton programme sera adapté.</p>
+        <p className="text-xs text-muted mb-2">{t('step_objective.detail_hint')}</p>
         <textarea
           id="objectif-detail"
           value={objectifDetail}
           onChange={(e) => onChangeDetail(e.target.value)}
           maxLength={300}
           rows={3}
-          placeholder="Ex : perdre 5kg avant l'été, pré-saison foot, programme en parallèle du basket pour performer le week-end..."
+          placeholder={t('step_objective.detail_placeholder')}
           className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand"
         />
       </div>
@@ -69,7 +71,7 @@ export function StepObjective({
         disabled={!isValid}
         className="cta-gradient w-full py-4 rounded-xl text-sm font-bold text-white tracking-wide cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Suivant
+        {t('step_objective.next')}
       </button>
     </div>
   );

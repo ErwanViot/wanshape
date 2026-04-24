@@ -1,9 +1,6 @@
-import i18n from 'i18next';
+import i18n, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-
-import commonEn from './locales/en/common.json';
-import commonFr from './locales/fr/common.json';
 
 export const SUPPORTED_LOCALES = ['fr', 'en'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
@@ -15,10 +12,26 @@ export function isSupportedLocale(value: string): value is SupportedLocale {
   return (SUPPORTED_LOCALES as readonly string[]).includes(value);
 }
 
-const resources = {
-  fr: { common: commonFr },
-  en: { common: commonEn },
-} as const;
+// Eagerly load every namespace JSON file so the app has full translations from first render.
+// Path shape: ./locales/<locale>/<namespace>.json
+const modules = import.meta.glob<{ default: Record<string, unknown> }>('./locales/*/*.json', {
+  eager: true,
+});
+
+const resources: Resource = {};
+const namespaceSet = new Set<string>();
+
+for (const [path, mod] of Object.entries(modules)) {
+  const match = path.match(/\.\/locales\/([^/]+)\/([^/]+)\.json$/);
+  if (!match) continue;
+  const [, locale, namespace] = match;
+  if (!isSupportedLocale(locale)) continue;
+  namespaceSet.add(namespace);
+  resources[locale] ??= {};
+  resources[locale][namespace] = mod.default;
+}
+
+const namespaces = Array.from(namespaceSet);
 
 i18n
   .use(LanguageDetector)
@@ -27,7 +40,7 @@ i18n
     resources,
     fallbackLng: DEFAULT_LOCALE,
     supportedLngs: SUPPORTED_LOCALES,
-    ns: ['common'],
+    ns: namespaces,
     defaultNS: 'common',
     interpolation: { escapeValue: false },
     detection: {

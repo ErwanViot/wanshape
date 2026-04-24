@@ -1,5 +1,6 @@
 import { Sparkles } from 'lucide-react';
 import { type FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useEstimateNutrition } from '../../hooks/useEstimateNutrition.ts';
 import type { MealLogInsert, MealType, TextEstimate } from '../../types/nutrition.ts';
 
@@ -9,13 +10,8 @@ interface AiTextPaneProps {
   onCancel: () => void;
 }
 
-const CONFIDENCE_LABEL: Record<TextEstimate['confidence'], string> = {
-  low: 'Faible',
-  medium: 'Moyenne',
-  high: 'Élevée',
-};
-
 export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
+  const { t } = useTranslation('nutrition');
   const { estimateFromText, loading, error, reset } = useEstimateNutrition();
   const [description, setDescription] = useState('');
   const [estimate, setEstimate] = useState<TextEstimate | null>(null);
@@ -68,16 +64,16 @@ export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <Sparkles className="w-4 h-4 text-brand" aria-hidden="true" />
-        <h3 className="font-display text-base font-bold text-heading">Estimation IA</h3>
+        <h3 className="font-display text-base font-bold text-heading">{t('ai_pane.heading')}</h3>
         <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full">
-          Premium
+          {t('ai_pane.premium_badge')}
         </span>
       </div>
 
       <form onSubmit={handleEstimate} className="space-y-3">
         <div>
           <label htmlFor="ai-description" className="block text-xs font-medium text-body mb-1">
-            Décris ton repas en quelques mots
+            {t('ai_pane.description_label')}
           </label>
           <textarea
             id="ai-description"
@@ -85,13 +81,10 @@ export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
             maxLength={1000}
-            placeholder="Ex. pâtes bolognaise maison, 300 g, avec 20 g parmesan"
+            placeholder={t('ai_pane.description_placeholder')}
             className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-sm text-heading placeholder:text-muted focus:outline-none focus:border-brand"
           />
-          <p className="text-[11px] text-muted mt-1">
-            L'estimation est indicative (±20%). L'heure d'envoi et la description sont transmises à Anthropic pour le
-            traitement.
-          </p>
+          <p className="text-[11px] text-muted mt-1">{t('ai_pane.disclaimer')}</p>
         </div>
         {error && <p className="text-xs text-red-400">{error}</p>}
         <button
@@ -99,7 +92,7 @@ export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
           disabled={loading || description.trim().length < 3}
           className="w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? 'Estimation…' : "Demander à l'IA"}
+          {loading ? t('ai_pane.estimating') : t('ai_pane.estimate_cta')}
         </button>
       </form>
 
@@ -108,14 +101,14 @@ export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
           <div className="flex items-start justify-between gap-2">
             <p className="text-sm text-heading font-medium">{estimate.name}</p>
             <span className="text-[10px] uppercase tracking-wider text-muted shrink-0">
-              Confiance : {CONFIDENCE_LABEL[estimate.confidence]}
+              {t('ai_pane.confidence_label', { level: t(`ai_pane.confidence_${estimate.confidence}`) })}
             </span>
           </div>
           <p className="font-display text-2xl font-black text-brand">{Math.round(estimate.calories)} kcal</p>
           <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted">
-            {estimate.protein_g != null && <span>{Math.round(estimate.protein_g)} g protéines</span>}
-            {estimate.carbs_g != null && <span>{Math.round(estimate.carbs_g)} g glucides</span>}
-            {estimate.fat_g != null && <span>{Math.round(estimate.fat_g)} g lipides</span>}
+            {estimate.protein_g != null && <span>{t('ai_pane.protein', { n: Math.round(estimate.protein_g) })}</span>}
+            {estimate.carbs_g != null && <span>{t('ai_pane.carbs', { n: Math.round(estimate.carbs_g) })}</span>}
+            {estimate.fat_g != null && <span>{t('ai_pane.fat', { n: Math.round(estimate.fat_g) })}</span>}
           </div>
           <div className="flex gap-2 pt-2">
             <button
@@ -123,7 +116,7 @@ export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
               onClick={onCancel}
               className="flex-1 py-3 rounded-xl text-sm font-medium text-body border border-divider hover:bg-divider transition-colors"
             >
-              Annuler
+              {t('ai_pane.cancel')}
             </button>
             <button
               type="button"
@@ -131,7 +124,7 @@ export function AiTextPane({ mealType, onSubmit, onCancel }: AiTextPaneProps) {
               disabled={submitting}
               className="flex-1 py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50"
             >
-              {submitting ? 'Ajout…' : 'Confirmer et ajouter'}
+              {submitting ? t('ai_pane.adding') : t('ai_pane.confirm')}
             </button>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Play, Sparkles, Target } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useActiveProgram } from '../../hooks/useProgram.ts';
@@ -32,6 +33,7 @@ export function ConnectedContent({
   guardNavigation: (path: string) => void;
   formatShortDate: (key: string) => string;
 }) {
+  const { t } = useTranslation('home');
   const { user, profile } = useAuth();
   const { activeProgram, loading: programLoading } = useActiveProgram(user?.id);
 
@@ -45,20 +47,22 @@ export function ConnectedContent({
   return (
     <div className="px-6 md:px-10 lg:px-14 py-8">
       <div className="max-w-5xl mx-auto space-y-10">
-        <h1 className="sr-only">Wan2Fit — Ta séance de sport quotidienne</h1>
+        <h1 className="sr-only">{t('sr_title')}</h1>
 
         {/* ── Titre + 3 colonnes d'action ── */}
         <section>
           {firstName && (
-            <h2 className="font-display text-xl sm:text-2xl font-bold text-heading mb-1">Salut {firstName}</h2>
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-heading mb-1">
+              {t('connected.greeting', { firstName })}
+            </h2>
           )}
-          <h3 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">Prêt à bouger ?</h3>
+          <h3 className="font-display text-2xl sm:text-3xl font-black text-heading mb-6">{t('connected.ready')}</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
             {/* 1 — Séance du jour */}
             <div className="flex flex-col rounded-2xl overflow-hidden border border-card-border transition-all hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10">
               <h4 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
-                Séance du jour
+                {t('connected.today_card.heading')}
               </h4>
               {loading ? (
                 <div className="flex-1 p-5 space-y-3">
@@ -71,7 +75,7 @@ export function ConnectedContent({
                   <button type="button" onClick={onStart} className="relative h-36 w-full cursor-pointer text-left">
                     <img
                       src={getSessionImage(session)}
-                      alt={`Séance du jour : ${session.title}`}
+                      alt={t('connected.today_card.session_alt', { title: session.title })}
                       className="w-full h-full object-cover object-[50%_30%]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -80,7 +84,9 @@ export function ConnectedContent({
                         {session.title.toUpperCase()}
                       </p>
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-xs text-white/70">~{session.estimatedDuration} min</span>
+                        <span className="text-xs text-white/70">
+                          {t('connected.today_card.duration', { duration: session.estimatedDuration })}
+                        </span>
                         {session.focus.slice(0, 2).map((f) => (
                           <span key={f} className="text-xs text-white/70">
                             · {f}
@@ -98,7 +104,7 @@ export function ConnectedContent({
                       className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cursor-pointer"
                     >
                       <Play className="w-4 h-4" aria-hidden="true" />
-                      C'est parti
+                      {t('connected.today_card.cta')}
                     </button>
                   </div>
                   <SessionAccordion session={session} />
@@ -106,8 +112,8 @@ export function ConnectedContent({
               ) : error ? (
                 <div className="flex-1 p-6 flex items-center justify-center">
                   <div className="text-center">
-                    <p className="text-sm text-red-400">Impossible de charger la séance</p>
-                    <p className="text-xs text-muted mt-1">Vérifie ta connexion et réessaie.</p>
+                    <p className="text-sm text-red-400">{t('connected.today_card.load_error')}</p>
+                    <p className="text-xs text-muted mt-1">{t('connected.today_card.load_error_hint')}</p>
                   </div>
                 </div>
               ) : (
@@ -115,10 +121,10 @@ export function ConnectedContent({
                   <div className="text-center">
                     <img
                       src="/images/illustration-empty-state.webp"
-                      alt="Pas de séance prévue"
+                      alt={t('connected.today_card.empty_alt')}
                       className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80"
                     />
-                    <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
+                    <p className="text-sm text-muted">{t('connected.today_card.empty')}</p>
                   </div>
                 </div>
               )}
@@ -132,26 +138,24 @@ export function ConnectedContent({
               >
                 <div className="flex items-center gap-2 px-5 py-4 bg-surface-card border-b border-divider">
                   <h4 className="font-display text-base font-bold text-heading group-hover:text-accent transition-colors">
-                    Séance sur-mesure
+                    {t('connected.ai_card.heading')}
                   </h4>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-brand/60 bg-brand/8 px-2 py-0.5 rounded-full shrink-0">
-                    Premium
+                    {t('connected.ai_card.badge_premium')}
                   </span>
                 </div>
                 <div className="relative h-36 overflow-hidden">
                   <img
                     src="/images/illustration-ai-session.webp"
-                    alt="Séance personnalisée par IA"
+                    alt={t('connected.ai_card.session_alt')}
                     className="w-full h-full object-cover object-center"
                   />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
-                  <p className="text-sm text-muted leading-relaxed">
-                    L'IA génère une séance adaptée à mes envies et mon niveau.
-                  </p>
+                  <p className="text-sm text-muted leading-relaxed">{t('connected.ai_card.description')}</p>
                   <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white bg-accent hover:bg-accent/90 transition-colors">
                     <Play className="w-4 h-4" aria-hidden="true" />
-                    C'est parti
+                    {t('connected.ai_card.cta_play')}
                   </div>
                 </div>
               </Link>
@@ -162,26 +166,24 @@ export function ConnectedContent({
               >
                 <div className="flex items-center gap-2 px-5 py-4 bg-surface-card border-b border-divider">
                   <h4 className="font-display text-base font-bold text-heading group-hover:text-accent transition-colors">
-                    Séance sur-mesure
+                    {t('connected.ai_card.heading')}
                   </h4>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full shrink-0">
-                    Premium
+                    {t('connected.ai_card.badge_premium')}
                   </span>
                 </div>
                 <div className="relative h-36 overflow-hidden">
                   <img
                     src="/images/illustration-ai-session.webp"
-                    alt="Séance personnalisée par IA"
+                    alt={t('connected.ai_card.session_alt')}
                     className="w-full h-full object-cover object-center"
                   />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
-                  <p className="text-sm text-muted leading-relaxed">
-                    L'IA génère une séance adaptée à mes envies et mon niveau.
-                  </p>
+                  <p className="text-sm text-muted leading-relaxed">{t('connected.ai_card.description')}</p>
                   <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white bg-accent hover:bg-accent/90 transition-colors">
                     <Sparkles className="w-4 h-4" aria-hidden="true" />
-                    Débloquer avec Premium
+                    {t('connected.ai_card.cta_unlock')}
                   </div>
                 </div>
               </Link>
@@ -201,7 +203,7 @@ export function ConnectedContent({
             ) : activeProgram ? (
               <div className="flex flex-col rounded-2xl overflow-hidden border border-card-border transition-all hover:border-brand-secondary/30 hover:shadow-lg hover:shadow-brand-secondary/10">
                 <h4 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider">
-                  Mon programme
+                  {t('connected.program_card.heading_active')}
                 </h4>
                 <Link to={`/programme/${activeProgram.slug}/suivi`} className="block relative h-36 group">
                   <img
@@ -220,7 +222,10 @@ export function ConnectedContent({
                   <div>
                     <div className="flex items-center justify-between text-xs text-muted mb-1.5">
                       <span>
-                        {activeProgram.completedCount}/{activeProgram.totalSessions} séances
+                        {t('connected.program_card.progress', {
+                          completed: activeProgram.completedCount,
+                          total: activeProgram.totalSessions,
+                        })}
                       </span>
                       <span>{progressPct}%</span>
                     </div>
@@ -233,7 +238,8 @@ export function ConnectedContent({
                   </div>
                   {activeProgram.nextSessionTitle && (
                     <p className="text-xs text-muted mt-3">
-                      Prochaine : <span className="text-heading font-semibold">{activeProgram.nextSessionTitle}</span>
+                      {t('connected.program_card.next_session')}{' '}
+                      <span className="text-heading font-semibold">{activeProgram.nextSessionTitle}</span>
                     </p>
                   )}
                   {activeProgram.nextSessionOrder != null && (
@@ -247,7 +253,7 @@ export function ConnectedContent({
                       className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white mt-3 cursor-pointer"
                     >
                       <Play className="w-4 h-4" aria-hidden="true" />
-                      C'est parti
+                      {t('connected.program_card.cta_play')}
                     </button>
                   )}
                 </div>
@@ -259,22 +265,20 @@ export function ConnectedContent({
                 className="flex flex-col rounded-2xl overflow-hidden border border-card-border group cursor-pointer transition-all hover:border-brand-secondary/30 hover:shadow-lg hover:shadow-brand-secondary/10"
               >
                 <h4 className="font-display text-base font-bold text-heading px-5 py-4 bg-surface-card border-b border-divider group-hover:text-brand-secondary transition-colors">
-                  Programmes
+                  {t('connected.program_card.heading_empty')}
                 </h4>
                 <div className="relative h-36 overflow-hidden">
                   <img
                     src="/images/illustration-program.webp"
-                    alt="Programmes d'entraînement"
+                    alt={t('connected.program_card.program_alt')}
                     className="w-full h-full object-cover object-center"
                   />
                 </div>
                 <div className="flex-1 flex flex-col justify-between px-5 py-4 bg-surface-card space-y-3">
-                  <p className="text-sm text-muted leading-relaxed">
-                    Un plan structuré sur plusieurs semaines pour progresser.
-                  </p>
+                  <p className="text-sm text-muted leading-relaxed">{t('connected.program_card.description')}</p>
                   <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient">
                     <Target className="w-4 h-4" aria-hidden="true" />
-                    Choisir un programme
+                    {t('connected.program_card.cta_choose')}
                   </div>
                 </div>
               </Link>

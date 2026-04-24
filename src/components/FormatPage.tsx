@@ -1,10 +1,12 @@
 import { AlertTriangle, CheckCircle, ChevronLeft, Clock, Lightbulb, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useParams } from 'react-router';
 import { getFormatBySlug } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { ContentSection } from './ContentSection.tsx';
 
 export function FormatPage() {
+  const { t } = useTranslation('explore');
   const { slug } = useParams<{ slug: string }>();
   const format = slug ? getFormatBySlug(slug) : undefined;
 
@@ -26,7 +28,7 @@ export function FormatPage() {
         <div className="h-48 sm:h-56 overflow-hidden">
           <img
             src={format.image}
-            alt={`Format ${format.name}`}
+            alt={t('format_page.img_alt', { name: format.name })}
             className="w-full h-full object-cover object-[50%_30%]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-surface/20" />
@@ -35,7 +37,7 @@ export function FormatPage() {
         <Link
           to="/formats"
           className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white"
-          aria-label="Retour aux formats"
+          aria-label={t('format_page.back_aria')}
         >
           <ChevronLeft className="w-5 h-5" />
         </Link>
@@ -52,7 +54,11 @@ export function FormatPage() {
               <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full">
                 {format.duration} min
               </span>
-              <div className="flex items-center gap-1" role="img" aria-label={`Intensité : ${format.intensity} sur 5`}>
+              <div
+                className="flex items-center gap-1"
+                role="img"
+                aria-label={t('format_page.intensity_aria', { n: format.intensity })}
+              >
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
                 ))}
@@ -67,17 +73,26 @@ export function FormatPage() {
         <p className="text-base text-body leading-relaxed">{format.shortDescription}</p>
 
         {/* Principe */}
-        <ContentSection title="Principe" icon={<Lightbulb className="w-4 h-4 text-brand" aria-hidden="true" />}>
+        <ContentSection
+          title={t('format_page.section_principle')}
+          icon={<Lightbulb className="w-4 h-4 text-brand" aria-hidden="true" />}
+        >
           <p className="text-sm text-subtle leading-relaxed">{format.principle}</p>
         </ContentSection>
 
         {/* Protocole */}
-        <ContentSection title="Comment ça se passe" icon={<Clock className="w-4 h-4 text-brand" aria-hidden="true" />}>
+        <ContentSection
+          title={t('format_page.section_protocol')}
+          icon={<Clock className="w-4 h-4 text-brand" aria-hidden="true" />}
+        >
           <p className="text-sm text-subtle leading-relaxed">{format.protocol}</p>
         </ContentSection>
 
         {/* Bénéfices */}
-        <ContentSection title="Bénéfices" icon={<CheckCircle className="w-4 h-4 text-brand" aria-hidden="true" />}>
+        <ContentSection
+          title={t('format_page.section_benefits')}
+          icon={<CheckCircle className="w-4 h-4 text-brand" aria-hidden="true" />}
+        >
           <ul className="space-y-2">
             {format.benefits.map((b, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
@@ -89,17 +104,23 @@ export function FormatPage() {
         </ContentSection>
 
         {/* Public cible */}
-        <ContentSection title="Pour qui ?" icon={<Users className="w-4 h-4 text-brand" aria-hidden="true" />}>
+        <ContentSection
+          title={t('format_page.section_audience')}
+          icon={<Users className="w-4 h-4 text-brand" aria-hidden="true" />}
+        >
           <p className="text-sm text-subtle leading-relaxed">{format.targetAudience}</p>
         </ContentSection>
 
         {/* Conseils */}
-        <ContentSection title="Nos conseils" icon={<Lightbulb className="w-4 h-4 text-brand" aria-hidden="true" />}>
+        <ContentSection
+          title={t('format_page.section_tips')}
+          icon={<Lightbulb className="w-4 h-4 text-brand" aria-hidden="true" />}
+        >
           <ul className="space-y-2">
-            {format.tips.map((t, i) => (
+            {format.tips.map((tip, i) => (
               <li key={i} className="flex gap-3 text-sm text-subtle leading-relaxed">
                 <span className="text-emerald-400 shrink-0 mt-0.5">{i + 1}.</span>
-                <span>{t}</span>
+                <span>{tip}</span>
               </li>
             ))}
           </ul>
@@ -107,7 +128,7 @@ export function FormatPage() {
 
         {/* Erreurs courantes */}
         <ContentSection
-          title="Erreurs courantes"
+          title={t('format_page.section_mistakes')}
           icon={<AlertTriangle className="w-4 h-4 text-amber-400" aria-hidden="true" />}
         >
           <ul className="space-y-2">
@@ -124,10 +145,10 @@ export function FormatPage() {
         <div className="pt-4 border-t border-divider space-y-3">
           <div className="flex flex-wrap gap-3">
             <Link to="/exercices" className="text-sm text-link hover:text-link-hover transition-colors">
-              Nos exercices →
+              {t('format_page.link_exercises')}
             </Link>
             <Link to="/programmes" className="text-sm text-link hover:text-link-hover transition-colors">
-              Nos programmes →
+              {t('format_page.link_programs')}
             </Link>
           </div>
           <div className="flex items-center justify-between">
@@ -136,10 +157,10 @@ export function FormatPage() {
               className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2"
             >
               <ChevronLeft className="w-4 h-4" />
-              Tous les formats
+              {t('format_page.all_formats')}
             </Link>
             <Link to="/" className="text-sm text-link hover:text-link-hover transition-colors">
-              Séance du jour →
+              {t('format_page.today_session')}
             </Link>
           </div>
         </div>

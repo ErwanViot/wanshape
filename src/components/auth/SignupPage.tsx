@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, Navigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
@@ -6,6 +7,7 @@ import { BackLink } from './BackLink.tsx';
 import { FormInput } from './FormInput.tsx';
 
 export function SignupPage() {
+  const { t } = useTranslation('auth');
   const { user, loading, signUp } = useAuth();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,8 +18,8 @@ export function SignupPage() {
   const [submitting, setSubmitting] = useState(false);
 
   useDocumentHead({
-    title: 'Créer un compte',
-    description: 'Crée ton compte gratuit pour suivre ta progression et ne rien perdre.',
+    title: t('signup.page_title'),
+    description: t('signup.page_description'),
   });
 
   if (!loading && user) return <Navigate to="/suivi" replace />;
@@ -26,7 +28,7 @@ export function SignupPage() {
     e.preventDefault();
     setError(null);
     if (password.length < 8) {
-      setError('Le mot de passe doit contenir au moins 8 caractères.');
+      setError(t('errors.password_too_short'));
       return;
     }
     setSubmitting(true);
@@ -38,7 +40,7 @@ export function SignupPage() {
         setSent(true);
       }
     } catch {
-      setError('Une erreur est survenue. Réessaie plus tard.');
+      setError(t('errors.generic'));
     } finally {
       setSubmitting(false);
     }
@@ -49,7 +51,7 @@ export function SignupPage() {
       <div className="w-full max-w-md">
         <BackLink />
 
-        <h1 className="text-2xl font-bold text-heading mb-8">Crée ton compte</h1>
+        <h1 className="text-2xl font-bold text-heading mb-8">{t('signup.heading')}</h1>
 
         <div className="glass-card rounded-2xl p-6">
           {sent ? (
@@ -69,37 +71,37 @@ export function SignupPage() {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <p className="text-strong font-medium mb-1">Vérifie ta boîte mail</p>
+              <p className="text-strong font-medium mb-1">{t('signup.confirm_title')}</p>
               <p className="text-sm text-muted">
-                Un lien de confirmation a été envoyé à <strong className="text-strong">{email}</strong>
+                {t('signup.confirm_message')} <strong className="text-strong">{email}</strong>
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <FormInput
-                label="Prénom ou pseudo"
+                label={t('signup.label_name')}
                 inputId="signup-name"
                 type="text"
                 required
                 autoComplete="given-name"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
-                placeholder="Alex"
+                placeholder={t('signup.placeholder_name')}
               />
 
               <FormInput
-                label="Email"
+                label={t('signup.label_email')}
                 inputId="signup-email"
                 type="email"
                 required
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="toi@exemple.com"
+                placeholder={t('signup.placeholder_email')}
               />
 
               <FormInput
-                label="Mot de passe"
+                label={t('signup.label_password')}
                 inputId="signup-password"
                 type="password"
                 required
@@ -107,7 +109,7 @@ export function SignupPage() {
                 autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="8 caractères minimum"
+                placeholder={t('signup.placeholder_password')}
               />
 
               <label className="flex items-start gap-2.5 cursor-pointer">
@@ -119,30 +121,30 @@ export function SignupPage() {
                   className="mt-0.5 h-4 w-4 rounded border-divider accent-brand"
                 />
                 <span className="text-sm text-muted">
-                  J'accepte les{' '}
+                  {t('signup.accept_terms')}{' '}
                   <Link to="/legal/cgu" target="_blank" className="text-link hover:text-link-hover transition-colors">
-                    Conditions Générales d'Utilisation
+                    {t('signup.terms_link')}
                   </Link>{' '}
-                  et la{' '}
+                  {t('signup.and')}{' '}
                   <Link
                     to="/legal/privacy"
                     target="_blank"
                     className="text-link hover:text-link-hover transition-colors"
                   >
-                    Politique de confidentialité
+                    {t('signup.privacy_link')}
                   </Link>
                 </span>
               </label>
 
               {/* tl;dr */}
               <div className="rounded-xl bg-surface border border-divider p-3.5 text-xs text-muted space-y-1">
-                <p className="font-semibold text-subtle">En bref (pour ceux qui ne lisent pas les CGU) 😉</p>
+                <p className="font-semibold text-subtle">{t('signup.tldr_title')}</p>
                 <ul className="space-y-0.5 list-inside">
-                  <li>Le compte est gratuit, sans engagement.</li>
-                  <li>On stocke ton email, ton prénom et tes séances.</li>
-                  <li>On ne revend pas tes données.</li>
-                  <li>Les exercices sont des suggestions, pas du coaching médical.</li>
-                  <li>Tu peux supprimer ton compte quand tu veux.</li>
+                  <li>{t('signup.tldr_1')}</li>
+                  <li>{t('signup.tldr_2')}</li>
+                  <li>{t('signup.tldr_3')}</li>
+                  <li>{t('signup.tldr_4')}</li>
+                  <li>{t('signup.tldr_5')}</li>
                 </ul>
               </div>
 
@@ -157,16 +159,16 @@ export function SignupPage() {
                 disabled={submitting}
                 className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {submitting ? 'Création...' : 'Créer mon compte'}
+                {submitting ? t('signup.submitting') : t('signup.submit')}
               </button>
             </form>
           )}
         </div>
 
         <p className="text-center text-sm text-muted mt-6">
-          Déjà un compte ?{' '}
+          {t('signup.already_account')}{' '}
           <Link to="/login" className="text-link hover:text-link-hover transition-colors">
-            Se connecter
+            {t('signup.login_link')}
           </Link>
         </p>
       </div>

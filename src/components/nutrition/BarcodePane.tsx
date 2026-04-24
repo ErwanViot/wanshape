@@ -1,5 +1,5 @@
 import { type FormEvent, useCallback, useEffect, useState } from 'react';
-import { MEAL_TYPE_LABELS } from '../../config/nutrition.ts';
+import { useTranslation } from 'react-i18next';
 import { useOpenFoodFacts } from '../../hooks/useOpenFoodFacts.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
 import type { MealType } from '../../types/nutrition.ts';
@@ -16,14 +16,8 @@ function scaleKcal(per100g: number | null, grams: number): number {
   return Math.round(((per100g * grams) / 100) * 10) / 10;
 }
 
-const ERROR_LABELS: Record<string, string> = {
-  invalid_barcode: 'Code-barres invalide. Utilise un EAN-8, EAN-13, UPC-A ou UPC-E.',
-  not_found: "Ce produit n'est pas référencé sur Open Food Facts.",
-  missing_nutrition: 'Ce produit est référencé mais ses données nutritionnelles sont incomplètes.',
-  network: 'Impossible de contacter Open Food Facts. Vérifie ta connexion.',
-};
-
 export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) {
+  const { t } = useTranslation('nutrition');
   const { product, loading, error, fetchByBarcode, reset } = useOpenFoodFacts();
   const [showScanner, setShowScanner] = useState(true);
   const [portionGrams, setPortionGrams] = useState('100');
@@ -66,7 +60,7 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <p className="text-xs text-muted">
-          Repas : <span className="text-body font-medium">{MEAL_TYPE_LABELS[mealType]}</span>
+          {t('barcode_pane.meal_label')} <span className="text-body font-medium">{t(`meal_type.${mealType}`)}</span>
         </p>
         <button
           type="button"
@@ -76,13 +70,25 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
           }}
           className="text-xs text-brand hover:underline"
         >
-          Scanner un autre
+          {t('barcode_pane.scan_another')}
         </button>
       </div>
 
-      {loading && <p className="text-sm text-body">Recherche sur Open Food Facts…</p>}
+      {loading && <p className="text-sm text-body">{t('barcode_pane.searching')}</p>}
 
-      {error && <p className="text-sm text-red-400">{ERROR_LABELS[error] ?? 'Erreur inconnue.'}</p>}
+      {error && (
+        <p className="text-sm text-red-400">
+          {error === 'invalid_barcode'
+            ? t('barcode_pane.error_invalid_barcode')
+            : error === 'not_found'
+              ? t('barcode_pane.error_not_found')
+              : error === 'missing_nutrition'
+                ? t('barcode_pane.error_missing_nutrition')
+                : error === 'network'
+                  ? t('barcode_pane.error_network')
+                  : t('barcode_pane.error_unknown')}
+        </p>
+      )}
 
       {product && (
         <form onSubmit={handleSubmit} className="space-y-3">
@@ -101,7 +107,7 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
               <p className="text-xs text-muted mt-1">
                 {product.calories_100g != null
                   ? `${Math.round(product.calories_100g)} kcal / 100 g`
-                  : 'kcal manquantes'}
+                  : t('barcode_pane.kcal_missing')}
                 {product.quantity ? ` · ${product.quantity}` : ''}
               </p>
             </div>
@@ -109,7 +115,7 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
 
           <div>
             <label htmlFor="barcode-portion" className="block text-xs font-medium text-body mb-1">
-              Quantité consommée (g)
+              {t('barcode_pane.quantity_label')}
             </label>
             <input
               id="barcode-portion"
@@ -123,13 +129,15 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
             />
           </div>
 
-          <p className="text-sm text-body">
-            Soit{' '}
-            <span className="font-bold text-brand">
-              {Math.round(scaleKcal(product.calories_100g, Number.parseFloat(portionGrams) || 0))} kcal
-            </span>{' '}
-            pour cette portion.
-          </p>
+          <p
+            className="text-sm text-body"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
+            dangerouslySetInnerHTML={{
+              __html: t('barcode_pane.portion_text', {
+                kcal: Math.round(scaleKcal(product.calories_100g, Number.parseFloat(portionGrams) || 0)),
+              }),
+            }}
+          />
 
           {formError && <p className="text-xs text-red-400">{formError}</p>}
 
@@ -139,23 +147,23 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
               onClick={onCancel}
               className="flex-1 py-3 rounded-xl text-sm font-medium text-body border border-divider hover:bg-divider transition-colors"
             >
-              Annuler
+              {t('barcode_pane.cancel')}
             </button>
             <button
               type="submit"
               disabled={submitting}
               className="flex-1 py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {submitting ? 'Ajout…' : 'Ajouter'}
+              {submitting ? t('barcode_pane.adding') : t('barcode_pane.add')}
             </button>
           </div>
 
           <p className="text-[11px] text-muted italic">
-            Données fournies via{' '}
+            {t('barcode_pane.source_credit_prefix')}{' '}
             <a href={product.source_url} target="_blank" rel="noreferrer noopener" className="underline">
               Open Food Facts
             </a>{' '}
-            (licence ODbL).
+            {t('barcode_pane.source_credit_suffix')}
           </p>
         </form>
       )}

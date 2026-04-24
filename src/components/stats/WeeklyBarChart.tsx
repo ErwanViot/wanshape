@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WeeklyData } from '../../hooks/useHistory.ts';
 
 export function WeeklyBarChart({ data }: { data: WeeklyData[] }) {
+  const { t } = useTranslation('stats');
   const maxMinutes = Math.max(...data.map((d) => d.minutes), 1);
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const [animated, setAnimated] = useState(false);
@@ -15,14 +17,18 @@ export function WeeklyBarChart({ data }: { data: WeeklyData[] }) {
   return (
     <div className="h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
-        <p className="text-sm font-bold text-heading">Volume hebdo</p>
+        <p className="text-sm font-bold text-heading">{t('bar_chart.heading')}</p>
         <p className="text-xs text-muted">
           {activeIdx != null ? (
             <span className="text-heading font-semibold">
-              {data[activeIdx].minutes} min · {data[activeIdx].sessions} séance{data[activeIdx].sessions > 1 ? 's' : ''}
+              {t(data[activeIdx].sessions === 1 ? 'bar_chart.bar_aria' : 'bar_chart.bar_aria_other', {
+                label: data[activeIdx].label,
+                minutes: data[activeIdx].minutes,
+                sessions: data[activeIdx].sessions,
+              })}
             </span>
           ) : (
-            'min / semaine'
+            t('bar_chart.unit')
           )}
         </p>
       </div>
@@ -37,7 +43,11 @@ export function WeeklyBarChart({ data }: { data: WeeklyData[] }) {
               onClick={() => setActiveIdx(isActive ? null : i)}
               onMouseEnter={() => setActiveIdx(i)}
               onMouseLeave={() => setActiveIdx(null)}
-              aria-label={`${week.label} : ${week.minutes} minutes, ${week.sessions} séance${week.sessions > 1 ? 's' : ''}`}
+              aria-label={t(week.sessions === 1 ? 'bar_chart.bar_aria' : 'bar_chart.bar_aria_other', {
+                label: week.label,
+                minutes: week.minutes,
+                sessions: week.sessions,
+              })}
               className="flex-1 flex flex-col items-center gap-1.5 cursor-pointer group"
             >
               <div className="w-full flex items-end relative" style={{ height: '100px' }}>
@@ -60,7 +70,7 @@ export function WeeklyBarChart({ data }: { data: WeeklyData[] }) {
                 {/* Tooltip */}
                 {isActive && (
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 rounded-lg bg-surface-card border border-divider px-2.5 py-1.5 shadow-lg text-[10px] font-semibold text-heading whitespace-nowrap z-10 pointer-events-none animate-fade-in">
-                    {week.minutes} min
+                    {t('bar_chart.tooltip', { minutes: week.minutes })}
                   </div>
                 )}
               </div>

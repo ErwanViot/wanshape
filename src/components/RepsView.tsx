@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { AtomicStep } from '../types/player.ts';
 import { ExerciseVideoButton } from './ExerciseVideoButton.tsx';
 import { NextPreview } from './NextPreview.tsx';
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export function RepsView({ step, onDone, showVideos, onToggleShowVideos }: Props) {
+  const { t } = useTranslation('player');
   const repsLabel = step.repTarget === 'max' ? 'MAX' : step.repTarget;
 
   return (
@@ -17,14 +19,10 @@ export function RepsView({ step, onDone, showVideos, onToggleShowVideos }: Props
       {/* Context */}
       <div className="text-white/50 text-sm">
         {step.roundInfo && (
-          <span>
-            Round {step.roundInfo.current}/{step.roundInfo.total}
-          </span>
+          <span>{t('reps_view.round', { current: step.roundInfo.current, total: step.roundInfo.total })}</span>
         )}
         {step.setInfo && (
-          <span>
-            Série {step.setInfo.current}/{step.setInfo.total}
-          </span>
+          <span>{t('reps_view.set', { current: step.setInfo.current, total: step.setInfo.total })}</span>
         )}
       </div>
 
@@ -34,14 +32,14 @@ export function RepsView({ step, onDone, showVideos, onToggleShowVideos }: Props
       {/* Rep count */}
       <div className="text-5xl sm:text-6xl font-bold" style={{ color: step.blockColor }}>
         {repsLabel}
-        <span className="text-xl sm:text-2xl text-white/50 ml-2">reps</span>
+        <span className="text-xl sm:text-2xl text-white/50 ml-2">{t('reps_view.reps_unit')}</span>
       </div>
 
       {/* Instructions */}
       <p className="text-white text-lg max-w-sm">{step.instructions}</p>
 
       {/* Tempo */}
-      {step.tempo && <p className="text-white/40 text-sm font-mono">Tempo {step.tempo}</p>}
+      {step.tempo && <p className="text-white/40 text-sm font-mono">{t('reps_view.tempo', { value: step.tempo })}</p>}
 
       {/* Video demo */}
       <ExerciseVideoButton
@@ -57,7 +55,7 @@ export function RepsView({ step, onDone, showVideos, onToggleShowVideos }: Props
         className="w-full max-w-sm h-16 rounded-2xl font-bold text-xl text-white transition-all active:scale-95 animate-bounce-in"
         style={{ backgroundColor: step.blockColor }}
       >
-        TERMINÉ ✓
+        {t('reps_view.done_button')}
       </button>
 
       {/* Next preview */}

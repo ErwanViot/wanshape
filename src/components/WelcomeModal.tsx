@@ -1,5 +1,6 @@
 import type { User } from '@supabase/supabase-js';
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { supabase } from '../lib/supabase.ts';
 
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export function WelcomeModal({ onClose }: Props) {
+  const { t } = useTranslation('home');
   const navigate = useNavigate();
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -85,13 +87,13 @@ export function WelcomeModal({ onClose }: Props) {
         <div className="text-center space-y-2">
           <img
             src="/images/illustration-onboarding.webp"
-            alt=""
+            alt={t('welcome_modal.image_alt')}
             className="w-full h-32 object-contain rounded-xl mx-auto"
           />
           <h2 id="welcome-title" className="text-xl font-bold text-heading">
-            Bienvenue sur Wan2Fit !
+            {t('welcome_modal.title')}
           </h2>
-          <p className="text-sm text-muted">Prêt(e) à te dépasser ? Voici comment commencer :</p>
+          <p className="text-sm text-muted">{t('welcome_modal.subtitle')}</p>
         </div>
 
         <div className="space-y-3">
@@ -118,9 +120,9 @@ export function WelcomeModal({ onClose }: Props) {
             </div>
             <div>
               <p className="text-sm font-semibold text-heading group-hover:text-brand transition-colors">
-                Lancer la séance du jour
+                {t('welcome_modal.option_today_title')}
               </p>
-              <p className="text-xs text-muted">25-40 min, sans matériel</p>
+              <p className="text-xs text-muted">{t('welcome_modal.option_today_desc')}</p>
             </div>
           </button>
 
@@ -147,9 +149,9 @@ export function WelcomeModal({ onClose }: Props) {
             </div>
             <div>
               <p className="text-sm font-semibold text-heading group-hover:text-brand transition-colors">
-                Choisir un programme
+                {t('welcome_modal.option_program_title')}
               </p>
-              <p className="text-xs text-muted">Plusieurs semaines, résultats visibles</p>
+              <p className="text-xs text-muted">{t('welcome_modal.option_program_desc')}</p>
             </div>
           </button>
         </div>
@@ -159,7 +161,7 @@ export function WelcomeModal({ onClose }: Props) {
           onClick={handleDismiss}
           className="w-full text-center text-sm text-muted hover:text-subtle transition-colors cursor-pointer py-1"
         >
-          Je découvre par moi-même
+          {t('welcome_modal.dismiss')}
         </button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { Settings2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDailyNutrition } from '../hooks/useDailyNutrition.ts';
@@ -14,9 +15,10 @@ import { InsightCard } from './nutrition/InsightCard.tsx';
 import { MealEntryForm } from './nutrition/MealEntryForm.tsx';
 
 export function NutritionPage() {
+  const { t } = useTranslation('nutrition');
   useDocumentHead({
-    title: 'Nutrition · Wan2Fit',
-    description: 'Suis tes apports caloriques et macros au fil de la journée.',
+    title: t('page.title'),
+    description: t('page.description'),
   });
 
   const { profile: authProfile } = useAuth();
@@ -100,9 +102,9 @@ export function NutritionPage() {
   }
 
   const macroRow = [
-    { label: 'Protéines', value: summary.totals.protein_g, target: target.protein_g, suffix: 'g' },
-    { label: 'Glucides', value: summary.totals.carbs_g, target: target.carbs_g, suffix: 'g' },
-    { label: 'Lipides', value: summary.totals.fat_g, target: target.fat_g, suffix: 'g' },
+    { label: t('page.macro_protein'), value: summary.totals.protein_g, target: target.protein_g, suffix: 'g' },
+    { label: t('page.macro_carbs'), value: summary.totals.carbs_g, target: target.carbs_g, suffix: 'g' },
+    { label: t('page.macro_fat'), value: summary.totals.fat_g, target: target.fat_g, suffix: 'g' },
   ];
 
   return (
@@ -110,15 +112,15 @@ export function NutritionPage() {
       <div className="max-w-3xl mx-auto space-y-8">
         <header className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl font-black text-heading">Nutrition</h1>
-            <p className="text-sm text-muted mt-1">Ta journée en un coup d'œil.</p>
+            <h1 className="font-display text-2xl sm:text-3xl font-black text-heading">{t('page.heading')}</h1>
+            <p className="text-sm text-muted mt-1">{t('page.subtitle')}</p>
           </div>
           <Link
             to="/nutrition/setup"
             className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-body border border-divider hover:bg-divider transition-colors"
           >
             <Settings2 className="w-3.5 h-3.5" aria-hidden="true" />
-            {profile?.target_calories != null ? 'Modifier la cible' : 'Définir une cible'}
+            {profile?.target_calories != null ? t('page.edit_target') : t('page.set_target')}
           </Link>
         </header>
 
@@ -127,11 +129,7 @@ export function NutritionPage() {
             <CalorieRing current={summary.totals.calories} target={target.calories} size={160} strokeWidth={12} />
           </div>
           <div className="flex-1 w-full space-y-3">
-            {target.calories == null && (
-              <p className="text-sm text-body">
-                Awareness mode : tu suis tes apports sans cible fixe. Active-la quand tu veux.
-              </p>
-            )}
+            {target.calories == null && <p className="text-sm text-body">{t('page.awareness_mode')}</p>}
             <dl className="grid grid-cols-3 gap-3">
               {macroRow.map((m) => (
                 <div key={m.label} className="rounded-xl bg-surface border border-divider p-3">
@@ -169,7 +167,7 @@ export function NutritionPage() {
           <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 overflow-y-auto">
             <button
               type="button"
-              aria-label="Fermer la fenêtre d'ajout"
+              aria-label={t('page.close_modal_aria')}
               onClick={() => setFormOpen(false)}
               className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-default"
             />
@@ -177,7 +175,7 @@ export function NutritionPage() {
               ref={modalRef}
               role="dialog"
               aria-modal="true"
-              aria-label="Ajouter un repas"
+              aria-label={t('page.add_meal_modal_aria')}
               tabIndex={-1}
               className="relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl bg-surface border border-card-border p-6 shadow-xl focus:outline-none"
             >
@@ -193,9 +191,7 @@ export function NutritionPage() {
           </div>
         )}
 
-        <footer className="text-center text-[11px] text-muted">
-          Base d'aliments : ANSES — Table CIQUAL (licence Etalab 2.0)
-        </footer>
+        <footer className="text-center text-[11px] text-muted">{t('page.footer_source')}</footer>
       </div>
     </div>
   );
