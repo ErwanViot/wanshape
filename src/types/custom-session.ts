@@ -37,6 +37,7 @@ export interface CustomSessionRecord {
   input_tokens: number | null;
   output_tokens: number | null;
   model: string | null;
+  locale: 'fr' | 'en';
   created_at: string;
 }
 

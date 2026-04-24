@@ -59,6 +59,7 @@
   },
   "content": {
     "back_aria": "Retour aux programmes",
+    "img_alt": "Programme {{headline}}",
     "stat_duration": "Durée",
     "stat_frequency": "Fréquence",
     "stat_session_length": "Par séance",

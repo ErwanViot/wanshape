@@ -1,12 +1,15 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import { isSupportedLocale } from '../i18n';
 import { supabase } from '../lib/supabase.ts';
 import type { GenerateProgramResponse, ProgramOnboardingInput } from '../types/custom-program.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 
 export function useGenerateProgram() {
   const { user } = useAuth();
+  const { i18n } = useTranslation();
   const queryClient = useQueryClient();
   const userId = user?.id;
   const [loading, setLoading] = useState(false);
@@ -27,8 +30,9 @@ export function useGenerateProgram() {
       setError(null);
 
       try {
+        const locale = isSupportedLocale(i18n.language) ? i18n.language : 'fr';
         const { data, error: fnError } = await supabase.functions.invoke('generate-program', {
-          body: input,
+          body: { ...input, locale },
         });
 
         if (fnError) {
@@ -61,7 +65,7 @@ export function useGenerateProgram() {
         inflightRef.current = false;
       }
     },
-    [queryClient, userId],
+    [queryClient, userId, i18n.language],
   );
 
   return { generate, loading, error };

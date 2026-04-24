@@ -20,6 +20,11 @@
     "footer_note": "Durations shown include warm-up and cool-down.",
     "img_alt": "Format {{name}}"
   },
+  "format_page_meta": {
+    "doc_title": "{{name}} — Training format",
+    "doc_title_fallback": "Format",
+    "doc_description": "{{name}}: {{short}} Discover the principle, protocol, benefits and tips for this no-equipment training format."
+  },
   "format_page": {
     "back_aria": "Back to formats",
     "img_alt": "Format {{name}}",
@@ -48,6 +53,9 @@
   "exercise_page": {
     "back_aria": "Back to exercises",
     "demo_aria": "Demo: {{name}}",
+    "doc_title": "{{name}} — Exercise",
+    "doc_title_fallback": "Exercise",
+    "doc_description": "{{name}}: {{short}} Technique, variations, tips and common mistakes.",
     "section_execution": "Execution",
     "section_breathing": "Breathing",
     "section_benefits": "Benefits",

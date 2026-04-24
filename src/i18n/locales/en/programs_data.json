@@ -1,0 +1,104 @@
+{
+  "debutant-4-semaines": {
+    "headline": "Build your foundations",
+    "intro": "Getting back into sport or starting out? This 4-week program guides you step by step. Each week adds a little more intensity so you progress without ever feeling overwhelmed.",
+    "audience": "Returning to activity, true beginners, or anyone who wants to (re)start on solid ground.",
+    "duration": "4 weeks",
+    "frequency": "3 sessions per week",
+    "sessionLength": "~25 min",
+    "approach": "The progression is designed so you don't skip steps. We start with simple movements and generous rest, then shorten the breaks and add fuller variations as the weeks go by.",
+    "weeks": [
+      {
+        "title": "Discovery",
+        "description": "Basic movements, 2 sets, generous rest. Learning the fundamental moves: squats, adapted push-ups, planks."
+      },
+      {
+        "title": "Building habits",
+        "description": "Same improved patterns, 2-3 sets, reps increasing. Your body starts to memorize the movements."
+      },
+      {
+        "title": "Progression",
+        "description": "Full variations (feet-elevated plank, standard push-ups), 3 sets. Introducing the EMOM format to learn effort management."
+      },
+      {
+        "title": "Consolidation",
+        "description": "Combined circuits, supersets, increased volume. You've mastered the basics and are ready for what's next."
+      }
+    ],
+    "benefits": [
+      "Learn the fundamental movements safely",
+      "Build a consistent training habit",
+      "Gain confidence and mobility",
+      "Prepare your body for more intense programs"
+    ],
+    "tip": "No need to push hard from day one. Consistency is what matters most. 3 sessions per week is enough to see real results in a month."
+  },
+  "remise-en-forme": {
+    "headline": "Find your rhythm back",
+    "intro": "You used to train but fell off the wagon? This program gets things back on track. Varied formats from the first week, progressive intensity — you'll find your feel quickly.",
+    "audience": "Former athletes getting back in shape, or intermediate-level people who want to structure their training.",
+    "duration": "4 weeks",
+    "frequency": "4 sessions per week",
+    "sessionLength": "~30 min",
+    "approach": "No discovery phase here: we dive straight in with varied formats. Each week alternates upper body, lower body, full-body, and cardio for a complete, balanced workout.",
+    "weeks": [
+      {
+        "title": "Active restart",
+        "description": "Targeted strength work and first circuits. We wake up the muscle groups with structured sessions."
+      },
+      {
+        "title": "Loading up",
+        "description": "Volume and intensity increase. Supersets and EMOM to build muscular endurance."
+      },
+      {
+        "title": "Intensity peak",
+        "description": "Demanding formats: AMRAP, HIIT. Your body is ready to be pushed. Sessions are shorter but more intense."
+      },
+      {
+        "title": "Mastery",
+        "description": "Advanced combinations, complex circuits. You finish the program in top shape, ready for a new challenge."
+      }
+    ],
+    "benefits": [
+      "Quickly regain a good level of fitness",
+      "Work your whole body in a balanced way",
+      "Discover multiple training formats",
+      "Kick-start your metabolism and endurance"
+    ],
+    "tip": "If a session feels easy, that's normal — it means you're in shape for it. The following week will raise the bar."
+  },
+  "cardio-express": {
+    "headline": "Short, intense, effective",
+    "intro": "No time for an hour of sport? This program bets on short, high-intensity sessions. 20 minutes is all it takes to sweat, progress, and get back to your day.",
+    "audience": "Busy schedules, athletes who want results without spending hours training.",
+    "duration": "4 weeks",
+    "frequency": "3 sessions per week",
+    "sessionLength": "~20 min",
+    "approach": "Every session uses formats designed to maximize effort in minimal time: HIIT, Tabata, EMOM. Intensity builds progressively so your cardio and explosiveness improve week after week.",
+    "weeks": [
+      {
+        "title": "Warm-up phase",
+        "description": "HIIT and classic intervals. We calibrate the intensity and establish the rhythm."
+      },
+      {
+        "title": "Acceleration",
+        "description": "Tabata and EMOM come into play. Rest periods shorten, cardio kicks up a notch."
+      },
+      {
+        "title": "High intensity",
+        "description": "Denser sessions, explosive combinations. Your heart is working at full capacity."
+      },
+      {
+        "title": "Full throttle",
+        "description": "The most intense sessions of the program. You measure your progress with timed formats."
+      }
+    ],
+    "benefits": [
+      "Improve your cardio in less time",
+      "Burn maximum calories in 20 minutes",
+      "Develop explosiveness and endurance",
+      "Train even with a packed schedule"
+    ],
+    "tip": "Intensity is the key. 20 minutes at full effort beats 45 minutes at half pace. Give everything during the work phases, and fully recover during the rest."
+  }
+}

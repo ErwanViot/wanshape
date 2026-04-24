@@ -59,6 +59,7 @@
   },
   "content": {
     "back_aria": "Back to programs",
+    "img_alt": "Program: {{headline}}",
     "stat_duration": "Duration",
     "stat_frequency": "Frequency",
     "stat_session_length": "Per session",
