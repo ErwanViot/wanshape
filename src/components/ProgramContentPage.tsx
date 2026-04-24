@@ -51,7 +51,11 @@ export function ProgramContentPage() {
       {/* Hero */}
       <div className="relative">
         <div className="h-56 sm:h-72 md:h-80 overflow-hidden">
-          <img src={image} alt={`Programme ${headline}`} className="w-full h-full object-cover object-[50%_30%]" />
+          <img
+            src={image}
+            alt={t('content.img_alt', { headline })}
+            className="w-full h-full object-cover object-[50%_30%]"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-surface/20" />
         </div>
 

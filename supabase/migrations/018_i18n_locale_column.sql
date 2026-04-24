@@ -9,16 +9,30 @@
 ALTER TABLE public.custom_sessions
   ADD COLUMN IF NOT EXISTS locale TEXT NOT NULL DEFAULT 'fr';
 
-ALTER TABLE public.custom_sessions
-  ADD CONSTRAINT custom_sessions_locale_check
-  CHECK (locale IN ('fr', 'en'));
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'custom_sessions_locale_check'
+  ) THEN
+    ALTER TABLE public.custom_sessions
+      ADD CONSTRAINT custom_sessions_locale_check
+      CHECK (locale IN ('fr', 'en'));
+  END IF;
+END $$;
 
 ALTER TABLE public.programs
   ADD COLUMN IF NOT EXISTS locale TEXT NOT NULL DEFAULT 'fr';
 
-ALTER TABLE public.programs
-  ADD CONSTRAINT programs_locale_check
-  CHECK (locale IN ('fr', 'en'));
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'programs_locale_check'
+  ) THEN
+    ALTER TABLE public.programs
+      ADD CONSTRAINT programs_locale_check
+      CHECK (locale IN ('fr', 'en'));
+  END IF;
+END $$;
 
 COMMENT ON COLUMN public.custom_sessions.locale IS
   'Language the session_data was generated in. Pre-i18n rows are ''fr''.';

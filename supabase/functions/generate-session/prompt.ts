@@ -44,7 +44,11 @@ const PRESET_DESCRIPTIONS: Record<Locale, Record<string, string>> = {
   },
 };
 
-const LANGUAGE_DIRECTIVE_EN = `CRITICAL LANGUAGE OVERRIDE: All user-facing strings in your JSON output MUST be in natural English. This applies to: title, description, focus tags, block names, exercise names, instructions, and any other string value. Use idiomatic fitness English. JSON keys stay exactly as specified below.\n\n`;
+const LANGUAGE_DIRECTIVE_EN = `CRITICAL LANGUAGE OVERRIDE: All user-facing strings in your JSON output MUST be in natural English. This applies to: title, description, focus tags, block names, exercise names, instructions, and any other string value. Use idiomatic fitness English. JSON keys stay exactly as specified below.
+
+The example session below uses French exercise names; map them to their natural English equivalents in your output (e.g. "Rotation des bras" → "Arm circles", "Montées de genoux" → "High knees", "Squats" → "Squats", "Pompes" → "Push-ups", "Mountain climbers" → "Mountain climbers", "Étirements quadriceps" → "Quad stretches", "Respiration profonde" → "Deep breathing", "Échauffement" → "Warm-up", "Retour au calme" → "Cool-down", "Circuit Full Body" → "Full Body Circuit").
+
+`;
 
 export const SYSTEM_PROMPT = `Tu es un coach fitness expert. Tu génères des séances d'entraînement au format JSON uniquement.
 
@@ -62,7 +66,7 @@ RÈGLES STRICTES :
 - Le premier bloc DOIT être de type "warmup"
 - Le dernier bloc DOIT être de type "cooldown"
 - Respecte la durée demandée (±3 minutes)
-- Tout le contenu en français
+- Tout le contenu dans la langue indiquée par la directive de langue en tête (français par défaut)
 - Instructions concises (1-2 phrases max par exercice)
 - Pas de HTML, pas d'URLs dans les textes
 
