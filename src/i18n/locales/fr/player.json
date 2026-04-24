@@ -74,6 +74,13 @@
     "share_loading": "Génération…",
     "share_shared": "Partagé !",
     "share_copied": "Image téléchargée & lien copié !",
+    "share_label_minutes": "minutes",
+    "share_label_blocks": "blocs",
+    "share_label_difficulty": "difficulté",
+    "share_label_rounds": "rounds",
+    "share_trophy_message": "+1 séance dans la boîte !",
+    "share_join_cta": "Rejoins le mouvement",
+    "share_amrap_suffix": "rounds AMRAP",
     "back_home": "Retour à l'accueil",
     "back_program": "Retour au programme",
     "back_custom_session": "Retour à la séance"

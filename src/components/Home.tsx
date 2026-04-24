@@ -11,15 +11,16 @@ import { ConnectedContent } from './home/ConnectedContent.tsx';
 import { VisitorContent } from './home/VisitorContent.tsx';
 import { useShowWelcome, WelcomeModal } from './WelcomeModal.tsx';
 
-function formatShortDate(dateKey: string): string {
-  const d = parseDateKey(dateKey);
-  const dd = String(d.getDate()).padStart(2, '0');
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  return `${dd}.${mm}.${d.getFullYear()}`;
-}
-
 export function Home() {
-  const { t } = useTranslation('home');
+  const { t, i18n } = useTranslation('home');
+  const formatShortDate = (dateKey: string) => {
+    const d = parseDateKey(dateKey);
+    return d.toLocaleDateString(i18n.language, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  };
   const todayKey = getTodayKey();
   const tomorrowKey = getTomorrowKey();
   const { session, loading, error } = useSession(todayKey);

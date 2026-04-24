@@ -75,9 +75,42 @@
     "section_aria": "Contenu de la séance",
     "summary": "{{blocks}} blocs · ~{{duration}} min estimées"
   },
-  "difficulty": {
-    "accessible": "Accessible",
-    "modere": "Modéré",
+  "presets": {
+    "transpirer_label": "Objectif : transpirer",
+    "transpirer_desc": "HIIT + Tabata, haute intensité",
+    "renfo_label": "Renfo complet",
+    "renfo_desc": "Renforcement musculaire structuré",
+    "express_label": "Full body express",
+    "express_desc": "Circuit rapide, zéro temps mort",
+    "mobilite_label": "Détente & mobilité",
+    "mobilite_desc": "Stretching et récupération active"
+  },
+  "intensity": {
+    "douce": "Douce",
+    "moderee": "Modérée",
     "intense": "Intense"
+  },
+  "body_focus": {
+    "upper": "Haut du corps",
+    "lower": "Bas du corps",
+    "core": "Core",
+    "full": "Full body"
+  },
+  "equipment": {
+    "poids_du_corps": "Poids du corps",
+    "halteres": "Haltères",
+    "barre_disques": "Barre & disques",
+    "kettlebell": "Kettlebell",
+    "elastiques": "Élastiques",
+    "banc": "Banc",
+    "barre_traction": "Barre de traction",
+    "trx": "TRX / Sangles",
+    "corde_a_sauter": "Corde à sauter",
+    "medecine_ball": "Medicine ball",
+    "swiss_ball": "Swiss ball",
+    "step": "Step",
+    "tapis": "Tapis",
+    "foam_roller": "Foam roller",
+    "anneaux": "Anneaux"
   }
 }

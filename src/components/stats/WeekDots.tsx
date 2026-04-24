@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-const DAY_LABELS = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+const DAY_KEYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] as const;
 
 export function WeekDots({ weekDots }: { weekDots: boolean[] }) {
   const { t } = useTranslation('stats');
@@ -39,7 +39,7 @@ export function WeekDots({ weekDots }: { weekDots: boolean[] }) {
                 </svg>
               )}
             </div>
-            <span className="text-[11px] font-medium text-muted">{DAY_LABELS[i]}</span>
+            <span className="text-[11px] font-medium text-muted">{t(`week_dots.day_${DAY_KEYS[i]}`)}</span>
           </div>
         ))}
       </div>

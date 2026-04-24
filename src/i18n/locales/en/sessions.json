@@ -75,9 +75,42 @@
     "section_aria": "Session content",
     "summary": "{{blocks}} blocks · ~{{duration}} min estimated"
   },
-  "difficulty": {
-    "accessible": "Accessible",
-    "modere": "Moderate",
+  "presets": {
+    "transpirer_label": "Goal: work up a sweat",
+    "transpirer_desc": "HIIT + Tabata, high intensity",
+    "renfo_label": "Full strength",
+    "renfo_desc": "Structured strength training",
+    "express_label": "Full body express",
+    "express_desc": "Fast circuit, zero downtime",
+    "mobilite_label": "Relax & mobility",
+    "mobilite_desc": "Stretching and active recovery"
+  },
+  "intensity": {
+    "douce": "Easy",
+    "moderee": "Moderate",
     "intense": "Intense"
+  },
+  "body_focus": {
+    "upper": "Upper body",
+    "lower": "Lower body",
+    "core": "Core",
+    "full": "Full body"
+  },
+  "equipment": {
+    "poids_du_corps": "Bodyweight",
+    "halteres": "Dumbbells",
+    "barre_disques": "Barbell & plates",
+    "kettlebell": "Kettlebell",
+    "elastiques": "Resistance bands",
+    "banc": "Bench",
+    "barre_traction": "Pull-up bar",
+    "trx": "TRX / Suspension straps",
+    "corde_a_sauter": "Jump rope",
+    "medecine_ball": "Medicine ball",
+    "swiss_ball": "Swiss ball",
+    "step": "Step",
+    "tapis": "Mat",
+    "foam_roller": "Foam roller",
+    "anneaux": "Rings"
   }
 }

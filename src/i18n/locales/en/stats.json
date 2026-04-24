@@ -57,7 +57,14 @@
     "aria_other": "Week activity: {{n}} days out of 7",
     "heading": "This week",
     "activity_one": "{{n}} active day",
-    "activity_other": "{{n}} active days"
+    "activity_other": "{{n}} active days",
+    "day_mon": "M",
+    "day_tue": "T",
+    "day_wed": "W",
+    "day_thu": "T",
+    "day_fri": "F",
+    "day_sat": "S",
+    "day_sun": "S"
   },
   "bar_chart": {
     "heading": "Weekly volume",

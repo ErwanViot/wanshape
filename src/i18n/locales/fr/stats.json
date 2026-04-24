@@ -57,7 +57,14 @@
     "aria_other": "Activité de la semaine : {{n}} jours sur 7",
     "heading": "Cette semaine",
     "activity_one": "{{n}} jour d'activité",
-    "activity_other": "{{n}} jours d'activité"
+    "activity_other": "{{n}} jours d'activité",
+    "day_mon": "L",
+    "day_tue": "M",
+    "day_wed": "M",
+    "day_thu": "J",
+    "day_fri": "V",
+    "day_sat": "S",
+    "day_sun": "D"
   },
   "bar_chart": {
     "heading": "Volume hebdo",

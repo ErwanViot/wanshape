@@ -43,7 +43,7 @@ export function StepObjective({
                   : 'border-divider text-muted hover:border-brand/30'
               }`}
             >
-              {t(`objectif.${o.value}`)}
+              {t(`goal.${o.value}`)}
             </button>
           ))}
         </div>

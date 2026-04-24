@@ -74,6 +74,13 @@
     "share_loading": "Generating…",
     "share_shared": "Shared!",
     "share_copied": "Image downloaded & link copied!",
+    "share_label_minutes": "minutes",
+    "share_label_blocks": "blocks",
+    "share_label_difficulty": "difficulty",
+    "share_label_rounds": "rounds",
+    "share_trophy_message": "+1 session in the bag!",
+    "share_join_cta": "Join the movement",
+    "share_amrap_suffix": "AMRAP rounds",
     "back_home": "Back to home",
     "back_program": "Back to program",
     "back_custom_session": "Back to session"

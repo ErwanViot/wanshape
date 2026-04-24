@@ -39,21 +39,35 @@ export function shiftYYYYMMDD(value: string, days: number): string | null {
   return formatLocalYYYYMMDD(parsed);
 }
 
+export interface RelativeDayLabels {
+  today: string;
+  yesterday: string;
+  tomorrow: string;
+}
+
 /**
- * Human-readable label like "aujourd'hui", "hier", or "lun. 17 avr.".
- * Locale-aware French.
+ * Human-readable label like "today", "yesterday", or "Mon, Apr 17".
+ * Caller passes the locale and translated relative labels so this utility
+ * stays pure (no React / i18n dependency).
  */
-export function formatDateLabel(value: string, now: Date = new Date()): string {
+export function formatDateLabel(
+  value: string,
+  options: { locale?: string; labels?: RelativeDayLabels; now?: Date } = {},
+): string {
   const parsed = parseYYYYMMDD(value);
   if (!parsed) return value;
 
+  const { locale = 'fr', labels, now = new Date() } = options;
   const today = new Date(now);
   today.setHours(0, 0, 0, 0);
   const diffDays = Math.round((today.getTime() - parsed.getTime()) / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 0) return "aujourd'hui";
-  if (diffDays === 1) return 'hier';
-  if (diffDays === -1) return 'demain';
+  const fallback: RelativeDayLabels = { today: "aujourd'hui", yesterday: 'hier', tomorrow: 'demain' };
+  const relative = labels ?? fallback;
 
-  return parsed.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+  if (diffDays === 0) return relative.today;
+  if (diffDays === 1) return relative.yesterday;
+  if (diffDays === -1) return relative.tomorrow;
+
+  return parsed.toLocaleDateString(locale, { weekday: 'short', day: 'numeric', month: 'short' });
 }

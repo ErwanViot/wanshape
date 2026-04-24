@@ -63,14 +63,28 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
   const handleShare = useCallback(async () => {
     setShareState('loading');
     try {
-      const result = await shareSession({ session, realMinutes, amrapRounds, difficultyLabel });
+      const result = await shareSession({
+        session,
+        realMinutes,
+        amrapRounds,
+        difficultyLabel,
+        labels: {
+          minutes: t('end_screen.share_label_minutes'),
+          blocks: t('end_screen.share_label_blocks'),
+          difficulty: t('end_screen.share_label_difficulty'),
+          rounds: t('end_screen.share_label_rounds'),
+          trophyMessage: t('end_screen.share_trophy_message'),
+          joinCta: t('end_screen.share_join_cta'),
+          amrapSuffix: t('end_screen.share_amrap_suffix'),
+        },
+      });
       setShareState(result);
       setTimeout(() => setShareState('idle'), 3000);
     } catch {
       // User cancelled share sheet or other error
       setShareState('idle');
     }
-  }, [session, realMinutes, amrapRounds, difficultyLabel]);
+  }, [session, realMinutes, amrapRounds, difficultyLabel, t]);
 
   const minutesUnit = displayMinutes === '< 1' ? t('end_screen.minutes_unit_one') : t('end_screen.minutes_unit_other');
 
