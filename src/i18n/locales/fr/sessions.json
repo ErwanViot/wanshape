@@ -42,7 +42,8 @@
     "regenerate": "Recommencer",
     "regenerating": "Régénération...",
     "bilateral": "(bilatéral)",
-    "pair": "Paire {{n}}"
+    "pair": "Paire {{n}}",
+    "rounds_count": "{{n}} tours"
   },
   "seances": {
     "page_title": "Mes séances",
@@ -74,6 +75,16 @@
     "toggle_label": "Contenu de la séance",
     "section_aria": "Contenu de la séance",
     "summary": "{{blocks}} blocs · ~{{duration}} min estimées"
+  },
+  "block_meta": {
+    "exercises": "{{n}} exercices",
+    "rounds_x_exos": "{{rounds}} rounds × {{exos}} exos",
+    "hiit": "{{rounds}} rounds · {{work}}s/{{rest}}s",
+    "tabata_with_sets": "{{sets}} sets × {{rounds}} rounds",
+    "rounds_only": "{{rounds}} rounds",
+    "minutes": "{{n}} minutes",
+    "superset": "{{sets}} séries · {{pairs}} paires",
+    "pyramid": "{{n}} paliers"
   },
   "presets": {
     "transpirer_label": "Objectif : transpirer",

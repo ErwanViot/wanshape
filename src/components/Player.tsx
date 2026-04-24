@@ -2,7 +2,6 @@ import { HeartPulse } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate, useParams } from 'react-router';
-import { BLOCK_LABELS } from '../engine/constants.ts';
 import { compileSession } from '../engine/interpreter.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
@@ -61,6 +60,7 @@ function getBlockProgress(step: AtomicStep): string {
 }
 
 function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep }) {
+  const { t } = useTranslation('common');
   const progress = getBlockProgress(step);
 
   return (
@@ -78,7 +78,7 @@ function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep
                 color: isActive ? step.blockColor : isPast ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.2)',
               }}
             >
-              {BLOCK_LABELS[block.type]}
+              {t(`block_name.${block.type}`)}
               {isActive && progress && ` - ${progress}`}
             </span>
           </span>

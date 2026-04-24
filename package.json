@@ -12,7 +12,8 @@
     "dead-code": "knip",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "check:i18n": "node scripts/check-i18n.mjs"
   },
   "dependencies": {
     "@sentry/react": "^10.45.0",
