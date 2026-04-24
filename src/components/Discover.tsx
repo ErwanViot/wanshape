@@ -6,17 +6,6 @@ import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import type { ExerciseCategory, ExerciseData } from '../types/exercise.ts';
 import { CATEGORY_ORDER, DIFFICULTY_COLORS } from '../types/exercise.ts';
 
-const FORMAT_SHORT_DESCS: Record<string, string> = {
-  pyramid: 'Séries croissantes puis décroissantes',
-  classic: 'Travail ciblé en séries classiques',
-  superset: 'Deux exercices enchaînés sans pause',
-  emom: 'Chaque minute, un effort à compléter',
-  circuit: "Rotation d'ateliers variés en boucle",
-  amrap: 'Maximum de tours dans le temps imparti',
-  hiit: 'Efforts explosifs, récupération courte',
-  tabata: '20s à fond, 10s de repos, sans répit',
-};
-
 function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, ExerciseData[]][] {
   const groups = new Map<ExerciseCategory, ExerciseData[]>();
   for (const ex of exercises) {
@@ -29,6 +18,8 @@ function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, Exercise
 
 export function Discover() {
   const { t } = useTranslation('explore');
+  const { t: td } = useTranslation('formats_data');
+  const { t: te } = useTranslation('exercises_data');
   useDocumentHead({
     title: t('discover.page_title'),
     description: t('discover.page_description'),
@@ -59,12 +50,10 @@ export function Discover() {
               className="glass-card rounded-xl p-4 flex flex-col gap-3 hover:border-divider-strong transition-colors"
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-heading">{f.name}</h3>
+                <h3 className="text-sm font-bold text-heading">{td(`${f.slug}.name`)}</h3>
                 <span className="text-xs text-muted shrink-0">{f.duration} min</span>
               </div>
-              <p className="text-xs text-muted leading-relaxed flex-1">
-                {FORMAT_SHORT_DESCS[f.type] ?? f.shortDescription}
-              </p>
+              <p className="text-xs text-muted leading-relaxed flex-1">{td(`${f.slug}.shortDescription`)}</p>
               <div className="flex items-center gap-1">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div key={i} className={`intensity-dot ${i <= f.intensity ? 'active' : 'inactive'}`} />
@@ -87,25 +76,28 @@ export function Discover() {
           <div key={category} className="space-y-3">
             <h3 className="text-sm font-bold uppercase tracking-wider text-subtle">{t(`category.${category}`)}</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {exercises.slice(0, 6).map((ex) => (
-                <Link
-                  key={ex.slug}
-                  to={`/exercices/${ex.slug}`}
-                  className="glass-card rounded-xl overflow-hidden group"
-                >
-                  <div className="relative h-24">
-                    <img src={ex.image} alt={ex.name} className="w-full h-full object-cover" loading="lazy" />
-                  </div>
-                  <div className="px-3 py-2 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-heading truncate">{ex.name}</span>
-                    <span
-                      className={`text-xs font-bold px-1.5 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
-                    >
-                      {t(`difficulty_level.${ex.difficulty}`)}
-                    </span>
-                  </div>
-                </Link>
-              ))}
+              {exercises.slice(0, 6).map((ex) => {
+                const exName = te(`${ex.slug}.name`);
+                return (
+                  <Link
+                    key={ex.slug}
+                    to={`/exercices/${ex.slug}`}
+                    className="glass-card rounded-xl overflow-hidden group"
+                  >
+                    <div className="relative h-24">
+                      <img src={ex.image} alt={exName} className="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div className="px-3 py-2 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-heading truncate">{exName}</span>
+                      <span
+                        className={`text-xs font-bold px-1.5 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
+                      >
+                        {t(`difficulty_level.${ex.difficulty}`)}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
             {exercises.length > 6 && (
               <Link to="/exercices" className="text-xs text-link hover:text-link-hover transition-colors">

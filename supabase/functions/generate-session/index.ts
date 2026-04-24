@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { getCorsHeaders } from "../_shared/cors.ts";
-import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.ts";
+import { buildSystemPrompt, buildUserPrompt, type Locale } from "./prompt.ts";
 import { validateSession } from "./validate.ts";
 
 const MAX_DAILY_GENERATIONS = 10;
@@ -30,6 +30,7 @@ const VALID_EQUIPMENT = [
 const VALID_INTENSITIES = ["douce", "moderee", "intense"];
 const VALID_BODY_FOCUS = ["upper", "lower", "core", "full"];
 const VALID_DURATIONS = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90];
+const VALID_LOCALES: Locale[] = ["fr", "en"];
 
 function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -51,6 +52,7 @@ interface RequestInput {
   bodyFocus?: string[];
   preferences?: string;
   refinementNote?: string;
+  locale?: string;
 }
 
 function validateInput(body: RequestInput): string | null {
@@ -106,6 +108,10 @@ function validateInput(body: RequestInput): string | null {
   }
   if (body.refinementNote && body.refinementNote.length > 300) {
     return "refinementNote: 300 caractères max";
+  }
+
+  if (body.locale && !VALID_LOCALES.includes(body.locale as Locale)) {
+    return "locale invalide";
   }
 
   return null;
@@ -205,7 +211,9 @@ Deno.serve(async (req: Request) => {
   }
 
   // Build prompt
-  const userPrompt = buildUserPrompt(body as Parameters<typeof buildUserPrompt>[0]);
+  const locale: Locale = (body.locale as Locale) ?? "fr";
+  const userPrompt = buildUserPrompt({ ...body, locale } as Parameters<typeof buildUserPrompt>[0]);
+  const systemPrompt = buildSystemPrompt(locale);
 
   // Call Anthropic API
   let aiResponse: Response;
@@ -220,7 +228,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: MAX_TOKENS,
-        system: SYSTEM_PROMPT,
+        system: systemPrompt,
         messages: [{ role: "user", content: userPrompt }],
       }),
       signal: AbortSignal.timeout(30_000),
@@ -297,6 +305,7 @@ Deno.serve(async (req: Request) => {
       input_tokens: inputTokens,
       output_tokens: outputTokens,
       model: MODEL,
+      locale,
     })
     .select("id")
     .single();

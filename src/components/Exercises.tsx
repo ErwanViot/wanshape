@@ -17,6 +17,7 @@ function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, Exercise
 
 export function Exercises() {
   const { t } = useTranslation('explore');
+  const { t: td } = useTranslation('exercises_data');
   useDocumentHead({
     title: t('exercises.page_title'),
     description: t('exercises.page_description'),
@@ -57,50 +58,59 @@ export function Exercises() {
           <section key={category}>
             <h2 className="text-xs font-bold uppercase tracking-wider text-muted mb-4">{t(`category.${category}`)}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {exercises.map((ex) => (
-                <Link
-                  key={ex.slug}
-                  to={`/exercices/${ex.slug}`}
-                  className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
-                >
-                  {/* Image */}
-                  <div className="relative h-28 overflow-hidden">
-                    <img src={ex.image} alt={ex.name} className="w-full h-full object-cover" loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
-                    <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                      <h3 className="font-bold text-white text-base drop-shadow-sm">{ex.name}</h3>
-                      <span
-                        className={`text-xs font-bold px-2 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
-                      >
-                        {t(`difficulty_level.${ex.difficulty}`)}
+              {exercises.map((ex) => {
+                const name = td(`${ex.slug}.name`);
+                const muscles = td(`${ex.slug}.muscles`, { returnObjects: true }) as string[];
+                const shortDescription = td(`${ex.slug}.shortDescription`);
+                const variants = td(`${ex.slug}.variants`, { returnObjects: true }) as {
+                  name: string;
+                  description: string;
+                }[];
+                return (
+                  <Link
+                    key={ex.slug}
+                    to={`/exercices/${ex.slug}`}
+                    className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+                  >
+                    {/* Image */}
+                    <div className="relative h-28 overflow-hidden">
+                      <img src={ex.image} alt={name} className="w-full h-full object-cover" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
+                      <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+                        <h3 className="font-bold text-white text-base drop-shadow-sm">{name}</h3>
+                        <span
+                          className={`text-xs font-bold px-2 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
+                        >
+                          {t(`difficulty_level.${ex.difficulty}`)}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-4 flex-1 flex flex-col gap-3">
+                      <div className="flex flex-wrap gap-1.5">
+                        {muscles.slice(0, 3).map((m) => (
+                          <span
+                            key={m}
+                            className="px-2 py-0.5 rounded-full text-xs font-semibold bg-brand/10 text-link border border-brand/20"
+                          >
+                            {m}
+                          </span>
+                        ))}
+                        {muscles.length > 3 && (
+                          <span className="px-2 py-0.5 rounded-full text-xs font-semibold text-muted">
+                            +{muscles.length - 3}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[13px] text-subtle leading-relaxed flex-1 line-clamp-2">{shortDescription}</p>
+                      <span className="text-xs text-link font-medium">
+                        {t('exercises.variant', { n: variants.length, count: variants.length })}
                       </span>
                     </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-4 flex-1 flex flex-col gap-3">
-                    <div className="flex flex-wrap gap-1.5">
-                      {ex.muscles.slice(0, 3).map((m) => (
-                        <span
-                          key={m}
-                          className="px-2 py-0.5 rounded-full text-xs font-semibold bg-brand/10 text-link border border-brand/20"
-                        >
-                          {m}
-                        </span>
-                      ))}
-                      {ex.muscles.length > 3 && (
-                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold text-muted">
-                          +{ex.muscles.length - 3}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-[13px] text-subtle leading-relaxed flex-1 line-clamp-2">{ex.shortDescription}</p>
-                    <span className="text-xs text-link font-medium">
-                      {t('exercises.variant', { n: ex.variants.length, count: ex.variants.length })}
-                    </span>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </section>
         ))}

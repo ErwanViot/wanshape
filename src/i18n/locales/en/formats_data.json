@@ -1,0 +1,234 @@
+{
+  "pyramide": {
+    "name": "Pyramid",
+    "subtitle": "Progressive up-and-down",
+    "shortDescription": "Ascending then descending sets for a gradual increase in load.",
+    "principle": "The Pyramid format structures your workout around a progressive increase in reps (2, 4, 6, 8…) followed by a symmetrical descent. Intensity naturally rises with the rep count, then falls back down — letting your body warm up gradually without any sudden shock.",
+    "protocol": "Each exercise follows a pyramid scheme. For example: 2 reps → 4 reps → 6 reps → 8 reps → 6 reps → 4 reps → 2 reps. Rest between each level is short (15–30s). Work time per exercise is fixed; rep count climbs and descends.",
+    "benefits": [
+      "Warm-up built right in thanks to the ascending phase",
+      "Self-regulation: your body adapts at every level",
+      "Muscular endurance work at the higher rep counts",
+      "Cool-down made easy by the descending phase",
+      "Accessible to all fitness levels"
+    ],
+    "targetAudience": "Ideal for beginners and those getting back into exercise. The gradual ramp-up reduces injury risk and helps you find your pace. Also well-suited to intermediate athletes looking to build muscular endurance.",
+    "tips": [
+      "Focus on movement quality over speed, especially at the higher levels",
+      "Use the lower levels to dial in your breathing",
+      "If a level feels too hard, stay at the previous one rather than rushing through sloppy reps",
+      "The descent is not a cool-down: keep your technique locked in"
+    ],
+    "commonMistakes": [
+      "Going too fast on the early levels and burning out before the peak",
+      "Letting form slip as the rep count climbs",
+      "Skipping levels to finish faster",
+      "Not respecting the rest periods between levels"
+    ],
+    "card_description": "Reps go up at each step (2, 4, 6, 8…) then back down. Intensity rises and falls naturally.",
+    "card_benefit": "Self-regulated: the warmup is built into the ascent."
+  },
+  "renforcement": {
+    "name": "Strength Training",
+    "subtitle": "Classic sets",
+    "shortDescription": "Targeted work in classic sets with structured rest periods.",
+    "principle": "Classic strength training is the most traditional format in bodyweight fitness. Each exercise is performed in successive sets with a set rep count and rest time between sets. This format lets you target a specific muscle group and apply enough volume to drive consistent progress.",
+    "protocol": "Exercises are organized by muscle group (upper body, lower body, core). Each exercise is performed for 3–4 sets of 8–15 reps, with 30–60 seconds of rest between sets. Workouts alternate between push days (push-ups, dips, shoulders) and pull/leg days (squats, lunges, glute bridges).",
+    "benefits": [
+      "Targeted development of strength and muscle",
+      "Measurable progress: you can track rep improvements over time",
+      "Simple, familiar structure that's easy to follow",
+      "Adequate rest to maintain movement quality throughout",
+      "Adaptable to all levels by adjusting reps and sets"
+    ],
+    "targetAudience": "Suitable for all levels. Beginners will appreciate the clear structure and built-in rest. Advanced athletes can increase reps or move to harder variations (decline push-ups, pistol squats, etc.).",
+    "tips": [
+      "Prioritize full range of motion over speed",
+      "Use your rest periods to hydrate and breathe deeply",
+      "If you can't hold your form, reduce your reps rather than cheating",
+      "Alternate upper and lower body on consecutive days to allow recovery"
+    ],
+    "commonMistakes": [
+      "Cutting range of motion short to squeeze out more reps",
+      "Not respecting rest periods (too short or too long)",
+      "Always training the same muscle groups while neglecting others",
+      "Holding your breath during the effort"
+    ],
+    "card_description": "Targeted exercises in sets with rest. Upper body (push & pull) or lower body & core.",
+    "card_benefit": "Targeted toning. Clear, measurable progression."
+  },
+  "superset": {
+    "name": "Superset",
+    "subtitle": "Antagonist pairs",
+    "shortDescription": "Two complementary exercises back-to-back with no rest for balanced, efficient training.",
+    "principle": "A superset pairs two complementary exercises (typically antagonist muscles) with no rest between them. While one muscle works, the other recovers — effectively doubling your work volume in the same amount of time. Classic example: push-ups (chest) immediately followed by rows (back).",
+    "protocol": "Exercises are organized into complementary pairs. Each pair is performed for 3–4 sets. Within a pair, both exercises flow directly into each other with no break. Rest (30–60s) comes between pairs, not between exercises. This rhythm keeps effort high while allowing muscular recovery.",
+    "benefits": [
+      "Time efficiency: twice the work in the same time",
+      "Muscular balance through antagonist pairing",
+      "Elevated heart rate for a cardio effect",
+      "Active recovery: one muscle rests while the other works",
+      "Shorter overall session without sacrificing quality"
+    ],
+    "targetAudience": "For athletes who already have a solid technical foundation and want to optimize their training time. Cardiovascular demand is moderate but higher than classic strength training, making it a great stepping-stone format.",
+    "tips": [
+      "Pick pairs that target opposing muscle groups (push/pull, flexion/extension)",
+      "Transition quickly between exercises to preserve the superset effect",
+      "If fatigue is compromising your form, take a few seconds to reset",
+      "Hydrate during rest periods between pairs"
+    ],
+    "commonMistakes": [
+      "Resting too long between the two exercises in a pair, which kills the superset effect",
+      "Choosing two exercises that target the same muscle group",
+      "Letting form break down on the second exercise due to fatigue",
+      "Failing to adjust rep counts between the exercises in a pair"
+    ],
+    "card_description": "Two complementary exercises back-to-back with no rest (e.g. push-ups then pull). Rest between pairs.",
+    "card_benefit": "Balanced, efficient work in less time."
+  },
+  "emom": {
+    "name": "EMOM",
+    "subtitle": "Every Minute On the Minute",
+    "shortDescription": "Every minute, a task to complete. Whatever time is left is your rest.",
+    "principle": "EMOM (Every Minute On the Minute) sets a target number of reps to complete at the start of each minute. Once done, the remaining time before the next minute is your rest. The faster and more efficient you are, the more you recover. This format teaches effort management: going too fast burns you out, going too slow cuts your rest.",
+    "protocol": "The timer runs in one-minute intervals. On each minute mark, complete the prescribed reps (e.g., 10 squats + 5 push-ups). The remaining time is your rest. On the next mark, you go again. The EMOM block lasts 10–16 minutes, with a warm-up and cool-down on either end.",
+    "benefits": [
+      "Builds both muscular and cardiovascular endurance",
+      "Teaches effort pacing and rhythm management",
+      "Natural self-regulation: your rest automatically adjusts to your speed",
+      "Built-in motivation from the challenge of finishing before the minute ends",
+      "Clear, predictable structure that sharpens mental focus"
+    ],
+    "targetAudience": "Accessible to beginners if reps are well-calibrated (aim for 30–40s of work per minute, leaving 20–30s of rest). Advanced athletes can increase volume or movement difficulty.",
+    "tips": [
+      "Aim for a steady pace rather than going all-out on the first minute",
+      "If you finish with less than 10 seconds of rest, reduce your reps",
+      "Use the rest to breathe deeply and reset mentally",
+      "Keep one eye on the clock so you're ready for the next minute"
+    ],
+    "commonMistakes": [
+      "Starting too fast in the first few minutes and running out of rest entirely",
+      "Rushing the last reps to steal a bit more rest",
+      "Not adjusting volume when rest starts disappearing",
+      "Losing count of reps in the rush"
+    ],
+    "card_description": "At the start of every minute, do a set number of reps. Remaining time = rest.",
+    "card_benefit": "Builds endurance and teaches effort pacing."
+  },
+  "circuit": {
+    "name": "Circuit Training",
+    "subtitle": "Full-body sequence",
+    "shortDescription": "A rotating loop of varied exercises blending strength and cardio.",
+    "principle": "Circuit training chains multiple different exercises together with minimal rest between them. Each exercise targets a different muscle group or physical quality, allowing you to sustain overall effort while each muscle partially recovers. The circuit is repeated for multiple rounds to build total volume.",
+    "protocol": "A typical circuit includes 4–6 varied exercises (upper body, lower body, core, cardio). Each exercise is performed for 30–45 seconds or a set number of reps. Rest between exercises is brief (10–15s transition). Rest between rounds is 60–90 seconds. Sessions typically include 3–5 rounds.",
+    "benefits": [
+      "Full-body workout in a single session",
+      "Effective combination of strength and cardio",
+      "Exercise variety keeps motivation and engagement high",
+      "Adjustable intensity: tweak the number of rounds and rest times",
+      "Burns plenty of calories by keeping heart rate elevated"
+    ],
+    "targetAudience": "A versatile format suited to intermediate fitness levels. Beginners can ease in by extending rest periods. It's the go-to format when you want a complete workout without specializing.",
+    "tips": [
+      "Alternate muscle groups in the circuit order to prevent local fatigue",
+      "Keep a steady pace rather than alternating sprints with long breaks",
+      "Treat the first round as your warm-up: ramp up intensity gradually",
+      "If an exercise is too hard, drop to an easier variation rather than skipping it"
+    ],
+    "commonMistakes": [
+      "Placing two exercises that target the same muscle back-to-back",
+      "Sprinting through early rounds then collapsing on the last ones",
+      "Cutting rest so short that technique breaks down",
+      "Neglecting core or mobility exercises in the circuit"
+    ],
+    "card_description": "A chain of varied exercises with very little rest. The circuit is repeated multiple times.",
+    "card_benefit": "Combines strength and cardio for complete training."
+  },
+  "amrap": {
+    "name": "AMRAP",
+    "subtitle": "As Many Rounds As Possible",
+    "shortDescription": "Max rounds in the time cap. You control your own pace.",
+    "principle": "AMRAP (As Many Rounds As Possible) gives you a short exercise circuit and a time cap to fill. The goal: complete as many full rounds as possible before the clock runs out. Everyone moves at their own pace — there's no 'right' number of rounds, only your personal record to beat next time.",
+    "protocol": "A circuit of 3–5 exercises with a fixed rep count per exercise (e.g., 10 squats, 8 push-ups, 6 burpees). The clock runs continuously for 8–15 minutes. No prescribed rest: you manage your own breaks. At the end, count total rounds completed plus reps from the ongoing round.",
+    "benefits": [
+      "Objective measure of progress: round count is a clear performance indicator",
+      "Total pace freedom: everyone adapts to their own level",
+      "Personal-challenge motivation to beat your score",
+      "Builds the ability to sustain effort over time",
+      "Simple to understand and easy to follow"
+    ],
+    "targetAudience": "An excellent format for all levels. A beginner might complete 3 rounds while an advanced athlete gets 7 — both get a workout perfectly matched to their fitness. The score-based nature is highly motivating for competitive types.",
+    "tips": [
+      "Find a sustainable pace from round one and stick with it",
+      "A consistent pace beats a fast start followed by a crash",
+      "Record your score so you can compare it next time",
+      "Breathe between exercises rather than stopping completely"
+    ],
+    "commonMistakes": [
+      "Sprinting the first round and burning out within 3 minutes",
+      "Sacrificing technique to squeeze out extra reps",
+      "Taking long breaks between exercises instead of simply slowing the overall pace",
+      "Not tracking your score, which makes it impossible to measure progress"
+    ],
+    "card_description": "Repeat a circuit as many times as possible within the time cap. You set the pace.",
+    "card_benefit": "Pace freedom. Ideal to track your progress."
+  },
+  "hiit": {
+    "name": "HIIT",
+    "subtitle": "High-Intensity Interval Training",
+    "shortDescription": "Explosive efforts followed by short recovery. Short, intense, effective.",
+    "principle": "HIIT alternates between maximal-effort work phases and rest or active recovery. The goal is to push your body into its high-intensity zone during the work intervals, then recover just enough to go again. This format leverages the afterburn effect (EPOC): your body keeps burning calories for hours after the session.",
+    "protocol": "Typical intervals: 30 seconds of effort followed by 30 seconds of rest (1:1 ratio). Each round features one exercise performed at maximum intensity. Sessions include 8–12 rounds (8–12 minutes of pure HIIT), bookended by a warm-up and cool-down.",
+    "benefits": [
+      "Maximum efficiency: meaningful results in minimal time",
+      "Afterburn effect: metabolism stays elevated for hours post-workout",
+      "Rapid cardiovascular improvement",
+      "No equipment needed: bodyweight exercises are all it takes",
+      "Short format that fits easily into a packed schedule"
+    ],
+    "targetAudience": "Reserved for athletes who already have a solid baseline fitness level and have mastered the fundamental movement patterns. The high intensity demands a healthy cardiovascular system and strong body awareness to avoid injury.",
+    "tips": [
+      "Give everything during work phases — it's short, make it count",
+      "Use rest phases for active breathing, not phone-scrolling",
+      "Choose exercises you've fully mastered, because fatigue will degrade your form",
+      "Don't do HIIT two days in a row: your body needs time to recover"
+    ],
+    "commonMistakes": [
+      "Not pushing hard enough during work phases (the 'I' in HIIT stands for Intense)",
+      "Chaining HIIT sessions back-to-back without rest days",
+      "Choosing overly complex movements that become dangerous under fatigue",
+      "Skipping the warm-up because the session seems short"
+    ],
+    "card_description": "Alternating hard effort (30s) and rest (30s). Every exercise goes all-out.",
+    "card_benefit": "Maximum results in minimum time."
+  },
+  "tabata": {
+    "name": "Tabata",
+    "subtitle": "20/10 Protocol",
+    "shortDescription": "20 seconds all-out, 10 seconds of rest. The shortest and most intense format.",
+    "principle": "The Tabata protocol, developed by Dr. Izumi Tabata in 1996, is an ultra-short interval training format. The 2:1 work-to-rest ratio (20s effort / 10s rest) is designed to push the body to its absolute maximum. In just 4 minutes per set (8 rounds of 30 seconds), this protocol simultaneously develops both aerobic and anaerobic capacity.",
+    "protocol": "A classic Tabata set: 8 rounds of 20 seconds maximum effort followed by 10 seconds of rest. Total: 4 minutes. On Wan2Fit, Tabata sessions include 1–2 sets with 60 seconds of rest between sets. Effort during the 20 seconds must be truly maximal — if you can speak in full sentences, you're not pushing hard enough.",
+    "benefits": [
+      "The shortest format available: 4 minutes of intense work per set",
+      "Scientifically proven improvements in both aerobic and anaerobic capacity",
+      "Significant afterburn effect despite the short duration",
+      "Builds power, explosiveness, and endurance simultaneously",
+      "A mental challenge: learning to sustain intensity when your body wants to quit"
+    ],
+    "targetAudience": "Reserved for advanced athletes with excellent cardiovascular fitness. This is not a format for beginners. It demands flawless movement mastery, because 20 seconds of maximum effort under extreme fatigue requires impeccable technical control.",
+    "tips": [
+      "Choose simple, explosive movements (burpees, mountain climbers, jump squats)",
+      "The 10-second rest goes by fast: get into position immediately for the next round",
+      "Effort must be truly maximal — by the end of 8 rounds, you should be completely spent",
+      "Limit yourself to 1–2 Tabata sessions per week maximum"
+    ],
+    "commonMistakes": [
+      "Holding back 'just in case' — Tabata demands 100% effort every single round",
+      "Using complex movements that become dangerous under extreme fatigue",
+      "Doing Tabata sessions too frequently (more than twice a week)",
+      "Confusing Tabata with regular HIIT: 20/10 is significantly more intense than 30/30"
+    ],
+    "card_description": "8 rounds of 20 seconds max effort followed by 10 seconds rest. Short but intense.",
+    "card_benefit": "The shortest and most intense format."
+  }
+}

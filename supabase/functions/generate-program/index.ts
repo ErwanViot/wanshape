@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { getCorsHeaders } from "../_shared/cors.ts";
-import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.ts";
+import { buildSystemPrompt, buildUserPrompt, type Locale } from "./prompt.ts";
 import { sanitizeOnboardingForPersistence } from "./sanitize.ts";
 import { validateProgram } from "./validate.ts";
 
@@ -23,6 +23,7 @@ const VALID_MATERIEL = [
   'step', 'foam_roller', 'anneaux',
 ];
 const VALID_DUREES = [4, 8, 12];
+const VALID_LOCALES: Locale[] = ["fr", "en"];
 
 function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -53,6 +54,7 @@ interface RequestInput {
   duree_seance_minutes: number;
   materiel: string[];
   duree_semaines: number;
+  locale?: string;
 }
 
 function validateInput(body: RequestInput): string | null {
@@ -108,6 +110,10 @@ function validateInput(body: RequestInput): string | null {
     return "blessure_detail doit etre une chaine";
   if (body.blessure_detail && body.blessure_detail.length > 300)
     return "blessure_detail: 300 caracteres max";
+
+  if (body.locale && !VALID_LOCALES.includes(body.locale as Locale)) {
+    return "locale invalide";
+  }
 
   return null;
 }
@@ -241,7 +247,9 @@ Deno.serve(async (req: Request) => {
   }
 
   // Build prompt
-  const userPrompt = buildUserPrompt(body);
+  const locale: Locale = (body.locale as Locale) ?? "fr";
+  const userPrompt = buildUserPrompt({ ...body, locale });
+  const systemPrompt = buildSystemPrompt(locale);
 
   // Call Anthropic API
   // Sonnet with 12K tokens needs more time than Haiku session generation
@@ -261,7 +269,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: MAX_TOKENS,
-        system: SYSTEM_PROMPT,
+        system: systemPrompt,
         messages,
       }),
       signal: AbortSignal.timeout(timeoutMs),
@@ -370,6 +378,7 @@ Deno.serve(async (req: Request) => {
       input_tokens: totalInputTokens,
       output_tokens: totalOutputTokens,
       model: MODEL,
+      locale,
     })
     .select("id")
     .single();

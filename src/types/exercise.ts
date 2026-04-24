@@ -2,13 +2,19 @@ export type ExerciseCategory = 'upper' | 'lower' | 'core' | 'cardio' | 'full-bod
 
 export interface ExerciseData {
   slug: string;
-  name: string;
-  aliases: string[];
   category: ExerciseCategory;
-  muscles: string[];
   difficulty: 1 | 2 | 3;
   image: string;
   video?: string;
+  /** Video URLs for variants, keyed by variant index. Only present when a variant has a video. */
+  variantVideos?: Record<number, string>;
+}
+
+/** Full exercise data as returned to the view layer (static fields + i18n-resolved text). */
+export interface ExerciseView extends ExerciseData {
+  name: string;
+  aliases: string[];
+  muscles: string[];
   shortDescription: string;
   execution: string;
   breathing: string;

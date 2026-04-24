@@ -1,8 +1,11 @@
+export type Locale = 'fr' | 'en';
+
 interface QuickInput {
   mode: 'quick';
   preset: string;
   duration: number;
   refinementNote?: string;
+  locale?: Locale;
 }
 
 interface DetailedInput {
@@ -13,6 +16,7 @@ interface DetailedInput {
   bodyFocus?: string[];
   preferences?: string;
   refinementNote?: string;
+  locale?: Locale;
 }
 
 interface ExpertInput {
@@ -20,16 +24,27 @@ interface ExpertInput {
   duration: number;
   preferences: string;
   refinementNote?: string;
+  locale?: Locale;
 }
 
 type PromptInput = QuickInput | DetailedInput | ExpertInput;
 
-const PRESET_DESCRIPTIONS: Record<string, string> = {
-  transpirer: 'HIIT et Tabata, haute intensité, cardio explosif',
-  renfo: 'renforcement musculaire structuré, séries et répétitions',
-  express: 'circuit rapide full body, zéro temps mort',
-  mobilite: 'stretching, mobilité et récupération active, intensité douce',
+const PRESET_DESCRIPTIONS: Record<Locale, Record<string, string>> = {
+  fr: {
+    transpirer: 'HIIT et Tabata, haute intensité, cardio explosif',
+    renfo: 'renforcement musculaire structuré, séries et répétitions',
+    express: 'circuit rapide full body, zéro temps mort',
+    mobilite: 'stretching, mobilité et récupération active, intensité douce',
+  },
+  en: {
+    transpirer: 'HIIT and Tabata, high intensity, explosive cardio',
+    renfo: 'structured strength training, sets and reps',
+    express: 'fast full-body circuit, zero downtime',
+    mobilite: 'stretching, mobility and active recovery, low intensity',
+  },
 };
+
+const LANGUAGE_DIRECTIVE_EN = `CRITICAL LANGUAGE OVERRIDE: All user-facing strings in your JSON output MUST be in natural English. This applies to: title, description, focus tags, block names, exercise names, instructions, and any other string value. Use idiomatic fitness English. JSON keys stay exactly as specified below.\n\n`;
 
 export const SYSTEM_PROMPT = `Tu es un coach fitness expert. Tu génères des séances d'entraînement au format JSON uniquement.
 
@@ -115,52 +130,83 @@ EXEMPLE DE SÉANCE VALIDE :
   ]
 }`;
 
+const FOCUS_LABELS: Record<Locale, Record<string, string>> = {
+  fr: {
+    upper: 'Haut du corps',
+    lower: 'Bas du corps',
+    core: 'Core / Abdos',
+    full: 'Full body',
+  },
+  en: {
+    upper: 'Upper body',
+    lower: 'Lower body',
+    core: 'Core / Abs',
+    full: 'Full body',
+  },
+};
+
+export function buildSystemPrompt(locale: Locale = 'fr'): string {
+  if (locale === 'en') return LANGUAGE_DIRECTIVE_EN + SYSTEM_PROMPT;
+  return SYSTEM_PROMPT;
+}
+
 export function buildUserPrompt(input: PromptInput): string {
+  const locale: Locale = input.locale ?? 'fr';
   const parts: string[] = [];
 
+  const L = (fr: string, en: string) => (locale === 'en' ? en : fr);
+
   if (input.mode === 'quick') {
-    const desc = PRESET_DESCRIPTIONS[input.preset] ?? input.preset;
+    const desc = PRESET_DESCRIPTIONS[locale][input.preset] ?? input.preset;
     parts.push(
-      `Crée une séance axée ${desc} d'environ ${input.duration} minutes.`,
+      L(
+        `Crée une séance axée ${desc} d'environ ${input.duration} minutes.`,
+        `Create a session focused on ${desc}, about ${input.duration} minutes.`,
+      ),
     );
   } else if (input.mode === 'expert') {
     parts.push(
-      `Crée une séance d'environ ${input.duration} minutes selon les préférences suivantes :\n<user_input>\n${input.preferences}\n</user_input>`,
+      L(
+        `Crée une séance d'environ ${input.duration} minutes selon les préférences suivantes :\n<user_input>\n${input.preferences}\n</user_input>`,
+        `Create a session of about ${input.duration} minutes following these preferences:\n<user_input>\n${input.preferences}\n</user_input>`,
+      ),
     );
   } else {
-    parts.push(`Crée une séance de ${input.duration} minutes.`);
+    parts.push(L(`Crée une séance de ${input.duration} minutes.`, `Create a ${input.duration}-minute session.`));
 
     if (input.equipment && input.equipment.length > 0) {
       const equipList = input.equipment.join(', ');
-      parts.push(`Équipement disponible : ${equipList}.`);
+      parts.push(L(`Équipement disponible : ${equipList}.`, `Available equipment: ${equipList}.`));
     } else {
-      parts.push('Sans matériel (poids du corps uniquement).');
+      parts.push(L('Sans matériel (poids du corps uniquement).', 'No equipment (bodyweight only).'));
     }
 
     if (input.intensity) {
-      parts.push(`Intensité souhaitée : ${input.intensity}.`);
+      parts.push(L(`Intensité souhaitée : ${input.intensity}.`, `Target intensity: ${input.intensity}.`));
     }
 
     if (input.bodyFocus && input.bodyFocus.length > 0) {
-      const FOCUS_LABELS: Record<string, string> = {
-        upper: 'Haut du corps',
-        lower: 'Bas du corps',
-        core: 'Core / Abdos',
-        full: 'Full body',
-      };
-      const focusList = input.bodyFocus
-        .map((f) => FOCUS_LABELS[f] ?? f)
-        .join(', ');
-      parts.push(`Zones ciblées : ${focusList}.`);
+      const focusList = input.bodyFocus.map((f) => FOCUS_LABELS[locale][f] ?? f).join(', ');
+      parts.push(L(`Zones ciblées : ${focusList}.`, `Target zones: ${focusList}.`));
     }
 
     if (input.preferences) {
-      parts.push(`Préférences :\n<user_input>\n${input.preferences}\n</user_input>`);
+      parts.push(
+        L(
+          `Préférences :\n<user_input>\n${input.preferences}\n</user_input>`,
+          `Preferences:\n<user_input>\n${input.preferences}\n</user_input>`,
+        ),
+      );
     }
   }
 
   if (input.refinementNote) {
-    parts.push(`\nNote de modification :\n<user_input>\n${input.refinementNote}\n</user_input>`);
+    parts.push(
+      L(
+        `\nNote de modification :\n<user_input>\n${input.refinementNote}\n</user_input>`,
+        `\nRefinement note:\n<user_input>\n${input.refinementNote}\n</user_input>`,
+      ),
+    );
   }
 
   return parts.join('\n');

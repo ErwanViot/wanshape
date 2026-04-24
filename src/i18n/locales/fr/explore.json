@@ -20,6 +20,11 @@
     "footer_note": "Les durées indiquées incluent l'échauffement et les étirements.",
     "img_alt": "Format {{name}}"
   },
+  "format_page_meta": {
+    "doc_title": "{{name}} — Format d'entraînement",
+    "doc_title_fallback": "Format",
+    "doc_description": "{{name}} : {{short}} Découvre le principe, le protocole, les bénéfices et les conseils pour ce format d'entraînement sans matériel."
+  },
   "format_page": {
     "back_aria": "Retour aux formats",
     "img_alt": "Format {{name}}",
@@ -48,6 +53,9 @@
   "exercise_page": {
     "back_aria": "Retour aux exercices",
     "demo_aria": "Démonstration : {{name}}",
+    "doc_title": "{{name}} — Exercice",
+    "doc_title_fallback": "Exercice",
+    "doc_description": "{{name}} : {{short}} Exécution, variantes, conseils et erreurs courantes.",
     "section_execution": "Exécution",
     "section_breathing": "Respiration",
     "section_benefits": "Bénéfices",

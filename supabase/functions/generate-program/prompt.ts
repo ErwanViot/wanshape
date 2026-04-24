@@ -1,3 +1,5 @@
+export type Locale = 'fr' | 'en';
+
 interface ProgramInput {
   objectifs: string[];
   objectif_detail?: string;
@@ -11,6 +13,14 @@ interface ProgramInput {
   duree_seance_minutes: number;
   materiel: string[];
   duree_semaines: number;
+  locale?: Locale;
+}
+
+const LANGUAGE_DIRECTIVE_EN = `CRITICAL LANGUAGE OVERRIDE: All user-facing strings in your JSON output MUST be in natural English. This applies to: titre, description, note_coach, progression.logique, progression.cible_semaine_*, consignes_semaine.*, sessions.*.title, sessions.*.description, sessions.*.focus, blocks.*.name, exercises.*.name, exercises.*.instructions. Use idiomatic fitness English. JSON keys stay exactly as specified below (keep fr keys like "titre", "seances_par_semaine", etc. — only translate the VALUES).\n\n`;
+
+export function buildSystemPrompt(locale: Locale = 'fr'): string {
+  if (locale === 'en') return LANGUAGE_DIRECTIVE_EN + SYSTEM_PROMPT;
+  return SYSTEM_PROMPT;
 }
 
 export const SYSTEM_PROMPT = `Tu es un preparateur physique expert. Tu generes des programmes d'entrainement multi-semaines au format JSON uniquement.

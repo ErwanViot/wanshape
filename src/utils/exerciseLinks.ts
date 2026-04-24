@@ -1,12 +1,20 @@
 import { EXERCISES_DATA } from '../data/exercises.ts';
+import exercisesEn from '../i18n/locales/en/exercises_data.json';
+import exercisesFr from '../i18n/locales/fr/exercises_data.json';
+
+type LocaleExerciseEntry = {
+  name: string;
+  aliases?: string[];
+  variants?: { name: string; description?: string }[];
+};
+
+type LocaleExercisesMap = Record<string, LocaleExerciseEntry>;
+
+const localeMaps: LocaleExercisesMap[] = [exercisesFr as LocaleExercisesMap, exercisesEn as LocaleExercisesMap];
 
 /** Lowercase, strip accents */
 function normalize(name: string): string {
-  return name
-    .trim()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase();
+  return name.trim().normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 }
 
 /** Lowercase, strip accents, spaces → hyphens */
@@ -21,18 +29,23 @@ interface ExerciseLink {
 
 const linkMap = new Map<string, ExerciseLink>();
 
+// Build lookup from every supported locale so AI-generated sessions match
+// regardless of whether they were produced in FR or EN.
 for (const ex of EXERCISES_DATA) {
   const entry: ExerciseLink = { slug: ex.slug };
 
-  // Main name + aliases
-  linkMap.set(normalize(ex.name), entry);
-  for (const alias of ex.aliases) {
-    linkMap.set(normalize(alias), entry);
-  }
+  for (const map of localeMaps) {
+    const localized = map[ex.slug];
+    if (!localized) continue;
 
-  // Variants → link to parent with anchor
-  for (const v of ex.variants) {
-    linkMap.set(normalize(v.name), { slug: ex.slug, anchor: slugify(v.name) });
+    linkMap.set(normalize(localized.name), entry);
+    for (const alias of localized.aliases ?? []) {
+      linkMap.set(normalize(alias), entry);
+    }
+
+    for (const v of localized.variants ?? []) {
+      linkMap.set(normalize(v.name), { slug: ex.slug, anchor: slugify(v.name) });
+    }
   }
 }
 
