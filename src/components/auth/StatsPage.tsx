@@ -1,4 +1,5 @@
 import { ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
@@ -34,24 +35,27 @@ interface WeekMessage {
   subtitle: string;
 }
 
-function getWeekMessage(sessions: number): WeekMessage {
+type TFunction = (key: string) => string;
+
+function getWeekMessage(sessions: number, t: TFunction): WeekMessage {
   const dayOfWeek = new Date().getDay();
   const isEndOfWeek = dayOfWeek === 0 || dayOfWeek === 6;
 
   if (sessions === 0) {
     return isEndOfWeek
-      ? { emoji: '😌', title: 'Week-end mérité', subtitle: 'Recharge les batteries, lundi on envoie du lourd.' }
-      : { emoji: '🚀', title: 'Nouvelle semaine', subtitle: "Prêt à t'entraîner ?" };
+      ? { emoji: '😌', title: t('week_message.weekend_idle_title'), subtitle: t('week_message.weekend_idle_sub') }
+      : { emoji: '🚀', title: t('week_message.new_week_title'), subtitle: t('week_message.new_week_sub') };
   }
   if (sessions === 1) {
     return isEndOfWeek
-      ? { emoji: '💪', title: 'Séance validée', subtitle: 'Belle semaine ! Récupère bien, la suite va être énorme.' }
-      : { emoji: '🔥', title: 'Première séance validée', subtitle: 'Le plus dur est fait.' };
+      ? { emoji: '💪', title: t('week_message.one_weekend_title'), subtitle: t('week_message.one_weekend_sub') }
+      : { emoji: '🔥', title: t('week_message.one_week_title'), subtitle: t('week_message.one_week_sub') };
   }
-  if (sessions === 2) return { emoji: '💪', title: 'Bien lancé', subtitle: 'Tu construis quelque chose de solide.' };
-  if (sessions === 3) return { emoji: '🚀', title: 'Rythme parfait', subtitle: 'Tu es sur la bonne lancée.' };
-  if (sessions === 4) return { emoji: '🔥', title: 'Impressionnant', subtitle: 'Tu dépasses tes objectifs.' };
-  return { emoji: '⚠️', title: 'Attention au surmenage', subtitle: 'Ton corps progresse au repos. Souffle un peu !' };
+  if (sessions === 2) return { emoji: '💪', title: t('week_message.two_title'), subtitle: t('week_message.two_sub') };
+  if (sessions === 3)
+    return { emoji: '🚀', title: t('week_message.three_title'), subtitle: t('week_message.three_sub') };
+  if (sessions === 4) return { emoji: '🔥', title: t('week_message.four_title'), subtitle: t('week_message.four_sub') };
+  return { emoji: '⚠️', title: t('week_message.overload_title'), subtitle: t('week_message.overload_sub') };
 }
 
 const WEEK_CARD_STYLES: Record<string, { bg: string; border: string; text: string }> = {
@@ -87,6 +91,7 @@ function weekCardStyle(sessions: number) {
 }
 
 export function StatsPage() {
+  const { t } = useTranslation('stats');
   const { user } = useAuth();
   const {
     completions,
@@ -102,8 +107,8 @@ export function StatsPage() {
   const { activeProgram } = useActiveProgram(user?.id);
 
   useDocumentHead({
-    title: 'Suivi',
-    description: 'Tableau de bord sportif Wan2Fit.',
+    title: t('page.title'),
+    description: t('page.description'),
   });
 
   const progressPct =
@@ -139,13 +144,13 @@ export function StatsPage() {
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
           </div>
-          <h1 className="font-display text-2xl font-black text-heading">Pas encore de stats</h1>
-          <p className="text-body text-sm">Lance ta première séance pour commencer à suivre ta progression ici.</p>
+          <h1 className="font-display text-2xl font-black text-heading">{t('page.empty_title')}</h1>
+          <p className="text-body text-sm">{t('page.empty_desc')}</p>
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand/80 transition-colors"
           >
-            Séance du jour
+            {t('page.empty_cta')}
             <ChevronRight className="w-4 h-4" aria-hidden="true" />
           </Link>
         </div>
@@ -154,46 +159,48 @@ export function StatsPage() {
   }
 
   const style = weekCardStyle(thisWeekSessions);
-  const msg = getWeekMessage(thisWeekSessions);
+  const msg = getWeekMessage(thisWeekSessions, t);
 
   return (
     <div className="flex-1 px-4 md:px-10 lg:px-14 py-6 md:py-8">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
-        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">Chaque effort compte</h1>
+        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">{t('page.heading')}</h1>
 
         {/* Bento Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {/* Row 1: 4 MetricCards */}
           <MetricCard
-            label="Séances"
+            label={t('metric.sessions')}
             value={totalSessions}
-            subtitle="total"
+            subtitle={t('metric.total')}
             variant="brand"
             className="stagger-fade-in stagger-1"
           />
           <MetricCard
-            label="Temps"
+            label={t('metric.time')}
             value={totalDuration}
             unit={formatDurationUnit(totalDuration)}
             formatter={durationFormatter(totalDuration)}
-            subtitle="cumulé"
+            subtitle={t('metric.cumulative')}
             className="stagger-fade-in stagger-2"
           />
           <MetricCard
-            label="Moy / séance"
+            label={t('metric.avg_session')}
             value={avgDuration}
             unit={formatDurationUnit(avgDuration)}
             formatter={durationFormatter(avgDuration)}
-            subtitle="durée moyenne"
+            subtitle={t('metric.avg_duration')}
             className="stagger-fade-in stagger-3"
           />
           <MetricCard
-            label="Cette semaine"
+            label={t('metric.this_week')}
             value={thisWeekDuration}
             unit={formatDurationUnit(thisWeekDuration)}
             formatter={durationFormatter(thisWeekDuration)}
-            subtitle={`${thisWeekSessions} séance${thisWeekSessions > 1 ? 's' : ''}`}
+            subtitle={t(thisWeekSessions === 1 ? 'metric.this_week_sub_one' : 'metric.this_week_sub_other', {
+              n: thisWeekSessions,
+            })}
             className="stagger-fade-in stagger-4"
           />
 
@@ -239,8 +246,8 @@ export function StatsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between">
                 <div>
-                  <p className="text-white font-bold text-base md:text-lg">Passe au niveau supérieur</p>
-                  <p className="text-white/60 text-xs mt-0.5">Commence à suivre un programme personnalisé</p>
+                  <p className="text-white font-bold text-base md:text-lg">{t('page.next_level')}</p>
+                  <p className="text-white/60 text-xs mt-0.5">{t('page.next_level_sub')}</p>
                 </div>
                 <ChevronRight
                   className="w-5 h-5 text-white/70 shrink-0 group-hover:translate-x-1 transition-transform"

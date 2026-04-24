@@ -1,0 +1,115 @@
+{
+  "about": {
+    "page_title": "About",
+    "page_description": "Discover the story behind Wan2Fit: a workout player born from frustration with timer setup, now a complete friction-free training tool.",
+    "heading": "Why Wan2Fit?",
+    "p1": "It all started with a silly problem: I was spending more time configuring timers than actually working out.",
+    "p2": "Work time, rest time, number of sets, exercise order… No app would just let me launch a session and follow the pace without overthinking it.",
+    "p3": "So I built my own player. A tool that handles the timer and transitions for me. That tells me what to do and when. Nothing more.",
+    "p4": "That player is the heart of Wan2Fit. Around it, I've added varied formats, structured multi-week programs, and an AI assistant capable of creating custom sessions.",
+    "p5": "The idea has been the same from day one: less friction, more training.",
+    "signature_alt": "Wan, creator of Wan2Fit",
+    "signature": "— Wan",
+    "contact": "A question or suggestion? Write to me at"
+  },
+  "pricing": {
+    "page_title": "Pricing",
+    "page_description": "Discover Wan2Fit plans: free to start, Premium to go further with AI.",
+    "heading": "Choose your plan",
+    "subtitle": "Free to start, Premium to go further with AI-powered sessions and programs."
+  },
+  "pricing_cards": {
+    "active_premium_title": "Premium",
+    "active_premium_status": "Active",
+    "active_premium_subscription": "Active subscription",
+    "ends_on": "Ends on {{date}}",
+    "renews_on": "Next renewal on {{date}}",
+    "manage": "Manage my subscription",
+    "free_title": "Free",
+    "free_subtitle": "To get started, no account or payment required.",
+    "cta_free_signup": "Start for free",
+    "cta_free_current": "Current plan",
+    "yearly_title": "Annual subscription",
+    "yearly_subtitle": "365 days to progress and reach your goals.",
+    "yearly_per_year": "/ year",
+    "yearly_monthly_equiv": "just €8.33 / month",
+    "yearly_badge": "Best deal",
+    "yearly_billing": "€99.99 charged annually",
+    "monthly_title": "Monthly subscription",
+    "monthly_subtitle": "One month to try and discover the full potential of Wan2Fit.",
+    "monthly_per_month": "/ month",
+    "monthly_billing": "€9.99 charged monthly",
+    "offer_details_label": "Offer details",
+    "offer_auto_renew": "Automatic renewal",
+    "offer_cancel_anytime": "Cancel at any time",
+    "accept_cgv": "I accept the",
+    "cgv_link": "General Terms of Sale",
+    "cta_yearly": "Go Premium — €99.99/year",
+    "cta_monthly": "Go Premium — €9.99/month",
+    "cta_signup": "Create an account to get started",
+    "legal_note": "VAT included. Secure payment via Stripe.",
+    "errors": {
+      "accept_cgv": "Please accept the Terms of Sale to continue.",
+      "missing_price": "Price configuration missing"
+    },
+    "features": {
+      "free_1": "Guided daily session",
+      "free_2": "8 training formats",
+      "free_3": "Exercise library",
+      "free_4": "3 guided programs",
+      "free_5": "Full history",
+      "free_6": "Statistics & tracking",
+      "premium_1": "All free content",
+      "premium_2": "Custom AI sessions",
+      "premium_3": "Personalized AI programs",
+      "premium_4": "Progression adapted to your level"
+    }
+  },
+  "premium": {
+    "page_title": "Premium",
+    "page_description": "Go Premium: custom AI sessions and personalized programs to reach your goals.",
+    "badge": "Premium",
+    "hero_heading_1": "The AI that adapts",
+    "hero_heading_2": "to your goals",
+    "hero_body": "Sessions and programs created just for you by artificial intelligence, tailored to your level, preferences, and progress.",
+    "hero_cta_signup": "Create an account",
+    "hero_cta_pricing": "See pricing",
+    "ai_sessions": {
+      "label": "AI Sessions",
+      "heading_1": "Sessions created",
+      "heading_2": "just for you",
+      "body": "Choose your target muscles, preferred format, and duration — AI builds a complete session in seconds.",
+      "bullet_1": "3 creation modes: quick, detailed, or expert",
+      "bullet_2": "Regenerate as many times as you want",
+      "bullet_3": "Adapted to your level and goals",
+      "carousel_quick_alt": "Create a session — Quick mode",
+      "carousel_detailed_alt": "Create a session — Detailed mode",
+      "carousel_expert_alt": "Create a session — Expert mode"
+    },
+    "ai_programs": {
+      "label": "AI Programs",
+      "heading_1": "A complete program",
+      "heading_2": "in a few clicks",
+      "body": "Set your goal, level, and availability — AI generates a structured program over several weeks with built-in progression.",
+      "bullet_1": "Structured weekly calendar",
+      "bullet_2": "Progression and deload integrated automatically",
+      "bullet_3": "Completion tracking and clear goals",
+      "carousel_goal_alt": "Create program — Goal",
+      "carousel_profile_alt": "Create program — Profile",
+      "carousel_config_alt": "Create program — Configuration"
+    },
+    "pricing_heading": "Choose your plan"
+  },
+  "footer": {
+    "by": "by",
+    "about": "About",
+    "legal": "Legal notice",
+    "privacy": "Privacy",
+    "cgu": "Terms",
+    "cgv": "Sales terms",
+    "contact": "Contact"
+  },
+  "carousel": {
+    "slide_aria": "Go to slide {{current}} of {{total}}"
+  }
+}

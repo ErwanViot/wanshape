@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { supabase } from '../../lib/supabase.ts';
@@ -7,25 +8,26 @@ import { LoadingSpinner } from '../LoadingSpinner.tsx';
 const TIMEOUT_MS = 15_000;
 
 export function AuthCallback() {
+  const { t } = useTranslation('auth');
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const handled = useRef(false);
 
-  useDocumentHead({ title: 'Connexion en cours' });
+  useDocumentHead({ title: t('callback.page_title') });
 
   useEffect(() => {
     if (handled.current) return;
     handled.current = true;
 
     if (!supabase) {
-      setError('Auth non disponible');
+      setError(t('errors.auth_unavailable'));
       return;
     }
 
     const client = supabase;
 
     const timeout = setTimeout(() => {
-      setError('La connexion prend trop de temps. Réessaye.');
+      setError(t('errors.connection_timeout'));
     }, TIMEOUT_MS);
 
     const params = new URLSearchParams(window.location.search);
@@ -54,13 +56,13 @@ export function AuthCallback() {
         if (session) {
           navigate('/suivi', { replace: true });
         } else {
-          setError('Code de vérification manquant');
+          setError(t('errors.missing_code'));
         }
       });
     }
 
     return () => clearTimeout(timeout);
-  }, [navigate]);
+  }, [navigate, t]);
 
   if (error) {
     return (
@@ -83,10 +85,10 @@ export function AuthCallback() {
               <line x1="9" y1="9" x2="15" y2="15" />
             </svg>
           </div>
-          <p className="text-strong font-medium mb-1">Erreur de connexion</p>
+          <p className="text-strong font-medium mb-1">{t('callback.error_title')}</p>
           <p className="text-sm text-muted mb-6">{error}</p>
           <Link to="/login" className="text-link hover:text-link-hover transition-colors text-sm">
-            Retour à la connexion
+            {t('callback.back_to_login')}
           </Link>
         </div>
       </div>
@@ -97,7 +99,7 @@ export function AuthCallback() {
     <div className="px-6 py-12 flex-1 flex items-center justify-center">
       <output className="flex flex-col items-center gap-3">
         <LoadingSpinner />
-        <p className="text-sm text-muted">Connexion en cours...</p>
+        <p className="text-sm text-muted">{t('callback.loading')}</p>
       </output>
     </div>
   );

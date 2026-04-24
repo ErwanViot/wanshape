@@ -5,6 +5,8 @@ interface ShareData {
   session: Session;
   realMinutes: number;
   amrapRounds: number;
+  /** Already-translated label for difficulty (e.g. "Easy" / "Accessible") */
+  difficultyLabel: string;
 }
 
 const CARD_SIZE = 1080;
@@ -54,7 +56,12 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: numbe
 }
 
 /** Generate the branded share card as a Blob */
-export async function generateShareCard({ session, realMinutes, amrapRounds }: ShareData): Promise<Blob> {
+export async function generateShareCard({
+  session,
+  realMinutes,
+  amrapRounds,
+  difficultyLabel,
+}: ShareData): Promise<Blob> {
   const canvas = document.createElement('canvas');
   canvas.width = CARD_SIZE;
   canvas.height = CARD_SIZE;
@@ -155,7 +162,7 @@ export async function generateShareCard({ session, realMinutes, amrapRounds }: S
   const stats: { value: string; label: string; color: string }[] = [
     { value: `${realMinutes}`, label: 'minutes', color: WHITE },
     { value: `${session.blocks.length}`, label: 'blocs', color: WHITE },
-    { value: difficulty.label, label: 'difficulté', color: diffColor },
+    { value: difficultyLabel, label: 'difficulté', color: diffColor },
   ];
   if (amrapRounds > 0) {
     stats.push({ value: `${amrapRounds}`, label: 'rounds', color: '#FBBF24' });
@@ -230,10 +237,10 @@ export async function generateShareCard({ session, realMinutes, amrapRounds }: S
 }
 
 /** Build the share text message */
-function buildShareText({ session, realMinutes, amrapRounds }: ShareData): string {
+function buildShareText({ session, realMinutes, amrapRounds, difficultyLabel }: ShareData): string {
   const difficulty = computeDifficulty(session);
   const emoji = DIFFICULTY_EMOJI[difficulty.level] ?? '💪';
-  let stats = `${session.title} · ${realMinutes} min · ${difficulty.label}`;
+  let stats = `${session.title} · ${realMinutes} min · ${difficultyLabel}`;
   if (amrapRounds > 0) {
     stats += ` · ${amrapRounds} rounds AMRAP`;
   }

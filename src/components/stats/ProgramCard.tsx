@@ -1,4 +1,5 @@
 import { ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { useActiveProgram } from '../../hooks/useProgram.ts';
 import { AnimatedNumber } from './AnimatedNumber.tsx';
 
@@ -8,6 +9,7 @@ export interface ProgramCardProps {
 }
 
 export function ProgramCard({ activeProgram, progressPct }: ProgramCardProps) {
+  const { t } = useTranslation('stats');
   const radius = 32;
   const circumference = 2 * Math.PI * radius;
   const dashOffset = circumference * (1 - progressPct / 100);
@@ -43,16 +45,20 @@ export function ProgramCard({ activeProgram, progressPct }: ProgramCardProps) {
 
       {/* Info */}
       <div className="flex-1 min-w-0">
-        <p className="text-xs font-bold uppercase tracking-wider text-brand mb-1">Programme en cours</p>
+        <p className="text-xs font-bold uppercase tracking-wider text-brand mb-1">{t('program_card.active_label')}</p>
         <p className="text-base font-bold text-heading group-hover:text-brand transition-colors truncate">
           {activeProgram.title}
         </p>
         <p className="text-xs text-muted mt-1">
-          {activeProgram.completedCount}/{activeProgram.totalSessions} séances
+          {t('program_card.sessions_progress', {
+            completed: activeProgram.completedCount,
+            total: activeProgram.totalSessions,
+          })}
         </p>
         {activeProgram.nextSessionTitle && (
           <p className="text-xs text-muted mt-1 flex items-center gap-1">
-            Prochaine : <span className="text-heading font-semibold truncate">{activeProgram.nextSessionTitle}</span>
+            {t('program_card.next_session')}{' '}
+            <span className="text-heading font-semibold truncate">{activeProgram.nextSessionTitle}</span>
             <ChevronRight className="w-3 h-3 text-muted shrink-0" aria-hidden="true" />
           </p>
         )}

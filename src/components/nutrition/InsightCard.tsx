@@ -1,5 +1,6 @@
 import { Sparkles } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useEstimateNutrition } from '../../hooks/useEstimateNutrition.ts';
 import type { NutritionInsight } from '../../types/nutrition.ts';
@@ -17,6 +18,7 @@ interface InsightCardProps {
  * the existing insight or a CTA to generate the 1-per-day analysis.
  */
 export function InsightCard({ insight, isPremium, onGenerated }: InsightCardProps) {
+  const { t } = useTranslation('nutrition');
   const { generateOverflowInsight, loading, reset } = useEstimateNutrition();
   const [localError, setLocalError] = useState<string | null>(null);
 
@@ -38,20 +40,17 @@ export function InsightCard({ insight, isPremium, onGenerated }: InsightCardProp
       <aside className="rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/5 to-transparent p-5">
         <div className="flex items-center gap-2 mb-2">
           <Sparkles className="w-4 h-4 text-accent" aria-hidden="true" />
-          <h2 className="font-display text-base font-bold text-heading">Analyse IA de ta journée</h2>
+          <h2 className="font-display text-base font-bold text-heading">{t('insight.heading')}</h2>
           <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full">
-            Premium
+            {t('insight.premium_badge')}
           </span>
         </div>
-        <p className="text-sm text-body mb-3">
-          Une fois par jour, l'IA résume ton équilibre alimentaire et te propose 1 à 3 pistes concrètes pour le reste de
-          la journée.
-        </p>
+        <p className="text-sm text-body mb-3">{t('insight.teaser')}</p>
         <Link
           to="/premium"
           className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-accent border border-accent/30 hover:bg-accent/10 transition-colors"
         >
-          Découvrir Premium
+          {t('insight.discover_premium')}
         </Link>
       </aside>
     );
@@ -62,7 +61,7 @@ export function InsightCard({ insight, isPremium, onGenerated }: InsightCardProp
       <aside className="rounded-2xl border border-brand/30 bg-gradient-to-br from-brand/5 to-transparent p-5 space-y-3">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-brand" aria-hidden="true" />
-          <h2 className="font-display text-base font-bold text-heading">Analyse IA de ta journée</h2>
+          <h2 className="font-display text-base font-bold text-heading">{t('insight.heading')}</h2>
         </div>
         <p className="text-sm text-body leading-relaxed">{insight.summary}</p>
         {insight.suggestions.length > 0 && (
@@ -77,9 +76,7 @@ export function InsightCard({ insight, isPremium, onGenerated }: InsightCardProp
             ))}
           </ul>
         )}
-        <p className="text-[11px] text-muted italic">
-          Estimation non-médicale. Ajuste selon ton ressenti. Une seule analyse par jour.
-        </p>
+        <p className="text-[11px] text-muted italic">{t('insight.disclaimer')}</p>
       </aside>
     );
   }
@@ -88,12 +85,9 @@ export function InsightCard({ insight, isPremium, onGenerated }: InsightCardProp
     <aside className="rounded-2xl border border-brand/30 bg-surface-card p-5 space-y-3">
       <div className="flex items-center gap-2">
         <Sparkles className="w-4 h-4 text-brand" aria-hidden="true" />
-        <h2 className="font-display text-base font-bold text-heading">Analyse IA de ta journée</h2>
+        <h2 className="font-display text-base font-bold text-heading">{t('insight.heading')}</h2>
       </div>
-      <p className="text-sm text-body">
-        Quand tu as saisi tes repas, demande un insight : synthèse en 1-3 phrases + pistes concrètes pour le reste de la
-        journée.
-      </p>
+      <p className="text-sm text-body">{t('insight.cta_desc')}</p>
       {localError && <p className="text-xs text-red-400">{localError}</p>}
       <button
         type="button"
@@ -101,7 +95,7 @@ export function InsightCard({ insight, isPremium, onGenerated }: InsightCardProp
         disabled={loading}
         className="w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50"
       >
-        {loading ? 'Analyse…' : 'Analyser ma journée'}
+        {loading ? t('insight.analyzing') : t('insight.generate_cta')}
       </button>
     </aside>
   );

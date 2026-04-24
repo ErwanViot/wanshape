@@ -1,0 +1,47 @@
+{
+  "page_title": "Paramètres",
+  "page_description": "Gère ton compte Wan2Fit.",
+  "avatar": {
+    "change_aria": "Changer la photo de profil",
+    "error_format": "Format accepté : JPG, PNG ou WebP.",
+    "error_size": "L'image ne doit pas dépasser 2 Mo.",
+    "error_upload": "Erreur lors de l'envoi. Réessaie."
+  },
+  "member_since": "Membre depuis",
+  "appearance": {
+    "heading": "Apparence",
+    "theme_light": "Clair",
+    "theme_dark": "Sombre",
+    "theme_system": "Système"
+  },
+  "subscription": {
+    "heading": "Abonnement",
+    "welcome_premium": "Bienvenue dans Premium ! Ton abonnement est actif.",
+    "ends_on": "Se termine le",
+    "renews_on": "Prochain renouvellement le",
+    "manage": "Gérer mon abonnement",
+    "free_plan": "Plan Gratuit",
+    "free_upsell": "Passe à Premium pour accéder aux séances et programmes IA personnalisés.",
+    "go_premium": "Passer Premium"
+  },
+  "legal": {
+    "heading": "Informations",
+    "terms_link": "Conditions d'utilisation",
+    "privacy_link": "Politique de confidentialité",
+    "cgv_link": "Conditions Générales de Vente"
+  },
+  "sign_out": "Se déconnecter",
+  "cgu_modal": {
+    "title": "Mise à jour des conditions",
+    "body": "Nos Conditions Générales d'Utilisation et notre Politique de Confidentialité ont été mises à jour (version {{version}}). L'accès à l'app est suspendu le temps que tu les acceptes.",
+    "changes_label": "Principales évolutions",
+    "cgu_link": "CGU",
+    "privacy_link": "Politique de confidentialité",
+    "read_detail": "Consulte le détail dans les",
+    "read_and": "et la",
+    "error_save": "Impossible d'enregistrer. Vérifie ta connexion et réessaie.",
+    "btn_sign_out": "Me déconnecter",
+    "btn_accept": "Accepter et continuer",
+    "btn_accepting": "Enregistrement…"
+  }
+}

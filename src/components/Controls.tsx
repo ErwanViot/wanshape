@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { PlayerStatus } from '../types/player.ts';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function Controls({ status, audioEnabled, onTogglePause, onSkip, onToggleAudio }: Props) {
+  const { t } = useTranslation('player');
   const isPaused = status === 'paused';
   const showControls = status !== 'idle' && status !== 'complete';
 
@@ -20,7 +22,7 @@ export function Controls({ status, audioEnabled, onTogglePause, onSkip, onToggle
         type="button"
         onClick={onTogglePause}
         className="flex items-center justify-center w-14 h-14 rounded-full bg-white/10 active:bg-white/20 transition-colors"
-        aria-label={isPaused ? 'Reprendre' : 'Pause'}
+        aria-label={isPaused ? t('controls.resume_aria') : t('controls.pause_aria')}
       >
         {isPaused ? (
           <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -38,7 +40,7 @@ export function Controls({ status, audioEnabled, onTogglePause, onSkip, onToggle
         type="button"
         onClick={onSkip}
         className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 active:bg-white/20 transition-colors"
-        aria-label="Passer"
+        aria-label={t('controls.skip_aria')}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
           <polygon points="5,3 15,12 5,21" />
@@ -50,7 +52,7 @@ export function Controls({ status, audioEnabled, onTogglePause, onSkip, onToggle
         type="button"
         onClick={onToggleAudio}
         className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 active:bg-white/20 transition-colors"
-        aria-label={audioEnabled ? 'Couper le son' : 'Activer le son'}
+        aria-label={audioEnabled ? t('controls.mute_aria') : t('controls.unmute_aria')}
       >
         {audioEnabled ? (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="white">

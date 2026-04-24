@@ -1,4 +1,5 @@
 import { ChevronLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 interface BackLinkProps {
@@ -6,14 +7,15 @@ interface BackLinkProps {
   label?: string;
 }
 
-export function BackLink({ to = '/', label = 'Retour' }: BackLinkProps) {
+export function BackLink({ to = '/', label }: BackLinkProps) {
+  const { t } = useTranslation('auth');
   return (
     <Link
       to={to}
       className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-strong transition-colors mb-8"
     >
       <ChevronLeft className="w-4 h-4" aria-hidden="true" />
-      {label}
+      {label ?? t('back')}
     </Link>
   );
 }

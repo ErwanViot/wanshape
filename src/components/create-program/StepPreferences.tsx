@@ -1,4 +1,5 @@
 import type { RefObject } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Equipment } from '../../types/equipment.ts';
 import { DUREE_OPTIONS, MATERIEL_OPTIONS } from './formOptions.ts';
 
@@ -41,14 +42,15 @@ export function StepPreferences({
   onBack,
   onSubmit,
 }: StepPreferencesProps) {
+  const { t } = useTranslation('programs');
   return (
     <div className="space-y-6">
       <h1 ref={stepHeadingRef} tabIndex={-1} className="text-2xl sm:text-3xl font-bold text-heading outline-none">
-        Configure ton programme
+        {t('step_preferences.title')}
       </h1>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-heading mb-2">Séances par semaine</legend>
+        <legend className="text-sm font-semibold text-heading mb-2">{t('step_preferences.sessions_legend')}</legend>
         <div className="flex items-center gap-4">
           <button
             type="button"
@@ -70,11 +72,13 @@ export function StepPreferences({
             +
           </button>
         </div>
-        {maxSeances < 5 && <p className="text-xs text-faint mt-1">Adapté à ton rythme actuel</p>}
+        {maxSeances < 5 && <p className="text-xs text-faint mt-1">{t('step_preferences.adapted_rhythm')}</p>}
       </fieldset>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-heading mb-2">Durée par séance</legend>
+        <legend className="text-sm font-semibold text-heading mb-2">
+          {t('step_preferences.session_duration_legend')}
+        </legend>
         <div className="flex items-center gap-4">
           <button
             type="button"
@@ -100,7 +104,7 @@ export function StepPreferences({
       </fieldset>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-heading mb-3">Matériel disponible</legend>
+        <legend className="text-sm font-semibold text-heading mb-3">{t('step_preferences.material_legend')}</legend>
         <div className="flex flex-wrap gap-2">
           {MATERIEL_OPTIONS.map((m) => (
             <button
@@ -114,7 +118,7 @@ export function StepPreferences({
                   : 'border-divider text-muted hover:border-brand/30'
               }`}
             >
-              {m.label}
+              {t(`materiel.${m.value}`)}
             </button>
           ))}
         </div>
@@ -123,13 +127,15 @@ export function StepPreferences({
           value={materielDetail}
           onChange={(e) => onChangeMaterielDetail(e.target.value)}
           maxLength={100}
-          placeholder="Autre matériel ? (optionnel)"
+          placeholder={t('step_preferences.material_other_placeholder')}
           className="mt-3 w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint focus:outline-none focus:border-brand"
         />
       </fieldset>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-heading mb-3">Durée du programme</legend>
+        <legend className="text-sm font-semibold text-heading mb-3">
+          {t('step_preferences.program_duration_legend')}
+        </legend>
         <div className="grid grid-cols-3 gap-3">
           {DUREE_OPTIONS.map((d) => (
             <button
@@ -141,8 +147,10 @@ export function StepPreferences({
                 dureeSemaines === d.value ? 'border-brand bg-brand/10' : 'border-divider hover:border-brand/30'
               }`}
             >
-              <span className="text-sm font-semibold text-heading">{d.label}</span>
-              {d.recommended && <span className="block text-xs text-brand mt-0.5">Recommandé</span>}
+              <span className="text-sm font-semibold text-heading">{t(`duree.${d.value}`)}</span>
+              {d.recommended && (
+                <span className="block text-xs text-brand mt-0.5">{t('step_preferences.recommended')}</span>
+              )}
             </button>
           ))}
         </div>
@@ -160,7 +168,7 @@ export function StepPreferences({
           onClick={onBack}
           className="flex-1 py-4 rounded-xl text-sm font-bold border border-divider text-muted hover:text-heading transition-colors cursor-pointer"
         >
-          Retour
+          {t('step_preferences.back')}
         </button>
         <button
           type="button"
@@ -168,7 +176,7 @@ export function StepPreferences({
           disabled={!isValid || generating}
           className="flex-1 cta-gradient py-4 rounded-xl text-sm font-bold text-white tracking-wide cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Générer mon programme
+          {t('step_preferences.generate')}
         </button>
       </div>
     </div>

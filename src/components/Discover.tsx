@@ -1,9 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { EXERCISES_DATA } from '../data/exercises.ts';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import type { ExerciseCategory, ExerciseData } from '../types/exercise.ts';
-import { CATEGORY_LABELS, CATEGORY_ORDER, DIFFICULTY_COLORS, DIFFICULTY_LABELS } from '../types/exercise.ts';
+import { CATEGORY_ORDER, DIFFICULTY_COLORS } from '../types/exercise.ts';
 
 const FORMAT_SHORT_DESCS: Record<string, string> = {
   pyramid: 'Séries croissantes puis décroissantes',
@@ -27,9 +28,10 @@ function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, Exercise
 }
 
 export function Discover() {
+  const { t } = useTranslation('explore');
   useDocumentHead({
-    title: 'Découvrir',
-    description: "Explore nos 8 formats d'entraînement et notre bibliothèque d'exercices.",
+    title: t('discover.page_title'),
+    description: t('discover.page_description'),
   });
 
   const groupedExercises = groupByCategory(EXERCISES_DATA);
@@ -37,18 +39,16 @@ export function Discover() {
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-10 lg:px-14 py-6 md:py-8 space-y-10">
       <div>
-        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">Explore ton terrain de jeu</h1>
-        <p className="text-sm text-muted mt-1">
-          Formats d'entraînement, exercices et tout ce qu'il faut pour progresser.
-        </p>
+        <h1 className="font-display text-2xl md:text-3xl font-black text-heading">{t('discover.heading')}</h1>
+        <p className="text-sm text-muted mt-1">{t('discover.subtitle')}</p>
       </div>
 
       {/* Formats section — card grid like /formats page */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-heading">Nos formats</h2>
+          <h2 className="text-lg font-bold text-heading">{t('discover.formats_section')}</h2>
           <Link to="/formats" className="text-xs text-link hover:text-link-hover transition-colors">
-            En savoir plus
+            {t('discover.formats_more')}
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -78,14 +78,14 @@ export function Discover() {
       {/* Exercises section */}
       <section className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-heading">Exercices</h2>
+          <h2 className="text-lg font-bold text-heading">{t('discover.exercises_section')}</h2>
           <Link to="/exercices" className="text-xs text-link hover:text-link-hover transition-colors">
-            Tout voir
+            {t('discover.exercises_more')}
           </Link>
         </div>
         {groupedExercises.map(([category, exercises]) => (
           <div key={category} className="space-y-3">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-subtle">{CATEGORY_LABELS[category]}</h3>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-subtle">{t(`category.${category}`)}</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {exercises.slice(0, 6).map((ex) => (
                 <Link
@@ -101,7 +101,7 @@ export function Discover() {
                     <span
                       className={`text-xs font-bold px-1.5 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
                     >
-                      {DIFFICULTY_LABELS[ex.difficulty - 1]}
+                      {t(`difficulty_level.${ex.difficulty}`)}
                     </span>
                   </div>
                 </Link>
@@ -109,7 +109,7 @@ export function Discover() {
             </div>
             {exercises.length > 6 && (
               <Link to="/exercices" className="text-xs text-link hover:text-link-hover transition-colors">
-                +{exercises.length - 6} exercices
+                {t('discover.more_exercises', { n: exercises.length - 6 })}
               </Link>
             )}
           </div>

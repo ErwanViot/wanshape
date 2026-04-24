@@ -13,6 +13,7 @@ import {
   Wand2,
   Zap,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { supabase } from '../../lib/supabase.ts';
 import type { Session } from '../../types/session.ts';
@@ -39,6 +40,8 @@ export function VisitorContent({
   onStart: () => void;
   formatShortDate: (key: string) => string;
 }) {
+  const { t } = useTranslation('home');
+
   return (
     <div className="space-y-0">
       {/* ── 1. Hero — photo pleine largeur ── */}
@@ -61,19 +64,18 @@ export function VisitorContent({
             <div className="stagger-fade-in stagger-1">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20 backdrop-blur-sm">
                 <Zap className="w-3 h-3" aria-hidden="true" />
-                Sans matériel, où tu veux
+                {t('visitor.hero.badge')}
               </span>
             </div>
 
             <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.05] max-w-xl stagger-fade-in stagger-2">
-              <span className="text-outline">Progresse</span>
+              <span className="text-outline">{t('visitor.hero.headline_1')}</span>
               <br />
-              <span className="gradient-text">à ton rythme</span>
+              <span className="gradient-text">{t('visitor.hero.headline_2')}</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/70 max-w-lg leading-relaxed text-outline stagger-fade-in stagger-3">
-              Une séance guidée chaque jour, 8 formats variés, 25-40 min. Gratuit pour commencer, premium pour aller
-              plus loin.
+              {t('visitor.hero.subtitle')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-3 stagger-fade-in stagger-4">
@@ -82,7 +84,7 @@ export function VisitorContent({
                   to="/signup"
                   className="cta-gradient px-8 py-4 rounded-full text-base font-bold text-white flex items-center gap-2"
                 >
-                  Commencer gratuitement
+                  {t('visitor.hero.cta_signup')}
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
               )}
@@ -91,7 +93,7 @@ export function VisitorContent({
                 onClick={onStart}
                 className="px-8 py-4 rounded-full text-base font-bold text-white border border-white/30 hover:bg-white/10 transition-colors cursor-pointer"
               >
-                Essayer sans inscription
+                {t('visitor.hero.cta_try')}
               </button>
             </div>
           </div>
@@ -102,27 +104,27 @@ export function VisitorContent({
       <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-display text-2xl md:text-3xl font-black text-heading text-center mb-12">
-            Comment ça marche
+            {t('visitor.how_it_works.heading')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 text-center">
             {[
               {
                 step: '1',
                 icon: Calendar,
-                title: 'Choisis ta séance',
-                desc: "Séance du jour, format libre ou programme : c'est toi qui décides.",
+                title: t('visitor.how_it_works.step_1_title'),
+                desc: t('visitor.how_it_works.step_1_desc'),
               },
               {
                 step: '2',
                 icon: Play,
-                title: 'Lance-toi',
-                desc: 'Exercices guidés, chrono intégré, transitions automatiques.',
+                title: t('visitor.how_it_works.step_2_title'),
+                desc: t('visitor.how_it_works.step_2_desc'),
               },
               {
                 step: '3',
                 icon: TrendingUp,
-                title: 'Suis ta progression',
-                desc: 'Historique, stats et programmes pour aller toujours plus loin.',
+                title: t('visitor.how_it_works.step_3_title'),
+                desc: t('visitor.how_it_works.step_3_desc'),
               },
             ].map((item) => (
               <div key={item.step} className="flex flex-col items-center gap-4">
@@ -148,20 +150,20 @@ export function VisitorContent({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Texte */}
             <div className="space-y-5">
-              <span className="text-xs font-bold tracking-widest uppercase text-brand">Séance du jour</span>
+              <span className="text-xs font-bold tracking-widest uppercase text-brand">
+                {t('visitor.feature_today.label')}
+              </span>
               <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                Chaque jour,
+                {t('visitor.feature_today.heading_1')}
                 <br />
-                une nouvelle séance
+                {t('visitor.feature_today.heading_2')}
               </h2>
-              <p className="text-muted leading-relaxed">
-                Pas besoin de réfléchir. Tu ouvres l'app, ta séance t'attend — avec un format différent chaque jour.
-              </p>
+              <p className="text-muted leading-relaxed">{t('visitor.feature_today.body')}</p>
               <ul className="space-y-3">
                 {[
-                  { icon: Shuffle, text: '8 formats variés : HIIT, EMOM, Circuit, Tabata…' },
-                  { icon: Clock, text: '25 à 40 min, adapté à ton emploi du temps' },
-                  { icon: Dumbbell, text: '100% sans matériel, faisable partout' },
+                  { icon: Shuffle, text: t('visitor.feature_today.bullet_1') },
+                  { icon: Clock, text: t('visitor.feature_today.bullet_2') },
+                  { icon: Dumbbell, text: t('visitor.feature_today.bullet_3') },
                 ].map((item) => (
                   <li key={item.text} className="flex items-start gap-3">
                     <item.icon className="w-5 h-5 text-brand shrink-0 mt-0.5" aria-hidden="true" />
@@ -174,7 +176,7 @@ export function VisitorContent({
                 onClick={onStart}
                 className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand/80 transition-colors cursor-pointer"
               >
-                Essayer maintenant
+                {t('visitor.feature_today.cta')}
                 <ChevronRight className="w-4 h-4" aria-hidden="true" />
               </button>
             </div>
@@ -193,13 +195,13 @@ export function VisitorContent({
                     <button type="button" onClick={onStart} className="relative h-44 w-full cursor-pointer text-left">
                       <img
                         src={getSessionImage(session)}
-                        alt={`Séance du jour : ${session.title}`}
+                        alt={t('visitor.feature_today.session_alt', { title: session.title })}
                         className="w-full h-full object-cover object-[50%_30%]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute top-3 left-4">
                         <span className="session-label px-2.5 py-1 rounded-lg text-xs font-bold tracking-widest uppercase text-white">
-                          Aujourd'hui
+                          {t('visitor.feature_today.today_label')}
                         </span>
                       </div>
                       <div className="absolute bottom-3 left-4 right-4">
@@ -207,7 +209,9 @@ export function VisitorContent({
                           {session.title.toUpperCase()}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-white/70">~{session.estimatedDuration} min</span>
+                          <span className="text-xs text-white/70">
+                            {t('visitor.feature_today.duration', { duration: session.estimatedDuration })}
+                          </span>
                           {session.focus.slice(0, 2).map((f) => (
                             <span key={f} className="text-xs text-white/70">
                               · {f}
@@ -227,7 +231,7 @@ export function VisitorContent({
                         className="cta-gradient flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white cursor-pointer"
                       >
                         <Play className="w-4 h-4" aria-hidden="true" />
-                        C'est parti
+                        {t('visitor.feature_today.play_cta')}
                       </button>
                     </div>
                     <SessionAccordion session={session} />
@@ -237,10 +241,10 @@ export function VisitorContent({
                     <div className="text-center">
                       <img
                         src="/images/illustration-empty-state.webp"
-                        alt="Pas de séance prévue"
+                        alt={t('visitor.feature_today.empty_alt')}
                         className="w-40 h-auto mx-auto mb-3 rounded-lg opacity-80"
                       />
-                      <p className="text-sm text-muted">Pas de séance aujourd'hui</p>
+                      <p className="text-sm text-muted">{t('visitor.feature_today.empty')}</p>
                     </div>
                   </div>
                 )}
@@ -261,21 +265,20 @@ export function VisitorContent({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Texte (à droite en desktop) */}
             <div className="space-y-5 order-1 md:order-2">
-              <span className="text-xs font-bold tracking-widest uppercase text-brand">Entraînement guidé</span>
+              <span className="text-xs font-bold tracking-widest uppercase text-brand">
+                {t('visitor.feature_player.label')}
+              </span>
               <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                Tu n'as qu'à
+                {t('visitor.feature_player.heading_1')}
                 <br />
-                suivre le rythme
+                {t('visitor.feature_player.heading_2')}
               </h2>
-              <p className="text-muted leading-relaxed">
-                Chrono, compteur de reps, transitions automatiques — le player gère tout pour que tu restes concentré
-                sur l'effort.
-              </p>
+              <p className="text-muted leading-relaxed">{t('visitor.feature_player.body')}</p>
               <ul className="space-y-3">
                 {[
-                  { icon: Play, text: 'Timer et reps guidés en temps réel' },
-                  { icon: Shuffle, text: 'Enchaînement automatique des blocs' },
-                  { icon: Zap, text: 'Signal sonore à chaque transition' },
+                  { icon: Play, text: t('visitor.feature_player.bullet_1') },
+                  { icon: Shuffle, text: t('visitor.feature_player.bullet_2') },
+                  { icon: Zap, text: t('visitor.feature_player.bullet_3') },
                 ].map((item) => (
                   <li key={item.text} className="flex items-start gap-3">
                     <item.icon className="w-5 h-5 text-brand shrink-0 mt-0.5" aria-hidden="true" />
@@ -288,7 +291,7 @@ export function VisitorContent({
                 onClick={onStart}
                 className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand/80 transition-colors cursor-pointer"
               >
-                Lancer une séance
+                {t('visitor.feature_player.cta')}
                 <ChevronRight className="w-4 h-4" aria-hidden="true" />
               </button>
             </div>
@@ -296,10 +299,13 @@ export function VisitorContent({
             {/* Visuel : carrousel player (à gauche en desktop) */}
             <ScreenshotCarousel
               images={[
-                { src: '/images/screenshot-player-reps.webp', alt: 'Player — exercice en reps' },
-                { src: '/images/screenshot-player-emom.webp', alt: 'Player — EMOM avec timer' },
-                { src: '/images/screenshot-player-hiit.webp', alt: 'Player — HIIT Mountain climbers' },
-                { src: '/images/screenshot-player-cooldown.webp', alt: 'Player — Retour au calme' },
+                { src: '/images/screenshot-player-reps.webp', alt: t('visitor.feature_player.carousel_reps_alt') },
+                { src: '/images/screenshot-player-emom.webp', alt: t('visitor.feature_player.carousel_emom_alt') },
+                { src: '/images/screenshot-player-hiit.webp', alt: t('visitor.feature_player.carousel_hiit_alt') },
+                {
+                  src: '/images/screenshot-player-cooldown.webp',
+                  alt: t('visitor.feature_player.carousel_cooldown_alt'),
+                },
               ]}
             />
           </div>
@@ -313,25 +319,24 @@ export function VisitorContent({
             {/* Texte */}
             <div className="space-y-5">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold tracking-widest uppercase text-accent">IA sur-mesure</span>
+                <span className="text-xs font-bold tracking-widest uppercase text-accent">
+                  {t('visitor.feature_ai.label')}
+                </span>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full">
-                  Premium
+                  {t('visitor.feature_ai.badge')}
                 </span>
               </div>
               <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                Des séances créées
+                {t('visitor.feature_ai.heading_1')}
                 <br />
-                rien que pour toi
+                {t('visitor.feature_ai.heading_2')}
               </h2>
-              <p className="text-muted leading-relaxed">
-                L'intelligence artificielle génère des séances et des programmes adaptés à tes envies, ton niveau et tes
-                objectifs.
-              </p>
+              <p className="text-muted leading-relaxed">{t('visitor.feature_ai.body')}</p>
               <ul className="space-y-3">
                 {[
-                  { icon: Wand2, text: 'Séances personnalisées en quelques secondes' },
-                  { icon: TrendingUp, text: 'Programmes sur-mesure avec progression intégrée' },
-                  { icon: RotateCcw, text: "S'adapte à tes retours et ta forme du moment" },
+                  { icon: Wand2, text: t('visitor.feature_ai.bullet_1') },
+                  { icon: TrendingUp, text: t('visitor.feature_ai.bullet_2') },
+                  { icon: RotateCcw, text: t('visitor.feature_ai.bullet_3') },
                 ].map((item) => (
                   <li key={item.text} className="flex items-start gap-3">
                     <item.icon className="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" />
@@ -343,7 +348,7 @@ export function VisitorContent({
                 to="/tarifs"
                 className="inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors"
               >
-                Découvrir Premium
+                {t('visitor.feature_ai.cta')}
                 <ChevronRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
@@ -352,10 +357,10 @@ export function VisitorContent({
             <ScreenshotCarousel
               fit="contain"
               images={[
-                { src: '/images/screenshot-custom-session.webp', alt: 'Créer une séance — Mode Rapide' },
-                { src: '/images/screenshot-custom-detailed.webp', alt: 'Créer une séance — Mode Détaillé' },
-                { src: '/images/screenshot-custom-expert.webp', alt: 'Créer une séance — Mode Expert' },
-                { src: '/images/screenshot-custom-detail.webp', alt: "Détail d'une séance personnalisée" },
+                { src: '/images/screenshot-custom-session.webp', alt: t('visitor.feature_ai.carousel_quick_alt') },
+                { src: '/images/screenshot-custom-detailed.webp', alt: t('visitor.feature_ai.carousel_detailed_alt') },
+                { src: '/images/screenshot-custom-expert.webp', alt: t('visitor.feature_ai.carousel_expert_alt') },
+                { src: '/images/screenshot-custom-detail.webp', alt: t('visitor.feature_ai.carousel_detail_alt') },
               ]}
             />
           </div>
@@ -369,21 +374,19 @@ export function VisitorContent({
             {/* Texte (à droite en desktop) */}
             <div className="space-y-5 order-1 md:order-2">
               <span className="text-xs font-bold tracking-widest uppercase text-brand-secondary">
-                Programmes guidés
+                {t('visitor.feature_programs.label')}
               </span>
               <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                Un plan structuré
+                {t('visitor.feature_programs.heading_1')}
                 <br />
-                pour progresser
+                {t('visitor.feature_programs.heading_2')}
               </h2>
-              <p className="text-muted leading-relaxed">
-                Suis un programme complet avec progression intégrée, suivi détaillé et séances adaptées à chaque étape.
-              </p>
+              <p className="text-muted leading-relaxed">{t('visitor.feature_programs.body')}</p>
               <ul className="space-y-3">
                 {[
-                  { icon: ListChecks, text: '3 programmes inclus pour bien démarrer' },
-                  { icon: Target, text: 'Suivi de complétion et objectifs clairs' },
-                  { icon: Wand2, text: 'Des programmes sur mesure pour atteindre tes objectifs', premium: true },
+                  { icon: ListChecks, text: t('visitor.feature_programs.bullet_1') },
+                  { icon: Target, text: t('visitor.feature_programs.bullet_2') },
+                  { icon: Wand2, text: t('visitor.feature_programs.bullet_3'), premium: true },
                 ].map((item) => (
                   <li key={item.text} className="flex items-start gap-3">
                     <item.icon className="w-5 h-5 text-brand-secondary shrink-0 mt-0.5" aria-hidden="true" />
@@ -402,7 +405,7 @@ export function VisitorContent({
                 to="/programmes"
                 className="inline-flex items-center gap-2 text-sm font-bold text-brand-secondary hover:text-brand-secondary/80 transition-colors"
               >
-                Voir les programmes
+                {t('visitor.feature_programs.cta')}
                 <ChevronRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
@@ -412,10 +415,22 @@ export function VisitorContent({
               <ScreenshotCarousel
                 fit="contain"
                 images={[
-                  { src: '/images/screenshot-program-list.webp', alt: 'Liste des programmes disponibles' },
-                  { src: '/images/screenshot-program-objectif.webp', alt: 'Création de programme — Objectif' },
-                  { src: '/images/screenshot-program-profil.webp', alt: 'Création de programme — Profil' },
-                  { src: '/images/screenshot-program-config.webp', alt: 'Création de programme — Configuration' },
+                  {
+                    src: '/images/screenshot-program-list.webp',
+                    alt: t('visitor.feature_programs.carousel_list_alt'),
+                  },
+                  {
+                    src: '/images/screenshot-program-objectif.webp',
+                    alt: t('visitor.feature_programs.carousel_goal_alt'),
+                  },
+                  {
+                    src: '/images/screenshot-program-profil.webp',
+                    alt: t('visitor.feature_programs.carousel_profile_alt'),
+                  },
+                  {
+                    src: '/images/screenshot-program-config.webp',
+                    alt: t('visitor.feature_programs.carousel_config_alt'),
+                  },
                 ]}
               />
             </div>
@@ -430,12 +445,16 @@ export function VisitorContent({
             to="/a-propos"
             className="flex items-center gap-4 px-5 py-4 rounded-2xl border border-card-border hover:border-divider-strong bg-surface-card/50 hover:bg-surface-card transition-all group"
           >
-            <img src="/photo-wan.png" alt="Wan" className="w-10 h-10 rounded-full object-cover shrink-0" />
+            <img
+              src="/photo-wan.png"
+              alt={t('visitor.about_teaser.photo_alt')}
+              className="w-10 h-10 rounded-full object-cover shrink-0"
+            />
             <div className="min-w-0">
               <p className="text-sm font-medium text-body group-hover:text-heading transition-colors">
-                Pourquoi Wan2Fit ?
+                {t('visitor.about_teaser.question')}
               </p>
-              <p className="text-xs text-muted truncate">L'histoire derrière le projet — par Wan</p>
+              <p className="text-xs text-muted truncate">{t('visitor.about_teaser.subtitle')}</p>
             </div>
             <ChevronRight
               className="w-4 h-4 text-muted group-hover:text-subtle transition-colors shrink-0 ml-auto"
@@ -448,19 +467,21 @@ export function VisitorContent({
       {/* ── 8. CTA final ── */}
       <section className="px-6 md:px-10 lg:px-14 pt-10 pb-16 md:pt-12 md:pb-20">
         <div className="max-w-2xl mx-auto text-center space-y-6">
-          <h2 className="font-display text-3xl md:text-4xl font-black text-heading">Prêt à commencer ?</h2>
-          <p className="text-muted">Ta séance quotidienne t'attend — rejoins Wan2Fit et commence dès aujourd'hui.</p>
+          <h2 className="font-display text-3xl md:text-4xl font-black text-heading">
+            {t('visitor.cta_section.heading')}
+          </h2>
+          <p className="text-muted">{t('visitor.cta_section.body')}</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             {supabase && (
               <Link to="/signup" className="cta-gradient px-8 py-4 rounded-full text-base font-bold text-white">
-                Créer mon compte gratuit
+                {t('visitor.cta_section.signup')}
               </Link>
             )}
             <Link
               to="/decouvrir"
               className="text-sm text-link hover:text-link-hover transition-colors flex items-center gap-1"
             >
-              Découvrir les formats
+              {t('visitor.cta_section.explore')}
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </Link>
           </div>

@@ -66,9 +66,9 @@ describe('computeDifficulty', () => {
     expect(computeDifficulty(long).score).toBeGreaterThan(computeDifficulty(short).score);
   });
 
-  it('returns label in French', () => {
+  it('returns modere level for EMOM block', () => {
     const session = makeSession([{ type: 'emom', name: 'EMOM', minutes: 12, exercises: [] }]);
     const result = computeDifficulty(session);
-    expect(result.label).toBe('Modéré');
+    expect(result.level).toBe('modere');
   });
 });

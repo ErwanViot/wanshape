@@ -1,11 +1,6 @@
 import { type FormEvent, useState } from 'react';
-import {
-  ACTIVITY_LEVEL_LABELS,
-  ACTIVITY_LEVELS,
-  NUTRITION_GOAL_LABELS,
-  NUTRITION_GOALS,
-  TDEE_BOUNDS,
-} from '../../config/nutrition.ts';
+import { useTranslation } from 'react-i18next';
+import { ACTIVITY_LEVELS, NUTRITION_GOALS, TDEE_BOUNDS } from '../../config/nutrition.ts';
 import type { ActivityLevel, BiologicalSex, NutritionGoal, TdeeResult } from '../../types/nutrition.ts';
 import { computeTdee, validateTdeeInputs } from '../../utils/tdee.ts';
 
@@ -14,10 +9,7 @@ interface TdeeCalculatorFormProps {
   onCancel: () => void;
 }
 
-const SEX_OPTIONS: { value: BiologicalSex; label: string }[] = [
-  { value: 'female', label: 'Femme' },
-  { value: 'male', label: 'Homme' },
-];
+const SEX_VALUES: BiologicalSex[] = ['female', 'male'];
 
 /**
  * Ephemeral onboarding form. Inputs (age, height, weight, sex) are kept in
@@ -25,6 +17,7 @@ const SEX_OPTIONS: { value: BiologicalSex; label: string }[] = [
  * `targetCalories` and `activityLevel`/`goal` are persisted via onAccept.
  */
 export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormProps) {
+  const { t } = useTranslation('nutrition');
   const [sex, setSex] = useState<BiologicalSex>('female');
   const [ageYears, setAge] = useState('');
   const [heightCm, setHeight] = useState('');
@@ -52,7 +45,15 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
     const inputs = parsed();
     const validation = validateTdeeInputs(inputs);
     if (validation) {
-      setError(errorLabel(validation));
+      setError(
+        validation === 'invalid_age'
+          ? t('tdee.error_age', { min: TDEE_BOUNDS.age.min, max: TDEE_BOUNDS.age.max })
+          : validation === 'invalid_height'
+            ? t('tdee.error_height', { min: TDEE_BOUNDS.heightCm.min, max: TDEE_BOUNDS.heightCm.max })
+            : validation === 'invalid_weight'
+              ? t('tdee.error_weight', { min: TDEE_BOUNDS.weightKg.min, max: TDEE_BOUNDS.weightKg.max })
+              : t('tdee.error_default'),
+      );
       setPreview(null);
       return;
     }
@@ -72,33 +73,31 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
   return (
     <div className="space-y-6">
       <div className="rounded-xl bg-surface-card border border-divider p-4 space-y-2">
-        <h3 className="font-display text-base font-bold text-heading">Calcul de ta cible calorique</h3>
-        <p className="text-sm text-body leading-relaxed">
-          Les informations ci-dessous sont utilisées <strong>uniquement dans ton navigateur</strong> pour estimer une
-          cible calorique indicative. Elles ne sont jamais envoyées sur nos serveurs et seront oubliées dès que tu
-          fermes cette page.
-        </p>
-        <p className="text-xs text-muted italic">
-          Formule : Mifflin-St Jeor. Estimation ±150 kcal. Ajuste après 2 semaines selon ton ressenti.
-        </p>
+        <h3 className="font-display text-base font-bold text-heading">{t('tdee.heading')}</h3>
+        <p
+          className="text-sm text-body leading-relaxed"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
+          dangerouslySetInnerHTML={{ __html: t('tdee.intro') }}
+        />
+        <p className="text-xs text-muted italic">{t('tdee.formula_note')}</p>
       </div>
 
       <form onSubmit={handleComputePreview} className="space-y-4">
         <div>
           <fieldset>
-            <legend className="block text-xs font-medium text-body mb-1">Sexe biologique</legend>
+            <legend className="block text-xs font-medium text-body mb-1">{t('tdee.sex_legend')}</legend>
             <div className="flex gap-2">
-              {SEX_OPTIONS.map((opt) => (
+              {SEX_VALUES.map((val) => (
                 <button
                   type="button"
-                  key={opt.value}
-                  onClick={() => setSex(opt.value)}
-                  aria-pressed={sex === opt.value}
+                  key={val}
+                  onClick={() => setSex(val)}
+                  aria-pressed={sex === val}
                   className={`flex-1 px-3 py-2 rounded-xl text-sm font-medium border transition-colors ${
-                    sex === opt.value ? 'border-brand bg-brand/10 text-heading' : 'border-divider text-body'
+                    sex === val ? 'border-brand bg-brand/10 text-heading' : 'border-divider text-body'
                   }`}
                 >
-                  {opt.label}
+                  {t(`tdee.sex_${val}`)}
                 </button>
               ))}
             </div>
@@ -108,7 +107,7 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
         <div className="grid grid-cols-3 gap-3">
           <div>
             <label htmlFor="tdee-age" className="block text-xs font-medium text-body mb-1">
-              Âge (ans)
+              {t('tdee.age_label')}
             </label>
             <input
               id="tdee-age"
@@ -123,7 +122,7 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
           </div>
           <div>
             <label htmlFor="tdee-height" className="block text-xs font-medium text-body mb-1">
-              Taille (cm)
+              {t('tdee.height_label')}
             </label>
             <input
               id="tdee-height"
@@ -138,7 +137,7 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
           </div>
           <div>
             <label htmlFor="tdee-weight" className="block text-xs font-medium text-body mb-1">
-              Poids (kg)
+              {t('tdee.weight_label')}
             </label>
             <input
               id="tdee-weight"
@@ -156,7 +155,7 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
 
         <div>
           <label htmlFor="tdee-activity" className="block text-xs font-medium text-body mb-1">
-            Niveau d'activité
+            {t('tdee.activity_label')}
           </label>
           <select
             id="tdee-activity"
@@ -166,14 +165,14 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
           >
             {ACTIVITY_LEVELS.map((lvl) => (
               <option key={lvl} value={lvl}>
-                {ACTIVITY_LEVEL_LABELS[lvl]}
+                {t(`activity_level.${lvl}`)}
               </option>
             ))}
           </select>
         </div>
 
         <fieldset>
-          <legend className="block text-xs font-medium text-body mb-1">Objectif</legend>
+          <legend className="block text-xs font-medium text-body mb-1">{t('tdee.goal_legend')}</legend>
           <div className="flex flex-wrap gap-2">
             {NUTRITION_GOALS.map((g) => (
               <button
@@ -185,7 +184,7 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
                   goal === g ? 'border-brand bg-brand/10 text-heading' : 'border-divider text-body'
                 }`}
               >
-                {NUTRITION_GOAL_LABELS[g]}
+                {t(`nutrition_goal.${g}`)}
               </button>
             ))}
           </div>
@@ -194,24 +193,29 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
         {error && <p className="text-xs text-red-400">{error}</p>}
 
         <button type="submit" className="w-full py-3 rounded-xl text-sm font-bold text-white cta-gradient">
-          Calculer ma cible
+          {t('tdee.compute_cta')}
         </button>
       </form>
 
       {preview && (
         <div className="rounded-xl bg-surface-card border border-brand/30 p-4 space-y-3">
-          <h4 className="font-display text-base font-bold text-heading">Ta cible estimée</h4>
-          <p className="text-sm text-body">
-            Métabolisme de base : <strong className="text-heading">{preview.bmr} kcal</strong>
-            <br />
-            Dépense totale estimée : <strong className="text-heading">{preview.tdee} kcal</strong>
-          </p>
+          <h4 className="font-display text-base font-bold text-heading">{t('tdee.preview_heading')}</h4>
+          <p
+            className="text-sm text-body"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tags
+            dangerouslySetInnerHTML={{
+              __html: `${t('tdee.bmr', { kcal: preview.bmr })}<br />${t('tdee.tdee_label', { kcal: preview.tdee })}`,
+            }}
+          />
           <div className="rounded-lg bg-brand/10 border border-brand/30 p-3">
-            <p className="text-xs text-muted uppercase tracking-wider mb-1">Cible quotidienne</p>
+            <p className="text-xs text-muted uppercase tracking-wider mb-1">{t('tdee.target_label')}</p>
             <p className="font-display text-3xl font-black text-brand">{preview.targetCalories} kcal</p>
             <p className="text-xs text-body mt-1">
-              Répartition indicative : {preview.targetProteinG} g protéines · {preview.targetCarbsG} g glucides ·{' '}
-              {preview.targetFatG} g lipides
+              {t('tdee.distribution', {
+                protein: preview.targetProteinG,
+                carbs: preview.targetCarbsG,
+                fat: preview.targetFatG,
+              })}
             </p>
           </div>
           <div className="flex gap-2">
@@ -220,7 +224,7 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
               onClick={onCancel}
               className="flex-1 py-3 rounded-xl text-sm font-medium text-body border border-divider hover:bg-divider transition-colors"
             >
-              Annuler
+              {t('tdee.cancel')}
             </button>
             <button
               type="button"
@@ -228,24 +232,11 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
               disabled={submitting}
               className="flex-1 py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50"
             >
-              {submitting ? 'Sauvegarde…' : 'Valider cette cible'}
+              {submitting ? t('tdee.saving') : t('tdee.accept')}
             </button>
           </div>
         </div>
       )}
     </div>
   );
-}
-
-function errorLabel(err: string): string {
-  switch (err) {
-    case 'invalid_age':
-      return `L'âge doit être entre ${TDEE_BOUNDS.age.min} et ${TDEE_BOUNDS.age.max} ans.`;
-    case 'invalid_height':
-      return `La taille doit être entre ${TDEE_BOUNDS.heightCm.min} et ${TDEE_BOUNDS.heightCm.max} cm.`;
-    case 'invalid_weight':
-      return `Le poids doit être entre ${TDEE_BOUNDS.weightKg.min} et ${TDEE_BOUNDS.weightKg.max} kg.`;
-    default:
-      return 'Vérifie les informations saisies.';
-  }
 }

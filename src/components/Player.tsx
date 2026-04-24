@@ -1,5 +1,6 @@
 import { HeartPulse } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate, useParams } from 'react-router';
 import { BLOCK_LABELS } from '../engine/constants.ts';
 import { compileSession } from '../engine/interpreter.ts';
@@ -28,9 +29,10 @@ export function PlayerPage() {
   const { dateKey: paramDateKey } = useParams<{ dateKey?: string }>();
   const dateKey = paramDateKey ?? getTodayKey();
   const { session, loading } = useSession(dateKey);
+  const { t } = useTranslation('player');
 
   useDocumentHead({
-    title: session ? `${session.title} — En cours` : 'Séance en cours',
+    title: session ? `${session.title} — ${t('page.title_in_progress')}` : t('page.title_default'),
   });
 
   if (!isHealthAccepted()) {
@@ -98,6 +100,7 @@ export function Player({
   backTo?: string;
 }) {
   const navigate = useNavigate();
+  const { t } = useTranslation('player');
   const steps = useMemo(() => compileSession(session), [session]);
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
   const [showVideos, setShowVideos] = useState(() => localStorage.getItem('wan2fit-show-exercise-videos') === 'true');
@@ -121,7 +124,7 @@ export function Player({
     }
   }, [steps.length, startOnce, workout.status]);
 
-  // Focus the "Reprendre" button when pause overlay is shown
+  // Focus the resume button when pause overlay is shown
   useEffect(() => {
     if (workout.status === 'paused' && resumeButtonRef.current) {
       resumeButtonRef.current.focus();
@@ -174,7 +177,7 @@ export function Player({
             setShowQuitConfirm(true);
           }}
           className="absolute top-2 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/50 hover:text-white/80 hover:bg-white/20 transition-colors"
-          aria-label="Quitter la séance"
+          aria-label={t('quit_button.aria_label')}
         >
           <svg
             width="16"
@@ -200,7 +203,7 @@ export function Player({
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Pause"
+          aria-label={t('pause_overlay.title')}
           className="absolute inset-0 z-10 flex items-center justify-center bg-black/70"
           onKeyDown={(e) => {
             if (e.key === 'Escape') workout.togglePause();
@@ -211,14 +214,14 @@ export function Player({
           }}
         >
           <div className="text-center">
-            <div className="text-4xl font-bold text-white mb-4">Pause</div>
+            <div className="text-4xl font-bold text-white mb-4">{t('pause_overlay.title')}</div>
             <button
               ref={resumeButtonRef}
               type="button"
               onClick={workout.togglePause}
               className="px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
             >
-              Reprendre
+              {t('pause_overlay.resume')}
             </button>
           </div>
         </div>
@@ -255,9 +258,9 @@ export function Player({
         >
           <div className="text-center px-6">
             <p id="quit-dialog-title" className="text-xl font-bold text-white mb-2">
-              Quitter la séance ?
+              {t('quit_dialog.title')}
             </p>
-            <p className="text-white/70 mb-6">Ta progression ne sera pas enregistrée.</p>
+            <p className="text-white/70 mb-6">{t('quit_dialog.body')}</p>
             <div className="flex gap-3 justify-center">
               <button
                 type="button"
@@ -267,7 +270,7 @@ export function Player({
                 }}
                 className="px-6 py-3 rounded-xl bg-white/10 text-white font-semibold"
               >
-                Continuer
+                {t('quit_dialog.cancel')}
               </button>
               <button
                 type="button"
@@ -276,7 +279,7 @@ export function Player({
                 onClick={() => navigate(backTo)}
                 className="px-6 py-3 rounded-xl bg-white text-black font-semibold"
               >
-                Quitter
+                {t('quit_dialog.confirm')}
               </button>
             </div>
           </div>
@@ -358,9 +361,9 @@ export function Player({
       <div className="px-6 pb-3 text-center space-y-0.5">
         <p className="text-sm text-white/70 inline-flex items-center gap-1.5">
           <HeartPulse className="w-4 h-4 shrink-0" aria-hidden="true" />
-          Écoute ton corps. Adapte l'effort, la qualité prime sur la quantité.
+          {t('health_reminder.listen')}
         </p>
-        <p className="text-sm text-white/70">En cas de douleur, arrête immédiatement.</p>
+        <p className="text-sm text-white/70">{t('health_reminder.stop_pain')}</p>
       </div>
     </div>
   );

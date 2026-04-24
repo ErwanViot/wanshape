@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { supabase } from '../../lib/supabase.ts';
 import { getInitials } from '../../utils/getInitials.ts';
 
 export function AuthButton() {
+  const { t } = useTranslation('auth');
   const { user, profile, loading } = useAuth();
 
   // No Supabase or still loading → render nothing
@@ -15,7 +17,7 @@ export function AuthButton() {
         to="/login"
         className="text-sm font-medium text-muted hover:text-strong transition-colors whitespace-nowrap"
       >
-        Se connecter / S'inscrire
+        {t('auth_button.login_signup')}
       </Link>
     );
   }
@@ -25,7 +27,7 @@ export function AuthButton() {
   const initials = getInitials(displayName, user.email);
 
   return (
-    <Link to="/parametres" className="flex items-center gap-2" aria-label="Paramètres">
+    <Link to="/parametres" className="flex items-center gap-2" aria-label={t('auth_button.settings_aria')}>
       {profile?.avatar_url ? (
         <img src={profile.avatar_url} alt="" className="w-8 h-8 rounded-full object-cover shrink-0" />
       ) : (

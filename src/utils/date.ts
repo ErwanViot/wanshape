@@ -35,17 +35,17 @@ export function formatDurationLong(seconds: number): string {
   return s > 0 ? `${m}min ${s}s` : `${m} min`;
 }
 
-export function formatDate(dateStr: string | null): string {
+export function formatDate(dateStr: string | null, locale: string = 'fr'): string {
   if (!dateStr) return '';
-  return new Date(dateStr).toLocaleDateString('fr-FR', {
+  return new Date(dateStr).toLocaleDateString(locale, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
 }
 
-export function formatShortDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('fr-FR', {
+export function formatShortDate(dateStr: string, locale: string = 'fr'): string {
+  return new Date(dateStr).toLocaleDateString(locale, {
     day: 'numeric',
     month: 'short',
   });

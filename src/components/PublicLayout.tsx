@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router';
 import { BottomNav } from './BottomNav.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
@@ -7,6 +8,7 @@ import { CguRevalidationModal } from './legal/CguRevalidationModal.tsx';
 import { SessionExpiredBanner } from './SessionExpiredBanner.tsx';
 
 export function PublicLayout() {
+  const { t } = useTranslation('common');
   const { pathname } = useLocation();
 
   // Scroll top on route change. Data freshness is no longer tied to
@@ -19,7 +21,7 @@ export function PublicLayout() {
   return (
     <div className="min-h-screen bg-surface flex flex-col">
       <a href="#main-content" className="skip-to-content">
-        Aller au contenu principal
+        {t('layout.skip_to_content')}
       </a>
       <BrandHeader />
       <SessionExpiredBanner />

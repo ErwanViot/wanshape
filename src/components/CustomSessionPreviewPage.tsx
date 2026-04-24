@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { ChevronLeft, ClipboardList, Dumbbell, Flame, Moon, RefreshCw, RotateCcw, Sun, Timer, Zap } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { BLOCK_COLORS, BLOCK_LABELS } from '../engine/constants.ts';
@@ -26,6 +27,7 @@ const BLOCK_ICONS: Record<string, LucideIcon> = {
 };
 
 function BlockDetail({ block, index }: { block: Block; index: number }) {
+  const { t } = useTranslation('sessions');
   const color = BLOCK_COLORS[block.type];
   const label = BLOCK_LABELS[block.type];
 
@@ -65,7 +67,7 @@ function BlockDetail({ block, index }: { block: Block; index: number }) {
               {typeof ex.duration === 'number' && <span className="text-xs text-muted">{ex.duration as number}s</span>}
               {typeof ex.reps === 'number' && <span className="text-xs text-muted">{ex.reps as number} reps</span>}
               {typeof ex.sets === 'number' && <span className="text-xs text-muted">{ex.sets as number} sets</span>}
-              {ex.bilateral === true && <span className="text-xs text-faint">(bilatéral)</span>}
+              {ex.bilateral === true && <span className="text-xs text-faint">{t('preview.bilateral')}</span>}
             </li>
           ))}
         </ul>
@@ -75,7 +77,7 @@ function BlockDetail({ block, index }: { block: Block; index: number }) {
         <ul className="space-y-2">
           {(block.pairs as Array<{ exercises: Array<Record<string, unknown>> }>).map((pair, pi) => (
             <li key={pi}>
-              <p className="text-xs text-muted mb-1">Paire {pi + 1}</p>
+              <p className="text-xs text-muted mb-1">{t('preview.pair', { n: pi + 1 })}</p>
               <ul className="space-y-1 ml-3">
                 {pair.exercises.map((ex, ei) => (
                   <li key={ei} className="flex items-baseline gap-2 text-sm">
@@ -96,6 +98,7 @@ function BlockDetail({ block, index }: { block: Block; index: number }) {
 }
 
 export function CustomSessionPreviewPage() {
+  const { t } = useTranslation('sessions');
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
   const { session: record, loading } = useCustomSession(id, user?.id);
@@ -110,7 +113,7 @@ export function CustomSessionPreviewPage() {
   const session = record?.session_data as Session | undefined;
 
   useDocumentHead({
-    title: session ? `${session.title} — Aperçu` : 'Séance personnalisée',
+    title: session ? `${session.title} ${t('preview.page_title_suffix')}` : t('preview.default_title'),
   });
 
   if (loading) {
@@ -126,9 +129,9 @@ export function CustomSessionPreviewPage() {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <Moon className="w-12 h-12 text-muted mb-4 mx-auto" aria-hidden="true" />
-          <p className="text-body text-lg font-medium">Séance introuvable.</p>
+          <p className="text-body text-lg font-medium">{t('preview.not_found_title')}</p>
           <Link to="/seance/custom" className="text-brand hover:text-brand-secondary underline mt-4 inline-block">
-            Créer une séance
+            {t('preview.not_found_cta')}
           </Link>
         </div>
       </div>
@@ -162,7 +165,7 @@ export function CustomSessionPreviewPage() {
         className="inline-flex items-center gap-1 text-sm text-muted hover:text-heading transition-colors mb-6"
       >
         <ChevronLeft className="w-4 h-4" />
-        Retour
+        {t('preview.back')}
       </Link>
 
       {/* Header */}
@@ -187,7 +190,7 @@ export function CustomSessionPreviewPage() {
       {/* Blocks detail */}
       <h2 className="text-sm font-bold text-heading mb-3 flex items-center gap-1.5">
         <ClipboardList className="w-4 h-4" aria-hidden="true" />
-        Détail des blocs
+        {t('preview.blocks_title')}
       </h2>
       <div className="space-y-3 mb-8">
         {session.blocks.map((block, i) => (
@@ -218,23 +221,23 @@ export function CustomSessionPreviewPage() {
         {confirming ? (
           <span className="inline-flex items-center gap-2">
             <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            Préparation...
+            {t('preview.preparing')}
           </span>
         ) : (
-          'Lancer la séance'
+          t('preview.start_cta')
         )}
       </button>
 
       {/* Confirm error */}
       {confirmError && (
         <div className="mt-3 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-sm">
-          <p className="text-red-400 mb-2">Impossible d'enregistrer la séance. Elle ne sera pas dans ton historique.</p>
+          <p className="text-red-400 mb-2">{t('preview.confirm_error')}</p>
           <button
             type="button"
             onClick={() => navigate(`/seance/custom/${id}/play`)}
             className="text-brand font-semibold text-sm hover:text-brand-secondary transition-colors cursor-pointer"
           >
-            Lancer quand même →
+            {t('preview.launch_anyway')}
           </button>
         </div>
       )}
@@ -243,15 +246,15 @@ export function CustomSessionPreviewPage() {
       <div className="mt-8 pt-6 border-t border-divider">
         <p className="text-sm font-semibold text-heading mb-3 flex items-center gap-1.5">
           <RefreshCw className="w-4 h-4" aria-hidden="true" />
-          Pas satisfait ?
+          {t('preview.not_satisfied')}
         </p>
         <textarea
           value={refinementNote}
           onChange={(e) => setRefinementNote(e.target.value)}
           maxLength={300}
           rows={2}
-          placeholder="Ce que je voudrais changer..."
-          aria-label="Modifications souhaitées"
+          placeholder={t('preview.refinement_placeholder')}
+          aria-label={t('preview.refinement_aria')}
           className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint resize-none focus:outline-none focus:border-brand mb-3"
         />
 
@@ -267,7 +270,7 @@ export function CustomSessionPreviewPage() {
           disabled={regenerating}
           className="px-6 py-2.5 rounded-xl border border-divider text-sm font-semibold text-muted hover:text-heading hover:border-brand/30 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {regenerating ? 'Régénération...' : 'Recommencer'}
+          {regenerating ? t('preview.regenerating') : t('preview.regenerate')}
         </button>
       </div>
     </div>

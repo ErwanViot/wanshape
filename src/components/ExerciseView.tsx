@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { AtomicStep } from '../types/player.ts';
 import { ExerciseVideoButton } from './ExerciseVideoButton.tsx';
 import { NextPreview } from './NextPreview.tsx';
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export function ExerciseView({ step, remaining, progress, showVideos, onToggleShowVideos }: Props) {
+  const { t } = useTranslation('player');
   const pulse = remaining <= 3 && remaining > 0;
 
   return (
@@ -19,18 +21,14 @@ export function ExerciseView({ step, remaining, progress, showVideos, onToggleSh
       {/* Context */}
       <div className="text-white/50 text-sm">
         {step.roundInfo && (
-          <span>
-            Round {step.roundInfo.current}/{step.roundInfo.total}
-          </span>
+          <span>{t('exercise_view.round', { current: step.roundInfo.current, total: step.roundInfo.total })}</span>
         )}
         {step.setInfo && (
-          <span>
-            Série {step.setInfo.current}/{step.setInfo.total}
-          </span>
+          <span>{t('exercise_view.set', { current: step.setInfo.current, total: step.setInfo.total })}</span>
         )}
         {step.intervalInfo && (
           <span className="ml-2">
-            · Intervalle {step.intervalInfo.current}/{step.intervalInfo.total}
+            {t('exercise_view.interval', { current: step.intervalInfo.current, total: step.intervalInfo.total })}
           </span>
         )}
       </div>
@@ -45,7 +43,9 @@ export function ExerciseView({ step, remaining, progress, showVideos, onToggleSh
       <p className="text-white text-lg max-w-sm">{step.instructions}</p>
 
       {/* Tempo */}
-      {step.tempo && <p className="text-white/40 text-sm font-mono">Tempo {step.tempo}</p>}
+      {step.tempo && (
+        <p className="text-white/40 text-sm font-mono">{t('exercise_view.tempo', { value: step.tempo })}</p>
+      )}
 
       {/* Video demo */}
       <ExerciseVideoButton

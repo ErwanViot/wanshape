@@ -1,0 +1,81 @@
+{
+  "page": {
+    "title": "Tracking",
+    "description": "Wan2Fit sports dashboard.",
+    "heading": "Every effort counts",
+    "empty_title": "No stats yet",
+    "empty_desc": "Start your first session to begin tracking your progress here.",
+    "empty_cta": "Today's session",
+    "next_level": "Level up",
+    "next_level_sub": "Start following a personalized program"
+  },
+  "metric": {
+    "sessions": "Sessions",
+    "total": "total",
+    "time": "Time",
+    "cumulative": "cumulative",
+    "avg_session": "Avg / session",
+    "avg_duration": "average duration",
+    "this_week": "This week",
+    "this_week_sub_one": "{{n}} session",
+    "this_week_sub_other": "{{n}} sessions"
+  },
+  "week_message": {
+    "weekend_idle_title": "Well-earned weekend",
+    "weekend_idle_sub": "Recharge your batteries, Monday we go hard.",
+    "new_week_title": "New week",
+    "new_week_sub": "Ready to train?",
+    "one_weekend_title": "Session done",
+    "one_weekend_sub": "Great week! Rest well, the next one's going to be huge.",
+    "one_week_title": "First session done",
+    "one_week_sub": "The hardest part is over.",
+    "two_title": "Off to a good start",
+    "two_sub": "You're building something solid.",
+    "three_title": "Perfect rhythm",
+    "three_sub": "You're on a great streak.",
+    "four_title": "Impressive",
+    "four_sub": "You're exceeding your goals.",
+    "overload_title": "Watch out for overtraining",
+    "overload_sub": "Your body progresses at rest. Take a breather!"
+  },
+  "program_card": {
+    "active_label": "Active program",
+    "sessions_progress": "{{completed}}/{{total}} sessions",
+    "next_session": "Next:"
+  },
+  "recent_sessions": {
+    "history": "History",
+    "filter_all": "All",
+    "filter_program": "Prog",
+    "filter_free": "Free",
+    "empty": "No sessions in this category.",
+    "load_more": "Load more",
+    "default_title": "Session"
+  },
+  "week_dots": {
+    "aria": "Week activity: {{n}} day out of 7",
+    "aria_other": "Week activity: {{n}} days out of 7",
+    "heading": "This week",
+    "activity_one": "{{n}} active day",
+    "activity_other": "{{n}} active days"
+  },
+  "bar_chart": {
+    "heading": "Weekly volume",
+    "unit": "min / week",
+    "bar_aria": "{{label}}: {{minutes}} minutes, {{sessions}} session",
+    "bar_aria_other": "{{label}}: {{minutes}} minutes, {{sessions}} sessions",
+    "tooltip": "{{minutes}} min"
+  },
+  "block_label": {
+    "classic": "Classic",
+    "circuit": "Circuit",
+    "hiit": "HIIT",
+    "tabata": "Tabata",
+    "emom": "EMOM",
+    "amrap": "AMRAP",
+    "superset": "Superset",
+    "pyramid": "Pyramid"
+  },
+  "amrap_rounds_one": "{{n}} round",
+  "amrap_rounds_other": "{{n}} rounds"
+}

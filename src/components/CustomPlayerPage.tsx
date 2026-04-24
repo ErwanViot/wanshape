@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Navigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useCustomSession } from '../hooks/useCustomSessions.ts';
@@ -13,11 +14,12 @@ export function CustomPlayerPage() {
   const { id } = useParams<{ id: string }>();
   const { user, loading: authLoading } = useAuth();
   const { session: record, loading } = useCustomSession(id, user?.id);
+  const { t } = useTranslation('player');
 
   const sessionData = record?.session_data as Session | undefined;
 
   useDocumentHead({
-    title: sessionData ? `${sessionData.title} — En cours` : 'Séance personnalisée',
+    title: sessionData ? `${sessionData.title} — ${t('page.title_in_progress')}` : t('page.title_custom'),
   });
 
   if (!authLoading && !user) {
@@ -31,7 +33,7 @@ export function CustomPlayerPage() {
   if (loading) return <PlayerLoader />;
 
   if (!record || !sessionData) {
-    return <SessionNotFound linkTo="/seance/custom" linkLabel="Retour aux séances" />;
+    return <SessionNotFound linkTo="/seance/custom" linkLabel={t('session_not_found.back_sessions')} />;
   }
 
   return (

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
@@ -18,6 +19,7 @@ function formatShortDate(dateKey: string): string {
 }
 
 export function Home() {
+  const { t } = useTranslation('home');
   const todayKey = getTodayKey();
   const tomorrowKey = getTomorrowKey();
   const { session, loading, error } = useSession(todayKey);
@@ -29,8 +31,7 @@ export function Home() {
 
   useDocumentHead({
     title: 'Wan2Fit',
-    description:
-      "Chaque jour, une séance de sport guidée sans matériel. 8 formats d'entraînement, 25-40 min. Gratuit pour commencer, premium pour aller plus loin.",
+    description: t('page_description'),
   });
 
   const handleStartSession = () => {

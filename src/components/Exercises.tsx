@@ -1,8 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { EXERCISES_DATA } from '../data/exercises.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import type { ExerciseCategory, ExerciseData } from '../types/exercise.ts';
-import { CATEGORY_LABELS, CATEGORY_ORDER, DIFFICULTY_COLORS, DIFFICULTY_LABELS } from '../types/exercise.ts';
+import { CATEGORY_ORDER, DIFFICULTY_COLORS } from '../types/exercise.ts';
 
 function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, ExerciseData[]][] {
   const groups = new Map<ExerciseCategory, ExerciseData[]>();
@@ -15,10 +16,10 @@ function groupByCategory(exercises: ExerciseData[]): [ExerciseCategory, Exercise
 }
 
 export function Exercises() {
+  const { t } = useTranslation('explore');
   useDocumentHead({
-    title: 'Nos exercices',
-    description:
-      'Tous les exercices Wan2Fit : fiches détaillées avec exécution, variantes, conseils et erreurs courantes.',
+    title: t('exercises.page_title'),
+    description: t('exercises.page_description'),
   });
 
   const grouped = groupByCategory(EXERCISES_DATA);
@@ -30,7 +31,7 @@ export function Exercises() {
           <Link
             to="/"
             className="p-1 -ml-1 text-muted hover:text-strong transition-colors"
-            aria-label="Retour à l'accueil"
+            aria-label={t('exercises.back_aria')}
           >
             <svg
               width="20"
@@ -45,19 +46,16 @@ export function Exercises() {
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </Link>
-          <h1 className="font-bold text-lg text-heading">Nos exercices</h1>
+          <h1 className="font-bold text-lg text-heading">{t('exercises.heading')}</h1>
         </div>
       </header>
 
       <div className="max-w-3xl mx-auto px-6 py-8 space-y-10">
-        <p className="text-sm text-subtle leading-relaxed">
-          Retrouvez ici les fiches détaillées de nos exercices : exécution, respiration, variantes, conseils et erreurs
-          courantes.
-        </p>
+        <p className="text-sm text-subtle leading-relaxed">{t('exercises.intro')}</p>
 
         {grouped.map(([category, exercises]) => (
           <section key={category}>
-            <h2 className="text-xs font-bold uppercase tracking-wider text-muted mb-4">{CATEGORY_LABELS[category]}</h2>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-muted mb-4">{t(`category.${category}`)}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {exercises.map((ex) => (
                 <Link
@@ -74,7 +72,7 @@ export function Exercises() {
                       <span
                         className={`text-xs font-bold px-2 py-0.5 rounded-full border shrink-0 ${DIFFICULTY_COLORS[ex.difficulty - 1]}`}
                       >
-                        {DIFFICULTY_LABELS[ex.difficulty - 1]}
+                        {t(`difficulty_level.${ex.difficulty}`)}
                       </span>
                     </div>
                   </div>
@@ -98,7 +96,7 @@ export function Exercises() {
                     </div>
                     <p className="text-[13px] text-subtle leading-relaxed flex-1 line-clamp-2">{ex.shortDescription}</p>
                     <span className="text-xs text-link font-medium">
-                      {ex.variants.length} variante{ex.variants.length > 1 ? 's' : ''}
+                      {t('exercises.variant', { n: ex.variants.length, count: ex.variants.length })}
                     </span>
                   </div>
                 </Link>
@@ -107,9 +105,7 @@ export function Exercises() {
           </section>
         ))}
 
-        <p className="text-xs text-faint text-center leading-relaxed">
-          De nouvelles fiches sont ajoutées régulièrement.
-        </p>
+        <p className="text-xs text-faint text-center leading-relaxed">{t('exercises.footer_note')}</p>
       </div>
     </>
   );

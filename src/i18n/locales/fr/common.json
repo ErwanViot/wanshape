@@ -1,7 +1,28 @@
 {
+  "difficulty": {
+    "accessible": "Accessible",
+    "modere": "Modéré",
+    "intense": "Intense"
+  },
   "language_switcher": {
     "aria_label": "Changer de langue",
     "option_fr": "Français",
     "option_en": "Anglais"
+  },
+  "layout": {
+    "skip_to_content": "Aller au contenu principal"
+  },
+  "not_found": {
+    "title": "Page introuvable",
+    "body": "La page que tu cherches n'existe pas ou a été déplacée.",
+    "back_home": "Retour à l'accueil"
+  },
+  "error_boundary": {
+    "title": "Une erreur est survenue",
+    "body": "L'application a rencontré un problème inattendu.",
+    "back_home": "Retour à l'accueil"
+  },
+  "loading": {
+    "aria": "Chargement"
   }
 }

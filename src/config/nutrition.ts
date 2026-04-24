@@ -4,14 +4,6 @@ import type { ActivityLevel, MealType, NutritionGoal } from '../types/nutrition.
 // in supabase/migrations/014_nutrition.sql.
 export const MEAL_TYPES: readonly MealType[] = ['breakfast', 'lunch', 'snack', 'dinner', 'extra'] as const;
 
-export const MEAL_TYPE_LABELS: Record<MealType, string> = {
-  breakfast: 'Petit-déjeuner',
-  lunch: 'Déjeuner',
-  snack: 'Goûter',
-  dinner: 'Dîner',
-  extra: 'Autre',
-};
-
 export const MEAL_TYPE_ORDER: Record<MealType, number> = {
   breakfast: 0,
   lunch: 1,
@@ -28,14 +20,6 @@ export const ACTIVITY_LEVELS: readonly ActivityLevel[] = [
   'very_active',
 ] as const;
 
-export const ACTIVITY_LEVEL_LABELS: Record<ActivityLevel, string> = {
-  sedentary: "Sédentaire (peu ou pas d'exercice)",
-  light: 'Légère (1 à 3 séances/semaine)',
-  moderate: 'Modérée (3 à 5 séances/semaine)',
-  active: 'Active (6 à 7 séances/semaine)',
-  very_active: 'Très active (2x/jour ou métier physique)',
-};
-
 /** PAL factor applied to BMR to get TDEE. Mifflin-St Jeor + Harris-Benedict multipliers. */
 export const ACTIVITY_MULTIPLIERS: Record<ActivityLevel, number> = {
   sedentary: 1.2,
@@ -46,12 +30,6 @@ export const ACTIVITY_MULTIPLIERS: Record<ActivityLevel, number> = {
 };
 
 export const NUTRITION_GOALS: readonly NutritionGoal[] = ['loss', 'maintenance', 'gain'] as const;
-
-export const NUTRITION_GOAL_LABELS: Record<NutritionGoal, string> = {
-  loss: 'Perte de poids progressive',
-  maintenance: 'Maintien du poids',
-  gain: 'Prise de masse progressive',
-};
 
 /**
  * Calorie delta applied to TDEE per goal (moderate / sustainable approach).

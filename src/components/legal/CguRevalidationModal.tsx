@@ -1,5 +1,6 @@
 import { AlertTriangle } from 'lucide-react';
 import { type KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { CGU_VERSION_CHANGES, CURRENT_CGU_VERSION } from '../../config/legal.ts';
 import { useAuth } from '../../contexts/AuthContext.tsx';
@@ -18,6 +19,7 @@ const FOCUSABLE_SELECTOR =
  * focus trapped inside, body scroll not needed since it fills the viewport.
  */
 export function CguRevalidationModal() {
+  const { t } = useTranslation('settings');
   const { needsRevalidation, acceptCurrentVersion } = useCguStatus();
   const { signOut } = useAuth();
   const [submitting, setSubmitting] = useState(false);
@@ -68,7 +70,7 @@ export function CguRevalidationModal() {
     setError(null);
     const ok = await acceptCurrentVersion();
     if (!ok) {
-      setError("Impossible d'enregistrer. Vérifie ta connexion et réessaie.");
+      setError(t('cgu_modal.error_save'));
     }
     setSubmitting(false);
   }
@@ -96,18 +98,14 @@ export function CguRevalidationModal() {
         <div className="flex items-center gap-2">
           <AlertTriangle className="w-5 h-5 text-brand" aria-hidden="true" />
           <h2 id="cgu-revalidation-title" className="font-display text-lg font-black text-heading">
-            Mise à jour des conditions
+            {t('cgu_modal.title')}
           </h2>
         </div>
 
-        <p className="text-sm text-body leading-relaxed">
-          Nos <strong>Conditions Générales d'Utilisation</strong> et notre <strong>Politique de Confidentialité</strong>{' '}
-          ont été mises à jour (version {CURRENT_CGU_VERSION}). L'accès à l'app est suspendu le temps que tu les
-          acceptes.
-        </p>
+        <p className="text-sm text-body leading-relaxed">{t('cgu_modal.body', { version: CURRENT_CGU_VERSION })}</p>
 
         <div className="rounded-xl bg-surface-card border border-divider p-4">
-          <p className="text-xs font-medium text-muted uppercase tracking-wider mb-2">Principales évolutions</p>
+          <p className="text-xs font-medium text-muted uppercase tracking-wider mb-2">{t('cgu_modal.changes_label')}</p>
           <ul className="space-y-1.5 text-sm text-body">
             {CGU_VERSION_CHANGES.map((change) => (
               <li key={change} className="flex gap-2">
@@ -121,13 +119,13 @@ export function CguRevalidationModal() {
         </div>
 
         <p className="text-xs text-muted">
-          Consulte le détail dans les{' '}
+          {t('cgu_modal.read_detail')}{' '}
           <Link to="/legal/cgu" className="text-link underline" target="_blank" rel="noopener noreferrer">
-            CGU
+            {t('cgu_modal.cgu_link')}
           </Link>{' '}
-          et la{' '}
+          {t('cgu_modal.read_and')}{' '}
           <Link to="/legal/privacy" className="text-link underline" target="_blank" rel="noopener noreferrer">
-            Politique de confidentialité
+            {t('cgu_modal.privacy_link')}
           </Link>
           .
         </p>
@@ -141,7 +139,7 @@ export function CguRevalidationModal() {
             disabled={submitting}
             className="flex-1 py-3 rounded-xl text-sm font-medium text-body border border-divider hover:bg-divider transition-colors disabled:opacity-50"
           >
-            Me déconnecter
+            {t('cgu_modal.btn_sign_out')}
           </button>
           <button
             type="button"
@@ -149,7 +147,7 @@ export function CguRevalidationModal() {
             disabled={submitting}
             className="flex-1 py-3 rounded-xl text-sm font-bold text-white cta-gradient disabled:opacity-50"
           >
-            {submitting ? 'Enregistrement…' : 'Accepter et continuer'}
+            {submitting ? t('cgu_modal.btn_accepting') : t('cgu_modal.btn_accept')}
           </button>
         </div>
       </div>

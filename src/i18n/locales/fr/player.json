@@ -1,0 +1,138 @@
+{
+  "page": {
+    "title_in_progress": "En cours",
+    "title_default": "Séance en cours",
+    "title_custom": "Séance personnalisée",
+    "title_program": "Séance programme"
+  },
+  "quit_button": {
+    "aria_label": "Quitter la séance"
+  },
+  "pause_overlay": {
+    "title": "Pause",
+    "resume": "Reprendre"
+  },
+  "quit_dialog": {
+    "title": "Quitter la séance ?",
+    "body": "Ta progression ne sera pas enregistrée.",
+    "cancel": "Continuer",
+    "confirm": "Quitter"
+  },
+  "health_reminder": {
+    "listen": "Écoute ton corps. Adapte l'effort, la qualité prime sur la quantité.",
+    "stop_pain": "En cas de douleur, arrête immédiatement."
+  },
+  "progress_bar": {
+    "aria_label": "Progression de la séance"
+  },
+  "block_transition": {
+    "block_indicator": "Bloc {{current}}/{{total}}"
+  },
+  "next_preview": {
+    "label": "Suivant : "
+  },
+  "exercise_view": {
+    "round": "Round {{current}}/{{total}}",
+    "set": "Série {{current}}/{{total}}",
+    "interval": "· Intervalle {{current}}/{{total}}",
+    "tempo": "Tempo {{value}}"
+  },
+  "reps_view": {
+    "round": "Round {{current}}/{{total}}",
+    "set": "Série {{current}}/{{total}}",
+    "reps_unit": "reps",
+    "done_button": "TERMINÉ ✓",
+    "tempo": "Tempo {{value}}"
+  },
+  "rest_view": {
+    "title": "Repos",
+    "round": "Round {{current}}/{{total}}",
+    "set": "Série {{current}}/{{total}}",
+    "interval": "· Intervalle {{current}}/{{total}}",
+    "skip": "Passer le repos →"
+  },
+  "amrap_view": {
+    "explanation": "Enchaîne les exercices en boucle. Fais un max de tours dans le temps imparti.",
+    "rounds_label": "rounds",
+    "increment_button": "+1 Round",
+    "tracking_hint": "Appuie à chaque tour complété pour suivre ta progression"
+  },
+  "emom_view": {
+    "minute": "Minute {{current}}/{{total}}",
+    "explanation": "Réalise les exercices dans la minute. Le temps restant est ta récupération."
+  },
+  "end_screen": {
+    "title": "Séance terminée !",
+    "saved_badge": "Séance enregistrée",
+    "save_error": "Enregistrement échoué",
+    "retry": "Réessayer",
+    "minutes_unit_one": "minute",
+    "minutes_unit_other": "minutes",
+    "blocks_unit": "blocs",
+    "amrap_rounds_unit": "rounds AMRAP",
+    "share_idle": "Partager ma séance",
+    "share_loading": "Génération…",
+    "share_shared": "Partagé !",
+    "share_copied": "Image téléchargée & lien copié !",
+    "back_home": "Retour à l'accueil",
+    "back_program": "Retour au programme",
+    "back_custom_session": "Retour à la séance"
+  },
+  "signup_nudge": {
+    "title": "Ne perds pas ta progression",
+    "body": "Sans compte, cette séance disparaît. Crée ton compte gratuit pour suivre ta progression et garder ta dynamique.",
+    "cta": "Créer mon compte",
+    "dismiss": "Plus tard"
+  },
+  "premium_teaser": {
+    "dismiss_aria": "Ignorer pour cette semaine",
+    "heading": "Tu gères.",
+    "body": "Avec Premium, ta prochaine séance est générée sur mesure en 30 s, ou pars sur un programme complet adapté à tes objectifs.",
+    "cta": "Découvrir Premium"
+  },
+  "controls": {
+    "resume_aria": "Reprendre",
+    "pause_aria": "Pause",
+    "skip_aria": "Passer",
+    "mute_aria": "Couper le son",
+    "unmute_aria": "Activer le son"
+  },
+  "health_disclaimer": {
+    "title": "Avertissement santé",
+    "subtitle": "Avant de commencer, merci de lire attentivement.",
+    "body_editorial": "Wan2Fit propose du <strong>contenu éditorial et informationnel</strong> relatif à l'activité physique. Il ne s'agit pas de coaching sportif personnalisé ni d'encadrement par un éducateur sportif diplômé.",
+    "body_responsibility": "Les séances sont des suggestions d'exercices à caractère général. Tu es seul responsable de leur exécution et de leur adaptation à ta condition physique.",
+    "warning_box_title": "Avant de pratiquer :",
+    "warning_consult": "Consulte un médecin pour vérifier ton aptitude sportive",
+    "warning_no_contraindication": "Ne pratique pas en cas de contre-indication médicale",
+    "warning_stop_pain": "Arrête immédiatement en cas de douleur ou de malaise",
+    "legal_note": "Service déconseillé sans avis médical pour les personnes présentant des pathologies cardiaques, des troubles articulaires, un état de grossesse ou toute condition pouvant être aggravée par l'exercice. Réservé aux personnes majeures (18 ans et plus).",
+    "checkbox_label": "J'ai lu et compris cet avertissement. Je pratique sous ma propre responsabilité et déclare ne pas présenter de contre-indication médicale.",
+    "accept_button": "Continuer"
+  },
+  "block_health_disclaimer": {
+    "before_start": "Avant de commencer :",
+    "consult_doctor": "Consulte un médecin en cas de doute",
+    "no_contraindication": "Assure-toi de n'avoir aucune contre-indication",
+    "stop_pain": "Arrête immédiatement en cas de douleur"
+  },
+  "error_boundary": {
+    "message": "Une erreur est survenue pendant la séance.",
+    "detail": "La séance n'a pas pu être affichée correctement.",
+    "back_button": "Retour"
+  },
+  "session_not_found": {
+    "message": "Séance introuvable.",
+    "back_home": "Retour à l'accueil",
+    "back_sessions": "Retour aux séances",
+    "back_program": "Retour au programme"
+  },
+  "session_expired_banner": {
+    "message": "Ta session a expiré.",
+    "refresh": "Rafraîchir la page"
+  },
+  "video_demo": {
+    "aria_label_with_name": "Démonstration : {{name}}",
+    "aria_label_generic": "Démonstration de l'exercice"
+  }
+}

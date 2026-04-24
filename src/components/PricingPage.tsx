@@ -1,20 +1,21 @@
+import { useTranslation } from 'react-i18next';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { PricingCards } from './PricingCards.tsx';
 
 export function PricingPage() {
+  const { t } = useTranslation('marketing');
+
   useDocumentHead({
-    title: 'Tarifs',
-    description: "Découvrez les offres Wan2Fit : gratuit pour commencer, Premium pour aller plus loin avec l'IA.",
+    title: t('pricing.page_title'),
+    description: t('pricing.page_description'),
   });
 
   return (
     <div className="max-w-5xl mx-auto px-6 md:px-10 py-10 md:py-16">
       {/* Header */}
       <div className="text-center mb-10">
-        <h1 className="font-display text-3xl md:text-4xl font-black text-heading mb-3">Choisis ton plan</h1>
-        <p className="text-muted max-w-lg mx-auto">
-          Gratuit pour commencer, Premium pour aller plus loin avec des séances et programmes générés par IA.
-        </p>
+        <h1 className="font-display text-3xl md:text-4xl font-black text-heading mb-3">{t('pricing.heading')}</h1>
+        <p className="text-muted max-w-lg mx-auto">{t('pricing.subtitle')}</p>
       </div>
 
       <PricingCards />

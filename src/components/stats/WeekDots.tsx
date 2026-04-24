@@ -1,14 +1,17 @@
+import { useTranslation } from 'react-i18next';
+
 const DAY_LABELS = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 
 export function WeekDots({ weekDots }: { weekDots: boolean[] }) {
+  const { t } = useTranslation('stats');
   const activeDays = weekDots.filter(Boolean).length;
 
   return (
-    <section aria-label={`Activité de la semaine : ${activeDays} jour${activeDays > 1 ? 's' : ''} sur 7`}>
+    <section aria-label={t(activeDays === 1 ? 'week_dots.aria' : 'week_dots.aria_other', { n: activeDays })}>
       <div className="flex items-center justify-between mb-4">
-        <p className="text-sm font-bold text-heading">Cette semaine</p>
+        <p className="text-sm font-bold text-heading">{t('week_dots.heading')}</p>
         <p className="text-xs text-muted">
-          {activeDays} jour{activeDays > 1 ? 's' : ''} d'activité
+          {t(activeDays === 1 ? 'week_dots.activity_one' : 'week_dots.activity_other', { n: activeDays })}
         </p>
       </div>
       <div className="flex gap-2">

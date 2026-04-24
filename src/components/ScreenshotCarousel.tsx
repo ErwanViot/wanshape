@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function ScreenshotCarousel({
   images,
@@ -15,6 +16,7 @@ export function ScreenshotCarousel({
   interval?: number;
   dotColor?: 'brand' | 'accent';
 }) {
+  const { t } = useTranslation('marketing');
   const [active, setActive] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
@@ -62,7 +64,7 @@ export function ScreenshotCarousel({
               type="button"
               onClick={() => setActive(i)}
               className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${i === active ? activeDotClass : 'bg-muted/30'}`}
-              aria-label={`Aller au slide ${i + 1} sur ${images.length}`}
+              aria-label={t('carousel.slide_aria', { current: i + 1, total: images.length })}
             />
           ))}
         </div>
