@@ -8,8 +8,12 @@ import commonFr from './locales/fr/common.json';
 export const SUPPORTED_LOCALES = ['fr', 'en'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
-export const LOCALE_STORAGE_KEY = 'wan2fit-locale';
+const LOCALE_STORAGE_KEY = 'wan2fit-locale';
 const DEFAULT_LOCALE: SupportedLocale = 'fr';
+
+export function isSupportedLocale(value: string): value is SupportedLocale {
+  return (SUPPORTED_LOCALES as readonly string[]).includes(value);
+}
 
 const resources = {
   fr: { common: commonFr },
@@ -35,8 +39,7 @@ i18n
   });
 
 const syncHtmlLang = (lng: string) => {
-  const normalized = (SUPPORTED_LOCALES as readonly string[]).includes(lng) ? lng : DEFAULT_LOCALE;
-  document.documentElement.lang = normalized;
+  document.documentElement.lang = isSupportedLocale(lng) ? lng : DEFAULT_LOCALE;
 };
 
 syncHtmlLang(i18n.language);
