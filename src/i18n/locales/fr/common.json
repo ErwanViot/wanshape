@@ -4,6 +4,30 @@
     "modere": "Modéré",
     "intense": "Intense"
   },
+  "block_name": {
+    "warmup": "Échauffement",
+    "cooldown": "Retour au calme",
+    "classic": "Renforcement",
+    "circuit": "Circuit",
+    "hiit": "HIIT",
+    "tabata": "Tabata",
+    "emom": "EMOM",
+    "amrap": "AMRAP",
+    "superset": "Superset",
+    "pyramid": "Pyramide"
+  },
+  "exercise_detail": {
+    "bilateral_seconds": "{{seconds}}s × 2 côtés",
+    "max_reps": "{{sets}} × max reps",
+    "sets_reps": "{{sets}} × {{reps}} reps",
+    "reps_count": "{{reps}} reps",
+    "duration_seconds": "{{seconds}}s",
+    "work_seconds": "{{seconds}}s effort",
+    "work_rest_seconds": "{{work}}s / {{rest}}s",
+    "reps_inline": "× {{reps}}",
+    "superset_pair": "× {{reps}} · paire {{n}}",
+    "pyramid_pattern": "{{pattern}} reps"
+  },
   "language_switcher": {
     "aria_label": "Changer de langue",
     "option_fr": "Français",

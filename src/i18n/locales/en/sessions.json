@@ -42,7 +42,8 @@
     "regenerate": "Retry",
     "regenerating": "Regenerating...",
     "bilateral": "(bilateral)",
-    "pair": "Pair {{n}}"
+    "pair": "Pair {{n}}",
+    "rounds_count": "{{n}} rounds"
   },
   "seances": {
     "page_title": "My sessions",
@@ -74,6 +75,16 @@
     "toggle_label": "Session content",
     "section_aria": "Session content",
     "summary": "{{blocks}} blocks · ~{{duration}} min estimated"
+  },
+  "block_meta": {
+    "exercises": "{{n}} exercises",
+    "rounds_x_exos": "{{rounds}} rounds × {{exos}} exos",
+    "hiit": "{{rounds}} rounds · {{work}}s/{{rest}}s",
+    "tabata_with_sets": "{{sets}} sets × {{rounds}} rounds",
+    "rounds_only": "{{rounds}} rounds",
+    "minutes": "{{n}} minutes",
+    "superset": "{{sets}} sets · {{pairs}} pairs",
+    "pyramid": "{{n}} levels"
   },
   "presets": {
     "transpirer_label": "Goal: work up a sweat",

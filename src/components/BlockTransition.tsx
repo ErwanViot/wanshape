@@ -1,6 +1,5 @@
 import { CheckCircle, Cross, OctagonX } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { BLOCK_LABELS } from '../engine/constants.ts';
 import type { AtomicStep } from '../types/player.ts';
 import { TimerDisplay } from './TimerDisplay.tsx';
 
@@ -38,6 +37,7 @@ function HealthDisclaimerInline() {
 
 export function BlockTransition({ step, remaining, progress }: Props) {
   const { t } = useTranslation('player');
+  const { t: tc } = useTranslation('common');
   const isFirstBlock = step.blockIndex === 0;
 
   return (
@@ -52,7 +52,7 @@ export function BlockTransition({ step, remaining, progress }: Props) {
         className="text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full"
         style={{ backgroundColor: `${step.blockColor}30`, color: step.blockColor }}
       >
-        {BLOCK_LABELS[step.blockType]}
+        {tc(`block_name.${step.blockType}`)}
       </div>
 
       {/* Block name */}

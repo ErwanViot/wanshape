@@ -13,19 +13,6 @@ export const BLOCK_COLORS: Record<BlockType, string> = {
   pyramid: '#9333EA',
 };
 
-export const BLOCK_LABELS: Record<BlockType, string> = {
-  warmup: 'Échauffement',
-  cooldown: 'Retour au calme',
-  classic: 'Renforcement',
-  circuit: 'Circuit',
-  hiit: 'HIIT',
-  tabata: 'Tabata',
-  emom: 'EMOM',
-  amrap: 'AMRAP',
-  superset: 'Superset',
-  pyramid: 'Pyramide',
-};
-
 export const TABATA_DEFAULTS = {
   sets: 1,
   rounds: 8,

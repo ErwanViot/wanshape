@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { BLOCK_COLORS, BLOCK_LABELS } from '../engine/constants.ts';
+import { BLOCK_COLORS } from '../engine/constants.ts';
 import { confirmCustomSession, useCustomSession } from '../hooks/useCustomSessions.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useGenerateSession } from '../hooks/useGenerateSession.ts';
@@ -28,8 +28,9 @@ const BLOCK_ICONS: Record<string, LucideIcon> = {
 
 function BlockDetail({ block, index }: { block: Block; index: number }) {
   const { t } = useTranslation('sessions');
+  const { t: tc } = useTranslation('common');
   const color = BLOCK_COLORS[block.type];
-  const label = BLOCK_LABELS[block.type];
+  const label = tc(`block_name.${block.type}`);
 
   const IconComponent = BLOCK_ICONS[block.type] ?? ClipboardList;
 
@@ -46,7 +47,9 @@ function BlockDetail({ block, index }: { block: Block; index: number }) {
             {block.rounds}R &middot; {block.work}s/{block.rest}s
           </span>
         )}
-        {block.type === 'circuit' && <span className="text-xs text-faint ml-auto">{block.rounds} tours</span>}
+        {block.type === 'circuit' && (
+          <span className="text-xs text-faint ml-auto">{t('preview.rounds_count', { n: block.rounds })}</span>
+        )}
         {block.type === 'tabata' && (
           <span className="text-xs text-faint ml-auto">
             {block.rounds ?? 8}R &middot; {block.work ?? 20}s/{block.rest ?? 10}s
