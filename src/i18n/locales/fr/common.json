@@ -56,6 +56,9 @@
     "portal_open_failed": "Erreur lors de l'ouverture du portail",
     "history_load_failed": "Impossible de charger l'historique.",
     "session_expired_refresh": "Session expirée. Rafraîchis la page.",
+    "search_failed": "Erreur de recherche",
+    "profile_load_failed": "Erreur de chargement du profil",
+    "meals_load_failed": "Erreur de chargement des repas",
     "generic_retry": "Une erreur est survenue. Réessayez.",
     "unexpected": "Erreur inattendue"
   }

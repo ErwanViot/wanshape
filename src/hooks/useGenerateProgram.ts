@@ -65,7 +65,7 @@ export function useGenerateProgram() {
         inflightRef.current = false;
       }
     },
-    [queryClient, userId, i18n],
+    [queryClient, userId, i18n.language],
   );
 
   return { generate, loading, error };
