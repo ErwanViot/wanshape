@@ -1,0 +1,103 @@
+{
+  "date": "20260601",
+  "title": "Express Strength Superset",
+  "description": "Fast push-pull supersets with explosive push-ups and rows for a toned upper body",
+  "estimatedDuration": 31,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 45,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, retract and protract the shoulder blades without bending the elbows"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Upper Body Supersets",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Explosive push-ups",
+              "reps": 8,
+              "instructions": "Push hard to lift the hands off the floor"
+            },
+            {
+              "name": "Superman",
+              "reps": 10,
+              "instructions": "Lying face down, lift arms and legs simultaneously, hold 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Decline push-ups",
+              "reps": 10,
+              "instructions": "Feet raised on a chair, body braced"
+            },
+            {
+              "name": "Reverse snow angels",
+              "reps": 10,
+              "instructions": "Lying face down, arms by the body, arc on the floor"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "date": "20260411",
+  "title": "Total Endurance",
+  "description": "10-minute EMOM followed by a 10-minute AMRAP for complete endurance work",
+  "estimatedDuration": 35,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 35,
+          "instructions": "Run in place, heels to glutes"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Endurance",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Explosive push-ups",
+          "reps": 8,
+          "instructions": "Push hard to lift the hands off the floor"
+        },
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "V-ups",
+          "reps": 10,
+          "instructions": "Back on the floor, lift arms and legs to touch the feet"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Challenge",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Walking lunges",
+          "reps": 12,
+          "instructions": "Walk forward in continuous lunges, big steps"
+        },
+        {
+          "name": "Hindu push-ups",
+          "reps": 8,
+          "instructions": "Diving motion: dive down then arc back up"
+        },
+        {
+          "name": "Russian twists",
+          "reps": 16,
+          "instructions": "Seated, feet off the floor, twist torso left to right"
+        },
+        {
+          "name": "Sumo squats",
+          "reps": 10,
+          "instructions": "Feet very wide, toes pointed out"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

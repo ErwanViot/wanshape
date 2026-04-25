@@ -1,0 +1,105 @@
+{
+  "date": "20260219",
+  "title": "Total Endurance",
+  "description": "10-minute EMOM followed by a 10-minute explosive AMRAP",
+  "estimatedDuration": 30,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Strength EMOM",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Standard push-ups",
+          "reps": 8,
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        },
+        {
+          "name": "Jump squats",
+          "reps": 10,
+          "instructions": "Explosive squat with jump, land softly"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Cardio",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Walking lunges",
+          "reps": 10,
+          "instructions": "Walk forward in continuous lunges, big steps"
+        },
+        {
+          "name": "Diamond push-ups",
+          "reps": 8,
+          "instructions": "Hands together under the chest, elbows close to the body"
+        },
+        {
+          "name": "V-ups",
+          "reps": 10,
+          "instructions": "Back on the floor, lift arms and legs to touch the feet"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

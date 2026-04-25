@@ -1,0 +1,132 @@
+{
+  "date": "20260507",
+  "title": "Explosive Pyramid Circuit",
+  "description": "Complete 3-round circuit followed by an up-down pyramid for intense full body work",
+  "estimatedDuration": 36,
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 45,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Body Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Explosive push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Push hard to lift the hands off the floor"
+        },
+        {
+          "name": "Jump squats",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Explosive squat with jump, land softly"
+        },
+        {
+          "name": "Shoulder plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In high plank, tap the opposite shoulder alternating"
+        },
+        {
+          "name": "Jump lunges",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Alternate legs while jumping, explosive"
+        },
+        {
+          "name": "Bicycle crunches",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Final Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Sit-ups",
+          "instructions": "Back on the floor, sit all the way up, reach for the feet"
+        },
+        {
+          "name": "Squats",
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

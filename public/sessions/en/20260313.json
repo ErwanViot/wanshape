@@ -1,0 +1,103 @@
+{
+  "date": "20260313",
+  "title": "Antagonists",
+  "description": "Push/pull and squat/hinge superset for balanced upper body work",
+  "estimatedDuration": 31,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 30,
+          "instructions": "In a plank, retract and protract the shoulder blades without bending the elbows"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Antagonist Superset",
+      "sets": 3,
+      "restBetweenSets": 75,
+      "restBetweenPairs": 45,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Standard push-ups",
+              "reps": 12,
+              "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+            },
+            {
+              "name": "Superman",
+              "reps": 12,
+              "instructions": "Lying face down, lift arms and legs simultaneously, hold 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+            },
+            {
+              "name": "Prone Y raises",
+              "reps": 10,
+              "instructions": "Lying face down, arms in Y, lift and hold 2s"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 25,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "date": "20260415",
+  "title": "EMOM Clock",
+  "description": "12-minute EMOM with commando push-ups, goblet squats and flutter kicks for endurance",
+  "estimatedDuration": 28,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 35,
+          "instructions": "Walk quickly in place with arm swings"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Precision",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Commando push-ups",
+          "reps": 8,
+          "instructions": "Alternate between forearm plank and high plank"
+        },
+        {
+          "name": "Goblet squat (no weight)",
+          "reps": 12,
+          "instructions": "Hands in front of the chest, sit deep"
+        },
+        {
+          "name": "Flutter kicks",
+          "reps": 20,
+          "instructions": "Back on the floor, legs extended, quick flutters"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

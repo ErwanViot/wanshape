@@ -1,0 +1,112 @@
+{
+  "date": "20260413",
+  "title": "Athletic Circuit",
+  "description": "3-round circuit blending sumo squats, wide push-ups, plank and lunges for a complete full body",
+  "estimatedDuration": 32,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Toe taps (step)",
+          "duration": 35,
+          "instructions": "Tap your foot on a step alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Body Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide, toes pointed out"
+        },
+        {
+          "name": "Wide push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands wider than the shoulders, chest focus"
+        },
+        {
+          "name": "Shoulder plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In high plank, tap the opposite shoulder alternating"
+        },
+        {
+          "name": "Curtsy lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Cross the leg behind diagonally",
+          "bilateral": true
+        },
+        {
+          "name": "Bicycle crunches",
+          "mode": "reps",
+          "reps": 16,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

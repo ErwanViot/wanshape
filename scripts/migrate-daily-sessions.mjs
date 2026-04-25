@@ -1,19 +1,16 @@
 #!/usr/bin/env node
 /**
- * One-shot import of public/sessions/<YYYYMMDD>.json into the
- * `daily_sessions` table created by migration 019.
+ * One-shot import of public/sessions/<YYYYMMDD>.json (FR) and
+ * public/sessions/en/<YYYYMMDD>.json (EN) into the `daily_sessions` table.
  *
  * Usage:
  *   node scripts/migrate-daily-sessions.mjs --env dev   # default
  *   node scripts/migrate-daily-sessions.mjs --env prod
  *   node scripts/migrate-daily-sessions.mjs --env dev --dry-run
  *
- * Idempotent: rows are upserted on (date_key, locale). Re-running the script
- * after editing a JSON file overwrites the existing FR row safely.
- *
- * EN content is intentionally NOT inserted here — bilingual translation
- * happens in PR 5b. After this script, the table holds 110 FR rows and
- * `useSession` falls back to FR for users on the EN locale.
+ * Idempotent: rows are upserted on (date_key, locale). Re-running after
+ * editing a JSON file overwrites the matching row safely. EN files that
+ * don't exist yet are silently skipped — they're seeded as PR 5b lands.
  *
  * Reads SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY from .env.local.
  * For --env prod, the script refuses to run unless the URL contains the
@@ -21,7 +18,7 @@
  */
 import { createClient } from '@supabase/supabase-js';
 import { config as loadEnv } from 'dotenv';
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 loadEnv({ path: '.env.local' });
@@ -56,31 +53,39 @@ if (!SUPABASE_URL.includes(expectedRef)) {
   process.exit(1);
 }
 
-const SESSIONS_DIR = 'public/sessions';
-const files = readdirSync(SESSIONS_DIR)
+const FR_DIR = 'public/sessions';
+const EN_DIR = 'public/sessions/en';
+const files = readdirSync(FR_DIR)
   .filter((f) => /^\d{8}\.json$/.test(f))
   .sort();
 
 if (files.length === 0) {
-  console.error(`No YYYYMMDD.json files found in ${SESSIONS_DIR}`);
+  console.error(`No YYYYMMDD.json files found in ${FR_DIR}`);
   process.exit(1);
 }
-
-console.log(`[${envFlag}] importing ${files.length} sessions${dryRun ? ' (dry-run)' : ''}`);
 
 const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
-const rows = files.map((file) => {
+const rows = [];
+for (const file of files) {
   const dateKey = file.replace('.json', '');
-  const payload = JSON.parse(readFileSync(join(SESSIONS_DIR, file), 'utf8'));
-  return {
-    date_key: dateKey,
-    locale: 'fr',
-    session_data: payload,
-  };
-});
+  const frPayload = JSON.parse(readFileSync(join(FR_DIR, file), 'utf8'));
+  rows.push({ date_key: dateKey, locale: 'fr', session_data: frPayload });
+
+  const enPath = join(EN_DIR, file);
+  if (existsSync(enPath)) {
+    const enPayload = JSON.parse(readFileSync(enPath, 'utf8'));
+    rows.push({ date_key: dateKey, locale: 'en', session_data: enPayload });
+  }
+}
+
+const frCount = rows.filter((r) => r.locale === 'fr').length;
+const enCount = rows.filter((r) => r.locale === 'en').length;
+console.log(
+  `[${envFlag}] importing ${rows.length} sessions (${frCount} FR, ${enCount} EN)${dryRun ? ' (dry-run)' : ''}`,
+);
 
 if (dryRun) {
   console.log(`[dry-run] would upsert ${rows.length} rows. First 3:`);

@@ -1,0 +1,112 @@
+{
+  "date": "20260513",
+  "title": "Athletic Circuit",
+  "description": "3-round circuit with lunges, Hindu push-ups, bear hold and high knees for a complete challenge",
+  "estimatedDuration": 33,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Complete Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Paused lunges",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Lower and hold 3s at the bottom before coming back up",
+          "bilateral": true
+        },
+        {
+          "name": "Hindu push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Diving motion: dive down then arc back up"
+        },
+        {
+          "name": "Bear hold",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On all fours, knees 2cm off the floor, hold"
+        },
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide, toes pointed out"
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        },
+        {
+          "name": "Russian twists",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Seated, feet off the floor, twist torso left to right"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}
