@@ -1,8 +1,14 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { PyramidBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
-export function expandPyramid(block: PyramidBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
+export function expandPyramid(
+  block: PyramidBlock,
+  blockIndex: number,
+  totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
+): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.pyramid;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -16,7 +22,7 @@ export function expandPyramid(block: PyramidBlock, blockIndex: number, totalBloc
     timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `Pyramide : ${patternStr}`,
+    instructions: labels.pyramidSummary(patternStr),
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });
@@ -67,8 +73,8 @@ export function expandPyramid(block: PyramidBlock, blockIndex: number, totalBloc
           phase: 'rest',
           timerMode: 'countdown',
           duration: block.restBetweenSets,
-          exerciseName: 'Repos',
-          instructions: `Prochain : ${ex.name} — ${block.pattern[i + 1]} reps`,
+          exerciseName: labels.rest,
+          instructions: labels.nextPyramidStep(ex.name, block.pattern[i + 1]),
           ...base,
           setInfo,
           exerciseInfo,
@@ -84,8 +90,8 @@ export function expandPyramid(block: PyramidBlock, blockIndex: number, totalBloc
         phase: 'rest',
         timerMode: 'countdown',
         duration: restBetweenExercises,
-        exerciseName: 'Repos',
-        instructions: `Prochain exercice : ${block.exercises[exIdx + 1].name}`,
+        exerciseName: labels.rest,
+        instructions: labels.nextExerciseLabel(block.exercises[exIdx + 1].name),
         ...base,
         exerciseInfo,
         estimatedDuration: restBetweenExercises,

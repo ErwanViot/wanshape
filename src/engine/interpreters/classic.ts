@@ -1,8 +1,14 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { ClassicBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
-export function expandClassic(block: ClassicBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
+export function expandClassic(
+  block: ClassicBlock,
+  blockIndex: number,
+  totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
+): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.classic;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -13,7 +19,7 @@ export function expandClassic(block: ClassicBlock, blockIndex: number, totalBloc
     timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `${block.exercises.length} exercices`,
+    instructions: labels.exercisesCount(block.exercises.length),
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });
@@ -62,8 +68,8 @@ export function expandClassic(block: ClassicBlock, blockIndex: number, totalBloc
           phase: 'rest',
           timerMode: 'countdown',
           duration: ex.restBetweenSets,
-          exerciseName: 'Repos',
-          instructions: `Prochain : ${ex.name} - Série ${set + 2}/${ex.sets}`,
+          exerciseName: labels.rest,
+          instructions: labels.nextSet(ex.name, set + 2, ex.sets),
           ...base,
           setInfo,
           exerciseInfo,
@@ -80,8 +86,8 @@ export function expandClassic(block: ClassicBlock, blockIndex: number, totalBloc
         phase: 'rest',
         timerMode: 'countdown',
         duration: block.restBetweenExercises,
-        exerciseName: 'Repos',
-        instructions: `Prochain : ${nextEx.name}`,
+        exerciseName: labels.rest,
+        instructions: labels.nextExercise(nextEx.name),
         ...base,
         exerciseInfo,
         estimatedDuration: block.restBetweenExercises,

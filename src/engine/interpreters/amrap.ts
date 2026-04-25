@@ -1,8 +1,14 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { AMRAPBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
-export function expandAMRAP(block: AMRAPBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
+export function expandAMRAP(
+  block: AMRAPBlock,
+  blockIndex: number,
+  totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
+): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.amrap;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -17,7 +23,7 @@ export function expandAMRAP(block: AMRAPBlock, blockIndex: number, totalBlocks: 
     timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `${durationMin} min - Max de rounds`,
+    instructions: labels.amrapSummary(durationMin),
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });

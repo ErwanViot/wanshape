@@ -1,8 +1,14 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { EMOMBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
-export function expandEMOM(block: EMOMBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
+export function expandEMOM(
+  block: EMOMBlock,
+  blockIndex: number,
+  totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
+): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.emom;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -16,7 +22,7 @@ export function expandEMOM(block: EMOMBlock, blockIndex: number, totalBlocks: nu
     timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `${block.minutes} minutes - ${exercisesSummary}`,
+    instructions: labels.emomSummary(block.minutes, exercisesSummary),
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });
@@ -30,14 +36,14 @@ export function expandEMOM(block: EMOMBlock, blockIndex: number, totalBlocks: nu
       phase: 'work',
       timerMode: 'emom',
       duration: intervalDuration,
-      exerciseName: `Minute ${min + 1}/${block.minutes}`,
+      exerciseName: labels.minuteLabel(min + 1, block.minutes),
       instructions: exercisesSummary,
       ...base,
       roundInfo,
       emomExercises: block.exercises.map((ex) => ({ name: ex.name, reps: ex.reps })),
       isLastInBlock: isLast,
       nextStepPreview: !isLast
-        ? { exerciseName: `Minute ${min + 2}/${block.minutes}`, description: exercisesSummary }
+        ? { exerciseName: labels.minuteLabel(min + 2, block.minutes), description: exercisesSummary }
         : undefined,
       estimatedDuration: intervalDuration,
     });

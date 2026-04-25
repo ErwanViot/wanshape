@@ -1,6 +1,7 @@
 import type { User } from '@supabase/supabase-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import i18n from '../i18n';
 import { supabase } from '../lib/supabase.ts';
 import { sessionEvents } from '../lib/supabaseQuery.ts';
 import type { Profile } from '../types/auth.ts';
@@ -20,25 +21,29 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-const ERROR_FR: Record<string, string> = {
-  'Invalid login credentials': 'Email ou mot de passe incorrect.',
-  'Email not confirmed': 'Confirme ton adresse email avant de te connecter.',
-  'User already registered': 'Un compte existe déjà avec cet email.',
-  'Password should be at least 6 characters': 'Le mot de passe doit contenir au moins 6 caractères.',
-  'For security purposes, you can only request this after': 'Patiente avant de réessayer.',
-  'Unable to validate email address: invalid format': 'Adresse email invalide.',
-  'New password should be different from the old password':
-    'Le nouveau mot de passe doit être différent de l\u2019ancien.',
-  'Auth session missing': 'Session expirée. Reconnecte-toi.',
-  'Email rate limit exceeded': 'Trop de tentatives. Patiente quelques minutes.',
+/**
+ * Map Supabase auth error messages (always EN) to i18n keys under `auth:supabase_errors.*`.
+ * Resolved with the current locale via the `i18n` instance — this runs outside
+ * React (signIn/signUp callbacks), hence the direct module import instead of `useTranslation`.
+ */
+const SUPABASE_ERROR_KEYS: Record<string, string> = {
+  'Invalid login credentials': 'invalid_credentials',
+  'Email not confirmed': 'email_not_confirmed',
+  'User already registered': 'user_already_registered',
+  'Password should be at least 6 characters': 'password_too_short',
+  'For security purposes, you can only request this after': 'rate_limited_short',
+  'Unable to validate email address: invalid format': 'invalid_email_format',
+  'New password should be different from the old password': 'new_password_same',
+  'Auth session missing': 'session_missing',
+  'Email rate limit exceeded': 'email_rate_limited',
 };
 
 function translateError(message: string | undefined): string | null {
   if (!message) return null;
-  for (const [en, fr] of Object.entries(ERROR_FR)) {
-    if (message.includes(en)) return fr;
+  for (const [needle, key] of Object.entries(SUPABASE_ERROR_KEYS)) {
+    if (message.includes(needle)) return i18n.t(`supabase_errors.${key}`, { ns: 'auth' });
   }
-  return 'Une erreur est survenue. Réessaye.';
+  return i18n.t('supabase_errors.generic', { ns: 'auth' });
 }
 
 async function fetchProfile(userId: string): Promise<Profile | null> {
