@@ -1,0 +1,101 @@
+{
+  "date": "20260525",
+  "title": "Total Endurance",
+  "description": "10-minute EMOM followed by an 8-minute AMRAP to test full endurance",
+  "estimatedDuration": 34,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 45,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM 10 Minutes",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Diamond push-ups",
+          "reps": 8,
+          "instructions": "Hands together under the chest, elbows close to the body"
+        },
+        {
+          "name": "Jump squats",
+          "reps": 8,
+          "instructions": "Explosive squat with jump, land softly"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 8 Minutes",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Reverse lunges",
+          "reps": 10,
+          "instructions": "Big step backward, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Crunches",
+          "reps": 12,
+          "instructions": "Back on the floor, lift shoulders, brace the abs"
+        },
+        {
+          "name": "Incline push-ups",
+          "reps": 10,
+          "instructions": "Hands on a raised surface, easier"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

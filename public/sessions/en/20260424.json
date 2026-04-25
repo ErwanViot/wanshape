@@ -1,0 +1,132 @@
+{
+  "date": "20260424",
+  "title": "Intense Legs & Core",
+  "description": "Assisted pistol squats, paused lunges and reverse hyper followed by a complete core block",
+  "estimatedDuration": 34,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Unilateral Strength",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Assisted pistol squat",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Single-leg squat holding a support",
+          "bilateral": true
+        },
+        {
+          "name": "Paused lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Lower and hold 3s at the bottom before coming back up",
+          "bilateral": true
+        },
+        {
+          "name": "Table reverse hyper",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Belly on the edge, lift legs behind you"
+        },
+        {
+          "name": "Glute bridge",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Like a hip thrust but back on the floor, drive hips up"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Full Plank",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "RKC plank",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Plank with max contraction, clench fists and glutes"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 16,
+          "restBetweenSets": 60,
+          "instructions": "Seated, feet off the floor, twist torso left to right"
+        },
+        {
+          "name": "Leg raises",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift extended legs to vertical"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

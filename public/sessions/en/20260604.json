@@ -1,0 +1,91 @@
+{
+  "date": "20260604",
+  "title": "Tabata Flash",
+  "description": "Fast intense tabata with tuck jumps, mountain climbers and burpees",
+  "estimatedDuration": 25,
+  "focus": [
+    "cardio",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Explosive Tabata",
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Tuck jumps",
+          "instructions": "Jump driving knees to the chest"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        },
+        {
+          "name": "Burpees",
+          "instructions": "Drop down, hands on the floor, jump feet back, push-up, jump up"
+        },
+        {
+          "name": "Scissors",
+          "instructions": "Back on the floor, legs extended, cross alternating over/under"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

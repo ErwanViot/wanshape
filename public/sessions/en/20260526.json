@@ -1,0 +1,131 @@
+{
+  "date": "20260526",
+  "title": "Solid Foundations",
+  "description": "Lower body strength with pulse squats and lateral lunges followed by dynamic core",
+  "estimatedDuration": 32,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Seated, legs at 90 degrees, twist side to side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Strength & Stability",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Pulse squats",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Stay at the bottom of the squat, small up-down pulses"
+        },
+        {
+          "name": "Lateral lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Big lateral step, bend one leg, the other extended",
+          "bilateral": true
+        },
+        {
+          "name": "Marching glute bridge",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "In glute bridge, alternate lifting one leg then the other like marching"
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands behind the head, lean torso forward keeping the back straight"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Dynamic Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs vertical, reach hands to feet"
+        },
+        {
+          "name": "Shoulder plank",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "In high plank, tap the opposite shoulder alternating"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, cross alternating over/under"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

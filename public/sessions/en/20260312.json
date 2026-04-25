@@ -1,0 +1,125 @@
+{
+  "date": "20260312",
+  "title": "Lower Body Focus",
+  "description": "Targeted lower body work with curtsy lunges, Romanian deadlift and dynamic core",
+  "estimatedDuration": 33,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, twist side to side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Curtsy lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Cross the leg behind diagonally",
+          "bilateral": true
+        },
+        {
+          "name": "Single-leg Romanian deadlift",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "On one leg, lean torso forward, back leg extended",
+          "bilateral": true
+        },
+        {
+          "name": "Goblet squat (no weight)",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands in front of the chest, sit deep"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Flutter kicks",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, quick flutters"
+        },
+        {
+          "name": "Bear hold",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "On all fours, knees 2cm off the floor, hold"
+        },
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs vertical, reach hands to feet"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

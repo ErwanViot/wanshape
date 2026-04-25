@@ -1,0 +1,88 @@
+{
+  "date": "20260521",
+  "title": "AMRAP Grind",
+  "description": "Max rounds in 10 minutes with push-ups, squats and dynamic plank",
+  "estimatedDuration": 28,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 10 Minutes",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Wide push-ups",
+          "reps": 10,
+          "instructions": "Hands wider than the shoulders, chest focus"
+        },
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "V-ups",
+          "reps": 8,
+          "instructions": "Back on the floor, lift arms and legs to touch the feet"
+        },
+        {
+          "name": "Forward lunges",
+          "reps": 10,
+          "instructions": "Big step forward, back knee grazes the floor",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

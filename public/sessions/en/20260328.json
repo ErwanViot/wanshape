@@ -1,0 +1,107 @@
+{
+  "date": "20260328",
+  "title": "Athletic Circuit",
+  "description": "3-round circuit mixing squats, push-ups, plank and lunges for a complete full body",
+  "estimatedDuration": 33,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Athletic Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide, toes pointed out"
+        },
+        {
+          "name": "Commando push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Alternate between forearm plank and high plank",
+          "bilateral": true
+        },
+        {
+          "name": "Dead bug",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Back on the floor, arms and legs up, extend opposite arm/leg alternating"
+        },
+        {
+          "name": "Reverse lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Big step backward, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Burpees no push-up",
+          "mode": "reps",
+          "reps": 6,
+          "instructions": "Drop down, jump feet back, come back, jump up"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

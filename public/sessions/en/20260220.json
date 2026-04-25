@@ -1,0 +1,122 @@
+{
+  "date": "20260220",
+  "title": "Push & Pull",
+  "description": "Upper body strength in push-pull: push-ups and inverted row",
+  "estimatedDuration": 32,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 35,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 40,
+          "instructions": "In a plank, retract and protract the shoulder blades without bending the elbows"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Standard push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        },
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Hips high in inverted V, lower the head between the hands"
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Inverted row (table)",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Under a table, pull the chest to the edge"
+        },
+        {
+          "name": "Superman",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, lift arms and legs simultaneously, hold 2s"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, arms in Y, lift and hold 2s"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 25,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 30,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

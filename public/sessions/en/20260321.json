@@ -1,0 +1,132 @@
+{
+  "date": "20260321",
+  "title": "Solid Foundations",
+  "description": "Targeted lower body work with sumo squats, Bulgarian split squats and dynamic plank",
+  "estimatedDuration": 33,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 35,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Seated, legs at 90 degrees, twist side to side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Strength",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Feet very wide, toes pointed out"
+        },
+        {
+          "name": "Bulgarian split squats",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Back foot on a chair, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Floor hip thrust",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, feet flat, lift hips, squeeze glutes"
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands behind the head, lean torso forward keeping the back straight"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Plank",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift arms and legs to touch the feet"
+        },
+        {
+          "name": "Forearm plank",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "On forearms, body perfectly aligned, brace the abs",
+          "tempo": "30s hold"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Seated, feet off the floor, twist torso left to right"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

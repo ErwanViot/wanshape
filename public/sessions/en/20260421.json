@@ -1,0 +1,132 @@
+{
+  "date": "20260421",
+  "title": "Lower Body Focus",
+  "description": "Sissy squats, lateral lunges and marching glute bridge for complete legs and core work",
+  "estimatedDuration": 32,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, twist side to side"
+        },
+        {
+          "name": "Toe taps (step)",
+          "duration": 35,
+          "instructions": "Tap your foot on a step alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Variety",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Sissy squat",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Lean backward, knees forward, quads on fire"
+        },
+        {
+          "name": "Lateral lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 75,
+          "instructions": "Big lateral step, bend one leg, the other extended",
+          "bilateral": true
+        },
+        {
+          "name": "Marching glute bridge",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "In glute bridge, alternate lifting one leg then the other like marching"
+        },
+        {
+          "name": "Single-leg deadlift",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lean the torso forward, one leg lifts behind, keep balance",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Dynamic",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift arms and legs to touch the feet"
+        },
+        {
+          "name": "Superman plank",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "In a plank, lift one arm and the opposite leg, alternate"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 16,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, cross alternating over/under"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

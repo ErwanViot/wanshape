@@ -1,0 +1,92 @@
+{
+  "date": "20260505",
+  "title": "AMRAP Total Challenge",
+  "description": "10-minute AMRAP with walking lunges, push-ups and crunches for max rounds",
+  "estimatedDuration": 28,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 45,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Seated, legs at 90 degrees, twist side to side"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 10 Minutes",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Walking lunges",
+          "reps": 10,
+          "instructions": "Walk forward in continuous lunges, big steps"
+        },
+        {
+          "name": "Hindu push-ups",
+          "reps": 8,
+          "instructions": "Diving motion: dive down then arc back up"
+        },
+        {
+          "name": "Crunches",
+          "reps": 12,
+          "instructions": "Back on the floor, lift shoulders, brace the abs"
+        },
+        {
+          "name": "Goblet squat (no weight)",
+          "reps": 10,
+          "instructions": "Hands in front of the chest, sit deep"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

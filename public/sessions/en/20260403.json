@@ -1,0 +1,125 @@
+{
+  "date": "20260403",
+  "title": "Pyramid Challenge",
+  "description": "Progressive push-up pyramid followed by complete strength with lunges and plank",
+  "estimatedDuration": 36,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 45,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Push-up Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Standard push-ups",
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Full Strength",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Lateral lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Big lateral step, bend one leg, the other extended",
+          "bilateral": true
+        },
+        {
+          "name": "Floor hip thrust",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, feet flat, lift hips, squeeze glutes"
+        },
+        {
+          "name": "Superman plank",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "In a plank, lift one arm and the opposite leg, alternate"
+        },
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs vertical, reach hands to feet"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

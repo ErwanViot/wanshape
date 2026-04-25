@@ -1,0 +1,99 @@
+{
+  "date": "20260515",
+  "title": "HIIT Machine",
+  "description": "Explosive intervals with burpees, tuck jumps, pop squats and star jumps for maximum cardio",
+  "estimatedDuration": 28,
+  "focus": [
+    "cardio"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Maximal HIIT",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Burpees no push-up",
+          "instructions": "Drop down, jump feet back, come back, jump up"
+        },
+        {
+          "name": "Tuck jumps",
+          "instructions": "Jump driving knees to the chest"
+        },
+        {
+          "name": "Pop squats",
+          "instructions": "Jump feet apart into a squat, jump feet together"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs into a star"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Powerful lateral bounds side to side"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Explosive squat with max jump, land softly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

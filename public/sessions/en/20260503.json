@@ -1,0 +1,119 @@
+{
+  "date": "20260503",
+  "title": "Pyramid & Strength",
+  "description": "Pyramid climb on push-ups and squats followed by a complete classic strength block",
+  "estimatedDuration": 35,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 45,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Up-Down Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 20,
+      "exercises": [
+        {
+          "name": "Wide push-ups",
+          "instructions": "Hands wider than the shoulders, chest focus"
+        },
+        {
+          "name": "Pulse squats",
+          "instructions": "Stay at the bottom of the squat, small up-down pulses"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Complementary Strength",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Reverse lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Big step backward, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Alternating Superman",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lift right arm + left leg, alternate"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Seated, feet off the floor, twist torso left to right"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

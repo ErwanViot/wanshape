@@ -1,0 +1,94 @@
+{
+  "date": "20260406",
+  "title": "Max Rounds",
+  "description": "10-minute AMRAP with goblet squat, push-ups, reverse lunges and sit-ups",
+  "estimatedDuration": 29,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Max Rounds",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Goblet squat (no weight)",
+          "reps": 12,
+          "instructions": "Hands in front of the chest, sit deep"
+        },
+        {
+          "name": "Standard push-ups",
+          "reps": 10,
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        },
+        {
+          "name": "Reverse lunges",
+          "reps": 10,
+          "instructions": "Big step backward, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Sit-ups",
+          "reps": 10,
+          "instructions": "Back on the floor, sit all the way up, reach for the feet"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

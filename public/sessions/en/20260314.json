@@ -1,0 +1,118 @@
+{
+  "date": "20260314",
+  "title": "Full Body Express",
+  "description": "3-round circuit with jump squats, push-ups, plank and lunges for an intense full body",
+  "estimatedDuration": 34,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Body Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide, toes pointed out"
+        },
+        {
+          "name": "Diamond push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Hands together under the chest, elbows close to the body"
+        },
+        {
+          "name": "Reverse lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Big step backward, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "RKC plank",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "Plank with max contraction, clench fists and glutes"
+        },
+        {
+          "name": "Burpees no push-up",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Drop down, jump feet back, come back, jump up"
+        },
+        {
+          "name": "Glute bridge",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Like a hip thrust but back on the floor, drive hips up"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

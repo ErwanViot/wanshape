@@ -1,0 +1,126 @@
+{
+  "date": "20260506",
+  "title": "Powerful Foundations",
+  "description": "Lower body strength with 1.5 squats, lateral lunges and dynamic floor plank",
+  "estimatedDuration": 34,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Strength",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "1.5 squats",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lower, come up halfway, lower again, come up fully"
+        },
+        {
+          "name": "Lateral lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Big lateral step, bend one leg, the other extended",
+          "bilateral": true
+        },
+        {
+          "name": "Single-leg hip thrust",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hip thrust on one leg, the other in the air",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core - Dynamic",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift arms and legs to touch the feet"
+        },
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, arms and legs up, extend opposite arm/leg alternating"
+        },
+        {
+          "name": "Flutter kicks",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, quick flutters"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

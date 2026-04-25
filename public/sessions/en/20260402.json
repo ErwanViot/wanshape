@@ -1,0 +1,117 @@
+{
+  "date": "20260402",
+  "title": "Strength Superset",
+  "description": "Intense push-pull superset with Hindu push-ups, dips and complete back work",
+  "estimatedDuration": 33,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 35,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, retract and protract the shoulder blades without bending the elbows"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Upper Body Superset",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Hindu push-ups",
+              "reps": 10,
+              "instructions": "Diving motion: dive down then arc back up"
+            },
+            {
+              "name": "Inverted row (table)",
+              "reps": 10,
+              "instructions": "Under a table, pull the chest to the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+            },
+            {
+              "name": "Superman",
+              "reps": 12,
+              "instructions": "Lying face down, lift arms and legs simultaneously, hold 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Diamond push-ups",
+              "reps": 8,
+              "instructions": "Hands together under the chest, elbows close to the body"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "Lying face down, lift chest off the floor, squeeze shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 25,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

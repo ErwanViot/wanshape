@@ -1,0 +1,93 @@
+{
+  "date": "20260322",
+  "title": "AMRAP Express",
+  "description": "8 minutes of continuous work with squats, push-ups, lunges and crunches",
+  "estimatedDuration": 28,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Express",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Squats",
+          "reps": 10,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "Incline push-ups",
+          "reps": 8,
+          "instructions": "Hands on a raised surface, easier"
+        },
+        {
+          "name": "Alternating lunges",
+          "reps": 10,
+          "instructions": "Alternate left foot forward then right foot forward without pausing"
+        },
+        {
+          "name": "Crunches",
+          "reps": 12,
+          "instructions": "Back on the floor, lift shoulders, brace the abs"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

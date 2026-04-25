@@ -1,0 +1,88 @@
+{
+  "date": "20260302",
+  "title": "EMOM Clock",
+  "description": "10-minute EMOM with explosive push-ups, goblet squats and leg raises for complete work",
+  "estimatedDuration": 28,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 35,
+          "instructions": "Run in place, heels to glutes"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Precision",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Explosive push-ups",
+          "reps": 8,
+          "instructions": "Push hard to lift the hands off the floor"
+        },
+        {
+          "name": "Goblet squat (no weight)",
+          "reps": 12,
+          "instructions": "Hands in front of the chest, sit deep"
+        },
+        {
+          "name": "Leg raises",
+          "reps": 10,
+          "instructions": "Back on the floor, lift extended legs to vertical"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

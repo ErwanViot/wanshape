@@ -1,0 +1,87 @@
+{
+  "date": "20260501",
+  "title": "EMOM Precision",
+  "description": "10-minute EMOM with push-ups, squats and mountain climbers for steady intense work",
+  "estimatedDuration": 28,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM 10 Minutes",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Decline push-ups",
+          "reps": 8,
+          "instructions": "Feet raised on a chair, body braced"
+        },
+        {
+          "name": "Jump squats",
+          "reps": 8,
+          "instructions": "Explosive squat with jump, land softly"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 12,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

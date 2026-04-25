@@ -1,0 +1,119 @@
+{
+  "date": "20260318",
+  "title": "Strength Climb",
+  "description": "Squats and push-ups pyramid followed by a complete classic strength block",
+  "estimatedDuration": 35,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Full Body Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 20,
+      "exercises": [
+        {
+          "name": "Squats",
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "Standard push-ups",
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Complementary Strength",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Forward lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Big step forward, back knee grazes the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Superman",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, lift arms and legs simultaneously, hold 2s"
+        },
+        {
+          "name": "Bicycle crunches",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

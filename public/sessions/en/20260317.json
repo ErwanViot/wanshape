@@ -1,0 +1,88 @@
+{
+  "date": "20260317",
+  "title": "EMOM Precision",
+  "description": "12-minute EMOM with commando push-ups, sumo squats and plank to downward dog",
+  "estimatedDuration": 29,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 35,
+          "instructions": "Run in place, heels to glutes"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Complete EMOM",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Commando push-ups",
+          "reps": 8,
+          "instructions": "Alternate between forearm plank and high plank"
+        },
+        {
+          "name": "Sumo squats",
+          "reps": 12,
+          "instructions": "Feet very wide, toes pointed out"
+        },
+        {
+          "name": "Plank to downward dog",
+          "reps": 8,
+          "instructions": "Alternate between high plank and downward dog"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

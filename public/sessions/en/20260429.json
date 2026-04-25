@@ -1,0 +1,95 @@
+{
+  "date": "20260429",
+  "title": "Explosive HIIT",
+  "description": "High-intensity intervals with burpees, squat jumps and high knees for intense cardio",
+  "estimatedDuration": 27,
+  "focus": [
+    "cardio"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Intense HIIT Cardio",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Burpees",
+          "instructions": "Drop down, hands on the floor, jump feet back, push-up, jump up"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Explosive squat with max jump, land softly"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Lateral hops side to side, arms swinging"
+        },
+        {
+          "name": "Pop squats",
+          "instructions": "Jump feet apart into a squat, jump feet together"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}
