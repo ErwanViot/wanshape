@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, Navigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { isPasswordStrong } from '../../utils/password.ts';
 import { BackLink } from './BackLink.tsx';
 import { FormInput } from './FormInput.tsx';
 
@@ -27,8 +28,8 @@ export function SignupPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
-    if (password.length < 8) {
-      setError(t('errors.password_too_short'));
+    if (!isPasswordStrong(password)) {
+      setError(t('errors.password_too_weak'));
       return;
     }
     setSubmitting(true);

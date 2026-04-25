@@ -30,7 +30,11 @@ const SUPABASE_ERROR_KEYS: Record<string, string> = {
   'Invalid login credentials': 'invalid_credentials',
   'Email not confirmed': 'email_not_confirmed',
   'User already registered': 'user_already_registered',
-  'Password should be at least 6 characters': 'password_too_short',
+  // Generic prefix that matches GoTrue's "Password should be at least N
+  // characters" regardless of N. The client-side isPasswordStrong() catches
+  // weak passwords first; this needle only fires if Supabase Cloud config
+  // ever drifts below the local 8-char rule.
+  'Password should be at least': 'password_too_short',
   'For security purposes, you can only request this after': 'rate_limited_short',
   'Unable to validate email address: invalid format': 'invalid_email_format',
   'New password should be different from the old password': 'new_password_same',
