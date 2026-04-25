@@ -35,18 +35,24 @@ export function SettingsPage() {
   // After Stripe redirects back with ?checkout=success the webhook may not
   // have updated profiles.subscription_tier yet — there's a short window
   // where the user sees "free" while the upgrade is still propagating.
-  // Force a profile + subscription refetch on landing, plus a retry after
-  // 3 s to cover typical webhook latency without polling forever.
+  // Force a profile + subscription refetch on landing, plus two retries
+  // staggered at 3s/8s to cover edge function cold-start + Stripe API
+  // latency in prod. refetchType: 'all' forces the subscription query to
+  // run even if it's disabled (isPremium still false until profile flips).
   const userId = user?.id;
   useEffect(() => {
     if (!checkoutSuccess || !userId) return;
-    queryClient.invalidateQueries({ queryKey: ['profile', userId] });
-    queryClient.invalidateQueries({ queryKey: ['subscription', userId] });
-    const retryId = setTimeout(() => {
+    const refresh = () => {
       queryClient.invalidateQueries({ queryKey: ['profile', userId] });
-      queryClient.invalidateQueries({ queryKey: ['subscription', userId] });
-    }, 3000);
-    return () => clearTimeout(retryId);
+      queryClient.invalidateQueries({ queryKey: ['subscription', userId], refetchType: 'all' });
+    };
+    refresh();
+    const t1 = setTimeout(refresh, 3000);
+    const t2 = setTimeout(refresh, 8000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [checkoutSuccess, userId, queryClient]);
 
   const THEME_OPTIONS = [
