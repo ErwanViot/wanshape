@@ -31,6 +31,10 @@ async function fetchDailySession(dateKey: string, locale: string): Promise<Sessi
   const requested = await tryLocale(locale);
   if (requested) return requested;
 
+  // TODO(PR-5b): once EN rows are seeded, replace this two-roundtrip flow with
+  // a single .in('locale', [locale, 'fr']) query and pick the preferred row
+  // client-side. Today the second hop is cheap because (date_key, locale) PK
+  // makes both lookups index-only.
   if (locale !== 'fr') {
     const fr = await tryLocale('fr');
     if (fr) return fr;
@@ -52,7 +56,9 @@ export function useSession(dateKey: string | null) {
 
   return {
     session: query.data ?? null,
-    loading: query.isLoading,
+    // isPending stays true while the query is disabled (no supabase client yet),
+    // which is the honest "still figuring it out" signal for the UI.
+    loading: query.isPending,
     error: query.error ? (query.error.message === 'not_found' ? 'not_found' : 'error') : null,
   };
 }

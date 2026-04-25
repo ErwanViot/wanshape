@@ -25,7 +25,12 @@ CREATE TABLE IF NOT EXISTS public.daily_sessions (
 DO $$
 BEGIN
   IF NOT EXISTS (
-    SELECT 1 FROM pg_constraint WHERE conname = 'daily_sessions_locale_check'
+    SELECT 1 FROM pg_constraint c
+    JOIN pg_class t ON c.conrelid = t.oid
+    JOIN pg_namespace n ON t.relnamespace = n.oid
+    WHERE c.conname = 'daily_sessions_locale_check'
+      AND n.nspname = 'public'
+      AND t.relname = 'daily_sessions'
   ) THEN
     ALTER TABLE public.daily_sessions
       ADD CONSTRAINT daily_sessions_locale_check CHECK (locale IN ('fr', 'en'));
@@ -35,7 +40,12 @@ END $$;
 DO $$
 BEGIN
   IF NOT EXISTS (
-    SELECT 1 FROM pg_constraint WHERE conname = 'daily_sessions_date_key_check'
+    SELECT 1 FROM pg_constraint c
+    JOIN pg_class t ON c.conrelid = t.oid
+    JOIN pg_namespace n ON t.relnamespace = n.oid
+    WHERE c.conname = 'daily_sessions_date_key_check'
+      AND n.nspname = 'public'
+      AND t.relname = 'daily_sessions'
   ) THEN
     ALTER TABLE public.daily_sessions
       ADD CONSTRAINT daily_sessions_date_key_check CHECK (date_key ~ '^\d{8}$');
@@ -44,6 +54,10 @@ END $$;
 
 CREATE INDEX IF NOT EXISTS daily_sessions_date_key_idx
   ON public.daily_sessions (date_key);
+
+CREATE OR REPLACE TRIGGER daily_sessions_updated_at
+  BEFORE UPDATE ON public.daily_sessions
+  FOR EACH ROW EXECUTE PROCEDURE public.update_updated_at();
 
 ALTER TABLE public.daily_sessions ENABLE ROW LEVEL SECURITY;
 
