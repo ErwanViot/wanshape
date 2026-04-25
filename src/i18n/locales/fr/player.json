@@ -118,7 +118,10 @@
     "bilateral_inline": "{{instructions}} ({{duration}}s par côté)",
     "next_set_countdown": "Set {{next}}/{{total}} dans...",
     "next_round_first": "Round {{next}}/{{total}} - {{name}}",
-    "pyramid_summary": "Pyramide : {{pattern}}"
+    "pyramid_summary": "Pyramide : {{pattern}}",
+    "preview_next_set": "Série {{next}}/{{total}} - {{repsLabel}}",
+    "reps_max": "max reps",
+    "reps_count": "{{reps}} reps"
   },
   "controls": {
     "resume_aria": "Reprendre",

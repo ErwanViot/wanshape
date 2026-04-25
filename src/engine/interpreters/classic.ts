@@ -36,7 +36,6 @@ export function expandClassic(
       const setInfo = { current: set + 1, total: ex.sets };
 
       // Work step
-      const repsLabel = ex.reps === 'max' ? 'max reps' : `${ex.reps} reps`;
       steps.push({
         id: `block-${blockIndex}-ex-${exIdx}-set-${set}-work`,
         phase: 'work',
@@ -51,11 +50,11 @@ export function expandClassic(
         exerciseInfo,
         isLastInBlock: isLastExercise && isLastSet,
         nextStepPreview: !isLastSet
-          ? { exerciseName: ex.name, description: `Série ${set + 2}/${ex.sets} - ${repsLabel}` }
+          ? { exerciseName: ex.name, description: labels.previewNextSet(set + 2, ex.sets, labels.repsLabel(ex.reps)) }
           : !isLastExercise
             ? {
                 exerciseName: block.exercises[exIdx + 1].name,
-                description: `${block.exercises[exIdx + 1].reps === 'max' ? 'max' : block.exercises[exIdx + 1].reps} reps`,
+                description: labels.repsLabel(block.exercises[exIdx + 1].reps),
               }
             : undefined,
         estimatedDuration: DEFAULT_REST_FOR_REPS,

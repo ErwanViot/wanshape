@@ -11,7 +11,7 @@ import type { EngineLabels } from './labels.ts';
  * compileSession can use it as a stable dep.
  */
 export function useEngineLabels(): EngineLabels {
-  const { t, i18n } = useTranslation('player');
+  const { t } = useTranslation('player');
 
   return useMemo<EngineLabels>(
     () => ({
@@ -36,7 +36,9 @@ export function useEngineLabels(): EngineLabels {
       nextSetCountdown: (next, total) => t('engine.next_set_countdown', { next, total }),
       nextRoundFirst: (next, total, name) => t('engine.next_round_first', { next, total, name }),
       pyramidSummary: (pattern) => t('engine.pyramid_summary', { pattern }),
+      previewNextSet: (next, total, repsLabel) => t('engine.preview_next_set', { next, total, repsLabel }),
+      repsLabel: (reps) => (reps === 'max' ? t('engine.reps_max') : t('engine.reps_count', { reps })),
     }),
-    [t, i18n.language],
+    [t],
   );
 }

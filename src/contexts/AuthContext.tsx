@@ -156,14 +156,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [queryClient, userId]);
 
   const signIn = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
-    if (!supabase) return { error: 'Auth non disponible' };
+    if (!supabase) return { error: i18n.t('errors.auth_unavailable', { ns: 'auth' }) };
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     return { error: translateError(error?.message) };
   }, []);
 
   const signUp = useCallback(
     async (email: string, password: string, displayName: string): Promise<{ error: string | null }> => {
-      if (!supabase) return { error: 'Auth non disponible' };
+      if (!supabase) return { error: i18n.t('errors.auth_unavailable', { ns: 'auth' }) };
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -177,7 +177,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 
   const resetPassword = useCallback(async (email: string): Promise<{ error: string | null }> => {
-    if (!supabase) return { error: 'Auth non disponible' };
+    if (!supabase) return { error: i18n.t('errors.auth_unavailable', { ns: 'auth' }) };
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
@@ -185,7 +185,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const updatePassword = useCallback(async (password: string): Promise<{ error: string | null }> => {
-    if (!supabase) return { error: 'Auth non disponible' };
+    if (!supabase) return { error: i18n.t('errors.auth_unavailable', { ns: 'auth' }) };
     const { error } = await supabase.auth.updateUser({ password });
     return { error: translateError(error?.message) };
   }, []);

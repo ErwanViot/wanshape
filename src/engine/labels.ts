@@ -47,6 +47,10 @@ export interface EngineLabels {
   nextRoundFirst: (next: number, total: number, name: string) => string;
   /** "Pyramide : {{pattern}}" — pyramid block transition summary. */
   pyramidSummary: (pattern: string) => string;
+  /** "Série {{next}}/{{total}} - {{reps}}" — classic block nextStepPreview when same exercise has more sets. */
+  previewNextSet: (next: number, total: number, repsLabel: string) => string;
+  /** "max reps" / "{{reps}} reps" — classic/superset/pyramid nextStepPreview reps marker. */
+  repsLabel: (reps: number | 'max') => string;
 }
 
 /**
@@ -74,4 +78,6 @@ export const DEFAULT_FR_ENGINE_LABELS: EngineLabels = {
   nextSetCountdown: (next, total) => `Set ${next}/${total} dans...`,
   nextRoundFirst: (next, total, name) => `Round ${next}/${total} - ${name}`,
   pyramidSummary: (pattern) => `Pyramide : ${pattern}`,
+  previewNextSet: (next, total, repsLabel) => `Série ${next}/${total} - ${repsLabel}`,
+  repsLabel: (reps) => (reps === 'max' ? 'max reps' : `${reps} reps`),
 };
