@@ -48,5 +48,15 @@
   },
   "loading": {
     "aria": "Loading"
+  },
+  "hook_errors": {
+    "service_unavailable": "Service unavailable",
+    "not_signed_in": "Not signed in",
+    "checkout_session_failed": "Failed to create the checkout session",
+    "portal_open_failed": "Failed to open the customer portal",
+    "history_load_failed": "Failed to load history.",
+    "session_expired_refresh": "Session expired. Please refresh the page.",
+    "generic_retry": "An error occurred. Please try again.",
+    "unexpected": "Unexpected error"
   }
 }

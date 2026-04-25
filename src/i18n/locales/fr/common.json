@@ -48,5 +48,15 @@
   },
   "loading": {
     "aria": "Chargement"
+  },
+  "hook_errors": {
+    "service_unavailable": "Service indisponible",
+    "not_signed_in": "Non connecté",
+    "checkout_session_failed": "Erreur lors de la création de la session de paiement",
+    "portal_open_failed": "Erreur lors de l'ouverture du portail",
+    "history_load_failed": "Impossible de charger l'historique.",
+    "session_expired_refresh": "Session expirée. Rafraîchis la page.",
+    "generic_retry": "Une erreur est survenue. Réessayez.",
+    "unexpected": "Erreur inattendue"
   }
 }
