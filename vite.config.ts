@@ -10,10 +10,10 @@ export default defineConfig(({ mode }) => ({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      // No `includeAssets`: sessions/*.json are cached on-demand via the
-      // runtimeCaching CacheFirst rule below, and photo-wan.png is too large
-      // (~1.7 MB) to precache eagerly on first load. The service worker
-      // should ship a minimal install bundle and grab the rest lazily.
+      // No `includeAssets`: photo-wan.png is too large (~1.7 MB) to precache
+      // eagerly on first load. The service worker ships a minimal install
+      // bundle and grabs the rest lazily. Daily session content moved to
+      // Supabase in PR 5a — no longer served from /public/sessions/.
       manifest: {
         name: 'Wan2Fit',
         short_name: 'Wan2Fit',
@@ -33,19 +33,10 @@ export default defineConfig(({ mode }) => ({
         globPatterns: ['**/*.{js,css,html,json,svg,png}'],
         // og-image.jpg: social preview, never needed by the app itself.
         // photo-wan.png: large portrait (~1.7 MB) rendered tiny; runtime-fetched.
-        // sessions/*.json: 200+ entries covered by the sessions-cache rule below.
-        globIgnores: ['**/og-image.jpg', '**/photo-wan.png', 'sessions/**/*.json'],
+        globIgnores: ['**/og-image.jpg', '**/photo-wan.png'],
         navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
+        navigateFallbackDenylist: [/^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
         runtimeCaching: [
-          {
-            urlPattern: /\/sessions\/.*\.json$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'sessions-cache',
-              expiration: { maxEntries: 110, maxAgeSeconds: 60 * 60 * 24 * 120 },
-            },
-          },
           {
             urlPattern: /^https:\/\/.*\.supabase\.co\/.*/,
             handler: 'NetworkOnly',

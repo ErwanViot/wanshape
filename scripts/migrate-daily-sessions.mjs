@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * One-shot import of public/sessions/<YYYYMMDD>.json (FR) and
- * public/sessions/en/<YYYYMMDD>.json (EN) into the `daily_sessions` table.
+ * One-shot import of data/daily-sessions/fr/<YYYYMMDD>.json and
+ * data/daily-sessions/en/<YYYYMMDD>.json into the `daily_sessions` table.
  *
  * Usage:
  *   node scripts/migrate-daily-sessions.mjs --env dev   # default
@@ -53,8 +53,8 @@ if (!SUPABASE_URL.includes(expectedRef)) {
   process.exit(1);
 }
 
-const FR_DIR = 'public/sessions';
-const EN_DIR = 'public/sessions/en';
+const FR_DIR = 'data/daily-sessions/fr';
+const EN_DIR = 'data/daily-sessions/en';
 const files = readdirSync(FR_DIR)
   .filter((f) => /^\d{8}\.json$/.test(f))
   .sort();

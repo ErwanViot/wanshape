@@ -6,8 +6,8 @@
  *   node scripts/upsert-daily-session.mjs --env dev --date 20260501
  *   node scripts/upsert-daily-session.mjs --env prod --date 20260501
  *
- * Reads `public/sessions/<date>.json` (FR) and, if it exists,
- * `public/sessions/en/<date>.json` (EN). Each present file is upserted as
+ * Reads `data/daily-sessions/fr/<date>.json` and, if it exists,
+ * `data/daily-sessions/en/<date>.json`. Each present file is upserted as
  * its own (date_key, locale) row.
  *
  * Designed to be called by the `generate-session` skill after it writes the
@@ -59,9 +59,10 @@ if (!SUPABASE_URL.includes(expectedRef)) {
   process.exit(1);
 }
 
-const SESSIONS_DIR = 'public/sessions';
-const frPath = join(SESSIONS_DIR, `${dateKey}.json`);
-const enPath = join(SESSIONS_DIR, 'en', `${dateKey}.json`);
+const FR_DIR = 'data/daily-sessions/fr';
+const EN_DIR = 'data/daily-sessions/en';
+const frPath = join(FR_DIR, `${dateKey}.json`);
+const enPath = join(EN_DIR, `${dateKey}.json`);
 
 const rows = [];
 if (existsSync(frPath)) {
@@ -72,7 +73,7 @@ if (existsSync(enPath)) {
 }
 
 if (rows.length === 0) {
-  console.error(`No source file found for ${dateKey} in ${SESSIONS_DIR}.`);
+  console.error(`No source file found for ${dateKey} in ${FR_DIR} or ${EN_DIR}.`);
   process.exit(1);
 }
 
