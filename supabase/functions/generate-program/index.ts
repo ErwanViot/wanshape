@@ -226,25 +226,42 @@ Deno.serve(async (req: Request) => {
     );
   }
 
-  // Rate limit: 3 generations / 24h
-  const { count: dailyCount, error: dailyError } = await supabaseAdmin
-    .from("programs")
-    .select("*", { count: "exact", head: true })
-    .eq("user_id", user.id)
-    .eq("is_fixed", false)
-    .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
+  // Atomic rate limit: insert a tracking row first, then count. If we end up
+  // over the quota we delete the just-inserted row and reject. Closes the
+  // race window of "count-then-insert" where parallel calls could slip past.
+  const { data: rateRow, error: rateInsertError } = await supabaseAdmin
+    .from("ai_generation_calls")
+    .insert({ user_id: user.id, kind: "program" })
+    .select("id")
+    .single();
 
-  if (dailyError) {
+  if (rateInsertError || !rateRow) {
     return errorResponse(req, "Erreur serveur", 500);
   }
 
-  if ((dailyCount ?? 0) >= MAX_DAILY_GENERATIONS) {
+  const { count: dailyCount, error: dailyError } = await supabaseAdmin
+    .from("ai_generation_calls")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", user.id)
+    .eq("kind", "program")
+    .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
+
+  if (dailyError) {
+    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+    return errorResponse(req, "Erreur serveur", 500);
+  }
+
+  if ((dailyCount ?? 0) > MAX_DAILY_GENERATIONS) {
+    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
     return errorResponse(
       req,
-      `Limite atteinte : ${MAX_DAILY_GENERATIONS} programmes par 24h. Reessaye plus tard.`,
+      `Limite atteinte : ${MAX_DAILY_GENERATIONS} programmes par 24h. Réessaye plus tard.`,
       429,
     );
   }
+  // Note: rateRow is intentionally NOT deleted on downstream failures (AI
+  // call, validation, DB insert). A failed attempt still counts against the
+  // 24h quota to prevent free retry storms — same policy as estimate-nutrition.
 
   // Build prompt
   const locale: Locale = (body.locale as Locale) ?? "fr";
