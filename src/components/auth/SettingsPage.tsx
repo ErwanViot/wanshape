@@ -1,5 +1,6 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { Camera, Crown, Monitor, Moon, Sparkles, Sun } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
@@ -20,6 +21,7 @@ export function SettingsPage() {
   const { isPremium, subscription, manageSubscription } = useSubscription();
   const [searchParams] = useSearchParams();
   const checkoutSuccess = searchParams.get('checkout') === 'success';
+  const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [avatarError, setAvatarError] = useState<string | null>(null);
@@ -29,6 +31,23 @@ export function SettingsPage() {
     title: t('page_title'),
     description: t('page_description'),
   });
+
+  // After Stripe redirects back with ?checkout=success the webhook may not
+  // have updated profiles.subscription_tier yet — there's a short window
+  // where the user sees "free" while the upgrade is still propagating.
+  // Force a profile + subscription refetch on landing, plus a retry after
+  // 3 s to cover typical webhook latency without polling forever.
+  const userId = user?.id;
+  useEffect(() => {
+    if (!checkoutSuccess || !userId) return;
+    queryClient.invalidateQueries({ queryKey: ['profile', userId] });
+    queryClient.invalidateQueries({ queryKey: ['subscription', userId] });
+    const retryId = setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: ['profile', userId] });
+      queryClient.invalidateQueries({ queryKey: ['subscription', userId] });
+    }, 3000);
+    return () => clearTimeout(retryId);
+  }, [checkoutSuccess, userId, queryClient]);
 
   const THEME_OPTIONS = [
     { value: 'light' as const, label: t('appearance.theme_light'), Icon: Sun },
