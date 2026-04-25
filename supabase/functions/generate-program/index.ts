@@ -382,10 +382,18 @@ Deno.serve(async (req: Request) => {
   for (const entry of calendrier) {
     for (const week of entry.semaines) {
       for (const sessionId of entry.sequence) {
+        const sessionData = sessions[sessionId];
+        if (!sessionData) {
+          // Malformed AI output: calendrier references a session id that
+          // isn't in the sessions map. Fail fast with a clear error rather
+          // than letting the RPC raise an opaque NOT NULL violation.
+          console.error("Missing session data for id:", sessionId);
+          return errorResponse(req, "Erreur de génération (sessions invalides)", 500);
+        }
         sessionRows.push({
           week_number: week,
           session_order: globalOrder,
-          session_data: sessions[sessionId],
+          session_data: sessionData,
         });
         globalOrder++;
       }

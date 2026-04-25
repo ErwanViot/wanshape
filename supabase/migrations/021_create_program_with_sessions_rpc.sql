@@ -12,11 +12,10 @@ CREATE OR REPLACE FUNCTION public.create_program_with_sessions(
 ) RETURNS uuid
 LANGUAGE plpgsql
 SECURITY DEFINER
-SET search_path = public
+SET search_path = ''
 AS $$
 DECLARE
   v_program_id uuid;
-  v_session jsonb;
 BEGIN
   INSERT INTO public.programs (
     slug,
@@ -60,21 +59,18 @@ BEGIN
   )
   RETURNING id INTO v_program_id;
 
-  FOR v_session IN SELECT * FROM jsonb_array_elements(p_sessions)
-  LOOP
-    INSERT INTO public.program_sessions (
-      program_id,
-      week_number,
-      session_order,
-      session_data
-    )
-    VALUES (
-      v_program_id,
-      (v_session->>'week_number')::int,
-      (v_session->>'session_order')::int,
-      v_session->'session_data'
-    );
-  END LOOP;
+  INSERT INTO public.program_sessions (
+    program_id,
+    week_number,
+    session_order,
+    session_data
+  )
+  SELECT
+    v_program_id,
+    (s->>'week_number')::int,
+    (s->>'session_order')::int,
+    s->'session_data'
+  FROM jsonb_array_elements(p_sessions) AS s;
 
   RETURN v_program_id;
 END;
