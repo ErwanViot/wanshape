@@ -6,12 +6,14 @@ import './index.css';
 import './i18n';
 import App from './App.tsx';
 
-// Strip identifiers (UUIDs, YYYYMMDD date keys) from URL paths so user/session
-// IDs don't end up in Sentry transaction names, breadcrumbs, or request URLs.
+// Strip identifiers (UUIDs, ISO date keys YYYYMMDD with year 19xx-20xx) from
+// URL paths so user/session IDs don't end up in Sentry transaction names,
+// fetch breadcrumbs, or span descriptions. Year prefix guards against matching
+// arbitrary 8-digit numeric IDs in unrelated paths.
 function scrubPathIds(value: string): string {
   return value
     .replace(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi, ':uuid')
-    .replace(/\/\d{8}(?=\/|$|\?)/g, '/:date');
+    .replace(/\/(?:19|20)\d{6}(?=\/|$|\?|#)/g, '/:date');
 }
 
 Sentry.init({
@@ -21,20 +23,38 @@ Sentry.init({
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.replayIntegration({
-      // RGPD art. 9: nutrition logs, injury declarations, and email inputs
-      // qualify as health/personal data. Mask all form inputs and keep the
-      // network detail allowlist empty so request/response bodies aren't
+      // RGPD art. 9: nutrition logs, injury declarations, calorie targets,
+      // AI coach notes and email inputs all qualify as health/personal data.
+      // Mask both form inputs AND rendered text nodes, block media, and keep
+      // the network detail allowlist empty so request/response bodies aren't
       // captured in error replays.
       maskAllInputs: true,
+      maskAllText: true,
+      blockAllMedia: true,
       networkDetailAllowUrls: [],
     }),
   ],
   tracesSampleRate: 0.2,
   replaysSessionSampleRate: 0,
   replaysOnErrorSampleRate: 1.0,
+  beforeBreadcrumb(breadcrumb) {
+    // Default fetch/xhr breadcrumbs include full URLs with Supabase UUID
+    // query params. Scrub before they reach the wire.
+    if (breadcrumb.category === 'fetch' || breadcrumb.category === 'xhr') {
+      if (typeof breadcrumb.data?.url === 'string') {
+        breadcrumb.data.url = scrubPathIds(breadcrumb.data.url);
+      }
+    }
+    return breadcrumb;
+  },
   beforeSendTransaction(event) {
     if (event.transaction) event.transaction = scrubPathIds(event.transaction);
-    if (event.request?.url) event.request.url = scrubPathIds(event.request.url);
+    // Each browser-tracing span carries the full fetch URL in `description`.
+    if (event.spans) {
+      for (const span of event.spans) {
+        if (span.description) span.description = scrubPathIds(span.description);
+      }
+    }
     return event;
   },
 });
