@@ -224,6 +224,9 @@ Deno.serve(async (req: Request) => {
       429,
     );
   }
+  // Note: rateRow is intentionally NOT deleted on downstream failures (AI
+  // call, validation, DB insert). A failed attempt still counts against the
+  // 24h quota to prevent free retry storms — same policy as estimate-nutrition.
 
   // Build prompt
   const locale: Locale = (body.locale as Locale) ?? "fr";

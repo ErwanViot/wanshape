@@ -255,10 +255,13 @@ Deno.serve(async (req: Request) => {
     await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
     return errorResponse(
       req,
-      `Limite atteinte : ${MAX_DAILY_GENERATIONS} programmes par 24h. Reessaye plus tard.`,
+      `Limite atteinte : ${MAX_DAILY_GENERATIONS} programmes par 24h. Réessaye plus tard.`,
       429,
     );
   }
+  // Note: rateRow is intentionally NOT deleted on downstream failures (AI
+  // call, validation, DB insert). A failed attempt still counts against the
+  // 24h quota to prevent free retry storms — same policy as estimate-nutrition.
 
   // Build prompt
   const locale: Locale = (body.locale as Locale) ?? "fr";
