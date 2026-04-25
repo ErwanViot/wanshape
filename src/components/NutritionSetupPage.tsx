@@ -1,6 +1,6 @@
 import { ArrowLeft, Trash2 } from 'lucide-react';
 import { type FormEvent, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useNutritionProfile } from '../hooks/useNutritionProfile.ts';
@@ -77,11 +77,9 @@ export function NutritionSetupPage() {
 
         <header>
           <h1 className="font-display text-2xl sm:text-3xl font-black text-heading">{t('setup.heading')}</h1>
-          <p
-            className="text-sm text-body mt-2 leading-relaxed"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
-            dangerouslySetInnerHTML={{ __html: t('setup.intro') }}
-          />
+          <p className="text-sm text-body mt-2 leading-relaxed">
+            <Trans i18nKey="setup.intro" ns="nutrition" components={{ strong: <strong /> }} />
+          </p>
         </header>
 
         <section className="rounded-2xl bg-surface-card border border-card-border p-6 space-y-4">

@@ -1,5 +1,5 @@
 import { type FormEvent, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { ACTIVITY_LEVELS, NUTRITION_GOALS, TDEE_BOUNDS } from '../../config/nutrition.ts';
 import type { ActivityLevel, BiologicalSex, NutritionGoal, TdeeResult } from '../../types/nutrition.ts';
 import { computeTdee, validateTdeeInputs } from '../../utils/tdee.ts';
@@ -74,11 +74,9 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
     <div className="space-y-6">
       <div className="rounded-xl bg-surface-card border border-divider p-4 space-y-2">
         <h3 className="font-display text-base font-bold text-heading">{t('tdee.heading')}</h3>
-        <p
-          className="text-sm text-body leading-relaxed"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
-          dangerouslySetInnerHTML={{ __html: t('tdee.intro') }}
-        />
+        <p className="text-sm text-body leading-relaxed">
+          <Trans i18nKey="tdee.intro" ns="nutrition" components={{ strong: <strong /> }} />
+        </p>
         <p className="text-xs text-muted italic">{t('tdee.formula_note')}</p>
       </div>
 
@@ -200,13 +198,21 @@ export function TdeeCalculatorForm({ onAccept, onCancel }: TdeeCalculatorFormPro
       {preview && (
         <div className="rounded-xl bg-surface-card border border-brand/30 p-4 space-y-3">
           <h4 className="font-display text-base font-bold text-heading">{t('tdee.preview_heading')}</h4>
-          <p
-            className="text-sm text-body"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tags
-            dangerouslySetInnerHTML={{
-              __html: `${t('tdee.bmr', { kcal: preview.bmr })}<br />${t('tdee.tdee_label', { kcal: preview.tdee })}`,
-            }}
-          />
+          <p className="text-sm text-body">
+            <Trans
+              i18nKey="tdee.bmr"
+              ns="nutrition"
+              values={{ kcal: preview.bmr }}
+              components={{ strong: <strong /> }}
+            />
+            <br />
+            <Trans
+              i18nKey="tdee.tdee_label"
+              ns="nutrition"
+              values={{ kcal: preview.tdee }}
+              components={{ strong: <strong /> }}
+            />
+          </p>
           <div className="rounded-lg bg-brand/10 border border-brand/30 p-3">
             <p className="text-xs text-muted uppercase tracking-wider mb-1">{t('tdee.target_label')}</p>
             <p className="font-display text-3xl font-black text-brand">{preview.targetCalories} kcal</p>

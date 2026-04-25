@@ -42,7 +42,11 @@ i18n
     supportedLngs: SUPPORTED_LOCALES,
     ns: namespaces,
     defaultNS: 'common',
-    interpolation: { escapeValue: false },
+    // Escape interpolated values by default (XSS safety). Strings that need
+    // intentional HTML (e.g. <strong>...</strong>) must be rendered with
+    // react-i18next's <Trans> component and an explicit `components` map —
+    // never with dangerouslySetInnerHTML.
+    interpolation: { escapeValue: true },
     detection: {
       order: ['localStorage', 'navigator'],
       lookupLocalStorage: LOCALE_STORAGE_KEY,
