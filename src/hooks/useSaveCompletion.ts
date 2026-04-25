@@ -26,19 +26,18 @@ export function useSaveCompletion() {
       if (!supabase || inflightRef.current || saved) return;
       inflightRef.current = true;
       setError(false);
-      const client = supabase;
 
       try {
         const {
           data: { user },
-        } = await client.auth.getUser();
+        } = await supabase.auth.getUser();
         if (!user) return;
 
         // Wrap the insert in supabaseQuery so an expired JWT mid-session
         // (e.g. user finishes a 60-min programme on a stale tab) triggers
         // a refresh + retry instead of silently dropping the completion.
         const { error: insertError, sessionExpired } = await supabaseQuery(() =>
-          client.from('session_completions').insert({
+          supabase!.from('session_completions').insert({
             user_id: user.id,
             session_date: params.sessionDate ?? null,
             program_session_id: params.programSessionId ?? null,
