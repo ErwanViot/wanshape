@@ -51,7 +51,7 @@ describe('expandWarmup', () => {
     const steps = expandWarmup(block, 0, 1);
 
     expect(steps[1].duration).toBe(40);
-    expect(steps[1].instructions).toContain('20s par cote');
+    expect(steps[1].instructions).toContain('20s par côté');
   });
 
   it('tags all steps with correct blockIndex and totalBlocks', () => {

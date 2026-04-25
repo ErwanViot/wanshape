@@ -1,8 +1,14 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { HIITBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, PREPARE_COUNTDOWN, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
-export function expandHIIT(block: HIITBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
+export function expandHIIT(
+  block: HIITBlock,
+  blockIndex: number,
+  totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
+): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.hiit;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -25,7 +31,7 @@ export function expandHIIT(block: HIITBlock, blockIndex: number, totalBlocks: nu
     timerMode: 'countdown',
     duration: PREPARE_COUNTDOWN,
     exerciseName: block.exercises[0].name,
-    instructions: 'Prépare-toi !',
+    instructions: labels.prepare,
     ...base,
     estimatedDuration: PREPARE_COUNTDOWN,
   });
@@ -66,8 +72,8 @@ export function expandHIIT(block: HIITBlock, blockIndex: number, totalBlocks: nu
           phase: 'rest',
           timerMode: 'countdown',
           duration: block.rest,
-          exerciseName: 'Repos',
-          instructions: nextEx ? `Prochain : ${nextEx.name}` : '',
+          exerciseName: labels.rest,
+          instructions: nextEx ? labels.nextExercise(nextEx.name) : '',
           ...base,
           roundInfo,
           intervalInfo,

@@ -1,8 +1,14 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { CircuitBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, PREPARE_COUNTDOWN, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
-export function expandCircuit(block: CircuitBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
+export function expandCircuit(
+  block: CircuitBlock,
+  blockIndex: number,
+  totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
+): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.circuit;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -13,7 +19,7 @@ export function expandCircuit(block: CircuitBlock, blockIndex: number, totalBloc
     timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `${block.rounds} rounds - ${block.exercises.length} exercices`,
+    instructions: labels.roundsAndExercises(block.rounds, block.exercises.length),
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });
@@ -35,7 +41,7 @@ export function expandCircuit(block: CircuitBlock, blockIndex: number, totalBloc
           timerMode: 'countdown',
           duration: PREPARE_COUNTDOWN,
           exerciseName: ex.name,
-          instructions: 'Prépare-toi !',
+          instructions: labels.prepare,
           ...base,
           roundInfo,
           estimatedDuration: PREPARE_COUNTDOWN,
@@ -76,8 +82,8 @@ export function expandCircuit(block: CircuitBlock, blockIndex: number, totalBloc
           phase: 'rest',
           timerMode: 'countdown',
           duration: block.restBetweenExercises,
-          exerciseName: 'Repos',
-          instructions: `Prochain : ${block.exercises[exIdx + 1].name}`,
+          exerciseName: labels.rest,
+          instructions: labels.nextExercise(block.exercises[exIdx + 1].name),
           ...base,
           roundInfo,
           estimatedDuration: block.restBetweenExercises,
@@ -92,8 +98,8 @@ export function expandCircuit(block: CircuitBlock, blockIndex: number, totalBloc
         phase: 'rest',
         timerMode: 'countdown',
         duration: block.restBetweenRounds,
-        exerciseName: 'Repos',
-        instructions: `Fin du round ${round + 1} - Round ${round + 2} dans...`,
+        exerciseName: labels.rest,
+        instructions: labels.endRound(round + 1, round + 2),
         ...base,
         roundInfo,
         isLastInRound: true,

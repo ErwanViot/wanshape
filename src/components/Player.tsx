@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate, useParams } from 'react-router';
 import { compileSession } from '../engine/interpreter.ts';
+import { useEngineLabels } from '../engine/useEngineLabels.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
 import { useSession } from '../hooks/useSession.ts';
@@ -101,7 +102,8 @@ export function Player({
 }) {
   const navigate = useNavigate();
   const { t } = useTranslation('player');
-  const steps = useMemo(() => compileSession(session), [session]);
+  const engineLabels = useEngineLabels();
+  const steps = useMemo(() => compileSession(session, engineLabels), [session, engineLabels]);
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
   const [showVideos, setShowVideos] = useState(() => localStorage.getItem('wan2fit-show-exercise-videos') === 'true');
   const resumeButtonRef = useRef<HTMLButtonElement>(null);
