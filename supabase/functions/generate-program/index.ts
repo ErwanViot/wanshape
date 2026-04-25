@@ -371,43 +371,8 @@ Deno.serve(async (req: Request) => {
     avance: 'advanced',
   };
 
-  // INSERT program
-  const { data: insertedProgram, error: insertError } = await supabaseAdmin
-    .from("programs")
-    .insert({
-      slug,
-      title: pgm.titre,
-      description: pgm.description,
-      goals: body.objectifs,
-      duration_weeks: body.duree_semaines,
-      frequency_per_week: body.seances_par_semaine,
-      fitness_level: niveauMap[pgm.niveau as string] ?? 'intermediate',
-      is_fixed: false,
-      user_id: user.id,
-      note_coach: pgm.note_coach,
-      progression: pgm.progression,
-      consignes_semaine: pgm.consignes_semaine,
-      // Strip age/sexe before persistence — RGPD art. 5(1)(c) minimization.
-      // Both are still sent to Anthropic at generation time (declared in the
-      // Privacy Policy) but never re-read by the app afterwards.
-      onboarding_data: sanitizeOnboardingForPersistence(body),
-      generation_metadata: pgm,
-      input_tokens: totalInputTokens,
-      output_tokens: totalOutputTokens,
-      model: MODEL,
-      locale,
-    })
-    .select("id")
-    .single();
-
-  if (insertError || !insertedProgram) {
-    console.error("Program insert error:", insertError);
-    return errorResponse(req, "Erreur de sauvegarde du programme", 500);
-  }
-
-  // Build program_sessions rows
+  // Build program_sessions rows (program_id is filled by the RPC, not us)
   const sessionRows: {
-    program_id: string;
     week_number: number;
     session_order: number;
     session_data: Record<string, unknown>;
@@ -417,31 +382,59 @@ Deno.serve(async (req: Request) => {
   for (const entry of calendrier) {
     for (const week of entry.semaines) {
       for (const sessionId of entry.sequence) {
+        const sessionData = sessions[sessionId];
+        if (!sessionData) {
+          // Malformed AI output: calendrier references a session id that
+          // isn't in the sessions map. Fail fast with a clear error rather
+          // than letting the RPC raise an opaque NOT NULL violation.
+          console.error("Missing session data for id:", sessionId);
+          return errorResponse(req, "Erreur de génération (sessions invalides)", 500);
+        }
         sessionRows.push({
-          program_id: insertedProgram.id,
           week_number: week,
           session_order: globalOrder,
-          session_data: sessions[sessionId],
+          session_data: sessionData,
         });
         globalOrder++;
       }
     }
   }
 
-  // INSERT program_sessions
-  const { error: sessionsError } = await supabaseAdmin
-    .from("program_sessions")
-    .insert(sessionRows);
+  // Atomic INSERT programs + program_sessions via RPC (migration 021).
+  // Wrapping both writes in a single transaction prevents the orphaned-
+  // program-row class of failures the previous "manual rollback" was trying
+  // to handle: if the sessions insert raises, the program insert is rolled
+  // back by Postgres rather than by a best-effort DELETE in JS.
+  const { data: programId, error: rpcError } = await supabaseAdmin.rpc("create_program_with_sessions", {
+    p_user_id: user.id,
+    p_program: {
+      slug,
+      title: pgm.titre,
+      description: pgm.description,
+      goals: body.objectifs,
+      duration_weeks: body.duree_semaines,
+      frequency_per_week: body.seances_par_semaine,
+      fitness_level: niveauMap[pgm.niveau as string] ?? "intermediate",
+      note_coach: pgm.note_coach,
+      progression: pgm.progression,
+      consignes_semaine: pgm.consignes_semaine,
+      // Strip age/sexe before persistence — RGPD art. 5(1)(c) minimization.
+      // Both are still sent to Anthropic at generation time (declared in
+      // the Privacy Policy) but never re-read by the app afterwards.
+      onboarding_data: sanitizeOnboardingForPersistence(body),
+      generation_metadata: pgm,
+      input_tokens: totalInputTokens,
+      output_tokens: totalOutputTokens,
+      model: MODEL,
+      locale,
+    },
+    p_sessions: sessionRows,
+  });
 
-  if (sessionsError) {
-    console.error("Program sessions insert error:", sessionsError);
-    // Rollback: delete the program, verify success
-    const { error: rollbackError } = await supabaseAdmin.from("programs").delete().eq("id", insertedProgram.id).eq("user_id", user.id);
-    if (rollbackError) {
-      console.error("Rollback failed — orphaned program:", insertedProgram.id, rollbackError);
-    }
-    return errorResponse(req, "Erreur de sauvegarde des seances", 502);
+  if (rpcError || !programId) {
+    console.error("Program RPC error:", rpcError);
+    return errorResponse(req, "Erreur de sauvegarde du programme", 500);
   }
 
-  return jsonResponse(req, { programId: insertedProgram.id, slug });
+  return jsonResponse(req, { programId, slug });
 });
