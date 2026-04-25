@@ -47,6 +47,13 @@ Sentry.init({
     }
     return breadcrumb;
   },
+  beforeSend(event) {
+    // Error events carry window.location.href in event.request.url via the
+    // HttpContext integration; routes like /seance/custom/<uuid> would leak
+    // the session id otherwise.
+    if (event.request?.url) event.request.url = scrubPathIds(event.request.url);
+    return event;
+  },
   beforeSendTransaction(event) {
     if (event.transaction) event.transaction = scrubPathIds(event.transaction);
     // Each browser-tracing span carries the full fetch URL in `description`.
