@@ -1,5 +1,5 @@
 import { ChevronLeft } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -28,11 +28,9 @@ export function Formats() {
       </header>
 
       <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
-        <p
-          className="text-sm text-subtle leading-relaxed"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
-          dangerouslySetInnerHTML={{ __html: t('formats.intro') }}
-        />
+        <p className="text-sm text-subtle leading-relaxed">
+          <Trans i18nKey="formats.intro" ns="explore" components={{ strong: <strong /> }} />
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {FORMATS_DATA.map((format) => (

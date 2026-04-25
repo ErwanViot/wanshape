@@ -1,6 +1,6 @@
 import { HeartPulse } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 interface Props {
   onAccept: () => void;
@@ -75,10 +75,9 @@ export function HealthDisclaimer({ onAccept, onCancel }: Props) {
         </div>
 
         <div className="px-6 overflow-y-auto flex-1 space-y-3 text-sm text-gray-600 leading-relaxed">
-          <p
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: controlled i18n string with known safe <strong> tag
-            dangerouslySetInnerHTML={{ __html: t('health_disclaimer.body_editorial') }}
-          />
+          <p>
+            <Trans i18nKey="health_disclaimer.body_editorial" ns="player" components={{ strong: <strong /> }} />
+          </p>
           <p>{t('health_disclaimer.body_responsibility')}</p>
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
             <p className="font-semibold text-amber-800">{t('health_disclaimer.warning_box_title')}</p>

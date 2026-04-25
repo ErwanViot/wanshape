@@ -1,6 +1,6 @@
 import { X } from 'lucide-react';
 import { type FormEvent, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { MEAL_TYPES } from '../../config/nutrition.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../../types/nutrition.ts';
@@ -372,11 +372,14 @@ function SearchPane({ selectedFood, onSelect, portionGrams, onPortionChange, sca
           />
         </div>
         {scaledCalories != null && (
-          <p
-            className="text-sm text-body"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
-            dangerouslySetInnerHTML={{ __html: t('meal_form.portion_text', { kcal: Math.round(scaledCalories) }) }}
-          />
+          <p className="text-sm text-body">
+            <Trans
+              i18nKey="meal_form.portion_text"
+              ns="nutrition"
+              values={{ kcal: Math.round(scaledCalories) }}
+              components={{ strong: <strong /> }}
+            />
+          </p>
         )}
       </div>
     );

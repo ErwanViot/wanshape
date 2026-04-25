@@ -1,5 +1,5 @@
 import { type FormEvent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useOpenFoodFacts } from '../../hooks/useOpenFoodFacts.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
 import type { MealType } from '../../types/nutrition.ts';
@@ -129,15 +129,16 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
             />
           </div>
 
-          <p
-            className="text-sm text-body"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: translated HTML with bold tag
-            dangerouslySetInnerHTML={{
-              __html: t('barcode_pane.portion_text', {
+          <p className="text-sm text-body">
+            <Trans
+              i18nKey="barcode_pane.portion_text"
+              ns="nutrition"
+              values={{
                 kcal: Math.round(scaleKcal(product.calories_100g, Number.parseFloat(portionGrams) || 0)),
-              }),
-            }}
-          />
+              }}
+              components={{ strong: <strong /> }}
+            />
+          </p>
 
           {formError && <p className="text-xs text-red-400">{formError}</p>}
 
