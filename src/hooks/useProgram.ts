@@ -5,6 +5,13 @@ import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program, ProgramSession, SessionCompletion } from '../types/completion.ts';
 import type { Session } from '../types/session.ts';
 
+// Columns needed by ProgramCard / ProgramList. JSONB-heavy columns
+// (progression, consignes_semaine, onboarding_data) and note_coach
+// are intentionally excluded from list views — they're only consumed
+// by ProgramPage which uses the full select('*') below.
+const PROGRAM_LIST_COLS =
+  'id, slug, title, description, goals, duration_weeks, frequency_per_week, fitness_level, is_fixed, locale';
+
 export interface ProgramWithSessions extends Program {
   sessions: ProgramSession[];
   completedSessionIds: Set<string>;
@@ -84,7 +91,7 @@ export function usePrograms() {
     queryKey: ['programs', 'fixed'],
     queryFn: async () => {
       const { data, error, sessionExpired } = await supabaseQuery(() =>
-        supabase!.from('programs').select('*').eq('is_fixed', true).order('created_at'),
+        supabase!.from('programs').select(PROGRAM_LIST_COLS).eq('is_fixed', true).order('created_at'),
       );
       if (sessionExpired) {
         notifySessionExpired();
