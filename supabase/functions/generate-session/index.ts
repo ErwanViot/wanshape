@@ -250,7 +250,11 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: MAX_TOKENS,
-        system: systemPrompt,
+        // System prompt is stable across all calls (only varies by locale).
+        // Marking it as cacheable cuts input cost ~90% and shaves latency.
+        system: [
+          { type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } },
+        ],
         messages: [
           { role: "user", content: userPrompt },
           { role: "assistant", content: ASSISTANT_PREFILL },

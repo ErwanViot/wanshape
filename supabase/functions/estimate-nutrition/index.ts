@@ -73,7 +73,11 @@ async function callAnthropic(
       body: JSON.stringify({
         model: MODEL,
         max_tokens: maxTokens,
-        system,
+        // System prompt is stable; caching it cuts input cost ~90% and shaves
+        // latency on warm cache hits within the 5-minute TTL.
+        system: [
+          { type: "text", text: system, cache_control: { type: "ephemeral" } },
+        ],
         messages,
       }),
       signal: AbortSignal.timeout(20_000),
