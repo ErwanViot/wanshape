@@ -1,8 +1,11 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback } from 'react';
+import i18n from '../i18n/index.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { CustomSessionRecord } from '../types/custom-session.ts';
+
+const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
 
 export function useCustomSessions(userId: string | undefined) {
   const queryClient = useQueryClient();
@@ -26,10 +29,10 @@ export function useCustomSessions(userId: string | undefined) {
 
       if (sessionExpired) {
         notifySessionExpired();
-        return { sessions: [], error: 'Session expirée. Rafraîchis la page.' };
+        return { sessions: [], error: tHookError('session_expired_refresh') };
       }
       if (fetchError) {
-        return { sessions: [], error: 'Impossible de charger l\u2019historique.' };
+        return { sessions: [], error: tHookError('history_load_failed') };
       }
       return { sessions: (data as CustomSessionRecord[]) ?? [], error: null };
     },

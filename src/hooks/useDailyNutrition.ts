@@ -1,8 +1,11 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useMemo, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import i18n from '../i18n/index.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
+
+const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
 import type {
   DailyNutritionSummary,
   DailyNutritionTotals,
@@ -75,7 +78,7 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
         return { logs: [], error: null };
       }
       if (err) {
-        return { logs: [], error: err.message ?? 'Erreur de chargement des repas' };
+        return { logs: [], error: err.message ?? tHookError('meals_load_failed') };
       }
       return { logs: (data ?? []) as MealLog[], error: null };
     },

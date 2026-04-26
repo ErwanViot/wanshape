@@ -1,7 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
+import i18n from '../i18n/index.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { NutritionInsight, TextEstimate } from '../types/nutrition.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
+
+const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
 
 export interface TextEstimateResponse {
   estimate: TextEstimate;
@@ -38,7 +41,7 @@ export function useEstimateNutrition(): UseEstimateNutritionResult {
   const inflightRef = useRef(false);
 
   const call = useCallback(async <T>(body: Record<string, unknown>): Promise<CallOutcome<T>> => {
-    if (!supabase) return { data: null, error: 'Service indisponible.' };
+    if (!supabase) return { data: null, error: tHookError('service_unavailable') };
     if (inflightRef.current) return { data: null, error: null };
     inflightRef.current = true;
     setLoading(true);
@@ -50,14 +53,14 @@ export function useEstimateNutrition(): UseEstimateNutritionResult {
       if (fnError) {
         const msg = await extractEdgeFunctionError(
           fnError as unknown as Record<string, unknown>,
-          'Estimation indisponible.',
+          tHookError('service_unavailable'),
         );
         setError(msg);
         return { data: null, error: msg };
       }
       return { data: (data ?? null) as T | null, error: null };
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Erreur inconnue';
+      const msg = err instanceof Error ? err.message : tHookError('unexpected');
       setError(msg);
       return { data: null, error: msg };
     } finally {

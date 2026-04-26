@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import i18n from '../i18n/index.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { FoodReference } from '../types/nutrition.ts';
+
+const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
 
 const DEBOUNCE_MS = 200;
 const RESULTS_LIMIT = 12;
@@ -59,7 +62,7 @@ export function useFoodSearch(query: string): UseFoodSearchResult {
           return;
         }
         if (err) {
-          setError(err.message ?? 'Erreur de recherche');
+          setError(err.message ?? tHookError('search_failed'));
           setLoading(false);
           return;
         }
@@ -68,7 +71,7 @@ export function useFoodSearch(query: string): UseFoodSearchResult {
         setLoading(false);
       } catch (err) {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Erreur inconnue');
+          setError(err instanceof Error ? err.message : tHookError('unexpected'));
           setLoading(false);
         }
       }

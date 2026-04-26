@@ -21,7 +21,7 @@ export function useGenerateSession() {
     async (input: CustomSessionInput): Promise<GenerateSessionResponse | null> => {
       if (inflightRef.current) return null;
       if (!supabase) {
-        setError('Service indisponible');
+        setError(i18n.t('hook_errors.service_unavailable', { ns: 'common' }));
         return null;
       }
 
@@ -38,7 +38,7 @@ export function useGenerateSession() {
         if (fnError) {
           const message = await extractEdgeFunctionError(
             fnError as unknown as Record<string, unknown>,
-            'Une erreur est survenue. Réessayez.',
+            i18n.t('hook_errors.generic_retry', { ns: 'common' }),
           );
           setError(message);
           return null;
@@ -58,7 +58,7 @@ export function useGenerateSession() {
 
         return data as GenerateSessionResponse;
       } catch (e) {
-        setError(e instanceof Error ? e.message : 'Erreur inattendue');
+        setError(e instanceof Error ? e.message : i18n.t('hook_errors.unexpected', { ns: 'common' }));
         return null;
       } finally {
         setLoading(false);

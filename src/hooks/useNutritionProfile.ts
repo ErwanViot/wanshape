@@ -1,9 +1,12 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import i18n from '../i18n/index.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { NutritionProfile, NutritionProfileUpsert } from '../types/nutrition.ts';
+
+const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
 
 export interface UseNutritionProfileResult {
   profile: NutritionProfile | null;
@@ -34,7 +37,7 @@ export function useNutritionProfile(): UseNutritionProfileResult {
         return { profile: null, error: null };
       }
       if (err) {
-        return { profile: null, error: err.message ?? 'Erreur de chargement du profil' };
+        return { profile: null, error: err.message ?? tHookError('profile_load_failed') };
       }
       return { profile: (data as NutritionProfile | null) ?? null, error: null };
     },
