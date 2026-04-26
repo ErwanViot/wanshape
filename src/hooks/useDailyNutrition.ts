@@ -4,8 +4,6 @@ import { useAuth } from '../contexts/AuthContext.tsx';
 import i18n from '../i18n/index.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
-
-const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
 import type {
   DailyNutritionSummary,
   DailyNutritionTotals,
@@ -14,6 +12,8 @@ import type {
   MealType,
 } from '../types/nutrition.ts';
 import { todayYYYYMMDD } from '../utils/nutritionDate.ts';
+
+const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
 
 const EMPTY_TOTALS: DailyNutritionTotals = { calories: 0, protein_g: 0, carbs_g: 0, fat_g: 0 };
 
