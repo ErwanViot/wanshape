@@ -450,6 +450,16 @@ Deno.serve(async (req: Request) => {
 
   if (rpcError || !programId) {
     console.error("Program RPC error:", rpcError);
+    // The DB trigger (migration 022) raises 'active_programs_cap_reached' if
+    // a race condition let us past the pre-flight count check. Translate it
+    // into the same user-facing message so the experience is consistent.
+    if (rpcError?.message?.includes("active_programs_cap_reached")) {
+      return errorResponse(
+        req,
+        `Limite atteinte : ${MAX_ACTIVE_PROGRAMS} programmes actifs maximum. Supprime un programme existant pour en creer un nouveau.`,
+        429,
+      );
+    }
     return errorResponse(req, "Erreur de sauvegarde du programme", 500);
   }
 

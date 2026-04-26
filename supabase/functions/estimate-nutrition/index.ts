@@ -232,15 +232,34 @@ Deno.serve(async (req: Request) => {
   }
 
   // mode === 'overflow'
+  // Atomic rate limit: insert a tracker row first, then count. Same pattern
+  // as text mode (ai_text_calls) and as generate-session/program. Closes
+  // the parallel-request race that previously let two simultaneous overflow
+  // analyses fire two Anthropic calls before only one upserted.
+  const { data: overflowRateRow, error: overflowRateInsertErr } = await supabaseAdmin
+    .from("ai_generation_calls")
+    .insert({ user_id: user.id, kind: "overflow" })
+    .select("id")
+    .single();
+  if (overflowRateInsertErr || !overflowRateRow) return errorResponse(req, "Erreur serveur", 500);
+
   const { count, error: countError } = await supabaseAdmin
-    .from("nutrition_insights")
+    .from("ai_generation_calls")
     .select("*", { count: "exact", head: true })
     .eq("user_id", user.id)
+    .eq("kind", "overflow")
     .gte("created_at", sinceIso);
-  if (countError) return errorResponse(req, "Erreur serveur", 500);
-  if ((count ?? 0) >= OVERFLOW_DAILY_LIMIT) {
+  if (countError) {
+    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", overflowRateRow.id);
+    return errorResponse(req, "Erreur serveur", 500);
+  }
+  if ((count ?? 0) > OVERFLOW_DAILY_LIMIT) {
+    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", overflowRateRow.id);
     return errorResponse(req, "Tu as déjà ton analyse du jour. Reviens demain.", 429);
   }
+  // Note: overflowRateRow is intentionally NOT deleted on downstream failures
+  // (AI call, validation). A failed attempt still counts against the 24h
+  // quota — same anti-retry-storm policy as the other AI endpoints.
 
   const [{ data: logsData, error: logsErr }, { data: profileData, error: profileErr }] = await Promise.all([
     supabaseAdmin
