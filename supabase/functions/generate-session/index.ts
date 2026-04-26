@@ -7,6 +7,10 @@ import { validateSession } from "./validate.ts";
 const MAX_DAILY_GENERATIONS = 10;
 const MODEL = "claude-haiku-4-5-20251001";
 const MAX_TOKENS = 4096;
+// Defence-in-depth against prompt injection: prefilling the assistant turn
+// with `{"` forces the model to immediately start a JSON object and pre-empts
+// any "ignore previous instructions" jailbreak embedded in user freetext.
+const ASSISTANT_PREFILL = '{"';
 
 const VALID_MODES = ["quick", "detailed", "expert"];
 const VALID_PRESETS = ["transpirer", "renfo", "express", "mobilite"];
@@ -247,7 +251,10 @@ Deno.serve(async (req: Request) => {
         model: MODEL,
         max_tokens: MAX_TOKENS,
         system: systemPrompt,
-        messages: [{ role: "user", content: userPrompt }],
+        messages: [
+          { role: "user", content: userPrompt },
+          { role: "assistant", content: ASSISTANT_PREFILL },
+        ],
       }),
       signal: AbortSignal.timeout(30_000),
     });
@@ -267,19 +274,21 @@ Deno.serve(async (req: Request) => {
   const inputTokens = aiData.usage?.input_tokens ?? null;
   const outputTokens = aiData.usage?.output_tokens ?? null;
 
-  // Parse content
+  // Parse content. The assistant prefill is included only as the prompt
+  // start — Anthropic returns just the continuation, so prepend it back.
   const rawContent = aiData.content?.[0]?.text ?? "";
+  const combined = `${ASSISTANT_PREFILL}${rawContent}`;
   let sessionJson: unknown;
 
   try {
     // Handle potential ```json wrapper
-    const cleaned = rawContent
+    const cleaned = combined
       .replace(/^```json\s*/i, "")
       .replace(/```\s*$/, "")
       .trim();
     sessionJson = JSON.parse(cleaned);
   } catch {
-    console.error("Failed to parse AI response:", rawContent.slice(0, 500));
+    console.error("Failed to parse AI response:", combined.slice(0, 500));
     return errorResponse(req, "Réponse IA invalide, réessayez", 502);
   }
 

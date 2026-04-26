@@ -9,6 +9,10 @@ const MAX_ACTIVE_PROGRAMS = 3;
 const MAX_DAILY_GENERATIONS = 3;
 const MODEL = "claude-sonnet-4-6";
 const MAX_TOKENS = 12288;
+// Defence-in-depth against prompt injection: prefilling the assistant turn
+// with `{"` forces the model to immediately start a JSON object and pre-empts
+// any "ignore previous instructions" jailbreak embedded in user freetext.
+const ASSISTANT_PREFILL = '{"';
 
 const VALID_OBJECTIFS = [
   'perte_poids', 'prise_muscle', 'remise_forme', 'force',
@@ -271,9 +275,12 @@ Deno.serve(async (req: Request) => {
   // Call Anthropic API
   // Sonnet with 12K tokens needs more time than Haiku session generation
   async function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = 120_000): Promise<{ data: unknown; inputTokens: number; outputTokens: number }> {
+    // Last message must be the assistant prefill so the model continues from
+    // the JSON-start token instead of free-form prose.
     const messages = [
       { role: "user", content: userPrompt },
       ...extraMessages,
+      { role: "assistant", content: ASSISTANT_PREFILL },
     ];
 
     const aiResponse = await fetch("https://api.anthropic.com/v1/messages", {
@@ -300,9 +307,12 @@ Deno.serve(async (req: Request) => {
 
     const aiData = await aiResponse.json();
     const rawContent = aiData.content?.[0]?.text ?? "";
+    // Anthropic returns only the continuation when the assistant turn is
+    // prefilled — prepend the prefill back before parsing.
+    const combined = `${ASSISTANT_PREFILL}${rawContent}`;
 
     // Parse JSON (handle potential markdown wrapper)
-    const cleaned = rawContent
+    const cleaned = combined
       .replace(/^```json\s*/i, "")
       .replace(/```\s*$/, "")
       .trim();
