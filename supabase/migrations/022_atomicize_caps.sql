@@ -50,7 +50,7 @@ CREATE TRIGGER programs_enforce_active_cap
   FOR EACH ROW EXECUTE FUNCTION public.enforce_user_active_programs_cap();
 
 COMMENT ON FUNCTION public.enforce_user_active_programs_cap IS
-  'Hard DB invariant for the 3-active-programs-per-user cap. Protects against race conditions in the edge function''s pre-flight count.';
+  'Hard DB invariant for the 3-active-programs-per-user cap. Protects against race conditions in the edge function''s pre-flight count. Note: this trigger fires for ALL inserts including service_role, so manual admin inserts of user programs (is_fixed=false) are also capped — by design, the cap is a data invariant, not a UI concern.';
 
 -- ── 2) Extend ai_generation_calls.kind to cover 'overflow' ───────────────
 DO $$
