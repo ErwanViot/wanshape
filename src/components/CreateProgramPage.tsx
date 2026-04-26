@@ -70,6 +70,7 @@ export function CreateProgramPage() {
     sessionStorage.removeItem(STORAGE_KEYS.CREATE_PROGRAM_DRAFT);
   }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: draft.step is the intentional trigger; the body doesn't read it.
   useEffect(() => {
     stepHeadingRef.current?.focus();
   }, [draft.step]);

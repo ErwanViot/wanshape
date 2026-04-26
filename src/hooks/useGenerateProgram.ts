@@ -17,6 +17,9 @@ export function useGenerateProgram() {
 
   const inflightRef = useRef(false);
 
+  // i18n.t is a fresh function reference each render; depending on i18n.language
+  // is the project-wide pattern for stable callbacks resolving localised strings.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: i18n.language is the stable trigger, not i18n.t.
   const generate = useCallback(
     async (input: ProgramOnboardingInput): Promise<GenerateProgramResponse | null> => {
       if (inflightRef.current) return null;

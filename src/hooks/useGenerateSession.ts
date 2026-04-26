@@ -17,6 +17,8 @@ export function useGenerateSession() {
 
   const inflightRef = useRef(false);
 
+  // See useGenerateProgram — i18n.t changes identity each render.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: i18n.language is the stable trigger, not i18n.t.
   const generate = useCallback(
     async (input: CustomSessionInput): Promise<GenerateSessionResponse | null> => {
       if (inflightRef.current) return null;
