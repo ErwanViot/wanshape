@@ -10,10 +10,6 @@ export default defineConfig(({ mode }) => ({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      // No `includeAssets`: photo-wan.png is too large (~1.7 MB) to precache
-      // eagerly on first load. The service worker ships a minimal install
-      // bundle and grabs the rest lazily. Daily session content moved to
-      // Supabase in PR 5a — no longer served from /public/sessions/.
       manifest: {
         name: 'Wan2Fit',
         short_name: 'Wan2Fit',
@@ -32,8 +28,7 @@ export default defineConfig(({ mode }) => ({
       workbox: {
         globPatterns: ['**/*.{js,css,html,json,svg,png}'],
         // og-image.jpg: social preview, never needed by the app itself.
-        // photo-wan.png: large portrait (~1.7 MB) rendered tiny; runtime-fetched.
-        globIgnores: ['**/og-image.jpg', '**/photo-wan.png'],
+        globIgnores: ['**/og-image.jpg'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
         runtimeCaching: [
