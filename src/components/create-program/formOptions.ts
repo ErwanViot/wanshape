@@ -57,4 +57,4 @@ export const DUREE_OPTIONS: { value: 4 | 8 | 12; recommended?: boolean }[] = [
   { value: 12 },
 ];
 
-export const LOADING_PHASES_COUNT = 4;
+export const LOADING_PHASES_COUNT = 8;

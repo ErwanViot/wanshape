@@ -125,6 +125,7 @@
     "generate": "Générer mon programme"
   },
   "generating": {
+    "title": "Création de ton programme",
     "estimate": "Estimation : 30-60 secondes"
   },
   "fitness_level": {
@@ -187,9 +188,13 @@
     "12": "12 semaines"
   },
   "loading_phases": {
-    "0": "Analyse de ton profil...",
-    "1": "Conception des séances...",
-    "2": "Planification du calendrier...",
-    "3": "Dernières vérifications..."
+    "0": "Analyse de ton profil",
+    "1": "Identification des contraintes",
+    "2": "Choix de la progression",
+    "3": "Conception des séances",
+    "4": "Construction du calendrier",
+    "5": "Équilibrage des charges",
+    "6": "Personnalisation du coaching",
+    "7": "Vérifications finales"
   }
 }
