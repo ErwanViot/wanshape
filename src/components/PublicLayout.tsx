@@ -14,6 +14,7 @@ export function PublicLayout() {
   // Scroll top on route change. Data freshness is no longer tied to
   // navigation — every hook is on TanStack Query and relies on its
   // `staleTime` + mutation-side invalidation contract.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname is the intentional trigger; the body doesn't read it.
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);

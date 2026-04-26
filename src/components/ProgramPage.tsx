@@ -54,7 +54,9 @@ export function ProgramPage() {
 
   // Initialize collapsed weeks: future weeks collapsed by default for custom programs.
   // All used values (isCustom, byWeek, currentWeek) are derived deterministically from
-  // program — so re-running only when the program identity changes is correct.
+  // program — re-running only when program identity changes is correct (byWeek is
+  // rebuilt fresh each render so depending on it would re-fire this effect every render).
+  // biome-ignore lint/correctness/useExhaustiveDependencies: program?.id is the intentional narrower trigger; see comment above.
   useEffect(() => {
     if (!program || !isCustom) return;
     const weeks = [...byWeek.keys()];
@@ -63,7 +65,7 @@ export function ProgramPage() {
       if (w > currentWeek) collapsed.add(w);
     }
     setCollapsedWeeks(collapsed);
-  }, [program?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [program?.id]);
 
   // Focus trap for delete modal
   useEffect(() => {
