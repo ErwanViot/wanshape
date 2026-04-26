@@ -8,6 +8,7 @@ import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { useSubscription } from '../../hooks/useSubscription.ts';
 import { useTheme } from '../../hooks/useTheme.ts';
 import { supabase } from '../../lib/supabase.ts';
+import { notifySessionExpired, supabaseQuery } from '../../lib/supabaseQuery.ts';
 import { formatDate } from '../../utils/date.ts';
 import { getInitials } from '../../utils/getInitials.ts';
 
@@ -96,7 +97,18 @@ export function SettingsPage() {
       // Append timestamp to bust cache
       const url = `${publicUrl}?t=${Date.now()}`;
 
-      const { error: updateError } = await supabase.from('profiles').update({ avatar_url: url }).eq('id', user.id);
+      // Wrap the profile update so an expired JWT triggers a refresh + retry
+      // instead of silently failing the avatar replace.
+      const { error: updateError, sessionExpired } = await supabaseQuery(() =>
+        supabase!.from('profiles').update({ avatar_url: url }).eq('id', user.id),
+      );
+      if (sessionExpired) {
+        // Session-expired banner fires via notifySessionExpired; skip the
+        // local 'error_upload' toast since it would be misleading (the
+        // upload itself succeeded, only the profile UPDATE was rejected).
+        notifySessionExpired();
+        return;
+      }
       if (updateError) throw updateError;
 
       await refreshProfile();

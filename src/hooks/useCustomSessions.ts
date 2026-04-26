@@ -77,11 +77,16 @@ export async function confirmCustomSession(id: string): Promise<boolean> {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) return false;
-    const { error } = await supabase
-      .from('custom_sessions')
-      .update({ status: 'confirmed' })
-      .eq('id', id)
-      .eq('user_id', user.id);
+    // Wrap in supabaseQuery so an expired JWT triggers a refresh + retry.
+    // The user has just reviewed and confirmed the AI-generated session;
+    // failing silently here would lose the confirmation.
+    const { error, sessionExpired } = await supabaseQuery(() =>
+      supabase!.from('custom_sessions').update({ status: 'confirmed' }).eq('id', id).eq('user_id', user.id),
+    );
+    if (sessionExpired) {
+      notifySessionExpired();
+      return false;
+    }
     return !error;
   } catch (err) {
     console.error('Confirm custom session error:', err);

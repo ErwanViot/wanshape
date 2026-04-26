@@ -34,7 +34,16 @@ export function useUserPrograms() {
     async (id: string) => {
       if (!supabase || !userId) return false;
       try {
-        const { error } = await supabase.from('programs').delete().eq('id', id).eq('user_id', userId);
+        // Wrap in supabaseQuery so an expired JWT triggers a refresh + retry
+        // instead of silently failing — the user might have left the program
+        // page open for several minutes before clicking delete.
+        const { error, sessionExpired } = await supabaseQuery(() =>
+          supabase!.from('programs').delete().eq('id', id).eq('user_id', userId),
+        );
+        if (sessionExpired) {
+          notifySessionExpired();
+          return false;
+        }
         if (error) {
           console.error('Delete program error:', error);
           return false;
