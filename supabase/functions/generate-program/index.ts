@@ -311,13 +311,20 @@ Deno.serve(async (req: Request) => {
     // prefilled — prepend the prefill back before parsing.
     const combined = `${ASSISTANT_PREFILL}${rawContent}`;
 
-    // Parse JSON (handle potential markdown wrapper)
+    // Parse JSON (handle potential markdown wrapper, kept as belt-and-
+    // suspenders even though the prefill makes it unreachable in practice).
     const cleaned = combined
       .replace(/^```json\s*/i, "")
       .replace(/```\s*$/, "")
       .trim();
 
-    const parsed = JSON.parse(cleaned);
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(cleaned);
+    } catch {
+      console.error("Failed to parse AI response:", combined.slice(0, 500));
+      throw new Error("Réponse IA invalide");
+    }
 
     return {
       data: parsed,
