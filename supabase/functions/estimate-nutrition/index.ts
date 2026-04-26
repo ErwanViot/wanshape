@@ -316,7 +316,16 @@ Deno.serve(async (req: Request) => {
   };
 
   const prompt = buildOverflowUserPrompt(ctx);
-  const aiResult = await callAnthropic(anthropicApiKey, OVERFLOW_SYSTEM_PROMPT, prompt, MAX_TOKENS_OVERFLOW);
+  // Assistant prefill mirrors the text-mode prompt-injection defense: the
+  // expected output is { summary: string, suggestions: string[] } so we
+  // anchor the response on the summary key.
+  const aiResult = await callAnthropic(
+    anthropicApiKey,
+    OVERFLOW_SYSTEM_PROMPT,
+    prompt,
+    MAX_TOKENS_OVERFLOW,
+    '{"summary":"',
+  );
   if (aiResult instanceof Response) {
     const text = await aiResult.text();
     return jsonResponse(req, JSON.parse(text), aiResult.status);
