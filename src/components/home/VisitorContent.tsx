@@ -446,7 +446,7 @@ export function VisitorContent({
             className="flex items-center gap-4 px-5 py-4 rounded-2xl border border-card-border hover:border-divider-strong bg-surface-card/50 hover:bg-surface-card transition-all group"
           >
             <img
-              src="/photo-wan.png"
+              src="/photo-wan.webp"
               alt={t('visitor.about_teaser.photo_alt')}
               className="w-10 h-10 rounded-full object-cover shrink-0"
             />

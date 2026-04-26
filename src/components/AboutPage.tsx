@@ -23,7 +23,7 @@ export function AboutPage() {
 
       {/* Signature */}
       <div className="mt-10 flex items-center gap-4">
-        <img src="/photo-wan.png" alt={t('about.signature_alt')} className="w-16 h-16 rounded-full object-cover" />
+        <img src="/photo-wan.webp" alt={t('about.signature_alt')} className="w-16 h-16 rounded-full object-cover" />
         <span className="text-subtle text-lg italic">{t('about.signature')}</span>
       </div>
 
