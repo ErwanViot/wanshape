@@ -103,8 +103,11 @@ export function SettingsPage() {
         supabase!.from('profiles').update({ avatar_url: url }).eq('id', user.id),
       );
       if (sessionExpired) {
+        // Session-expired banner fires via notifySessionExpired; skip the
+        // local 'error_upload' toast since it would be misleading (the
+        // upload itself succeeded, only the profile UPDATE was rejected).
         notifySessionExpired();
-        throw new Error('session_expired');
+        return;
       }
       if (updateError) throw updateError;
 
