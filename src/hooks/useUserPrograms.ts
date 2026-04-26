@@ -5,6 +5,12 @@ import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program } from '../types/completion.ts';
 
+// Same column subset as usePrograms — avoids fetching the JSONB blobs
+// (progression / consignes_semaine / onboarding_data) on the listing
+// view. ProgramPage refetches the full row by slug when needed.
+const PROGRAM_LIST_COLS =
+  'id, slug, title, description, goals, duration_weeks, frequency_per_week, fitness_level, is_fixed, locale, created_at';
+
 export function useUserPrograms() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
@@ -16,7 +22,7 @@ export function useUserPrograms() {
       const { data, sessionExpired } = await supabaseQuery(() =>
         supabase!
           .from('programs')
-          .select('*')
+          .select(PROGRAM_LIST_COLS)
           .eq('user_id', userId!)
           .eq('is_fixed', false)
           .order('created_at', { ascending: false }),
