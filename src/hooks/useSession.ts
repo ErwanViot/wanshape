@@ -51,7 +51,11 @@ export function useSession(dateKey: string | null) {
     queryKey: ['daily-session', dateKey, locale],
     queryFn: () => fetchDailySession(dateKey!, locale),
     enabled: !!dateKey && !!supabase,
-    staleTime: 5 * 60 * 1000, // 5 min — content changes rarely
+    // Daily sessions are generated server-side ahead of time and never
+    // mutated for a given (date_key, locale). 24h is therefore a safe
+    // upper bound — the cache key already changes when dateKey or locale
+    // does, so a stale entry is impossible in normal use.
+    staleTime: 24 * 60 * 60 * 1000,
   });
 
   return {

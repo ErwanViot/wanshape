@@ -94,6 +94,10 @@ export function usePrograms() {
       return (data as Program[]) ?? [];
     },
     enabled: !authLoading && !!supabase,
+    // Fixed programs are seed data, only modified through migrations.
+    // The user can never invalidate this cache by interacting with the
+    // app — Infinity is the right answer.
+    staleTime: Infinity,
   });
 
   return { programs: query.data ?? [], loading: query.isPending };
