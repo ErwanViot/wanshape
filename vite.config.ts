@@ -54,7 +54,13 @@ export default defineConfig(({ mode }) => ({
             handler: 'CacheFirst',
             options: {
               cacheName: 'videos-cache',
-              expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              // Tightened from (30 entries / 90 days) to (15 / 7) — exercise
+              // videos are 1-5 MB each, and iOS Safari aggressively purges
+              // sites that exceed a few hundred MB of cached storage. The
+              // 7-day window is a deliberate trade-off: missing the cache on
+              // a less-frequent exercise costs one re-download, but bloating
+              // the cache costs everyone.
+              expiration: { maxEntries: 15, maxAgeSeconds: 60 * 60 * 24 * 7 },
               cacheableResponse: { statuses: [200] },
             },
           },
