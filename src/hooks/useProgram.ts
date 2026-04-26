@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
-import type { Program, ProgramSession, SessionCompletion } from '../types/completion.ts';
+import type { Program, ProgramSession } from '../types/completion.ts';
 import type { Session } from '../types/session.ts';
 
 // Columns needed by ProgramCard / ProgramList. JSONB-heavy columns
@@ -110,57 +110,59 @@ export function usePrograms() {
   return { programs: query.data ?? [], loading: query.isPending };
 }
 
+// Row shape returned by the embedded select below — program_sessions are
+// nested, and each session_completions array is RLS-filtered to the
+// current user, so any non-empty array means the session is completed.
+type ProgramWithEmbeddedSessions = Program & {
+  program_sessions: (ProgramSession & {
+    session_completions: { id: string }[] | null;
+  })[];
+};
+
 export function useProgram(slug: string | undefined, userId: string | undefined) {
   const query = useQuery<ProgramWithSessions | null>({
     queryKey: ['program', slug ?? null, userId ?? null],
     queryFn: async () => {
-      // Fetch program (RLS handles access control)
-      const { data: pgm, sessionExpired } = await supabaseQuery(() =>
-        supabase!.from('programs').select('*').eq('slug', slug!).single(),
+      // Single round-trip: fetch the program, its program_sessions and the
+      // current user's completion rows for those sessions in one query.
+      // session_completions is RLS-filtered to the authenticated user, so
+      // the embed implicitly filters to "my completions only" — no
+      // explicit user_id filter needed (and a public/anonymous read still
+      // gets an empty array rather than every user's completions).
+      const { data, sessionExpired } = await supabaseQuery(() =>
+        supabase!
+          .from('programs')
+          .select('*, program_sessions(*, session_completions(id))')
+          .eq('slug', slug!)
+          .order('session_order', { referencedTable: 'program_sessions', ascending: true })
+          .single(),
       );
       if (sessionExpired) {
         notifySessionExpired();
         return null;
       }
-      if (!pgm) return null;
+      if (!data) return null;
 
-      const { data: sessions, sessionExpired: sessExp } = await supabaseQuery(() =>
-        supabase!
-          .from('program_sessions')
-          .select('*')
-          .eq('program_id', (pgm as Program).id)
-          .order('session_order'),
+      const row = data as ProgramWithEmbeddedSessions;
+      const sessions: ProgramSession[] = (row.program_sessions ?? []).map(
+        ({ session_completions: _ignore, ...sess }) => sess,
       );
-      if (sessExp) {
-        notifySessionExpired();
-        return null;
-      }
 
-      const sessionIds = ((sessions as ProgramSession[]) ?? []).map((s) => s.id);
-      let completedIds = new Set<string>();
-
-      if (sessionIds.length > 0 && userId) {
-        const { data: completions, sessionExpired: compExp } = await supabaseQuery(() =>
-          supabase!
-            .from('session_completions')
-            .select('program_session_id')
-            .eq('user_id', userId)
-            .in('program_session_id', sessionIds),
-        );
-        if (compExp) {
-          notifySessionExpired();
-          return null;
+      // Build the completed-id set only when a user is authenticated.
+      // Anonymous reads can't satisfy the RLS check, so the embed comes
+      // back empty for those — `userId` is the right guard.
+      const completedIds = new Set<string>();
+      if (userId) {
+        for (const ps of row.program_sessions ?? []) {
+          if (ps.session_completions && ps.session_completions.length > 0) {
+            completedIds.add(ps.id);
+          }
         }
-        completedIds = new Set(
-          (completions as Pick<SessionCompletion, 'program_session_id'>[] | null)
-            ?.map((c) => c.program_session_id)
-            .filter((id): id is string => id !== null) ?? [],
-        );
       }
 
       return {
-        ...(pgm as Program),
-        sessions: (sessions as ProgramSession[]) ?? [],
+        ...row,
+        sessions,
         completedSessionIds: completedIds,
       };
     },
