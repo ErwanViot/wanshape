@@ -1,8 +1,8 @@
-import * as Sentry from '@sentry/react';
 import type { ReactNode } from 'react';
 import { Component } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { captureException } from '../lib/sentryReport.ts';
 
 interface Props {
   children: ReactNode;
@@ -40,7 +40,7 @@ export class PlayerErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    Sentry.captureException(error, { contexts: { react: { componentStack: errorInfo.componentStack } } });
+    captureException(error, { contexts: { react: { componentStack: errorInfo.componentStack } } });
   }
 
   render() {
