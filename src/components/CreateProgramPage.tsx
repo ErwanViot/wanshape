@@ -15,8 +15,11 @@ import { StepObjective } from './create-program/StepObjective.tsx';
 import { StepPreferences } from './create-program/StepPreferences.tsx';
 import { StepProfile } from './create-program/StepProfile.tsx';
 
-/** Durations in ms for each loading phase — must match LOADING_PHASES_COUNT */
-const LOADING_PHASE_DURATIONS = [5000, 20000, 10000, 10000] as const;
+/** Durations in ms for each loading phase — must match LOADING_PHASES_COUNT.
+ * Sums to ~45s, which matches the typical generate-program latency. If the
+ * call runs longer, GeneratingOverlay clamps to the last phase rather than
+ * cycling, so the checklist never resets back to "Analyse..." mid-wait. */
+const LOADING_PHASE_DURATIONS = [3000, 5000, 7000, 8000, 8000, 6000, 5000, 3000] as const;
 
 const MAX_ACTIVE = 3;
 

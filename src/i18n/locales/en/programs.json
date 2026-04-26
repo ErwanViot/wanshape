@@ -125,6 +125,7 @@
     "generate": "Generate my program"
   },
   "generating": {
+    "title": "Building your program",
     "estimate": "Estimated: 30-60 seconds"
   },
   "fitness_level": {
@@ -187,9 +188,13 @@
     "12": "12 weeks"
   },
   "loading_phases": {
-    "0": "Analyzing your profile...",
-    "1": "Designing sessions...",
-    "2": "Planning the calendar...",
-    "3": "Final checks..."
+    "0": "Analyzing your profile",
+    "1": "Mapping constraints",
+    "2": "Choosing your progression",
+    "3": "Designing sessions",
+    "4": "Building the calendar",
+    "5": "Balancing the load",
+    "6": "Personalizing coaching",
+    "7": "Final checks"
   }
 }
