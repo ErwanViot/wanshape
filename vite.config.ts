@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => ({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,json,svg,png}'],
+        globPatterns: ['**/*.{js,css,html,json,svg,png,woff2}'],
         // og-image.jpg: social preview, never needed by the app itself.
         globIgnores: ['**/og-image.jpg'],
         navigateFallback: '/index.html',
