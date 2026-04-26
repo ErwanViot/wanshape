@@ -297,7 +297,12 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: MAX_TOKENS,
-        system: systemPrompt,
+        // System prompt is stable across all calls (only varies by locale).
+        // Caching cuts input cost ~90% and shaves latency on the second-and-after
+        // call within the 5-minute TTL.
+        system: [
+          { type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } },
+        ],
         messages,
       }),
       signal: AbortSignal.timeout(timeoutMs),
