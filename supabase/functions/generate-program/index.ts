@@ -13,6 +13,10 @@ const MAX_TOKENS = 12288;
 // with `{"` forces the model to immediately start a JSON object and pre-empts
 // any "ignore previous instructions" jailbreak embedded in user freetext.
 const ASSISTANT_PREFILL = '{"';
+// Sentinel raised by the enforce_user_active_programs_cap trigger
+// (migration 022). Kept as a constant so a future trigger message rename
+// surfaces as a TypeScript build break rather than a silent 500.
+const TRIGGER_CAP_REACHED = "active_programs_cap_reached";
 
 const VALID_OBJECTIFS = [
   'perte_poids', 'prise_muscle', 'remise_forme', 'force',
@@ -450,6 +454,16 @@ Deno.serve(async (req: Request) => {
 
   if (rpcError || !programId) {
     console.error("Program RPC error:", rpcError);
+    // The DB trigger (migration 022) raises 'active_programs_cap_reached' if
+    // a race condition let us past the pre-flight count check. Translate it
+    // into the same user-facing message so the experience is consistent.
+    if (rpcError?.message?.includes(TRIGGER_CAP_REACHED)) {
+      return errorResponse(
+        req,
+        `Limite atteinte : ${MAX_ACTIVE_PROGRAMS} programmes actifs maximum. Supprime un programme existant pour en creer un nouveau.`,
+        429,
+      );
+    }
     return errorResponse(req, "Erreur de sauvegarde du programme", 500);
   }
 
