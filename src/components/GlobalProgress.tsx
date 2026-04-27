@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { BLOCK_COLORS } from '../engine/constants.ts';
 import type { AtomicStep } from '../types/player.ts';
 import type { BlockType } from '../types/session.ts';
@@ -16,6 +17,8 @@ interface BlockSegment {
 }
 
 export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
+  const { t } = useTranslation('player');
+
   // Build block segments
   const totalDuration = steps.reduce((sum, s) => sum + s.estimatedDuration, 0);
   if (totalDuration === 0) return null;
@@ -50,7 +53,7 @@ export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
       aria-valuenow={Math.round(progress * 100)}
       aria-valuemin={0}
       aria-valuemax={100}
-      aria-label="Progression de la séance"
+      aria-label={t('progress_bar.aria_label')}
     >
       {segments.map((seg, i) => (
         <div key={i} className="h-full relative" style={{ width: `${seg.widthPercent}%` }}>
@@ -59,9 +62,10 @@ export function GlobalProgress({ steps, currentStepIndex, progress }: Props) {
             className="absolute inset-0 transition-all duration-300"
             style={{
               backgroundColor: seg.color,
-              clipPath: seg.widthPercent > 0
-                ? `inset(0 ${Math.max(0, 100 - ((progress * 100 - seg.startPercent) / seg.widthPercent) * 100)}% 0 0)`
-                : 'inset(0 100% 0 0)',
+              clipPath:
+                seg.widthPercent > 0
+                  ? `inset(0 ${Math.max(0, 100 - ((progress * 100 - seg.startPercent) / seg.widthPercent) * 100)}% 0 0)`
+                  : 'inset(0 100% 0 0)',
             }}
           />
         </div>

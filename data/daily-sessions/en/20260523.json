@@ -1,0 +1,127 @@
+{
+  "date": "20260523",
+  "title": "Complete Pyramid Circuit",
+  "description": "3-round full body circuit followed by an explosive push-up pyramid",
+  "estimatedDuration": 36,
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Body Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Goblet squat (no weight)",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands in front of the chest, sit deep"
+        },
+        {
+          "name": "Hindu push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Diving motion: dive down then arc back up"
+        },
+        {
+          "name": "Side plank",
+          "mode": "timed",
+          "duration": 20,
+          "instructions": "On one forearm, body aligned, hips high",
+          "bilateral": true
+        },
+        {
+          "name": "Walking lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Walk forward in continuous lunges, big steps"
+        },
+        {
+          "name": "Leg raises",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Back on the floor, lift extended legs to vertical"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Explosive Push-up Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 20,
+      "exercises": [
+        {
+          "name": "Explosive push-ups",
+          "instructions": "Push hard to lift the hands off the floor"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

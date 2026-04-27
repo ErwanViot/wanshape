@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { EMOMBlock } from '../../types/session.ts';
-import { expandEMOM } from '../interpreters/emom.ts';
 import { BLOCK_COLORS, TRANSITION_DURATION } from '../constants.ts';
+import { expandEMOM } from '../interpreters/emom.ts';
 
 function makeEMOMBlock(overrides?: Partial<EMOMBlock>): EMOMBlock {
   return {

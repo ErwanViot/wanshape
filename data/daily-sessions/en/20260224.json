@@ -1,0 +1,119 @@
+{
+  "date": "20260224",
+  "title": "Strength Climb",
+  "description": "Push-ups and squats pyramid followed by a classic strength block",
+  "estimatedDuration": 35,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Up-Down Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Standard push-ups",
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        },
+        {
+          "name": "Jump squats",
+          "instructions": "Explosive squat with jump, land softly"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Strength",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Bulgarian split squats",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Back foot on a chair, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Decline push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 75,
+          "instructions": "Feet raised on a chair, body braced"
+        },
+        {
+          "name": "Crunches",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift shoulders, brace the abs"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 30,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "date": "20260529",
+  "title": "EMOM Precision",
+  "description": "12-minute EMOM with squats, push-ups and plank for steady endurance work",
+  "estimatedDuration": 29,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 45,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM 12 Minutes",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "reps": 10,
+          "instructions": "Feet very wide, toes pointed out"
+        },
+        {
+          "name": "Wide push-ups",
+          "reps": 8,
+          "instructions": "Hands wider than the shoulders, chest focus"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 12,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

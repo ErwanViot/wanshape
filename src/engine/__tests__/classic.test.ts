@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { ClassicBlock } from '../../types/session.ts';
-import { expandClassic } from '../interpreters/classic.ts';
 import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
+import { expandClassic } from '../interpreters/classic.ts';
 
 function makeClassicBlock(overrides?: Partial<ClassicBlock>): ClassicBlock {
   return {
@@ -28,9 +28,7 @@ describe('expandClassic', () => {
 
   it('produces correct step count for one exercise with multiple sets', () => {
     const block = makeClassicBlock({
-      exercises: [
-        { name: 'Squat', sets: 3, reps: 12, restBetweenSets: 45, instructions: 'Go' },
-      ],
+      exercises: [{ name: 'Squat', sets: 3, reps: 12, restBetweenSets: 45, instructions: 'Go' }],
     });
     const steps = expandClassic(block, 0, 1);
 
@@ -63,9 +61,7 @@ describe('expandClassic', () => {
 
   it('rest steps use countdown timerMode with correct duration', () => {
     const block = makeClassicBlock({
-      exercises: [
-        { name: 'Squat', sets: 2, reps: 10, restBetweenSets: 45, instructions: 'Go' },
-      ],
+      exercises: [{ name: 'Squat', sets: 2, reps: 10, restBetweenSets: 45, instructions: 'Go' }],
     });
     const steps = expandClassic(block, 0, 1);
 
@@ -77,9 +73,7 @@ describe('expandClassic', () => {
 
   it('no rest after last set of last exercise', () => {
     const block = makeClassicBlock({
-      exercises: [
-        { name: 'Squat', sets: 2, reps: 10, restBetweenSets: 45, instructions: 'Go' },
-      ],
+      exercises: [{ name: 'Squat', sets: 2, reps: 10, restBetweenSets: 45, instructions: 'Go' }],
     });
     const steps = expandClassic(block, 0, 1);
 
@@ -101,9 +95,7 @@ describe('expandClassic', () => {
 
   it('sets repTarget correctly including max reps', () => {
     const block = makeClassicBlock({
-      exercises: [
-        { name: 'Pull-ups', sets: 2, reps: 'max', restBetweenSets: 60, instructions: 'Max reps' },
-      ],
+      exercises: [{ name: 'Pull-ups', sets: 2, reps: 'max', restBetweenSets: 60, instructions: 'Max reps' }],
     });
     const steps = expandClassic(block, 0, 1);
 
@@ -115,9 +107,7 @@ describe('expandClassic', () => {
 
   it('sets tempo when provided', () => {
     const block = makeClassicBlock({
-      exercises: [
-        { name: 'Squat', sets: 1, reps: 10, restBetweenSets: 30, tempo: '3-1-2', instructions: 'Tempo' },
-      ],
+      exercises: [{ name: 'Squat', sets: 1, reps: 10, restBetweenSets: 30, tempo: '3-1-2', instructions: 'Tempo' }],
     });
     const steps = expandClassic(block, 0, 1);
 
@@ -127,9 +117,7 @@ describe('expandClassic', () => {
 
   it('sets setInfo with current and total', () => {
     const block = makeClassicBlock({
-      exercises: [
-        { name: 'Squat', sets: 3, reps: 12, restBetweenSets: 45, instructions: 'Go' },
-      ],
+      exercises: [{ name: 'Squat', sets: 3, reps: 12, restBetweenSets: 45, instructions: 'Go' }],
     });
     const steps = expandClassic(block, 0, 1);
 
@@ -155,9 +143,7 @@ describe('expandClassic', () => {
 
   it('provides nextStepPreview between sets', () => {
     const block = makeClassicBlock({
-      exercises: [
-        { name: 'Squat', sets: 2, reps: 12, restBetweenSets: 45, instructions: 'Go' },
-      ],
+      exercises: [{ name: 'Squat', sets: 2, reps: 12, restBetweenSets: 45, instructions: 'Go' }],
     });
     const steps = expandClassic(block, 0, 1);
 

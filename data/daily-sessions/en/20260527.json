@@ -1,0 +1,108 @@
+{
+  "date": "20260527",
+  "title": "Athletic Circuit",
+  "description": "3-round circuit combining squats, push-ups, plank and cardio for complete work",
+  "estimatedDuration": 33,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 45,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Body Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "1.5 squats",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Lower, come up halfway, lower again, come up fully"
+        },
+        {
+          "name": "Commando push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Alternate between forearm plank and high plank",
+          "bilateral": true
+        },
+        {
+          "name": "Hollow hold",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "Back on the floor, arms and legs extended above the floor, lower back pinned"
+        },
+        {
+          "name": "Curtsy lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Cross the leg behind diagonally",
+          "bilateral": true
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 20,
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

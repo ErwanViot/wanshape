@@ -1,0 +1,88 @@
+{
+  "page": {
+    "title": "Suivi",
+    "description": "Tableau de bord sportif Wan2Fit.",
+    "heading": "Chaque effort compte",
+    "empty_title": "Pas encore de stats",
+    "empty_desc": "Lance ta première séance pour commencer à suivre ta progression ici.",
+    "empty_cta": "Séance du jour",
+    "next_level": "Passe au niveau supérieur",
+    "next_level_sub": "Commence à suivre un programme personnalisé"
+  },
+  "metric": {
+    "sessions": "Séances",
+    "total": "total",
+    "time": "Temps",
+    "cumulative": "cumulé",
+    "avg_session": "Moy / séance",
+    "avg_duration": "durée moyenne",
+    "this_week": "Cette semaine",
+    "this_week_sub_one": "{{n}} séance",
+    "this_week_sub_other": "{{n}} séances"
+  },
+  "week_message": {
+    "weekend_idle_title": "Week-end mérité",
+    "weekend_idle_sub": "Recharge les batteries, lundi on envoie du lourd.",
+    "new_week_title": "Nouvelle semaine",
+    "new_week_sub": "Prêt à t'entraîner ?",
+    "one_weekend_title": "Séance validée",
+    "one_weekend_sub": "Belle semaine ! Récupère bien, la suite va être énorme.",
+    "one_week_title": "Première séance validée",
+    "one_week_sub": "Le plus dur est fait.",
+    "two_title": "Bien lancé",
+    "two_sub": "Tu construis quelque chose de solide.",
+    "three_title": "Rythme parfait",
+    "three_sub": "Tu es sur la bonne lancée.",
+    "four_title": "Impressionnant",
+    "four_sub": "Tu dépasses tes objectifs.",
+    "overload_title": "Attention au surmenage",
+    "overload_sub": "Ton corps progresse au repos. Souffle un peu !"
+  },
+  "program_card": {
+    "active_label": "Programme en cours",
+    "sessions_progress": "{{completed}}/{{total}} séances",
+    "next_session": "Prochaine :"
+  },
+  "recent_sessions": {
+    "history": "Historique",
+    "filter_all": "Tout",
+    "filter_program": "Prog",
+    "filter_free": "Libre",
+    "empty": "Aucune séance dans cette catégorie.",
+    "load_more": "Charger plus",
+    "default_title": "Séance"
+  },
+  "week_dots": {
+    "aria": "Activité de la semaine : {{n}} jour sur 7",
+    "aria_other": "Activité de la semaine : {{n}} jours sur 7",
+    "heading": "Cette semaine",
+    "activity_one": "{{n}} jour d'activité",
+    "activity_other": "{{n}} jours d'activité",
+    "day_mon": "L",
+    "day_tue": "M",
+    "day_wed": "M",
+    "day_thu": "J",
+    "day_fri": "V",
+    "day_sat": "S",
+    "day_sun": "D"
+  },
+  "bar_chart": {
+    "heading": "Volume hebdo",
+    "unit": "min / semaine",
+    "bar_aria": "{{label}} : {{minutes}} minutes, {{sessions}} séance",
+    "bar_aria_other": "{{label}} : {{minutes}} minutes, {{sessions}} séances",
+    "tooltip": "{{minutes}} min"
+  },
+  "block_label": {
+    "classic": "Classique",
+    "circuit": "Circuit",
+    "hiit": "HIIT",
+    "tabata": "Tabata",
+    "emom": "EMOM",
+    "amrap": "AMRAP",
+    "superset": "Superset",
+    "pyramid": "Pyramide"
+  },
+  "amrap_rounds_one": "{{n}} round",
+  "amrap_rounds_other": "{{n}} rounds"
+}

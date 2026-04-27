@@ -1,6 +1,7 @@
 import type { RefObject } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ExperienceDuree, FrequenceActuelle } from '../../types/custom-program.ts';
-import { EXPERIENCE_OPTIONS, FREQUENCE_OPTIONS, BLESSURE_OPTIONS } from './formOptions.ts';
+import { BLESSURE_OPTIONS, EXPERIENCE_OPTIONS, FREQUENCE_OPTIONS } from './formOptions.ts';
 
 export interface StepProfileProps {
   experienceDuree: ExperienceDuree | '';
@@ -39,14 +40,15 @@ export function StepProfile({
   onBack,
   onNext,
 }: StepProfileProps) {
+  const { t } = useTranslation('programs');
   return (
     <div className="space-y-6">
       <h1 ref={stepHeadingRef} tabIndex={-1} className="text-2xl sm:text-3xl font-bold text-heading outline-none">
-        Parle-nous de toi
+        {t('step_profile.title')}
       </h1>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-heading mb-3">Expérience sportive</legend>
+        <legend className="text-sm font-semibold text-heading mb-3">{t('step_profile.experience_legend')}</legend>
         <div className="grid grid-cols-3 gap-3">
           {EXPERIENCE_OPTIONS.map((e) => (
             <button
@@ -55,20 +57,18 @@ export function StepProfile({
               onClick={() => onChangeExperience(e.value)}
               aria-pressed={experienceDuree === e.value}
               className={`px-3 py-3 rounded-xl border text-center transition-colors cursor-pointer ${
-                experienceDuree === e.value
-                  ? 'border-brand bg-brand/10'
-                  : 'border-divider hover:border-brand/30'
+                experienceDuree === e.value ? 'border-brand bg-brand/10' : 'border-divider hover:border-brand/30'
               }`}
             >
-              <span className="block text-sm font-semibold text-heading">{e.label}</span>
-              <span className="block text-xs text-muted mt-0.5">{e.desc}</span>
+              <span className="block text-sm font-semibold text-heading">{t(`experience.${e.value}`)}</span>
+              <span className="block text-xs text-muted mt-0.5">{t(`experience_desc.${e.value}`)}</span>
             </button>
           ))}
         </div>
       </fieldset>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-heading mb-3">Fréquence actuelle</legend>
+        <legend className="text-sm font-semibold text-heading mb-3">{t('step_profile.frequency_legend')}</legend>
         <div className="grid grid-cols-2 gap-3">
           {FREQUENCE_OPTIONS.map((f) => (
             <button
@@ -77,20 +77,18 @@ export function StepProfile({
               onClick={() => onChangeFrequence(f.value)}
               aria-pressed={frequenceActuelle === f.value}
               className={`px-3 py-3 rounded-xl border text-center transition-colors cursor-pointer ${
-                frequenceActuelle === f.value
-                  ? 'border-brand bg-brand/10'
-                  : 'border-divider hover:border-brand/30'
+                frequenceActuelle === f.value ? 'border-brand bg-brand/10' : 'border-divider hover:border-brand/30'
               }`}
             >
-              <span className="text-sm font-semibold text-heading">{f.label}</span>
+              <span className="text-sm font-semibold text-heading">{t(`frequence.${f.value}`)}</span>
             </button>
           ))}
         </div>
       </fieldset>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-heading mb-3">Blessures / sensibilités</legend>
-        <div className="flex flex-wrap gap-2" role="group">
+        <legend className="text-sm font-semibold text-heading mb-3">{t('step_profile.injuries_legend')}</legend>
+        <div className="flex flex-wrap gap-2">
           {BLESSURE_OPTIONS.map((b) => (
             <button
               key={b.value}
@@ -103,7 +101,7 @@ export function StepProfile({
                   : 'border-divider text-muted hover:border-brand/30'
               }`}
             >
-              {b.label}
+              {t(`blessure.${b.value}`)}
             </button>
           ))}
         </div>
@@ -113,7 +111,7 @@ export function StepProfile({
             value={blessureDetail}
             onChange={(e) => onChangeBlessureDetail(e.target.value)}
             maxLength={300}
-            placeholder="Précise ta blessure..."
+            placeholder={t('step_profile.injury_detail_placeholder')}
             className="mt-3 w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint focus:outline-none focus:border-brand"
           />
         )}
@@ -122,7 +120,7 @@ export function StepProfile({
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label htmlFor="age" className="text-sm font-semibold text-heading mb-2 block">
-            Age (optionnel)
+            {t('step_profile.age_label')}
           </label>
           <input
             id="age"
@@ -131,13 +129,13 @@ export function StepProfile({
             max={99}
             value={age}
             onChange={(e) => onChangeAge(e.target.value)}
-            placeholder="Ex : 30"
+            placeholder={t('step_profile.age_placeholder')}
             className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint focus:outline-none focus:border-brand"
           />
         </div>
         <div>
           <label htmlFor="sexe" className="text-sm font-semibold text-heading mb-2 block">
-            Sexe (optionnel)
+            {t('step_profile.sex_label')}
           </label>
           <select
             id="sexe"
@@ -146,16 +144,14 @@ export function StepProfile({
             className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading focus:outline-none focus:border-brand"
           >
             <option value="">-</option>
-            <option value="homme">Homme</option>
-            <option value="femme">Femme</option>
-            <option value="autre">Autre</option>
+            <option value="homme">{t('step_profile.sex_male')}</option>
+            <option value="femme">{t('step_profile.sex_female')}</option>
+            <option value="autre">{t('step_profile.sex_other')}</option>
           </select>
         </div>
       </div>
 
-      <p className="text-xs text-faint">
-        Ces infos permettent d'affiner le programme — elles restent privées.
-      </p>
+      <p className="text-xs text-faint">{t('step_profile.privacy_note')}</p>
 
       <div className="flex gap-3">
         <button
@@ -163,7 +159,7 @@ export function StepProfile({
           onClick={onBack}
           className="flex-1 py-4 rounded-xl text-sm font-bold border border-divider text-muted hover:text-heading transition-colors cursor-pointer"
         >
-          Retour
+          {t('step_profile.back')}
         </button>
         <button
           type="button"
@@ -171,7 +167,7 @@ export function StepProfile({
           disabled={!isValid}
           className="flex-1 cta-gradient py-4 rounded-xl text-sm font-bold text-white tracking-wide cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Suivant
+          {t('step_profile.next')}
         </button>
       </div>
     </div>

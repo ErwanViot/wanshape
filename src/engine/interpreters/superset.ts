@@ -1,8 +1,14 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { SupersetBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
-export function expandSuperset(block: SupersetBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
+export function expandSuperset(
+  block: SupersetBlock,
+  blockIndex: number,
+  totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
+): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.superset;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -13,7 +19,7 @@ export function expandSuperset(block: SupersetBlock, blockIndex: number, totalBl
     timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `${block.sets} séries - ${block.pairs.length} paire${block.pairs.length > 1 ? 's' : ''}`,
+    instructions: labels.setsAndPairs(block.sets, block.pairs.length),
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });
@@ -60,8 +66,8 @@ export function expandSuperset(block: SupersetBlock, blockIndex: number, totalBl
           phase: 'rest',
           timerMode: 'countdown',
           duration: block.restBetweenPairs,
-          exerciseName: 'Repos',
-          instructions: `Prochain : ${nextPair.exercises[0].name}`,
+          exerciseName: labels.rest,
+          instructions: labels.nextExercise(nextPair.exercises[0].name),
           ...base,
           setInfo,
           estimatedDuration: block.restBetweenPairs,
@@ -76,8 +82,8 @@ export function expandSuperset(block: SupersetBlock, blockIndex: number, totalBl
         phase: 'rest',
         timerMode: 'countdown',
         duration: block.restBetweenSets,
-        exerciseName: 'Repos',
-        instructions: `Série ${set + 2}/${block.sets} dans...`,
+        exerciseName: labels.rest,
+        instructions: labels.nextSupersetSet(set + 2, block.sets),
         ...base,
         setInfo,
         estimatedDuration: block.restBetweenSets,

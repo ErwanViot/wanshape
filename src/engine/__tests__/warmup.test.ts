@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import type { WarmupBlock, CooldownBlock } from '../../types/session.ts';
-import { expandWarmup } from '../interpreters/warmup.ts';
+import type { CooldownBlock, WarmupBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, TRANSITION_DURATION } from '../constants.ts';
+import { expandWarmup } from '../interpreters/warmup.ts';
 
 function makeWarmupBlock(overrides?: Partial<WarmupBlock>): WarmupBlock {
   return {
@@ -46,14 +46,12 @@ describe('expandWarmup', () => {
 
   it('doubles duration for bilateral exercises', () => {
     const block = makeWarmupBlock({
-      exercises: [
-        { name: 'Fentes', duration: 20, instructions: 'Alterner', bilateral: true },
-      ],
+      exercises: [{ name: 'Fentes', duration: 20, instructions: 'Alterner', bilateral: true }],
     });
     const steps = expandWarmup(block, 0, 1);
 
     expect(steps[1].duration).toBe(40);
-    expect(steps[1].instructions).toContain('20s par cote');
+    expect(steps[1].instructions).toContain('20s par côté');
   });
 
   it('tags all steps with correct blockIndex and totalBlocks', () => {
@@ -117,9 +115,7 @@ describe('expandWarmup', () => {
     const block: CooldownBlock = {
       type: 'cooldown',
       name: 'Retour au calme',
-      exercises: [
-        { name: 'Etirements', duration: 30, instructions: 'Etirer' },
-      ],
+      exercises: [{ name: 'Etirements', duration: 30, instructions: 'Etirer' }],
     };
     const steps = expandWarmup(block, 2, 3);
 

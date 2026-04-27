@@ -1,0 +1,86 @@
+{
+  "discover": {
+    "page_title": "Découvrir",
+    "page_description": "Explore nos 8 formats d'entraînement et notre bibliothèque d'exercices.",
+    "heading": "Explore ton terrain de jeu",
+    "subtitle": "Formats d'entraînement, exercices et tout ce qu'il faut pour progresser.",
+    "formats_section": "Nos formats",
+    "formats_more": "En savoir plus",
+    "exercises_section": "Exercices",
+    "exercises_more": "Tout voir",
+    "more_exercises": "+{{n}} exercices"
+  },
+  "formats": {
+    "page_title": "Formats de séance",
+    "page_description": "8 formats d'entraînement sans matériel : Pyramide, Renforcement, Superset, EMOM, Circuit, AMRAP, HIIT et Tabata. Découvrez chaque méthode.",
+    "heading": "Les formats de séance",
+    "back_aria": "Retour à l'accueil",
+    "intro": "<strong>8 formats</strong> alternent au fil des jours : les séances intenses sont plus courtes, les séances de renforcement et d'endurance plus longues. Toutes incluent échauffement et étirements.",
+    "intensity_aria": "Intensité : {{n}} sur 5",
+    "footer_note": "Les durées indiquées incluent l'échauffement et les étirements.",
+    "img_alt": "Format {{name}}"
+  },
+  "format_page_meta": {
+    "doc_title": "{{name}} — Format d'entraînement",
+    "doc_title_fallback": "Format",
+    "doc_description": "{{name}} : {{short}} Découvre le principe, le protocole, les bénéfices et les conseils pour ce format d'entraînement sans matériel."
+  },
+  "format_page": {
+    "back_aria": "Retour aux formats",
+    "img_alt": "Format {{name}}",
+    "intensity_aria": "Intensité : {{n}} sur 5",
+    "section_principle": "Principe",
+    "section_protocol": "Comment ça se passe",
+    "section_benefits": "Bénéfices",
+    "section_audience": "Pour qui ?",
+    "section_tips": "Nos conseils",
+    "section_mistakes": "Erreurs courantes",
+    "link_exercises": "Nos exercices →",
+    "link_programs": "Nos programmes →",
+    "all_formats": "Tous les formats",
+    "today_session": "Séance du jour →"
+  },
+  "exercises": {
+    "page_title": "Nos exercices",
+    "page_description": "Tous les exercices Wan2Fit : fiches détaillées avec exécution, variantes, conseils et erreurs courantes.",
+    "heading": "Nos exercices",
+    "back_aria": "Retour à l'accueil",
+    "intro": "Retrouvez ici les fiches détaillées de nos exercices : exécution, respiration, variantes, conseils et erreurs courantes.",
+    "footer_note": "De nouvelles fiches sont ajoutées régulièrement.",
+    "variant_one": "{{n}} variante",
+    "variant_other": "{{n}} variantes"
+  },
+  "exercise_page": {
+    "back_aria": "Retour aux exercices",
+    "demo_aria": "Démonstration : {{name}}",
+    "doc_title": "{{name}} — Exercice",
+    "doc_title_fallback": "Exercice",
+    "doc_description": "{{name}} : {{short}} Exécution, variantes, conseils et erreurs courantes.",
+    "section_execution": "Exécution",
+    "section_breathing": "Respiration",
+    "section_benefits": "Bénéfices",
+    "section_variants": "Variantes",
+    "section_tips": "Nos conseils",
+    "section_mistakes": "Erreurs courantes",
+    "link_formats": "Les formats →",
+    "link_programs": "Nos programmes →",
+    "all_exercises": "Nos exercices",
+    "today_session": "Séance du jour →"
+  },
+  "content_section": {
+    "title": "{{title}}"
+  },
+  "category": {
+    "upper": "Haut du corps",
+    "lower": "Bas du corps",
+    "core": "Core",
+    "cardio": "Cardio",
+    "full-body": "Full body",
+    "mobility": "Mobilité"
+  },
+  "difficulty_level": {
+    "1": "Accessible",
+    "2": "Intermédiaire",
+    "3": "Avancé"
+  }
+}

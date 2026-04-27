@@ -1,0 +1,86 @@
+{
+  "discover": {
+    "page_title": "Discover",
+    "page_description": "Explore our 8 training formats and exercise library.",
+    "heading": "Explore your playground",
+    "subtitle": "Training formats, exercises and everything you need to progress.",
+    "formats_section": "Our formats",
+    "formats_more": "Learn more",
+    "exercises_section": "Exercises",
+    "exercises_more": "View all",
+    "more_exercises": "+{{n}} exercises"
+  },
+  "formats": {
+    "page_title": "Session formats",
+    "page_description": "8 equipment-free training formats: Pyramid, Strength, Superset, EMOM, Circuit, AMRAP, HIIT and Tabata. Discover each method.",
+    "heading": "Session formats",
+    "back_aria": "Back to home",
+    "intro": "<strong>8 formats</strong> alternate throughout the week: intense sessions are shorter, strength and endurance sessions longer. All include warm-up and cool-down.",
+    "intensity_aria": "Intensity: {{n}} out of 5",
+    "footer_note": "Durations shown include warm-up and cool-down.",
+    "img_alt": "Format {{name}}"
+  },
+  "format_page_meta": {
+    "doc_title": "{{name}} — Training format",
+    "doc_title_fallback": "Format",
+    "doc_description": "{{name}}: {{short}} Discover the principle, protocol, benefits and tips for this no-equipment training format."
+  },
+  "format_page": {
+    "back_aria": "Back to formats",
+    "img_alt": "Format {{name}}",
+    "intensity_aria": "Intensity: {{n}} out of 5",
+    "section_principle": "Principle",
+    "section_protocol": "How it works",
+    "section_benefits": "Benefits",
+    "section_audience": "Who is it for?",
+    "section_tips": "Our tips",
+    "section_mistakes": "Common mistakes",
+    "link_exercises": "Our exercises →",
+    "link_programs": "Our programs →",
+    "all_formats": "All formats",
+    "today_session": "Today's session →"
+  },
+  "exercises": {
+    "page_title": "Our exercises",
+    "page_description": "All Wan2Fit exercises: detailed guides with execution, variants, tips and common mistakes.",
+    "heading": "Our exercises",
+    "back_aria": "Back to home",
+    "intro": "Find detailed guides for our exercises: execution, breathing, variants, tips and common mistakes.",
+    "footer_note": "New guides are added regularly.",
+    "variant_one": "{{n}} variant",
+    "variant_other": "{{n}} variants"
+  },
+  "exercise_page": {
+    "back_aria": "Back to exercises",
+    "demo_aria": "Demo: {{name}}",
+    "doc_title": "{{name}} — Exercise",
+    "doc_title_fallback": "Exercise",
+    "doc_description": "{{name}}: {{short}} Technique, variations, tips and common mistakes.",
+    "section_execution": "Execution",
+    "section_breathing": "Breathing",
+    "section_benefits": "Benefits",
+    "section_variants": "Variants",
+    "section_tips": "Our tips",
+    "section_mistakes": "Common mistakes",
+    "link_formats": "Training formats →",
+    "link_programs": "Our programs →",
+    "all_exercises": "Our exercises",
+    "today_session": "Today's session →"
+  },
+  "content_section": {
+    "title": "{{title}}"
+  },
+  "category": {
+    "upper": "Upper body",
+    "lower": "Lower body",
+    "core": "Core",
+    "cardio": "Cardio",
+    "full-body": "Full body",
+    "mobility": "Mobility"
+  },
+  "difficulty_level": {
+    "1": "Easy",
+    "2": "Intermediate",
+    "3": "Advanced"
+  }
+}

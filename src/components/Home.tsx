@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
@@ -6,18 +7,20 @@ import { useSession } from '../hooks/useSession.ts';
 import { getTodayKey, getTomorrowKey, parseDateKey } from '../utils/date.ts';
 
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
-import { WelcomeModal, useShowWelcome } from './WelcomeModal.tsx';
 import { ConnectedContent } from './home/ConnectedContent.tsx';
 import { VisitorContent } from './home/VisitorContent.tsx';
-
-function formatShortDate(dateKey: string): string {
-  const d = parseDateKey(dateKey);
-  const dd = String(d.getDate()).padStart(2, '0');
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  return `${dd}.${mm}.${d.getFullYear()}`;
-}
+import { useShowWelcome, WelcomeModal } from './WelcomeModal.tsx';
 
 export function Home() {
+  const { t, i18n } = useTranslation('home');
+  const formatShortDate = (dateKey: string) => {
+    const d = parseDateKey(dateKey);
+    return d.toLocaleDateString(i18n.language, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  };
   const todayKey = getTodayKey();
   const tomorrowKey = getTomorrowKey();
   const { session, loading, error } = useSession(todayKey);
@@ -29,8 +32,7 @@ export function Home() {
 
   useDocumentHead({
     title: 'Wan2Fit',
-    description:
-      "Chaque jour, une séance de sport guidée sans matériel. 8 formats d'entraînement, 25-40 min. Gratuit pour commencer, premium pour aller plus loin.",
+    description: t('page_description'),
   });
 
   const handleStartSession = () => {
@@ -66,7 +68,6 @@ export function Home() {
           formatShortDate={formatShortDate}
         />
       )}
-
     </>
   );
 }

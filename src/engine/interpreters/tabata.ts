@@ -1,8 +1,14 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { TabataBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, TABATA_DEFAULTS, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
-export function expandTabata(block: TabataBlock, blockIndex: number, totalBlocks: number): AtomicStep[] {
+export function expandTabata(
+  block: TabataBlock,
+  blockIndex: number,
+  totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
+): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS.tabata;
   const base = { blockName: block.name, blockType: block.type, blockColor: color, blockIndex, totalBlocks };
@@ -56,11 +62,11 @@ export function expandTabata(block: TabataBlock, blockIndex: number, totalBlocks
         // Rest after each exercise, except after the very last exercise of the very last round/set
         if (!isVeryLast) {
           const isEndOfRound = isLastExercise;
-          const nextLabel = isEndOfRound
+          const nextLine = isEndOfRound
             ? isLastRound
-              ? `Set ${set + 2}/${sets} dans...`
-              : `Round ${round + 2}/${rounds} - ${block.exercises[0].name}`
-            : `${nextEx!.name}`;
+              ? labels.nextSetCountdown(set + 2, sets)
+              : labels.nextRoundFirst(round + 2, rounds, block.exercises[0].name)
+            : labels.nextExercise(nextEx!.name);
 
           steps.push({
             id: `block-${blockIndex}-set-${set}-round-${round}-ex-${exIdx}-rest`,
@@ -68,8 +74,8 @@ export function expandTabata(block: TabataBlock, blockIndex: number, totalBlocks
             timerMode: 'countdown',
             duration:
               isEndOfRound && !isLastRound ? rest : isEndOfRound && isLastRound && !isLastSet ? restBetweenSets : rest,
-            exerciseName: 'Repos',
-            instructions: `Prochain : ${nextLabel}`,
+            exerciseName: labels.rest,
+            instructions: nextLine,
             ...base,
             setInfo,
             roundInfo,

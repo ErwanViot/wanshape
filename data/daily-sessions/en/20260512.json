@@ -1,0 +1,117 @@
+{
+  "date": "20260512",
+  "title": "Balanced Strength Superset",
+  "description": "3 antagonist pairs push-ups/row, pike push-ups/back extensions and dips/prone Y raises",
+  "estimatedDuration": 33,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, retract and protract the shoulder blades without bending the elbows"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Complete Push/Pull Superset",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Standard push-ups",
+              "reps": 10,
+              "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+            },
+            {
+              "name": "Inverted row (table)",
+              "reps": 10,
+              "instructions": "Under a table, pull the chest to the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hips high in inverted V, lower the head between the hands"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "Lying face down, lift chest off the floor, squeeze shoulder blades"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+            },
+            {
+              "name": "Prone Y raises",
+              "reps": 10,
+              "instructions": "Lying face down, arms in Y, lift and hold 2s"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 25,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

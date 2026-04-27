@@ -78,12 +78,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Wan2Fit" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,800,900&display=swap" rel="stylesheet" />
+    <!-- Fonts: self-hosted, see src/styles/fonts.css. -->
+
+    <!-- LCP preload: visitor hero image. ~96 KB, downloaded in parallel
+         with the JS bundle so it lands before VisitorContent mounts. -->
+    <link rel="preload" as="image" href="/images/hero-landing-couple.webp" fetchpriority="high" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -92,15 +91,14 @@
 
   </head>
   <body>
-    <script>
-      (function() {
-        var p = localStorage.getItem('wan2fit-theme') || 'light';
-        var t = p === 'system'
-          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-          : p;
-        if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
-      })();
-    </script>
+    <!--
+      Theme flash prevention — synchronous, external (kept out of inline
+      script-src). IMPORTANT: never add `defer` or `async` here. The script
+      must block the parser so the <html data-theme> attribute is set
+      BEFORE the first paint, otherwise users on light theme see a dark
+      flash while React hydrates.
+    -->
+    <script src="/theme-init.js"></script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,0 +1,119 @@
+{
+  "date": "20260304",
+  "title": "Pyramid Challenge",
+  "description": "Up-down pyramid of Hindu push-ups and squats followed by a classic strength block",
+  "estimatedDuration": 35,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Up-Down Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Hindu push-ups",
+          "instructions": "Diving motion: dive down then arc back up"
+        },
+        {
+          "name": "Squats",
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Strength",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Reverse lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Big step backward, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Seated, feet off the floor, twist torso left to right"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

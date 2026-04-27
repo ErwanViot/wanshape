@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   videoUrl: string;
@@ -6,10 +7,15 @@ interface Props {
 }
 
 export function PlayerVideoDemo({ videoUrl, exerciseName }: Props) {
+  const { t } = useTranslation('player');
   const [hasError, setHasError] = useState(false);
   const handleError = useCallback(() => setHasError(true), []);
 
   if (hasError) return null;
+
+  const ariaLabel = exerciseName
+    ? t('video_demo.aria_label_with_name', { name: exerciseName })
+    : t('video_demo.aria_label_generic');
 
   return (
     <div className="w-full max-w-xs mx-auto rounded-xl overflow-hidden">
@@ -23,7 +29,7 @@ export function PlayerVideoDemo({ videoUrl, exerciseName }: Props) {
         playsInline
         preload="metadata"
         className="w-full aspect-video object-cover"
-        aria-label={exerciseName ? `Démonstration : ${exerciseName}` : "Démonstration de l'exercice"}
+        aria-label={ariaLabel}
         onError={handleError}
       >
         <source src={videoUrl} type="video/mp4" />

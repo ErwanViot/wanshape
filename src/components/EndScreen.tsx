@@ -1,11 +1,13 @@
-import { Check, Download, Share2, Trophy } from 'lucide-react';
+import { Check, Download, Share2, Sparkles, Trophy, X } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { STORAGE_KEYS } from '../config/storage-keys.ts';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
+import { computeDifficulty } from '../utils/sessionDifficulty.ts';
 import { shareSession } from '../utils/share.ts';
 
 interface Props {
@@ -18,8 +20,10 @@ interface Props {
 }
 
 export function EndScreen({ session, amrapRounds, durationSeconds, onBack, programSessionId, customSessionId }: Props) {
-  const { user } = useAuth();
+  const { t } = useTranslation(['player', 'common']);
+  const { user, profile, loading: authLoading } = useAuth();
   const { save, saved, error: saveError } = useSaveCompletion();
+  const isPremium = profile?.subscription_tier === 'premium';
 
   useEffect(() => {
     if (!user || !durationSeconds) return;
@@ -51,20 +55,44 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
   const rawMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
   const realMinutes = rawMinutes > 0 ? rawMinutes : 1;
   const displayMinutes = durationSeconds > 0 && durationSeconds < 60 ? '< 1' : String(realMinutes);
+  const difficultyLevel = computeDifficulty(session).level;
+  const difficultyLabel = t(`common:difficulty.${difficultyLevel}`);
 
   const [shareState, setShareState] = useState<'idle' | 'loading' | 'shared' | 'copied'>('idle');
 
   const handleShare = useCallback(async () => {
     setShareState('loading');
     try {
-      const result = await shareSession({ session, realMinutes, amrapRounds });
+      const result = await shareSession({
+        session,
+        realMinutes,
+        amrapRounds,
+        difficultyLabel,
+        labels: {
+          minutes: t('end_screen.share_label_minutes'),
+          blocks: t('end_screen.share_label_blocks'),
+          difficulty: t('end_screen.share_label_difficulty'),
+          rounds: t('end_screen.share_label_rounds'),
+          trophyMessage: t('end_screen.share_trophy_message'),
+          joinCta: t('end_screen.share_join_cta'),
+          amrapSuffix: t('end_screen.share_amrap_suffix'),
+        },
+      });
       setShareState(result);
       setTimeout(() => setShareState('idle'), 3000);
-    } catch (err) {
+    } catch {
       // User cancelled share sheet or other error
       setShareState('idle');
     }
-  }, [session, realMinutes, amrapRounds]);
+  }, [session, realMinutes, amrapRounds, difficultyLabel, t]);
+
+  const minutesUnit = displayMinutes === '< 1' ? t('end_screen.minutes_unit_one') : t('end_screen.minutes_unit_other');
+
+  const backLabel = programSessionId
+    ? t('end_screen.back_program')
+    : customSessionId
+      ? t('end_screen.back_custom_session')
+      : t('end_screen.back_home');
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center bg-[#0a0a0a]">
@@ -73,7 +101,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
         <Trophy className="w-10 h-10 text-brand" aria-hidden="true" />
       </div>
 
-      <h1 className="font-display text-3xl sm:text-4xl font-bold text-white">Séance terminée !</h1>
+      <h1 className="font-display text-3xl sm:text-4xl font-bold text-white">{t('end_screen.title')}</h1>
 
       <p className="text-white/60 text-lg">{session.title}</p>
 
@@ -92,13 +120,13 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
           >
             <polyline points="20 6 9 17 4 12" />
           </svg>
-          Séance enregistrée
+          {t('end_screen.saved_badge')}
         </div>
       )}
 
       {user && saveError && !saved && (
         <div className="flex flex-col items-center gap-2 text-sm">
-          <p className="text-red-400">Enregistrement échoué</p>
+          <p className="text-red-400">{t('end_screen.save_error')}</p>
           <button
             type="button"
             onClick={() =>
@@ -118,7 +146,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
             }
             className="text-brand hover:text-brand-secondary font-semibold transition-colors cursor-pointer"
           >
-            Réessayer
+            {t('end_screen.retry')}
           </button>
         </div>
       )}
@@ -126,21 +154,22 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
       <div className="flex gap-6">
         <div className="text-center">
           <div className="text-3xl font-bold text-white">{displayMinutes}</div>
-          <div className="text-white/50 text-sm">{displayMinutes === '< 1' ? 'minute' : 'minutes'}</div>
+          <div className="text-white/50 text-sm">{minutesUnit}</div>
         </div>
         <div className="text-center">
           <div className="text-3xl font-bold text-white">{session.blocks.length}</div>
-          <div className="text-white/50 text-sm">blocs</div>
+          <div className="text-white/50 text-sm">{t('end_screen.blocks_unit')}</div>
         </div>
         {amrapRounds > 0 && (
           <div className="text-center">
             <div className="text-3xl font-bold text-amrap">{amrapRounds}</div>
-            <div className="text-white/50 text-sm">rounds AMRAP</div>
+            <div className="text-white/50 text-sm">{t('end_screen.amrap_rounds_unit')}</div>
           </div>
         )}
       </div>
 
       {!user && supabase && <SignupNudge />}
+      {user && !authLoading && profile && !isPremium && <PremiumTeaser />}
 
       <div className="flex flex-col gap-3 mt-4 w-full max-w-xs">
         <button
@@ -152,22 +181,22 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
           {shareState === 'loading' ? (
             <>
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              Génération…
+              {t('end_screen.share_loading')}
             </>
           ) : shareState === 'shared' ? (
             <>
               <Check className="w-5 h-5" aria-hidden="true" />
-              Partagé !
+              {t('end_screen.share_shared')}
             </>
           ) : shareState === 'copied' ? (
             <>
               <Download className="w-5 h-5" aria-hidden="true" />
-              Image téléchargée &amp; lien copié !
+              {t('end_screen.share_copied')}
             </>
           ) : (
             <>
               <Share2 className="w-5 h-5" aria-hidden="true" />
-              Partager ma séance
+              {t('end_screen.share_idle')}
             </>
           )}
         </button>
@@ -177,7 +206,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
           onClick={onBack}
           className="px-8 py-4 rounded-2xl bg-white/10 text-white font-bold text-lg active:scale-95 transition-transform"
         >
-          {programSessionId ? 'Retour au programme' : customSessionId ? 'Retour à la séance' : "Retour à l'accueil"}
+          {backLabel}
         </button>
       </div>
     </div>
@@ -187,6 +216,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 const NUDGE_COOLDOWN_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 function SignupNudge() {
+  const { t } = useTranslation('player');
   const [visible, setVisible] = useState(() => {
     try {
       const dismissed = localStorage.getItem(STORAGE_KEYS.NUDGE_DISMISSED);
@@ -210,17 +240,73 @@ function SignupNudge() {
 
   return (
     <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 p-5 text-left">
-      <p className="text-white text-sm font-semibold mb-1">Ne perds pas ta progression</p>
-      <p className="text-white/50 text-xs leading-relaxed mb-4">
-        Sans compte, cette séance disparaît. Crée ton compte gratuit pour suivre ta progression et garder ta dynamique.
-      </p>
+      <p className="text-white text-sm font-semibold mb-1">{t('signup_nudge.title')}</p>
+      <p className="text-white/50 text-xs leading-relaxed mb-4">{t('signup_nudge.body')}</p>
       <div className="flex items-center gap-3">
         <Link to="/signup" className="btn-primary px-5 py-2.5 rounded-xl text-sm font-bold text-white">
-          Créer mon compte
+          {t('signup_nudge.cta')}
         </Link>
         <button type="button" onClick={dismiss} className="text-white/40 text-xs hover:text-white/60 transition-colors">
-          Plus tard
+          {t('signup_nudge.dismiss')}
         </button>
+      </div>
+    </div>
+  );
+}
+
+const PREMIUM_TEASER_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+/**
+ * Shown on the EndScreen to non-premium authenticated users, right after the
+ * rush of completing a session — the highest-engagement moment in the funnel
+ * (audit 2026-04-18 06-business-ux, R2). Cooldown 7d to stay friendly: a
+ * regular exerciser sees it once a week, not at every session.
+ */
+function PremiumTeaser() {
+  const { t } = useTranslation('player');
+  const [visible, setVisible] = useState(() => {
+    try {
+      const dismissed = localStorage.getItem(STORAGE_KEYS.PREMIUM_TEASER_DISMISSED);
+      if (!dismissed) return true;
+      return Date.now() - Number(dismissed) > PREMIUM_TEASER_COOLDOWN_MS;
+    } catch {
+      return true;
+    }
+  });
+
+  if (!visible) return null;
+
+  const dismiss = () => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.PREMIUM_TEASER_DISMISSED, String(Date.now()));
+    } catch {
+      /* ignore */
+    }
+    setVisible(false);
+  };
+
+  return (
+    <div className="relative w-full max-w-sm rounded-2xl overflow-hidden bg-gradient-to-br from-brand via-brand-secondary to-brand">
+      <div className="p-5 text-left">
+        <button
+          type="button"
+          onClick={dismiss}
+          aria-label={t('premium_teaser.dismiss_aria')}
+          className="absolute top-2.5 right-2.5 text-white/70 hover:text-white transition-colors"
+        >
+          <X className="w-4 h-4" aria-hidden="true" />
+        </button>
+        <div className="flex items-center gap-2 mb-2">
+          <Sparkles className="w-4 h-4 text-white" aria-hidden="true" />
+          <p className="text-white text-sm font-semibold">{t('premium_teaser.heading')}</p>
+        </div>
+        <p className="text-white/80 text-xs leading-relaxed mb-4 pr-4">{t('premium_teaser.body')}</p>
+        <Link
+          to="/premium"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-sm font-bold text-white hover:bg-white/30 transition-colors"
+        >
+          {t('premium_teaser.cta')}
+        </Link>
       </div>
     </div>
   );

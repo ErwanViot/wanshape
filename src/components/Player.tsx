@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router';
 import { HeartPulse } from 'lucide-react';
-import { BLOCK_LABELS } from '../engine/constants.ts';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Navigate, useNavigate, useParams } from 'react-router';
 import { compileSession } from '../engine/interpreter.ts';
+import { useEngineLabels } from '../engine/useEngineLabels.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
 import { useSession } from '../hooks/useSession.ts';
@@ -28,9 +29,10 @@ export function PlayerPage() {
   const { dateKey: paramDateKey } = useParams<{ dateKey?: string }>();
   const dateKey = paramDateKey ?? getTodayKey();
   const { session, loading } = useSession(dateKey);
+  const { t } = useTranslation('player');
 
   useDocumentHead({
-    title: session ? `${session.title} — En cours` : 'Séance en cours',
+    title: session ? `${session.title} — ${t('page.title_in_progress')}` : t('page.title_default'),
   });
 
   if (!isHealthAccepted()) {
@@ -59,6 +61,7 @@ function getBlockProgress(step: AtomicStep): string {
 }
 
 function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep }) {
+  const { t } = useTranslation('common');
   const progress = getBlockProgress(step);
 
   return (
@@ -76,7 +79,7 @@ function BlockBreadcrumb({ session, step }: { session: Session; step: AtomicStep
                 color: isActive ? step.blockColor : isPast ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.2)',
               }}
             >
-              {BLOCK_LABELS[block.type]}
+              {t(`block_name.${block.type}`)}
               {isActive && progress && ` - ${progress}`}
             </span>
           </span>
@@ -98,11 +101,11 @@ export function Player({
   backTo?: string;
 }) {
   const navigate = useNavigate();
-  const steps = useMemo(() => compileSession(session), [session]);
+  const { t } = useTranslation('player');
+  const engineLabels = useEngineLabels();
+  const steps = useMemo(() => compileSession(session, engineLabels), [session, engineLabels]);
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
-  const [showVideos, setShowVideos] = useState(
-    () => localStorage.getItem('wan2fit-show-exercise-videos') === 'true',
-  );
+  const [showVideos, setShowVideos] = useState(() => localStorage.getItem('wan2fit-show-exercise-videos') === 'true');
   const resumeButtonRef = useRef<HTMLButtonElement>(null);
   const quitDialogRef = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
@@ -123,7 +126,7 @@ export function Player({
     }
   }, [steps.length, startOnce, workout.status]);
 
-  // Focus the "Reprendre" button when pause overlay is shown
+  // Focus the resume button when pause overlay is shown
   useEffect(() => {
     if (workout.status === 'paused' && resumeButtonRef.current) {
       resumeButtonRef.current.focus();
@@ -176,7 +179,7 @@ export function Player({
             setShowQuitConfirm(true);
           }}
           className="absolute top-2 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/50 hover:text-white/80 hover:bg-white/20 transition-colors"
-          aria-label="Quitter la séance"
+          aria-label={t('quit_button.aria_label')}
         >
           <svg
             width="16"
@@ -202,22 +205,25 @@ export function Player({
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Pause"
+          aria-label={t('pause_overlay.title')}
           className="absolute inset-0 z-10 flex items-center justify-center bg-black/70"
           onKeyDown={(e) => {
             if (e.key === 'Escape') workout.togglePause();
-            if (e.key === 'Tab') { e.preventDefault(); resumeButtonRef.current?.focus(); }
+            if (e.key === 'Tab') {
+              e.preventDefault();
+              resumeButtonRef.current?.focus();
+            }
           }}
         >
           <div className="text-center">
-            <div className="text-4xl font-bold text-white mb-4">Pause</div>
+            <div className="text-4xl font-bold text-white mb-4">{t('pause_overlay.title')}</div>
             <button
               ref={resumeButtonRef}
               type="button"
               onClick={workout.togglePause}
               className="px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg active:scale-95 transition-transform"
             >
-              Reprendre
+              {t('pause_overlay.resume')}
             </button>
           </div>
         </div>
@@ -242,29 +248,40 @@ export function Player({
               if (!focusable || focusable.length === 0) return;
               const first = focusable[0];
               const last = focusable[focusable.length - 1];
-              if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-              else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+              if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+              } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+              }
             }
           }}
         >
           <div className="text-center px-6">
-            <p id="quit-dialog-title" className="text-xl font-bold text-white mb-2">Quitter la séance ?</p>
-            <p className="text-white/70 mb-6">Ta progression ne sera pas enregistrée.</p>
+            <p id="quit-dialog-title" className="text-xl font-bold text-white mb-2">
+              {t('quit_dialog.title')}
+            </p>
+            <p className="text-white/70 mb-6">{t('quit_dialog.body')}</p>
             <div className="flex gap-3 justify-center">
               <button
                 type="button"
-                onClick={() => { setShowQuitConfirm(false); workout.togglePause(); }}
+                onClick={() => {
+                  setShowQuitConfirm(false);
+                  workout.togglePause();
+                }}
                 className="px-6 py-3 rounded-xl bg-white/10 text-white font-semibold"
               >
-                Continuer
+                {t('quit_dialog.cancel')}
               </button>
               <button
                 type="button"
+                // biome-ignore lint/a11y/noAutofocus: alertdialog pattern — focus must land on the confirmation CTA to let the user cancel via Escape or confirm with Enter without hunting for the button.
                 autoFocus
                 onClick={() => navigate(backTo)}
                 className="px-6 py-3 rounded-xl bg-white text-black font-semibold"
               >
-                Quitter
+                {t('quit_dialog.confirm')}
               </button>
             </div>
           </div>
@@ -288,7 +305,13 @@ export function Player({
         )}
 
         {step.phase === 'work' && step.timerMode === 'emom' && (
-          <EMOMView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
+          <EMOMView
+            step={step}
+            remaining={workout.timer.remaining}
+            progress={workout.timer.progress}
+            showVideos={showVideos}
+            onToggleShowVideos={toggleShowVideos}
+          />
         )}
 
         {step.phase === 'work' && step.timerMode === 'amrap' && (
@@ -304,10 +327,18 @@ export function Player({
         )}
 
         {step.phase === 'work' && step.timerMode === 'countdown' && (
-          <ExerciseView step={step} remaining={workout.timer.remaining} progress={workout.timer.progress} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
+          <ExerciseView
+            step={step}
+            remaining={workout.timer.remaining}
+            progress={workout.timer.progress}
+            showVideos={showVideos}
+            onToggleShowVideos={toggleShowVideos}
+          />
         )}
 
-        {step.phase === 'work' && step.timerMode === 'manual' && <RepsView step={step} onDone={workout.done} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />}
+        {step.phase === 'work' && step.timerMode === 'manual' && (
+          <RepsView step={step} onDone={workout.done} showVideos={showVideos} onToggleShowVideos={toggleShowVideos} />
+        )}
 
         {step.phase === 'rest' && (
           <RestView
@@ -332,9 +363,9 @@ export function Player({
       <div className="px-6 pb-3 text-center space-y-0.5">
         <p className="text-sm text-white/70 inline-flex items-center gap-1.5">
           <HeartPulse className="w-4 h-4 shrink-0" aria-hidden="true" />
-          Écoute ton corps. Adapte l'effort, la qualité prime sur la quantité.
+          {t('health_reminder.listen')}
         </p>
-        <p className="text-sm text-white/70">En cas de douleur, arrête immédiatement.</p>
+        <p className="text-sm text-white/70">{t('health_reminder.stop_pain')}</p>
       </div>
     </div>
   );

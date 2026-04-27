@@ -1,0 +1,140 @@
+{
+  "page_description": "Chaque jour, une séance de sport guidée sans matériel. 8 formats d'entraînement, 25-40 min. Gratuit pour commencer, premium pour aller plus loin.",
+  "sr_title": "Wan2Fit — Ta séance de sport quotidienne",
+  "connected": {
+    "greeting": "Salut {{firstName}}",
+    "ready": "Prêt à bouger ?",
+    "today_card": {
+      "heading": "Séance du jour",
+      "session_alt": "Séance du jour : {{title}}",
+      "duration": "~{{duration}} min",
+      "cta": "C'est parti",
+      "load_error": "Impossible de charger la séance",
+      "load_error_hint": "Vérifie ta connexion et réessaie.",
+      "empty_alt": "Pas de séance prévue",
+      "empty": "Pas de séance aujourd'hui"
+    },
+    "ai_card": {
+      "heading": "Séance sur-mesure",
+      "badge_premium": "Premium",
+      "session_alt": "Séance personnalisée par IA",
+      "description": "L'IA génère une séance adaptée à mes envies et mon niveau.",
+      "cta_play": "C'est parti",
+      "cta_unlock": "Débloquer avec Premium"
+    },
+    "program_card": {
+      "heading_active": "Mon programme",
+      "heading_empty": "Programmes",
+      "program_alt": "Programmes d'entraînement",
+      "progress": "{{completed}}/{{total}} séances",
+      "next_session": "Prochaine :",
+      "cta_play": "C'est parti",
+      "cta_choose": "Choisir un programme",
+      "description": "Un plan structuré sur plusieurs semaines pour progresser."
+    }
+  },
+  "visitor": {
+    "hero": {
+      "badge": "Sans matériel, où tu veux",
+      "headline_1": "Progresse",
+      "headline_2": "à ton rythme",
+      "subtitle": "Une séance guidée chaque jour, 8 formats variés, 25-40 min. Gratuit pour commencer, premium pour aller plus loin.",
+      "cta_signup": "Commencer gratuitement",
+      "cta_try": "Essayer sans inscription"
+    },
+    "how_it_works": {
+      "heading": "Comment ça marche",
+      "step_1_title": "Choisis ta séance",
+      "step_1_desc": "Séance du jour, format libre ou programme : c'est toi qui décides.",
+      "step_2_title": "Lance-toi",
+      "step_2_desc": "Exercices guidés, chrono intégré, transitions automatiques.",
+      "step_3_title": "Suis ta progression",
+      "step_3_desc": "Historique, stats et programmes pour aller toujours plus loin."
+    },
+    "feature_today": {
+      "label": "Séance du jour",
+      "heading_1": "Chaque jour,",
+      "heading_2": "une nouvelle séance",
+      "body": "Pas besoin de réfléchir. Tu ouvres l'app, ta séance t'attend — avec un format différent chaque jour.",
+      "bullet_1": "8 formats variés : HIIT, EMOM, Circuit, Tabata…",
+      "bullet_2": "25 à 40 min, adapté à ton emploi du temps",
+      "bullet_3": "100% sans matériel, faisable partout",
+      "cta": "Essayer maintenant",
+      "session_alt": "Séance du jour : {{title}}",
+      "duration": "~{{duration}} min",
+      "today_label": "Aujourd'hui",
+      "empty_alt": "Pas de séance prévue",
+      "empty": "Pas de séance aujourd'hui",
+      "play_cta": "C'est parti"
+    },
+    "feature_player": {
+      "label": "Entraînement guidé",
+      "heading_1": "Tu n'as qu'à",
+      "heading_2": "suivre le rythme",
+      "body": "Chrono, compteur de reps, transitions automatiques — le player gère tout pour que tu restes concentré sur l'effort.",
+      "bullet_1": "Timer et reps guidés en temps réel",
+      "bullet_2": "Enchaînement automatique des blocs",
+      "bullet_3": "Signal sonore à chaque transition",
+      "cta": "Lancer une séance",
+      "carousel_reps_alt": "Player — exercice en reps",
+      "carousel_emom_alt": "Player — EMOM avec timer",
+      "carousel_hiit_alt": "Player — HIIT Mountain climbers",
+      "carousel_cooldown_alt": "Player — Retour au calme"
+    },
+    "feature_ai": {
+      "label": "IA sur-mesure",
+      "badge": "Premium",
+      "heading_1": "Des séances créées",
+      "heading_2": "rien que pour toi",
+      "body": "L'intelligence artificielle génère des séances et des programmes adaptés à tes envies, ton niveau et tes objectifs.",
+      "bullet_1": "Séances personnalisées en quelques secondes",
+      "bullet_2": "Programmes sur-mesure avec progression intégrée",
+      "bullet_3": "S'adapte à tes retours et ta forme du moment",
+      "cta": "Découvrir Premium",
+      "carousel_quick_alt": "Créer une séance — Mode Rapide",
+      "carousel_detailed_alt": "Créer une séance — Mode Détaillé",
+      "carousel_expert_alt": "Créer une séance — Mode Expert",
+      "carousel_detail_alt": "Détail d'une séance personnalisée"
+    },
+    "feature_programs": {
+      "label": "Programmes guidés",
+      "heading_1": "Un plan structuré",
+      "heading_2": "pour progresser",
+      "body": "Suis un programme complet avec progression intégrée, suivi détaillé et séances adaptées à chaque étape.",
+      "bullet_1": "3 programmes inclus pour bien démarrer",
+      "bullet_2": "Suivi de complétion et objectifs clairs",
+      "bullet_3": "Des programmes sur mesure pour atteindre tes objectifs",
+      "cta": "Voir les programmes",
+      "carousel_list_alt": "Liste des programmes disponibles",
+      "carousel_goal_alt": "Création de programme — Objectif",
+      "carousel_profile_alt": "Création de programme — Profil",
+      "carousel_config_alt": "Création de programme — Configuration"
+    },
+    "about_teaser": {
+      "photo_alt": "Wan",
+      "question": "Pourquoi Wan2Fit ?",
+      "subtitle": "L'histoire derrière le projet — par Wan"
+    },
+    "cta_section": {
+      "heading": "Prêt à commencer ?",
+      "body": "Ta séance quotidienne t'attend — rejoins Wan2Fit et commence dès aujourd'hui.",
+      "signup": "Créer mon compte gratuit",
+      "explore": "Découvrir les formats"
+    }
+  },
+  "tomorrow": {
+    "label": "Demain",
+    "session_alt": "Séance de demain : {{title}}",
+    "duration": "~{{duration}} min"
+  },
+  "welcome_modal": {
+    "image_alt": "",
+    "title": "Bienvenue sur Wan2Fit !",
+    "subtitle": "Prêt(e) à te dépasser ? Voici comment commencer :",
+    "option_today_title": "Lancer la séance du jour",
+    "option_today_desc": "25-40 min, sans matériel",
+    "option_program_title": "Choisir un programme",
+    "option_program_desc": "Plusieurs semaines, résultats visibles",
+    "dismiss": "Je découvre par moi-même"
+  }
+}

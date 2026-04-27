@@ -1,0 +1,171 @@
+{
+  "page": {
+    "title_in_progress": "In progress",
+    "title_default": "Session in progress",
+    "title_custom": "Custom session",
+    "title_program": "Program session"
+  },
+  "quit_button": {
+    "aria_label": "Quit session"
+  },
+  "pause_overlay": {
+    "title": "Pause",
+    "resume": "Resume"
+  },
+  "quit_dialog": {
+    "title": "Quit session?",
+    "body": "Your progress will not be saved.",
+    "cancel": "Keep going",
+    "confirm": "Quit"
+  },
+  "health_reminder": {
+    "listen": "Listen to your body. Adapt the effort — quality over quantity.",
+    "stop_pain": "If you feel pain, stop immediately."
+  },
+  "progress_bar": {
+    "aria_label": "Session progress"
+  },
+  "block_transition": {
+    "block_indicator": "Block {{current}}/{{total}}"
+  },
+  "next_preview": {
+    "label": "Next: "
+  },
+  "exercise_view": {
+    "round": "Round {{current}}/{{total}}",
+    "set": "Set {{current}}/{{total}}",
+    "interval": "· Interval {{current}}/{{total}}",
+    "tempo": "Tempo {{value}}"
+  },
+  "reps_view": {
+    "round": "Round {{current}}/{{total}}",
+    "set": "Set {{current}}/{{total}}",
+    "reps_unit": "reps",
+    "done_button": "DONE ✓",
+    "tempo": "Tempo {{value}}"
+  },
+  "rest_view": {
+    "title": "Rest",
+    "round": "Round {{current}}/{{total}}",
+    "set": "Set {{current}}/{{total}}",
+    "interval": "· Interval {{current}}/{{total}}",
+    "skip": "Skip rest →"
+  },
+  "amrap_view": {
+    "explanation": "Cycle through the exercises. Complete as many rounds as possible in the time cap.",
+    "rounds_label": "rounds",
+    "increment_button": "+1 Round",
+    "tracking_hint": "Tap each time you complete a full round to track your progress"
+  },
+  "emom_view": {
+    "minute": "Minute {{current}}/{{total}}",
+    "explanation": "Complete the exercises within the minute. Remaining time is your recovery."
+  },
+  "end_screen": {
+    "title": "Session complete!",
+    "saved_badge": "Session saved",
+    "save_error": "Save failed",
+    "retry": "Try again",
+    "minutes_unit_one": "minute",
+    "minutes_unit_other": "minutes",
+    "blocks_unit": "blocks",
+    "amrap_rounds_unit": "AMRAP rounds",
+    "share_idle": "Share my session",
+    "share_loading": "Generating…",
+    "share_shared": "Shared!",
+    "share_copied": "Image downloaded & link copied!",
+    "share_label_minutes": "minutes",
+    "share_label_blocks": "blocks",
+    "share_label_difficulty": "difficulty",
+    "share_label_rounds": "rounds",
+    "share_trophy_message": "+1 session in the bag!",
+    "share_join_cta": "Join the movement",
+    "share_amrap_suffix": "AMRAP rounds",
+    "back_home": "Back to home",
+    "back_program": "Back to program",
+    "back_custom_session": "Back to session"
+  },
+  "signup_nudge": {
+    "title": "Don't lose your progress",
+    "body": "Without an account, this session disappears. Create your free account to track your progress and keep your momentum.",
+    "cta": "Create my account",
+    "dismiss": "Maybe later"
+  },
+  "premium_teaser": {
+    "dismiss_aria": "Dismiss for this week",
+    "heading": "You're crushing it.",
+    "body": "With Premium, your next session is custom-generated in 30 s, or start a full program tailored to your goals.",
+    "cta": "Discover Premium"
+  },
+  "engine": {
+    "prepare": "Get ready!",
+    "rest": "Rest",
+    "between_blocks": "Rest between blocks",
+    "next_block": "Next block: {{name}}",
+    "next_exercise": "Next: {{name}}",
+    "next_exercise_label": "Next exercise: {{name}}",
+    "next_pyramid_step": "Next: {{name}} — {{reps}} reps",
+    "next_set": "Next: {{name}} - Set {{next}}/{{total}}",
+    "end_round": "End of round {{current}} - Round {{next}} in...",
+    "next_superset_set": "Set {{next}}/{{total}} in...",
+    "exercises_count": "{{n}} exercises",
+    "rounds_and_exercises": "{{rounds}} rounds - {{exercises}} exercises",
+    "sets_and_pairs_one": "{{sets}} sets - {{pairs}} pair",
+    "sets_and_pairs_other": "{{sets}} sets - {{pairs}} pairs",
+    "amrap_summary": "{{minutes}} min - Max rounds",
+    "emom_summary": "{{minutes}} minutes - {{summary}}",
+    "minute_label": "Minute {{current}}/{{total}}",
+    "bilateral_inline": "{{instructions}} ({{duration}}s per side)",
+    "next_set_countdown": "Set {{next}}/{{total}} in...",
+    "next_round_first": "Round {{next}}/{{total}} - {{name}}",
+    "pyramid_summary": "Pyramid: {{pattern}}",
+    "preview_next_set": "Set {{next}}/{{total}} - {{repsLabel}}",
+    "reps_max": "max reps",
+    "reps_count": "{{reps}} reps"
+  },
+  "controls": {
+    "resume_aria": "Resume",
+    "pause_aria": "Pause",
+    "skip_aria": "Skip",
+    "mute_aria": "Mute",
+    "unmute_aria": "Unmute"
+  },
+  "health_disclaimer": {
+    "title": "Health notice",
+    "subtitle": "Please read carefully before starting.",
+    "body_editorial": "Wan2Fit provides <strong>editorial and informational content</strong> related to physical activity. It is not personalised sports coaching or supervision by a qualified sports educator.",
+    "body_responsibility": "Sessions are general exercise suggestions. You are solely responsible for their execution and adaptation to your physical condition.",
+    "warning_box_title": "Before exercising:",
+    "warning_consult": "Consult a doctor to check your fitness for exercise",
+    "warning_no_contraindication": "Do not exercise if you have a medical contraindication",
+    "warning_stop_pain": "Stop immediately if you feel pain or discomfort",
+    "legal_note": "Not recommended without medical advice for people with cardiac conditions, joint disorders, pregnancy or any condition that may be aggravated by exercise. For adults aged 18 and over only.",
+    "checkbox_label": "I have read and understood this notice. I exercise at my own risk and declare I have no medical contraindication.",
+    "accept_button": "Continue"
+  },
+  "block_health_disclaimer": {
+    "before_start": "Before you start:",
+    "consult_doctor": "Consult a doctor if in doubt",
+    "no_contraindication": "Make sure you have no contraindications",
+    "stop_pain": "Stop immediately if you feel pain"
+  },
+  "error_boundary": {
+    "message": "An error occurred during the session.",
+    "detail": "The session could not be displayed correctly.",
+    "back_button": "Back"
+  },
+  "session_not_found": {
+    "message": "Session not found.",
+    "back_home": "Back to home",
+    "back_sessions": "Back to sessions",
+    "back_program": "Back to program"
+  },
+  "session_expired_banner": {
+    "message": "Your session has expired.",
+    "refresh": "Refresh the page"
+  },
+  "video_demo": {
+    "aria_label_with_name": "Demo: {{name}}",
+    "aria_label_generic": "Exercise demonstration"
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "list": {
+    "title": "Passe au niveau supérieur",
+    "subtitle": "Suis tes programmes ou génère-en un nouveau adapté à tes objectifs.",
+    "subtitle_visitor": " Crée ton compte gratuit pour suivre ton avancement.",
+    "deleted_banner": "Programme supprimé. Ton historique de séances est conservé.",
+    "active_label": "Programme en cours",
+    "sessions_progress": "{{completed}}/{{total}} séances",
+    "next_session": "Prochaine :",
+    "progress_mobile": "{{pct}}% complété",
+    "cta_continue": "Continuer",
+    "cta_tracking": "Voir le suivi",
+    "ai_banner_title": "Générer un programme avec l'IA",
+    "ai_banner_desc": "En 30 secondes, crée un plan d'entraînement adapté à ton niveau.",
+    "ai_banner_cta": "Créer mon programme",
+    "premium_banner_cta": "Débloquer avec Premium",
+    "my_programs": "Mes programmes",
+    "goal_label": "Objectif : {{goal}}",
+    "duration_frequency": "{{weeks}} sem · {{freq}}x/sem",
+    "next_challenge": "Choisis ton prochain défi",
+    "programs": "Programmes",
+    "no_programs": "Aucun programme disponible pour le moment.",
+    "service_unavailable": "Service temporairement indisponible.",
+    "start_free": "Commencer gratuitement"
+  },
+  "card": {
+    "weeks": "{{n}} semaines",
+    "freq_per_week": "{{n}}x / semaine"
+  },
+  "page": {
+    "title_suffix": "— Programme",
+    "back": "Programmes",
+    "ai_badge": "Programme IA",
+    "week": "Semaine {{n}}",
+    "progression": "Progression",
+    "sessions_with_pct": "{{completed}}/{{total}} séances ({{pct}}%)",
+    "coach_note": "Note du coach",
+    "weeks_label": "{{n}} semaines",
+    "freq_label": "{{n}}x / semaine",
+    "progression_logic": "Logique de progression",
+    "week_target": "Semaine {{n}} : {{target}}",
+    "auth_gate": "Connecte-toi pour suivre ce programme et enregistrer ta progression.",
+    "login": "Se connecter",
+    "not_found": "Programme introuvable ou service indisponible.",
+    "see_all": "Voir tous les programmes",
+    "session_start": "Commencer",
+    "session_continue": "Continuer",
+    "session_redo": "Refaire",
+    "session_launch": "Lancer",
+    "delete_button": "Supprimer ce programme",
+    "all_programs": "Tous les programmes",
+    "delete_modal_title": "Supprimer ce programme ?",
+    "delete_modal_body": "Ton historique de séances sera conservé. Cette action est irréversible.",
+    "delete_cancel": "Annuler",
+    "delete_confirm": "Supprimer",
+    "deleting": "Suppression...",
+    "blocks": "{{n}} blocs",
+    "duration_min": "~{{n}} min"
+  },
+  "content": {
+    "back_aria": "Retour aux programmes",
+    "img_alt": "Programme {{headline}}",
+    "stat_duration": "Durée",
+    "stat_frequency": "Fréquence",
+    "stat_session_length": "Par séance",
+    "stat_audience": "Public",
+    "cta_start": "Commencer le programme",
+    "cta_signup": "S'inscrire pour commencer",
+    "cta_already_user": "Déjà inscrit ? Voir mon suivi",
+    "approach": "L'approche",
+    "for_who": "Pour qui ?",
+    "week_by_week": "Semaine par semaine",
+    "benefits": "Ce que tu vas gagner",
+    "tip": "Conseil",
+    "link_formats": "Les formats →",
+    "link_exercises": "Nos exercices →",
+    "link_programs": "Tous les programmes →"
+  },
+  "create": {
+    "page_title": "Créer mon programme",
+    "img_alt": "Créer un programme sportif personnalisé",
+    "nav_aria": "Étape {{step}} sur 3",
+    "step_aria": "Étape {{n}} : {{label}}",
+    "step_objective": "Objectif",
+    "step_profile": "Profil",
+    "step_program": "Programme",
+    "limit_title": "Limite atteinte",
+    "limit_body": "Tu as déjà {{max}} programmes actifs. Supprime un programme existant pour en créer un nouveau.",
+    "limit_cta": "Voir mes programmes"
+  },
+  "step_objective": {
+    "title": "Qu'est-ce qui te motive ?",
+    "legend": "Choisis tes objectifs",
+    "detail_label": "Dis-nous en plus",
+    "detail_hint": "Plus tu précises, plus ton programme sera adapté.",
+    "detail_placeholder": "Ex : perdre 5kg avant l'été, pré-saison foot, programme en parallèle du basket pour performer le week-end...",
+    "next": "Suivant"
+  },
+  "step_profile": {
+    "title": "Parle-nous de toi",
+    "experience_legend": "Expérience sportive",
+    "frequency_legend": "Fréquence actuelle",
+    "injuries_legend": "Blessures / sensibilités",
+    "injury_detail_placeholder": "Précise ta blessure...",
+    "age_label": "Age (optionnel)",
+    "age_placeholder": "Ex : 30",
+    "sex_label": "Sexe (optionnel)",
+    "sex_male": "Homme",
+    "sex_female": "Femme",
+    "sex_other": "Autre",
+    "privacy_note": "Ces infos permettent d'affiner le programme — elles restent privées.",
+    "back": "Retour",
+    "next": "Suivant"
+  },
+  "step_preferences": {
+    "title": "Configure ton programme",
+    "sessions_legend": "Séances par semaine",
+    "adapted_rhythm": "Adapté à ton rythme actuel",
+    "session_duration_legend": "Durée par séance",
+    "material_legend": "Matériel disponible",
+    "material_other_placeholder": "Autre matériel ? (optionnel)",
+    "program_duration_legend": "Durée du programme",
+    "recommended": "Recommandé",
+    "back": "Retour",
+    "generate": "Générer mon programme"
+  },
+  "generating": {
+    "title": "Création de ton programme",
+    "estimate": "Estimation : 30-60 secondes"
+  },
+  "fitness_level": {
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé"
+  },
+  "goal": {
+    "perte_poids": "Perte de poids",
+    "prise_muscle": "Prise de muscle",
+    "remise_forme": "Remise en forme",
+    "force": "Force",
+    "endurance": "Endurance",
+    "performance_sportive": "Performance sportive",
+    "bien_etre": "Bien-être",
+    "souplesse": "Souplesse"
+  },
+  "experience": {
+    "debutant": "Débutant",
+    "six_mois_deux_ans": "6 mois - 2 ans",
+    "plus_deux_ans": "+2 ans"
+  },
+  "experience_desc": {
+    "debutant": "Moins de 6 mois",
+    "six_mois_deux_ans": "Pratique régulière",
+    "plus_deux_ans": "Expérimenté"
+  },
+  "frequence": {
+    "jamais": "Jamais",
+    "une_deux": "1-2x / sem",
+    "trois_quatre": "3-4x / sem",
+    "cinq_plus": "5+ / sem"
+  },
+  "blessure": {
+    "genou": "Genou",
+    "dos": "Dos / Lombaires",
+    "epaule": "Épaule",
+    "cheville": "Cheville",
+    "poignet": "Poignet",
+    "cervicales": "Cervicales",
+    "hanche": "Hanche",
+    "autre": "Autre"
+  },
+  "materiel": {
+    "poids_du_corps": "Poids du corps",
+    "halteres": "Haltères",
+    "barre_disques": "Barre & disques",
+    "kettlebell": "Kettlebell",
+    "elastiques": "Élastiques",
+    "banc": "Banc",
+    "barre_traction": "Barre de traction",
+    "trx": "TRX / Sangles",
+    "corde_a_sauter": "Corde à sauter",
+    "medecine_ball": "Medicine ball",
+    "salle": "Salle de sport (machines)"
+  },
+  "duree": {
+    "4": "4 semaines",
+    "8": "8 semaines",
+    "12": "12 semaines"
+  },
+  "loading_phases": {
+    "0": "Analyse de ton profil",
+    "1": "Identification des contraintes",
+    "2": "Choix de la progression",
+    "3": "Conception des séances",
+    "4": "Construction du calendrier",
+    "5": "Équilibrage des charges",
+    "6": "Personnalisation du coaching",
+    "7": "Vérifications finales"
+  }
+}

@@ -1,30 +1,27 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useAuth } from '../contexts/AuthContext.tsx';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
+import i18n from '../i18n/index.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { CustomSessionRecord } from '../types/custom-session.ts';
 
+const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
+
 export function useCustomSessions(userId: string | undefined) {
-  const { dataGeneration } = useAuth();
-  const [sessions, setSessions] = useState<CustomSessionRecord[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const refresh = useCallback(async () => {
-    if (!supabase || !userId) {
-      setSessions([]);
-      setError(null);
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const { data, error: fetchError, sessionExpired } = await supabaseQuery(() =>
+  const query = useQuery<{ sessions: CustomSessionRecord[]; error: string | null }>({
+    queryKey: ['customSessions', userId ?? null],
+    queryFn: async () => {
+      const {
+        data,
+        error: fetchError,
+        sessionExpired,
+      } = await supabaseQuery(() =>
         supabase!
           .from('custom_sessions')
           .select('*')
-          .eq('user_id', userId)
+          .eq('user_id', userId!)
           .eq('status', 'confirmed')
           .order('created_at', { ascending: false })
           .limit(20),
@@ -32,85 +29,64 @@ export function useCustomSessions(userId: string | undefined) {
 
       if (sessionExpired) {
         notifySessionExpired();
-        setError('Session expirée. Rafraîchis la page.');
-      } else if (fetchError) {
-        setError('Impossible de charger l\u2019historique.');
-      } else {
-        setSessions(data as CustomSessionRecord[]);
-        setError(null);
+        return { sessions: [], error: tHookError('session_expired_refresh') };
       }
-    } catch (err) {
-      console.error('Custom sessions fetch error:', err);
-      setError('Impossible de charger l\u2019historique.');
-    } finally {
-      setLoading(false);
-    }
-  }, [userId, dataGeneration]);
+      if (fetchError) {
+        return { sessions: [], error: tHookError('history_load_failed') };
+      }
+      return { sessions: (data as CustomSessionRecord[]) ?? [], error: null };
+    },
+    enabled: !!userId && !!supabase,
+  });
 
-  useEffect(() => {
-    refresh();
-  }, [refresh]);
+  const refresh = useCallback(async () => {
+    await queryClient.invalidateQueries({ queryKey: ['customSessions', userId] });
+  }, [queryClient, userId]);
 
-  return { sessions, loading, error, refresh };
+  return {
+    sessions: query.data?.sessions ?? [],
+    loading: query.isPending,
+    error: query.data?.error ?? null,
+    refresh,
+  };
 }
 
 export function useCustomSession(id: string | undefined, userId: string | undefined) {
-  const { dataGeneration } = useAuth();
-  const [session, setSession] = useState<CustomSessionRecord | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!id || !userId || !supabase) {
-      setSession(null);
-      setLoading(false);
-      return;
-    }
-
-    let cancelled = false;
-    setLoading(true);
-
-    async function load() {
-      try {
-        const { data, sessionExpired } = await supabaseQuery(() =>
-          supabase!
-            .from('custom_sessions')
-            .select('*')
-            .eq('id', id)
-            .eq('user_id', userId)
-            .single(),
-        );
-
-        if (sessionExpired) { notifySessionExpired(); }
-        if (!cancelled && data) {
-          setSession(data as CustomSessionRecord);
-        }
-      } catch (err) {
-        console.error('Custom session fetch error:', err);
-      } finally {
-        if (!cancelled) setLoading(false);
+  const query = useQuery<CustomSessionRecord | null>({
+    queryKey: ['customSession', id ?? null, userId ?? null],
+    queryFn: async () => {
+      const { data, sessionExpired } = await supabaseQuery(() =>
+        supabase!.from('custom_sessions').select('*').eq('id', id!).eq('user_id', userId!).single(),
+      );
+      if (sessionExpired) {
+        notifySessionExpired();
+        return null;
       }
-    }
+      return (data as CustomSessionRecord | null) ?? null;
+    },
+    enabled: !!id && !!userId && !!supabase,
+  });
 
-    load();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [id, userId, dataGeneration]);
-
-  return { session, loading };
+  return { session: query.data ?? null, loading: query.isPending };
 }
 
 export async function confirmCustomSession(id: string): Promise<boolean> {
   if (!supabase) return false;
   try {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) return false;
-    const { error } = await supabase
-      .from('custom_sessions')
-      .update({ status: 'confirmed' })
-      .eq('id', id)
-      .eq('user_id', user.id);
+    // Wrap in supabaseQuery so an expired JWT triggers a refresh + retry.
+    // The user has just reviewed and confirmed the AI-generated session;
+    // failing silently here would lose the confirmation.
+    const { error, sessionExpired } = await supabaseQuery(() =>
+      supabase!.from('custom_sessions').update({ status: 'confirmed' }).eq('id', id).eq('user_id', user.id),
+    );
+    if (sessionExpired) {
+      notifySessionExpired();
+      return false;
+    }
     return !error;
   } catch (err) {
     console.error('Confirm custom session error:', err);

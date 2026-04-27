@@ -1,0 +1,200 @@
+{
+  "list": {
+    "title": "Level up",
+    "subtitle": "Follow your programs or generate a new one tailored to your goals.",
+    "subtitle_visitor": " Create your free account to track your progress.",
+    "deleted_banner": "Program deleted. Your session history is preserved.",
+    "active_label": "Active program",
+    "sessions_progress": "{{completed}}/{{total}} sessions",
+    "next_session": "Next:",
+    "progress_mobile": "{{pct}}% complete",
+    "cta_continue": "Continue",
+    "cta_tracking": "View progress",
+    "ai_banner_title": "Generate a program with AI",
+    "ai_banner_desc": "In 30 seconds, create a training plan tailored to your level.",
+    "ai_banner_cta": "Create my program",
+    "premium_banner_cta": "Unlock with Premium",
+    "my_programs": "My programs",
+    "goal_label": "Goal: {{goal}}",
+    "duration_frequency": "{{weeks}} wks · {{freq}}x/wk",
+    "next_challenge": "Choose your next challenge",
+    "programs": "Programs",
+    "no_programs": "No programs available at the moment.",
+    "service_unavailable": "Service temporarily unavailable.",
+    "start_free": "Get started for free"
+  },
+  "card": {
+    "weeks": "{{n}} weeks",
+    "freq_per_week": "{{n}}x / week"
+  },
+  "page": {
+    "title_suffix": "— Program",
+    "back": "Programs",
+    "ai_badge": "AI Program",
+    "week": "Week {{n}}",
+    "progression": "Progress",
+    "sessions_with_pct": "{{completed}}/{{total}} sessions ({{pct}}%)",
+    "coach_note": "Coach note",
+    "weeks_label": "{{n}} weeks",
+    "freq_label": "{{n}}x / week",
+    "progression_logic": "Progression logic",
+    "week_target": "Week {{n}}: {{target}}",
+    "auth_gate": "Sign in to follow this program and record your progress.",
+    "login": "Sign in",
+    "not_found": "Program not found or service unavailable.",
+    "see_all": "See all programs",
+    "session_start": "Start",
+    "session_continue": "Continue",
+    "session_redo": "Redo",
+    "session_launch": "Launch",
+    "delete_button": "Delete this program",
+    "all_programs": "All programs",
+    "delete_modal_title": "Delete this program?",
+    "delete_modal_body": "Your session history will be preserved. This action is irreversible.",
+    "delete_cancel": "Cancel",
+    "delete_confirm": "Delete",
+    "deleting": "Deleting...",
+    "blocks": "{{n}} blocks",
+    "duration_min": "~{{n}} min"
+  },
+  "content": {
+    "back_aria": "Back to programs",
+    "img_alt": "Program: {{headline}}",
+    "stat_duration": "Duration",
+    "stat_frequency": "Frequency",
+    "stat_session_length": "Per session",
+    "stat_audience": "Audience",
+    "cta_start": "Start the program",
+    "cta_signup": "Sign up to start",
+    "cta_already_user": "Already signed up? View my progress",
+    "approach": "The approach",
+    "for_who": "Who is it for?",
+    "week_by_week": "Week by week",
+    "benefits": "What you'll gain",
+    "tip": "Tip",
+    "link_formats": "Training formats →",
+    "link_exercises": "Our exercises →",
+    "link_programs": "All programs →"
+  },
+  "create": {
+    "page_title": "Create my program",
+    "img_alt": "Create a personalized training program",
+    "nav_aria": "Step {{step}} of 3",
+    "step_aria": "Step {{n}}: {{label}}",
+    "step_objective": "Objective",
+    "step_profile": "Profile",
+    "step_program": "Program",
+    "limit_title": "Limit reached",
+    "limit_body": "You already have {{max}} active programs. Delete an existing program to create a new one.",
+    "limit_cta": "View my programs"
+  },
+  "step_objective": {
+    "title": "What motivates you?",
+    "legend": "Choose your goals",
+    "detail_label": "Tell us more",
+    "detail_hint": "The more specific you are, the better your program will be.",
+    "detail_placeholder": "E.g. lose 5kg before summer, pre-season football, program alongside basketball to perform on weekends...",
+    "next": "Next"
+  },
+  "step_profile": {
+    "title": "Tell us about yourself",
+    "experience_legend": "Athletic experience",
+    "frequency_legend": "Current frequency",
+    "injuries_legend": "Injuries / sensitivities",
+    "injury_detail_placeholder": "Describe your injury...",
+    "age_label": "Age (optional)",
+    "age_placeholder": "E.g. 30",
+    "sex_label": "Sex (optional)",
+    "sex_male": "Male",
+    "sex_female": "Female",
+    "sex_other": "Other",
+    "privacy_note": "This information helps refine your program — it stays private.",
+    "back": "Back",
+    "next": "Next"
+  },
+  "step_preferences": {
+    "title": "Set up your program",
+    "sessions_legend": "Sessions per week",
+    "adapted_rhythm": "Adapted to your current rhythm",
+    "session_duration_legend": "Session duration",
+    "material_legend": "Available equipment",
+    "material_other_placeholder": "Other equipment? (optional)",
+    "program_duration_legend": "Program duration",
+    "recommended": "Recommended",
+    "back": "Back",
+    "generate": "Generate my program"
+  },
+  "generating": {
+    "title": "Building your program",
+    "estimate": "Estimated: 30-60 seconds"
+  },
+  "fitness_level": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "goal": {
+    "perte_poids": "Weight loss",
+    "prise_muscle": "Muscle gain",
+    "remise_forme": "Getting back in shape",
+    "force": "Strength",
+    "endurance": "Endurance",
+    "performance_sportive": "Sports performance",
+    "bien_etre": "Well-being",
+    "souplesse": "Flexibility"
+  },
+  "experience": {
+    "debutant": "Beginner",
+    "six_mois_deux_ans": "6 months - 2 years",
+    "plus_deux_ans": "+2 years"
+  },
+  "experience_desc": {
+    "debutant": "Less than 6 months",
+    "six_mois_deux_ans": "Regular practice",
+    "plus_deux_ans": "Experienced"
+  },
+  "frequence": {
+    "jamais": "Never",
+    "une_deux": "1-2x / wk",
+    "trois_quatre": "3-4x / wk",
+    "cinq_plus": "5+ / wk"
+  },
+  "blessure": {
+    "genou": "Knee",
+    "dos": "Back / Lower back",
+    "epaule": "Shoulder",
+    "cheville": "Ankle",
+    "poignet": "Wrist",
+    "cervicales": "Neck",
+    "hanche": "Hip",
+    "autre": "Other"
+  },
+  "materiel": {
+    "poids_du_corps": "Bodyweight",
+    "halteres": "Dumbbells",
+    "barre_disques": "Barbell & plates",
+    "kettlebell": "Kettlebell",
+    "elastiques": "Resistance bands",
+    "banc": "Bench",
+    "barre_traction": "Pull-up bar",
+    "trx": "TRX / Suspension straps",
+    "corde_a_sauter": "Jump rope",
+    "medecine_ball": "Medicine ball",
+    "salle": "Gym (machines)"
+  },
+  "duree": {
+    "4": "4 weeks",
+    "8": "8 weeks",
+    "12": "12 weeks"
+  },
+  "loading_phases": {
+    "0": "Analyzing your profile",
+    "1": "Mapping constraints",
+    "2": "Choosing your progression",
+    "3": "Designing sessions",
+    "4": "Building the calendar",
+    "5": "Balancing the load",
+    "6": "Personalizing coaching",
+    "7": "Final checks"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "date": "20260426",
+  "title": "Double Time Challenge",
+  "description": "10-minute EMOM with wide push-ups and sumo squats followed by a complete 8-minute AMRAP",
+  "estimatedDuration": 33,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, twist side to side"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Precision",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Wide push-ups",
+          "reps": 10,
+          "instructions": "Hands wider than the shoulders, chest focus"
+        },
+        {
+          "name": "Sumo squats",
+          "reps": 12,
+          "instructions": "Feet very wide, toes pointed out"
+        },
+        {
+          "name": "Toe touches",
+          "reps": 12,
+          "instructions": "Back on the floor, legs vertical, reach hands to feet"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Total",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Reverse lunges",
+          "reps": 10,
+          "instructions": "Big step backward, lower the knee"
+        },
+        {
+          "name": "Standard push-ups",
+          "reps": 10,
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        },
+        {
+          "name": "Bicycle crunches",
+          "reps": 16,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "date": "20260423",
+  "title": "Complete Challenge",
+  "description": "3-round circuit with jump lunges and plank followed by a burpees and crunches pyramid",
+  "estimatedDuration": 37,
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 35,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Explosive Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Jump lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Alternate legs while jumping, explosive"
+        },
+        {
+          "name": "Decline push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Feet raised on a chair, body braced"
+        },
+        {
+          "name": "Shoulder plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In high plank, tap the opposite shoulder alternating"
+        },
+        {
+          "name": "Jump squats",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Explosive squat with jump, land softly"
+        },
+        {
+          "name": "Superman",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Lying face down, lift arms and legs simultaneously, hold 2s"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Final Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Burpees no push-up",
+          "instructions": "Drop down, jump feet back, come back, jump up"
+        },
+        {
+          "name": "Crunches",
+          "instructions": "Back on the floor, lift shoulders, brace the abs"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

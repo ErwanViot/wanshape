@@ -1,0 +1,98 @@
+{
+  "date": "20260412",
+  "title": "HIIT Machine",
+  "description": "High-intensity intervals with broad jumps, high knees and burpees for explosive cardio",
+  "estimatedDuration": 27,
+  "focus": [
+    "cardio"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, twist side to side"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 35,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Intensive HIIT",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Broad jumps",
+          "instructions": "Broad jumps, land softly and repeat"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        },
+        {
+          "name": "Burpees no push-up",
+          "instructions": "Drop down, jump feet back, come back, jump up"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Powerful lateral bounds side to side"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs into a star"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Explosive squat with max jump, land softly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

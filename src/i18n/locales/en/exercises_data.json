@@ -1,0 +1,1000 @@
+{
+  "pompes-classiques": {
+    "name": "Push-ups",
+    "aliases": ["Push-up", "Classic push-ups", "Scapular push-ups", "Pike push-ups"],
+    "muscles": ["Chest", "Triceps", "Front deltoids", "Core (stabilization)"],
+    "shortDescription": "The fundamental upper-body bodyweight exercise. Push-ups develop horizontal pushing strength by engaging the chest, triceps and shoulders in a complete, functional movement.",
+    "execution": "Starting position: hands on the floor slightly wider than shoulder-width, arms extended, body aligned from head to heels. Feet together or slightly apart. Lower by bending your elbows until your chest nearly touches the floor (elbows at roughly 45° from your body, not flared to 90°). Push back to the starting position by locking out your arms. Keep your body braced throughout: no sagging lower back, no hips in the air.",
+    "breathing": "Inhale on the way down, exhale on the push. Never hold your breath, even when the effort becomes intense.",
+    "benefits": [
+      "Strengthens the entire push chain (chest, triceps, shoulders)",
+      "Works core stability in a dynamic plank position",
+      "Requires no equipment and can be done anywhere",
+      "Direct carry-over to everyday movements (getting up, pushing a door)",
+      "Dozens of progressions allow indefinite improvement"
+    ],
+    "variants": [
+      {
+        "name": "Incline push-ups",
+        "description": "Hands on an elevated surface (chair, step). Reduces load and makes the movement easier — ideal for beginners or at the end of a set when fatigue sets in."
+      },
+      {
+        "name": "Diamond push-ups",
+        "description": "Hands close together under your chest, thumbs and index fingers forming a diamond. Increases triceps and inner-chest recruitment."
+      },
+      {
+        "name": "Decline push-ups",
+        "description": "Feet elevated on a surface. Increases load on the shoulders and upper chest. Reserved for those who have mastered standard push-ups."
+      },
+      {
+        "name": "Explosive push-ups",
+        "description": "Push explosively enough for your hands to leave the floor. Develops power and muscular contraction speed."
+      },
+      {
+        "name": "Archer push-ups",
+        "description": "One arm extended to the side while the other arm performs most of the push. Develops unilateral strength and gradually prepares you for one-arm push-ups."
+      },
+      {
+        "name": "Commando push-ups",
+        "description": "Start in a forearm plank, push up to a high plank one arm at a time, then lower back down. Works transition strength and core stability under asymmetric load."
+      },
+      {
+        "name": "Hindu push-ups",
+        "description": "Start in downward dog, swoop your body forward close to the floor then rise into cobra. A dynamic movement combining flexibility, strength and spinal mobility."
+      },
+      {
+        "name": "Wide push-ups",
+        "description": "Hands placed well beyond shoulder-width. Increases pectoral recruitment and reduces triceps involvement — ideal for targeting the chest with bodyweight."
+      },
+      {
+        "name": "Pike push-ups",
+        "description": "Hips high in an inverted V, push vertically toward the floor. Targets the shoulders similarly to an overhead press — excellent progression toward the handstand push-up."
+      },
+      {
+        "name": "Scapular push-ups",
+        "description": "In a high plank, only the shoulder blades move (protraction and retraction) without bending the elbows. Strengthens the serratus anterior and improves scapular stability."
+      }
+    ],
+    "tips": [
+      "Keep elbows at 45° from your body (not tucked tight, not flared to 90°) to protect your shoulders",
+      "Squeeze your abs and glutes as if holding a plank — your body must not 'break'",
+      "Go all the way down: half-reps don't count and limit progress",
+      "If you can't do a full push-up, start with incline push-ups rather than knee push-ups"
+    ],
+    "commonMistakes": [
+      "Hips sagging (lower back arched) — a sign of insufficient core engagement. Contract your abs.",
+      "Hips piking up — shortens the movement and eliminates chest work",
+      "Elbows flared to 90° — places excessive stress on the shoulder joint",
+      "Incomplete range of motion — not going low enough limits strength and mobility gains",
+      "Head dropping toward the floor — keep your gaze at the floor about 30 cm in front of your hands, neck neutral"
+    ]
+  },
+  "dips-sur-chaise": {
+    "name": "Chair dips",
+    "aliases": ["Dips", "Triceps dips"],
+    "muscles": ["Triceps", "Front deltoids", "Chest (lower)"],
+    "shortDescription": "A vertical pushing exercise that targets the triceps using a chair or stable support. Chair dips are one of the best bodyweight movements to sculpt the back of the arms and build pushing strength.",
+    "execution": "Sit on the edge of a stable chair or bench, hands gripping the edge on either side of your hips, fingers pointing forward. Walk your feet forward to lift your hips off the support, arms extended. Lower by bending your elbows straight back (not out) until your arms form roughly a 90° angle. Push through your palms to rise back up, locking out at the top. Keep your back close to the support throughout — don't drift away from the chair. Shoulders stay low and pulled back, away from your ears.",
+    "breathing": "Inhale as you lower under control. Exhale as you push back up. Don't hold your breath at the bottom position.",
+    "benefits": [
+      "Effectively isolates the triceps with a natural pushing motion",
+      "Strengthens the front deltoids and lower chest",
+      "Requires only a chair, bench or step — can be done anywhere",
+      "Develops vertical pushing strength useful in daily life",
+      "Intensity easily scaled by adjusting foot position"
+    ],
+    "variants": [],
+    "tips": [
+      "Use a perfectly stable support — a chair that slides can cause a fall",
+      "Keep your elbows tight and pointing straight back, never out to the sides",
+      "To make the movement easier, bend your knees and bring your feet closer to the support",
+      "To increase difficulty, extend your legs or elevate your feet on a second support"
+    ],
+    "commonMistakes": [
+      "Elbows flaring outward — keep them tight and pointing backward to protect your shoulders",
+      "Dipping too low (past 90°) — places excessive stress on the shoulder joint",
+      "Shoulders rising toward your ears — pull your shoulder blades down and back",
+      "Back drifting away from the chair — stay close to the support to keep the work on the triceps",
+      "Pushing with your legs instead of your arms — your feet are a support, not the engine of the movement"
+    ]
+  },
+  "rowing-inverse": {
+    "name": "Inverted row (table)",
+    "aliases": ["Inverted row", "Table row"],
+    "muscles": ["Lats", "Rhomboids", "Traps", "Biceps", "Rear deltoids"],
+    "shortDescription": "The push-up's counterpart for the upper back. The inverted row under a table or low bar trains horizontal pulling with bodyweight, targeting the lats, rhomboids and biceps. A fundamental exercise for postural balance.",
+    "execution": "Lie under a sturdy table (or low bar) and grip the edge with hands shoulder-width apart, palms facing you or in a neutral grip. Your body is aligned from head to heels, arms extended, heels on the floor. Keeping your body fully braced, pull your chest toward the table by squeezing your shoulder blades together. Elbows travel along your sides (not flared). Rise until your chest touches or approaches the table, pause at the top contracting your upper back, then lower slowly back to full arm extension.",
+    "breathing": "Exhale as you pull your chest toward the table; inhale as you lower under control. Keep your abs engaged to maintain body alignment throughout the set.",
+    "benefits": [
+      "Strengthens the full pulling chain: lats, rhomboids, traps and biceps",
+      "Corrects postural imbalances by targeting upper-back muscles that are often neglected",
+      "Prepares you for pull-ups by developing horizontal pulling strength",
+      "Improves scapular retraction, essential for shoulder health",
+      "Requires only a sturdy table or low bar — doable at home"
+    ],
+    "variants": [
+      {
+        "name": "Face pulls on the floor",
+        "description": "Lying face down, arms extended in front, pull your elbows back while squeezing your shoulder blades. Isolates the rhomboids and rear deltoids with no equipment. Excellent for posture and upper-back activation."
+      }
+    ],
+    "tips": [
+      "Choose a solid, stable table — test it before hanging underneath",
+      "Squeeze your shoulder blades at the top and hold the contraction for a second before lowering",
+      "The more horizontal your body (feet further out), the harder it gets — walk your feet back to reduce the load",
+      "Keep your body rigid like a plank: glutes and abs stay contracted throughout"
+    ],
+    "commonMistakes": [
+      "Hips sagging — your body must stay aligned like a plank. Contract your glutes and abs.",
+      "Shoulders shrugging toward your ears while pulling — lower your shoulders and focus on squeezing the shoulder blades together",
+      "Incomplete range of motion — lower to full arm extension and pull your chest to the table. Half-reps don't count.",
+      "Elbows flaring to 90° — keep them at 45° maximum to protect your shoulders and target the right muscles",
+      "Using momentum by swinging the hips — the movement must be slow and controlled; only the arms and back work"
+    ]
+  },
+  "squats": {
+    "name": "Squats",
+    "aliases": ["Squat", "Bodyweight squat", "Jump squats", "Speed squats"],
+    "muscles": ["Quads", "Glutes", "Hamstrings", "Core (stabilization)"],
+    "shortDescription": "The king of lower-body movements. The squat is a fundamental motor pattern that engages the entire lower chain: thighs, glutes and core. It's the movement you perform every time you sit down and stand back up.",
+    "execution": "Stand with feet shoulder-width apart or slightly wider, toes turned out 15–30°. Initiate by pushing your hips back as if sitting into a chair. Lower while keeping your weight through your heels and mid-foot, knees tracking over your toes. Descend at least until your thighs are parallel to the floor (deeper if your mobility allows). Drive through the floor to rise, squeezing your glutes at the top.",
+    "breathing": "Inhale deeply on the way down (belly expands), exhale forcefully on the way up. For heavy or intense sets, take a breath before descending and exhale past the sticking point on the way up.",
+    "benefits": [
+      "Strengthens the entire lower body: quads, glutes, hamstrings",
+      "Improves hip, knee and ankle mobility",
+      "An essential functional movement: sitting, standing, carrying loads",
+      "Strongly engages core stability to keep the back straight",
+      "Triggers a significant hormonal response due to the large muscle mass involved"
+    ],
+    "variants": [
+      {
+        "name": "Sumo squats",
+        "description": "Feet very wide, toes pointing out. Targets the inner thighs (adductors) and glutes more. Easier on ankle mobility."
+      },
+      {
+        "name": "Pulse squats",
+        "description": "Stay in the bottom position and perform small bouncing movements. Increases time under tension and burns out the quads."
+      },
+      {
+        "name": "Jump squats",
+        "description": "Add an explosive jump at the top. Develops power and cardio. Reserved for those without knee issues."
+      },
+      {
+        "name": "Assisted pistol squat",
+        "description": "Single-leg squat holding onto a support. Works balance, unilateral strength and mobility. An advanced goal to build gradually."
+      },
+      {
+        "name": "1.5 squats",
+        "description": "Full descent, rise halfway, descend again, then rise completely — that counts as one rep. Greatly increases time under tension in the bottom portion of the movement."
+      },
+      {
+        "name": "Pop squats",
+        "description": "Jump to spread your feet into a wide squat, then jump to bring them back together. Combines cardio work and leg strengthening in a dynamic, rhythmic movement."
+      },
+      {
+        "name": "Goblet squat (no weight)",
+        "description": "Hands clasped in front of your chest, elbows pushing between your knees at the bottom. Helps keep the torso upright and deepen the squat — an excellent technique correction tool."
+      },
+      {
+        "name": "Sissy squat",
+        "description": "Lean your torso back, push your knees forward, heels off the floor. Intensely isolates the quads. An advanced movement requiring good balance and healthy knees."
+      },
+      {
+        "name": "Wall sit",
+        "description": "Back flat against a wall, thighs parallel to the floor, held isometrically. A pure endurance challenge for the quads — deceptively simple, brutal after 30 seconds."
+      }
+    ],
+    "tips": [
+      "Push your knees outward on the way down — they must never cave inward",
+      "Keep your weight through your heels: you should be able to wiggle your toes at any moment",
+      "Back stays straight, chest tall and proud. Imagine you're wearing a logo on your chest that everyone should see",
+      "Go at least to parallel thighs — quarter squats develop neither strength nor mobility"
+    ],
+    "commonMistakes": [
+      "Knees caving inward (valgus) — consciously activate your glutes to push your knees out",
+      "Heels lifting off the floor — a sign of limited ankle mobility. Work on mobility or place a small wedge under your heels",
+      "Torso collapsing too far forward — strengthen your upper back and core. Try goblet squats to correct this",
+      "Insufficient depth — going only halfway robs the movement of its main benefits",
+      "Excessive speed — control the descent (2–3 seconds) before rising dynamically"
+    ]
+  },
+  "fentes": {
+    "name": "Lunges",
+    "aliases": ["Lunge", "Forward lunges", "Alternating lunges", "Jump lunges", "Jumping lunges"],
+    "muscles": ["Quads", "Glutes", "Hamstrings", "Calves", "Core (stabilization)"],
+    "shortDescription": "The essential unilateral movement for powerful, balanced legs. Lunges engage the quads, glutes and hamstrings while training balance and hip stability — a complete exercise that corrects imbalances between the right and left leg.",
+    "execution": "Stand with feet hip-width apart, eyes forward. Take a large step forward with one leg, keeping your torso upright and abs engaged. Bend both knees simultaneously until your back knee nearly grazes the floor (both knees at roughly 90°). Your front knee stays aligned with your toes without excessively passing over them. Drive firmly through the front heel to return to the starting position. Alternate legs or complete all reps on one side depending on the variation.",
+    "breathing": "Inhale as you lower under control, exhale as you push back up. Maintain deep, regular breathing — never hold your breath, especially at the end of a set when fatigue sets in.",
+    "benefits": [
+      "Develops unilateral strength and corrects muscular imbalances between the two legs",
+      "Intensely engages the glutes, which are often under-activated in bilateral movements like squats",
+      "Improves balance, proprioception and hip stability",
+      "Strengthens hip mobility and hip flexor flexibility",
+      "Direct carry-over to walking, running, climbing stairs and changes of direction"
+    ],
+    "variants": [
+      {
+        "name": "Alternating lunges",
+        "description": "Step forward with the right leg, return, then step forward with the left. Trains both sides equally in the same set. Returning to standing between each rep adds a stabilization challenge."
+      },
+      {
+        "name": "Reverse lunges",
+        "description": "The step goes backward instead of forward. Gentler on the knees because your weight stays naturally over the front heel. Ideal for those with patellar sensitivity."
+      },
+      {
+        "name": "Pause lunges",
+        "description": "Hold the bottom position for 2–3 seconds before rising. The pause eliminates momentum and increases time under tension, intensifying quad and glute work."
+      },
+      {
+        "name": "Bulgarian split squats",
+        "description": "Rear foot elevated on a chair or bench. Greatly increases load on the front leg and the stretch on the rear hip flexor. A demanding variation in strength and balance, reserved for those comfortable with standard lunges."
+      },
+      {
+        "name": "Curtsy lunges",
+        "description": "The back foot crosses behind the standing leg in a curtsy. Targets the glute medius and adductors more, working lateral hip stability in a rarely trained plane of motion."
+      },
+      {
+        "name": "Lateral lunges",
+        "description": "The step goes to the side instead of forward. Engages adductors and abductors in addition to quads and glutes. Excellent for hip mobility and preparation for lateral sports movements."
+      },
+      {
+        "name": "Walking lunges",
+        "description": "Chain lunges by stepping forward continuously, like walking. The continuous motion adds a dynamic balance challenge and increases the cardiovascular component. Requires a few metres of space."
+      },
+      {
+        "name": "Jump lunges",
+        "description": "Jump to switch legs in the lunge position. A plyometric version that develops explosiveness and spikes your heart rate quickly. Reserved for those who have mastered standard lunges and have no joint pain."
+      }
+    ],
+    "tips": [
+      "Keep your torso upright and eyes forward — the natural tendency is to lean forward as fatigue sets in",
+      "The front knee must stay aligned with your second toe: if it caves inward, consciously activate your glute",
+      "Take a long enough step: too short puts excessive pressure on the front knee; too long throws off your balance",
+      "If balance is an issue, start with reverse lunges or place your hands on your hips to lower your center of gravity"
+    ],
+    "commonMistakes": [
+      "Front knee diving past the toes or caving inward — shorten your step and push the knee outward",
+      "Torso leaning forward — keep your chest tall and shoulders over your hips",
+      "Step too short turning the lunge into a partial squat — the front shin should be nearly vertical at the bottom",
+      "Back foot flat on the floor — only the ball of the back foot touches the floor; the heel stays raised",
+      "Lowering too fast without control — control the eccentric phase over 2 seconds to protect the knees and maximize muscle work"
+    ]
+  },
+  "glute-bridge": {
+    "name": "Glute bridge",
+    "aliases": ["Hip thrust on floor", "Bridge"],
+    "muscles": ["Glutes", "Hamstrings", "Core (stabilization)"],
+    "shortDescription": "The go-to movement to activate and strengthen the glutes. Lying on the floor, you lift your hips by contracting your glutes — a simple, effective exercise accessible to all levels.",
+    "execution": "Lie on your back, knees bent, feet flat on the floor hip-width apart, positioned so your shins are vertical at the top. Arms along your body, palms down. Drive through your heels and squeeze your glutes to lift your hips until you form a straight line from shoulders to knees. Hold the contraction for one second at the top, squeezing your glutes as hard as possible. Lower slowly without fully setting your hips on the floor between reps to maintain tension. The movement comes from the hips — don't arch your lower back to go higher.",
+    "breathing": "Exhale as you lift your hips and squeeze your glutes. Inhale as you lower under control. This breathing pattern helps engage the core and stabilize the movement.",
+    "benefits": [
+      "Activates and strengthens the glutes, which are often underused due to prolonged sitting",
+      "Protects the lower back by strengthening the posterior chain",
+      "Improves hip stability and standing posture",
+      "A low-impact movement, accessible even with joint discomfort",
+      "Excellent warm-up exercise before more intense movements (squats, lunges)"
+    ],
+    "variants": [
+      {
+        "name": "Marching glute bridge",
+        "description": "In the top position of the bridge, extend one leg in front of you then place it back, and alternate. This variation adds unilateral work and a balance challenge that intensifies glute activation."
+      },
+      {
+        "name": "Hip thrust on floor",
+        "description": "Upper back resting on a sofa or bench, feet on the floor, lift your hips. The range of motion is greater and the position allows you to add weight (bag, dumbbell) on your hips to progress in load."
+      },
+      {
+        "name": "Unilateral hip thrust",
+        "description": "In the hip thrust position, only one foot on the floor, the other leg extended or knee pulled toward the chest. Doubles the load on the working leg and reveals strength imbalances between the two sides."
+      }
+    ],
+    "tips": [
+      "Drive through your heels, not your toes — you should be able to lift your toes off the floor",
+      "Squeeze your glutes as hard as possible at the top and hold for one second",
+      "Don't arch your lower back to rise higher — stop when your body forms a straight line",
+      "Position your feet so your shins are vertical at the top to maximize glute recruitment"
+    ],
+    "commonMistakes": [
+      "Pushing with your toes instead of your heels — shifts the work from glutes to quads",
+      "Arching the lower back at the top — a sign your hips are going too high. Stop when your body is aligned.",
+      "Not consciously contracting the glutes — the movement becomes passive and the hamstrings take over",
+      "Knees spreading or caving — keep them stable and aligned with your feet throughout",
+      "Rising and lowering too fast — control the tempo to maximize time under tension and muscle activation"
+    ]
+  },
+  "box-jumps": {
+    "name": "Box jumps (step)",
+    "aliases": ["Box jumps", "Step jumps"],
+    "muscles": ["Quads", "Glutes", "Calves", "Core"],
+    "shortDescription": "An accessible plyometric exercise that involves jumping onto a step or stable platform. Box jumps develop explosive leg power and coordination while teaching the body to produce force rapidly.",
+    "execution": "Stand facing a step or stable surface, feet shoulder-width apart, about 30 cm from the edge. Bend your knees while pushing your hips back (like a half squat) while swinging your arms back. Drive explosively into the floor and swing your arms forward and up to propel your body. Land on the step with both feet flat, knees bent to absorb impact. Stand fully upright at the top, hips open. Step back down in control (one foot at a time or with a slight backward hop) and chain the next rep.",
+    "breathing": "Take a quick breath before the jump, exhale during the push phase and flight. Breathe freely at the top of the step before stepping back down.",
+    "benefits": [
+      "Develops explosive lower-limb power in a functional and progressive way",
+      "Improves coordination, timing and dynamic proprioception",
+      "Strengthens quads, glutes and calves in plyometric mode",
+      "Teaches the body to absorb impacts correctly (landing quality)",
+      "Natural progression: simply increase the step height to advance"
+    ],
+    "variants": [
+      {
+        "name": "Broad jumps",
+        "description": "Standing long jump forward. Develops horizontal power and the ability to fully extend the posterior chain. Excellent for carry-over to athletic movements."
+      },
+      {
+        "name": "Tuck jumps",
+        "description": "Vertical jump with knees pulled toward the chest in the air. Increases air time and explosiveness. Requires good core control to maintain position in flight."
+      },
+      {
+        "name": "Squat jumps",
+        "description": "Explosive jump upward from a deep squat position, no platform needed. Combines squat strength work with jumping explosiveness. Very intense on the quads and glutes."
+      }
+    ],
+    "tips": [
+      "Start with a low step (15–20 cm) and progressively increase the height",
+      "Land with both feet simultaneously, knees bent — never landing on one foot",
+      "Use your arm swing to gain height: they play a key role in propulsion",
+      "Always step or jump back down under control — no uncontrolled backward jump that risks your ankles"
+    ],
+    "commonMistakes": [
+      "Landing on the tips of your toes at the edge of the step — land flat-footed in the center of the surface for stability",
+      "Knees caving inward on landing — push your knees outward as you land, just like a squat",
+      "Not opening your hips at the top — stand fully upright before stepping back down, otherwise the movement is incomplete",
+      "Using an unstable or too-high platform — safety over ego; choose a height you can control",
+      "Chaining reps by falling backward — step down in control each time to protect your Achilles tendons"
+    ]
+  },
+  "good-morning": {
+    "name": "Good morning",
+    "aliases": ["Good mornings"],
+    "muscles": ["Hamstrings", "Spinal erectors", "Glutes"],
+    "shortDescription": "A hip hinge exercise that deeply targets the posterior chain. The good morning strengthens the hamstrings, spinal erectors and glutes through a controlled forward trunk flexion — essential for back health and posture.",
+    "execution": "Stand with feet shoulder-width apart, knees slightly bent (never locked). Place your hands behind your head or crossed on your chest. Keeping your back perfectly straight and chest tall, hinge your torso forward by pushing your hips back, as if trying to touch the wall behind you with your glutes. Lower until you feel a strong stretch in your hamstrings (torso roughly parallel to the floor depending on your flexibility). Contract your glutes and hamstrings to return your torso upright by driving your hips forward. The movement comes from the hips, never the lower back.",
+    "breathing": "Inhale deeply as you hinge forward, exhale as you rise while contracting your glutes. Keep your abs engaged throughout to protect your spine.",
+    "benefits": [
+      "Strengthens the entire posterior chain: hamstrings, spinal erectors and glutes",
+      "Improves hip mobility and hamstring flexibility dynamically",
+      "Teaches the hip hinge motor pattern, fundamental for lifting objects in daily life",
+      "Prevents lower back pain by strengthening the spinal stabilizer muscles",
+      "Prepares you for more advanced movements like the deadlift and kettlebell swing"
+    ],
+    "variants": [
+      {
+        "name": "Single-leg Romanian deadlift",
+        "description": "The same hip hinge movement but on one leg, the free leg extending behind. Greatly increases balance work and hip stabilizer engagement."
+      },
+      {
+        "name": "Single-leg deadlift",
+        "description": "Similar to the unilateral Romanian deadlift with an even greater balance challenge. The free leg aligns with the torso to form a horizontal line. Excellent for correcting muscular imbalances between the two sides."
+      }
+    ],
+    "tips": [
+      "Maintain a slight knee bend throughout — locked knees place too much stress on the lower back",
+      "The movement comes from the hips, not the back: imagine your hips are a door hinge",
+      "Keep your gaze toward the floor about one metre in front of you to keep your neck aligned with your spine",
+      "Only lower as far as your back stays straight — never sacrifice posture for range of motion"
+    ],
+    "commonMistakes": [
+      "Back rounding on the way down — a sign you're going too low or your hamstrings lack flexibility. Reduce the range of motion.",
+      "Locked knees — always maintain a micro-bend to protect the lower back and allow free hip movement",
+      "Movement originating from the lower back instead of the hips — push your glutes back first; your torso follows naturally",
+      "Head lifting to look forward — keep your neck neutral; your gaze follows the movement of your torso",
+      "Uncontrolled fast descent — control the lowering phase over 2–3 seconds to maximize muscle work and protect your back"
+    ]
+  },
+  "gainage-planche": {
+    "name": "Plank",
+    "aliases": ["Plank hold", "Forearm plank", "Plank", "Bear crawl", "Hollow body hold"],
+    "muscles": ["Transverse abdominis", "Rectus abdominis", "Obliques", "Deltoids", "Spinal erectors"],
+    "shortDescription": "The foundational exercise for a strong core and a protected back. The forearm plank strengthens the deep abdominal belt without any movement: simply hold the position and resist gravity. A fundamental accessible to everyone.",
+    "execution": "On the floor, brace yourself on your forearms and the balls of your feet. Elbows placed directly under your shoulders, forearms parallel or hands clasped in front. Your body forms a straight line from head to heels: contract your abs by pulling your navel toward your spine, squeeze your glutes and push your heels backward. Eyes directed at the floor, between your hands, neck in line with your spine. Hold for the prescribed time while breathing steadily, never letting your hips sag or rise.",
+    "breathing": "Breathe normally and regularly through your nose and mouth. The natural tendency is to hold your breath — resist: use controlled diaphragmatic breathing, maintaining transverse contraction on each exhale.",
+    "benefits": [
+      "Strengthens the transverse abdominis, the deep muscle essential for core stability",
+      "Protects the lower back by improving posture control and intra-abdominal pressure",
+      "Engages the entire body isometrically: shoulders, back, glutes and thighs all contribute",
+      "No equipment needed and very low injury risk — accessible from day one",
+      "An essential foundation for all other exercises: push-ups, squats, burpees and everyday movements"
+    ],
+    "variants": [
+      {
+        "name": "Side plank",
+        "description": "Supported on one forearm and the outer edge of the foot, body in profile. Targets the obliques and glute medius to strengthen lateral core stability. Alternate sides for balanced work."
+      },
+      {
+        "name": "Side plank on knees",
+        "description": "Accessible version of the side plank: supported on the forearm and knee rather than the foot. Reduces leverage for beginners while still working the obliques and lateral stability. Ideal for building strength before progressing to the full version."
+      },
+      {
+        "name": "Superman plank",
+        "description": "In the standard plank position, extend your arms forward like Superman in flight. Greatly increases leverage and difficulty by engaging the spinal erectors and shoulders more."
+      },
+      {
+        "name": "Shoulder tap plank",
+        "description": "In a high plank, touch the opposite shoulder with each hand alternately. Adds an anti-rotation challenge: the core must resist twisting while you lift one hand."
+      },
+      {
+        "name": "RKC plank",
+        "description": "Forearm plank with maximum full-body tension: try to bring your elbows toward your feet (without moving), make fists and contract every muscle. Much more intense than a standard plank — 10 seconds RKC equals 30 seconds standard plank."
+      },
+      {
+        "name": "Bear hold",
+        "description": "On all fours, hands under shoulders, knees under hips, lift your knees 2–3 cm off the floor and hold. Works core stability in a shortened position that intensely engages the quads and transverse abdominis. An excellent transition exercise before the plank."
+      },
+      {
+        "name": "Hollow hold",
+        "description": "Lying on your back, arms extended overhead and legs extended, lift your shoulders and feet off the floor while pressing your lower back into the floor. A gymnastics position that powerfully strengthens the rectus abdominis and transverse in a supine position."
+      },
+      {
+        "name": "Plank to downward dog",
+        "description": "From a high plank, push your hips up and back into downward dog, then return to plank. The alternation trains shoulder mobility, hamstring flexibility and dynamic core stability. An excellent warm-up transition movement."
+      }
+    ],
+    "tips": [
+      "Think about pushing the floor away from you with your forearms — this active shoulder engagement protects the joint and increases muscle recruitment",
+      "Squeeze your glutes as hard as your abs: they prevent the pelvis from tilting forward",
+      "Prefer several short sets with good form (4 x 20 s) over one long set where posture breaks down",
+      "Shaking is normal and means the muscles are working — if your back arches, stop and rest"
+    ],
+    "commonMistakes": [
+      "Hips sagging toward the floor (lower back arch) — the most common sign of fatigue. Contract your abs and glutes or stop the set.",
+      "Hips piking up — makes the exercise easier but eliminates the core training benefit. Your body must remain a straight line.",
+      "Elbows placed too far in front of your shoulders — places excessive strain on the shoulders. Elbows must be directly under the joints.",
+      "Head lifting to look forward — compresses the cervical spine. Keep your gaze at the floor, neck neutral in line with your spine.",
+      "Holding your breath — raises blood pressure and limits how long you can hold. Breathe calmly and steadily."
+    ]
+  },
+  "crunchs": {
+    "name": "Crunches",
+    "aliases": ["Crunch", "Abs", "Bicycle crunches"],
+    "muscles": ["Rectus abdominis", "Obliques"],
+    "shortDescription": "The basic movement to target the abs. The crunch isolates the rectus abdominis through a short, controlled trunk flexion — no momentum, no neck pulling. Simple in appearance, it demands a genuine mind-muscle connection to be effective.",
+    "execution": "Lie on your back, knees bent, feet flat on the floor hip-width apart. Place your hands behind your head (fingers lightly touching your ears, not pulling your neck) or crossed on your chest. Contract your abs to lift your shoulders and upper back off the floor by curling your torso toward your pelvis. Rise until you feel maximum ab contraction (about 30 degrees), pause at the top, then lower slowly without fully resting your shoulders on the floor. Your lower back stays pressed to the floor throughout.",
+    "breathing": "Exhale on the way up (blow hard, belly drawn in toward your spine) and inhale on the way down. Forced exhalation on the contraction activates the transverse abdominis and maximizes ab recruitment.",
+    "benefits": [
+      "Effectively isolates the rectus abdominis without equipment",
+      "Strengthens the abdominal belt for better daily posture",
+      "An accessible movement that adapts to all levels with its many variations",
+      "Low joint stress compared to full sit-ups",
+      "Improves the mind-muscle connection in the abdominal area"
+    ],
+    "variants": [
+      {
+        "name": "Bicycle crunches",
+        "description": "In a crunch position, bring your right elbow toward your left knee while your right leg extends, then alternate. The rotational pedaling intensely engages the obliques in addition to the rectus abdominis."
+      },
+      {
+        "name": "Sit-ups",
+        "description": "Full rise of the torso to a seated position, with the entire back lifting off the floor. A more complete movement that recruits the hip flexors in addition to the abs, but more demanding on the lower back."
+      },
+      {
+        "name": "V-ups",
+        "description": "Legs and torso rise simultaneously to form a V, hands reaching for the feet. An advanced variation requiring abdominal strength and hamstring flexibility."
+      },
+      {
+        "name": "Russian twists",
+        "description": "Seated balancing on your glutes, feet off the floor, rotate your torso left and right. Targets the obliques and transverse with dynamic anti-rotation work."
+      },
+      {
+        "name": "Toe touches",
+        "description": "Lying on your back, legs extended vertically, reach your hands up to touch your toes. The short, targeted movement isolates the upper portion of the rectus abdominis with an intense contraction."
+      }
+    ],
+    "tips": [
+      "Keep a fist's distance between your chin and your chest to protect your neck",
+      "Focus on bringing your ribs toward your pelvis, not on how high you rise",
+      "Keep your lower back pressed to the floor: if it arches, your abs have let go",
+      "Slow down the descent (2–3 seconds) to double the time under tension"
+    ],
+    "commonMistakes": [
+      "Pulling on your neck with your hands — ease the finger pressure; they only support the head without pulling it",
+      "Rising too high by lifting the lower back off the floor — a crunch is a short movement, not a sit-up",
+      "Using momentum to chain reps — each rise must be initiated by the ab contraction, not a swing",
+      "Puffing the belly on the way up — the belly must draw inward at the effort to engage the transverse abdominis",
+      "Fully resting your shoulders between reps — maintain continuous tension by staying slightly lifted"
+    ]
+  },
+  "superman": {
+    "name": "Superman",
+    "aliases": ["Alternating superman", "Back extension on floor"],
+    "muscles": ["Spinal erectors", "Glutes", "Traps", "Rhomboids", "Rear deltoids"],
+    "shortDescription": "The antidote to hours spent sitting. The superman strengthens the entire posterior chain in a single floor movement. By lifting your arms and legs simultaneously, you work the spinal erectors, glutes and upper back for a strong back and upright posture.",
+    "execution": "Lie face down, arms extended in front of you (superman-in-flight position), legs extended and together. Your forehead can rest on the floor or stay slightly raised. Contract your glutes and back muscles simultaneously to lift your arms, chest and legs off the floor. Rise as high as your mobility allows without straining your lower back, keeping your gaze toward the floor (neck neutral). Hold the top position 1–2 seconds while squeezing your shoulder blades together, then lower slowly. The movement comes from the glutes and back, not from a lower-back jerk.",
+    "breathing": "Inhale at the bottom to prepare, exhale as you rise while contracting your back and glutes. Maintain fluid breathing if you hold the position isometrically.",
+    "benefits": [
+      "Strengthens the entire posterior chain: spinal erectors, glutes, upper back",
+      "Corrects posture by counterbalancing the effects of prolonged sitting",
+      "Prevents lower back pain by building endurance in the spinal stabilizer muscles",
+      "No equipment needed, can be done on any flat surface",
+      "Improves proprioception and coordination between the upper and lower body"
+    ],
+    "variants": [
+      {
+        "name": "Alternating superman",
+        "description": "Lift your right arm and left leg simultaneously, then alternate. Reduces difficulty and adds anti-rotation hip stabilization work."
+      },
+      {
+        "name": "Back extensions",
+        "description": "Only the upper body lifts; legs remain on the floor. Focuses work on the spinal erectors and upper back — ideal for beginners or as a pre-fatigue exercise."
+      },
+      {
+        "name": "Reverse hyper on table",
+        "description": "Lying face down at the edge of a table, hips supported, lift your legs toward horizontal. Targets the glutes and lower back with greater range of motion and no disc compression."
+      },
+      {
+        "name": "Reverse snow angels",
+        "description": "In a held superman position, arc your arms from in front to your hips and back. The continuous movement under tension burns the rhomboids and traps."
+      },
+      {
+        "name": "Prone T raises",
+        "description": "Face down, arms spread to the sides, lift them to form a T. Specifically targets the mid-traps and rhomboids — perfect for correcting rounded shoulders."
+      },
+      {
+        "name": "Prone Y raises",
+        "description": "Face down, arms extended forward at 45 degrees, lift them to form a Y. Recruits the lower traps and rear deltoids, reinforcing scapular stability."
+      }
+    ],
+    "tips": [
+      "Keep your gaze toward the floor to maintain neck neutrality — don't lift your head to look forward",
+      "Squeeze your shoulder blades together at the top as if you were trying to hold a pencil between them",
+      "Initiate the movement from your glutes, not from an excessive lower-back arch",
+      "Start with the alternating variation if the full superman causes tension in your lower back"
+    ],
+    "commonMistakes": [
+      "Lifting your head to look forward — creates cervical hyperextension. Keep your gaze at the floor, neck in line with your spine.",
+      "Forcing the rise by excessively arching your lower back — height comes from muscle contraction, not a back jerk. Limit range of motion if needed.",
+      "Bending your knees to lift your legs higher — keep your legs straight and let your glutes do the work",
+      "Letting your arms relax between reps — maintain slight tension in your upper back even at the bottom",
+      "Going too fast without controlling the movement — the superman is a control exercise, not a speed drill. Pause at the top."
+    ]
+  },
+  "leg-raises": {
+    "name": "Leg raises",
+    "aliases": ["Hanging leg raises"],
+    "muscles": ["Rectus abdominis (lower)", "Hip flexors", "Obliques (stabilization)"],
+    "shortDescription": "The reference exercise for targeting the lower abs. The leg raise requires real pelvic control to prevent the back from arching, making it a far more technical movement than it appears.",
+    "execution": "Lie on your back, arms alongside your body (palms down) or hands tucked under your glutes to stabilize your pelvis. Legs extended and together, lift your feet a few centimetres off the floor. Keeping your lower back pressed to the floor, raise your straight legs to vertical (90 degrees) by contracting your abs. Lower slowly, controlling the descent over 3–4 seconds, until your feet nearly touch the floor without touching it. If straight legs are too challenging, bend your knees slightly to reduce leverage. The key to the movement is never letting your lower back lift off the floor.",
+    "breathing": "Exhale as you raise your legs (belly drawn in, lower back pressed to floor); inhale as you lower. Forced exhalation on the way up helps maintain pelvic retroversion and protects the lower back.",
+    "benefits": [
+      "Targets the lower portion of the rectus abdominis, often underdeveloped compared to the upper portion",
+      "Strengthens hip flexors, essential for running and walking",
+      "Develops pelvic control and lumbar stabilization",
+      "A natural progression toward advanced movements (toes-to-bar, L-sit)",
+      "Improves body awareness and proprioception in the lumbo-pelvic region"
+    ],
+    "variants": [
+      {
+        "name": "Flutter kicks",
+        "description": "Legs extended a few centimetres off the floor, perform small rapid alternating kicks. Sustained tension with the lower back pressed to the floor burns the abs and hip flexors."
+      },
+      {
+        "name": "Scissors",
+        "description": "Legs extended off the floor, cross them alternately like scissors. The crossing motion adds an adduction component and oblique work to the abdominal holding effort."
+      }
+    ],
+    "tips": [
+      "Place your hands under your glutes if your back arches — it helps maintain pelvic retroversion",
+      "Control the descent: it's the eccentric phase that builds strength. If your legs drop, the load is too heavy.",
+      "Never touch the floor with your feet between reps to maintain continuous tension",
+      "Bend your knees slightly if straight legs cause tension in your lower back — movement quality trumps range of motion"
+    ],
+    "commonMistakes": [
+      "Lower back arching on the descent — the most common and dangerous error. Reduce range of motion or bend your knees until you can control your pelvic position.",
+      "Using momentum to raise the legs — each rise must be initiated by ab contraction, not a swing",
+      "Letting your legs fall under gravity — the descent must last at least 3–4 seconds. If you can't control it, reduce the range of motion.",
+      "Pulling on your neck or lifting your head — keep your head resting on the floor, neck relaxed; the work is in your abs, not your neck",
+      "Reflexively holding your breath — breath-holding uncontrollably increases intra-abdominal pressure and prevents effective core engagement"
+    ]
+  },
+  "dead-bug": {
+    "name": "Dead bug",
+    "aliases": ["Bird dog"],
+    "muscles": ["Transverse abdominis", "Rectus abdominis", "Obliques", "Hip flexors"],
+    "shortDescription": "An anti-extension core exercise performed lying on your back. The dead bug teaches the body to stabilize the trunk while the arms and legs move — exactly what the core does in everyday life and sport.",
+    "execution": "Lie on your back, arms extended toward the ceiling directly over your shoulders, knees bent to 90° over your hips (shins parallel to the floor). Before moving, press your lower back into the floor by contracting your abs — this contact must never be lost. Simultaneously extend your right arm overhead and your left leg toward the floor, without either touching the floor. Return to the starting position then repeat on the opposite side. The movement is slow and controlled — each rep lasts 3–4 seconds. If your lower back lifts off the floor, reduce your range of motion.",
+    "breathing": "Exhale slowly as you extend the opposite arm and leg — this exhalation helps press your lower back to the floor. Inhale as you return to the starting position.",
+    "benefits": [
+      "Strengthens the core in anti-extension, the most functional stabilization pattern",
+      "Teaches limb-trunk dissociation: moving arms and legs without compensating with the back",
+      "Extremely gentle on the back — recommended in rehabilitation and lower back pain prevention",
+      "Improves contralateral coordination (right arm / left leg) essential in running and walking",
+      "An excellent warm-up exercise to prepare the core before more intense movements"
+    ],
+    "variants": [],
+    "tips": [
+      "Your lower back must remain pressed to the floor at all times — this IS the quality criterion for the movement",
+      "Go slow: 3–4 seconds per extension, 2 seconds to return. Speed is the enemy of the dead bug.",
+      "If you can't keep your back on the floor, reduce range of motion: don't lower your arm and leg as far",
+      "Focus on exhaling during extension — it naturally locks your trunk position"
+    ],
+    "commonMistakes": [
+      "Lower back lifting off the floor — a sign the range of motion is too great or the core isn't engaged enough. Reduce the movement.",
+      "Going too fast — the dead bug is a control exercise, not a speed drill. Each rep must be deliberate.",
+      "Moving the arm and leg on the same side (ipsilateral) instead of opposite sides (contralateral)",
+      "Holding your breath — exhaling during extension is essential to maintain trunk stability",
+      "Neglecting the return phase — bring your arm and leg back with the same control as the extension"
+    ]
+  },
+  "mountain-climbers": {
+    "name": "Mountain climbers",
+    "aliases": ["Mountain climber", "Spider-Man mountain climbers"],
+    "muscles": ["Core", "Shoulders", "Quads", "Hip flexors"],
+    "shortDescription": "An explosive cardio exercise performed in a plank position. Mountain climbers combine core stability, leg work and cardiovascular endurance in a fast, rhythmic movement that spikes your heart rate within seconds.",
+    "execution": "Get into a high plank: hands under your shoulders, arms extended, body aligned from head to heels. Drive one knee toward your chest by contracting your abs, then send it back while simultaneously bringing the other knee toward your chest. Alternate your legs rapidly in a horizontal running motion. Hips stay low and stable — they must neither pike up nor bounce up and down. Keep your shoulders over your wrists and your gaze at the floor, slightly in front of your hands.",
+    "breathing": "Adopt a natural, steady breathing rhythm matched to your leg movement: inhale over a two-stride cycle, exhale over the next. Never hold your breath even as the pace increases.",
+    "benefits": [
+      "Spikes your heart rate very quickly with no equipment",
+      "Strengthens dynamic core stability by engaging the core under instability",
+      "Works hip flexors and quads in explosive mode",
+      "Improves coordination and agility through rapid leg alternation",
+      "Easily integrated into a circuit or HIIT as a high-intensity burst"
+    ],
+    "variants": [],
+    "tips": [
+      "Start slow to master the plank position before picking up speed",
+      "Lock your shoulders over your wrists — don't let your torso drift back",
+      "Keep your abs contracted throughout to prevent your hips from bouncing",
+      "Prefer a steady, sustained pace over uncontrolled bursts followed by breaks"
+    ],
+    "commonMistakes": [
+      "Hips piking up — a sign the core is letting go. Lower your hips to shoulder level.",
+      "Hips bouncing up and down — keep the pelvis stable by contracting your core",
+      "Shoulders drifting behind your wrists — keep your hands directly under your shoulders",
+      "Feet dragging on the floor instead of lifting — drive your knees with energy, as in a run",
+      "Holding your breath — breathe fluidly and continuously, even at high intensity"
+    ]
+  },
+  "jumping-jacks": {
+    "name": "Jumping jacks",
+    "aliases": ["Jumping jack"],
+    "muscles": ["Deltoids", "Calves", "Quads", "Adductors"],
+    "shortDescription": "The classic warm-up exercise. Jumping jacks combine a jump with a simultaneous spread of arms and legs in a rhythmic movement that quickly activates the cardiovascular system. Simple, effective and accessible to all levels.",
+    "execution": "Stand with feet together, arms at your sides. In a single jump, spread your feet to about one and a half times shoulder-width while raising your arms laterally overhead (hands meet or nearly meet at the top). Return to the starting position with a second jump: feet together, arms at your sides. The movement is fluid and continuous; arms and legs synchronize perfectly. Land on the balls of your feet with your knees slightly bent to absorb each jump.",
+    "breathing": "Inhale as you spread your arms and legs; exhale as you return to the starting position. Your breathing rhythm adapts naturally to the movement cadence — keep it fluid and steady.",
+    "benefits": [
+      "Full-body warm-up in seconds: simultaneously activates cardio, shoulders and legs",
+      "Improves arm-leg motor coordination and sense of rhythm",
+      "Zero equipment, zero complex technique: accessible from the very first session",
+      "Engages the adductors and deltoids, often undertrained in classic routines",
+      "Quickly raises heart rate to prepare the body for more intense effort"
+    ],
+    "variants": [
+      {
+        "name": "Star jumps",
+        "description": "Explosive jump where arms and legs spread as wide as possible in the air to form a star. More intense than standard jumping jacks, this variation develops power and engages glutes and shoulders more."
+      }
+    ],
+    "tips": [
+      "Keep your knees slightly bent on landing to protect your joints",
+      "Arms rise straight out to the sides, not in front of you — the movement comes from the shoulders",
+      "Stay on the balls of your feet, never land heel-first",
+      "Find a steady, sustainable rhythm rather than going maximum speed from the start"
+    ],
+    "commonMistakes": [
+      "Landing on your heels — creates excessive impact on knees and ankles. Stay on the balls of your feet.",
+      "Arms passing in front of the body instead of rising laterally — reduces deltoid work and breaks the rhythm",
+      "Stiff knees on landing — always bend your knees slightly to absorb the impact",
+      "Too small a range of motion (hands don't reach overhead) — perform the full movement for effective work",
+      "Irregular or jerky rhythm — maintain a constant, fluid cadence to maximize the cardiovascular effect"
+    ]
+  },
+  "high-knees": {
+    "name": "High knees",
+    "aliases": ["Running in place", "High knee run", "Butt kicks", "Sprint on spot", "Heel kicks", "Skipping"],
+    "muscles": ["Hip flexors", "Quads", "Calves", "Core"],
+    "shortDescription": "A dynamic cardio exercise that mimics running in place with knees driven high. High knees intensely work the hip flexors and core while spiking your heart rate within seconds.",
+    "execution": "Stand with feet hip-width apart, arms bent at 90° as in a sprint position. Drive one knee up to hip height (thigh parallel to the floor or higher) while pumping the opposite arm forward. Plant your foot and immediately drive the other knee up. The movement is fast and dynamic, like high-frequency running in place. Stay on the balls of your feet, torso slightly forward and abs engaged to stabilize the pelvis.",
+    "breathing": "Breathe rhythmically and shortly, as in a sprint: two counts in, two counts out. Avoid holding your breath, even as intensity rises.",
+    "benefits": [
+      "Explodes your heart rate in seconds — perfect for high-intensity intervals",
+      "Strengthens hip flexors, a key muscle group for running and daily mobility",
+      "Works arm-leg coordination and dynamic proprioception",
+      "Strongly engages core stability to stabilize the pelvis with each knee drive",
+      "Improves foot speed and muscular reactivity in the lower limbs"
+    ],
+    "variants": [
+      {
+        "name": "Butt kicks",
+        "description": "Instead of driving your knees up, your heels kick back toward your glutes. Targets the hamstrings and calves more while reducing stress on the hip flexors."
+      }
+    ],
+    "tips": [
+      "Drive knees to at least hip height — below that, the exercise loses its purpose",
+      "Keep your torso upright or very slightly forward, not leaning back",
+      "Use your arms actively: they set the rhythm and help drive the knees",
+      "Start at a moderate pace and progressively increase speed over the first few reps"
+    ],
+    "commonMistakes": [
+      "Knees not rising high enough — the thigh must reach parallel to the floor for effective hip flexor work",
+      "Torso leaning back to compensate — a sign of weak hip flexors. Reduce speed and keep the core engaged.",
+      "Landing on your heels — stay on the balls of your feet to protect your joints and maintain dynamism",
+      "Arms still at your sides — opposite arms must accompany the movement for coordination and balance",
+      "Too fast a pace at the expense of range of motion — better to drive high and go slightly slower than to shuffle with no amplitude"
+    ]
+  },
+  "skaters": {
+    "name": "Skaters",
+    "aliases": ["Skater", "Speed skaters", "Lateral skaters"],
+    "muscles": ["Glutes", "Quads", "Adductors", "Calves"],
+    "shortDescription": "A lateral cardio exercise inspired by the speed skater's movement. Skaters develop leg power, single-leg balance and hip stability in an explosive, fluid motion.",
+    "execution": "Stand upright, shift your weight onto your right leg and push laterally to the left, leaving the floor. Land on your left foot, knee slightly bent, bringing your right leg behind your standing leg (foot barely touching the floor or not at all). Simultaneously, your right arm swings forward and your left arm swings back, like a skater. Immediately push back to the right. The movement is continuous, fluid and controlled: each landing is cushioned by a knee bend before exploding in the other direction.",
+    "breathing": "Exhale on each lateral push, inhale briefly during the flight phase. Your breathing rhythm naturally syncs with the back-and-forth motion.",
+    "benefits": [
+      "Works lateral leg power, a movement plane often neglected in standard training",
+      "Strengthens the glutes and adductors dynamically and functionally",
+      "Develops single-leg balance and hip and ankle stability",
+      "High cardio effect with lower impact than vertical jumps",
+      "Improves agility and rapid direction-change ability"
+    ],
+    "variants": [
+      {
+        "name": "Lateral bounds",
+        "description": "Wider, more explosive lateral jumps with longer air time. Develops more power and lower-limb explosiveness. Requires good ankle stability."
+      },
+      {
+        "name": "Side shuffles",
+        "description": "Lateral gliding steps without a flight phase. Reduces joint impact while working the adductors and lateral coordination. Ideal for warm-ups or beginners."
+      }
+    ],
+    "tips": [
+      "Push hard through your standing leg into the floor — the explosiveness of that push is what makes the quality of the movement",
+      "Bend your knee on landing to absorb impact and prepare for the next push",
+      "Keep your torso slightly forward, like a real skater — it helps your balance",
+      "Start with moderate amplitude and progressively increase the width of your jumps"
+    ],
+    "commonMistakes": [
+      "Landing with a straight leg — always bend your knee on landing to protect your joints and maintain balance",
+      "Torso too upright — lean slightly forward to lower your center of gravity and improve stability",
+      "Too little amplitude (small steps instead of real lateral jumps) — actually push into the floor to cover ground",
+      "Arms staying still — use the natural arm swing for balance and power",
+      "Landing knee collapsing inward (valgus) — focus on knee-foot alignment on every landing"
+    ]
+  },
+  "burpees": {
+    "name": "Burpees",
+    "aliases": ["Burpee", "Sprawls", "Sprawl", "Push-up burpees", "Tuck jump burpees", "Broad jump burpees"],
+    "muscles": ["Chest", "Quads", "Glutes", "Shoulders", "Triceps", "Core"],
+    "shortDescription": "The most complete and most dreaded bodyweight exercise. The burpee combines a push-up, a squat and a jump in a fluid movement that explodes your cardio and engages every muscle in your body.",
+    "execution": "Stand with feet shoulder-width apart. Squat down and place your hands on the floor in front of you. Jump your feet back to land in a push-up position. Perform a full push-up (chest to the floor). Jump your feet back toward your hands. Jump vertically, raising your arms overhead. Land softly and immediately chain the next rep.",
+    "breathing": "Inhale on the way down to the floor, exhale on the way back up and during the jump. Your breathing rhythm naturally adapts to the intensity — the key is to never hold your breath.",
+    "benefits": [
+      "Full-body work in a single movement: push, squat, jump, core",
+      "Simultaneously develops strength, endurance and power",
+      "Maximum cardio effect: raises heart rate in just a few reps",
+      "Burns a large number of calories by engaging major muscle chains",
+      "No equipment, minimal space required"
+    ],
+    "variants": [
+      {
+        "name": "Burpees without push-up",
+        "description": "Jump to plank and return without performing the push-up. Reduces difficulty while keeping the cardio effect. A good starting point to build endurance."
+      },
+      {
+        "name": "Burpees without jump",
+        "description": "Replace the final jump with a simple stand-up. Less joint impact — ideal in an apartment or for those with knee sensitivities."
+      },
+      {
+        "name": "Burpees with tuck jump",
+        "description": "The final jump is replaced by a tuck jump (knees to chest). An advanced version that increases explosiveness and cardiovascular demand."
+      }
+    ],
+    "tips": [
+      "Find a sustainable pace. A steady rhythm beats 5 fast burpees followed by 30 seconds gasping for breath",
+      "The push-up must be complete — if you can no longer do full push-ups, switch to burpees without push-up rather than cheating",
+      "Land softly on the balls of your feet, not stiff-legged",
+      "Keep your abs contracted throughout the floor phase to protect your lower back"
+    ],
+    "commonMistakes": [
+      "Skipping the push-up or doing a half push-up — it's an integral part of the movement",
+      "Lower back sagging in the plank position — brace your core before jumping your feet back",
+      "Landing with straight legs after the jump — bend your knees to absorb the impact",
+      "Going out too fast and collapsing after 4–5 reps — the burpee is a marathon, not a sprint",
+      "Forgetting to breathe — breath-holding under effort is the number-one trap with this exercise"
+    ]
+  },
+  "inchworms": {
+    "name": "Inchworms",
+    "aliases": ["Inchworm"],
+    "muscles": ["Shoulders", "Core", "Hamstrings (flexibility)", "Chest"],
+    "shortDescription": "A dynamic mobility exercise combining hand walking and hamstring stretching. The inchworm warms up your entire body by transitioning from standing to plank and back — perfect as a warm-up or active recovery.",
+    "execution": "Stand with feet together or slightly apart. Hinge forward and place your hands on the floor in front of your feet (bend your knees slightly if needed to reach the floor). Walk your hands out step by step until you reach a high plank, body aligned from head to heels. Pause in the plank, shoulders over wrists. Then walk your feet toward your hands in small steps, keeping your legs as straight as possible to stretch the hamstrings. Stand back up and chain the next rep. Each hand-to-foot transition must be fluid and controlled.",
+    "breathing": "Inhale as you walk your hands forward; exhale as you walk your feet toward your hands. Maintain a calm, regular breathing rhythm — this exercise is not a sprint.",
+    "benefits": [
+      "Warms up your entire body in a single fluid movement: shoulders, core, hamstrings",
+      "Improves dynamic hamstring and calf flexibility",
+      "Strengthens shoulders and core in the plank position with each rep",
+      "Prepares joints and muscles for more intense movements",
+      "A slow, controlled movement that can serve as active recovery between intense sets"
+    ],
+    "variants": [],
+    "tips": [
+      "Keep your legs as straight as possible when walking your feet in — that's where the stretch happens",
+      "Don't rush: the inchworm is a mobility exercise, not a speed drill",
+      "In the plank position, verify your shoulders are directly over your wrists before moving on",
+      "If you can't touch the floor with straight legs, bend your knees slightly — flexibility will come with practice"
+    ],
+    "commonMistakes": [
+      "Rushing through the transitions — each phase (hand walk, plank, foot walk) deserves control",
+      "Excessively bending the knees when walking feet in — the goal is to feel the hamstring stretch",
+      "Hips rising or dropping in the plank — maintain head-to-heel alignment as in a static plank",
+      "Skipping the plank pause — don't just pass through; stabilize for a second in the plank",
+      "Hands walking too far past the shoulders — in the plank, wrists must be under the shoulders"
+    ]
+  },
+  "etirements": {
+    "name": "Stretches",
+    "aliases": ["Stretching", "Static stretching", "Twist", "Cobra", "Savasana", "Cool-down"],
+    "muscles": ["Hamstrings", "Quads", "Chest", "Hip flexors", "Triceps"],
+    "shortDescription": "Static stretches at the end of a session return muscles to their resting length, improve flexibility and promote recovery. Each position is held for 20–30 seconds while breathing calmly.",
+    "execution": "Move into each stretch position slowly, without jerking. Hold the posture for 20–30 seconds while breathing deeply. You should feel a moderate tension, never pain. Release gently and move to the next stretch. For unilateral stretches, always work both sides, holding for the same duration on each side.",
+    "breathing": "Breathe slowly and deeply through your nose. With each exhale, release a little more muscular tension to gain range of motion. Never hold your breath.",
+    "benefits": [
+      "Improves muscular flexibility and joint range of motion",
+      "Promotes recovery by reducing post-workout tension",
+      "Decreases injury risk by maintaining tissue elasticity",
+      "Reduces soreness and muscle stiffness the next day",
+      "A cool-down moment that helps the transition to rest"
+    ],
+    "variants": [
+      {
+        "name": "Hamstring stretch",
+        "description": "One leg extended on a low support or on the floor in front of you, hinge your torso forward keeping your back straight until you feel the stretch at the back of the thigh. Hold 20–30 seconds on each side."
+      },
+      {
+        "name": "Chest stretch",
+        "description": "One arm extended against a wall or doorframe at 90°, slowly rotate your torso away until you feel the stretch across your chest and the front of your shoulder. Hold 20–30 seconds on each side."
+      },
+      {
+        "name": "Hip flexor stretch",
+        "description": "In a low lunge position, rear knee on the floor, push your hips forward until you feel the stretch at the front of the rear hip. Keep your torso upright. Hold 20–30 seconds on each side."
+      },
+      {
+        "name": "Standing quad stretch",
+        "description": "Standing on one leg, grab the foot of the other leg behind you and pull the heel toward your glute, keeping knees together. Keep your pelvis neutral. Hold 20–30 seconds on each side."
+      },
+      {
+        "name": "Triceps stretch",
+        "description": "Raise one arm, bend your elbow to bring your hand behind your head between your shoulder blades. Use your other hand to gently push the elbow down. Hold 20–30 seconds on each side."
+      }
+    ],
+    "tips": [
+      "Always stretch warm muscles — never stretch cold at the start of a session",
+      "Seek the feeling of a stretch, not pain: if it hurts, ease off",
+      "Never bounce in a stretch: hold the position statically",
+      "Respect symmetry: always stretch both sides for the same duration"
+    ],
+    "commonMistakes": [
+      "Stretching cold before exercise — static stretches reduce performance if done before training",
+      "Forcing range of motion to the point of pain — a stretch should be comfortable, never painful",
+      "Bouncing or jerking in the position — increases the risk of micro-tears in the muscle",
+      "Holding for less than 15 seconds — below that, the stretch doesn't have time to produce a meaningful effect",
+      "Holding your breath — prevents muscular relaxation and increases tension"
+    ]
+  },
+  "mobilite": {
+    "name": "Joint mobility",
+    "aliases": [
+      "Mobility",
+      "Joint mobility",
+      "Cat-cow",
+      "Child's pose",
+      "Pigeon stretch",
+      "Scorpion stretches",
+      "Squat to stand",
+      "Thoracic rotation"
+    ],
+    "muscles": ["Hips", "Spine", "Shoulders", "Ankles"],
+    "shortDescription": "Mobility exercises improve joint range of motion and movement quality. They prepare the body for effort during warm-up and promote recovery at the end of a session.",
+    "execution": "Perform each mobility movement slowly and under control, exploring the full available range without forcing. Transition fluidly between positions while breathing steadily. Mobility work is not intense effort: it's a conversation with your body to identify and reduce movement restrictions.",
+    "breathing": "Breathe calmly and deeply. Use the exhale to release tension and gain range of motion. Your breathing guides the pace of movement.",
+    "benefits": [
+      "Improves joint range of motion and movement quality",
+      "Prevents injuries by preparing joints for effort",
+      "Reduces stiffness caused by sedentary behavior and prolonged sitting",
+      "Promotes recovery and reduces post-workout aches",
+      "Improves posture and body awareness in daily life"
+    ],
+    "variants": [
+      {
+        "name": "Cat-cow",
+        "description": "On all fours, slowly alternate between a rounded back (cat: head down, navel drawn in, back toward the ceiling) and an arched back (cow: head up, belly toward the floor, chest open). Mobilizes the entire spine segment by segment."
+      },
+      {
+        "name": "Child's pose",
+        "description": "Kneeling, sit back on your heels and extend your arms in front of you, forehead to the floor. Breathe deeply into your lower back. A rest and stretch position that releases the lower back, shoulders and hips."
+      },
+      {
+        "name": "Deep squat hold",
+        "description": "Hold a deep squat (hips close to the floor), feet flat, elbows against the inside of your knees to push them outward. Improves hip, ankle and lower back mobility. Hold 30–60 seconds."
+      },
+      {
+        "name": "Hip 90/90",
+        "description": "Seated on the floor, one leg bent to 90° in front of you (external hip rotation) and the other at 90° to the side (internal rotation). Pivot to alternate sides. Works hip rotation mobility in both directions."
+      },
+      {
+        "name": "Pigeon stretch",
+        "description": "From a lunge, bring your front shin to the floor in front of you (parallel or diagonal) and extend the back leg. Lean your torso forward to intensify the glute and piriform stretch. Hold 30 seconds on each side."
+      },
+      {
+        "name": "Scorpion stretch",
+        "description": "Lying face down, arms spread in a cross. Bring your right foot toward your left hand by rotating your hips, then alternate. Mobilizes the thoracic spine in rotation and stretches the hip flexors."
+      },
+      {
+        "name": "World's greatest stretch",
+        "description": "In a low lunge, place your inside hand on the floor, then rotate your torso by lifting your other arm toward the sky. Combines lunge, thoracic rotation and hip opening in a single complete movement. The king of warm-up exercises."
+      }
+    ],
+    "tips": [
+      "Practice mobility daily — even a few minutes is enough to maintain your gains",
+      "Respect your body's limits: mobility is built gradually, not by forcing",
+      "Pair joint mobility with deep breathing to maximize relaxation",
+      "Mobility exercises are perfect upon waking to 'wake up' your joints after the night"
+    ],
+    "commonMistakes": [
+      "Going too fast — mobility requires slowness to be effective. Take your time to explore each position.",
+      "Forcing range of motion beyond what your body allows — respect current limitations and progress gradually",
+      "Neglecting breathing — shallow breathing prevents the muscular relaxation needed",
+      "Only doing mobility when in pain — prevention is far more effective than correction",
+      "Confusing mobility and stretching — mobility is active and controlled movement, not passive holding"
+    ]
+  },
+  "echauffement": {
+    "name": "Dynamic warm-up",
+    "aliases": [
+      "Warm-up",
+      "Warm up",
+      "Arm circles",
+      "Breathing",
+      "Rotations",
+      "March",
+      "Running on the spot",
+      "Circles",
+      "Swings",
+      "A-skips",
+      "Carioca",
+      "Lateral shuffles"
+    ],
+    "muscles": ["Full body"],
+    "shortDescription": "Dynamic warm-up exercises prepare the body for effort by progressively raising core temperature, heart rate and joint lubrication. Essential before every session to perform well and prevent injuries.",
+    "execution": "Begin with slow, small movements, then progressively increase speed and intensity. The warm-up typically lasts 5–10 minutes. The goal is to feel your body temperature rise and your joints 'unlock' — you should be slightly out of breath at the end.",
+    "breathing": "Breathe naturally following the rhythm of the movements. Breathing accelerates progressively with intensity. Keep it fluid and steady.",
+    "benefits": [
+      "Raises core temperature and muscle blood flow",
+      "Prepares joints by stimulating synovial fluid production",
+      "Significantly reduces the risk of muscle and joint injuries",
+      "Improves performance by activating neuromuscular connections",
+      "Creates a mental transition between daily life and training"
+    ],
+    "variants": [
+      {
+        "name": "Joint circles",
+        "description": "Perform slow, controlled circles with each joint: neck, shoulders, elbows, wrists, hips, knees and ankles. Start small and progressively widen the circles. 10 rotations in each direction per joint."
+      },
+      {
+        "name": "Brisk march in place",
+        "description": "March vigorously in place, lifting your knees and swinging your arms in a coordinated way. Progressively raises your heart rate without impact. Perfect to start the warm-up before more intense movements."
+      },
+      {
+        "name": "Toe taps (step)",
+        "description": "Facing a low step or platform, alternately tap the ball of each foot on the edge. Keep a fast, steady rhythm, like quick running steps. Works coordination, agility and warms up calves and hip flexors."
+      },
+      {
+        "name": "Deep breathing",
+        "description": "Inhale slowly through your nose for 4 seconds, expanding your belly; hold for 4 seconds; then exhale through your mouth for 6 seconds. Used at the end of a session to bring the nervous system back to calm and accelerate recovery. 5–10 cycles is enough."
+      }
+    ],
+    "tips": [
+      "Never skip the warm-up — even 3 minutes is better than nothing",
+      "Adjust the intensity: the warm-up prepares you for effort, it must not tire you out",
+      "Target the areas that will be most taxed in the upcoming session",
+      "In winter or cold weather, extend the duration of the warm-up"
+    ],
+    "commonMistakes": [
+      "Jumping straight to intense exercises — your body needs at least 5 minutes to prepare",
+      "Using static stretches as a warm-up — the warm-up must be dynamic and active",
+      "Going too fast and too hard — the warm-up is progressive, not a sprint",
+      "Only warming up a few arm movements — your entire body needs warming up, from ankles to shoulders",
+      "Treating the warm-up as wasted time — it's an investment in performance and injury prevention"
+    ]
+  }
+}

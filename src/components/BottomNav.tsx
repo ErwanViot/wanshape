@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 
@@ -98,6 +99,26 @@ function UserIcon() {
   );
 }
 
+function UtensilsIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+      <path d="M7 2v20" />
+      <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
+    </svg>
+  );
+}
+
 function ChartIcon() {
   return (
     <svg
@@ -146,48 +167,50 @@ function NavItem({
 export function BottomNav() {
   const { pathname } = useLocation();
   const { user } = useAuth();
+  const { t } = useTranslation('nav');
 
   const isHome = pathname === '/';
   const isSeances = pathname === '/seances' || pathname.startsWith('/seance');
   const isPrograms = pathname.startsWith('/programme');
   const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
   const isSuivi = pathname === '/suivi';
+  const isNutrition = pathname.startsWith('/nutrition');
   const isLogin = pathname === '/login' || pathname === '/signup';
 
   return (
     <nav
       className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-divider md:hidden"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-      aria-label="Navigation principale"
+      aria-label={t('main_label')}
     >
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
         {user ? (
           <>
-            <NavItem to="/seances" label="Séances" active={isSeances}>
+            <NavItem to="/seances" label={t('sessions')} active={isSeances}>
               <DumbbellIcon />
             </NavItem>
-            <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+            <NavItem to="/programmes" label={t('programs')} active={isPrograms}>
               <ProgramsIcon />
             </NavItem>
-            <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
-              <DiscoverIcon />
+            <NavItem to="/nutrition" label={t('nutrition')} active={isNutrition}>
+              <UtensilsIcon />
             </NavItem>
-            <NavItem to="/suivi" label="Suivi" active={isSuivi}>
+            <NavItem to="/suivi" label={t('tracking')} active={isSuivi}>
               <ChartIcon />
             </NavItem>
           </>
         ) : (
           <>
-            <NavItem to="/" label="Accueil" active={isHome}>
+            <NavItem to="/" label={t('home')} active={isHome}>
               <HomeIcon />
             </NavItem>
-            <NavItem to="/programmes" label="Programmes" active={isPrograms}>
+            <NavItem to="/programmes" label={t('programs')} active={isPrograms}>
               <ProgramsIcon />
             </NavItem>
-            <NavItem to="/decouvrir" label="Explorer" active={isDiscover}>
+            <NavItem to="/decouvrir" label={t('explore')} active={isDiscover}>
               <DiscoverIcon />
             </NavItem>
-            <NavItem to="/login" label="Connexion" active={isLogin}>
+            <NavItem to="/login" label={t('login')} active={isLogin}>
               <UserIcon />
             </NavItem>
           </>

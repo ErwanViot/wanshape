@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function ScreenshotCarousel({
   images,
@@ -15,6 +16,7 @@ export function ScreenshotCarousel({
   interval?: number;
   dotColor?: 'brand' | 'accent';
 }) {
+  const { t } = useTranslation('marketing');
   const [active, setActive] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
@@ -24,10 +26,7 @@ export function ScreenshotCarousel({
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 },
-    );
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
@@ -44,7 +43,9 @@ export function ScreenshotCarousel({
 
   return (
     <div ref={containerRef} className="relative w-full">
-      <div className={`relative ${aspectClass} ${maxHClass} mx-auto overflow-hidden rounded-2xl border border-card-border shadow-2xl`}>
+      <div
+        className={`relative ${aspectClass} ${maxHClass} mx-auto overflow-hidden rounded-2xl border border-card-border shadow-2xl`}
+      >
         {images.map((img, i) => (
           <img
             key={img.src}
@@ -63,7 +64,7 @@ export function ScreenshotCarousel({
               type="button"
               onClick={() => setActive(i)}
               className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${i === active ? activeDotClass : 'bg-muted/30'}`}
-              aria-label={`Aller au slide ${i + 1} sur ${images.length}`}
+              aria-label={t('carousel.slide_aria', { current: i + 1, total: images.length })}
             />
           ))}
         </div>

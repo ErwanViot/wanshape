@@ -1,0 +1,122 @@
+{
+  "date": "20260319",
+  "title": "Upper Body Strength",
+  "description": "Targeted upper body strength in push-pull with diamond push-ups and inverted row",
+  "estimatedDuration": 32,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, retract and protract the shoulder blades without bending the elbows"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Press",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Diamond push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands together under the chest, elbows close to the body"
+        },
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Hips high in inverted V, lower the head between the hands"
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Row",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Inverted row (table)",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Under a table, pull the chest to the edge"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, arms in Y, lift and hold 2s"
+        },
+        {
+          "name": "Back extensions",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, lift chest off the floor, squeeze shoulder blades"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 25,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

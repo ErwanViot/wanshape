@@ -1,0 +1,65 @@
+{
+  "difficulty": {
+    "accessible": "Accessible",
+    "modere": "Modéré",
+    "intense": "Intense"
+  },
+  "block_name": {
+    "warmup": "Échauffement",
+    "cooldown": "Retour au calme",
+    "classic": "Renforcement",
+    "circuit": "Circuit",
+    "hiit": "HIIT",
+    "tabata": "Tabata",
+    "emom": "EMOM",
+    "amrap": "AMRAP",
+    "superset": "Superset",
+    "pyramid": "Pyramide"
+  },
+  "exercise_detail": {
+    "bilateral_seconds": "{{seconds}}s × 2 côtés",
+    "max_reps": "{{sets}} × max reps",
+    "sets_reps": "{{sets}} × {{reps}} reps",
+    "reps_count": "{{reps}} reps",
+    "duration_seconds": "{{seconds}}s",
+    "work_seconds": "{{seconds}}s effort",
+    "work_rest_seconds": "{{work}}s / {{rest}}s",
+    "reps_inline": "× {{reps}}",
+    "superset_pair": "× {{reps}} · paire {{n}}",
+    "pyramid_pattern": "{{pattern}} reps"
+  },
+  "language_switcher": {
+    "aria_label": "Changer de langue",
+    "option_fr": "Français",
+    "option_en": "Anglais"
+  },
+  "layout": {
+    "skip_to_content": "Aller au contenu principal"
+  },
+  "not_found": {
+    "title": "Page introuvable",
+    "body": "La page que tu cherches n'existe pas ou a été déplacée.",
+    "back_home": "Retour à l'accueil"
+  },
+  "error_boundary": {
+    "title": "Une erreur est survenue",
+    "body": "L'application a rencontré un problème inattendu.",
+    "back_home": "Retour à l'accueil"
+  },
+  "loading": {
+    "aria": "Chargement"
+  },
+  "hook_errors": {
+    "service_unavailable": "Service indisponible",
+    "not_signed_in": "Non connecté",
+    "checkout_session_failed": "Erreur lors de la création de la session de paiement",
+    "portal_open_failed": "Erreur lors de l'ouverture du portail",
+    "history_load_failed": "Impossible de charger l'historique.",
+    "session_expired_refresh": "Session expirée. Rafraîchis la page.",
+    "search_failed": "Erreur de recherche",
+    "profile_load_failed": "Erreur de chargement du profil",
+    "meals_load_failed": "Erreur de chargement des repas",
+    "generic_retry": "Une erreur est survenue. Réessayez.",
+    "unexpected": "Erreur inattendue"
+  }
+}

@@ -1,11 +1,13 @@
 import type { AtomicStep } from '../../types/player.ts';
 import type { CooldownBlock, WarmupBlock } from '../../types/session.ts';
 import { BLOCK_COLORS, TRANSITION_DURATION } from '../constants.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from '../labels.ts';
 
 export function expandWarmup(
   block: WarmupBlock | CooldownBlock,
   blockIndex: number,
   totalBlocks: number,
+  labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS,
 ): AtomicStep[] {
   const steps: AtomicStep[] = [];
   const color = BLOCK_COLORS[block.type];
@@ -17,7 +19,7 @@ export function expandWarmup(
     timerMode: 'countdown',
     duration: TRANSITION_DURATION,
     exerciseName: block.name,
-    instructions: `${block.exercises.length} exercices`,
+    instructions: labels.exercisesCount(block.exercises.length),
     ...base,
     estimatedDuration: TRANSITION_DURATION,
   });
@@ -38,7 +40,7 @@ export function expandWarmup(
       timerMode: 'countdown',
       duration: totalDuration,
       exerciseName: ex.name,
-      instructions: ex.bilateral ? `${ex.instructions} (${ex.duration}s par cote)` : ex.instructions,
+      instructions: ex.bilateral ? labels.bilateralInline(ex.instructions, ex.duration) : ex.instructions,
       ...base,
       exerciseInfo,
       isLastInBlock: isLast,

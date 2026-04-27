@@ -10,28 +10,29 @@ import { expandPyramid } from './interpreters/pyramid.ts';
 import { expandSuperset } from './interpreters/superset.ts';
 import { expandTabata } from './interpreters/tabata.ts';
 import { expandWarmup } from './interpreters/warmup.ts';
+import { DEFAULT_FR_ENGINE_LABELS, type EngineLabels } from './labels.ts';
 
-function expandBlock(block: Block, blockIndex: number, totalBlocks: number): AtomicStep[] {
+function expandBlock(block: Block, blockIndex: number, totalBlocks: number, labels: EngineLabels): AtomicStep[] {
   switch (block.type) {
     case 'warmup':
     case 'cooldown':
-      return expandWarmup(block, blockIndex, totalBlocks);
+      return expandWarmup(block, blockIndex, totalBlocks, labels);
     case 'classic':
-      return expandClassic(block, blockIndex, totalBlocks);
+      return expandClassic(block, blockIndex, totalBlocks, labels);
     case 'circuit':
-      return expandCircuit(block, blockIndex, totalBlocks);
+      return expandCircuit(block, blockIndex, totalBlocks, labels);
     case 'hiit':
-      return expandHIIT(block, blockIndex, totalBlocks);
+      return expandHIIT(block, blockIndex, totalBlocks, labels);
     case 'tabata':
-      return expandTabata(block, blockIndex, totalBlocks);
+      return expandTabata(block, blockIndex, totalBlocks, labels);
     case 'emom':
-      return expandEMOM(block, blockIndex, totalBlocks);
+      return expandEMOM(block, blockIndex, totalBlocks, labels);
     case 'amrap':
-      return expandAMRAP(block, blockIndex, totalBlocks);
+      return expandAMRAP(block, blockIndex, totalBlocks, labels);
     case 'superset':
-      return expandSuperset(block, blockIndex, totalBlocks);
+      return expandSuperset(block, blockIndex, totalBlocks, labels);
     case 'pyramid':
-      return expandPyramid(block, blockIndex, totalBlocks);
+      return expandPyramid(block, blockIndex, totalBlocks, labels);
   }
 }
 
@@ -39,12 +40,12 @@ function needsInterBlockRest(current: Block, next: Block): boolean {
   return current.type !== 'warmup' && current.type !== 'cooldown' && next.type !== 'cooldown';
 }
 
-export function compileSession(session: Session): AtomicStep[] {
+export function compileSession(session: Session, labels: EngineLabels = DEFAULT_FR_ENGINE_LABELS): AtomicStep[] {
   const totalBlocks = session.blocks.length;
   const allSteps: AtomicStep[] = [];
 
   for (let i = 0; i < session.blocks.length; i++) {
-    const blockSteps = expandBlock(session.blocks[i], i, totalBlocks);
+    const blockSteps = expandBlock(session.blocks[i], i, totalBlocks, labels);
     allSteps.push(...blockSteps);
 
     // Insert inter-block rest between active blocks
@@ -55,8 +56,8 @@ export function compileSession(session: Session): AtomicStep[] {
         phase: 'rest',
         timerMode: 'countdown',
         duration: INTER_BLOCK_REST,
-        exerciseName: 'Repos entre blocs',
-        instructions: `Prochain bloc : ${nextBlock.name}`,
+        exerciseName: labels.betweenBlocks,
+        instructions: labels.nextBlock(nextBlock.name),
         blockName: session.blocks[i].name,
         blockType: session.blocks[i].type,
         blockColor: BLOCK_COLORS[session.blocks[i].type],

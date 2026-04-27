@@ -1,0 +1,120 @@
+{
+  "date": "20260417",
+  "title": "Strength Climb",
+  "description": "Push-ups and squats pyramid followed by a classic targeting core and hinge for progressive full body",
+  "estimatedDuration": 35,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Ascending Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Incline push-ups",
+          "instructions": "Hands on a raised surface, easier"
+        },
+        {
+          "name": "Squats",
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Complementary Strength",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands behind the head, lean torso forward keeping the back straight"
+        },
+        {
+          "name": "Forearm plank",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "On forearms, body perfectly aligned, brace the abs"
+        },
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs vertical, reach hands to feet"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

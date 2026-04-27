@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -7,13 +8,14 @@ import { useProgram } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import type { Session } from '../types/session.ts';
 import { getConsigneForWeek } from '../utils/coaching.ts';
-import { FITNESS_COLORS, FITNESS_LABELS, GOAL_COLORS, GOAL_LABELS } from '../utils/labels.ts';
+import { FITNESS_COLORS, GOAL_COLORS } from '../utils/labels.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
 
 export function ProgramPage() {
+  const { t } = useTranslation('programs');
   const { slug } = useParams<{ slug: string }>();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ export function ProgramPage() {
   const deleteDialogRef = useRef<HTMLDivElement>(null);
 
   useDocumentHead({
-    title: program ? `${program.title} — Programme` : 'Programme',
+    title: program ? `${program.title} ${t('page.title_suffix')}` : t('page.title_suffix'),
     description: program?.description ?? undefined,
   });
 
@@ -52,7 +54,9 @@ export function ProgramPage() {
 
   // Initialize collapsed weeks: future weeks collapsed by default for custom programs.
   // All used values (isCustom, byWeek, currentWeek) are derived deterministically from
-  // program — so re-running only when the program identity changes is correct.
+  // program — re-running only when program identity changes is correct (byWeek is
+  // rebuilt fresh each render so depending on it would re-fire this effect every render).
+  // biome-ignore lint/correctness/useExhaustiveDependencies: program?.id is the intentional narrower trigger; see comment above.
   useEffect(() => {
     if (!program || !isCustom) return;
     const weeks = [...byWeek.keys()];
@@ -61,7 +65,7 @@ export function ProgramPage() {
       if (w > currentWeek) collapsed.add(w);
     }
     setCollapsedWeeks(collapsed);
-  }, [program?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [program?.id]);
 
   // Focus trap for delete modal
   useEffect(() => {
@@ -72,14 +76,22 @@ export function ProgramPage() {
     if (focusable.length > 0) focusable[0].focus();
 
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') { setShowDeleteModal(false); return; }
+      if (e.key === 'Escape') {
+        setShowDeleteModal(false);
+        return;
+      }
       if (e.key === 'Tab') {
         const focusableEls = dialog?.querySelectorAll<HTMLElement>('button:not(:disabled)');
         if (!focusableEls || focusableEls.length === 0) return;
         const first = focusableEls[0];
         const last = focusableEls[focusableEls.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     }
     document.addEventListener('keydown', handleKeyDown);
@@ -99,9 +111,9 @@ export function ProgramPage() {
   if (!program) {
     return (
       <div className="min-h-[50vh] flex flex-col items-center justify-center gap-4 px-6">
-        <p className="text-muted">Programme introuvable ou service indisponible.</p>
+        <p className="text-muted">{t('page.not_found')}</p>
         <Link to="/programmes" className="text-link hover:text-link-hover underline text-sm">
-          Voir tous les programmes
+          {t('page.see_all')}
         </Link>
       </div>
     );
@@ -136,27 +148,31 @@ export function ProgramPage() {
 
       {/* Delete modal */}
       {showDeleteModal && (
+        // biome-ignore lint/a11y/useKeyWithClickEvents: Escape is wired in the keydown effect above; the click here is the pointer-only click-outside dismissal.
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-labelledby="delete-program-title"
-          onClick={(e) => { if (e.target === e.currentTarget) setShowDeleteModal(false); }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowDeleteModal(false);
+          }}
         >
-          <div ref={deleteDialogRef} className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4">
+          <div
+            ref={deleteDialogRef}
+            className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4"
+          >
             <h2 id="delete-program-title" className="text-lg font-bold text-heading">
-              Supprimer ce programme ?
+              {t('page.delete_modal_title')}
             </h2>
-            <p className="text-sm text-muted">
-              Ton historique de séances sera conservé. Cette action est irréversible.
-            </p>
+            <p className="text-sm text-muted">{t('page.delete_modal_body')}</p>
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setShowDeleteModal(false)}
                 className="flex-1 py-3 rounded-xl text-sm font-semibold border border-divider text-muted hover:text-heading transition-colors cursor-pointer"
               >
-                Annuler
+                {t('page.delete_cancel')}
               </button>
               <button
                 type="button"
@@ -164,7 +180,7 @@ export function ProgramPage() {
                 disabled={deleting}
                 className="flex-1 py-3 rounded-xl text-sm font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer disabled:opacity-50"
               >
-                {deleting ? 'Suppression...' : 'Supprimer'}
+                {deleting ? t('page.deleting') : t('page.delete_confirm')}
               </button>
             </div>
           </div>
@@ -188,15 +204,24 @@ export function ProgramPage() {
                   to="/programmes"
                   className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white transition-colors cursor-pointer w-fit"
                 >
-                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <svg
+                    aria-hidden="true"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  >
                     <path d="M15 18l-6-6 6-6" />
                   </svg>
-                  Programmes
+                  {t('page.back')}
                 </Link>
 
                 {isCustom && (
                   <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-brand/20 border border-brand/30 text-brand backdrop-blur-sm">
-                    Programme IA
+                    {t('page.ai_badge')}
                   </span>
                 )}
               </div>
@@ -207,32 +232,50 @@ export function ProgramPage() {
                     FITNESS_COLORS[program.fitness_level] ?? ''
                   }`}
                 >
-                  {FITNESS_LABELS[program.fitness_level] ?? program.fitness_level}
+                  {t(`fitness_level.${program.fitness_level}`) ?? program.fitness_level}
                 </span>
 
                 <h1 className="font-display text-3xl md:text-4xl font-black tracking-tight text-white">
                   {program.title}
                 </h1>
 
-                {program.description && (
-                  <p className="text-sm leading-relaxed text-white/70">{program.description}</p>
-                )}
+                {program.description && <p className="text-sm leading-relaxed text-white/70">{program.description}</p>}
 
                 <div className={`flex items-center gap-3 text-xs ${isCustom ? 'text-faint' : 'text-white/50'}`}>
                   <span className="flex items-center gap-1.5">
-                    <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                       <line x1="16" y1="2" x2="16" y2="6" />
                       <line x1="8" y1="2" x2="8" y2="6" />
                       <line x1="3" y1="10" x2="21" y2="10" />
                     </svg>
-                    {program.duration_weeks} semaines
+                    {t('page.weeks_label', { n: program.duration_weeks })}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                     </svg>
-                    {program.frequency_per_week}x / semaine
+                    {t('page.freq_label', { n: program.frequency_per_week })}
                   </span>
                 </div>
 
@@ -243,7 +286,7 @@ export function ProgramPage() {
                         key={goal}
                         className={`text-xs font-bold px-2.5 py-1 rounded-full text-white ${GOAL_COLORS[goal] ?? 'bg-rose-400/80'}`}
                       >
-                        {GOAL_LABELS[goal] ?? goal}
+                        {t(`goal.${goal}`) ?? goal}
                       </li>
                     ))}
                   </ul>
@@ -256,11 +299,12 @@ export function ProgramPage() {
         {/* Auth gate */}
         {!user && (
           <div className="glass-card rounded-2xl p-6 text-center space-y-4">
-            <p className="text-sm text-subtle">
-              Connecte-toi pour suivre ce programme et enregistrer ta progression.
-            </p>
-            <Link to="/login" className="inline-block cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer">
-              Se connecter
+            <p className="text-sm text-subtle">{t('page.auth_gate')}</p>
+            <Link
+              to="/login"
+              className="inline-block cta-gradient px-8 py-3.5 rounded-full text-sm font-bold text-white cursor-pointer"
+            >
+              {t('page.login')}
             </Link>
           </div>
         )}
@@ -269,9 +313,9 @@ export function ProgramPage() {
         {user && totalSessions > 0 && (
           <div className="glass-card rounded-2xl p-5 space-y-3">
             <div className="flex items-center justify-between text-sm">
-              <span className="font-semibold text-heading">Progression</span>
+              <span className="font-semibold text-heading">{t('page.progression')}</span>
               <span className="text-muted">
-                {completedCount}/{totalSessions} séances ({progressPct}%)
+                {t('page.sessions_with_pct', { completed: completedCount, total: totalSessions, pct: progressPct })}
               </span>
             </div>
             <div className="h-2.5 rounded-full bg-white/10 overflow-hidden">
@@ -286,7 +330,7 @@ export function ProgramPage() {
         {/* Note coach */}
         {isCustom && program.note_coach && (
           <div className="glass-card rounded-2xl p-5 border-l-4 border-l-brand space-y-2">
-            <h2 className="text-sm font-bold text-heading">Note du coach</h2>
+            <h2 className="text-sm font-bold text-heading">{t('page.coach_note')}</h2>
             <p className="text-sm text-subtle leading-relaxed">{program.note_coach}</p>
           </div>
         )}
@@ -304,7 +348,9 @@ export function ProgramPage() {
                 className={`flex items-center gap-2 w-full text-left ${isCustom ? 'cursor-pointer' : ''}`}
                 aria-expanded={isCustom ? !isCollapsed : undefined}
               >
-                <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">Semaine {week}</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">
+                  {t('page.week', { n: week })}
+                </h2>
                 {isCustom && (
                   <svg
                     aria-hidden="true"
@@ -324,7 +370,9 @@ export function ProgramPage() {
 
               {consigne && !isCollapsed && (
                 <div className="flex gap-2.5 items-start rounded-lg bg-accent/10 border border-accent/20 px-3 py-2.5">
-                  <span className="text-sm mt-0.5 shrink-0" aria-hidden="true">💡</span>
+                  <span className="text-sm mt-0.5 shrink-0" aria-hidden="true">
+                    💡
+                  </span>
                   <p className="text-sm text-body leading-relaxed">{consigne}</p>
                 </div>
               )}
@@ -354,7 +402,17 @@ export function ProgramPage() {
                             }`}
                           >
                             {isDone ? (
-                              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              <svg
+                                aria-hidden="true"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
                                 <polyline points="20 6 9 17 4 12" />
                               </svg>
                             ) : (
@@ -366,9 +424,9 @@ export function ProgramPage() {
                             <h3 className="text-sm font-bold truncate text-heading">{data.title}</h3>
                             <p className="text-xs text-muted truncate mt-0.5">{data.description}</p>
                             <div className="flex items-center gap-2 mt-1.5 text-xs text-faint">
-                              <span>~{data.estimatedDuration} min</span>
+                              <span>{t('page.duration_min', { n: data.estimatedDuration })}</span>
                               <span>·</span>
-                              <span>{data.blocks.length} blocs</span>
+                              <span>{t('page.blocks', { n: data.blocks.length })}</span>
                             </div>
                           </div>
 
@@ -378,7 +436,7 @@ export function ProgramPage() {
                               onClick={() => handleStartSession(ps.session_order)}
                               className="shrink-0 px-5 py-2.5 rounded-full text-sm font-bold cta-gradient text-white cursor-pointer"
                             >
-                              {completedCount === 0 ? 'Commencer' : 'Continuer'}
+                              {completedCount === 0 ? t('page.session_start') : t('page.session_continue')}
                             </button>
                           )}
                           {user && isDone && (
@@ -387,7 +445,7 @@ export function ProgramPage() {
                               onClick={() => handleStartSession(ps.session_order)}
                               className="shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-white/5 text-subtle hover:bg-white/10 transition-colors cursor-pointer"
                             >
-                              Refaire
+                              {t('page.session_redo')}
                             </button>
                           )}
                           {user && !isSuggested && !isDone && (
@@ -396,7 +454,7 @@ export function ProgramPage() {
                               onClick={() => handleStartSession(ps.session_order)}
                               className="shrink-0 px-4 py-2 rounded-full text-xs font-medium text-muted hover:text-subtle hover:bg-white/5 transition-colors cursor-pointer"
                             >
-                              Lancer
+                              {t('page.session_launch')}
                             </button>
                           )}
                         </div>
@@ -414,19 +472,27 @@ export function ProgramPage() {
         {/* Progression info */}
         {isCustom && program.progression && (
           <div className="glass-card rounded-2xl p-5 space-y-3">
-            <h2 className="text-sm font-bold text-heading">Logique de progression</h2>
+            <h2 className="text-sm font-bold text-heading">{t('page.progression_logic')}</h2>
             <p className="text-sm text-subtle leading-relaxed">{program.progression.logique}</p>
             {program.progression.cible_semaine_3 && (
-              <p className="text-xs text-muted">Semaine 3 : {program.progression.cible_semaine_3}</p>
+              <p className="text-xs text-muted">
+                {t('page.week_target', { n: 3, target: program.progression.cible_semaine_3 })}
+              </p>
             )}
             {program.progression.cible_semaine_6 && (
-              <p className="text-xs text-muted">Semaine 6 : {program.progression.cible_semaine_6}</p>
+              <p className="text-xs text-muted">
+                {t('page.week_target', { n: 6, target: program.progression.cible_semaine_6 })}
+              </p>
             )}
             {program.progression.cible_semaine_8 && (
-              <p className="text-xs text-muted">Semaine 8 : {program.progression.cible_semaine_8}</p>
+              <p className="text-xs text-muted">
+                {t('page.week_target', { n: 8, target: program.progression.cible_semaine_8 })}
+              </p>
             )}
             {program.progression.cible_semaine_12 && (
-              <p className="text-xs text-muted">Semaine 12 : {program.progression.cible_semaine_12}</p>
+              <p className="text-xs text-muted">
+                {t('page.week_target', { n: 12, target: program.progression.cible_semaine_12 })}
+              </p>
             )}
           </div>
         )}
@@ -439,7 +505,7 @@ export function ProgramPage() {
               onClick={() => setShowDeleteModal(true)}
               className="text-xs text-faint hover:text-red-400 transition-colors cursor-pointer"
             >
-              Supprimer ce programme
+              {t('page.delete_button')}
             </button>
           </div>
         )}
@@ -450,10 +516,19 @@ export function ProgramPage() {
             to="/programmes"
             className="text-sm text-muted hover:text-body transition-colors flex items-center gap-2 cursor-pointer"
           >
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg
+              aria-hidden="true"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
               <path d="M15 18l-6-6 6-6" />
             </svg>
-            Tous les programmes
+            {t('page.all_programs')}
           </Link>
         </div>
       </div>

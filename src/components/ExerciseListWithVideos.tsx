@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import { Play, X } from 'lucide-react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getExerciseVideoUrl } from '../utils/exerciseVideo.ts';
 import { NoVideoTag } from './NoVideoTag.tsx';
 import { PlayerVideoDemo } from './PlayerVideoDemo.tsx';
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export function ExerciseListWithVideos({ exercises, blockColor, showVideos, onToggleShowVideos }: Props) {
+  const { t } = useTranslation('exercises_ui');
   const [expandedIndex, setExpandedIndex] = useState<number | null>(() => {
     const idx = exercises.findIndex((ex) => getExerciseVideoUrl(ex.name));
     return idx >= 0 ? idx : null;
@@ -80,7 +82,7 @@ export function ExerciseListWithVideos({ exercises, blockColor, showVideos, onTo
             onChange={onToggleShowVideos}
             className="w-3.5 h-3.5 rounded accent-white/60"
           />
-          Toujours montrer les exemples
+          {t('video_button.always_show')}
         </label>
       )}
     </>

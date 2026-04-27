@@ -1,38 +1,66 @@
-import { useRef, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { Camera, Crown, Monitor, Moon, Sparkles, Sun } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams } from 'react-router';
-import { Moon, Sun, Monitor, Crown, Sparkles, Camera } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { useSubscription } from '../../hooks/useSubscription.ts';
 import { useTheme } from '../../hooks/useTheme.ts';
-import { getInitials } from '../../utils/getInitials.ts';
-import { formatDate } from '../../utils/date.ts';
 import { supabase } from '../../lib/supabase.ts';
-
-const THEME_OPTIONS = [
-  { value: 'light' as const, label: 'Clair', Icon: Sun },
-  { value: 'dark' as const, label: 'Sombre', Icon: Moon },
-  { value: 'system' as const, label: 'Système', Icon: Monitor },
-];
+import { notifySessionExpired, supabaseQuery } from '../../lib/supabaseQuery.ts';
+import { formatDate } from '../../utils/date.ts';
+import { getInitials } from '../../utils/getInitials.ts';
 
 const MAX_AVATAR_SIZE = 2 * 1024 * 1024; // 2 Mo
 const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 export function SettingsPage() {
+  const { t, i18n } = useTranslation('settings');
   const { user, profile, signOut, refreshProfile } = useAuth();
   const { preference, setTheme } = useTheme();
   const { isPremium, subscription, manageSubscription } = useSubscription();
   const [searchParams] = useSearchParams();
   const checkoutSuccess = searchParams.get('checkout') === 'success';
+  const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [portalError, setPortalError] = useState<string | null>(null);
 
   useDocumentHead({
-    title: 'Paramètres',
-    description: 'Gère ton compte Wan2Fit.',
+    title: t('page_title'),
+    description: t('page_description'),
   });
+
+  // After Stripe redirects back with ?checkout=success the webhook may not
+  // have updated profiles.subscription_tier yet — there's a short window
+  // where the user sees "free" while the upgrade is still propagating.
+  // Force a profile + subscription refetch on landing, plus two retries
+  // staggered at 3s/8s to cover edge function cold-start + Stripe API
+  // latency in prod. refetchType: 'all' forces the subscription query to
+  // run even if it's disabled (isPremium still false until profile flips).
+  const userId = user?.id;
+  useEffect(() => {
+    if (!checkoutSuccess || !userId) return;
+    const refresh = () => {
+      queryClient.invalidateQueries({ queryKey: ['profile', userId] });
+      queryClient.invalidateQueries({ queryKey: ['subscription', userId], refetchType: 'all' });
+    };
+    refresh();
+    const t1 = setTimeout(refresh, 3000);
+    const t2 = setTimeout(refresh, 8000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [checkoutSuccess, userId, queryClient]);
+
+  const THEME_OPTIONS = [
+    { value: 'light' as const, label: t('appearance.theme_light'), Icon: Sun },
+    { value: 'dark' as const, label: t('appearance.theme_dark'), Icon: Moon },
+    { value: 'system' as const, label: t('appearance.theme_system'), Icon: Monitor },
+  ];
 
   const displayName = profile?.display_name ?? user?.user_metadata?.display_name;
   const initials = getInitials(displayName, user?.email);
@@ -42,11 +70,11 @@ export function SettingsPage() {
     if (!file || !user || !supabase) return;
 
     if (!ACCEPTED_TYPES.includes(file.type)) {
-      setAvatarError('Format accepté : JPG, PNG ou WebP.');
+      setAvatarError(t('avatar.error_format'));
       return;
     }
     if (file.size > MAX_AVATAR_SIZE) {
-      setAvatarError('L\u2019image ne doit pas dépasser 2 Mo.');
+      setAvatarError(t('avatar.error_size'));
       return;
     }
 
@@ -62,22 +90,30 @@ export function SettingsPage() {
         .upload(path, file, { upsert: true, contentType: file.type });
       if (uploadError) throw uploadError;
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('avatars')
-        .getPublicUrl(path);
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from('avatars').getPublicUrl(path);
 
       // Append timestamp to bust cache
       const url = `${publicUrl}?t=${Date.now()}`;
 
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .update({ avatar_url: url })
-        .eq('id', user.id);
+      // Wrap the profile update so an expired JWT triggers a refresh + retry
+      // instead of silently failing the avatar replace.
+      const { error: updateError, sessionExpired } = await supabaseQuery(() =>
+        supabase!.from('profiles').update({ avatar_url: url }).eq('id', user.id),
+      );
+      if (sessionExpired) {
+        // Session-expired banner fires via notifySessionExpired; skip the
+        // local 'error_upload' toast since it would be misleading (the
+        // upload itself succeeded, only the profile UPDATE was rejected).
+        notifySessionExpired();
+        return;
+      }
       if (updateError) throw updateError;
 
       await refreshProfile();
     } catch {
-      setAvatarError('Erreur lors de l\u2019envoi. Réessaie.');
+      setAvatarError(t('avatar.error_upload'));
     } finally {
       setAvatarUploading(false);
       // Reset input so re-selecting same file triggers change
@@ -95,14 +131,10 @@ export function SettingsPage() {
             onClick={() => fileInputRef.current?.click()}
             disabled={avatarUploading}
             className="relative w-14 h-14 rounded-full shrink-0 group cursor-pointer"
-            aria-label="Changer la photo de profil"
+            aria-label={t('avatar.change_aria')}
           >
             {profile?.avatar_url ? (
-              <img
-                src={profile.avatar_url}
-                alt=""
-                className="w-14 h-14 rounded-full object-cover"
-              />
+              <img src={profile.avatar_url} alt="" className="w-14 h-14 rounded-full object-cover" />
             ) : (
               <div className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg bg-brand">
                 {initials}
@@ -129,18 +161,16 @@ export function SettingsPage() {
             {displayName && <h1 className="text-xl font-bold text-heading truncate">{displayName}</h1>}
             <p className="text-sm text-muted truncate">{user?.email}</p>
             <p className="text-xs text-faint mt-0.5">
-              Membre depuis {user?.created_at ? formatDate(user.created_at) : '—'}
+              {t('member_since')} {user?.created_at ? formatDate(user.created_at, i18n.language) : '—'}
             </p>
           </div>
         </div>
 
-        {avatarError && (
-          <p className="text-xs text-red-400 text-center -mt-4">{avatarError}</p>
-        )}
+        {avatarError && <p className="text-xs text-red-400 text-center -mt-4">{avatarError}</p>}
 
         {/* Theme */}
         <section className="space-y-3">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">Apparence</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">{t('appearance.heading')}</h2>
           <div className="flex gap-2">
             {THEME_OPTIONS.map(({ value, label, Icon }) => (
               <button
@@ -164,13 +194,13 @@ export function SettingsPage() {
         {/* Checkout success */}
         {checkoutSuccess && (
           <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm text-center">
-            Bienvenue dans Premium ! Ton abonnement est actif.
+            {t('subscription.welcome_premium')}
           </div>
         )}
 
         {/* Subscription */}
         <section className="space-y-3">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">Abonnement</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">{t('subscription.heading')}</h2>
           {isPremium ? (
             <div className="rounded-xl border border-accent/30 bg-accent/5 p-4 space-y-3">
               <div className="flex items-center gap-2">
@@ -179,8 +209,8 @@ export function SettingsPage() {
               </div>
               {subscription?.cancel_at_period_end && subscription.current_period_end && (
                 <p className="text-xs text-muted">
-                  Se termine le{' '}
-                  {new Date(subscription.current_period_end).toLocaleDateString('fr-FR', {
+                  {t('subscription.ends_on')}{' '}
+                  {new Date(subscription.current_period_end).toLocaleDateString(i18n.language, {
                     day: 'numeric',
                     month: 'long',
                     year: 'numeric',
@@ -189,8 +219,8 @@ export function SettingsPage() {
               )}
               {!subscription?.cancel_at_period_end && subscription?.current_period_end && (
                 <p className="text-xs text-muted">
-                  Prochain renouvellement le{' '}
-                  {new Date(subscription.current_period_end).toLocaleDateString('fr-FR', {
+                  {t('subscription.renews_on')}{' '}
+                  {new Date(subscription.current_period_end).toLocaleDateString(i18n.language, {
                     day: 'numeric',
                     month: 'long',
                     year: 'numeric',
@@ -199,29 +229,29 @@ export function SettingsPage() {
               )}
               <button
                 type="button"
-                onClick={async () => { setPortalError(null); const err = await manageSubscription(); if (err) setPortalError(err); }}
+                onClick={async () => {
+                  setPortalError(null);
+                  const err = await manageSubscription();
+                  if (err) setPortalError(err);
+                }}
                 className="w-full py-2.5 rounded-xl border border-accent/30 text-sm font-semibold text-accent hover:bg-accent/10 transition-colors cursor-pointer"
               >
-                Gérer mon abonnement
+                {t('subscription.manage')}
               </button>
-              {portalError && (
-                <p className="text-xs text-red-400 mt-2">{portalError}</p>
-              )}
+              {portalError && <p className="text-xs text-red-400 mt-2">{portalError}</p>}
             </div>
           ) : (
             <div className="rounded-xl border border-divider bg-surface-card p-4 space-y-3">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-muted">Plan Gratuit</span>
+                <span className="text-sm font-medium text-muted">{t('subscription.free_plan')}</span>
               </div>
-              <p className="text-xs text-muted">
-                Passe à Premium pour accéder aux séances et programmes IA personnalisés.
-              </p>
+              <p className="text-xs text-muted">{t('subscription.free_upsell')}</p>
               <Link
                 to="/tarifs"
                 className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-bold text-white bg-accent hover:bg-accent/90 transition-colors"
               >
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
-                Passer Premium
+                {t('subscription.go_premium')}
               </Link>
             </div>
           )}
@@ -229,16 +259,16 @@ export function SettingsPage() {
 
         {/* Legal */}
         <section className="space-y-3">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">Informations</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider text-subtle">{t('legal.heading')}</h2>
           <div className="space-y-1">
             <Link to="/legal/cgu" className="block py-2.5 text-sm text-body hover:text-heading transition-colors">
-              Conditions d'utilisation
+              {t('legal.terms_link')}
             </Link>
             <Link to="/legal/privacy" className="block py-2.5 text-sm text-body hover:text-heading transition-colors">
-              Politique de confidentialité
+              {t('legal.privacy_link')}
             </Link>
             <Link to="/legal/cgv" className="block py-2.5 text-sm text-body hover:text-heading transition-colors">
-              Conditions Générales de Vente
+              {t('legal.cgv_link')}
             </Link>
           </div>
         </section>
@@ -249,7 +279,7 @@ export function SettingsPage() {
           onClick={signOut}
           className="w-full py-3 rounded-xl text-red-400 font-semibold border border-red-400/30 hover:bg-red-400/10 transition-colors cursor-pointer"
         >
-          Se déconnecter
+          {t('sign_out')}
         </button>
       </div>
     </div>

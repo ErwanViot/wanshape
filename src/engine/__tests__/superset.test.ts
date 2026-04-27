@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { SupersetBlock } from '../../types/session.ts';
-import { expandSuperset } from '../interpreters/superset.ts';
 import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
+import { expandSuperset } from '../interpreters/superset.ts';
 
 function makeSupersetBlock(overrides?: Partial<SupersetBlock>): SupersetBlock {
   return {

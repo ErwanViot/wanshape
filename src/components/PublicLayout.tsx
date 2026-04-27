@@ -1,24 +1,28 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router';
-import { useAuth } from '../contexts/AuthContext.tsx';
 import { BottomNav } from './BottomNav.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
 import { Footer } from './Footer.tsx';
+import { CguRevalidationModal } from './legal/CguRevalidationModal.tsx';
 import { SessionExpiredBanner } from './SessionExpiredBanner.tsx';
 
 export function PublicLayout() {
+  const { t } = useTranslation('common');
   const { pathname } = useLocation();
-  const { user, bumpDataGeneration } = useAuth();
 
+  // Scroll top on route change. Data freshness is no longer tied to
+  // navigation — every hook is on TanStack Query and relies on its
+  // `staleTime` + mutation-side invalidation contract.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname is the intentional trigger; the body doesn't read it.
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (user) bumpDataGeneration();
-  }, [pathname, user, bumpDataGeneration]);
+  }, [pathname]);
 
   return (
     <div className="min-h-screen bg-surface flex flex-col">
       <a href="#main-content" className="skip-to-content">
-        Aller au contenu principal
+        {t('layout.skip_to_content')}
       </a>
       <BrandHeader />
       <SessionExpiredBanner />
@@ -29,6 +33,7 @@ export function PublicLayout() {
       </main>
       <Footer />
       <BottomNav />
+      <CguRevalidationModal />
     </div>
   );
 }

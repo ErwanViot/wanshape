@@ -1,0 +1,117 @@
+{
+  "date": "20260524",
+  "title": "Antagonist Supersets",
+  "description": "Push-pull and squat-hinge pairs in superset for balanced upper body work",
+  "estimatedDuration": 32,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 45,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 40,
+          "instructions": "In a plank, retract and protract the shoulder blades without bending the elbows"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Push-Pull Supersets",
+      "sets": 3,
+      "restBetweenSets": 75,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Standard push-ups",
+              "reps": 10,
+              "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+            },
+            {
+              "name": "Alternating Superman",
+              "reps": 12,
+              "instructions": "Lift right arm + left leg, alternate"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hips high in inverted V, lower the head between the hands"
+            },
+            {
+              "name": "Inverted row (table)",
+              "reps": 10,
+              "instructions": "Under a table, pull the chest to the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 10,
+              "instructions": "Lying face down, arms in T, squeeze the shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

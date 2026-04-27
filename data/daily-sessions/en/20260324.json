@@ -1,0 +1,130 @@
+{
+  "date": "20260324",
+  "title": "Full Body Pyramid",
+  "description": "Complete circuit followed by an explosive pyramid for intense full body work",
+  "estimatedDuration": 36,
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 45,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 35,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Body Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Wide push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands wider than the shoulders, chest focus"
+        },
+        {
+          "name": "Goblet squat (no weight)",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Hands in front of the chest, sit deep"
+        },
+        {
+          "name": "Shoulder plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In high plank, tap the opposite shoulder alternating"
+        },
+        {
+          "name": "Lateral lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Big lateral step, bend one leg, the other extended",
+          "bilateral": true
+        },
+        {
+          "name": "Leg raises",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Back on the floor, lift extended legs to vertical"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Explosive Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Jump squats",
+          "instructions": "Explosive squat with jump, land softly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

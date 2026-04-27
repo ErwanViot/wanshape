@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 interface LoadingSpinnerProps {
   /** 'dark' uses white borders (player screens), 'themed' uses divider tokens (standard pages) */
   variant?: 'dark' | 'themed';
@@ -5,9 +7,14 @@ interface LoadingSpinnerProps {
 }
 
 export function LoadingSpinner({ variant = 'themed', className = '' }: LoadingSpinnerProps) {
+  const { t } = useTranslation('common');
   const borderClass = variant === 'dark' ? 'border-white/20' : 'border-divider-strong';
   return (
-    <div role="status" aria-label="Chargement" className={`w-6 h-6 border-2 ${borderClass} border-t-brand rounded-full animate-spin ${className}`} />
+    <output
+      aria-label={t('loading.aria')}
+      aria-live="polite"
+      className={`block w-6 h-6 border-2 ${borderClass} border-t-brand rounded-full animate-spin ${className}`}
+    />
   );
 }
 

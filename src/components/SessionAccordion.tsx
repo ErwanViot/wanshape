@@ -1,4 +1,5 @@
 import { useId, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { BLOCK_COLORS } from '../engine/constants.ts';
 import type { Block, Session } from '../types/session.ts';
@@ -6,6 +7,7 @@ import { getExerciseLink } from '../utils/exerciseLinks.ts';
 import { computeTimeline } from '../utils/sessionTimeline.ts';
 
 export function SessionAccordion({ session, defaultOpen = false }: { session: Session; defaultOpen?: boolean }) {
+  const { t } = useTranslation('sessions');
   const [open, setOpen] = useState(defaultOpen);
   const panelId = useId();
 
@@ -18,7 +20,7 @@ export function SessionAccordion({ session, defaultOpen = false }: { session: Se
         aria-controls={panelId}
         className="w-full px-5 py-3 flex items-center justify-between bg-surface-card border-t border-divider text-sm cursor-pointer"
       >
-        <span className="text-muted font-medium">Contenu de la séance</span>
+        <span className="text-muted font-medium">{t('accordion.toggle_label')}</span>
         <svg
           aria-hidden="true"
           width="16"
@@ -36,9 +38,9 @@ export function SessionAccordion({ session, defaultOpen = false }: { session: Se
       </button>
 
       {open && (
-        <div id={panelId} role="region" aria-label="Contenu de la séance">
+        <section id={panelId} aria-label={t('accordion.section_aria')}>
           <SessionDetail session={session} />
-        </div>
+        </section>
       )}
     </>
   );
@@ -47,6 +49,8 @@ export function SessionAccordion({ session, defaultOpen = false }: { session: Se
 /* ── Detail content ── */
 
 function SessionDetail({ session }: { session: Session }) {
+  const { t } = useTranslation('sessions');
+  const { t: tc } = useTranslation('common');
   const timeline = computeTimeline(session.blocks);
   const totalDuration = timeline.reduce((sum, t) => sum + t.duration, 0);
 
@@ -55,15 +59,15 @@ function SessionDetail({ session }: { session: Session }) {
       {session.blocks.map((block, i) => {
         const seg = timeline[i];
         const color = BLOCK_COLORS[seg.type];
-        const exercises = getBlockExercises(block);
+        const exercises = getBlockExercises(block, tc);
         return (
           <div key={i}>
             <div className="flex items-center gap-2 mb-1.5">
               <div className="w-1.5 h-5 rounded-full shrink-0" style={{ backgroundColor: color }} />
               <span className="text-xs font-bold uppercase tracking-wider" style={{ color }}>
-                {seg.label} · {i + 1}/{session.blocks.length}
+                {tc(`block_name.${seg.type}`)} · {i + 1}/{session.blocks.length}
               </span>
-              <span className="text-xs text-muted ml-auto">{getBlockMeta(block)}</span>
+              <span className="text-xs text-muted ml-auto">{getBlockMeta(block, t)}</span>
             </div>
             <div className="pl-4 space-y-0.5">
               {exercises.map((ex, j) => (
@@ -92,7 +96,7 @@ function SessionDetail({ session }: { session: Session }) {
         ))}
       </div>
       <p className="text-xs text-muted">
-        {session.blocks.length} blocs · ~{session.estimatedDuration} min estimées
+        {t('accordion.summary', { blocks: session.blocks.length, duration: session.estimatedDuration })}
       </p>
     </div>
   );
@@ -121,82 +125,91 @@ interface ExerciseInfo {
   detail: string;
 }
 
-function getBlockExercises(block: Block): ExerciseInfo[] {
+type Translator = (key: string, options?: Record<string, unknown>) => string;
+
+function getBlockExercises(block: Block, tc: Translator): ExerciseInfo[] {
   switch (block.type) {
     case 'warmup':
     case 'cooldown':
       return block.exercises.map((ex) => ({
         name: ex.name,
-        detail: ex.bilateral ? `${ex.duration}s × 2 côtés` : `${ex.duration}s`,
+        detail: ex.bilateral
+          ? tc('exercise_detail.bilateral_seconds', { seconds: ex.duration })
+          : tc('exercise_detail.duration_seconds', { seconds: ex.duration }),
       }));
     case 'classic':
       return block.exercises.map((ex) => ({
         name: ex.name,
-        detail: `${ex.sets} × ${ex.reps === 'max' ? 'max' : ex.reps} reps`,
+        detail:
+          ex.reps === 'max'
+            ? tc('exercise_detail.max_reps', { sets: ex.sets })
+            : tc('exercise_detail.sets_reps', { sets: ex.sets, reps: ex.reps }),
       }));
     case 'circuit':
       return block.exercises.map((ex) => ({
         name: ex.name,
-        detail: ex.mode === 'timed' ? `${ex.duration}s` : `${ex.reps} reps`,
+        detail:
+          ex.mode === 'timed'
+            ? tc('exercise_detail.duration_seconds', { seconds: ex.duration })
+            : tc('exercise_detail.reps_count', { reps: ex.reps }),
       }));
     case 'hiit':
       return block.exercises.map((ex) => ({
         name: ex.name,
-        detail: `${block.work}s effort`,
+        detail: tc('exercise_detail.work_seconds', { seconds: block.work }),
       }));
     case 'tabata':
       return block.exercises.map((ex) => ({
         name: ex.name,
-        detail: `${block.work ?? 20}s / ${block.rest ?? 10}s`,
+        detail: tc('exercise_detail.work_rest_seconds', { work: block.work ?? 20, rest: block.rest ?? 10 }),
       }));
     case 'emom':
       return block.exercises.map((ex) => ({
         name: ex.name,
-        detail: `× ${ex.reps}`,
+        detail: tc('exercise_detail.reps_inline', { reps: ex.reps }),
       }));
     case 'amrap':
       return block.exercises.map((ex) => ({
         name: ex.name,
-        detail: `× ${ex.reps}`,
+        detail: tc('exercise_detail.reps_inline', { reps: ex.reps }),
       }));
     case 'superset':
       return block.pairs.flatMap((pair, pi) =>
         pair.exercises.map((ex) => ({
           name: ex.name,
-          detail: `× ${ex.reps} · paire ${pi + 1}`,
+          detail: tc('exercise_detail.superset_pair', { reps: ex.reps, n: pi + 1 }),
         })),
       );
     case 'pyramid':
       return block.exercises.map((ex) => ({
         name: ex.name,
-        detail: `${block.pattern.join(' - ')} reps`,
+        detail: tc('exercise_detail.pyramid_pattern', { pattern: block.pattern.join(' - ') }),
       }));
   }
 }
 
-function getBlockMeta(block: Block): string {
+function getBlockMeta(block: Block, ts: Translator): string {
   switch (block.type) {
     case 'warmup':
     case 'cooldown':
-      return `${block.exercises.length} exercices`;
     case 'classic':
-      return `${block.exercises.length} exercices`;
+      return ts('block_meta.exercises', { n: block.exercises.length });
     case 'circuit':
-      return `${block.rounds} rounds × ${block.exercises.length} exos`;
+      return ts('block_meta.rounds_x_exos', { rounds: block.rounds, exos: block.exercises.length });
     case 'hiit':
-      return `${block.rounds} rounds · ${block.work}s/${block.rest}s`;
+      return ts('block_meta.hiit', { rounds: block.rounds, work: block.work, rest: block.rest });
     case 'tabata': {
       const sets = block.sets ?? 1;
       const rounds = block.rounds ?? 8;
-      return sets > 1 ? `${sets} sets × ${rounds} rounds` : `${rounds} rounds`;
+      return sets > 1 ? ts('block_meta.tabata_with_sets', { sets, rounds }) : ts('block_meta.rounds_only', { rounds });
     }
     case 'emom':
-      return `${block.minutes} minutes`;
+      return ts('block_meta.minutes', { n: block.minutes });
     case 'amrap':
-      return `${Math.floor(block.duration / 60)} minutes`;
+      return ts('block_meta.minutes', { n: Math.floor(block.duration / 60) });
     case 'superset':
-      return `${block.sets} séries · ${block.pairs.length} paires`;
+      return ts('block_meta.superset', { sets: block.sets, pairs: block.pairs.length });
     case 'pyramid':
-      return `${block.pattern.length} paliers`;
+      return ts('block_meta.pyramid', { n: block.pattern.length });
   }
 }

@@ -1,0 +1,65 @@
+{
+  "difficulty": {
+    "accessible": "Easy",
+    "modere": "Moderate",
+    "intense": "Intense"
+  },
+  "block_name": {
+    "warmup": "Warm-up",
+    "cooldown": "Cool-down",
+    "classic": "Strength",
+    "circuit": "Circuit",
+    "hiit": "HIIT",
+    "tabata": "Tabata",
+    "emom": "EMOM",
+    "amrap": "AMRAP",
+    "superset": "Superset",
+    "pyramid": "Pyramid"
+  },
+  "exercise_detail": {
+    "bilateral_seconds": "{{seconds}}s × 2 sides",
+    "max_reps": "{{sets}} × max reps",
+    "sets_reps": "{{sets}} × {{reps}} reps",
+    "reps_count": "{{reps}} reps",
+    "duration_seconds": "{{seconds}}s",
+    "work_seconds": "{{seconds}}s work",
+    "work_rest_seconds": "{{work}}s / {{rest}}s",
+    "reps_inline": "× {{reps}}",
+    "superset_pair": "× {{reps}} · pair {{n}}",
+    "pyramid_pattern": "{{pattern}} reps"
+  },
+  "language_switcher": {
+    "aria_label": "Switch language",
+    "option_fr": "French",
+    "option_en": "English"
+  },
+  "layout": {
+    "skip_to_content": "Skip to main content"
+  },
+  "not_found": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or has been moved.",
+    "back_home": "Back to home"
+  },
+  "error_boundary": {
+    "title": "An error occurred",
+    "body": "The application encountered an unexpected problem.",
+    "back_home": "Back to home"
+  },
+  "loading": {
+    "aria": "Loading"
+  },
+  "hook_errors": {
+    "service_unavailable": "Service unavailable",
+    "not_signed_in": "Not signed in",
+    "checkout_session_failed": "Failed to create the checkout session",
+    "portal_open_failed": "Failed to open the customer portal",
+    "history_load_failed": "Failed to load history.",
+    "session_expired_refresh": "Session expired. Please refresh the page.",
+    "search_failed": "Search error",
+    "profile_load_failed": "Failed to load profile",
+    "meals_load_failed": "Failed to load meals",
+    "generic_retry": "An error occurred. Please try again.",
+    "unexpected": "Unexpected error"
+  }
+}

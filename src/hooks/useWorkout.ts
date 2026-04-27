@@ -100,6 +100,8 @@ export function useWorkout(steps: AtomicStep[]) {
   // Countdown beeps for last 3 seconds
   // NB: 'transition' status is NOT handled here — branded countdown audio
   // is played by the dedicated effect above for first-block transitions.
+  // audio.beepCountdown and audio.speakCountdown are stable useCallback refs;
+  // listing them in deps is fine and shuts the linter up without changing behaviour.
   useEffect(() => {
     if (timer.remaining > 0 && timer.remaining <= 3 && timer.isRunning) {
       if (status === 'countdown') {
@@ -108,9 +110,7 @@ export function useWorkout(steps: AtomicStep[]) {
         audio.beepCountdown();
       }
     }
-    // audio.beepCountdown and audio.speakCountdown are stable useCallback refs.
-    // Only timer.remaining changes should trigger beep evaluation.
-  }, [timer.remaining, audio.beepCountdown, audio.speakCountdown, status, timer.isRunning]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [timer.remaining, audio.beepCountdown, audio.speakCountdown, status, timer.isRunning]);
 
   const start = useCallback(() => {
     if (steps.length === 0) return;
@@ -125,7 +125,7 @@ export function useWorkout(steps: AtomicStep[]) {
     } else {
       setStatus('active');
     }
-  }, [steps]);
+  }, [steps, audio.unlock, audio.preloadBrandedSounds]);
 
   const pause = useCallback(() => {
     if (status === 'paused') return;

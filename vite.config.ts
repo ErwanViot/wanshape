@@ -10,7 +10,6 @@ export default defineConfig(({ mode }) => ({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['sessions/*.json'],
       manifest: {
         name: 'Wan2Fit',
         short_name: 'Wan2Fit',
@@ -27,19 +26,12 @@ export default defineConfig(({ mode }) => ({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,json,svg,png}'],
+        globPatterns: ['**/*.{js,css,html,json,svg,png,woff2}'],
+        // og-image.jpg: social preview, never needed by the app itself.
         globIgnores: ['**/og-image.jpg'],
         navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/^\/sessions\//, /^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
+        navigateFallbackDenylist: [/^\/images\//, /^\/videos\//, /^\/icons\//, /^\/api\//, /^\/ads\.txt$/],
         runtimeCaching: [
-          {
-            urlPattern: /\/sessions\/.*\.json$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'sessions-cache',
-              expiration: { maxEntries: 110, maxAgeSeconds: 60 * 60 * 24 * 120 },
-            },
-          },
           {
             urlPattern: /^https:\/\/.*\.supabase\.co\/.*/,
             handler: 'NetworkOnly',
@@ -62,7 +54,13 @@ export default defineConfig(({ mode }) => ({
             handler: 'CacheFirst',
             options: {
               cacheName: 'videos-cache',
-              expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              // Tightened from (30 entries / 90 days) to (15 / 7) — exercise
+              // videos are 1-5 MB each, and iOS Safari aggressively purges
+              // sites that exceed a few hundred MB of cached storage. The
+              // 7-day window is a deliberate trade-off: missing the cache on
+              // a less-frequent exercise costs one re-download, but bloating
+              // the cache costs everyone.
+              expiration: { maxEntries: 15, maxAgeSeconds: 60 * 60 * 24 * 7 },
               cacheableResponse: { statuses: [200] },
             },
           },

@@ -1,53 +1,74 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext.tsx';
+import { isSupportedLocale } from '../i18n';
 import { supabase } from '../lib/supabase.ts';
 import type { CustomSessionInput, GenerateSessionResponse } from '../types/custom-session.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
 
 export function useGenerateSession() {
+  const { user } = useAuth();
+  const { i18n } = useTranslation();
+  const queryClient = useQueryClient();
+  const userId = user?.id;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const inflightRef = useRef(false);
 
-  const generate = useCallback(async (input: CustomSessionInput): Promise<GenerateSessionResponse | null> => {
-    if (inflightRef.current) return null;
-    if (!supabase) {
-      setError('Service indisponible');
-      return null;
-    }
-
-    inflightRef.current = true;
-    setLoading(true);
-    setError(null);
-
-    try {
-      const { data, error: fnError } = await supabase.functions.invoke('generate-session', {
-        body: input,
-      });
-
-      if (fnError) {
-        const message = await extractEdgeFunctionError(
-          fnError as unknown as Record<string, unknown>,
-          'Une erreur est survenue. Réessayez.',
-        );
-        setError(message);
+  // See useGenerateProgram — i18n.t changes identity each render.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: i18n.language is the stable trigger, not i18n.t.
+  const generate = useCallback(
+    async (input: CustomSessionInput): Promise<GenerateSessionResponse | null> => {
+      if (inflightRef.current) return null;
+      if (!supabase) {
+        setError(i18n.t('hook_errors.service_unavailable', { ns: 'common' }));
         return null;
       }
 
-      if (data?.error) {
-        setError(data.error);
-        return null;
-      }
+      inflightRef.current = true;
+      setLoading(true);
+      setError(null);
 
-      return data as GenerateSessionResponse;
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Erreur inattendue');
-      return null;
-    } finally {
-      setLoading(false);
-      inflightRef.current = false;
-    }
-  }, []);
+      try {
+        const locale = isSupportedLocale(i18n.language) ? i18n.language : 'fr';
+        const { data, error: fnError } = await supabase.functions.invoke('generate-session', {
+          body: { ...input, locale },
+        });
+
+        if (fnError) {
+          const message = await extractEdgeFunctionError(
+            fnError as unknown as Record<string, unknown>,
+            i18n.t('hook_errors.generic_retry', { ns: 'common' }),
+          );
+          setError(message);
+          return null;
+        }
+
+        if (data?.error) {
+          setError(data.error);
+          return null;
+        }
+
+        // The new session row enters `custom_sessions` via the edge function;
+        // invalidate the user's list so "Mes séances précédentes" shows it
+        // immediately on the next render. Use `userId ?? null` so the key
+        // matches the one the read hook registered for logged-out visitors
+        // (TanStack compares keys with strict ===, so undefined ≠ null).
+        queryClient.invalidateQueries({ queryKey: ['customSessions', userId ?? null] });
+
+        return data as GenerateSessionResponse;
+      } catch (e) {
+        setError(e instanceof Error ? e.message : i18n.t('hook_errors.unexpected', { ns: 'common' }));
+        return null;
+      } finally {
+        setLoading(false);
+        inflightRef.current = false;
+      }
+    },
+    [queryClient, userId, i18n.language],
+  );
 
   return { generate, loading, error };
 }

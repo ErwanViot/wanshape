@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
@@ -6,6 +7,7 @@ import { BackLink } from './BackLink.tsx';
 import { FormInput } from './FormInput.tsx';
 
 export function ResetPasswordPage() {
+  const { t } = useTranslation('auth');
   const { user, loading, resetPassword } = useAuth();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
@@ -13,8 +15,8 @@ export function ResetPasswordPage() {
   const [submitting, setSubmitting] = useState(false);
 
   useDocumentHead({
-    title: 'Mot de passe oublié',
-    description: 'Réinitialise ton mot de passe Wan2Fit.',
+    title: t('reset_password.page_title'),
+    description: t('reset_password.page_description'),
   });
 
   if (!loading && user) return <Navigate to="/suivi" replace />;
@@ -31,7 +33,7 @@ export function ResetPasswordPage() {
         setSent(true);
       }
     } catch {
-      setError('Une erreur est survenue. Réessaie plus tard.');
+      setError(t('errors.generic'));
     } finally {
       setSubmitting(false);
     }
@@ -40,9 +42,9 @@ export function ResetPasswordPage() {
   return (
     <div className="px-6 py-12 flex-1 flex items-start justify-center">
       <div className="w-full max-w-md">
-        <BackLink to="/login" label="Retour à la connexion" />
+        <BackLink to="/login" label={t('back_to_login')} />
 
-        <h1 className="text-2xl font-bold text-heading mb-8">Mot de passe oublié</h1>
+        <h1 className="text-2xl font-bold text-heading mb-8">{t('reset_password.heading')}</h1>
 
         <div className="glass-card rounded-2xl p-6">
           {sent ? (
@@ -62,26 +64,24 @@ export function ResetPasswordPage() {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <p className="text-strong font-medium mb-1">Vérifie ta boîte mail</p>
+              <p className="text-strong font-medium mb-1">{t('reset_password.confirm_title')}</p>
               <p className="text-sm text-muted">
-                Un lien de réinitialisation a été envoyé à <strong className="text-strong">{email}</strong>
+                {t('reset_password.confirm_message')} <strong className="text-strong">{email}</strong>
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              <p className="text-sm text-muted mb-2">
-                Saisis ton adresse email et on t'enverra un lien pour réinitialiser ton mot de passe.
-              </p>
+              <p className="text-sm text-muted mb-2">{t('reset_password.instruction')}</p>
 
               <FormInput
-                label="Email"
+                label={t('reset_password.label_email')}
                 inputId="reset-email"
                 type="email"
                 required
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="toi@exemple.com"
+                placeholder={t('reset_password.placeholder_email')}
               />
 
               {error && (
@@ -95,7 +95,7 @@ export function ResetPasswordPage() {
                 disabled={submitting}
                 className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {submitting ? 'Envoi...' : 'Envoyer le lien'}
+                {submitting ? t('reset_password.submitting') : t('reset_password.submit')}
               </button>
             </form>
           )}

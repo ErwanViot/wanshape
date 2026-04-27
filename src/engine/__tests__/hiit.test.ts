@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { HIITBlock } from '../../types/session.ts';
-import { expandHIIT } from '../interpreters/hiit.ts';
 import { BLOCK_COLORS, PREPARE_COUNTDOWN, TRANSITION_DURATION } from '../constants.ts';
+import { expandHIIT } from '../interpreters/hiit.ts';
 
 function makeHIITBlock(overrides?: Partial<HIITBlock>): HIITBlock {
   return {

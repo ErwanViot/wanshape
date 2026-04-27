@@ -1,11 +1,14 @@
 import { type FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { isPasswordStrong } from '../../utils/password.ts';
 import { LoadingSpinner } from '../LoadingSpinner.tsx';
 import { FormInput } from './FormInput.tsx';
 
 export function UpdatePasswordPage() {
+  const { t } = useTranslation('auth');
   const { user, loading, updatePassword } = useAuth();
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -13,20 +16,20 @@ export function UpdatePasswordPage() {
   const [submitting, setSubmitting] = useState(false);
 
   useDocumentHead({
-    title: 'Nouveau mot de passe',
-    description: 'Choisis un nouveau mot de passe pour ton compte Wan2Fit.',
+    title: t('update_password.page_title'),
+    description: t('update_password.page_description'),
   });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (password.length < 8) {
-      setError('Le mot de passe doit contenir au moins 8 caractères.');
+    if (!isPasswordStrong(password)) {
+      setError(t('errors.password_too_weak'));
       return;
     }
     if (password !== confirm) {
-      setError('Les mots de passe ne correspondent pas.');
+      setError(t('errors.passwords_mismatch'));
       return;
     }
 
@@ -38,7 +41,7 @@ export function UpdatePasswordPage() {
       const result = await Promise.race([
         updatePassword(password),
         new Promise<{ error: string | null }>((resolve) =>
-          setTimeout(() => resolve({ error: 'Le serveur met trop de temps à répondre. Réessaye.' }), 30_000),
+          setTimeout(() => resolve({ error: t('errors.timeout') }), 30_000),
         ),
       ]);
       if (result.error) {
@@ -48,7 +51,7 @@ export function UpdatePasswordPage() {
         window.location.replace('/');
       }
     } catch {
-      setError('Une erreur est survenue. Réessaye.');
+      setError(t('errors.generic_retry'));
       setSubmitting(false);
     }
   };
@@ -82,10 +85,10 @@ export function UpdatePasswordPage() {
               <line x1="9" y1="9" x2="15" y2="15" />
             </svg>
           </div>
-          <p className="text-strong font-medium mb-1">Lien expiré ou invalide</p>
-          <p className="text-sm text-muted mb-6">Refais une demande de réinitialisation.</p>
+          <p className="text-strong font-medium mb-1">{t('update_password.expired_title')}</p>
+          <p className="text-sm text-muted mb-6">{t('update_password.expired_message')}</p>
           <Link to="/mot-de-passe-oublie" className="text-link hover:text-link-hover transition-colors text-sm">
-            Mot de passe oublié
+            {t('update_password.expired_link')}
           </Link>
         </div>
       </div>
@@ -95,12 +98,12 @@ export function UpdatePasswordPage() {
   return (
     <div className="px-6 py-12 flex-1 flex items-start justify-center">
       <div className="w-full max-w-md">
-        <h1 className="text-2xl font-bold text-heading mb-8">Nouveau mot de passe</h1>
+        <h1 className="text-2xl font-bold text-heading mb-8">{t('update_password.heading')}</h1>
 
         <div className="glass-card rounded-2xl p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <FormInput
-              label="Nouveau mot de passe"
+              label={t('update_password.label_new')}
               inputId="new-password"
               type="password"
               required
@@ -108,11 +111,11 @@ export function UpdatePasswordPage() {
               autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="8 caractères minimum"
+              placeholder={t('update_password.placeholder_new')}
             />
 
             <FormInput
-              label="Confirmer le mot de passe"
+              label={t('update_password.label_confirm')}
               inputId="confirm-password"
               type="password"
               required
@@ -120,7 +123,7 @@ export function UpdatePasswordPage() {
               autoComplete="new-password"
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
-              placeholder="Retapez le mot de passe"
+              placeholder={t('update_password.placeholder_confirm')}
             />
 
             {error && (
@@ -134,7 +137,7 @@ export function UpdatePasswordPage() {
               disabled={submitting}
               className="w-full py-3 rounded-xl text-white font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {submitting ? 'Mise à jour...' : 'Mettre à jour le mot de passe'}
+              {submitting ? t('update_password.submitting') : t('update_password.submit')}
             </button>
           </form>
         </div>

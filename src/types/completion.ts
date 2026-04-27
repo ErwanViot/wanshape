@@ -27,7 +27,9 @@ export interface Program {
   note_coach: string | null;
   progression: import('./custom-program.ts').ProgramProgression | null;
   consignes_semaine: Record<string, string> | null;
-  onboarding_data: import('./custom-program.ts').ProgramOnboardingInput | null;
+  onboarding_data: import('./custom-program.ts').PersistedProgramOnboarding | null;
+  /** Language the program content was generated in. Pre-i18n rows are 'fr'. */
+  locale: 'fr' | 'en';
 }
 
 export interface ProgramSession {

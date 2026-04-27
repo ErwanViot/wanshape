@@ -1,30 +1,16 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
-import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.ts";
+import { getCorsHeaders } from "../_shared/cors.ts";
+import { buildSystemPrompt, buildUserPrompt, type Locale } from "./prompt.ts";
 import { validateSession } from "./validate.ts";
-
-const PROD_ORIGINS = [
-  "https://wan2fit.fr",
-  "https://www.wan2fit.fr",
-];
-const DEV_ORIGINS = ["http://localhost:5173", "http://localhost:4173"];
-const ALLOWED_ORIGINS = Deno.env.get("ENVIRONMENT") === "production" ? PROD_ORIGINS : [...PROD_ORIGINS, ...DEV_ORIGINS];
-
-const DEFAULT_ORIGIN = "https://wan2fit.fr";
-
-function getCorsHeaders(req: Request) {
-  const origin = req.headers.get("origin") ?? "";
-  return {
-    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN,
-    "Access-Control-Allow-Headers":
-      "authorization, x-client-info, apikey, content-type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-  };
-}
 
 const MAX_DAILY_GENERATIONS = 10;
 const MODEL = "claude-haiku-4-5-20251001";
 const MAX_TOKENS = 4096;
+// Defence-in-depth against prompt injection: prefilling the assistant turn
+// with `{"` forces the model to immediately start a JSON object and pre-empts
+// any "ignore previous instructions" jailbreak embedded in user freetext.
+const ASSISTANT_PREFILL = '{"';
 
 const VALID_MODES = ["quick", "detailed", "expert"];
 const VALID_PRESETS = ["transpirer", "renfo", "express", "mobilite"];
@@ -48,6 +34,7 @@ const VALID_EQUIPMENT = [
 const VALID_INTENSITIES = ["douce", "moderee", "intense"];
 const VALID_BODY_FOCUS = ["upper", "lower", "core", "full"];
 const VALID_DURATIONS = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90];
+const VALID_LOCALES: Locale[] = ["fr", "en"];
 
 function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -69,6 +56,7 @@ interface RequestInput {
   bodyFocus?: string[];
   preferences?: string;
   refinementNote?: string;
+  locale?: string;
 }
 
 function validateInput(body: RequestInput): string | null {
@@ -124,6 +112,10 @@ function validateInput(body: RequestInput): string | null {
   }
   if (body.refinementNote && body.refinementNote.length > 300) {
     return "refinementNote: 300 caractères max";
+  }
+
+  if (body.locale && !VALID_LOCALES.includes(body.locale as Locale)) {
+    return "locale invalide";
   }
 
   return null;
@@ -203,27 +195,47 @@ Deno.serve(async (req: Request) => {
     return errorResponse(req, inputError);
   }
 
-  // Rate limit: max generations per 24h
-  const { count, error: countError } = await supabaseAdmin
-    .from("custom_sessions")
-    .select("*", { count: "exact", head: true })
-    .eq("user_id", user.id)
-    .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
+  // Atomic rate limit: insert a tracking row first, then count. If we end up
+  // over the quota we delete the just-inserted row and reject. Closes the
+  // race window of "count-then-insert" where parallel calls could slip past.
+  const { data: rateRow, error: rateInsertError } = await supabaseAdmin
+    .from("ai_generation_calls")
+    .insert({ user_id: user.id, kind: "session" })
+    .select("id")
+    .single();
 
-  if (countError) {
+  if (rateInsertError || !rateRow) {
     return errorResponse(req, "Erreur serveur", 500);
   }
 
-  if ((count ?? 0) >= MAX_DAILY_GENERATIONS) {
+  const { count, error: countError } = await supabaseAdmin
+    .from("ai_generation_calls")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", user.id)
+    .eq("kind", "session")
+    .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
+
+  if (countError) {
+    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+    return errorResponse(req, "Erreur serveur", 500);
+  }
+
+  if ((count ?? 0) > MAX_DAILY_GENERATIONS) {
+    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
     return errorResponse(
       req,
       `Limite atteinte : ${MAX_DAILY_GENERATIONS} séances par 24h. Réessayez plus tard.`,
       429,
     );
   }
+  // Note: rateRow is intentionally NOT deleted on downstream failures (AI
+  // call, validation, DB insert). A failed attempt still counts against the
+  // 24h quota to prevent free retry storms — same policy as estimate-nutrition.
 
   // Build prompt
-  const userPrompt = buildUserPrompt(body as Parameters<typeof buildUserPrompt>[0]);
+  const locale: Locale = (body.locale as Locale) ?? "fr";
+  const userPrompt = buildUserPrompt({ ...body, locale } as Parameters<typeof buildUserPrompt>[0]);
+  const systemPrompt = buildSystemPrompt(locale);
 
   // Call Anthropic API
   let aiResponse: Response;
@@ -238,8 +250,15 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: MAX_TOKENS,
-        system: SYSTEM_PROMPT,
-        messages: [{ role: "user", content: userPrompt }],
+        // System prompt is stable across all calls (only varies by locale).
+        // Marking it as cacheable cuts input cost ~90% and shaves latency.
+        system: [
+          { type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } },
+        ],
+        messages: [
+          { role: "user", content: userPrompt },
+          { role: "assistant", content: ASSISTANT_PREFILL },
+        ],
       }),
       signal: AbortSignal.timeout(30_000),
     });
@@ -259,19 +278,21 @@ Deno.serve(async (req: Request) => {
   const inputTokens = aiData.usage?.input_tokens ?? null;
   const outputTokens = aiData.usage?.output_tokens ?? null;
 
-  // Parse content
+  // Parse content. The assistant prefill is included only as the prompt
+  // start — Anthropic returns just the continuation, so prepend it back.
   const rawContent = aiData.content?.[0]?.text ?? "";
+  const combined = `${ASSISTANT_PREFILL}${rawContent}`;
   let sessionJson: unknown;
 
   try {
     // Handle potential ```json wrapper
-    const cleaned = rawContent
+    const cleaned = combined
       .replace(/^```json\s*/i, "")
       .replace(/```\s*$/, "")
       .trim();
     sessionJson = JSON.parse(cleaned);
   } catch {
-    console.error("Failed to parse AI response:", rawContent.slice(0, 500));
+    console.error("Failed to parse AI response:", combined.slice(0, 500));
     return errorResponse(req, "Réponse IA invalide, réessayez", 502);
   }
 
@@ -315,6 +336,7 @@ Deno.serve(async (req: Request) => {
       input_tokens: inputTokens,
       output_tokens: outputTokens,
       model: MODEL,
+      locale,
     })
     .select("id")
     .single();

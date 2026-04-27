@@ -1,6 +1,7 @@
+import { Check, Crown, Sparkles, Zap } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import { Check, Sparkles, Crown, Zap } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSubscription } from '../hooks/useSubscription.ts';
 import { formatDate } from '../utils/date.ts';
@@ -10,28 +11,8 @@ const PRICE_IDS = {
   yearly: import.meta.env.VITE_STRIPE_PRICE_YEARLY as string | undefined,
 };
 
-const FREE_FEATURES = [
-  'Séance du jour guidée',
-  '8 formats d\'entraînement',
-  'Bibliothèque d\'exercices',
-  '3 programmes guidés',
-  'Historique complet',
-  'Statistiques & suivi',
-];
-
-const PREMIUM_FEATURES = [
-  'Tout le contenu gratuit',
-  'Séances IA sur-mesure',
-  'Programmes IA personnalisés',
-  'Progression adaptée à ton niveau',
-];
-
-const OFFER_DETAILS = [
-  'Renouvellement automatique',
-  'Résiliable à tout moment',
-];
-
 export function PricingCards() {
+  const { t, i18n } = useTranslation('marketing');
   const { user } = useAuth();
   const { isPremium, subscription, checkout, manageSubscription } = useSubscription();
   const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('yearly');
@@ -39,14 +20,32 @@ export function PricingCards() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const FREE_FEATURES = [
+    t('pricing_cards.features.free_1'),
+    t('pricing_cards.features.free_2'),
+    t('pricing_cards.features.free_3'),
+    t('pricing_cards.features.free_4'),
+    t('pricing_cards.features.free_5'),
+    t('pricing_cards.features.free_6'),
+  ];
+
+  const PREMIUM_FEATURES = [
+    t('pricing_cards.features.premium_1'),
+    t('pricing_cards.features.premium_2'),
+    t('pricing_cards.features.premium_3'),
+    t('pricing_cards.features.premium_4'),
+  ];
+
+  const OFFER_DETAILS = [t('pricing_cards.offer_auto_renew'), t('pricing_cards.offer_cancel_anytime')];
+
   const handleCheckout = async () => {
     if (!acceptedCgv) {
-      setError('Accepte les CGV pour continuer.');
+      setError(t('pricing_cards.errors.accept_cgv'));
       return;
     }
     const priceId = PRICE_IDS[selectedPlan];
     if (!priceId) {
-      setError('Configuration de prix manquante');
+      setError(t('pricing_cards.errors.missing_price'));
       return;
     }
     setCheckoutLoading(true);
@@ -70,15 +69,15 @@ export function PricingCards() {
         <div className="rounded-2xl border-2 border-accent bg-surface-card p-6 flex flex-col">
           <div className="flex items-center gap-2 mb-1">
             <Crown className="w-5 h-5 text-accent" aria-hidden="true" />
-            <h3 className="font-display text-lg font-bold text-heading">Premium</h3>
+            <h3 className="font-display text-lg font-bold text-heading">{t('pricing_cards.active_premium_title')}</h3>
           </div>
-          <p className="text-3xl font-black text-heading mb-1">Actif</p>
+          <p className="text-3xl font-black text-heading mb-1">{t('pricing_cards.active_premium_status')}</p>
           <p className="text-xs text-muted mb-6">
             {subscription?.cancel_at_period_end
-              ? `Se termine le ${formatDate(subscription.current_period_end)}`
+              ? t('pricing_cards.ends_on', { date: formatDate(subscription.current_period_end, i18n.language) })
               : subscription?.current_period_end
-                ? `Prochain renouvellement le ${formatDate(subscription.current_period_end)}`
-                : 'Abonnement actif'}
+                ? t('pricing_cards.renews_on', { date: formatDate(subscription.current_period_end, i18n.language) })
+                : t('pricing_cards.active_premium_subscription')}
           </p>
           <ul className="space-y-3 flex-1">
             {PREMIUM_FEATURES.map((f) => (
@@ -93,7 +92,7 @@ export function PricingCards() {
             onClick={handleManage}
             className="mt-6 flex items-center justify-center py-3 rounded-xl border border-accent/30 text-sm font-bold text-accent hover:bg-accent/10 transition-colors cursor-pointer"
           >
-            Gérer mon abonnement
+            {t('pricing_cards.manage')}
           </button>
         </div>
       </div>
@@ -104,13 +103,10 @@ export function PricingCards() {
     <div>
       {/* Plans — 3 columns */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto items-start">
-
         {/* Free — reference */}
         <div className="rounded-2xl border border-card-border bg-surface-card p-6 flex flex-col">
-          <h3 className="font-display text-lg font-bold text-heading mb-2">Gratuit</h3>
-          <p className="text-sm text-muted mb-4">
-            Pour commencer, sans compte ni paiement.
-          </p>
+          <h3 className="font-display text-lg font-bold text-heading mb-2">{t('pricing_cards.free_title')}</h3>
+          <p className="text-sm text-muted mb-4">{t('pricing_cards.free_subtitle')}</p>
 
           <p className="mb-6">
             <span className="text-4xl font-black text-heading">0€</span>
@@ -130,11 +126,11 @@ export function PricingCards() {
               to="/signup"
               className="mt-6 flex items-center justify-center py-3 rounded-xl border border-divider-strong text-sm font-bold text-heading hover:bg-divider transition-colors"
             >
-              Commencer gratuitement
+              {t('pricing_cards.cta_free_signup')}
             </Link>
           ) : (
             <div className="mt-6 flex items-center justify-center py-3 rounded-xl border border-divider text-sm font-medium text-muted">
-              Plan actuel
+              {t('pricing_cards.cta_free_current')}
             </div>
           )}
         </div>
@@ -154,24 +150,22 @@ export function PricingCards() {
           <div className="absolute -top-3 left-4">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-white bg-accent px-3 py-1 rounded-full">
               <Zap className="w-3 h-3" aria-hidden="true" />
-              Meilleure offre
+              {t('pricing_cards.yearly_badge')}
             </span>
           </div>
 
-          <h3 className="font-display text-lg font-bold text-heading mt-1 mb-2">Abonnement Annuel</h3>
-          <p className="text-sm text-muted mb-4">
-            365 jours pour progresser et atteindre tes objectifs.
-          </p>
+          <h3 className="font-display text-lg font-bold text-heading mt-1 mb-2">{t('pricing_cards.yearly_title')}</h3>
+          <p className="text-sm text-muted mb-4">{t('pricing_cards.yearly_subtitle')}</p>
 
           {/* Price */}
           <p className="mb-2">
             <span className="text-4xl font-black text-heading">99,99€</span>
-            <span className="text-base text-muted ml-1">/ an</span>
+            <span className="text-base text-muted ml-1">{t('pricing_cards.yearly_per_year')}</span>
           </p>
 
           {/* Monthly equivalent */}
           <div className="inline-flex self-start px-3 py-1 rounded-full bg-surface border border-divider text-xs font-semibold text-heading mb-4">
-            soit 8,33€ / mois
+            {t('pricing_cards.yearly_monthly_equiv')}
           </div>
 
           {/* Features */}
@@ -186,11 +180,11 @@ export function PricingCards() {
 
           {/* Offer details */}
           <div className="mt-5 pt-4 border-t border-divider">
-            <p className="text-xs font-semibold text-subtle mb-2">Détails de l'offre</p>
+            <p className="text-xs font-semibold text-subtle mb-2">{t('pricing_cards.offer_details_label')}</p>
             <ul className="space-y-1">
               <li className="flex items-center gap-2 text-xs text-muted">
                 <Check className="w-3.5 h-3.5 text-accent shrink-0" aria-hidden="true" />
-                99,99€ prélevés tous les ans
+                {t('pricing_cards.yearly_billing')}
               </li>
               {OFFER_DETAILS.map((d) => (
                 <li key={d} className="flex items-center gap-2 text-xs text-muted">
@@ -213,15 +207,13 @@ export function PricingCards() {
               : 'bg-surface-card border-2 border-card-border hover:border-brand/40'
           }`}
         >
-          <h3 className="font-display text-lg font-bold text-heading mb-2">Abonnement Mensuel</h3>
-          <p className="text-sm text-muted mb-4">
-            Un mois pour tester et découvrir tout le potentiel de Wan2Fit.
-          </p>
+          <h3 className="font-display text-lg font-bold text-heading mb-2">{t('pricing_cards.monthly_title')}</h3>
+          <p className="text-sm text-muted mb-4">{t('pricing_cards.monthly_subtitle')}</p>
 
           {/* Price */}
           <p className="mb-6">
             <span className="text-4xl font-black text-heading">9,99€</span>
-            <span className="text-base text-muted ml-1">/ mois</span>
+            <span className="text-base text-muted ml-1">{t('pricing_cards.monthly_per_month')}</span>
           </p>
 
           {/* Features */}
@@ -236,11 +228,11 @@ export function PricingCards() {
 
           {/* Offer details */}
           <div className="mt-5 pt-4 border-t border-divider">
-            <p className="text-xs font-semibold text-subtle mb-2">Détails de l'offre</p>
+            <p className="text-xs font-semibold text-subtle mb-2">{t('pricing_cards.offer_details_label')}</p>
             <ul className="space-y-1">
               <li className="flex items-center gap-2 text-xs text-muted">
                 <Check className="w-3.5 h-3.5 text-accent shrink-0" aria-hidden="true" />
-                9,99€ prélevés tous les mois
+                {t('pricing_cards.monthly_billing')}
               </li>
               {OFFER_DETAILS.map((d) => (
                 <li key={d} className="flex items-center gap-2 text-xs text-muted">
@@ -261,19 +253,24 @@ export function PricingCards() {
               <input
                 type="checkbox"
                 checked={acceptedCgv}
-                onChange={(e) => { setAcceptedCgv(e.target.checked); setError(null); }}
+                onChange={(e) => {
+                  setAcceptedCgv(e.target.checked);
+                  setError(null);
+                }}
                 className="mt-0.5 h-4 w-4 rounded border-divider accent-brand"
               />
               <span className="text-sm text-muted">
-                J'accepte les{' '}
+                {t('pricing_cards.accept_cgv')}{' '}
                 <Link to="/legal/cgv" target="_blank" className="text-link hover:text-link-hover transition-colors">
-                  Conditions Générales de Vente
+                  {t('pricing_cards.cgv_link')}
                 </Link>
               </span>
             </label>
 
             {error && (
-              <p role="alert" className="text-xs text-red-400 text-center">{error}</p>
+              <p role="alert" className="text-xs text-red-400 text-center">
+                {error}
+              </p>
             )}
 
             <button
@@ -287,7 +284,7 @@ export function PricingCards() {
               ) : (
                 <>
                   <Sparkles className="w-5 h-5" aria-hidden="true" />
-                  {selectedPlan === 'yearly' ? 'Passer Premium — 99,99€/an' : 'Passer Premium — 9,99€/mois'}
+                  {selectedPlan === 'yearly' ? t('pricing_cards.cta_yearly') : t('pricing_cards.cta_monthly')}
                 </>
               )}
             </button>
@@ -300,14 +297,14 @@ export function PricingCards() {
             className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-base font-bold text-white bg-accent hover:bg-accent/90 transition-colors"
           >
             <Sparkles className="w-5 h-5" aria-hidden="true" />
-            Créer un compte pour commencer
+            {t('pricing_cards.cta_signup')}
           </Link>
         )}
       </div>
 
       {/* Legal note */}
       <div className="mt-6 text-center text-xs text-muted space-y-1">
-        <p>Prix TTC. TVA 20% incluse. Paiement sécurisé par Stripe.</p>
+        <p>{t('pricing_cards.legal_note')}</p>
       </div>
     </div>
   );

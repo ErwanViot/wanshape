@@ -1,0 +1,115 @@
+{
+  "date": "20260326",
+  "title": "Total Endurance",
+  "description": "10-minute EMOM followed by a 10-minute AMRAP to test endurance",
+  "estimatedDuration": 35,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Endurance",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Hindu push-ups",
+          "reps": 8,
+          "instructions": "Diving motion: dive down then arc back up"
+        },
+        {
+          "name": "1.5 squats",
+          "reps": 8,
+          "instructions": "Lower, come up halfway, lower again, come up fully"
+        },
+        {
+          "name": "V-ups",
+          "reps": 10,
+          "instructions": "Back on the floor, lift arms and legs to touch the feet"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Challenge",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Walking lunges",
+          "reps": 10,
+          "instructions": "Walk forward in continuous lunges, big steps"
+        },
+        {
+          "name": "Wide push-ups",
+          "reps": 8,
+          "instructions": "Hands wider than the shoulders, chest focus"
+        },
+        {
+          "name": "Sit-ups",
+          "reps": 10,
+          "instructions": "Back on the floor, sit all the way up, reach for the feet"
+        },
+        {
+          "name": "Glute bridge",
+          "reps": 12,
+          "instructions": "Like a hip thrust but back on the floor, drive hips up"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -163,10 +163,3 @@ export interface Session {
   focus: string[];
   blocks: Block[];
 }
-
-/** Where to fetch sessions from — extensible for future Supabase source. */
-export type SessionSource =
-  | { type: 'static' }
-  | { type: 'api'; baseUrl: string }
-  | { type: 'program'; programSessionId: string }
-  | { type: 'custom'; customSessionId: string };

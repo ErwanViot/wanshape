@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { PyramidBlock } from '../../types/session.ts';
-import { expandPyramid } from '../interpreters/pyramid.ts';
 import { BLOCK_COLORS, DEFAULT_REST_FOR_REPS, TRANSITION_DURATION } from '../constants.ts';
+import { expandPyramid } from '../interpreters/pyramid.ts';
 
 function makePyramidBlock(overrides?: Partial<PyramidBlock>): PyramidBlock {
   return {

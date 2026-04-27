@@ -1,0 +1,117 @@
+{
+  "date": "20260422",
+  "title": "Strength Superset",
+  "description": "Antagonist superset push-ups/row and dips/superman for balanced upper body work",
+  "estimatedDuration": 31,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, retract and protract the shoulder blades without bending the elbows"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Upper Body Superset",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 60,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Decline push-ups",
+              "reps": 10,
+              "instructions": "Feet raised on a chair, body braced"
+            },
+            {
+              "name": "Alternating Superman",
+              "reps": 12,
+              "instructions": "Lift right arm + left leg, alternate"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+            },
+            {
+              "name": "Prone Y raises",
+              "reps": 10,
+              "instructions": "Lying face down, arms in Y, lift and hold 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Hindu push-ups",
+              "reps": 8,
+              "instructions": "Diving motion: dive down then arc back up"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "Lying face down, lift chest off the floor, squeeze shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 25,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot to the opposite hand, twisting",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

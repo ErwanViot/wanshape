@@ -1,51 +1,15 @@
-import { Link } from 'react-router';
 import { ChevronLeft } from 'lucide-react';
+import { Trans, useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
 import { FORMATS_DATA } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 
-const FORMAT_DESCRIPTIONS: Record<string, { description: string; benefit: string }> = {
-  pyramid: {
-    description:
-      "Les répétitions augmentent à chaque palier (2, 4, 6, 8…) puis redescendent. L'intensité monte puis diminue naturellement.",
-    benefit: "Auto-régulé : l'échauffement est intégré dans la montée.",
-  },
-  classic: {
-    description:
-      'Des exercices ciblés en séries avec des temps de repos. Haut du corps (push & pull) ou bas du corps & core.',
-    benefit: 'Tonification ciblée. Progression claire et mesurable.',
-  },
-  superset: {
-    description:
-      'Deux exercices complémentaires enchaînés sans repos (ex : pompes puis tirage). Repos entre les paires.',
-    benefit: 'Travail équilibré et efficace en moins de temps.',
-  },
-  emom: {
-    description: 'À chaque début de minute, réaliser un nombre défini de répétitions. Le temps restant = repos.',
-    benefit: "Développe l'endurance et apprend à gérer son effort.",
-  },
-  circuit: {
-    description: "Enchaînement d'exercices variés avec très peu de repos. On répète le circuit plusieurs fois.",
-    benefit: 'Combine renforcement et cardio pour un travail complet.',
-  },
-  amrap: {
-    description: 'Enchaîner un circuit le plus de fois possible dans un temps imparti. Tu gères ton rythme.',
-    benefit: 'Liberté de rythme. Idéal pour mesurer sa progression.',
-  },
-  hiit: {
-    description: "Alternance d'effort intense (30s) et de repos (30s). Chaque exercice est réalisé à fond.",
-    benefit: 'Maximum de résultats en minimum de temps.',
-  },
-  tabata: {
-    description: "8 rounds de 20 secondes d'effort maximal suivies de 10 secondes de repos. Court mais intense.",
-    benefit: 'Le format le plus court et le plus intense.',
-  },
-};
-
 export function Formats() {
+  const { t } = useTranslation('explore');
+  const { t: td } = useTranslation('formats_data');
   useDocumentHead({
-    title: 'Formats de séance',
-    description:
-      "8 formats d'entraînement sans matériel : Pyramide, Renforcement, Superset, EMOM, Circuit, AMRAP, HIIT et Tabata. Découvrez chaque méthode.",
+    title: t('formats.page_title'),
+    description: t('formats.page_description'),
   });
 
   return (
@@ -55,67 +19,69 @@ export function Formats() {
           <Link
             to="/"
             className="p-1 -ml-1 text-muted hover:text-strong transition-colors"
-            aria-label="Retour à l'accueil"
+            aria-label={t('formats.back_aria')}
           >
             <ChevronLeft className="w-5 h-5" />
           </Link>
-          <h1 className="font-display font-bold text-lg text-heading">Les formats de séance</h1>
+          <h1 className="font-display font-bold text-lg text-heading">{t('formats.heading')}</h1>
         </div>
       </header>
 
       <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
         <p className="text-sm text-subtle leading-relaxed">
-          <strong className="text-strong">8 formats</strong> alternent au fil des jours : les séances intenses sont plus
-          courtes, les séances de renforcement et d'endurance plus longues. Toutes incluent échauffement et étirements.
+          <Trans i18nKey="formats.intro" ns="explore" components={{ strong: <strong /> }} />
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {FORMATS_DATA.map((format) => {
-            const extra = FORMAT_DESCRIPTIONS[format.type];
-            return (
-              <Link
-                key={format.type}
-                to={`/formats/${format.slug}`}
-                className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
-              >
-                {/* Image — text stays white (over image) */}
-                <div className="relative h-28 overflow-hidden">
-                  <img src={format.image} alt={`Format ${format.name}`} className="w-full h-full object-cover object-[50%_30%]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
-                  <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                    <div>
-                      <h2 className="font-bold text-white text-base drop-shadow-sm">{format.name}</h2>
-                      <p className="text-xs text-white/60">{format.subtitle}</p>
-                    </div>
-                    <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full shrink-0">
-                      {format.duration} min
-                    </span>
+          {FORMATS_DATA.map((format) => (
+            <Link
+              key={format.type}
+              to={`/formats/${format.slug}`}
+              className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+            >
+              {/* Image — text stays white (over image) */}
+              <div className="relative h-28 overflow-hidden">
+                <img
+                  src={format.image}
+                  alt={t('formats.img_alt', { name: td(`${format.slug}.name`) })}
+                  className="w-full h-full object-cover object-[50%_30%]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+                  <div>
+                    <h2 className="font-bold text-white text-base drop-shadow-sm">{td(`${format.slug}.name`)}</h2>
+                    <p className="text-xs text-white/60">{td(`${format.slug}.subtitle`)}</p>
                   </div>
+                  <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full shrink-0">
+                    {format.duration} min
+                  </span>
+                </div>
+              </div>
+
+              {/* Content (below image) */}
+              <div className="p-4 flex-1 flex flex-col gap-3">
+                {/* Intensity dots */}
+                <div
+                  className="flex items-center gap-1.5"
+                  role="img"
+                  aria-label={t('formats.intensity_aria', { n: format.intensity })}
+                >
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
+                  ))}
                 </div>
 
-                {/* Content (below image) */}
-                <div className="p-4 flex-1 flex flex-col gap-3">
-                  {/* Intensity dots */}
-                  <div className="flex items-center gap-1.5" aria-label={`Intensité : ${format.intensity} sur 5`}>
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div key={i} className={`intensity-dot ${i <= format.intensity ? 'active' : 'inactive'}`} />
-                    ))}
-                  </div>
+                <p className="text-[13px] text-subtle leading-relaxed flex-1">
+                  {td(`${format.slug}.card_description`)}
+                </p>
 
-                  <p className="text-[13px] text-subtle leading-relaxed flex-1">
-                    {extra?.description ?? format.shortDescription}
-                  </p>
-
-                  <p className="text-xs text-link font-medium leading-relaxed">{extra?.benefit}</p>
-                </div>
-              </Link>
-            );
-          })}
+                <p className="text-xs text-link font-medium leading-relaxed">{td(`${format.slug}.card_benefit`)}</p>
+              </div>
+            </Link>
+          ))}
         </div>
 
-        <p className="text-xs text-faint text-center leading-relaxed">
-          Les durées indiquées incluent l'échauffement et les étirements.
-        </p>
+        <p className="text-xs text-faint text-center leading-relaxed">{t('formats.footer_note')}</p>
       </div>
     </>
   );

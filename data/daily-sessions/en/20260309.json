@@ -1,0 +1,120 @@
+{
+  "date": "20260309",
+  "title": "Cardio Double Impact",
+  "description": "HIIT combo with jump lunges and broad jumps followed by a Tabata with skaters and flutter kicks",
+  "estimatedDuration": 30,
+  "focus": [
+    "cardio"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 40,
+          "instructions": "Walk quickly in place with arm swings"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 35,
+          "instructions": "Run in place, heels to glutes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Explosive HIIT",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Jump lunges",
+          "instructions": "Jump lunges alternating legs"
+        },
+        {
+          "name": "Broad jumps",
+          "instructions": "Broad jumps, land softly and repeat"
+        },
+        {
+          "name": "Burpees no push-up",
+          "instructions": "Drop down, jump feet back, come back, jump up"
+        },
+        {
+          "name": "Pop squats",
+          "instructions": "Jump feet apart into a squat, jump feet together"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Powerful lateral bounds side to side"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Tabata Finisher",
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Skaters",
+          "instructions": "Lateral hops side to side, arms swinging"
+        },
+        {
+          "name": "Flutter kicks",
+          "instructions": "Back on the floor, legs extended, quick flutters"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

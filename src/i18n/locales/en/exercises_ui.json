@@ -1,0 +1,10 @@
+{
+  "video_button": {
+    "show": "See example",
+    "hide": "Hide",
+    "always_show": "Always show examples"
+  },
+  "no_video": {
+    "tag": "No video yet for this exercise"
+  }
+}
