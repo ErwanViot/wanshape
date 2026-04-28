@@ -40,3 +40,4 @@ tmp/
 data/**/*.csv
 data/**/*.xls
 data/**/*.xlsx
+.vercel
