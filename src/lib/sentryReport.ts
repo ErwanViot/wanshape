@@ -75,50 +75,72 @@ export function initSentryAsync(): void {
   // implemented on Safari < 16.4; fall back to a small setTimeout — both
   // schedules run after the LCP frame.
   const start = () => {
-    loadSentry().then((Sentry) => {
-      Sentry.init({
-        dsn: import.meta.env.VITE_SENTRY_DSN,
-        environment: import.meta.env.MODE,
-        enabled: import.meta.env.PROD,
-        integrations: [
-          Sentry.browserTracingIntegration(),
-          Sentry.replayIntegration({
-            // RGPD art. 9: nutrition logs, injury declarations, calorie
-            // targets, AI coach notes and email inputs all qualify as
-            // health/personal data. Mask both inputs and rendered text,
-            // block media, and keep the network detail allowlist empty.
-            maskAllInputs: true,
-            maskAllText: true,
-            blockAllMedia: true,
-            networkDetailAllowUrls: [],
-          }),
-        ],
-        tracesSampleRate: 0.2,
-        replaysSessionSampleRate: 0,
-        replaysOnErrorSampleRate: 1.0,
-        beforeBreadcrumb(breadcrumb) {
-          if (breadcrumb.category === 'fetch' || breadcrumb.category === 'xhr') {
-            if (typeof breadcrumb.data?.url === 'string') {
-              breadcrumb.data.url = scrubPathIds(breadcrumb.data.url);
-            }
+    loadSentry()
+      .then((Sentry) => {
+        try {
+          Sentry.init({
+            dsn: import.meta.env.VITE_SENTRY_DSN,
+            environment: import.meta.env.MODE,
+            enabled: import.meta.env.PROD,
+            integrations: [
+              Sentry.browserTracingIntegration(),
+              Sentry.replayIntegration({
+                // RGPD art. 9: nutrition logs, injury declarations, calorie
+                // targets, AI coach notes and email inputs all qualify as
+                // health/personal data. Mask both inputs and rendered text,
+                // block media, and keep the network detail allowlist empty.
+                maskAllInputs: true,
+                maskAllText: true,
+                blockAllMedia: true,
+                networkDetailAllowUrls: [],
+              }),
+            ],
+            tracesSampleRate: 0.2,
+            replaysSessionSampleRate: 0,
+            replaysOnErrorSampleRate: 1.0,
+            beforeBreadcrumb(breadcrumb) {
+              if (breadcrumb.category === 'fetch' || breadcrumb.category === 'xhr') {
+                if (typeof breadcrumb.data?.url === 'string') {
+                  breadcrumb.data.url = scrubPathIds(breadcrumb.data.url);
+                }
+              }
+              return breadcrumb;
+            },
+            beforeSend(event) {
+              if (event.request?.url) event.request.url = scrubPathIds(event.request.url);
+              return event;
+            },
+            beforeSendTransaction(event) {
+              if (event.transaction) event.transaction = scrubPathIds(event.transaction);
+              if (event.spans) {
+                for (const span of event.spans) {
+                  if (span.description) span.description = scrubPathIds(span.description);
+                }
+              }
+              return event;
+            },
+          });
+          // One-shot per-session boot probe. Low-traffic prod can spend hours
+          // with zero errors and zero sampled transactions, making a silent
+          // init failure indistinguishable from "no events to report". This
+          // gives us a heartbeat per session so dashboard absence == real
+          // breakage. Gated on sessionStorage to keep the cost bounded.
+          if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem('sentry_boot')) {
+            Sentry.captureMessage('sentry-boot', 'info');
+            sessionStorage.setItem('sentry_boot', '1');
           }
-          return breadcrumb;
-        },
-        beforeSend(event) {
-          if (event.request?.url) event.request.url = scrubPathIds(event.request.url);
-          return event;
-        },
-        beforeSendTransaction(event) {
-          if (event.transaction) event.transaction = scrubPathIds(event.transaction);
-          if (event.spans) {
-            for (const span of event.spans) {
-              if (span.description) span.description = scrubPathIds(span.description);
-            }
-          }
-          return event;
-        },
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.warn('[sentry] init failed', err);
+        }
+      })
+      .catch((err) => {
+        // Dynamic import failure (chunk 404, network drop, blocked by an
+        // extension). Surfacing it to the console is the only signal we
+        // have — Sentry itself is the diagnostic channel and it's not up.
+        // eslint-disable-next-line no-console
+        console.warn('[sentry] dynamic import failed', err);
       });
-    });
   };
   if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
     window.requestIdleCallback(start, { timeout: 2000 });
