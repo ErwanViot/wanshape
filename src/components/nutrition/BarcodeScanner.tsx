@@ -33,6 +33,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
   const streamRef = useRef<MediaStream | null>(null);
   const rafRef = useRef<number | null>(null);
   const mountedRef = useRef(true);
+  const manualInputRef = useRef<HTMLInputElement | null>(null);
   const [status, setStatus] = useState<DetectorStatus>('idle');
   const [manualBarcode, setManualBarcode] = useState('');
   const [manualError, setManualError] = useState<string | null>(null);
@@ -129,6 +130,15 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
     };
   }, [startCamera, stopCamera]);
 
+  // Send focus to the manual input when the camera path is unavailable. The
+  // `autoFocus` prop only fires on mount, but `status` flips after the async
+  // permission/feature-detection result, so we focus imperatively here.
+  useEffect(() => {
+    if (status === 'unsupported' || status === 'permission_denied' || status === 'error') {
+      manualInputRef.current?.focus();
+    }
+  }, [status]);
+
   function handleManualSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = manualBarcode.replace(/\s+/g, '');
@@ -180,7 +190,12 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
         </div>
       )}
 
-      {status === 'unsupported' && <p className="text-sm text-body">{t('barcode_scanner.unsupported')}</p>}
+      {status === 'unsupported' && (
+        <div className="rounded-xl bg-surface-card border border-divider p-3 space-y-1">
+          <p className="text-sm text-heading font-medium">{t('barcode_scanner.unsupported_title')}</p>
+          <p className="text-xs text-body">{t('barcode_scanner.unsupported')}</p>
+        </div>
+      )}
       {status === 'permission_denied' && <p className="text-sm text-body">{t('barcode_scanner.permission_denied')}</p>}
       {status === 'error' && <p className="text-sm text-red-400">{t('barcode_scanner.error')}</p>}
 
@@ -190,6 +205,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
         </label>
         <div className="flex gap-2">
           <input
+            ref={manualInputRef}
             id="manual-barcode"
             type="text"
             inputMode="numeric"

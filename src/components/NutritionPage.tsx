@@ -164,7 +164,7 @@ export function NutritionPage() {
         {error && <p className="text-sm text-red-400">{error}</p>}
 
         {formOpen && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6">
             <button
               type="button"
               aria-label={t('page.close_modal_aria')}
@@ -177,7 +177,7 @@ export function NutritionPage() {
               aria-modal="true"
               aria-label={t('page.add_meal_modal_aria')}
               tabIndex={-1}
-              className="relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl bg-surface border border-card-border p-6 shadow-xl focus:outline-none"
+              className="relative w-full max-w-lg max-h-[90dvh] sm:max-h-[85vh] overflow-y-auto overscroll-contain rounded-t-2xl sm:rounded-2xl bg-surface border border-card-border p-6 shadow-xl focus:outline-none"
             >
               <MealEntryForm
                 initialMealType={initialMealType}
