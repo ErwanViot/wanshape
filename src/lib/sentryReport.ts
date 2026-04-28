@@ -58,11 +58,15 @@ export function captureException(error: unknown, context?: CaptureContext): void
 // URL identifier scrubbing — kept here so initSentryAsync can pass it to
 // Sentry.init beforeBreadcrumb / beforeSend / beforeSendTransaction. Year
 // prefix in the date regex guards against matching arbitrary 8-digit
-// numeric IDs in unrelated paths.
+// numeric IDs in unrelated paths. The OFF barcode rule is anchored to the
+// /product/<8-14 digits> path so we don't strip unrelated numeric segments;
+// it keeps the diagnostic signal (an OFF lookup failed) without leaking the
+// EAN which links to dietary choices (RGPD art. 9).
 function scrubPathIds(value: string): string {
   return value
     .replace(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi, ':uuid')
-    .replace(/\/(?:19|20)\d{6}(?=\/|$|\?|#)/g, '/:date');
+    .replace(/\/(?:19|20)\d{6}(?=\/|$|\?|#)/g, '/:date')
+    .replace(/\/product\/\d{8,14}(?=\/|$|\?|#)/g, '/product/:barcode');
 }
 
 export function initSentryAsync(): void {

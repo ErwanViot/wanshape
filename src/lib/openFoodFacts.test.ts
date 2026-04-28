@@ -1,5 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fetchOpenFoodFactsProduct } from './openFoodFacts.ts';
+import { captureException } from './sentryReport.ts';
+
+vi.mock('./sentryReport.ts', () => ({
+  captureException: vi.fn(),
+}));
 
 const realFetch = globalThis.fetch;
 
@@ -16,6 +21,7 @@ function mockFetch(response: Partial<Response> & { _json?: unknown }): typeof fe
 
 beforeEach(() => {
   vi.restoreAllMocks();
+  vi.mocked(captureException).mockClear();
 });
 
 afterEach(() => {
@@ -91,12 +97,36 @@ describe('fetchOpenFoodFactsProduct', () => {
     expect(error).toBe('not_found');
   });
 
-  it('returns network on fetch throw', async () => {
+  it('returns network on fetch throw and reports to Sentry', async () => {
     globalThis.fetch = vi.fn(async () => {
       throw new TypeError('network unreachable');
     }) as unknown as typeof fetch;
     const { error } = await fetchOpenFoodFactsProduct('3017620422003');
     expect(error).toBe('network');
+    expect(captureException).toHaveBeenCalledTimes(1);
+  });
+
+  it('treats AbortError as a silent cancellation, no Sentry report', async () => {
+    globalThis.fetch = vi.fn(async () => {
+      throw new DOMException('The operation was aborted.', 'AbortError');
+    }) as unknown as typeof fetch;
+    const { product, error } = await fetchOpenFoodFactsProduct('3017620422003');
+    expect(product).toBeNull();
+    expect(error).toBeNull();
+    expect(captureException).not.toHaveBeenCalled();
+  });
+
+  it('reports HTTP 5xx to Sentry but not 404', async () => {
+    globalThis.fetch = mockFetch({ ok: false, status: 503, _json: {} });
+    const { error } = await fetchOpenFoodFactsProduct('3017620422003');
+    expect(error).toBe('network');
+    expect(captureException).toHaveBeenCalledTimes(1);
+
+    vi.mocked(captureException).mockClear();
+    globalThis.fetch = mockFetch({ ok: false, status: 404, _json: {} });
+    const r = await fetchOpenFoodFactsProduct('9999999999999');
+    expect(r.error).toBe('not_found');
+    expect(captureException).not.toHaveBeenCalled();
   });
 
   it('accepts 8-digit EAN-8', async () => {
