@@ -102,7 +102,7 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
     return { product: null, error: response.status === 404 ? 'not_found' : 'network' };
   }
 
-  const payload = (await response.json().catch(() => null)) as {
+  type OffPayload = {
     status?: number;
     product?: {
       product_name?: string;
@@ -113,9 +113,20 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
       nutriments?: Record<string, unknown>;
       image_small_url?: string;
     };
-  } | null;
+  };
+  // json() can throw on truncated / non-JSON 200s (content-blocker
+  // injections, captive portals). That is a transport failure, not a
+  // missing product — surface it as 'network' so the UI message and the
+  // Sentry breadcrumb stay accurate.
+  let payload: OffPayload;
+  try {
+    payload = (await response.json()) as OffPayload;
+  } catch (err) {
+    captureException(err, { contexts: { off_fetch: { phase: 'json_parse' } } });
+    return { product: null, error: 'network' };
+  }
 
-  if (!payload || payload.status !== 1 || !payload.product) {
+  if (payload.status !== 1 || !payload.product) {
     return { product: null, error: 'not_found' };
   }
 

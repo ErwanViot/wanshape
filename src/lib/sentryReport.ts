@@ -126,8 +126,10 @@ export function initSentryAsync(): void {
           // gives us a heartbeat per session so dashboard absence == real
           // breakage. Gated on sessionStorage to keep the cost bounded.
           if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem('sentry_boot')) {
-            Sentry.captureMessage('sentry-boot', 'info');
+            // Set the gate before sending so a captureMessage exception still
+            // honours the once-per-session invariant.
             sessionStorage.setItem('sentry_boot', '1');
+            Sentry.captureMessage('sentry-boot', 'info');
           }
         } catch (err) {
           // eslint-disable-next-line no-console

@@ -89,13 +89,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
         }
         setStatus('scanning');
 
-        const DetectorCtor = g.BarcodeDetector;
-        if (!DetectorCtor) {
-          setStatus('unsupported');
-          stopCamera();
-          return;
-        }
-        const detector = new DetectorCtor({ formats: SUPPORTED_FORMATS });
+        const detector = new g.BarcodeDetector({ formats: SUPPORTED_FORMATS });
 
         const tick = async () => {
           if (!isCurrent() || !videoRef.current || !streamRef.current) return;
@@ -110,6 +104,10 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
           } catch {
             // transient detection errors are expected; keep trying
           }
+          // Re-check after the awaited detect: the cleanup may have run while
+          // we were waiting and already cancelled `rafRef`. Without this guard
+          // we'd schedule one orphan frame that fires before the inner check.
+          if (!isCurrent()) return;
           rafRef.current = requestAnimationFrame(tick);
         };
         rafRef.current = requestAnimationFrame(tick);

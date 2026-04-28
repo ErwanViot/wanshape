@@ -142,4 +142,50 @@ describe('fetchOpenFoodFactsProduct', () => {
     const { product } = await fetchOpenFoodFactsProduct('12345678');
     expect(product?.name).toBe('Produit court');
   });
+
+  it('accepts 12-digit UPC-A', async () => {
+    globalThis.fetch = mockFetch({
+      _json: {
+        status: 1,
+        product: {
+          product_name: 'US import',
+          nutriments: { 'energy-kcal_100g': 100 },
+        },
+      },
+    });
+    const { product, error } = await fetchOpenFoodFactsProduct('012345678905');
+    expect(error).toBeNull();
+    expect(product?.name).toBe('US import');
+  });
+
+  it('returns missing_nutrition when name is empty even if calories exist', async () => {
+    globalThis.fetch = mockFetch({
+      _json: {
+        status: 1,
+        product: {
+          product_name: '',
+          nutriments: { 'energy-kcal_100g': 250 },
+        },
+      },
+    });
+    const { product, error } = await fetchOpenFoodFactsProduct('3000000000001');
+    expect(product).toBeNull();
+    expect(error).toBe('missing_nutrition');
+  });
+
+  it('classifies json() parse failure as network and reports to Sentry', async () => {
+    globalThis.fetch = vi.fn(async () =>
+      ({
+        ok: true,
+        status: 200,
+        json: async () => {
+          throw new SyntaxError('Unexpected end of JSON input');
+        },
+      }) as unknown as Response,
+    ) as unknown as typeof fetch;
+    const { product, error } = await fetchOpenFoodFactsProduct('3017620422003');
+    expect(product).toBeNull();
+    expect(error).toBe('network');
+    expect(captureException).toHaveBeenCalledTimes(1);
+  });
 });
