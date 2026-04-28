@@ -164,7 +164,7 @@ export function NutritionPage() {
         {error && <p className="text-sm text-red-400">{error}</p>}
 
         {formOpen && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6">
+          <div className="fixed inset-0 z-[60] h-[100dvh] flex items-end sm:items-center justify-center p-0 sm:p-6">
             <button
               type="button"
               aria-label={t('page.close_modal_aria')}

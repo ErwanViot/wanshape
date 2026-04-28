@@ -137,7 +137,7 @@ export function MealEntryForm({
               setError(null);
             }}
             aria-pressed={mode === m}
-            className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`flex-1 min-w-0 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap truncate ${
               mode === m ? 'bg-brand text-white' : 'text-body hover:text-heading'
             }`}
           >
