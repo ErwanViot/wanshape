@@ -32,7 +32,12 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const rafRef = useRef<number | null>(null);
-  const mountedRef = useRef(true);
+  // Per-mount token. Async code captures the token at start and bails if the
+  // current ref has moved on to a newer value — handles React StrictMode's
+  // mount → unmount → remount in dev (which would otherwise let two parallel
+  // getUserMedia calls collide on the camera and surface as status='error').
+  const activeTokenRef = useRef<symbol | null>(null);
+  const manualInputRef = useRef<HTMLInputElement | null>(null);
   const [status, setStatus] = useState<DetectorStatus>('idle');
   const [manualBarcode, setManualBarcode] = useState('');
   const [manualError, setManualError] = useState<string | null>(null);
@@ -48,86 +53,96 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
     }
   }, []);
 
-  const startCamera = useCallback(async () => {
-    const releaseTracks = (s: MediaStream) => {
-      for (const track of s.getTracks()) track.stop();
-    };
-    const g = globalThis as unknown as GlobalWithBarcodeDetector;
-    if (!g.BarcodeDetector) {
-      setStatus('unsupported');
-      return;
-    }
-    setStatus('starting');
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: 'environment' } },
-        audio: false,
-      });
-      // Unmount-during-await guard: release the stream instead of attaching it
-      // to a ref that nothing will stop.
-      if (!mountedRef.current) {
-        releaseTracks(stream);
-        return;
-      }
-      streamRef.current = stream;
-      const video = videoRef.current;
-      if (!video) {
-        releaseTracks(stream);
-        streamRef.current = null;
-        return;
-      }
-      video.srcObject = stream;
-      await video.play();
-      if (!mountedRef.current) {
-        stopCamera();
-        return;
-      }
-      setStatus('scanning');
-
-      const DetectorCtor = g.BarcodeDetector;
-      if (!DetectorCtor) {
-        setStatus('unsupported');
-        stopCamera();
-        return;
-      }
-      const detector = new DetectorCtor({ formats: SUPPORTED_FORMATS });
-
-      const tick = async () => {
-        if (!mountedRef.current || !videoRef.current || !streamRef.current) return;
-        try {
-          const results = await detector.detect(videoRef.current);
-          if (results.length > 0) {
-            const barcode = results[0].rawValue;
-            stopCamera();
-            if (mountedRef.current) onDetected(barcode);
-            return;
-          }
-        } catch {
-          // transient detection errors are expected; keep trying
-        }
-        rafRef.current = requestAnimationFrame(tick);
+  const startCamera = useCallback(
+    async (token: symbol) => {
+      const isCurrent = () => activeTokenRef.current === token;
+      const releaseTracks = (s: MediaStream) => {
+        for (const track of s.getTracks()) track.stop();
       };
-      rafRef.current = requestAnimationFrame(tick);
-    } catch (err) {
-      if (!mountedRef.current) return;
-      const name = err instanceof Error ? err.name : '';
-      if (name === 'NotAllowedError' || name === 'SecurityError') {
-        setStatus('permission_denied');
-      } else {
-        setStatus('error');
+      const g = globalThis as unknown as GlobalWithBarcodeDetector;
+      if (!g.BarcodeDetector) {
+        if (isCurrent()) setStatus('unsupported');
+        return;
       }
-      stopCamera();
-    }
-  }, [onDetected, stopCamera]);
+      if (isCurrent()) setStatus('starting');
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: { ideal: 'environment' } },
+          audio: false,
+        });
+        if (!isCurrent()) {
+          releaseTracks(stream);
+          return;
+        }
+        streamRef.current = stream;
+        const video = videoRef.current;
+        if (!video) {
+          releaseTracks(stream);
+          streamRef.current = null;
+          return;
+        }
+        video.srcObject = stream;
+        await video.play();
+        if (!isCurrent()) {
+          stopCamera();
+          return;
+        }
+        setStatus('scanning');
+
+        const detector = new g.BarcodeDetector({ formats: SUPPORTED_FORMATS });
+
+        const tick = async () => {
+          if (!isCurrent() || !videoRef.current || !streamRef.current) return;
+          try {
+            const results = await detector.detect(videoRef.current);
+            if (results.length > 0) {
+              const barcode = results[0].rawValue;
+              stopCamera();
+              if (isCurrent()) onDetected(barcode);
+              return;
+            }
+          } catch {
+            // transient detection errors are expected; keep trying
+          }
+          // Re-check after the awaited detect: the cleanup may have run while
+          // we were waiting and already cancelled `rafRef`. Without this guard
+          // we'd schedule one orphan frame that fires before the inner check.
+          if (!isCurrent()) return;
+          rafRef.current = requestAnimationFrame(tick);
+        };
+        rafRef.current = requestAnimationFrame(tick);
+      } catch (err) {
+        if (!isCurrent()) return;
+        const name = err instanceof Error ? err.name : '';
+        if (name === 'NotAllowedError' || name === 'SecurityError') {
+          setStatus('permission_denied');
+        } else {
+          setStatus('error');
+        }
+        stopCamera();
+      }
+    },
+    [onDetected, stopCamera],
+  );
 
   useEffect(() => {
-    mountedRef.current = true;
-    startCamera();
+    const token = Symbol('barcode-scanner-mount');
+    activeTokenRef.current = token;
+    startCamera(token);
     return () => {
-      mountedRef.current = false;
+      if (activeTokenRef.current === token) activeTokenRef.current = null;
       stopCamera();
     };
   }, [startCamera, stopCamera]);
+
+  // Send focus to the manual input when the camera path is unavailable. The
+  // `autoFocus` prop only fires on mount, but `status` flips after the async
+  // permission/feature-detection result, so we focus imperatively here.
+  useEffect(() => {
+    if (status === 'unsupported' || status === 'permission_denied' || status === 'error') {
+      manualInputRef.current?.focus();
+    }
+  }, [status]);
 
   function handleManualSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -180,7 +195,12 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
         </div>
       )}
 
-      {status === 'unsupported' && <p className="text-sm text-body">{t('barcode_scanner.unsupported')}</p>}
+      {status === 'unsupported' && (
+        <div className="rounded-xl bg-surface-card border border-divider p-3 space-y-1">
+          <p className="text-sm text-heading font-medium">{t('barcode_scanner.unsupported_title')}</p>
+          <p className="text-xs text-body">{t('barcode_scanner.unsupported')}</p>
+        </div>
+      )}
       {status === 'permission_denied' && <p className="text-sm text-body">{t('barcode_scanner.permission_denied')}</p>}
       {status === 'error' && <p className="text-sm text-red-400">{t('barcode_scanner.error')}</p>}
 
@@ -190,6 +210,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
         </label>
         <div className="flex gap-2">
           <input
+            ref={manualInputRef}
             id="manual-barcode"
             type="text"
             inputMode="numeric"

@@ -10,6 +10,8 @@
  * credentials.
  */
 
+import { captureException } from './sentryReport.ts';
+
 const OFF_BASE = 'https://world.openfoodfacts.org/api/v2/product';
 const FIELDS = [
   'product_name',
@@ -79,15 +81,28 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
       signal,
       headers: { Accept: 'application/json' },
     });
-  } catch {
+  } catch (err) {
+    // Aborts come from the consumer (component unmount, scan another) and are
+    // not user-facing failures — surface no error so the UI stays clean.
+    if (err instanceof DOMException && err.name === 'AbortError') {
+      return { product: null, error: null };
+    }
+    // Real network failure: log the cause so we can tell connectivity loss
+    // apart from content-blocker / privacy-relay drops in Sentry.
+    captureException(err, { contexts: { off_fetch: { phase: 'fetch_throw' } } });
     return { product: null, error: 'network' };
   }
 
   if (!response.ok) {
+    if (response.status !== 404) {
+      captureException(new Error(`OFF http ${response.status}`), {
+        contexts: { off_fetch: { phase: 'http_error', status: response.status } },
+      });
+    }
     return { product: null, error: response.status === 404 ? 'not_found' : 'network' };
   }
 
-  const payload = (await response.json().catch(() => null)) as {
+  type OffPayload = {
     status?: number;
     product?: {
       product_name?: string;
@@ -98,9 +113,20 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
       nutriments?: Record<string, unknown>;
       image_small_url?: string;
     };
-  } | null;
+  };
+  // json() can throw on truncated / non-JSON 200s (content-blocker
+  // injections, captive portals). That is a transport failure, not a
+  // missing product — surface it as 'network' so the UI message and the
+  // Sentry breadcrumb stay accurate.
+  let payload: OffPayload;
+  try {
+    payload = (await response.json()) as OffPayload;
+  } catch (err) {
+    captureException(err, { contexts: { off_fetch: { phase: 'json_parse' } } });
+    return { product: null, error: 'network' };
+  }
 
-  if (!payload || payload.status !== 1 || !payload.product) {
+  if (payload.status !== 1 || !payload.product) {
     return { product: null, error: 'not_found' };
   }
 
