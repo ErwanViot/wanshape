@@ -174,14 +174,15 @@ describe('fetchOpenFoodFactsProduct', () => {
   });
 
   it('classifies json() parse failure as network and reports to Sentry', async () => {
-    globalThis.fetch = vi.fn(async () =>
-      ({
-        ok: true,
-        status: 200,
-        json: async () => {
-          throw new SyntaxError('Unexpected end of JSON input');
-        },
-      }) as unknown as Response,
+    globalThis.fetch = vi.fn(
+      async () =>
+        ({
+          ok: true,
+          status: 200,
+          json: async () => {
+            throw new SyntaxError('Unexpected end of JSON input');
+          },
+        }) as unknown as Response,
     ) as unknown as typeof fetch;
     const { product, error } = await fetchOpenFoodFactsProduct('3017620422003');
     expect(product).toBeNull();
