@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { MEAL_TYPES } from '../../config/nutrition.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
@@ -56,6 +56,20 @@ export function MealEntryForm({
   // Search tab state
   const [selectedFood, setSelectedFood] = useState<FoodReference | null>(null);
   const [portionGrams, setPortionGrams] = useState('100');
+
+  // OFF results carry quantity hints (`serving_quantity_g`, `product_quantity_g`)
+  // — use them to seed a smarter default than 100g, just like BarcodePane.
+  // Single-serve cap of 250g avoids prefilling 1 kg for a pasta box. CIQUAL
+  // rows have no quantity metadata so this no-ops for them.
+  useEffect(() => {
+    if (!selectedFood) return;
+    const serving = selectedFood.serving_quantity_g;
+    const product = selectedFood.product_quantity_g;
+    let grams = 100;
+    if (serving && serving > 0) grams = serving;
+    else if (product && product > 0 && product <= 250) grams = product;
+    setPortionGrams(String(grams));
+  }, [selectedFood]);
 
   async function handleManualSubmit(e: FormEvent) {
     e.preventDefault();

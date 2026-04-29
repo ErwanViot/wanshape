@@ -74,9 +74,9 @@
   "barcode_scanner": {
     "heading": "Scan a barcode",
     "close": "Close",
+    "loading_decoder": "Loading the scanner…",
+    "starting": "Opening the camera…",
     "frame_hint": "Align the barcode in the frame…",
-    "unsupported_title": "Manual entry only",
-    "unsupported": "Your browser doesn't support camera scanning (iOS Safari, Chrome iOS). Type the digits below the barcode, or use the manual entry tab.",
     "permission_denied": "Camera access denied. You can enter the code manually.",
     "error": "Cannot open camera. Enter the code manually.",
     "manual_label": "Manual barcode entry",
@@ -103,9 +103,11 @@
     "default_placeholder": "Apple, cooked pasta, yogurt…",
     "min_chars": "Type at least 2 characters.",
     "searching": "Searching…",
-    "no_results": "No results in the CIQUAL database.",
+    "no_results": "No results found.",
     "kcal_per_100": "{{kcal}} kcal / 100 g",
-    "calories_unavailable": "Calories unavailable"
+    "calories_unavailable": "Calories unavailable",
+    "off_badge": "Open Food Facts",
+    "off_attribution": "Extended results via Open Food Facts (ODbL licence)."
   },
   "insight": {
     "heading": "AI analysis of your day",
