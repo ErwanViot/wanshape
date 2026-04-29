@@ -61,10 +61,16 @@ export function NutritionPage() {
   async function handleSearchSelect(food: FoodReference, quantityGrams: number, mealType: MealType): Promise<boolean> {
     const factor = quantityGrams / 100;
     const scaled = (per100: number | null) => (per100 != null ? Math.round(per100 * factor * 10) / 10 : null);
+    // OFF results from the search fallback share the same data source as a
+    // scanned barcode (the OFF database, indexed by EAN). The DB CHECK only
+    // allows ('manual','ciqual','barcode','ai_text','overflow_insight'), so
+    // we fold OFF text-search results into 'barcode' rather than introduce
+    // a new value via migration. reference_id is the barcode either way.
+    const isOff = food.source === 'off';
     const result = await addMeal({
       meal_type: mealType,
-      source: 'ciqual',
-      name: food.name_fr,
+      source: isOff ? 'barcode' : 'ciqual',
+      name: food.name_fr.slice(0, 200),
       calories: scaled(food.calories_100g) ?? 0,
       protein_g: scaled(food.protein_100g),
       carbs_g: scaled(food.carbs_100g),

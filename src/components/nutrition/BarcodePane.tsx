@@ -16,6 +16,19 @@ function scaleKcal(per100g: number | null, grams: number): number {
   return Math.round(((per100g * grams) / 100) * 10) / 10;
 }
 
+// Pick the most sensible default portion for a scanned product. We prefer
+// `serving_quantity` (one normal portion as declared by the producer), then
+// fall back to `product_quantity` only when the package is small enough to
+// plausibly be a single serving — a 1 kg pasta box must NOT pre-fill 1000g.
+// 250 g covers bars, single yogurts, snacks, and individual drinks.
+const SINGLE_SERVE_GRAMS_CAP = 250;
+
+function pickDefaultGrams(servingG: number | null, productG: number | null): number {
+  if (servingG && servingG > 0) return servingG;
+  if (productG && productG > 0 && productG <= SINGLE_SERVE_GRAMS_CAP) return productG;
+  return 100;
+}
+
 export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) {
   const { t } = useTranslation('nutrition');
   const { product, loading, error, fetchByBarcode, reset } = useOpenFoodFacts();
@@ -26,6 +39,14 @@ export function BarcodePane({ mealType, onSubmit, onCancel }: BarcodePaneProps) 
 
   // Cancel in-flight OFF fetch + clear state when the pane unmounts.
   useEffect(() => () => reset(), [reset]);
+
+  // When a product loads, seed the portion input from OFF's quantity hints.
+  // The user can still override; we just provide a smarter default than 100g.
+  useEffect(() => {
+    if (!product) return;
+    const grams = pickDefaultGrams(product.serving_quantity_g, product.product_quantity_g);
+    setPortionGrams(String(grams));
+  }, [product]);
 
   const handleDetected = useCallback(
     (barcode: string) => {
