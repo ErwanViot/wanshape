@@ -10,8 +10,8 @@
  * credentials.
  */
 
-import { supabase } from './supabase.ts';
 import { captureException } from './sentryReport.ts';
+import { supabase } from './supabase.ts';
 
 const OFF_BASE = 'https://world.openfoodfacts.org/api/v2/product';
 const FIELDS = [

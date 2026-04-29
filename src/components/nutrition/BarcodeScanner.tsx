@@ -7,13 +7,7 @@ interface BarcodeScannerProps {
   onClose: () => void;
 }
 
-type DetectorStatus =
-  | 'idle'
-  | 'loading_decoder'
-  | 'starting'
-  | 'scanning'
-  | 'permission_denied'
-  | 'error';
+type DetectorStatus = 'idle' | 'loading_decoder' | 'starting' | 'scanning' | 'permission_denied' | 'error';
 
 interface DetectorLike {
   detect: (source: HTMLVideoElement) => Promise<Array<{ rawValue: string }>>;
@@ -49,8 +43,7 @@ async function loadPolyfillCtor(): Promise<DetectorCtor> {
       // dependency we don't want for an offline-capable PWA.
       prepareZXingModule({
         overrides: {
-          locateFile: (path: string, prefix: string) =>
-            path.endsWith('.wasm') ? wasmUrlMod.default : prefix + path,
+          locateFile: (path: string, prefix: string) => (path.endsWith('.wasm') ? wasmUrlMod.default : prefix + path),
         },
       });
       return BarcodeDetector as unknown as DetectorCtor;
@@ -257,9 +250,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
             <div className="w-3/4 h-20 border-2 border-brand/80 rounded-lg" />
           </div>
           <p className="absolute bottom-2 left-0 right-0 text-center text-xs text-white/80">
-            {status === 'scanning'
-              ? t('barcode_scanner.frame_hint')
-              : t('barcode_scanner.starting')}
+            {status === 'scanning' ? t('barcode_scanner.frame_hint') : t('barcode_scanner.starting')}
           </p>
         </div>
       )}
