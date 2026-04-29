@@ -18,7 +18,9 @@ const FIELDS = [
   'product_name_fr',
   'brands',
   'quantity',
+  'product_quantity',
   'serving_size',
+  'serving_quantity',
   'nutriments',
   'image_small_url',
 ].join(',');
@@ -27,7 +29,12 @@ export interface OpenFoodFactsProduct {
   barcode: string;
   name: string;
   brand: string | null;
+  /** Human-readable total quantity, e.g. "40 g", "1 L", "270 g (3 x 90g)". */
   quantity: string | null;
+  /** Numeric total package weight in grams, when OFF reports it. */
+  product_quantity_g: number | null;
+  /** Numeric weight of one serving in grams, when OFF reports it. */
+  serving_quantity_g: number | null;
   /** kcal per 100g when available, null if unit is kJ only or missing. */
   calories_100g: number | null;
   protein_100g: number | null;
@@ -109,7 +116,9 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
       product_name_fr?: string;
       brands?: string;
       quantity?: string;
+      product_quantity?: number | string;
       serving_size?: string;
+      serving_quantity?: number | string;
       nutriments?: Record<string, unknown>;
       image_small_url?: string;
     };
@@ -141,12 +150,20 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
     return { product: null, error: 'missing_nutrition' };
   }
 
+  // OFF often returns these as numeric strings (e.g. "40"); pickNumber
+  // coerces both shapes uniformly. Negative or zero values are treated as
+  // missing — they're never meaningful as a portion default.
+  const productQtyRaw = pickNumber(p as unknown as Record<string, unknown>, ['product_quantity']);
+  const servingQtyRaw = pickNumber(p as unknown as Record<string, unknown>, ['serving_quantity']);
+
   return {
     product: {
       barcode,
       name,
       brand: p.brands ? p.brands.split(',')[0].trim() : null,
       quantity: p.quantity ?? null,
+      product_quantity_g: productQtyRaw && productQtyRaw > 0 ? productQtyRaw : null,
+      serving_quantity_g: servingQtyRaw && servingQtyRaw > 0 ? servingQtyRaw : null,
       calories_100g: calories,
       protein_100g: pickNumber(nutr, ['proteins_100g', 'proteins']),
       carbs_100g: pickNumber(nutr, ['carbohydrates_100g', 'carbohydrates']),

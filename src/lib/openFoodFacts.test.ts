@@ -173,6 +173,73 @@ describe('fetchOpenFoodFactsProduct', () => {
     expect(error).toBe('missing_nutrition');
   });
 
+  it('extracts numeric product_quantity and serving_quantity when OFF returns them', async () => {
+    globalThis.fetch = mockFetch({
+      _json: {
+        status: 1,
+        product: {
+          product_name: 'Barre céréales',
+          quantity: '40 g',
+          product_quantity: 40,
+          serving_quantity: 40,
+          nutriments: { 'energy-kcal_100g': 420 },
+        },
+      },
+    });
+    const { product } = await fetchOpenFoodFactsProduct('3017620422003');
+    expect(product?.product_quantity_g).toBe(40);
+    expect(product?.serving_quantity_g).toBe(40);
+  });
+
+  it('coerces string-typed numeric quantities (OFF often serializes them as strings)', async () => {
+    globalThis.fetch = mockFetch({
+      _json: {
+        status: 1,
+        product: {
+          product_name: 'Yaourt',
+          product_quantity: '500',
+          serving_quantity: '125',
+          nutriments: { 'energy-kcal_100g': 60 },
+        },
+      },
+    });
+    const { product } = await fetchOpenFoodFactsProduct('3017620422003');
+    expect(product?.product_quantity_g).toBe(500);
+    expect(product?.serving_quantity_g).toBe(125);
+  });
+
+  it('drops zero / negative quantities to null so the UI falls back to a sane default', async () => {
+    globalThis.fetch = mockFetch({
+      _json: {
+        status: 1,
+        product: {
+          product_name: 'Produit incomplet',
+          product_quantity: 0,
+          serving_quantity: -1,
+          nutriments: { 'energy-kcal_100g': 100 },
+        },
+      },
+    });
+    const { product } = await fetchOpenFoodFactsProduct('3017620422003');
+    expect(product?.product_quantity_g).toBeNull();
+    expect(product?.serving_quantity_g).toBeNull();
+  });
+
+  it('returns null for missing quantity fields rather than NaN', async () => {
+    globalThis.fetch = mockFetch({
+      _json: {
+        status: 1,
+        product: {
+          product_name: 'Ancien produit',
+          nutriments: { 'energy-kcal_100g': 100 },
+        },
+      },
+    });
+    const { product } = await fetchOpenFoodFactsProduct('3017620422003');
+    expect(product?.product_quantity_g).toBeNull();
+    expect(product?.serving_quantity_g).toBeNull();
+  });
+
   it('classifies json() parse failure as network and reports to Sentry', async () => {
     globalThis.fetch = vi.fn(
       async () =>
