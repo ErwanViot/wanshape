@@ -54,21 +54,36 @@ export function FoodSearchInput({ onSelect, placeholder }: FoodSearchInputProps)
                     onClick={() => onSelect(food)}
                     className="w-full text-left px-3 py-2 hover:bg-divider transition-colors border-b border-divider last:border-b-0"
                   >
-                    <div className="flex items-start gap-2">
-                      <p className="text-sm text-heading truncate flex-1">{food.name_fr}</p>
-                      {food.source === 'off' && (
-                        // ODbL attribution requirement when surfacing OFF data.
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-brand/10 text-brand shrink-0">
-                          {t('food_search.off_badge')}
-                        </span>
+                    <div className="flex items-start gap-3">
+                      {food.image_url && (
+                        <img
+                          src={food.image_url}
+                          alt=""
+                          loading="lazy"
+                          className="w-10 h-10 rounded-md object-cover bg-surface shrink-0"
+                        />
                       )}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start gap-2">
+                          {/* Drop `truncate` so multi-line names stay legible —
+                              shrinking would only hide info we just paid an
+                              edge-function call to fetch. */}
+                          <p className="text-sm text-heading flex-1 leading-snug">{food.name_fr}</p>
+                          {food.source === 'off' && (
+                            // ODbL attribution requirement when surfacing OFF data.
+                            <span className="text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-brand/10 text-brand shrink-0 whitespace-nowrap">
+                              {t('food_search.off_badge')}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-muted mt-0.5">
+                          {food.calories_100g != null
+                            ? t('food_search.kcal_per_100', { kcal: Math.round(food.calories_100g) })
+                            : t('food_search.calories_unavailable')}
+                          {food.group_fr && <span className="ml-2">· {food.group_fr}</span>}
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-xs text-muted mt-0.5">
-                      {food.calories_100g != null
-                        ? t('food_search.kcal_per_100', { kcal: Math.round(food.calories_100g) })
-                        : t('food_search.calories_unavailable')}
-                      {food.group_fr && <span className="ml-2">· {food.group_fr}</span>}
-                    </p>
                   </button>
                 </li>
               ))}
