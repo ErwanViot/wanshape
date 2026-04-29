@@ -97,8 +97,7 @@ export function useFoodSearch(query: string): UseFoodSearchResult {
           // OFF's data frequently produces — many products store the brand
           // verbatim in their product_name. Only append the brand when it
           // adds information.
-          const brandIsRedundant =
-            p.brand && p.name.toLowerCase().includes(p.brand.toLowerCase());
+          const brandIsRedundant = p.brand && p.name.toLowerCase().includes(p.brand.toLowerCase());
           return {
             id: p.barcode,
             name_fr: p.brand && !brandIsRedundant ? `${p.name} (${p.brand})` : p.name,
