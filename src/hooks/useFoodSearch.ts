@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import i18n from '../i18n/index.ts';
+import { searchOpenFoodFactsProducts } from '../lib/openFoodFacts.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { FoodReference } from '../types/nutrition.ts';
@@ -8,6 +9,11 @@ const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' 
 
 const DEBOUNCE_MS = 200;
 const RESULTS_LIMIT = 12;
+// CIQUAL covers ~3000 generic foods (apple, milk, bread); branded retail
+// products (e.g. Desperados, Heineken, Activia) only live in OFF. When
+// CIQUAL has zero hits, fall back to the public OFF text-search so the
+// user doesn't dead-end. Capped to keep the result list digestible.
+const OFF_FALLBACK_LIMIT = 8;
 
 export interface UseFoodSearchResult {
   results: FoodReference[];
@@ -16,8 +22,8 @@ export interface UseFoodSearchResult {
 }
 
 /**
- * Debounced fuzzy search over public.food_reference (CIQUAL).
- * Uses the `ilike` operator over the trigram-indexed `name_fr` column.
+ * Debounced fuzzy search over public.food_reference (CIQUAL), with an
+ * automatic Open Food Facts fallback when CIQUAL returns no results.
  */
 export function useFoodSearch(query: string): UseFoodSearchResult {
   const [results, setResults] = useState<FoodReference[]>([]);
@@ -40,6 +46,7 @@ export function useFoodSearch(query: string): UseFoodSearchResult {
     const escaped = trimmed.replace(/\\/g, '\\\\').replace(/%/g, '\\%').replace(/_/g, '\\_');
 
     let cancelled = false;
+    const offAbort = new AbortController();
     setLoading(true);
     const timer = setTimeout(async () => {
       try {
@@ -66,7 +73,46 @@ export function useFoodSearch(query: string): UseFoodSearchResult {
           setLoading(false);
           return;
         }
-        setResults((data ?? []) as FoodReference[]);
+        const ciqualRows = (data ?? []) as FoodReference[];
+
+        if (ciqualRows.length > 0) {
+          setResults(ciqualRows);
+          setError(null);
+          setLoading(false);
+          return;
+        }
+
+        // CIQUAL miss → query OFF as a graceful fallback. Failures degrade
+        // to "no results" rather than surfacing — the search still returned,
+        // it just had nothing to offer.
+        const offHits = await searchOpenFoodFactsProducts(trimmed, OFF_FALLBACK_LIMIT, offAbort.signal);
+        if (cancelled) return;
+
+        const mapped: FoodReference[] = offHits.map((p) => {
+          // Avoid the redundant "Desperados (Desperados)" pattern that
+          // OFF's data frequently produces — many products store the brand
+          // verbatim in their product_name. Only append the brand when it
+          // adds information.
+          const brandIsRedundant =
+            p.brand && p.name.toLowerCase().includes(p.brand.toLowerCase());
+          return {
+            id: p.barcode,
+            name_fr: p.brand && !brandIsRedundant ? `${p.name} (${p.brand})` : p.name,
+            group_fr: null,
+            calories_100g: p.calories_100g,
+            protein_100g: p.protein_100g,
+            carbs_100g: p.carbs_100g,
+            fat_100g: p.fat_100g,
+            fiber_100g: p.fiber_100g,
+            source: 'off',
+            brand: p.brand,
+            image_url: p.image_url,
+            source_url: p.source_url,
+            product_quantity_g: p.product_quantity_g,
+            serving_quantity_g: p.serving_quantity_g,
+          };
+        });
+        setResults(mapped);
         setError(null);
         setLoading(false);
       } catch (err) {
@@ -79,6 +125,7 @@ export function useFoodSearch(query: string): UseFoodSearchResult {
 
     return () => {
       cancelled = true;
+      offAbort.abort();
       clearTimeout(timer);
     };
   }, [query]);

@@ -103,9 +103,11 @@
     "default_placeholder": "Apple, cooked pasta, yogurt…",
     "min_chars": "Type at least 2 characters.",
     "searching": "Searching…",
-    "no_results": "No results in the CIQUAL database.",
+    "no_results": "No results found.",
     "kcal_per_100": "{{kcal}} kcal / 100 g",
-    "calories_unavailable": "Calories unavailable"
+    "calories_unavailable": "Calories unavailable",
+    "off_badge": "OFF",
+    "off_attribution": "Extended results via Open Food Facts (ODbL licence)."
   },
   "insight": {
     "heading": "AI analysis of your day",

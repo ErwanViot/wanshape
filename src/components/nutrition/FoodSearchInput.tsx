@@ -54,7 +54,15 @@ export function FoodSearchInput({ onSelect, placeholder }: FoodSearchInputProps)
                     onClick={() => onSelect(food)}
                     className="w-full text-left px-3 py-2 hover:bg-divider transition-colors border-b border-divider last:border-b-0"
                   >
-                    <p className="text-sm text-heading truncate">{food.name_fr}</p>
+                    <div className="flex items-start gap-2">
+                      <p className="text-sm text-heading truncate flex-1">{food.name_fr}</p>
+                      {food.source === 'off' && (
+                        // ODbL attribution requirement when surfacing OFF data.
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-brand/10 text-brand shrink-0">
+                          {t('food_search.off_badge')}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs text-muted mt-0.5">
                       {food.calories_100g != null
                         ? t('food_search.kcal_per_100', { kcal: Math.round(food.calories_100g) })
@@ -67,6 +75,9 @@ export function FoodSearchInput({ onSelect, placeholder }: FoodSearchInputProps)
             </ul>
           )}
         </div>
+      )}
+      {results.some((r) => r.source === 'off') && (
+        <p className="text-[11px] text-muted italic">{t('food_search.off_attribution')}</p>
       )}
     </div>
   );

@@ -10,6 +10,7 @@
  * credentials.
  */
 
+import { supabase } from './supabase.ts';
 import { captureException } from './sentryReport.ts';
 
 const OFF_BASE = 'https://world.openfoodfacts.org/api/v2/product';
@@ -109,20 +110,7 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
     return { product: null, error: response.status === 404 ? 'not_found' : 'network' };
   }
 
-  type OffPayload = {
-    status?: number;
-    product?: {
-      product_name?: string;
-      product_name_fr?: string;
-      brands?: string;
-      quantity?: string;
-      product_quantity?: number | string;
-      serving_size?: string;
-      serving_quantity?: number | string;
-      nutriments?: Record<string, unknown>;
-      image_small_url?: string;
-    };
-  };
+  type OffPayload = { status?: number; product?: OffProductPayload };
   // json() can throw on truncated / non-JSON 200s (content-blocker
   // injections, captive portals). That is a transport failure, not a
   // missing product — surface it as 'network' so the UI message and the
@@ -139,16 +127,45 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
     return { product: null, error: 'not_found' };
   }
 
-  const p = payload.product;
+  const product = mapOffProduct(barcode, payload.product);
+  if (!product) return { product: null, error: 'missing_nutrition' };
+  return { product, error: null };
+}
+
+type OffProductPayload = {
+  code?: string;
+  product_name?: string;
+  product_name_fr?: string;
+  // /api/v2/product returns brands as a comma-separated string;
+  // search-a-licious returns it as an array. We accept both.
+  brands?: string | string[];
+  quantity?: string;
+  product_quantity?: number | string;
+  serving_size?: string;
+  serving_quantity?: number | string;
+  nutriments?: Record<string, unknown>;
+  image_small_url?: string;
+};
+
+function pickFirstBrand(brands: string | string[] | undefined): string | null {
+  if (!brands) return null;
+  if (Array.isArray(brands)) return brands[0]?.trim() || null;
+  return brands.split(',')[0]?.trim() || null;
+}
+
+/**
+ * Maps an OFF API product object to our internal shape. Returns null when
+ * the product lacks the bare minimum (name + kcal/100g) we need to render a
+ * meal entry — there's no point surfacing items we can't compute calories
+ * for. Used by both the single-product lookup and the search endpoint.
+ */
+function mapOffProduct(barcode: string, p: OffProductPayload): OpenFoodFactsProduct | null {
   const nutr = p.nutriments ?? {};
   const name = p.product_name_fr?.trim() || p.product_name?.trim() || null;
   // Only accept kcal-typed keys; `energy_100g` is in kJ on OFF and would
   // otherwise inflate calories by ~4.184x with no unit check.
   const calories = pickNumber(nutr, ['energy-kcal_100g', 'energy-kcal']);
-
-  if (!name || calories == null) {
-    return { product: null, error: 'missing_nutrition' };
-  }
+  if (!name || calories == null) return null;
 
   // OFF often returns these as numeric strings (e.g. "40"); pickNumber
   // coerces both shapes uniformly. Negative or zero values are treated as
@@ -157,21 +174,80 @@ export async function fetchOpenFoodFactsProduct(barcode: string, signal?: AbortS
   const servingQtyRaw = pickNumber(p as unknown as Record<string, unknown>, ['serving_quantity']);
 
   return {
-    product: {
-      barcode,
-      name,
-      brand: p.brands ? p.brands.split(',')[0].trim() : null,
-      quantity: p.quantity ?? null,
-      product_quantity_g: productQtyRaw && productQtyRaw > 0 ? productQtyRaw : null,
-      serving_quantity_g: servingQtyRaw && servingQtyRaw > 0 ? servingQtyRaw : null,
-      calories_100g: calories,
-      protein_100g: pickNumber(nutr, ['proteins_100g', 'proteins']),
-      carbs_100g: pickNumber(nutr, ['carbohydrates_100g', 'carbohydrates']),
-      fat_100g: pickNumber(nutr, ['fat_100g', 'fat']),
-      fiber_100g: pickNumber(nutr, ['fiber_100g', 'fiber']),
-      image_url: p.image_small_url ?? null,
-      source_url: `https://world.openfoodfacts.org/product/${barcode}`,
-    },
-    error: null,
+    barcode,
+    name,
+    brand: pickFirstBrand(p.brands),
+    quantity: p.quantity ?? null,
+    product_quantity_g: productQtyRaw && productQtyRaw > 0 ? productQtyRaw : null,
+    serving_quantity_g: servingQtyRaw && servingQtyRaw > 0 ? servingQtyRaw : null,
+    calories_100g: calories,
+    protein_100g: pickNumber(nutr, ['proteins_100g', 'proteins']),
+    carbs_100g: pickNumber(nutr, ['carbohydrates_100g', 'carbohydrates']),
+    fat_100g: pickNumber(nutr, ['fat_100g', 'fat']),
+    fiber_100g: pickNumber(nutr, ['fiber_100g', 'fiber']),
+    image_url: p.image_small_url ?? null,
+    source_url: `https://world.openfoodfacts.org/product/${barcode}`,
   };
+}
+
+/**
+ * Free-text product search, used as a fallback when the local CIQUAL
+ * referential returns no results — CIQUAL only has generic foods (e.g.
+ * "Bière, blonde"), while OFF carries branded retail products (e.g.
+ * "Desperados").
+ *
+ * Routes through our `off-search` Supabase Edge Function rather than calling
+ * OFF directly: the proper text-search endpoint (search-a-licious) blocks
+ * browser CORS at the gateway, and the CORS-open `/api/v2/search` endpoint
+ * silently ignores its `search_terms` parameter. The proxy adds a 15-min
+ * in-memory cache and identifies us to OFF with a proper User-Agent, both
+ * required to stay under OFF's 10 req/min/IP limit.
+ *
+ * Returns an empty array on any non-fatal failure so the search UI degrades
+ * gracefully to "no results" instead of throwing.
+ */
+export async function searchOpenFoodFactsProducts(
+  query: string,
+  limit: number,
+  signal?: AbortSignal,
+): Promise<OpenFoodFactsProduct[]> {
+  const trimmed = query.trim();
+  if (trimmed.length < 2 || !supabase) return [];
+  // The caller's AbortSignal cancels stale-debounce searches; bail out
+  // before invoking the function on an already-aborted request.
+  if (signal?.aborted) return [];
+
+  type EdgeResponse = { hits?: OffProductPayload[]; error?: string };
+  let data: EdgeResponse | null = null;
+  let invokeError: { message?: string } | null = null;
+  try {
+    const result = await supabase.functions.invoke<EdgeResponse>('off-search', {
+      body: { q: trimmed, page_size: Math.min(Math.max(limit, 1), 24) },
+    });
+    data = result.data;
+    invokeError = result.error as { message?: string } | null;
+  } catch (err) {
+    if (err instanceof DOMException && err.name === 'AbortError') return [];
+    captureException(err, { contexts: { off_search: { phase: 'invoke_throw' } } });
+    return [];
+  }
+
+  if (signal?.aborted) return [];
+
+  if (invokeError) {
+    captureException(new Error(`off-search invoke error: ${invokeError.message ?? 'unknown'}`), {
+      contexts: { off_search: { phase: 'edge_error' } },
+    });
+    return [];
+  }
+
+  const items = Array.isArray(data?.hits) ? data!.hits! : [];
+  const out: OpenFoodFactsProduct[] = [];
+  for (const raw of items) {
+    const code = typeof raw.code === 'string' ? raw.code : '';
+    if (!code) continue;
+    const mapped = mapOffProduct(code, raw);
+    if (mapped) out.push(mapped);
+  }
+  return out;
 }

@@ -94,7 +94,18 @@ export type FoodReference = {
   carbs_100g: number | null;
   fat_100g: number | null;
   fiber_100g: number | null;
+  /** 'ciqual' for rows fetched from the local CIQUAL table; 'off' when
+   *  synthesized from an Open Food Facts text-search fallback. */
   source: string;
+  // Fields below are only populated for source === 'off' search fallback.
+  // They carry product-level metadata (brand, image, OFF source URL) plus
+  // numeric quantity hints used to seed the portion input — keeping them
+  // optional preserves the CIQUAL row shape unchanged.
+  brand?: string | null;
+  image_url?: string | null;
+  source_url?: string;
+  product_quantity_g?: number | null;
+  serving_quantity_g?: number | null;
 };
 
 export type DailyNutritionTotals = {
