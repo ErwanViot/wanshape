@@ -7,7 +7,11 @@ import type { FoodReference } from '../types/nutrition.ts';
 
 const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' });
 
-const DEBOUNCE_MS = 200;
+// 500 ms is the sweet spot for a text search that may chain into a remote
+// edge function (OFF). 200 ms was too aggressive — fast typers hit the
+// edge function on most keystrokes, even though only the last one mattered,
+// pushing us toward OFF's 10 req/min/IP ceiling for nothing.
+const DEBOUNCE_MS = 500;
 const RESULTS_LIMIT = 12;
 // CIQUAL covers ~3000 generic foods (apple, milk, bread); branded retail
 // products (e.g. Desperados, Heineken, Activia) only live in OFF. When

@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react';
+import { Loader2, Search } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFoodSearch } from '../../hooks/useFoodSearch.ts';
@@ -20,10 +20,20 @@ export function FoodSearchInput({ onSelect, placeholder }: FoodSearchInputProps)
         {t('food_search.sr_label')}
       </label>
       <div className="relative block">
-        <Search
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none"
-          aria-hidden="true"
-        />
+        {/* Search → spinner swap during loading: the user sees that something
+            is happening even before any result appears, and the swap is in
+            the same screen position so there's no layout shift. */}
+        {loading ? (
+          <Loader2
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand animate-spin pointer-events-none"
+            aria-label={t('food_search.searching')}
+          />
+        ) : (
+          <Search
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none"
+            aria-hidden="true"
+          />
+        )}
         <input
           id="food-search-input"
           type="text"
