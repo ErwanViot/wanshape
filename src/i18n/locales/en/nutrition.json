@@ -74,9 +74,9 @@
   "barcode_scanner": {
     "heading": "Scan a barcode",
     "close": "Close",
+    "loading_decoder": "Loading the scanner…",
+    "starting": "Opening the camera…",
     "frame_hint": "Align the barcode in the frame…",
-    "unsupported_title": "Manual entry only",
-    "unsupported": "Your browser doesn't support camera scanning (iOS Safari, Chrome iOS). Type the digits below the barcode, or use the manual entry tab.",
     "permission_denied": "Camera access denied. You can enter the code manually.",
     "error": "Cannot open camera. Enter the code manually.",
     "manual_label": "Manual barcode entry",

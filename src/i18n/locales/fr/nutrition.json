@@ -74,9 +74,9 @@
   "barcode_scanner": {
     "heading": "Scanner un code-barres",
     "close": "Fermer",
+    "loading_decoder": "Chargement du scanner…",
+    "starting": "Ouverture de la caméra…",
     "frame_hint": "Aligne le code-barres dans le cadre…",
-    "unsupported_title": "Saisie manuelle uniquement",
-    "unsupported": "Ton navigateur ne permet pas le scan caméra (iOS Safari, Chrome iOS). Tape les chiffres sous le code-barres ci-dessous, ou utilise l'onglet Saisie libre.",
     "permission_denied": "Accès à la caméra refusé. Tu peux saisir le code manuellement.",
     "error": "Impossible d'ouvrir la caméra. Saisis le code manuellement.",
     "manual_label": "Saisie manuelle du code-barres",

@@ -7,21 +7,64 @@ interface BarcodeScannerProps {
   onClose: () => void;
 }
 
-type DetectorStatus = 'idle' | 'supported' | 'unsupported' | 'permission_denied' | 'starting' | 'scanning' | 'error';
+type DetectorStatus =
+  | 'idle'
+  | 'loading_decoder'
+  | 'starting'
+  | 'scanning'
+  | 'permission_denied'
+  | 'error';
+
+interface DetectorLike {
+  detect: (source: HTMLVideoElement) => Promise<Array<{ rawValue: string }>>;
+}
+
+type DetectorCtor = new (options?: { formats?: string[] }) => DetectorLike;
 
 interface GlobalWithBarcodeDetector {
-  BarcodeDetector?: new (options?: {
-    formats?: string[];
-  }) => {
-    detect: (source: HTMLVideoElement) => Promise<Array<{ rawValue: string }>>;
-  };
+  BarcodeDetector?: DetectorCtor;
 }
 
 const SUPPORTED_FORMATS = ['ean_13', 'ean_8', 'upc_a', 'upc_e'];
 
+// Native BarcodeDetector exists on Chrome desktop/Android and recent Safari
+// macOS, but not on iOS Safari, Chrome iOS (= WKWebView), or Firefox. The
+// barcode-detector ponyfill (powered by zxing-wasm) fills that gap with a
+// drop-in implementation of the same standard API. It's only loaded when the
+// native API is missing — on Chrome we keep the lighter native path.
+let polyfillCtor: DetectorCtor | null = null;
+let polyfillLoading: Promise<DetectorCtor> | null = null;
+
+async function loadPolyfillCtor(): Promise<DetectorCtor> {
+  if (polyfillCtor) return polyfillCtor;
+  if (!polyfillLoading) {
+    polyfillLoading = (async () => {
+      const [{ BarcodeDetector, prepareZXingModule }, wasmUrlMod] = await Promise.all([
+        import('barcode-detector/ponyfill'),
+        import('zxing-wasm/reader/zxing_reader.wasm?url'),
+      ]);
+      // Self-host the WASM via the Vite asset pipeline (same origin, hashed
+      // filename, cached forever). The default jsDelivr URL would require
+      // loosening connect-src in the CSP and introduces a third-party runtime
+      // dependency we don't want for an offline-capable PWA.
+      prepareZXingModule({
+        overrides: {
+          locateFile: (path: string, prefix: string) =>
+            path.endsWith('.wasm') ? wasmUrlMod.default : prefix + path,
+        },
+      });
+      return BarcodeDetector as unknown as DetectorCtor;
+    })();
+  }
+  polyfillCtor = await polyfillLoading;
+  return polyfillCtor;
+}
+
 /**
- * Camera-based barcode scanner using the native BarcodeDetector API.
- * Falls back to a manual input when the API is unavailable (iOS Safari).
+ * Camera-based barcode scanner using the standard BarcodeDetector API.
+ * Uses the native implementation when available (Chrome desktop/Android),
+ * and lazy-loads the barcode-detector ponyfill (zxing-wasm) elsewhere
+ * (iOS Safari, Chrome iOS, Firefox).
  *
  * The component releases the camera stream on unmount and when the user
  * closes the scanner. The video stream is NEVER recorded nor uploaded —
@@ -59,11 +102,24 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
       const releaseTracks = (s: MediaStream) => {
         for (const track of s.getTracks()) track.stop();
       };
-      const g = globalThis as unknown as GlobalWithBarcodeDetector;
-      if (!g.BarcodeDetector) {
-        if (isCurrent()) setStatus('unsupported');
-        return;
+
+      // Resolve detector (native sync, ponyfill async). Keep the user
+      // informed while the WASM bundle is loading on slower connections.
+      let DetectorCtor: DetectorCtor;
+      const nativeCtor = (globalThis as unknown as GlobalWithBarcodeDetector).BarcodeDetector;
+      if (nativeCtor) {
+        DetectorCtor = nativeCtor;
+      } else {
+        if (isCurrent()) setStatus('loading_decoder');
+        try {
+          DetectorCtor = await loadPolyfillCtor();
+        } catch {
+          if (isCurrent()) setStatus('error');
+          return;
+        }
+        if (!isCurrent()) return;
       }
+
       if (isCurrent()) setStatus('starting');
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -89,7 +145,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
         }
         setStatus('scanning');
 
-        const detector = new g.BarcodeDetector({ formats: SUPPORTED_FORMATS });
+        const detector = new DetectorCtor({ formats: SUPPORTED_FORMATS });
 
         const tick = async () => {
           if (!isCurrent() || !videoRef.current || !streamRef.current) return;
@@ -139,7 +195,7 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
   // `autoFocus` prop only fires on mount, but `status` flips after the async
   // permission/feature-detection result, so we focus imperatively here.
   useEffect(() => {
-    if (status === 'unsupported' || status === 'permission_denied' || status === 'error') {
+    if (status === 'permission_denied' || status === 'error') {
       manualInputRef.current?.focus();
     }
   }, [status]);
@@ -156,6 +212,10 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
     onDetected(trimmed);
   }
 
+  // Pre-decoder loading + camera startup share the same skeleton viewport so
+  // the layout doesn't reflow when the polyfill resolves. The video element
+  // mounts only when we have a stream, so a separate placeholder covers the
+  // earlier states.
   return (
     <div className="space-y-4">
       <header className="flex items-center justify-between">
@@ -175,6 +235,15 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
         </button>
       </header>
 
+      {status === 'loading_decoder' && (
+        <div className="rounded-xl bg-black/50 aspect-[4/3] flex items-center justify-center">
+          <p className="text-xs text-white/80">{t('barcode_scanner.loading_decoder')}</p>
+        </div>
+      )}
+
+      {/* Mount the video element for both 'starting' and 'scanning' so
+          videoRef is attached before startCamera tries to set srcObject.
+          The overlay differs per state. */}
       {(status === 'starting' || status === 'scanning') && (
         <div className="relative rounded-xl overflow-hidden bg-black aspect-[4/3]">
           <video
@@ -187,20 +256,14 @@ export function BarcodeScanner({ onDetected, onClose }: BarcodeScannerProps) {
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-3/4 h-20 border-2 border-brand/80 rounded-lg" />
           </div>
-          {status === 'scanning' && (
-            <p className="absolute bottom-2 left-0 right-0 text-center text-xs text-white/80">
-              {t('barcode_scanner.frame_hint')}
-            </p>
-          )}
+          <p className="absolute bottom-2 left-0 right-0 text-center text-xs text-white/80">
+            {status === 'scanning'
+              ? t('barcode_scanner.frame_hint')
+              : t('barcode_scanner.starting')}
+          </p>
         </div>
       )}
 
-      {status === 'unsupported' && (
-        <div className="rounded-xl bg-surface-card border border-divider p-3 space-y-1">
-          <p className="text-sm text-heading font-medium">{t('barcode_scanner.unsupported_title')}</p>
-          <p className="text-xs text-body">{t('barcode_scanner.unsupported')}</p>
-        </div>
-      )}
       {status === 'permission_denied' && <p className="text-sm text-body">{t('barcode_scanner.permission_denied')}</p>}
       {status === 'error' && <p className="text-sm text-red-400">{t('barcode_scanner.error')}</p>}
 
