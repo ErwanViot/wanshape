@@ -104,61 +104,6 @@ export function courseJsonLd(input: CourseInput) {
   };
 }
 
-export interface RecipeInput {
-  name: string;
-  description: string;
-  url: string;
-  image?: string;
-  prepTimeMinutes?: number;
-  recipeYield?: string;
-  recipeCategory?: string;
-  keywords?: string[];
-  ingredients: string[];
-  instructions: string[];
-  nutrition?: {
-    calories?: number;
-    protein_g?: number;
-    carbs_g?: number;
-    fat_g?: number;
-    fiber_g?: number;
-  };
-  inLanguage?: string;
-}
-
-export function recipeJsonLd(input: RecipeInput) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Recipe',
-    name: input.name,
-    description: input.description,
-    image: input.image ? absoluteUrl(input.image) : undefined,
-    prepTime: input.prepTimeMinutes ? `PT${input.prepTimeMinutes}M` : undefined,
-    totalTime: input.prepTimeMinutes ? `PT${input.prepTimeMinutes}M` : undefined,
-    recipeYield: input.recipeYield,
-    recipeCategory: input.recipeCategory,
-    keywords: input.keywords?.join(', '),
-    recipeIngredient: input.ingredients,
-    recipeInstructions: input.instructions.map((text, i) => ({
-      '@type': 'HowToStep',
-      position: i + 1,
-      text,
-    })),
-    nutrition: input.nutrition
-      ? {
-          '@type': 'NutritionInformation',
-          calories: input.nutrition.calories ? `${input.nutrition.calories} kcal` : undefined,
-          proteinContent: input.nutrition.protein_g ? `${input.nutrition.protein_g} g` : undefined,
-          carbohydrateContent: input.nutrition.carbs_g ? `${input.nutrition.carbs_g} g` : undefined,
-          fatContent: input.nutrition.fat_g ? `${input.nutrition.fat_g} g` : undefined,
-          fiberContent: input.nutrition.fiber_g ? `${input.nutrition.fiber_g} g` : undefined,
-        }
-      : undefined,
-    inLanguage: input.inLanguage ?? 'fr',
-    url: `${SITE_URL}${input.url}`,
-    author: { '@type': 'Organization', name: 'Wan2Fit' },
-  };
-}
-
 function absoluteUrl(path: string): string {
   if (path.startsWith('http')) return path;
   return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import { SITE_URL } from '../lib/jsonld.ts';
 
 interface HeadOptions {
@@ -9,6 +10,8 @@ interface HeadOptions {
 const BASE_TITLE = 'Wan2Fit';
 
 export function useDocumentHead({ title, description }: HeadOptions) {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     document.title = title === BASE_TITLE ? BASE_TITLE : `${title} | ${BASE_TITLE}`;
 
@@ -28,10 +31,10 @@ export function useDocumentHead({ title, description }: HeadOptions) {
       canonical.rel = 'canonical';
       document.head.appendChild(canonical);
     }
-    canonical.href = `${SITE_URL}${window.location.pathname}`;
+    canonical.href = `${SITE_URL}${pathname}`;
 
     return () => {
       document.title = BASE_TITLE;
     };
-  }, [title, description]);
+  }, [title, description, pathname]);
 }

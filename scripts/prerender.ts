@@ -13,7 +13,7 @@ import { spawn } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { chromium } from 'playwright';
+import { type Browser, chromium } from 'playwright';
 import { SITE_URL } from '../src/lib/jsonld.ts';
 import { getPublicRoutes, type SeoRoute } from '../src/lib/seoRoutes.ts';
 
@@ -34,38 +34,72 @@ const preview = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--stri
 });
 preview.stderr?.on('data', (chunk) => process.stderr.write(`[preview] ${chunk}`));
 
-await waitForServer(`${BASE}/`, NAV_TIMEOUT_MS);
-console.log('[prerender] preview ready');
+let browser: Browser | undefined;
+let hadError = false;
 
-const browser = await chromium.launch();
-const context = await browser.newContext({ locale: 'fr-FR' });
-const page = await context.newPage();
+try {
+  await waitForServer(`${BASE}/`, NAV_TIMEOUT_MS);
+  console.log('[prerender] preview ready');
 
-let captured = 0;
-for (const route of routes) {
-  const url = `${BASE}${route.path}`;
-  await page.goto(url, { waitUntil: 'networkidle', timeout: NAV_TIMEOUT_MS });
-  await page.waitForTimeout(SETTLE_MS);
-  const html = await page.content();
-  const outDir = route.path === '/' ? DIST : join(DIST, route.path);
-  mkdirSync(outDir, { recursive: true });
-  writeFileSync(join(outDir, 'index.html'), html);
-  captured++;
-  process.stdout.write(`\r[prerender] ${captured}/${routes.length} ${route.path.padEnd(40)}`);
+  browser = await chromium.launch();
+  const context = await browser.newContext({ locale: 'fr-FR' });
+  const page = await context.newPage();
+
+  const failed: string[] = [];
+  let captured = 0;
+
+  for (const route of routes) {
+    const url = `${BASE}${route.path}`;
+    try {
+      await page.goto(url, { waitUntil: 'networkidle', timeout: NAV_TIMEOUT_MS });
+      await page.waitForTimeout(SETTLE_MS);
+      const html = await page.content();
+      const outDir = route.path === '/' ? DIST : join(DIST, route.path);
+      mkdirSync(outDir, { recursive: true });
+      writeFileSync(join(outDir, 'index.html'), html);
+      captured++;
+      process.stdout.write(`\r[prerender] ${captured}/${routes.length} ${route.path.padEnd(40)}`);
+    } catch (err) {
+      failed.push(route.path);
+      console.error(`\n[prerender] FAILED ${route.path}: ${(err as Error).message}`);
+    }
+  }
+
+  if (failed.length > 0) {
+    console.error(`\n[prerender] ${failed.length} route(s) failed: ${failed.join(', ')}`);
+    hadError = true;
+  } else {
+    console.log('\n[prerender] all routes captured');
+  }
+
+  // Sitemap reflects only successfully captured routes — avoid pointing crawlers
+  // at URLs whose static HTML may be stale or missing.
+  const successful = routes.filter((r) => !failed.includes(r.path));
+  const today = new Date().toISOString().split('T')[0];
+  writeFileSync(join(DIST, 'sitemap.xml'), buildSitemap(successful, today));
+  console.log(`[prerender] sitemap.xml: ${successful.length} routes, lastmod=${today}`);
+} catch (err) {
+  console.error('\n[prerender] fatal error:', err);
+  hadError = true;
+} finally {
+  if (browser) {
+    await browser.close().catch(() => {
+      /* already closed */
+    });
+  }
+  preview.kill('SIGTERM');
 }
-console.log('\n[prerender] all routes captured');
 
-await browser.close();
-
-const today = new Date().toISOString().split('T')[0];
-writeFileSync(join(DIST, 'sitemap.xml'), buildSitemap(routes, today));
-console.log(`[prerender] sitemap.xml: ${routes.length} routes, lastmod=${today}`);
-
-preview.kill('SIGTERM');
+if (hadError) {
+  process.exit(1);
+}
 
 async function waitForServer(url: string, timeoutMs: number): Promise<void> {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
+    if (preview.exitCode != null) {
+      throw new Error(`vite preview exited early with code ${preview.exitCode}`);
+    }
     try {
       const r = await fetch(url);
       if (r.ok) return;

@@ -9,10 +9,9 @@ import { breadcrumbJsonLd, courseJsonLd } from '../lib/jsonld.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 
 export function ProgramContentPage() {
-  const { t } = useTranslation('programs');
+  const { t, i18n } = useTranslation('programs');
   const { t: tData } = useTranslation('programs_data');
   const { t: tc } = useTranslation('common');
-  const { i18n } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const { user } = useAuth();
   const meta = slug ? PROGRAM_CONTENT_META[slug] : undefined;
