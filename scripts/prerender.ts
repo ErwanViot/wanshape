@@ -1,0 +1,99 @@
+/**
+ * Pre-render public routes to static HTML for SEO and LLM indexing.
+ *
+ * Usage: tsx scripts/prerender.ts
+ *
+ * Boots `vite preview`, drives a headless Chromium through every public route
+ * with a French locale, captures the rendered DOM (including JSON-LD structured
+ * data), and writes `dist/<route>/index.html`. Also regenerates `dist/sitemap.xml`.
+ *
+ * Designed to run after `vite build`.
+ */
+import { spawn } from 'node:child_process';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { chromium } from 'playwright';
+import { SITE_URL } from '../src/lib/jsonld.ts';
+import { getPublicRoutes, type SeoRoute } from '../src/lib/seoRoutes.ts';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DIST = join(__dirname, '..', 'dist');
+const PORT = 4173;
+const BASE = `http://localhost:${PORT}`;
+const NAV_TIMEOUT_MS = 30_000;
+const SETTLE_MS = 300;
+
+const routes = getPublicRoutes();
+console.log(`[prerender] ${routes.length} routes queued`);
+
+console.log(`[prerender] starting vite preview on :${PORT}…`);
+const preview = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--strictPort'], {
+  stdio: ['ignore', 'pipe', 'pipe'],
+  env: { ...process.env },
+});
+preview.stderr?.on('data', (chunk) => process.stderr.write(`[preview] ${chunk}`));
+
+await waitForServer(`${BASE}/`, NAV_TIMEOUT_MS);
+console.log('[prerender] preview ready');
+
+const browser = await chromium.launch();
+const context = await browser.newContext({ locale: 'fr-FR' });
+const page = await context.newPage();
+
+let captured = 0;
+for (const route of routes) {
+  const url = `${BASE}${route.path}`;
+  await page.goto(url, { waitUntil: 'networkidle', timeout: NAV_TIMEOUT_MS });
+  await page.waitForTimeout(SETTLE_MS);
+  const html = await page.content();
+  const outDir = route.path === '/' ? DIST : join(DIST, route.path);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+  captured++;
+  process.stdout.write(`\r[prerender] ${captured}/${routes.length} ${route.path.padEnd(40)}`);
+}
+console.log('\n[prerender] all routes captured');
+
+await browser.close();
+
+const today = new Date().toISOString().split('T')[0];
+writeFileSync(join(DIST, 'sitemap.xml'), buildSitemap(routes, today));
+console.log(`[prerender] sitemap.xml: ${routes.length} routes, lastmod=${today}`);
+
+preview.kill('SIGTERM');
+
+async function waitForServer(url: string, timeoutMs: number): Promise<void> {
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    try {
+      const r = await fetch(url);
+      if (r.ok) return;
+    } catch {
+      // server not ready yet
+    }
+    await new Promise((r) => setTimeout(r, 200));
+  }
+  throw new Error(`Server at ${url} did not start within ${timeoutMs}ms`);
+}
+
+function buildSitemap(items: SeoRoute[], lastmod: string): string {
+  const urls = items
+    .map((r) => {
+      const parts = [
+        '  <url>',
+        `    <loc>${SITE_URL}${r.path}</loc>`,
+        `    <lastmod>${lastmod}</lastmod>`,
+      ];
+      if (r.changefreq) parts.push(`    <changefreq>${r.changefreq}</changefreq>`);
+      if (r.priority != null) parts.push(`    <priority>${r.priority}</priority>`);
+      parts.push('  </url>');
+      return parts.join('\n');
+    })
+    .join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>
+`;
+}

@@ -4,11 +4,15 @@ import { Link, Navigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { PROGRAM_CONTENT_META } from '../data/programContent.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { JsonLd } from '../lib/JsonLd.tsx';
+import { breadcrumbJsonLd, courseJsonLd } from '../lib/jsonld.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 
 export function ProgramContentPage() {
   const { t } = useTranslation('programs');
   const { t: tData } = useTranslation('programs_data');
+  const { t: tc } = useTranslation('common');
+  const { i18n } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const { user } = useAuth();
   const meta = slug ? PROGRAM_CONTENT_META[slug] : undefined;
@@ -46,8 +50,24 @@ export function ProgramContentPage() {
     formats: meta.weeks[i]?.formats ?? [],
   }));
 
+  const courseData = courseJsonLd({
+    name: headline ?? slug,
+    description: intro ?? '',
+    url: `/programme/${slug}`,
+    image,
+    duration,
+    inLanguage: i18n.language?.startsWith('en') ? 'en' : 'fr',
+  });
+  const breadcrumbData = breadcrumbJsonLd([
+    { name: tc('breadcrumb.home'), url: '/' },
+    { name: tc('breadcrumb.programs'), url: '/programmes' },
+    { name: headline ?? slug, url: `/programme/${slug}` },
+  ]);
+
   return (
     <div className="min-h-screen">
+      <JsonLd data={courseData} />
+      <JsonLd data={breadcrumbData} />
       {/* Hero */}
       <div className="relative">
         <div className="h-56 sm:h-72 md:h-80 overflow-hidden">

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { SITE_URL } from '../lib/jsonld.ts';
 
 interface HeadOptions {
   title: string;
@@ -20,6 +21,14 @@ export function useDocumentHead({ title, description }: HeadOptions) {
       }
       meta.content = description;
     }
+
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = `${SITE_URL}${window.location.pathname}`;
 
     return () => {
       document.title = BASE_TITLE;

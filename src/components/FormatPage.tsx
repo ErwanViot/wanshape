@@ -3,11 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useParams } from 'react-router';
 import { getFormatBySlug } from '../data/formats.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { JsonLd } from '../lib/JsonLd.tsx';
+import { articleJsonLd, breadcrumbJsonLd } from '../lib/jsonld.ts';
 import { ContentSection } from './ContentSection.tsx';
 
 export function FormatPage() {
   const { t } = useTranslation('explore');
   const { t: td } = useTranslation('formats_data');
+  const { t: tc } = useTranslation('common');
   const { slug } = useParams<{ slug: string }>();
   const format = slug ? getFormatBySlug(slug) : undefined;
 
@@ -31,8 +34,24 @@ export function FormatPage() {
   const tips = td(`${format.slug}.tips`, { returnObjects: true }) as string[];
   const commonMistakes = td(`${format.slug}.commonMistakes`, { returnObjects: true }) as string[];
 
+  const formatName = td(`${format.slug}.name`);
+  const formatShort = td(`${format.slug}.shortDescription`);
+  const articleData = articleJsonLd({
+    headline: formatName,
+    description: formatShort,
+    url: `/formats/${format.slug}`,
+    image: format.image,
+  });
+  const breadcrumbData = breadcrumbJsonLd([
+    { name: tc('breadcrumb.home'), url: '/' },
+    { name: tc('breadcrumb.formats'), url: '/formats' },
+    { name: formatName, url: `/formats/${format.slug}` },
+  ]);
+
   return (
     <>
+      <JsonLd data={articleData} />
+      <JsonLd data={breadcrumbData} />
       {/* Hero — text stays white (over image) */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">

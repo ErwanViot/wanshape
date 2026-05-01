@@ -1,4 +1,5 @@
 {
+  "installCommand": "npm install && npx playwright install chromium",
   "rewrites": [
     { "source": "/((?!assets|sessions|images|icons|logo-wan2fit\\.png|icon-192\\.png|icon-512\\.png|favicon\\.ico|manifest\\.webmanifest|sw\\.js|theme-init\\.js).*)", "destination": "/index.html" }
   ],
