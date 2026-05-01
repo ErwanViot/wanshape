@@ -126,14 +126,21 @@
     "source_barcode": "Code-barres",
     "source_ai": "IA"
   },
+  "recurring": {
+    "heading": "À réutiliser",
+    "count_one": "{{count}}× ce mois-ci",
+    "count_other": "{{count}}× ce mois-ci",
+    "quick_add_aria": "Ajouter {{name}}",
+    "edit_aria": "Modifier avant d'ajouter {{name}}",
+    "add_failed": "L'ajout a échoué. Vérifie ta connexion puis réessaie."
+  },
   "meal_form": {
     "heading": "Ajouter un repas",
     "close_aria": "Fermer",
-    "mode_manual": "Saisie libre",
-    "mode_search": "Rechercher",
+    "mode_manual": "Manuel",
+    "mode_search": "Chercher",
     "mode_barcode": "Scanner",
     "mode_ai": "IA",
-    "meal_legend": "Repas",
     "name_label": "Nom du repas",
     "name_placeholder": "Ex. pâtes bolo maison",
     "calories_label": "Calories (kcal)",

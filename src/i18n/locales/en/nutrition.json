@@ -126,14 +126,21 @@
     "source_barcode": "Barcode",
     "source_ai": "AI"
   },
+  "recurring": {
+    "heading": "Quick add",
+    "count_one": "{{count}}× this month",
+    "count_other": "{{count}}× this month",
+    "quick_add_aria": "Add {{name}}",
+    "edit_aria": "Edit before adding {{name}}",
+    "add_failed": "Add failed. Check your connection and try again."
+  },
   "meal_form": {
     "heading": "Add a meal",
     "close_aria": "Close",
-    "mode_manual": "Manual entry",
+    "mode_manual": "Manual",
     "mode_search": "Search",
     "mode_barcode": "Scan",
     "mode_ai": "AI",
-    "meal_legend": "Meal",
     "name_label": "Meal name",
     "name_placeholder": "E.g. homemade pasta bolognese",
     "calories_label": "Calories (kcal)",

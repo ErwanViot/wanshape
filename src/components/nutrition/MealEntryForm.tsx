@@ -1,22 +1,22 @@
 import { X } from 'lucide-react';
 import { type FormEvent, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { MEAL_TYPES } from '../../config/nutrition.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../../types/nutrition.ts';
 import { AiTextPane } from './AiTextPane.tsx';
 import { BarcodePane } from './BarcodePane.tsx';
 import { FoodSearchInput } from './FoodSearchInput.tsx';
+import { type RecurringMealPrefill, RecurringMealsBlock } from './RecurringMealsBlock.tsx';
 
 type Mode = 'manual' | 'search' | 'barcode' | 'ai';
 
 interface MealEntryFormProps {
-  initialMealType: MealType;
+  mealType: MealType;
   isPremium: boolean;
   onSubmit: (input: Omit<MealLogInsert, 'user_id' | 'logged_date'>) => Promise<boolean>;
   onCancel: () => void;
-  onSearchSelect?: (food: FoodReference, quantityGrams: number, mealType: MealType) => Promise<boolean>;
-  onBarcodeSelect?: (product: OpenFoodFactsProduct, quantityGrams: number, mealType: MealType) => Promise<boolean>;
+  onSearchSelect: (food: FoodReference, quantityGrams: number, mealType: MealType) => Promise<boolean>;
+  onBarcodeSelect: (product: OpenFoodFactsProduct, quantityGrams: number, mealType: MealType) => Promise<boolean>;
 }
 
 function parseMacro(raw: string): number | null {
@@ -33,7 +33,7 @@ function scaleByPortion(per100g: number | null | undefined, grams: number): numb
 }
 
 export function MealEntryForm({
-  initialMealType,
+  mealType,
   isPremium,
   onSubmit,
   onCancel,
@@ -41,9 +41,9 @@ export function MealEntryForm({
   onBarcodeSelect,
 }: MealEntryFormProps) {
   const { t } = useTranslation('nutrition');
-  const [mode, setMode] = useState<Mode>('manual');
-  const modes: Mode[] = isPremium ? ['manual', 'search', 'barcode', 'ai'] : ['manual', 'search', 'barcode'];
-  const [mealType, setMealType] = useState<MealType>(initialMealType);
+  const modes: Mode[] = isPremium ? ['barcode', 'search', 'ai', 'manual'] : ['barcode', 'search', 'manual'];
+  const [mode, setMode] = useState<Mode>('barcode');
+  const safeMode = modes.includes(mode) ? mode : modes[0];
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
   const [protein, setProtein] = useState('');
@@ -114,10 +114,8 @@ export function MealEntryForm({
     }
     setSubmitting(true);
     try {
-      if (onSearchSelect) {
-        const ok = await onSearchSelect(selectedFood, grams, mealType);
-        if (ok) onCancel();
-      }
+      const ok = await onSearchSelect(selectedFood, grams, mealType);
+      if (ok) onCancel();
     } finally {
       setSubmitting(false);
     }
@@ -127,19 +125,58 @@ export function MealEntryForm({
     ? scaleByPortion(selectedFood.calories_100g, Number.parseFloat(portionGrams) || 0)
     : null;
 
+  async function handleQuickAdd(input: Omit<MealLogInsert, 'user_id' | 'logged_date'>): Promise<boolean> {
+    if (submitting) return false;
+    setError(null);
+    setSubmitting(true);
+    try {
+      const ok = await onSubmit(input);
+      if (ok) {
+        onCancel();
+      } else {
+        setError(t('recurring.add_failed'));
+      }
+      return ok;
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  function handleEditPrefill(prefill: RecurringMealPrefill) {
+    setName(prefill.name);
+    setCalories(prefill.calories);
+    setProtein(prefill.protein);
+    setCarbs(prefill.carbs);
+    setFat(prefill.fat);
+    setNotes('');
+    setError(null);
+    setMode('manual');
+  }
+
   return (
     <div className="space-y-4">
-      <header className="flex items-center justify-between">
-        <h2 className="font-display text-lg font-bold text-heading">{t('meal_form.heading')}</h2>
+      <header className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h2 className="font-display text-lg font-bold text-heading">{t('meal_form.heading')}</h2>
+          <p className="mt-0.5 text-xs text-muted">{t(`meal_type.${mealType}`)}</p>
+        </div>
         <button
           type="button"
           onClick={onCancel}
-          className="p-2 rounded-lg text-muted hover:text-heading hover:bg-divider"
+          className="-mr-2 -mt-2 p-2 rounded-lg text-muted hover:text-heading hover:bg-divider shrink-0"
           aria-label={t('meal_form.close_aria')}
         >
           <X className="w-4 h-4" />
         </button>
       </header>
+
+      <RecurringMealsBlock mealType={mealType} onQuickAdd={handleQuickAdd} onEdit={handleEditPrefill} />
+
+      {error && (
+        <p className="text-xs text-red-400" role="alert">
+          {error}
+        </p>
+      )}
 
       <div className="flex gap-1 p-1 rounded-xl bg-surface border border-divider w-full">
         {modes.map((m) => (
@@ -150,9 +187,9 @@ export function MealEntryForm({
               setMode(m);
               setError(null);
             }}
-            aria-pressed={mode === m}
+            aria-pressed={safeMode === m}
             className={`flex-1 min-w-0 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap truncate ${
-              mode === m ? 'bg-brand text-white' : 'text-body hover:text-heading'
+              safeMode === m ? 'bg-brand text-white' : 'text-body hover:text-heading'
             }`}
           >
             {t(`meal_form.mode_${m}`)}
@@ -160,46 +197,24 @@ export function MealEntryForm({
         ))}
       </div>
 
-      <fieldset>
-        <legend className="block text-xs font-medium text-body mb-1">{t('meal_form.meal_legend')}</legend>
-        <div className="flex flex-wrap gap-1.5">
-          {MEAL_TYPES.map((mt) => (
-            <button
-              key={mt}
-              type="button"
-              onClick={() => setMealType(mt)}
-              aria-pressed={mealType === mt}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                mealType === mt ? 'bg-brand text-white' : 'bg-surface border border-divider text-body'
-              }`}
-            >
-              {t(`meal_type.${mt}`)}
-            </button>
-          ))}
-        </div>
-      </fieldset>
-
-      {mode === 'ai' ? (
+      {safeMode === 'ai' ? (
         <AiTextPane mealType={mealType} onSubmit={onSubmit} onCancel={onCancel} />
-      ) : mode === 'barcode' ? (
+      ) : safeMode === 'barcode' ? (
         <BarcodePane
           mealType={mealType}
           onCancel={onCancel}
           onSubmit={async (product, grams) => {
             setSubmitting(true);
             try {
-              if (onBarcodeSelect) {
-                const ok = await onBarcodeSelect(product, grams, mealType);
-                if (ok) onCancel();
-                return ok;
-              }
-              return false;
+              const ok = await onBarcodeSelect(product, grams, mealType);
+              if (ok) onCancel();
+              return ok;
             } finally {
               setSubmitting(false);
             }
           }}
         />
-      ) : mode === 'manual' ? (
+      ) : safeMode === 'manual' ? (
         <form onSubmit={handleManualSubmit} className="space-y-3">
           <div>
             <label htmlFor="meal-name" className="block text-xs font-medium text-body mb-1">
@@ -292,7 +307,6 @@ export function MealEntryForm({
               className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-sm text-heading placeholder:text-muted focus:outline-none focus:border-brand"
             />
           </div>
-          {error && <p className="text-xs text-red-400">{error}</p>}
           <div className="flex gap-2">
             <button
               type="button"
@@ -319,7 +333,6 @@ export function MealEntryForm({
             onPortionChange={setPortionGrams}
             scaledCalories={scaledCalories}
           />
-          {error && <p className="text-xs text-red-400">{error}</p>}
           <div className="flex gap-2">
             <button
               type="button"
