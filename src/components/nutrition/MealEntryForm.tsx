@@ -6,6 +6,7 @@ import type { FoodReference, MealLogInsert, MealType } from '../../types/nutriti
 import { AiTextPane } from './AiTextPane.tsx';
 import { BarcodePane } from './BarcodePane.tsx';
 import { FoodSearchInput } from './FoodSearchInput.tsx';
+import { type RecurringMealPrefill, RecurringMealsBlock } from './RecurringMealsBlock.tsx';
 
 type Mode = 'manual' | 'search' | 'barcode' | 'ai';
 
@@ -124,6 +125,34 @@ export function MealEntryForm({
     ? scaleByPortion(selectedFood.calories_100g, Number.parseFloat(portionGrams) || 0)
     : null;
 
+  async function handleQuickAdd(input: Omit<MealLogInsert, 'user_id' | 'logged_date'>): Promise<boolean> {
+    if (submitting) return false;
+    setError(null);
+    setSubmitting(true);
+    try {
+      const ok = await onSubmit(input);
+      if (ok) {
+        onCancel();
+      } else {
+        setError(t('recurring.add_failed'));
+      }
+      return ok;
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  function handleEditPrefill(prefill: RecurringMealPrefill) {
+    setName(prefill.name);
+    setCalories(prefill.calories);
+    setProtein(prefill.protein);
+    setCarbs(prefill.carbs);
+    setFat(prefill.fat);
+    setNotes('');
+    setError(null);
+    setMode('manual');
+  }
+
   return (
     <div className="space-y-4">
       <header className="flex items-start justify-between gap-2">
@@ -140,6 +169,14 @@ export function MealEntryForm({
           <X className="w-4 h-4" />
         </button>
       </header>
+
+      <RecurringMealsBlock mealType={mealType} onQuickAdd={handleQuickAdd} onEdit={handleEditPrefill} />
+
+      {error && (
+        <p className="text-xs text-red-400" role="alert">
+          {error}
+        </p>
+      )}
 
       <div className="flex gap-1 p-1 rounded-xl bg-surface border border-divider w-full">
         {modes.map((m) => (
@@ -270,7 +307,6 @@ export function MealEntryForm({
               className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-sm text-heading placeholder:text-muted focus:outline-none focus:border-brand"
             />
           </div>
-          {error && <p className="text-xs text-red-400">{error}</p>}
           <div className="flex gap-2">
             <button
               type="button"
@@ -297,7 +333,6 @@ export function MealEntryForm({
             onPortionChange={setPortionGrams}
             scaledCalories={scaledCalories}
           />
-          {error && <p className="text-xs text-red-400">{error}</p>}
           <div className="flex gap-2">
             <button
               type="button"
