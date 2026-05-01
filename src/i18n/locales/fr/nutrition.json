@@ -129,11 +129,10 @@
   "meal_form": {
     "heading": "Ajouter un repas",
     "close_aria": "Fermer",
-    "mode_manual": "Saisie libre",
+    "mode_manual": "Manuel",
     "mode_search": "Rechercher",
     "mode_barcode": "Scanner",
     "mode_ai": "IA",
-    "meal_legend": "Repas",
     "name_label": "Nom du repas",
     "name_placeholder": "Ex. pâtes bolo maison",
     "calories_label": "Calories (kcal)",

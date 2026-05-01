@@ -1,7 +1,6 @@
 import { X } from 'lucide-react';
 import { type FormEvent, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { MEAL_TYPES } from '../../config/nutrition.ts';
 import type { OpenFoodFactsProduct } from '../../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../../types/nutrition.ts';
 import { AiTextPane } from './AiTextPane.tsx';
@@ -41,9 +40,9 @@ export function MealEntryForm({
   onBarcodeSelect,
 }: MealEntryFormProps) {
   const { t } = useTranslation('nutrition');
-  const [mode, setMode] = useState<Mode>('manual');
-  const modes: Mode[] = isPremium ? ['manual', 'search', 'barcode', 'ai'] : ['manual', 'search', 'barcode'];
-  const [mealType, setMealType] = useState<MealType>(initialMealType);
+  const modes: Mode[] = isPremium ? ['barcode', 'search', 'ai', 'manual'] : ['barcode', 'search', 'manual'];
+  const [mode, setMode] = useState<Mode>('barcode');
+  const mealType = initialMealType;
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
   const [protein, setProtein] = useState('');
@@ -129,12 +128,15 @@ export function MealEntryForm({
 
   return (
     <div className="space-y-4">
-      <header className="flex items-center justify-between">
-        <h2 className="font-display text-lg font-bold text-heading">{t('meal_form.heading')}</h2>
+      <header className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h2 className="font-display text-lg font-bold text-heading">{t('meal_form.heading')}</h2>
+          <p className="mt-0.5 text-xs text-muted">{t(`meal_type.${mealType}`)}</p>
+        </div>
         <button
           type="button"
           onClick={onCancel}
-          className="p-2 rounded-lg text-muted hover:text-heading hover:bg-divider"
+          className="-mr-2 -mt-2 p-2 rounded-lg text-muted hover:text-heading hover:bg-divider shrink-0"
           aria-label={t('meal_form.close_aria')}
         >
           <X className="w-4 h-4" />
@@ -159,25 +161,6 @@ export function MealEntryForm({
           </button>
         ))}
       </div>
-
-      <fieldset>
-        <legend className="block text-xs font-medium text-body mb-1">{t('meal_form.meal_legend')}</legend>
-        <div className="flex flex-wrap gap-1.5">
-          {MEAL_TYPES.map((mt) => (
-            <button
-              key={mt}
-              type="button"
-              onClick={() => setMealType(mt)}
-              aria-pressed={mealType === mt}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                mealType === mt ? 'bg-brand text-white' : 'bg-surface border border-divider text-body'
-              }`}
-            >
-              {t(`meal_type.${mt}`)}
-            </button>
-          ))}
-        </div>
-      </fieldset>
 
       {mode === 'ai' ? (
         <AiTextPane mealType={mealType} onSubmit={onSubmit} onCancel={onCancel} />
