@@ -10,12 +10,12 @@ import { FoodSearchInput } from './FoodSearchInput.tsx';
 type Mode = 'manual' | 'search' | 'barcode' | 'ai';
 
 interface MealEntryFormProps {
-  initialMealType: MealType;
+  mealType: MealType;
   isPremium: boolean;
   onSubmit: (input: Omit<MealLogInsert, 'user_id' | 'logged_date'>) => Promise<boolean>;
   onCancel: () => void;
-  onSearchSelect?: (food: FoodReference, quantityGrams: number, mealType: MealType) => Promise<boolean>;
-  onBarcodeSelect?: (product: OpenFoodFactsProduct, quantityGrams: number, mealType: MealType) => Promise<boolean>;
+  onSearchSelect: (food: FoodReference, quantityGrams: number, mealType: MealType) => Promise<boolean>;
+  onBarcodeSelect: (product: OpenFoodFactsProduct, quantityGrams: number, mealType: MealType) => Promise<boolean>;
 }
 
 function parseMacro(raw: string): number | null {
@@ -32,7 +32,7 @@ function scaleByPortion(per100g: number | null | undefined, grams: number): numb
 }
 
 export function MealEntryForm({
-  initialMealType,
+  mealType,
   isPremium,
   onSubmit,
   onCancel,
@@ -42,7 +42,7 @@ export function MealEntryForm({
   const { t } = useTranslation('nutrition');
   const modes: Mode[] = isPremium ? ['barcode', 'search', 'ai', 'manual'] : ['barcode', 'search', 'manual'];
   const [mode, setMode] = useState<Mode>('barcode');
-  const mealType = initialMealType;
+  const safeMode = modes.includes(mode) ? mode : modes[0];
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
   const [protein, setProtein] = useState('');
@@ -113,10 +113,8 @@ export function MealEntryForm({
     }
     setSubmitting(true);
     try {
-      if (onSearchSelect) {
-        const ok = await onSearchSelect(selectedFood, grams, mealType);
-        if (ok) onCancel();
-      }
+      const ok = await onSearchSelect(selectedFood, grams, mealType);
+      if (ok) onCancel();
     } finally {
       setSubmitting(false);
     }
@@ -152,9 +150,9 @@ export function MealEntryForm({
               setMode(m);
               setError(null);
             }}
-            aria-pressed={mode === m}
+            aria-pressed={safeMode === m}
             className={`flex-1 min-w-0 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap truncate ${
-              mode === m ? 'bg-brand text-white' : 'text-body hover:text-heading'
+              safeMode === m ? 'bg-brand text-white' : 'text-body hover:text-heading'
             }`}
           >
             {t(`meal_form.mode_${m}`)}
@@ -162,27 +160,24 @@ export function MealEntryForm({
         ))}
       </div>
 
-      {mode === 'ai' ? (
+      {safeMode === 'ai' ? (
         <AiTextPane mealType={mealType} onSubmit={onSubmit} onCancel={onCancel} />
-      ) : mode === 'barcode' ? (
+      ) : safeMode === 'barcode' ? (
         <BarcodePane
           mealType={mealType}
           onCancel={onCancel}
           onSubmit={async (product, grams) => {
             setSubmitting(true);
             try {
-              if (onBarcodeSelect) {
-                const ok = await onBarcodeSelect(product, grams, mealType);
-                if (ok) onCancel();
-                return ok;
-              }
-              return false;
+              const ok = await onBarcodeSelect(product, grams, mealType);
+              if (ok) onCancel();
+              return ok;
             } finally {
               setSubmitting(false);
             }
           }}
         />
-      ) : mode === 'manual' ? (
+      ) : safeMode === 'manual' ? (
         <form onSubmit={handleManualSubmit} className="space-y-3">
           <div>
             <label htmlFor="meal-name" className="block text-xs font-medium text-body mb-1">
