@@ -131,7 +131,8 @@
     "count_one": "{{count}}× this month",
     "count_other": "{{count}}× this month",
     "quick_add_aria": "Add {{name}}",
-    "edit_aria": "Edit before adding {{name}}"
+    "edit_aria": "Edit before adding {{name}}",
+    "add_failed": "Add failed. Check your connection and try again."
   },
   "meal_form": {
     "heading": "Add a meal",

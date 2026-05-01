@@ -127,10 +127,15 @@ export function MealEntryForm({
 
   async function handleQuickAdd(input: Omit<MealLogInsert, 'user_id' | 'logged_date'>): Promise<boolean> {
     if (submitting) return false;
+    setError(null);
     setSubmitting(true);
     try {
       const ok = await onSubmit(input);
-      if (ok) onCancel();
+      if (ok) {
+        onCancel();
+      } else {
+        setError(t('recurring.add_failed'));
+      }
       return ok;
     } finally {
       setSubmitting(false);
@@ -166,6 +171,12 @@ export function MealEntryForm({
       </header>
 
       <RecurringMealsBlock mealType={mealType} onQuickAdd={handleQuickAdd} onEdit={handleEditPrefill} />
+
+      {error && (
+        <p className="text-xs text-red-400" role="alert">
+          {error}
+        </p>
+      )}
 
       <div className="flex gap-1 p-1 rounded-xl bg-surface border border-divider w-full">
         {modes.map((m) => (
@@ -296,7 +307,6 @@ export function MealEntryForm({
               className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-sm text-heading placeholder:text-muted focus:outline-none focus:border-brand"
             />
           </div>
-          {error && <p className="text-xs text-red-400">{error}</p>}
           <div className="flex gap-2">
             <button
               type="button"
@@ -323,7 +333,6 @@ export function MealEntryForm({
             onPortionChange={setPortionGrams}
             scaledCalories={scaledCalories}
           />
-          {error && <p className="text-xs text-red-400">{error}</p>}
           <div className="flex gap-2">
             <button
               type="button"

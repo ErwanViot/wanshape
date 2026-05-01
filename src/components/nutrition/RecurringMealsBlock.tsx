@@ -1,4 +1,4 @@
-import { Pencil, Plus } from 'lucide-react';
+import { Pencil } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useRecurringMeals } from '../../hooks/useRecurringMeals.ts';
 import type { MealLogInsert, MealType } from '../../types/nutrition.ts';
@@ -58,14 +58,14 @@ export function RecurringMealsBlock({ mealType, onQuickAdd, onEdit }: RecurringM
       <h3 id="recurring-meals-heading" className="text-xs font-medium text-body">
         {t('recurring.heading')}
       </h3>
-      <ul className="flex gap-2 overflow-x-auto -mx-4 px-4 sm:-mx-6 sm:px-6 pb-1 snap-x snap-mandatory">
+      <ul className="flex gap-2 overflow-x-auto -mx-4 px-4 sm:-mx-6 sm:px-6 pb-1">
         {items.map((meal) => (
-          <li key={meal.signature} className="snap-start shrink-0 w-44">
-            <article className="relative h-full flex flex-col rounded-xl bg-surface-card border border-divider p-3">
+          <li key={meal.signature} className="shrink-0 w-44">
+            <div className="relative h-full rounded-xl bg-surface-card border border-divider">
               <button
                 type="button"
                 onClick={() => onQuickAdd(toMealLogInsert(meal, mealType))}
-                className="flex-1 text-left -m-3 p-3 pb-1 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                className="w-full h-full flex flex-col text-left p-3 pr-9 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                 aria-label={t('recurring.quick_add_aria', { name: meal.name })}
               >
                 <p className="text-sm font-medium text-heading line-clamp-2 leading-snug">{meal.name}</p>
@@ -73,31 +73,19 @@ export function RecurringMealsBlock({ mealType, onQuickAdd, onEdit }: RecurringM
                   {Math.round(meal.calories)} kcal
                   {meal.quantity_grams != null && ` · ${Math.round(meal.quantity_grams)} g`}
                 </p>
-              </button>
-              <div className="mt-2 flex items-center justify-between gap-2">
-                <span className="text-[10px] uppercase tracking-wider text-muted">
+                <span className="mt-2 text-[10px] uppercase tracking-wider text-muted">
                   {t('recurring.count', { count: meal.count })}
                 </span>
-                <div className="flex items-center gap-1">
-                  <button
-                    type="button"
-                    onClick={() => onEdit(toPrefill(meal))}
-                    aria-label={t('recurring.edit_aria', { name: meal.name })}
-                    className="p-1.5 rounded-lg text-muted hover:text-heading hover:bg-divider transition-colors"
-                  >
-                    <Pencil className="w-3.5 h-3.5" aria-hidden="true" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => onQuickAdd(toMealLogInsert(meal, mealType))}
-                    aria-label={t('recurring.quick_add_aria', { name: meal.name })}
-                    className="p-1.5 rounded-lg text-white bg-brand hover:opacity-90 transition-opacity"
-                  >
-                    <Plus className="w-3.5 h-3.5" aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
-            </article>
+              </button>
+              <button
+                type="button"
+                onClick={() => onEdit(toPrefill(meal))}
+                aria-label={t('recurring.edit_aria', { name: meal.name })}
+                className="absolute top-2 right-2 p-1.5 rounded-lg text-muted hover:text-heading hover:bg-divider transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+              >
+                <Pencil className="w-3.5 h-3.5" aria-hidden="true" />
+              </button>
+            </div>
           </li>
         ))}
       </ul>

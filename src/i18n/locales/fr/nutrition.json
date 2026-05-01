@@ -131,7 +131,8 @@
     "count_one": "{{count}}× ce mois-ci",
     "count_other": "{{count}}× ce mois-ci",
     "quick_add_aria": "Ajouter {{name}}",
-    "edit_aria": "Modifier avant d'ajouter {{name}}"
+    "edit_aria": "Modifier avant d'ajouter {{name}}",
+    "add_failed": "L'ajout a échoué. Vérifie ta connexion puis réessaie."
   },
   "meal_form": {
     "heading": "Ajouter un repas",

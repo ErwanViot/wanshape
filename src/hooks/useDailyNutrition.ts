@@ -114,6 +114,7 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
           (prev) => ({ logs: [...(prev?.logs ?? []), inserted], error: null }),
         );
         queryClient.invalidateQueries({ queryKey: ['todayInsight', userId] });
+        queryClient.invalidateQueries({ queryKey: ['recurringMeals', userId] });
         return inserted;
       } finally {
         inflightRef.current = false;
@@ -140,6 +141,7 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
         (prev) => ({ logs: (prev?.logs ?? []).filter((l) => l.id !== id), error: null }),
       );
       queryClient.invalidateQueries({ queryKey: ['todayInsight', userId] });
+      queryClient.invalidateQueries({ queryKey: ['recurringMeals', userId] });
       return true;
     },
     [userId, dateKey, queryClient],
