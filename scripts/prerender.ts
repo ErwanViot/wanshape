@@ -90,9 +90,9 @@ try {
   preview.kill('SIGTERM');
 }
 
-if (hadError) {
-  process.exit(1);
-}
+// Force-exit so the lingering preview subprocess and stdio listeners don't
+// keep the event loop alive (CI runners would otherwise hang until timeout).
+process.exit(hadError ? 1 : 0);
 
 async function waitForServer(url: string, timeoutMs: number): Promise<void> {
   const start = Date.now();
