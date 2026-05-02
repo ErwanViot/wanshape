@@ -105,6 +105,17 @@ describe('buildRangeSummary', () => {
     expect(summary.daysHittingTargetWeek).toBeNull();
   });
 
+  it('handles a range smaller than 7 days without crashing', () => {
+    // Defensive: if a caller ever asks for a 3-day window (e.g. a freshly
+    // created account), slice(-7) collapses to the whole window and the
+    // "week" metrics are computed over what is available, not faked.
+    const logs = [makeLog('20260501', 1500), makeLog('20260502', 2500)];
+    const summary = buildRangeSummary(logs, '20260430', '20260502', 2000);
+    expect(summary.days).toHaveLength(3);
+    expect(summary.avgCalories7d).toBe(2000); // (1500+2500)/2
+    expect(summary.daysHittingTargetWeek).toBe(1); // only 20260502 hits 2000
+  });
+
   it('daysHittingTargetWeek counts days reaching the target on the last 7 days', () => {
     const logs = [
       makeLog('20260426', 1500), // below

@@ -30,14 +30,20 @@ export function WeekStrip({ days, targetCalories, todayKey }: WeekStripProps) {
           },
         });
         const cal = Math.round(d.totals.calories);
-        const pct = targetCalories ? Math.min(120, Math.round((cal / targetCalories) * 100)) : null;
+        // Show the actual percentage (no cap): the user is allowed to overshoot
+        // and lying about it would contradict the awareness philosophy.
+        const pct = targetCalories ? Math.round((cal / targetCalories) * 100) : null;
         const queryString = d.date === todayKey ? '' : `?d=${d.date}`;
         const href = `/nutrition${queryString}`;
+        const ariaLabel = d.hasEntries
+          ? t('history.cell_aria_filled', { date: d.date, calories: cal })
+          : t('history.cell_aria_empty', { date: d.date });
 
         return (
           <Link
             key={d.date}
             to={href}
+            aria-label={ariaLabel}
             className="flex flex-col items-center gap-1 rounded-xl border border-divider bg-surface px-1.5 py-2 hover:border-brand/40 hover:bg-divider transition-colors"
           >
             <span className="text-[10px] font-medium uppercase tracking-wider text-muted truncate max-w-full">

@@ -12,6 +12,11 @@ const WEEK_DAYS = 7;
  * 7-day rolling nutrition widget for /suivi. Shows mini-bars sized by
  * % of calorie target (or just by absolute kcal when no target is set)
  * and a one-line average. Hidden for visitors via parent gating.
+ *
+ * No IntersectionObserver gate here, by design: on /suivi the widget
+ * lives below `RecentSessions` but is still in the user's first
+ * meaningful viewport on most devices, and the 7-day fetch is much
+ * cheaper than the 30-day one used by NutritionHistorySection.
  */
 export function NutritionWidget7d() {
   const { t } = useTranslation('nutrition');

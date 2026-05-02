@@ -15,19 +15,22 @@ export interface InsightsBlockProps {
 export function InsightsBlock({ summary, rangeDays }: InsightsBlockProps) {
   const { t } = useTranslation('nutrition');
 
-  const items: string[] = [];
+  const items: { id: string; text: string }[] = [];
   if (summary.avgCalories7d != null) {
-    items.push(t('history.avg_kcal_week', { n: summary.avgCalories7d }));
+    items.push({ id: 'avg7', text: t('history.avg_kcal_week', { n: summary.avgCalories7d }) });
   }
   if (summary.avgCaloriesRange != null) {
-    items.push(t('history.avg_kcal_range', { n: summary.avgCaloriesRange, days: rangeDays }));
+    items.push({ id: 'avgRange', text: t('history.avg_kcal_range', { n: summary.avgCaloriesRange, days: rangeDays }) });
   }
   if (summary.daysHittingTargetWeek != null && summary.daysHittingTargetWeek > 0) {
-    items.push(t('history.target_days_week', { n: summary.daysHittingTargetWeek }));
+    items.push({ id: 'targetDays', text: t('history.target_days_week', { n: summary.daysHittingTargetWeek }) });
   }
   const daysWithoutEntries = summary.days.length - summary.daysWithEntries;
   if (daysWithoutEntries > 0 && summary.daysWithEntries > 0) {
-    items.push(t('history.days_without_entry', { n: daysWithoutEntries, days: rangeDays }));
+    items.push({
+      id: 'daysWithout',
+      text: t('history.days_without_entry', { n: daysWithoutEntries, days: rangeDays }),
+    });
   }
 
   if (items.length === 0) {
@@ -36,10 +39,10 @@ export function InsightsBlock({ summary, rangeDays }: InsightsBlockProps) {
 
   return (
     <ul className="space-y-1.5 text-sm text-body">
-      {items.map((line) => (
-        <li key={line} className="flex items-start gap-2">
+      {items.map((item) => (
+        <li key={item.id} className="flex items-start gap-2">
           <span aria-hidden="true" className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand/60" />
-          <span>{line}</span>
+          <span>{item.text}</span>
         </li>
       ))}
     </ul>
