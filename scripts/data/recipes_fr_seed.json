@@ -1,0 +1,2636 @@
+{
+  "version": "2.1",
+  "generated": "2026-04",
+  "categories": [
+    {
+      "id": "pre",
+      "label": "Pré-entraînement",
+      "color": "#1B6EF3"
+    },
+    {
+      "id": "post",
+      "label": "Post-entraînement",
+      "color": "#0D9E75"
+    },
+    {
+      "id": "breakfast",
+      "label": "Petit-déjeuner",
+      "color": "#E0860A"
+    },
+    {
+      "id": "recovery",
+      "label": "Récupération",
+      "color": "#7C3ABD"
+    },
+    {
+      "id": "snack",
+      "label": "Snack protéiné",
+      "color": "#C23B3B"
+    },
+    {
+      "id": "main",
+      "label": "Plats du quotidien",
+      "color": "#D4453A"
+    },
+    {
+      "id": "dessert",
+      "label": "Desserts",
+      "color": "#9C4A1E"
+    },
+    {
+      "id": "base",
+      "label": "Bases & pâtes",
+      "color": "#5A6270"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "pre-01",
+      "category": "pre",
+      "name": "Toast patate douce & œuf mollet",
+      "description": "Base glucidique à index glycémique modéré + protéines légères. Idéal 60 min avant.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 340,
+        "protein": 18,
+        "carbs": 44,
+        "fat": 9,
+        "fiber": 5
+      },
+      "ingredients": [
+        {
+          "qty": "2 tranches",
+          "item": "Patate douce (env. 150g cuite)"
+        },
+        {
+          "qty": "2",
+          "item": "Œufs"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "Sel, poivre, paprika fumé",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Couper la patate douce en tranches de 1 cm et griller 5 min de chaque côté à la poêle avec l'huile.",
+        "Faire cuire les œufs 6 min dans l'eau bouillante pour un mollet, puis eau froide pour stopper la cuisson.",
+        "Poser les œufs écalés et coupés sur les toasts de patate douce.",
+        "Assaisonner sel, poivre, paprika. Servir immédiatement."
+      ],
+      "tags": [
+        "sans gluten",
+        "rapide",
+        "glucides lents"
+      ]
+    },
+    {
+      "id": "pre-02",
+      "category": "pre",
+      "name": "Porridge banane & miel",
+      "description": "Classique incontournable. Énergie progressive et facilement digestible.",
+      "prepTime": 10,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 385,
+        "protein": 12,
+        "carbs": 66,
+        "fat": 8,
+        "fiber": 6
+      },
+      "ingredients": [
+        {
+          "qty": "80g",
+          "item": "Flocons d'avoine"
+        },
+        {
+          "qty": "250ml",
+          "item": "Lait demi-écrémé (ou lait végétal)"
+        },
+        {
+          "qty": "1",
+          "item": "Banane mûre"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Miel"
+        },
+        {
+          "qty": "1 pincée",
+          "item": "Cannelle"
+        }
+      ],
+      "steps": [
+        "Verser les flocons et le lait dans une casserole à feu moyen.",
+        "Remuer constamment 4-5 min jusqu'à consistance crémeuse.",
+        "Couper la banane en rondelles, disposer sur le porridge.",
+        "Napper de miel et saupoudrer de cannelle."
+      ],
+      "tags": [
+        "végétarien",
+        "glucides lents",
+        "rapide"
+      ]
+    },
+    {
+      "id": "pre-03",
+      "category": "pre",
+      "name": "Pain complet, beurre d'amande & banane",
+      "description": "Le combo parfait : glucides complexes + lipides sains + sucres rapides en fin.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 420,
+        "protein": 14,
+        "carbs": 56,
+        "fat": 16,
+        "fiber": 7
+      },
+      "ingredients": [
+        {
+          "qty": "2 tranches",
+          "item": "Pain complet (ou pain de seigle)"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Beurre d'amande (ou cacahuète)"
+        },
+        {
+          "qty": "1",
+          "item": "Banane"
+        }
+      ],
+      "steps": [
+        "Toaster légèrement les tranches de pain.",
+        "Tartiner généreusement de beurre d'amande.",
+        "Disposer des rondelles de banane par-dessus. Servir."
+      ],
+      "tags": [
+        "végétarien",
+        "ultra-rapide",
+        "2 ingrédients"
+      ]
+    },
+    {
+      "id": "pre-04",
+      "category": "pre",
+      "name": "Riz basmati & thon en conserve",
+      "description": "Option salée haute densité nutritionnelle pour ceux qui ne supportent pas le sucré avant l'effort.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 380,
+        "protein": 30,
+        "carbs": 52,
+        "fat": 5,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "100g (poids cuit)",
+          "item": "Riz basmati"
+        },
+        {
+          "qty": "1 boîte (140g égouttée)",
+          "item": "Thon au naturel"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Sauce soja légère"
+        },
+        {
+          "qty": "½ c.à.c.",
+          "item": "Jus de citron"
+        }
+      ],
+      "steps": [
+        "Cuire le riz selon le paquet (ou utiliser du riz précuit).",
+        "Égoutter le thon, l'émietter dans un bol avec sauce soja et citron.",
+        "Mélanger avec le riz tiède."
+      ],
+      "tags": [
+        "sans gluten",
+        "sans lactose",
+        "haute protéine"
+      ]
+    },
+    {
+      "id": "pre-05",
+      "category": "pre",
+      "name": "Smoothie avoine, lait & banane",
+      "description": "Liquide et facile à digérer. Bon pour ceux qui ont l'estomac sensible avant l'effort.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 320,
+        "protein": 13,
+        "carbs": 54,
+        "fat": 6,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "40g",
+          "item": "Flocons d'avoine"
+        },
+        {
+          "qty": "250ml",
+          "item": "Lait demi-écrémé"
+        },
+        {
+          "qty": "1",
+          "item": "Banane congelée"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Miel"
+        }
+      ],
+      "steps": [
+        "Mixer tous les ingrédients ensemble jusqu'à consistance lisse.",
+        "Consommer immédiatement. Ajouter un peu de lait si trop épais."
+      ],
+      "tags": [
+        "végétarien",
+        "ultra-rapide",
+        "liquide"
+      ]
+    },
+    {
+      "id": "post-01",
+      "category": "post",
+      "name": "Bowl riz brun, poulet grillé & brocoli",
+      "description": "Le classique post-training. Ratio protéines/glucides optimal pour la récupération musculaire.",
+      "prepTime": 20,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 490,
+        "protein": 44,
+        "carbs": 52,
+        "fat": 10,
+        "fiber": 6
+      },
+      "ingredients": [
+        {
+          "qty": "130g",
+          "item": "Filet de poulet"
+        },
+        {
+          "qty": "100g (poids cuit)",
+          "item": "Riz brun"
+        },
+        {
+          "qty": "150g",
+          "item": "Brocoli"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "Sel, ail en poudre, herbes",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Cuire le riz brun selon le paquet (20 min ou utiliser du précuit).",
+        "Découper le poulet, assaisonner sel et ail, cuire 6-7 min à la poêle avec l'huile.",
+        "Cuire le brocoli à la vapeur 5 min (il doit rester croquant).",
+        "Assembler dans un bol, arroser d'un filet d'huile d'olive."
+      ],
+      "tags": [
+        "sans gluten",
+        "sans lactose",
+        "muscle",
+        "batch cooking"
+      ]
+    },
+    {
+      "id": "post-02",
+      "category": "post",
+      "name": "Omelette 3 œufs aux champignons",
+      "description": "Rapide, protéiné, faible en glucides. Idéal si on préfère limiter les féculents après l'effort.",
+      "prepTime": 10,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 310,
+        "protein": 28,
+        "carbs": 5,
+        "fat": 20,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "3",
+          "item": "Œufs entiers"
+        },
+        {
+          "qty": "100g",
+          "item": "Champignons de Paris"
+        },
+        {
+          "qty": "30g",
+          "item": "Fromage râpé (emmental ou gruyère)"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "Sel, poivre, persil",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Faire revenir les champignons émincés 4-5 min à la poêle avec l'huile.",
+        "Battre les œufs, assaisonner, verser sur les champignons.",
+        "Parsemer de fromage, replier l'omelette à mi-cuisson.",
+        "Cuire encore 1-2 min selon la texture souhaitée."
+      ],
+      "tags": [
+        "sans gluten",
+        "keto-friendly",
+        "rapide"
+      ]
+    },
+    {
+      "id": "post-03",
+      "category": "post",
+      "name": "Saumon grillé, quinoa & brocoli",
+      "description": "Oméga-3 anti-inflammatoires + protéines complètes. Excellent pour la récupération musculaire profonde.",
+      "prepTime": 25,
+      "difficulty": "moyen",
+      "servings": 1,
+      "nutrition": {
+        "calories": 530,
+        "protein": 46,
+        "carbs": 38,
+        "fat": 18,
+        "fiber": 5
+      },
+      "ingredients": [
+        {
+          "qty": "150g",
+          "item": "Pavé de saumon"
+        },
+        {
+          "qty": "80g (poids sec)",
+          "item": "Quinoa"
+        },
+        {
+          "qty": "150g",
+          "item": "Brocoli"
+        },
+        {
+          "qty": "½",
+          "item": "Citron"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "Sel, aneth ou herbes de Provence",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Rincer et cuire le quinoa dans 160ml d'eau salée, 15 min à couvert.",
+        "Assaisonner le saumon, griller 4 min de chaque côté à la poêle.",
+        "Cuire le brocoli à la vapeur 5 min.",
+        "Dresser le quinoa, le brocoli et le saumon. Arroser de citron et d'huile d'olive."
+      ],
+      "tags": [
+        "sans gluten",
+        "sans lactose",
+        "oméga-3",
+        "anti-inflammatoire"
+      ]
+    },
+    {
+      "id": "post-04",
+      "category": "post",
+      "name": "Smoothie récupération whey & banane",
+      "description": "La version express post-entraînement. À consommer dans les 30 min après l'effort.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 380,
+        "protein": 35,
+        "carbs": 44,
+        "fat": 6,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "30g",
+          "item": "Protéine whey (vanille ou neutre)"
+        },
+        {
+          "qty": "1",
+          "item": "Banane"
+        },
+        {
+          "qty": "250ml",
+          "item": "Lait demi-écrémé"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Beurre de cacahuète (optionnel)"
+        }
+      ],
+      "steps": [
+        "Mixer tous les ingrédients ensemble.",
+        "Consommer immédiatement après la séance."
+      ],
+      "tags": [
+        "végétarien",
+        "ultra-rapide",
+        "30 min post-effort"
+      ]
+    },
+    {
+      "id": "post-05",
+      "category": "post",
+      "name": "Tortilla poulet & avocat",
+      "description": "Pratique à préparer à l'avance. Protéines + bons lipides + glucides en une seule main.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 490,
+        "protein": 38,
+        "carbs": 40,
+        "fat": 17,
+        "fiber": 6
+      },
+      "ingredients": [
+        {
+          "qty": "1 grande",
+          "item": "Tortilla de blé complet"
+        },
+        {
+          "qty": "120g",
+          "item": "Poulet cuit émincé (ou reste)"
+        },
+        {
+          "qty": "½",
+          "item": "Avocat"
+        },
+        {
+          "qty": "50g",
+          "item": "Feuilles de salade"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Fromage blanc 0%"
+        },
+        {
+          "qty": "Sel, poivre, paprika",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Étaler le fromage blanc sur la tortilla.",
+        "Disposer la salade, le poulet et l'avocat en tranches.",
+        "Assaisonner, rouler fermement. Couper en deux."
+      ],
+      "tags": [
+        "batch cooking",
+        "nomade",
+        "sans cuisson"
+      ]
+    },
+    {
+      "id": "post-06",
+      "category": "post",
+      "name": "Fromage blanc, fruits rouges & granola",
+      "description": "Option légère post-séance courte ou pour les jours où l'appétit est faible.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 295,
+        "protein": 22,
+        "carbs": 36,
+        "fat": 6,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Fromage blanc 0% ou 3,2%"
+        },
+        {
+          "qty": "100g",
+          "item": "Fruits rouges (frais ou surgelés décongelés)"
+        },
+        {
+          "qty": "30g",
+          "item": "Granola (sans sucre ajouté de préférence)"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Miel (optionnel)"
+        }
+      ],
+      "steps": [
+        "Verser le fromage blanc dans un bol.",
+        "Disposer les fruits rouges par-dessus.",
+        "Parsemer de granola juste avant de manger (pour garder le croquant)."
+      ],
+      "tags": [
+        "végétarien",
+        "ultra-rapide",
+        "faible calorie"
+      ]
+    },
+    {
+      "id": "breakfast-01",
+      "category": "breakfast",
+      "name": "Pancakes avoine & banane (3 ingrédients)",
+      "description": "Pas de farine, pas de sucre ajouté. Texture moelleuse et naturellement sucrée.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 365,
+        "protein": 18,
+        "carbs": 52,
+        "fat": 9,
+        "fiber": 5
+      },
+      "ingredients": [
+        {
+          "qty": "1",
+          "item": "Banane mûre"
+        },
+        {
+          "qty": "2",
+          "item": "Œufs"
+        },
+        {
+          "qty": "50g",
+          "item": "Flocons d'avoine"
+        },
+        {
+          "qty": "1 pincée",
+          "item": "Cannelle"
+        },
+        {
+          "qty": "Spray d'huile de coco ou beurre",
+          "item": "Pour la cuisson"
+        }
+      ],
+      "steps": [
+        "Écraser la banane à la fourchette, mélanger avec les œufs battus et les flocons.",
+        "Laisser reposer 2 min pour que les flocons absorbent.",
+        "Faire cuire des petits pancakes à feu moyen, 2-3 min par face.",
+        "Servir avec fruits frais ou miel."
+      ],
+      "tags": [
+        "végétarien",
+        "sans gluten",
+        "sans sucre ajouté",
+        "3 ingrédients"
+      ]
+    },
+    {
+      "id": "breakfast-02",
+      "category": "breakfast",
+      "name": "Egg muffins aux légumes (batch cooking)",
+      "description": "Préparés le dimanche, consommés toute la semaine. Protéinés et sans glucides superflus.",
+      "prepTime": 30,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 230,
+        "protein": 20,
+        "carbs": 5,
+        "fat": 14,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "6",
+          "item": "Œufs"
+        },
+        {
+          "qty": "1 poivron",
+          "item": "Poivron rouge émincé"
+        },
+        {
+          "qty": "½ courgette",
+          "item": "Courgette râpée"
+        },
+        {
+          "qty": "50g",
+          "item": "Fromage râpé"
+        },
+        {
+          "qty": "Sel, poivre, paprika, herbes",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Préchauffer le four à 180°C. Huiler un moule à muffins.",
+        "Répartir les légumes dans les empreintes.",
+        "Battre les œufs, assaisonner, verser sur les légumes. Parsemer de fromage.",
+        "Cuire 20 min. Se conserve 4 jours au frigo."
+      ],
+      "tags": [
+        "batch cooking",
+        "sans gluten",
+        "keto-friendly",
+        "repas de semaine"
+      ]
+    },
+    {
+      "id": "breakfast-03",
+      "category": "breakfast",
+      "name": "Yaourt grec, granola maison & fruits",
+      "description": "Probiotiques + protéines + glucides complexes. Base parfaite pour bien démarrer.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 390,
+        "protein": 22,
+        "carbs": 50,
+        "fat": 11,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Yaourt grec entier"
+        },
+        {
+          "qty": "40g",
+          "item": "Granola (avoine, miel, noix)"
+        },
+        {
+          "qty": "100g",
+          "item": "Fruits frais de saison"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Graines de chia (optionnel)"
+        }
+      ],
+      "steps": [
+        "Verser le yaourt dans un bol.",
+        "Ajouter les fruits, puis le granola.",
+        "Parsemer de chia si utilisé. Manger immédiatement."
+      ],
+      "tags": [
+        "végétarien",
+        "ultra-rapide",
+        "probiotiques"
+      ]
+    },
+    {
+      "id": "breakfast-04",
+      "category": "breakfast",
+      "name": "Avocado toast & œuf poché",
+      "description": "Tendance mais efficace. Bons lipides + protéines + glucides complexes pour durer toute la matinée.",
+      "prepTime": 12,
+      "difficulty": "moyen",
+      "servings": 1,
+      "nutrition": {
+        "calories": 430,
+        "protein": 20,
+        "carbs": 36,
+        "fat": 22,
+        "fiber": 8
+      },
+      "ingredients": [
+        {
+          "qty": "2 tranches",
+          "item": "Pain complet ou pain de seigle"
+        },
+        {
+          "qty": "1",
+          "item": "Avocat mûr"
+        },
+        {
+          "qty": "2",
+          "item": "Œufs"
+        },
+        {
+          "qty": "½",
+          "item": "Citron"
+        },
+        {
+          "qty": "Fleur de sel, poivre, flocons de piment (optionnel)",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Porter de l'eau à petits frémissements avec un trait de vinaigre.",
+        "Créer un tourbillon et glisser l'œuf délicatement. Cuire 3 min pour un jaune coulant.",
+        "Écraser l'avocat sur le pain toasté, citronner, assaisonner.",
+        "Poser l'œuf poché par-dessus, fleur de sel."
+      ],
+      "tags": [
+        "végétarien",
+        "bons lipides",
+        "satiété longue"
+      ]
+    },
+    {
+      "id": "breakfast-05",
+      "category": "breakfast",
+      "name": "Bowl açaï protéiné",
+      "description": "Antioxydants concentrés + protéines. Visuellement et gustativement au top.",
+      "prepTime": 8,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 385,
+        "protein": 16,
+        "carbs": 54,
+        "fat": 13,
+        "fiber": 7
+      },
+      "ingredients": [
+        {
+          "qty": "100g",
+          "item": "Purée d'açaï surgelée (sachet)"
+        },
+        {
+          "qty": "1",
+          "item": "Banane congelée"
+        },
+        {
+          "qty": "100ml",
+          "item": "Lait végétal (amande ou avoine)"
+        },
+        {
+          "qty": "20g",
+          "item": "Protéine en poudre (optionnel)"
+        },
+        {
+          "qty": "Toppings au choix",
+          "item": "Granola, fruits, noix de coco râpée"
+        }
+      ],
+      "steps": [
+        "Mixer l'açaï, la banane et le lait végétal jusqu'à consistance épaisse.",
+        "Verser dans un bol.",
+        "Décorer avec les toppings choisis."
+      ],
+      "tags": [
+        "vegan",
+        "antioxydants",
+        "instagrammable"
+      ]
+    },
+    {
+      "id": "recovery-01",
+      "category": "recovery",
+      "name": "Dahl de lentilles corail",
+      "description": "Anti-inflammatoire, riche en protéines végétales et en fer. Idéal les jours de repos.",
+      "prepTime": 30,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 380,
+        "protein": 18,
+        "carbs": 52,
+        "fat": 10,
+        "fiber": 12
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Lentilles corail sèches"
+        },
+        {
+          "qty": "1 boîte (400ml)",
+          "item": "Lait de coco"
+        },
+        {
+          "qty": "1 boîte (400g)",
+          "item": "Tomates concassées"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Curcuma"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Cumin"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Gingembre frais râpé"
+        },
+        {
+          "qty": "1 gousse",
+          "item": "Ail"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Huile de coco ou d'olive"
+        }
+      ],
+      "steps": [
+        "Faire revenir l'ail et le gingembre 2 min dans l'huile. Ajouter les épices 30 sec.",
+        "Verser les lentilles rincées, les tomates et le lait de coco.",
+        "Cuire à feu moyen 20-25 min en remuant régulièrement jusqu'à ce que les lentilles soient fondantes.",
+        "Ajuster l'assaisonnement. Servir avec du riz ou du pain naan."
+      ],
+      "tags": [
+        "vegan",
+        "anti-inflammatoire",
+        "batch cooking",
+        "fer"
+      ]
+    },
+    {
+      "id": "recovery-02",
+      "category": "recovery",
+      "name": "Soupe miso, tofu & edamame",
+      "description": "Légère, reminéralisante et riche en probiotiques. Parfaite le soir d'une séance intense.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 190,
+        "protein": 16,
+        "carbs": 15,
+        "fat": 7,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "1 c.à.s.",
+          "item": "Pâte de miso (blanc de préférence)"
+        },
+        {
+          "qty": "400ml",
+          "item": "Eau chaude (non bouillante)"
+        },
+        {
+          "qty": "100g",
+          "item": "Tofu soyeux en dés"
+        },
+        {
+          "qty": "50g",
+          "item": "Edamame (surgelés décongelés)"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Sauce soja"
+        },
+        {
+          "qty": "Ciboule ou coriandre",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Délayer la pâte miso dans l'eau chaude (ne pas faire bouillir pour préserver les probiotiques).",
+        "Ajouter le tofu en dés, l'edamame, la sauce soja.",
+        "Servir avec ciboule émincée."
+      ],
+      "tags": [
+        "vegan",
+        "faible calorie",
+        "probiotiques",
+        "récupération légère"
+      ]
+    },
+    {
+      "id": "recovery-03",
+      "category": "recovery",
+      "name": "Salade pois chiches, avocat & feta",
+      "description": "Protéines végétales + bons lipides + calcium. Sans cuisson, prête en 5 min.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 430,
+        "protein": 16,
+        "carbs": 40,
+        "fat": 22,
+        "fiber": 10
+      },
+      "ingredients": [
+        {
+          "qty": "1 boîte (240g égouttée)",
+          "item": "Pois chiches"
+        },
+        {
+          "qty": "½",
+          "item": "Avocat"
+        },
+        {
+          "qty": "50g",
+          "item": "Feta"
+        },
+        {
+          "qty": "1 poignée",
+          "item": "Épinards ou roquette"
+        },
+        {
+          "qty": "½",
+          "item": "Citron"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "Sel, poivre, cumin",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Rincer et égoutter les pois chiches.",
+        "Mélanger tous les ingrédients dans un bol.",
+        "Assaisonner avec citron, huile, sel, poivre et cumin."
+      ],
+      "tags": [
+        "végétarien",
+        "sans gluten",
+        "sans cuisson",
+        "ultra-rapide"
+      ]
+    },
+    {
+      "id": "recovery-04",
+      "category": "recovery",
+      "name": "Curry de légumes & pois chiches",
+      "description": "Le curcuma et le gingembre en font un repas activement anti-inflammatoire. Réconfortant.",
+      "prepTime": 30,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 390,
+        "protein": 14,
+        "carbs": 54,
+        "fat": 13,
+        "fiber": 11
+      },
+      "ingredients": [
+        {
+          "qty": "1 boîte",
+          "item": "Pois chiches cuits"
+        },
+        {
+          "qty": "1",
+          "item": "Courgette en dés"
+        },
+        {
+          "qty": "1",
+          "item": "Poivron rouge en dés"
+        },
+        {
+          "qty": "1 boîte (400ml)",
+          "item": "Lait de coco"
+        },
+        {
+          "qty": "2 c.à.c.",
+          "item": "Curry en poudre"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Curcuma"
+        },
+        {
+          "qty": "Riz basmati",
+          "item": "Pour servir"
+        }
+      ],
+      "steps": [
+        "Faire revenir les légumes 5 min à la poêle.",
+        "Ajouter les épices, remuer 30 sec.",
+        "Ajouter les pois chiches et le lait de coco. Mijoter 15 min.",
+        "Servir sur riz basmati cuit."
+      ],
+      "tags": [
+        "vegan",
+        "anti-inflammatoire",
+        "batch cooking"
+      ]
+    },
+    {
+      "id": "recovery-05",
+      "category": "recovery",
+      "name": "Taboulé quinoa & menthe",
+      "description": "Protéines complètes du quinoa + herbes fraîches. Léger, digeste, parfait le soir.",
+      "prepTime": 20,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 320,
+        "protein": 10,
+        "carbs": 48,
+        "fat": 10,
+        "fiber": 5
+      },
+      "ingredients": [
+        {
+          "qty": "160g (poids sec)",
+          "item": "Quinoa"
+        },
+        {
+          "qty": "1",
+          "item": "Concombre"
+        },
+        {
+          "qty": "2",
+          "item": "Tomates"
+        },
+        {
+          "qty": "1 bouquet",
+          "item": "Persil plat + menthe fraîche"
+        },
+        {
+          "qty": "2",
+          "item": "Citrons pressés"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Huile d'olive"
+        }
+      ],
+      "steps": [
+        "Cuire le quinoa 12 min dans 320ml d'eau salée. Laisser refroidir.",
+        "Couper finement concombre, tomates et herbes.",
+        "Mélanger tous les ingrédients, assaisonner citron + huile + sel.",
+        "Peut se préparer la veille (meilleur le lendemain)."
+      ],
+      "tags": [
+        "vegan",
+        "sans gluten",
+        "batch cooking",
+        "repas froid"
+      ]
+    },
+    {
+      "id": "snack-01",
+      "category": "snack",
+      "name": "Houmous maison & crudités",
+      "description": "Houmous fait maison en 5 min au mixeur. Bien plus goûteux que l'industriel.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 280,
+        "protein": 10,
+        "carbs": 28,
+        "fat": 14,
+        "fiber": 7
+      },
+      "ingredients": [
+        {
+          "qty": "1 boîte (240g égouttée)",
+          "item": "Pois chiches"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Tahini (purée de sésame)"
+        },
+        {
+          "qty": "1",
+          "item": "Citron pressé"
+        },
+        {
+          "qty": "1 gousse",
+          "item": "Ail"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Huile d'olive + 1 filet pour servir"
+        },
+        {
+          "qty": "Crudités au choix",
+          "item": "Carottes, concombre, poivron, céleri"
+        }
+      ],
+      "steps": [
+        "Mixer tous les ingrédients du houmous avec 3-4 c.à.s. d'eau froide.",
+        "Mixer longtemps (3 min) pour une texture très crémeuse.",
+        "Servir dans un bol, arroser d'huile d'olive et paprika.",
+        "Accompagner de crudités coupées en bâtonnets."
+      ],
+      "tags": [
+        "vegan",
+        "sans gluten",
+        "batch",
+        "préparation en avance"
+      ]
+    },
+    {
+      "id": "snack-02",
+      "category": "snack",
+      "name": "Boules énergie avoine & chocolat",
+      "description": "Le snack idéal à préparer le dimanche pour toute la semaine. Zéro cuisson.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 4,
+      "nutrition": {
+        "calories": 185,
+        "protein": 6,
+        "carbs": 24,
+        "fat": 8,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "100g",
+          "item": "Flocons d'avoine"
+        },
+        {
+          "qty": "3 c.à.s.",
+          "item": "Beurre de cacahuète"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Miel"
+        },
+        {
+          "qty": "30g",
+          "item": "Pépites de chocolat noir"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Graines de chia (optionnel)"
+        }
+      ],
+      "steps": [
+        "Mélanger tous les ingrédients dans un bol.",
+        "Réfrigérer 20 min pour que ça se tienne mieux.",
+        "Former des boules de la taille d'une noix.",
+        "Conserver au frigo jusqu'à 1 semaine (ou congélateur)."
+      ],
+      "tags": [
+        "végétarien",
+        "sans cuisson",
+        "batch",
+        "nomade"
+      ]
+    },
+    {
+      "id": "snack-03",
+      "category": "snack",
+      "name": "Œufs durs & fromage blanc",
+      "description": "Le snack protéiné le plus simple et le plus efficace. Aucune excuse de ne pas l'avoir.",
+      "prepTime": 12,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 205,
+        "protein": 24,
+        "carbs": 4,
+        "fat": 10,
+        "fiber": 0
+      },
+      "ingredients": [
+        {
+          "qty": "2",
+          "item": "Œufs durs"
+        },
+        {
+          "qty": "150g",
+          "item": "Fromage blanc 0%"
+        },
+        {
+          "qty": "Sel, poivre, herbes",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Cuire les œufs 10 min dans l'eau bouillante. Refroidir, écaler.",
+        "Assaisonner le fromage blanc.",
+        "Manger ensemble. Peut être préparé en avance et conservé 3 jours."
+      ],
+      "tags": [
+        "sans gluten",
+        "keto-friendly",
+        "ultra-simple",
+        "batch"
+      ]
+    },
+    {
+      "id": "snack-04",
+      "category": "snack",
+      "name": "Cottage cheese, noix & miel",
+      "description": "Protéines lentes (caséine) + lipides sains. Idéal en soirée pour la récupération nocturne.",
+      "prepTime": 2,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 260,
+        "protein": 20,
+        "carbs": 22,
+        "fat": 10,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Cottage cheese"
+        },
+        {
+          "qty": "20g",
+          "item": "Noix ou noix de cajou"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Miel"
+        },
+        {
+          "qty": "Cannelle",
+          "item": "Optionnel"
+        }
+      ],
+      "steps": [
+        "Verser le cottage cheese dans un bol.",
+        "Ajouter les noix et le miel.",
+        "Saupoudrer de cannelle si souhaité."
+      ],
+      "tags": [
+        "végétarien",
+        "sans gluten",
+        "caséine",
+        "snack soir"
+      ]
+    },
+    {
+      "id": "main-01",
+      "category": "main",
+      "name": "Burger maison bœuf & cheddar",
+      "description": "Un vrai burger fait maison. Aucune raison de se priver — la différence avec le fast-food, c'est la qualité des ingrédients et la taille de la portion.",
+      "prepTime": 20,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 650,
+        "protein": 36,
+        "carbs": 44,
+        "fat": 36,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "150g",
+          "item": "Bœuf haché 15% MG"
+        },
+        {
+          "qty": "1+2+4 c.à.s.",
+          "item": "Sauce burger (1 moutarde + 2 ketchup + 4 mayonnaise)"
+        },
+        {
+          "qty": "1 tranche",
+          "item": "Cheddar"
+        },
+        {
+          "qty": "2 feuilles",
+          "item": "Laitue"
+        },
+        {
+          "qty": "2 rondelles",
+          "item": "Tomate"
+        },
+        {
+          "qty": "1+2+4 c.à.s.",
+          "item": "Sauce burger (1 moutarde + 2 ketchup + 4 mayonnaise)"
+        },
+        {
+          "qty": "Sel, poivre",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Former le steak haché en boule, assaisonner, aplatir légèrement. Ne pas trop travailler la viande.",
+        "Cuire à feu vif 2-3 min par face pour une cuisson rosée. Poser le cheddar 30 sec avant la fin, couvrir pour faire fondre.",
+        "Toaster légèrement le pain coupé en deux.",
+        "Assembler : sauce sur les deux faces du pain, laitue, tomate, steak. Servir immédiatement."
+      ],
+      "tags": [
+        "sans gluten possible",
+        "protéines",
+        "plat complet"
+      ]
+    },
+    {
+      "id": "main-02",
+      "category": "main",
+      "name": "Pasta carbonara (vraie recette)",
+      "description": "La vraie : pas de crème fraîche. Guanciale ou lardons, jaune d'œuf, pecorino. Simple, technique, parfaite.",
+      "prepTime": 20,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 720,
+        "protein": 32,
+        "carbs": 62,
+        "fat": 38,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "160g",
+          "item": "Spaghetti ou rigatoni"
+        },
+        {
+          "qty": "120g",
+          "item": "Guanciale ou lardons fumés"
+        },
+        {
+          "qty": "3",
+          "item": "Jaunes d'œufs + 1 œuf entier"
+        },
+        {
+          "qty": "60g",
+          "item": "Pecorino romano râpé (ou parmesan)"
+        },
+        {
+          "qty": "Poivre noir",
+          "item": "Généreux, fraîchement moulu"
+        },
+        {
+          "qty": "Sel",
+          "item": "Pour la cuisson des pâtes"
+        }
+      ],
+      "steps": [
+        "Cuire les pâtes al dente dans de l'eau très salée. Réserver 2 louches d'eau de cuisson.",
+        "Faire revenir le guanciale à feu moyen dans une grande poêle jusqu'à ce qu'il soit légèrement croustillant. Retirer du feu.",
+        "Mélanger jaunes, œuf entier, pecorino et poivre généreux dans un bol.",
+        "Égoutter les pâtes, les ajouter dans la poêle hors du feu avec le guanciale. Verser le mélange œufs-fromage et mélanger vivement en ajoutant l'eau de cuisson cuillère par cuillère pour créer une crème onctueuse. Ne jamais remettre sur le feu."
+      ],
+      "tags": [
+        "rapide",
+        "sans légumes",
+        "plat signature"
+      ]
+    },
+    {
+      "id": "main-03",
+      "category": "main",
+      "name": "Pâtes pesto basilic & parmesan",
+      "description": "Dix minutes, zéro technique. Le pesto maison change tout par rapport au bocal.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 580,
+        "protein": 18,
+        "carbs": 68,
+        "fat": 26,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "160g",
+          "item": "Penne ou trofie"
+        },
+        {
+          "qty": "1 bouquet",
+          "item": "Basilic frais (30g)"
+        },
+        {
+          "qty": "40g",
+          "item": "Parmesan râpé"
+        },
+        {
+          "qty": "30g",
+          "item": "Pignons de pin (ou noix de cajou)"
+        },
+        {
+          "qty": "1 gousse",
+          "item": "Ail"
+        },
+        {
+          "qty": "6 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "Sel, poivre",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Cuire les pâtes al dente dans de l'eau très salée.",
+        "Mixer basilic, pignons, ail et huile jusqu'à obtenir une pâte. Ajouter le parmesan, mixer brièvement. Assaisonner.",
+        "Réserver 1 louche d'eau de cuisson. Égoutter les pâtes.",
+        "Mélanger avec le pesto hors du feu. Détendre avec un peu d'eau de cuisson si besoin."
+      ],
+      "tags": [
+        "végétarien",
+        "rapide",
+        "sans cuisson pesto"
+      ]
+    },
+    {
+      "id": "main-04",
+      "category": "main",
+      "name": "Poulet rôti citron & ail",
+      "description": "Le plat du dimanche par excellence. Un poulet rôti fait maison, c'est 6 portions pour la semaine.",
+      "prepTime": 90,
+      "difficulty": "facile",
+      "servings": 4,
+      "nutrition": {
+        "calories": 420,
+        "protein": 46,
+        "carbs": 4,
+        "fat": 24,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "1 (environ 1,4kg)",
+          "item": "Poulet entier"
+        },
+        {
+          "qty": "1",
+          "item": "Citron"
+        },
+        {
+          "qty": "6 gousses",
+          "item": "Ail (non épluché)"
+        },
+        {
+          "qty": "3 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "Thym, romarin frais",
+          "item": ""
+        },
+        {
+          "qty": "Sel, poivre",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Préchauffer le four à 200°C. Sortir le poulet du frigo 30 min avant.",
+        "Frotter l'extérieur avec l'huile d'olive, sel et poivre généreux. Glisser les herbes et le citron coupé en deux à l'intérieur.",
+        "Disposer les gousses d'ail autour dans le plat.",
+        "Cuire 1h20 en arrosant toutes les 20 min. Vérifier la cuisson en piquant une cuisse — le jus doit être clair."
+      ],
+      "tags": [
+        "sans gluten",
+        "sans lactose",
+        "batch cooking",
+        "protéines"
+      ]
+    },
+    {
+      "id": "main-05",
+      "category": "main",
+      "name": "Steak & frites de patate douce",
+      "description": "La version maison est incomparable. Les frites de patate douce au four remplacent avantageusement les frites classiques sans tricher.",
+      "prepTime": 40,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 560,
+        "protein": 40,
+        "carbs": 52,
+        "fat": 18,
+        "fiber": 6
+      },
+      "ingredients": [
+        {
+          "qty": "180g",
+          "item": "Steak (bavette, entrecôte ou rumsteck)"
+        },
+        {
+          "qty": "300g",
+          "item": "Patate douce"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Paprika fumé"
+        },
+        {
+          "qty": "Sel, poivre, thym",
+          "item": ""
+        },
+        {
+          "qty": "Beurre ou beurre composé",
+          "item": "Optionnel, pour la cuisson steak"
+        }
+      ],
+      "steps": [
+        "Préchauffer le four à 200°C. Couper la patate douce en bâtonnets, enrober d'huile, paprika, sel. Cuire 30 min en retournant à mi-cuisson.",
+        "Sortir le steak du frigo 15 min avant. Assaisonner juste avant la cuisson.",
+        "Saisir à feu très vif 2 min par face pour une cuisson saignante, ou 3 min pour à point. Laisser reposer 3 min avant de couper.",
+        "Servir immédiatement avec les frites."
+      ],
+      "tags": [
+        "sans gluten",
+        "sans lactose",
+        "plat principal",
+        "glucides lents"
+      ]
+    },
+    {
+      "id": "main-06",
+      "category": "main",
+      "name": "Ramen maison simplifié",
+      "description": "Pas un ramen de restaurant en 4 heures — une version 25 min qui reste délicieuse et nourrissante.",
+      "prepTime": 25,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 490,
+        "protein": 32,
+        "carbs": 54,
+        "fat": 16,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "160g",
+          "item": "Nouilles ramen (ou soba)"
+        },
+        {
+          "qty": "2",
+          "item": "Œufs (pour l'œuf mollet)"
+        },
+        {
+          "qty": "200g",
+          "item": "Filet de poulet ou poitrine de porc fine"
+        },
+        {
+          "qty": "1 L",
+          "item": "Bouillon de poulet (cube ou maison)"
+        },
+        {
+          "qty": "3 c.à.s.",
+          "item": "Sauce soja"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Miso blanc"
+        },
+        {
+          "qty": "Champignons, ciboule, maïs",
+          "item": "Garnitures au choix"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Huile de sésame"
+        }
+      ],
+      "steps": [
+        "Cuire les œufs 6 min dans l'eau bouillante, refroidir immédiatement. Écaler et couper en deux.",
+        "Porter le bouillon à frémissement, ajouter sauce soja et miso. Goûter et ajuster.",
+        "Cuire les nouilles séparément selon le paquet. Faire dorer la viande à la poêle.",
+        "Répartir les nouilles dans des bols, verser le bouillon chaud, disposer la viande, l'œuf et les garnitures. Filet d'huile de sésame."
+      ],
+      "tags": [
+        "plat complet",
+        "umami",
+        "hivernal"
+      ]
+    },
+    {
+      "id": "main-07",
+      "category": "main",
+      "name": "Quesadillas poulet & fromage",
+      "description": "Prêt en 15 minutes. Croustillant, fondant, nourrissant. Parfait pour les soirs sans inspiration.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 510,
+        "protein": 36,
+        "carbs": 44,
+        "fat": 20,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "2 grandes",
+          "item": "Tortillas blé"
+        },
+        {
+          "qty": "120g",
+          "item": "Poulet cuit émincé (reste de poulet rôti idéal)"
+        },
+        {
+          "qty": "60g",
+          "item": "Fromage râpé (comté ou emmental)"
+        },
+        {
+          "qty": "½",
+          "item": "Poivron rouge émincé"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Cumin + paprika"
+        },
+        {
+          "qty": "Crème fraîche ou guacamole",
+          "item": "Pour servir"
+        }
+      ],
+      "steps": [
+        "Mélanger le poulet avec le poivron et les épices.",
+        "Chauffer une grande poêle à sec à feu moyen.",
+        "Poser une tortilla, garnir de poulet et fromage sur une moitié, replier. Cuire 2-3 min par face jusqu'à dorure.",
+        "Couper en triangles, servir avec crème fraîche ou guacamole."
+      ],
+      "tags": [
+        "rapide",
+        "restes",
+        "sans four"
+      ]
+    },
+    {
+      "id": "main-08",
+      "category": "main",
+      "name": "Risotto parmesan & champignons",
+      "description": "Plat de confort par excellence. Demande 30 min d'attention mais aucune technique difficile.",
+      "prepTime": 35,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 520,
+        "protein": 18,
+        "carbs": 72,
+        "fat": 18,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "160g",
+          "item": "Riz arborio ou carnaroli"
+        },
+        {
+          "qty": "200g",
+          "item": "Champignons de Paris ou shiitake"
+        },
+        {
+          "qty": "1",
+          "item": "Échalote"
+        },
+        {
+          "qty": "100ml",
+          "item": "Vin blanc sec"
+        },
+        {
+          "qty": "800ml",
+          "item": "Bouillon chaud (poulet ou légumes)"
+        },
+        {
+          "qty": "60g",
+          "item": "Parmesan râpé"
+        },
+        {
+          "qty": "20g",
+          "item": "Beurre"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Huile d'olive"
+        }
+      ],
+      "steps": [
+        "Faire revenir l'échalote et les champignons dans l'huile 5 min.",
+        "Ajouter le riz, remuer 2 min pour le nacrer.",
+        "Verser le vin blanc, laisser absorber.",
+        "Ajouter le bouillon chaud louche par louche en remuant constamment. Chaque louche doit être absorbée avant d'en ajouter une autre. Compter environ 18-20 min.",
+        "Hors du feu, ajouter beurre et parmesan. Mélanger vigoureusement (la mantecatura). Servir immédiatement."
+      ],
+      "tags": [
+        "végétarien",
+        "plat de fête",
+        "sans gluten possible"
+      ]
+    },
+    {
+      "id": "main-09",
+      "category": "main",
+      "name": "Tacos bœuf épicé & guacamole",
+      "description": "Convivial, coloré, qu'on mange avec les mains. Le format idéal pour ne pas peser chaque gramme.",
+      "prepTime": 25,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 620,
+        "protein": 34,
+        "carbs": 52,
+        "fat": 28,
+        "fiber": 8
+      },
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Bœuf haché"
+        },
+        {
+          "qty": "4 petites",
+          "item": "Tortillas maïs"
+        },
+        {
+          "qty": "1",
+          "item": "Avocat"
+        },
+        {
+          "qty": "1",
+          "item": "Citron vert"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Cumin + chili"
+        },
+        {
+          "qty": "1",
+          "item": "Oignon rouge émincé"
+        },
+        {
+          "qty": "Coriandre fraîche, crème fraîche",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Faire revenir le bœuf haché avec les épices jusqu'à coloration. Assaisonner.",
+        "Écraser l'avocat avec le jus de citron vert, sel et une pincée de cumin — guacamole express.",
+        "Réchauffer les tortillas directement sur la flamme ou à la poêle sèche.",
+        "Assembler : guacamole, bœuf épicé, oignon rouge, coriandre, crème fraîche."
+      ],
+      "tags": [
+        "sans lactose possible",
+        "convivial",
+        "format partage"
+      ]
+    },
+    {
+      "id": "main-10",
+      "category": "main",
+      "name": "Pizza maison tomate & mozzarella",
+      "description": "Avec la pâte à pizza maison (voir Bases). Une vraie pizza, pas une version allégée.",
+      "prepTime": 30,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 580,
+        "protein": 24,
+        "carbs": 74,
+        "fat": 20,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "1 portion",
+          "item": "Pâte à pizza maison (recette Bases)"
+        },
+        {
+          "qty": "150g",
+          "item": "Sauce tomate (passata ou concassée)"
+        },
+        {
+          "qty": "150g",
+          "item": "Mozzarella di bufala"
+        },
+        {
+          "qty": "Basilic frais",
+          "item": ""
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "Sel",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Préchauffer le four au maximum (250°C ou plus) avec la plaque à l'intérieur.",
+        "Étaler la pâte finement sur du papier sulfurisé fariné. Laisser le bord plus épais.",
+        "Étaler la sauce tomate, déchirer la mozzarella par-dessus. Assaisonner.",
+        "Cuire 10-12 min jusqu'à bords dorés et mozzarella dorée. Ajouter le basilic frais et l'huile à la sortie du four."
+      ],
+      "tags": [
+        "végétarien",
+        "plat signature",
+        "fait maison"
+      ],
+      "linkedBase": "base-02"
+    },
+    {
+      "id": "main-11",
+      "category": "breakfast",
+      "name": "Crêpes classiques",
+      "description": "La recette de base. Fine, dorée, à garnir selon l'humeur — sucrée ou salée.",
+      "prepTime": 25,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 360,
+        "protein": 12,
+        "carbs": 58,
+        "fat": 10,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "125g",
+          "item": "Farine T45"
+        },
+        {
+          "qty": "2",
+          "item": "Œufs"
+        },
+        {
+          "qty": "300ml",
+          "item": "Lait"
+        },
+        {
+          "qty": "20g",
+          "item": "Beurre fondu"
+        },
+        {
+          "qty": "1 pincée",
+          "item": "Sel"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Sucre vanillé (pour version sucrée)"
+        }
+      ],
+      "steps": [
+        "Mélanger farine, sel et sucre. Creuser un puits, ajouter les œufs battus au centre.",
+        "Incorporer progressivement le lait en fouettant pour éviter les grumeaux. Ajouter le beurre fondu.",
+        "Laisser reposer 30 min si possible (non obligatoire).",
+        "Cuire dans une poêle légèrement beurrée à feu moyen, 1 min par face."
+      ],
+      "tags": [
+        "végétarien",
+        "base",
+        "sucré ou salé"
+      ]
+    },
+    {
+      "id": "main-12",
+      "category": "breakfast",
+      "name": "French toast cannelle & sirop d'érable",
+      "description": "Le pain brioché rassis transformé en quelque chose d'exceptionnel. Prêt en 10 minutes.",
+      "prepTime": 10,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 420,
+        "protein": 16,
+        "carbs": 54,
+        "fat": 14,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "2 tranches épaisses",
+          "item": "Pain brioché ou brioche rassis"
+        },
+        {
+          "qty": "2",
+          "item": "Œufs"
+        },
+        {
+          "qty": "60ml",
+          "item": "Lait"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Cannelle"
+        },
+        {
+          "qty": "1 c.à.c.",
+          "item": "Extrait de vanille"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Beurre"
+        },
+        {
+          "qty": "Sirop d'érable ou miel",
+          "item": "Pour servir"
+        }
+      ],
+      "steps": [
+        "Battre les œufs avec le lait, la cannelle et la vanille.",
+        "Tremper les tranches de brioche 30 secondes de chaque côté.",
+        "Cuire à feu moyen dans le beurre mousseux, 2-3 min par face jusqu'à dorure.",
+        "Servir avec sirop d'érable, fruits frais ou sucre glace."
+      ],
+      "tags": [
+        "végétarien",
+        "anti-gaspi",
+        "rapide"
+      ]
+    },
+    {
+      "id": "dessert-01",
+      "category": "dessert",
+      "name": "Mousse au chocolat (recette Erwan)",
+      "description": "3 ingrédients, zéro compromis. La mousse la plus pure qui soit — chocolat noir, blancs en neige, sucre.",
+      "prepTime": 15,
+      "difficulty": "moyen",
+      "servings": 4,
+      "nutrition": {
+        "calories": 255,
+        "protein": 6,
+        "carbs": 24,
+        "fat": 15,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "140g",
+          "item": "Chocolat noir (70% minimum)"
+        },
+        {
+          "qty": "4",
+          "item": "Blancs d'œufs"
+        },
+        {
+          "qty": "35g",
+          "item": "Sucre en poudre"
+        }
+      ],
+      "steps": [
+        "Faire fondre le chocolat au bain-marie ou au micro-ondes par tranches de 30 secondes. Laisser tiédir.",
+        "Monter les blancs en neige ferme. Quand ils forment des pics mous, ajouter le sucre progressivement et continuer à battre.",
+        "Incorporer délicatement les blancs au chocolat fondu en trois fois, en soulevant la masse avec une maryse. Ne pas fouetter — on veut garder l'air.",
+        "Verser dans des ramequins ou verrines. Réfrigérer au minimum 2h avant de servir."
+      ],
+      "tags": [
+        "végétarien",
+        "sans farine",
+        "recette perso",
+        "3 ingrédients"
+      ],
+      "personal": true,
+      "author": "Erwan"
+    },
+    {
+      "id": "dessert-02",
+      "category": "dessert",
+      "name": "Cookies avoine & chocolat noir",
+      "description": "Croustillant dehors, moelleux dedans. Des vrais cookies, pas des barres de sport.",
+      "prepTime": 25,
+      "difficulty": "facile",
+      "servings": 4,
+      "nutrition": {
+        "calories": 210,
+        "protein": 5,
+        "carbs": 28,
+        "fat": 9,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "100g",
+          "item": "Flocons d'avoine"
+        },
+        {
+          "qty": "80g",
+          "item": "Farine complète"
+        },
+        {
+          "qty": "80g",
+          "item": "Beurre mou"
+        },
+        {
+          "qty": "60g",
+          "item": "Cassonade"
+        },
+        {
+          "qty": "1",
+          "item": "Œuf"
+        },
+        {
+          "qty": "60g",
+          "item": "Pépites de chocolat noir"
+        },
+        {
+          "qty": "1 pincée",
+          "item": "Sel + bicarbonate"
+        }
+      ],
+      "steps": [
+        "Préchauffer le four à 170°C. Battre le beurre et la cassonade jusqu'à consistance crémeuse.",
+        "Ajouter l'œuf et mélanger. Incorporer farine, flocons, sel et bicarbonate.",
+        "Ajouter les pépites de chocolat. Former des boules de la taille d'une noix, les aplatir légèrement sur la plaque.",
+        "Cuire 12-14 min. Laisser refroidir sur la plaque (ils durcissent en refroidissant)."
+      ],
+      "tags": [
+        "végétarien",
+        "batch",
+        "goûter"
+      ]
+    },
+    {
+      "id": "dessert-03",
+      "category": "dessert",
+      "name": "Brownie à la papy Brossard",
+      "description": "La recette de famille. Dense, fondant, avec la fleur de sel qui change tout. Plus généreux en chocolat que les versions classiques.",
+      "prepTime": 35,
+      "difficulty": "facile",
+      "servings": 10,
+      "nutrition": {
+        "calories": 342,
+        "protein": 7,
+        "carbs": 40,
+        "fat": 19,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Chocolat noir"
+        },
+        {
+          "qty": "100g",
+          "item": "Beurre"
+        },
+        {
+          "qty": "20g",
+          "item": "Huile (tournesol ou coco)"
+        },
+        {
+          "qty": "2",
+          "item": "Œufs"
+        },
+        {
+          "qty": "150g",
+          "item": "Sucre"
+        },
+        {
+          "qty": "150g",
+          "item": "Farine"
+        },
+        {
+          "qty": "1 pincée",
+          "item": "Bicarbonate (facultatif)"
+        },
+        {
+          "qty": "1 pincée",
+          "item": "Fleur de sel"
+        },
+        {
+          "qty": "40g",
+          "item": "Pépites de chocolat"
+        }
+      ],
+      "steps": [
+        "Faire fondre le chocolat avec le beurre. Ajouter l'huile. Laisser tiédir.",
+        "Blanchir les œufs avec le sucre (fouetter jusqu'à ce que le mélange devienne pâle et mousseux).",
+        "Incorporer le chocolat fondu au mélange œufs-sucre.",
+        "Ajouter la farine tamisée et le bicarbonate. Mélanger sans trop travailler.",
+        "Ajouter la fleur de sel et les pépites de chocolat.",
+        "Verser dans un moule beurré. Cuire à 180°C : 20 min pour un grand plat, 25 min pour un moule plus petit. Le centre doit encore trembler légèrement."
+      ],
+      "tags": [
+        "végétarien",
+        "recette famille",
+        "batch",
+        "fondant"
+      ],
+      "personal": true,
+      "author": "Famille"
+    },
+    {
+      "id": "dessert-04",
+      "category": "dessert",
+      "name": "Tiramisu express",
+      "description": "Pas de lécithine, pas de mascarpone allégé. La vraie recette italienne, en version simplifiée.",
+      "prepTime": 20,
+      "difficulty": "moyen",
+      "servings": 4,
+      "nutrition": {
+        "calories": 340,
+        "protein": 10,
+        "carbs": 36,
+        "fat": 18,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Mascarpone"
+        },
+        {
+          "qty": "3",
+          "item": "Œufs (jaunes et blancs séparés)"
+        },
+        {
+          "qty": "80g",
+          "item": "Sucre"
+        },
+        {
+          "qty": "200ml",
+          "item": "Café espresso fort refroidi"
+        },
+        {
+          "qty": "16-20",
+          "item": "Biscuits boudoir (savoiardi)"
+        },
+        {
+          "qty": "Cacao en poudre non sucré",
+          "item": "Pour saupoudrer"
+        }
+      ],
+      "steps": [
+        "Fouetter les jaunes avec le sucre jusqu'à blanchissement. Incorporer le mascarpone à la spatule.",
+        "Monter les blancs en neige ferme. Incorporer délicatement à la crème mascarpone.",
+        "Tremper rapidement les biscuits dans le café (1 seconde par face, ne pas détremper).",
+        "Alterner couches de biscuits et crème dans un plat. Terminer par la crème. Réfrigérer 3h minimum.",
+        "Saupoudrer de cacao juste avant de servir."
+      ],
+      "tags": [
+        "végétarien",
+        "préparer en avance",
+        "dessert de fête"
+      ]
+    },
+    {
+      "id": "dessert-05",
+      "category": "dessert",
+      "name": "Banana nice cream",
+      "description": "2 ingrédients, texture de glace, zéro culpabilité. La banane congelée mixée fait tout le travail.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 180,
+        "protein": 4,
+        "carbs": 38,
+        "fat": 2,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "3",
+          "item": "Bananes mûres congelées (en morceaux)"
+        },
+        {
+          "qty": "1 c.à.s.",
+          "item": "Beurre de cacahuète ou cacao (optionnel)"
+        },
+        {
+          "qty": "Toppings au choix",
+          "item": "Fruits, granola, noix de coco"
+        }
+      ],
+      "steps": [
+        "Mixer les morceaux de banane congelée seuls pendant 3-4 min en raclant les parois régulièrement.",
+        "La texture va d'abord ressembler à de la chapelure, puis devenir crémeuse comme une glace.",
+        "Ajouter beurre de cacahuète ou cacao si souhaité, mixer encore 30 sec.",
+        "Servir immédiatement pour une texture soft, ou passer 30 min au congélateur pour une glace plus ferme."
+      ],
+      "tags": [
+        "vegan",
+        "sans gluten",
+        "sans sucre ajouté",
+        "2 ingrédients"
+      ]
+    },
+    {
+      "id": "base-01",
+      "category": "base",
+      "name": "Pâte à pasta maison",
+      "description": "La base de toutes les pâtes fraîches. Nécessite un laminoir (ou de la motivation avec un rouleau). Le résultat n'a rien à voir avec les pâtes sèches.",
+      "prepTime": 75,
+      "difficulty": "moyen",
+      "servings": 4,
+      "nutrition": {
+        "calories": 347,
+        "protein": 13,
+        "carbs": 53,
+        "fat": 8,
+        "fiber": 2
+      },
+      "note": "Valeurs pour la pâte seule, sans sauce. Compter +200-300 kcal selon la garniture.",
+      "ingredients": [
+        {
+          "qty": "280g",
+          "item": "Farine T00 (ou T55 à défaut)"
+        },
+        {
+          "qty": "4",
+          "item": "Jaunes d'œufs"
+        },
+        {
+          "qty": "2",
+          "item": "Œufs entiers"
+        }
+      ],
+      "steps": [
+        "Faire un puits avec la farine. Verser les jaunes et les œufs entiers au centre.",
+        "Mélanger avec une fourchette en incorporant progressivement la farine depuis les bords.",
+        "Pétrir à la main 8-10 min jusqu'à obtenir une pâte lisse, élastique et non collante. Si trop sèche, ajouter quelques gouttes d'eau.",
+        "Envelopper dans du film alimentaire. Réfrigérer minimum 1h (jusqu'à 24h — plus longtemps = meilleure texture).",
+        "Diviser en 4 pâtons. Abaisser au laminoir (position 1 → 5 ou 6) ou très finement au rouleau.",
+        "Découper en tagliatelles, fettuccine, ou utiliser pour des lasagnes, raviolis, etc."
+      ],
+      "tags": [
+        "végétarien",
+        "base",
+        "pâtes fraîches",
+        "recette perso"
+      ],
+      "personal": true,
+      "author": "Erwan",
+      "usedIn": [
+        "Tagliatelles sauce bolognaise",
+        "Carbonara",
+        "Lasagnes",
+        "Raviolis"
+      ]
+    },
+    {
+      "id": "base-02",
+      "category": "base",
+      "name": "Pâte à pizza maison",
+      "description": "Une recette domestique fiable — plus facile à travailler qu'une napolitaine haute hydratation, avec une belle tenue grâce à l'huile d'olive.",
+      "prepTime": 75,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 547,
+        "protein": 13,
+        "carbs": 93,
+        "fat": 11,
+        "fiber": 3
+      },
+      "note": "Valeurs pour 1 base de pizza individuelle (moitié de la recette). La garniture est en supplément.",
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Farine T00 ou T45"
+        },
+        {
+          "qty": "140g",
+          "item": "Eau tiède (env. 30°C)"
+        },
+        {
+          "qty": "20g",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "2,5g (½ sachet)",
+          "item": "Levure boulangère sèche"
+        },
+        {
+          "qty": "6g",
+          "item": "Sel"
+        }
+      ],
+      "steps": [
+        "Dissoudre la levure dans l'eau tiède. Laisser activer 5 min.",
+        "Dans un grand bol, mélanger farine et sel. Verser l'eau + levure et l'huile d'olive.",
+        "Pétrir 10 min à la main jusqu'à obtenir une pâte lisse, souple et légèrement élastique.",
+        "Couvrir d'un torchon humide. Laisser lever 1h à température ambiante (ou toute une nuit au frigo pour plus de saveur).",
+        "Diviser en 2 pâtons. Étaler finement à la main ou au rouleau. Garnir et cuire à 250°C sur plaque préchauffée, 10-12 min."
+      ],
+      "tags": [
+        "végétarien",
+        "base",
+        "pizza",
+        "recette perso"
+      ],
+      "personal": true,
+      "author": "Erwan",
+      "usedIn": [
+        "Pizza tomate mozzarella",
+        "Pizza bianca",
+        "Calzone"
+      ]
+    },
+    {
+      "id": "post-07",
+      "category": "post",
+      "name": "Poke Bowl saumon mariné",
+      "description": "Le plat post-entraînement qui ne ressemble pas à un repas de sportif. Riz vinaigré, saumon mariné soja-miel-gingembre. La version maison est incomparable.",
+      "prepTime": 30,
+      "difficulty": "facile",
+      "servings": 4,
+      "nutrition": {
+        "calories": 480,
+        "protein": 38,
+        "carbs": 52,
+        "fat": 14,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "500g",
+          "item": "Riz rond (sushi rice)"
+        },
+        {
+          "qty": "600g",
+          "item": "Saumon frais (pavé ou filet)"
+        },
+        {
+          "qty": "6-7 mL",
+          "item": "Vinaigre de riz"
+        },
+        {
+          "qty": "2+ c.à.c.",
+          "item": "Sucre"
+        },
+        {
+          "qty": "1 pincée",
+          "item": "Sel"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Sauce soja salée"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Miel"
+        },
+        {
+          "qty": "2 c.à.c.",
+          "item": "Gingembre frais râpé"
+        },
+        {
+          "qty": "Jus de citron",
+          "item": ""
+        },
+        {
+          "qty": "Garnitures au choix",
+          "item": "Avocat, edamame, concombre, radis, sésame"
+        }
+      ],
+      "steps": [
+        "Cuire le riz au cuiseur (même volume d'eau que de riz). Pendant ce temps, faire chauffer sans bouillir le vinaigre de riz avec le sucre et le sel jusqu'à dissolution.",
+        "Riz cuit : mélanger délicatement avec la préparation vinaigrée. Laisser refroidir à température ambiante.",
+        "Couper le saumon en dés. Mariner 15-20 min dans sauce soja + miel + gingembre + citron.",
+        "Assembler les bols : riz, saumon mariné, garnitures. Arroser du reste de marinade."
+      ],
+      "tags": [
+        "sans gluten",
+        "oméga-3",
+        "recette perso",
+        "convivial",
+        "batch"
+      ],
+      "personal": true,
+      "author": "Erwan"
+    },
+    {
+      "id": "dessert-06",
+      "category": "dessert",
+      "name": "Flan pâtissier maison",
+      "description": "Le flan de boulangerie, fait maison. Crémeux, parfumé à la vanille, avec un fond de pâte légèrement croustillant.",
+      "prepTime": 70,
+      "difficulty": "moyen",
+      "servings": 8,
+      "nutrition": {
+        "calories": 310,
+        "protein": 9,
+        "carbs": 46,
+        "fat": 10,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "3",
+          "item": "Œufs"
+        },
+        {
+          "qty": "1 L",
+          "item": "Lait entier (875mL + 125mL)"
+        },
+        {
+          "qty": "100g",
+          "item": "Maïzena"
+        },
+        {
+          "qty": "160g",
+          "item": "Sucre"
+        },
+        {
+          "qty": "2 sachets",
+          "item": "Sucre vanillé"
+        },
+        {
+          "qty": "1",
+          "item": "Gousse de vanille"
+        },
+        {
+          "qty": "1 rouleau",
+          "item": "Pâte brisée ou feuilletée (maison ou achetée)"
+        }
+      ],
+      "steps": [
+        "Mélanger les 3 œufs avec 125mL de lait froid et la maïzena jusqu'à obtenir une préparation lisse sans grumeaux.",
+        "Dans une casserole, chauffer les 875mL de lait restants avec le sucre, le sucre vanillé et la gousse de vanille fendue. Porter à ébullition.",
+        "Verser le lait chaud sur la préparation aux œufs en fouettant constamment. Remettre dans la casserole à feu moyen sans cesser de remuer jusqu'à épaississement.",
+        "Foncer un moule de 24-26 cm avec la pâte. Verser l'appareil à flan par-dessus.",
+        "Cuire à 180°C pendant 40 min. Le dessus doit être légèrement doré et trembler encore un peu au centre.",
+        "Laisser refroidir complètement avant de démouler."
+      ],
+      "tags": [
+        "végétarien",
+        "recette perso",
+        "dessert de fête",
+        "préparer en avance"
+      ],
+      "personal": true,
+      "author": "Erwan"
+    },
+    {
+      "id": "base-03",
+      "category": "base",
+      "name": "Pâte à galettes bretonnes",
+      "description": "La pâte à galettes sarrasin. Simple, sans beurre dans la pâte, qui laisse toute la place aux garnitures. La version qui fonctionne à la maison.",
+      "prepTime": 75,
+      "difficulty": "facile",
+      "servings": 8,
+      "nutrition": {
+        "calories": 143,
+        "protein": 5,
+        "carbs": 22,
+        "fat": 5,
+        "fiber": 3
+      },
+      "note": "Calories pour une galette seule, sans garniture. Compter +150-400 kcal selon la garniture (complète, poulet-fromage, etc.)",
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Farine de sarrasin"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Farine de froment"
+        },
+        {
+          "qty": "1 pincée",
+          "item": "Sel + poivre"
+        },
+        {
+          "qty": "1",
+          "item": "Œuf"
+        },
+        {
+          "qty": "2 c.à.s.",
+          "item": "Huile d'olive"
+        },
+        {
+          "qty": "500mL",
+          "item": "Eau"
+        }
+      ],
+      "steps": [
+        "Mélanger les farines, sel et poivre dans un grand bol. Creuser un puits.",
+        "Ajouter l'œuf et l'huile au centre. Incorporer en mélangeant depuis le centre.",
+        "Délayer progressivement avec l'eau pour éviter les grumeaux. La pâte doit être fluide.",
+        "Laisser reposer 1h minimum (ou toute la nuit au frigo — les galettes seront meilleures).",
+        "Cuire sur une crêpière ou poêle anti-adhésive très chaude et légèrement huilée, 1-2 min par face."
+      ],
+      "tags": [
+        "vegan",
+        "sans gluten",
+        "base",
+        "bretagne",
+        "recette perso"
+      ],
+      "personal": true,
+      "author": "Erwan",
+      "usedIn": [
+        "Galette complète",
+        "Galette poulet-fromage",
+        "Galette chèvre-miel"
+      ]
+    },
+    {
+      "id": "snack-05",
+      "category": "snack",
+      "name": "Cookies pois chiches & beurre de cacahuète",
+      "description": "La recette qui surprend tout le monde. Pas de goût de pois chiche, texture de cookie, macros de snack protéiné. Zéro farine.",
+      "prepTime": 20,
+      "difficulty": "facile",
+      "servings": 8,
+      "nutrition": {
+        "calories": 113,
+        "protein": 8,
+        "carbs": 13,
+        "fat": 5,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "1 boîte (400g)",
+          "item": "Pois chiches non égouttés"
+        },
+        {
+          "qty": "40g",
+          "item": "Beurre de cacahuète"
+        },
+        {
+          "qty": "20g",
+          "item": "Miel"
+        },
+        {
+          "qty": "60g",
+          "item": "Whey caramel (ou cacao en poudre à défaut)"
+        },
+        {
+          "qty": "Pépites de chocolat noir",
+          "item": "Intérieur + dessus"
+        }
+      ],
+      "steps": [
+        "Mixer les pois chiches non égouttés avec le beurre de cacahuète, le miel et la whey jusqu'à obtenir une pâte lisse.",
+        "Incorporer quelques pépites de chocolat dans la pâte à la spatule.",
+        "Former des cookies sur une feuille de papier cuisson. Ajouter des pépites sur le dessus.",
+        "Cuire 10-12 min à 180°C. Laisser refroidir complètement avant de manipuler."
+      ],
+      "tags": [
+        "sans farine",
+        "haute protéine",
+        "batch",
+        "sans gluten"
+      ]
+    },
+    {
+      "id": "base-04",
+      "category": "base",
+      "name": "Pâte à crêpes maison",
+      "description": "La recette généreuse — plus de beurre, plus d'œufs. Des crêpes riches et dorées. Deux versions dans les notes, voici la plus complète.",
+      "prepTime": 80,
+      "difficulty": "facile",
+      "servings": 15,
+      "nutrition": {
+        "calories": 148,
+        "protein": 5,
+        "carbs": 18,
+        "fat": 6,
+        "fiber": 0
+      },
+      "note": "Pour une version plus légère : 250g farine, 3 œufs, 60g sucre, 5g sel, 400ml lait. Résultat plus fin, sans beurre.",
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Farine T45"
+        },
+        {
+          "qty": "60g",
+          "item": "Sucre"
+        },
+        {
+          "qty": "6",
+          "item": "Œufs"
+        },
+        {
+          "qty": "5cl",
+          "item": "Huile"
+        },
+        {
+          "qty": "80g",
+          "item": "Beurre (fondu)"
+        },
+        {
+          "qty": "75cl",
+          "item": "Lait (température ambiante)"
+        }
+      ],
+      "steps": [
+        "Faire fondre le beurre, laisser tiédir.",
+        "Battre les œufs dans un grand saladier. Ajouter farine + sucre, mélanger.",
+        "Incorporer l'huile et le beurre fondu.",
+        "Ajouter 50cl de lait progressivement en fouettant pour éviter les grumeaux.",
+        "Laisser reposer 1h (obligatoire pour cette recette).",
+        "Ajouter les 25cl de lait restants si la pâte est trop épaisse. Cuire à feu moyen dans une crêpière légèrement beurrée."
+      ],
+      "tags": [
+        "végétarien",
+        "base",
+        "crêpes",
+        "recette perso",
+        "bretagne"
+      ],
+      "personal": true,
+      "author": "Erwan"
+    }
+  ],
+  "total": 49
+}
