@@ -115,6 +115,10 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
         );
         queryClient.invalidateQueries({ queryKey: ['todayInsight', userId] });
         queryClient.invalidateQueries({ queryKey: ['recurringMeals', userId] });
+        // Historical rollups (week strip, monthly heatmap, /suivi widget) read
+        // from a separate range query — partial-match on the prefix invalidates
+        // every cached window for this user.
+        queryClient.invalidateQueries({ queryKey: ['nutritionRange', userId] });
         return inserted;
       } finally {
         inflightRef.current = false;
@@ -142,6 +146,7 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
       );
       queryClient.invalidateQueries({ queryKey: ['todayInsight', userId] });
       queryClient.invalidateQueries({ queryKey: ['recurringMeals', userId] });
+      queryClient.invalidateQueries({ queryKey: ['nutritionRange', userId] });
       return true;
     },
     [userId, dateKey, queryClient],
