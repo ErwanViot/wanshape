@@ -119,6 +119,25 @@ function UtensilsIcon() {
   );
 }
 
+function ChefHatIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+      <line x1="6" y1="17" x2="18" y2="17" />
+    </svg>
+  );
+}
+
 function ChartIcon() {
   return (
     <svg
@@ -174,7 +193,10 @@ export function BottomNav() {
   const isPrograms = pathname.startsWith('/programme');
   const isDiscover = pathname === '/decouvrir' || pathname.startsWith('/formats') || pathname.startsWith('/exercices');
   const isSuivi = pathname === '/suivi';
-  const isNutrition = pathname.startsWith('/nutrition');
+  const isRecipes = pathname.startsWith('/nutrition/recettes') || pathname.startsWith('/en/nutrition/recipes');
+  // Match the exact /nutrition page (and its setup sub-page) only — recipes
+  // own their own bottom-nav slot.
+  const isNutrition = (pathname === '/nutrition' || pathname.startsWith('/nutrition/setup')) && !isRecipes;
   const isLogin = pathname === '/login' || pathname === '/signup';
 
   return (
@@ -195,6 +217,9 @@ export function BottomNav() {
             <NavItem to="/nutrition" label={t('nutrition')} active={isNutrition}>
               <UtensilsIcon />
             </NavItem>
+            <NavItem to="/nutrition/recettes" label={t('recipes')} active={isRecipes}>
+              <ChefHatIcon />
+            </NavItem>
             <NavItem to="/suivi" label={t('tracking')} active={isSuivi}>
               <ChartIcon />
             </NavItem>
@@ -209,6 +234,9 @@ export function BottomNav() {
             </NavItem>
             <NavItem to="/decouvrir" label={t('explore')} active={isDiscover}>
               <DiscoverIcon />
+            </NavItem>
+            <NavItem to="/nutrition/recettes" label={t('recipes')} active={isRecipes}>
+              <ChefHatIcon />
             </NavItem>
             <NavItem to="/login" label={t('login')} active={isLogin}>
               <UserIcon />
