@@ -49,6 +49,12 @@
   "loading": {
     "aria": "Loading"
   },
+  "breadcrumb": {
+    "home": "Home",
+    "formats": "Formats",
+    "exercises": "Exercises",
+    "programs": "Programs"
+  },
   "hook_errors": {
     "service_unavailable": "Service unavailable",
     "not_signed_in": "Not signed in",

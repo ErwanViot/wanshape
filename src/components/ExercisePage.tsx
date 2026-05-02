@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useLocation, useParams } from 'react-router';
 import { getExerciseBySlug } from '../data/exercises.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { JsonLd } from '../lib/JsonLd.tsx';
+import { breadcrumbJsonLd, howToJsonLd } from '../lib/jsonld.ts';
 import { DIFFICULTY_COLORS } from '../types/exercise.ts';
 import { slugify } from '../utils/exerciseLinks.ts';
 import { ContentSection } from './ContentSection.tsx';
@@ -11,6 +13,7 @@ import { ContentSection } from './ContentSection.tsx';
 export function ExercisePage() {
   const { t } = useTranslation('explore');
   const { t: td } = useTranslation('exercises_data');
+  const { t: tc } = useTranslation('common');
   const { slug } = useParams<{ slug: string }>();
   const { hash } = useLocation();
   const exercise = slug ? getExerciseBySlug(slug) : undefined;
@@ -44,8 +47,24 @@ export function ExercisePage() {
   const tips = td(`${exercise.slug}.tips`, { returnObjects: true }) as string[];
   const commonMistakes = td(`${exercise.slug}.commonMistakes`, { returnObjects: true }) as string[];
 
+  const howToData = howToJsonLd({
+    name,
+    description: shortDescription,
+    url: `/exercices/${exercise.slug}`,
+    image: exercise.image,
+    supply: muscles,
+    steps: [{ text: execution }],
+  });
+  const breadcrumbData = breadcrumbJsonLd([
+    { name: tc('breadcrumb.home'), url: '/' },
+    { name: tc('breadcrumb.exercises'), url: '/exercices' },
+    { name, url: `/exercices/${exercise.slug}` },
+  ]);
+
   return (
     <>
+      <JsonLd data={howToData} />
+      <JsonLd data={breadcrumbData} />
       {/* Hero */}
       <div className="relative">
         <div className="h-48 sm:h-56 overflow-hidden">
