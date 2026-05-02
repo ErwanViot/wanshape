@@ -14,6 +14,15 @@
     "add_meal_modal_aria": "Add a meal",
     "footer_source": "Food database: ANSES — CIQUAL Table (Etalab 2.0 licence)"
   },
+  "date_selector": {
+    "today": "today",
+    "yesterday": "yesterday",
+    "tomorrow": "tomorrow",
+    "previous_day": "Previous day",
+    "next_day": "Next day",
+    "back_to_today": "Back to today",
+    "editing_past_notice": "You're editing a past day."
+  },
   "setup": {
     "title": "Calorie target · Wan2Fit",
     "description": "Set your daily calorie target without sharing your body data.",
