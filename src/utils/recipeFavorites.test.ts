@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { computeToggledFavorites } from './useRecipeFavorites.ts';
+import { computeToggledFavorites } from './recipeFavorites.ts';
 
 describe('computeToggledFavorites', () => {
   it('adds the key when absent', () => {

@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
+import { computeToggledFavorites } from '../utils/recipeFavorites.ts';
 
 export interface UseRecipeFavoritesResult {
   /** Set of recipe_keys the current user has favorited. Empty for visitors. */
@@ -16,14 +17,6 @@ export interface UseRecipeFavoritesResult {
    * disable every other heart on the page during the round-trip.
    */
   pendingKey: string | null;
-}
-
-/** Pure: returns the new set after toggling `key`. Exported for unit tests. */
-export function computeToggledFavorites(current: ReadonlySet<string>, key: string): Set<string> {
-  const next = new Set(current);
-  if (next.has(key)) next.delete(key);
-  else next.add(key);
-  return next;
 }
 
 /**
