@@ -7,6 +7,10 @@
  * with a French locale, captures the rendered DOM (including JSON-LD structured
  * data), and writes `dist/<route>/index.html`. Also regenerates `dist/sitemap.xml`.
  *
+ * Locale: pre-rendering is FR-only by design. The SPA hydrates client-side and
+ * lets users toggle EN via i18next; a single FR snapshot is enough for the FR
+ * audience and matches `<html lang="fr">` in `index.html`.
+ *
  * Designed to run after `vite build`.
  */
 import { spawn } from 'node:child_process';
@@ -54,6 +58,12 @@ try {
       await page.goto(url, { waitUntil: 'networkidle', timeout: NAV_TIMEOUT_MS });
       await page.waitForTimeout(SETTLE_MS);
       const html = await page.content();
+      // SPA fallback always returns HTTP 200, so detect the NotFoundPage marker
+      // instead — guards against silently capturing a 404 for routes listed in
+      // seoRoutes but missing from the router.
+      if (route.path !== '/' && /text-brand[^"]*">404</.test(html)) {
+        throw new Error('route resolved to NotFoundPage (404)');
+      }
       const outDir = route.path === '/' ? DIST : join(DIST, route.path);
       mkdirSync(outDir, { recursive: true });
       writeFileSync(join(outDir, 'index.html'), html);

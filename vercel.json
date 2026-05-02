@@ -1,7 +1,7 @@
 {
   "installCommand": "dnf install -y nss nspr atk at-spi2-atk at-spi2-core cups-libs libdrm libxkbcommon mesa-libgbm alsa-lib pango cairo libXcomposite libXdamage libXfixes libXrandr libXtst libXScrnSaver && npm install && npx playwright install chromium",
   "rewrites": [
-    { "source": "/((?!assets|sessions|images|icons|logo-wan2fit\\.png|icon-192\\.png|icon-512\\.png|favicon\\.ico|manifest\\.webmanifest|sw\\.js|theme-init\\.js).*)", "destination": "/index.html" }
+    { "source": "/((?!assets|sessions|images|icons|sitemap\\.xml|robots\\.txt|logo-wan2fit\\.png|icon-192\\.png|icon-512\\.png|favicon\\.ico|manifest\\.webmanifest|sw\\.js|theme-init\\.js).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

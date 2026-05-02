@@ -40,7 +40,7 @@ export function howToJsonLd(input: HowToInput) {
     step: input.steps.map((s, i) => ({
       '@type': 'HowToStep',
       position: i + 1,
-      name: s.name ?? `Step ${i + 1}`,
+      name: s.name ?? `Étape ${i + 1}`,
       text: s.text,
     })),
     url: `${SITE_URL}${input.url}`,
@@ -66,7 +66,7 @@ export function articleJsonLd(input: ArticleInput) {
     image: input.image ? absoluteUrl(input.image) : undefined,
     datePublished: input.datePublished,
     dateModified: input.dateModified ?? input.datePublished,
-    inLanguage: input.inLanguage ?? 'fr',
+    inLanguage: input.inLanguage ?? 'fr-FR',
     author: { '@type': 'Organization', name: 'WAN SOFT' },
     publisher: {
       '@type': 'Organization',
@@ -94,7 +94,7 @@ export function courseJsonLd(input: CourseInput) {
     description: input.description,
     url: `${SITE_URL}${input.url}`,
     image: input.image ? absoluteUrl(input.image) : undefined,
-    inLanguage: input.inLanguage ?? 'fr',
+    inLanguage: input.inLanguage ?? 'fr-FR',
     provider: { '@type': 'Organization', name: 'Wan2Fit', sameAs: SITE_URL },
     hasCourseInstance: {
       '@type': 'CourseInstance',

@@ -55,7 +55,7 @@ export function ProgramContentPage() {
     url: `/programme/${slug}`,
     image,
     duration,
-    inLanguage: i18n.language?.startsWith('en') ? 'en' : 'fr',
+    inLanguage: i18n.language?.startsWith('en') ? 'en-US' : 'fr-FR',
   });
   const breadcrumbData = breadcrumbJsonLd([
     { name: tc('breadcrumb.home'), url: '/' },
