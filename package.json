@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check:i18n": "node scripts/check-i18n.mjs",
-    "migrate:daily-sessions": "node scripts/migrate-daily-sessions.mjs"
+    "migrate:daily-sessions": "node scripts/migrate-daily-sessions.mjs",
+    "seed:recipes": "tsx scripts/seed-recipes.ts"
   },
   "dependencies": {
     "@sentry/react": "^10.45.0",
