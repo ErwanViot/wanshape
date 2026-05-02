@@ -1,0 +1,60 @@
+{
+  "list": {
+    "title": "Wan2Fit Recipes · Sport and nutrition cooking",
+    "description": "49 recipes built for performance, recovery, and everyday meals. Filter by category, tag, ingredient.",
+    "heading": "Recipes",
+    "subtitle": "49 recipes built for performance, recovery, and everyday meals.",
+    "empty": "No recipe matches your filters.",
+    "count_one": "{{count}} recipe",
+    "count_other": "{{count}} recipes"
+  },
+  "detail": {
+    "title_fallback": "Recipe · Wan2Fit",
+    "description_fallback": "A Wan2Fit recipe.",
+    "not_found_title": "Recipe not found",
+    "not_found_body": "This recipe doesn't exist or has been removed.",
+    "back_to_list": "All recipes",
+    "prep_time": "Prep time",
+    "servings": "Servings",
+    "difficulty": "Difficulty",
+    "nutrition_heading": "Nutrition facts",
+    "nutrition_per_serving_one": "For {{count}} serving",
+    "nutrition_per_serving_other": "For {{count}} servings",
+    "ingredients_heading": "Ingredients",
+    "steps_heading": "Steps",
+    "tags_heading": "Tags"
+  },
+  "filters": {
+    "search_placeholder": "Search by name or ingredient…",
+    "category_all": "All",
+    "category_aria": "Filter by category",
+    "tags_toggle": "Filter by tag ({{n}})",
+    "reset": "Reset filters"
+  },
+  "category": {
+    "pre": "Pre-workout",
+    "post": "Post-workout",
+    "breakfast": "Breakfast",
+    "recovery": "Recovery",
+    "snack": "Protein snack",
+    "main": "Everyday meals",
+    "dessert": "Desserts",
+    "base": "Bases & pastes"
+  },
+  "difficulty": {
+    "facile": "easy",
+    "moyen": "medium",
+    "difficile": "hard"
+  },
+  "macro": {
+    "calories": "Calories",
+    "protein": "Protein",
+    "carbs": "Carbs",
+    "fat": "Fat",
+    "fiber": "Fiber"
+  },
+  "card": {
+    "kcal": "{{n}} kcal",
+    "prep_min": "{{n}} min"
+  }
+}

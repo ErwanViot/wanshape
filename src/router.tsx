@@ -63,6 +63,12 @@ const LazyNutritionPage = lazy(() =>
 const LazyNutritionSetupPage = lazy(() =>
   import('./components/NutritionSetupPage.tsx').then((m) => ({ default: m.NutritionSetupPage })),
 );
+const LazyRecipeListPage = lazy(() =>
+  import('./components/recipes/RecipeListPage.tsx').then((m) => ({ default: m.RecipeListPage })),
+);
+const LazyRecipeDetailPage = lazy(() =>
+  import('./components/recipes/RecipeDetailPage.tsx').then((m) => ({ default: m.RecipeDetailPage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -118,6 +124,23 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyExercisePage />
+          </Lazy>
+        ),
+      },
+      // Public recipes — accessible without auth, indexable by SEO
+      {
+        path: 'nutrition/recettes',
+        element: (
+          <Lazy>
+            <LazyRecipeListPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'nutrition/recettes/:slug',
+        element: (
+          <Lazy>
+            <LazyRecipeDetailPage />
           </Lazy>
         ),
       },
