@@ -1,18 +1,25 @@
 import { ArrowLeft, ChefHat, Clock, Flame, Users } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router';
+import { Link, useLocation, useParams } from 'react-router';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { useRecipe } from '../../hooks/useRecipes.ts';
+import { JsonLd } from '../../lib/JsonLd.tsx';
+import { breadcrumbJsonLd, minutesToISODuration, recipeJsonLd } from '../../lib/jsonld.ts';
+import { getRecipeLocaleFromPath, recipeListingUrlForLocale } from '../../utils/localePath.ts';
 
 export function RecipeDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useTranslation('recipes');
+  const { pathname } = useLocation();
+  const locale = getRecipeLocaleFromPath(pathname);
   const { recipe, loading, error } = useRecipe(slug);
 
   useDocumentHead({
     title: recipe ? `${recipe.name} · Wan2Fit` : t('detail.title_fallback'),
     description: recipe?.description ?? t('detail.description_fallback'),
   });
+
+  const listingUrl = recipeListingUrlForLocale(locale);
 
   if (loading) {
     return (
@@ -33,7 +40,7 @@ export function RecipeDetailPage() {
         <div className="max-w-2xl mx-auto text-center space-y-4">
           <h1 className="font-display text-2xl font-bold text-heading">{t('detail.not_found_title')}</h1>
           <p className="text-sm text-muted">{error ?? t('detail.not_found_body')}</p>
-          <Link to="/nutrition/recettes" className="inline-block text-sm text-brand hover:underline">
+          <Link to={listingUrl} className="inline-block text-sm text-brand hover:underline">
             {t('detail.back_to_list')}
           </Link>
         </div>
@@ -48,11 +55,41 @@ export function RecipeDetailPage() {
     { label: t('macro.fat'), value: recipe.nutrition.fat, unit: 'g' },
   ];
 
+  // Schema.org Recipe payload — drives Google Rich Results and gives LLMs a
+  // structured view of the recipe (ingredients, steps, nutrition).
+  const recipeSchema = recipeJsonLd({
+    name: recipe.name,
+    description: recipe.description,
+    url: pathname,
+    inLanguage: locale === 'en' ? 'en-US' : 'fr-FR',
+    recipeCategory: t(`category.${recipe.category}`),
+    recipeYield: recipe.servings,
+    totalTime: minutesToISODuration(recipe.prep_time_min ?? null),
+    recipeIngredient: recipe.ingredients.map((ing) => `${ing.qty ? `${ing.qty} ` : ''}${ing.item}`.trim()),
+    recipeInstructions: recipe.steps,
+    nutrition: {
+      calories: recipe.nutrition.calories,
+      protein_g: recipe.nutrition.protein,
+      carbs_g: recipe.nutrition.carbs,
+      fat_g: recipe.nutrition.fat,
+      fiber_g: recipe.nutrition.fiber,
+      servings: recipe.servings,
+    },
+    keywords: recipe.tags,
+  });
+  const breadcrumbsSchema = breadcrumbJsonLd([
+    { name: t('breadcrumb.home', { ns: 'common' }), url: '/' },
+    { name: t('list.heading'), url: listingUrl },
+    { name: recipe.name, url: pathname },
+  ]);
+
   return (
     <article className="px-6 md:px-10 py-8">
+      <JsonLd data={breadcrumbsSchema} />
+      <JsonLd data={recipeSchema} />
       <div className="max-w-3xl mx-auto space-y-8">
         <Link
-          to="/nutrition/recettes"
+          to={listingUrl}
           className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-body transition-colors"
         >
           <ArrowLeft className="w-4 h-4" aria-hidden="true" />

@@ -1,13 +1,19 @@
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { useRecipes } from '../../hooks/useRecipes.ts';
+import { JsonLd } from '../../lib/JsonLd.tsx';
+import { breadcrumbJsonLd, SITE_URL } from '../../lib/jsonld.ts';
 import type { RecipeCategory } from '../../types/recipe.ts';
+import { getRecipeLocaleFromPath, recipeUrlForLocale } from '../../utils/localePath.ts';
 import { RecipeCard } from './RecipeCard.tsx';
 import { RecipeFilters } from './RecipeFilters.tsx';
 
 export function RecipeListPage() {
   const { t } = useTranslation('recipes');
+  const { pathname } = useLocation();
+  const locale = getRecipeLocaleFromPath(pathname);
   useDocumentHead({
     title: t('list.title'),
     description: t('list.description'),
@@ -46,8 +52,27 @@ export function RecipeListPage() {
     setSelectedTags([]);
   }
 
+  // ItemList schema for the listing helps Google understand the page structure
+  // and surface individual recipes as separate results.
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: recipes.slice(0, 30).map((r, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE_URL}${recipeUrlForLocale(locale, r.slug)}`,
+      name: r.name,
+    })),
+  };
+  const breadcrumbsJsonLd = breadcrumbJsonLd([
+    { name: t('breadcrumb.home', { ns: 'common' }), url: '/' },
+    { name: t('list.heading'), url: pathname },
+  ]);
+
   return (
     <div className="px-6 md:px-10 lg:px-14 py-8">
+      <JsonLd data={breadcrumbsJsonLd} />
+      <JsonLd data={itemListJsonLd} />
       <div className="max-w-5xl mx-auto space-y-8">
         <header className="space-y-2">
           <h1 className="font-display text-2xl sm:text-3xl font-black text-heading">{t('list.heading')}</h1>

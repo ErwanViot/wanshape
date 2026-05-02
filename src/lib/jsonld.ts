@@ -108,3 +108,94 @@ function absoluteUrl(path: string): string {
   if (path.startsWith('http')) return path;
   return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
 }
+
+export interface RecipeJsonLdInput {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+  inLanguage?: string;
+  recipeCategory?: string;
+  recipeYield?: number;
+  /** ISO 8601 duration, e.g. "PT15M". Built by `minutesToISODuration` below. */
+  totalTime?: string;
+  recipeIngredient: string[];
+  recipeInstructions: string[];
+  nutrition?: {
+    calories: number;
+    protein_g: number;
+    carbs_g: number;
+    fat_g: number;
+    fiber_g?: number;
+    /** Servings the nutrition values reference, used to fill `servingSize`. */
+    servings: number;
+  };
+  keywords?: string[];
+}
+
+/** Convert a positive minute count to an ISO 8601 duration ("PT15M"). */
+export function minutesToISODuration(minutes: number | null | undefined): string | undefined {
+  if (minutes == null || minutes <= 0) return undefined;
+  return `PT${Math.round(minutes)}M`;
+}
+
+const STEP_NAME_MAX_CHARS = 60;
+
+/**
+ * Derives a short HowToStep `name` from the full step text. Splits on the first
+ * sentence terminator and truncates to keep the name digestible in rich-result
+ * cards. Falls back to an indexed placeholder for unusable input.
+ */
+export function stepName(text: string, index: number): string {
+  const trimmed = text.trim();
+  if (!trimmed) return `Étape ${index}`;
+  // First sentence — split on a terminator followed by whitespace OR end of
+  // string, then strip any trailing terminator + whitespace.
+  const firstSentence = trimmed
+    .split(/(?<=[.!?])(?:\s|$)/, 1)[0]
+    .replace(/[.!?\s]+$/, '')
+    .trim();
+  if (firstSentence.length <= STEP_NAME_MAX_CHARS) return firstSentence;
+  return `${firstSentence.slice(0, STEP_NAME_MAX_CHARS - 1).trimEnd()}…`;
+}
+
+export function recipeJsonLd(input: RecipeJsonLdInput) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Recipe',
+    name: input.name,
+    description: input.description,
+    image: input.image ? absoluteUrl(input.image) : undefined,
+    inLanguage: input.inLanguage ?? 'fr-FR',
+    recipeCategory: input.recipeCategory,
+    recipeYield: input.recipeYield,
+    totalTime: input.totalTime,
+    recipeIngredient: input.recipeIngredient,
+    recipeInstructions: input.recipeInstructions.map((step, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      // Google's Recipe rich-results validator wants a non-empty `name` per
+      // step. Use the first sentence (truncated to 60 chars) so the value is
+      // descriptive without duplicating the whole step text.
+      name: stepName(step, i + 1),
+      text: step,
+    })),
+    nutrition: input.nutrition
+      ? {
+          '@type': 'NutritionInformation',
+          calories: `${input.nutrition.calories} kcal`,
+          proteinContent: `${input.nutrition.protein_g} g`,
+          carbohydrateContent: `${input.nutrition.carbs_g} g`,
+          fatContent: `${input.nutrition.fat_g} g`,
+          fiberContent: input.nutrition.fiber_g != null ? `${input.nutrition.fiber_g} g` : undefined,
+          // Schema.org expects a measurable description, not a fraction. Our
+          // recipes don't expose grams-per-serving, so we use the canonical
+          // "1 serving" string which the rich-results tester accepts.
+          servingSize: '1 serving',
+        }
+      : undefined,
+    keywords: input.keywords?.length ? input.keywords.join(', ') : undefined,
+    url: `${SITE_URL}${input.url}`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${input.url}` },
+  };
+}

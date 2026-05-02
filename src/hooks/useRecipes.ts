@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
 import { supabase } from '../lib/supabase.ts';
 import type { Recipe, RecipeCategory, RecipeLocale } from '../types/recipe.ts';
+import { getRecipeLocaleFromPath } from '../utils/localePath.ts';
 
 export interface RecipesFilters {
   category?: RecipeCategory | null;
@@ -15,19 +16,19 @@ export interface UseRecipesResult {
   error: string | null;
 }
 
-function detectLocale(language: string): RecipeLocale {
-  return language?.startsWith('en') ? 'en' : 'fr';
-}
-
 /**
  * Public listing — no auth required (recipes RLS allows anon SELECT when
  * is_published = TRUE). Filters apply on the result set client-side because
  * the catalogue is small (≤ 100 rows per locale) and avoids index-juggling
  * on every filter combo.
+ *
+ * Locale is derived from the URL (`/en/...` ⇒ en, otherwise fr) rather than
+ * `i18n.language` so the rendered locale matches the indexed URL. The user's
+ * preference toggle in /parametres switches the URL itself.
  */
 export function useRecipes(filters: RecipesFilters = {}): UseRecipesResult {
-  const { i18n } = useTranslation();
-  const locale = detectLocale(i18n.language);
+  const { pathname } = useLocation();
+  const locale: RecipeLocale = getRecipeLocaleFromPath(pathname);
 
   const query = useQuery<{ recipes: Recipe[]; error: string | null }>({
     queryKey: ['recipes', locale],
@@ -82,18 +83,17 @@ export function applyFilters(recipes: Recipe[], filters: RecipesFilters): Recipe
 }
 
 /**
- * Slug↔locale invariant: each (recipe_key, locale) row has its own slug.
- * If the user switches language while sitting on a FR slug, this hook will
- * legitimately return `recipe: null` because the EN row has a different slug.
- * Per-recipe URL rewrite/redirect on locale toggle lands in PR 5.
+ * Locale comes from the URL (`/en/...` is en, anything else is fr). This way
+ * a deep-linked French slug under `/nutrition/recettes/...` keeps querying
+ * FR rows even if the user has set their UI preference to English.
  */
 export function useRecipe(slug: string | undefined): {
   recipe: Recipe | null;
   loading: boolean;
   error: string | null;
 } {
-  const { i18n } = useTranslation();
-  const locale = detectLocale(i18n.language);
+  const { pathname } = useLocation();
+  const locale: RecipeLocale = getRecipeLocaleFromPath(pathname);
 
   const query = useQuery<{ recipe: Recipe | null; error: string | null }>({
     queryKey: ['recipe', locale, slug ?? null],
