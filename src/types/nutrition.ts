@@ -129,6 +129,32 @@ export type DailyNutritionSummary = {
   };
 };
 
+/**
+ * Lightweight per-day rollup used by historical views (7d strip, 30d heatmap).
+ * Drops `byMealType` and `target` to keep payload small over a 30-day window.
+ */
+export type DailyNutritionBrief = {
+  /** YYYYMMDD in the user's local timezone. */
+  date: string;
+  totals: DailyNutritionTotals;
+  hasEntries: boolean;
+};
+
+export type NutritionRangeSummary = {
+  /** Inclusive YYYYMMDD bounds, oldest to newest. */
+  startDate: string;
+  endDate: string;
+  /** One entry per day in [startDate, endDate], oldest first. */
+  days: DailyNutritionBrief[];
+  /** Mean calories on the most recent 7 days; null if none had entries. */
+  avgCalories7d: number | null;
+  /** Mean calories on the full window; null if none had entries. */
+  avgCaloriesRange: number | null;
+  daysWithEntries: number;
+  /** Days hitting the (non-null) calorie target on the most recent 7 days. */
+  daysHittingTargetWeek: number | null;
+};
+
 export type TextEstimate = {
   name: string;
   calories: number;

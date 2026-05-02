@@ -15,6 +15,7 @@ import { DailyFeed } from './nutrition/DailyFeed.tsx';
 import { DateSelector } from './nutrition/DateSelector.tsx';
 import { InsightCard } from './nutrition/InsightCard.tsx';
 import { MealEntryForm } from './nutrition/MealEntryForm.tsx';
+import { NutritionHistorySection } from './nutrition/NutritionHistorySection.tsx';
 
 const RETRO_WINDOW_DAYS = 7;
 
@@ -201,6 +202,8 @@ export function NutritionPage() {
         )}
 
         {error && <p className="text-sm text-red-400">{error}</p>}
+
+        <NutritionHistorySection />
 
         {formOpen && (
           <div className="fixed inset-0 z-[60] h-[100dvh] flex items-end sm:items-center justify-center p-0 sm:p-6">
