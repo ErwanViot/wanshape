@@ -39,6 +39,12 @@ export function RecipeListPage() {
   });
   const { user } = useAuth();
   const { favoriteKeys } = useRecipeFavorites();
+  // Favourites are locale-agnostic in the schema (recipe_key only), but the
+  // section here renders rows from the *current* locale's catalogue. As long
+  // as every recipe ships in both FR and EN (the seed enforces parity), every
+  // favourited recipe surfaces correctly under either URL. If one day a
+  // recipe shipped FR-only, it would silently disappear when the user views
+  // the EN listing — revisit when that happens.
   const favoriteRecipes = user ? allRecipes.filter((r) => favoriteKeys.has(r.recipe_key)) : [];
 
   const availableTags = useMemo(() => {

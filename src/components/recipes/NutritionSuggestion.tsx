@@ -24,6 +24,10 @@ export function NutritionSuggestion({ seed }: NutritionSuggestionProps) {
 
   if (loading || !recipe) return null;
 
+  // Unlike RecipeListPage / RecipeDetailPage which derive locale from the URL,
+  // EndScreen lives at /seance/play (no /en/ prefix), so the locale must come
+  // from the user's i18n preference instead. Generates an /en/ recipe URL
+  // when the UI is in English even though the parent route is FR-pathed.
   const locale = i18n.language?.startsWith('en') ? 'en' : 'fr';
   const href = recipeUrlForLocale(locale, recipe.slug);
 

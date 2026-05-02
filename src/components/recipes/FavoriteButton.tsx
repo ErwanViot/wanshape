@@ -20,11 +20,12 @@ export interface FavoriteButtonProps {
 export function FavoriteButton({ recipeKey, compact = false }: FavoriteButtonProps) {
   const { t } = useTranslation('recipes');
   const { user } = useAuth();
-  const { favoriteKeys, toggle, pending } = useRecipeFavorites();
+  const { favoriteKeys, toggle, pendingKey } = useRecipeFavorites();
 
   if (!user) return null;
 
   const isFavorite = favoriteKeys.has(recipeKey);
+  const isPending = pendingKey === recipeKey;
   const label = isFavorite ? t('favorites.remove') : t('favorites.add');
 
   return (
@@ -35,7 +36,7 @@ export function FavoriteButton({ recipeKey, compact = false }: FavoriteButtonPro
         e.stopPropagation();
         void toggle(recipeKey);
       }}
-      disabled={pending}
+      disabled={isPending}
       aria-pressed={isFavorite}
       aria-label={label}
       title={label}

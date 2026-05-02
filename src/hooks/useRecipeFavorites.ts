@@ -11,8 +11,11 @@ export interface UseRecipeFavoritesResult {
   error: string | null;
   /** Toggles a recipe's favourite state with optimistic update. No-op for visitors. */
   toggle: (recipeKey: string) => Promise<void>;
-  /** True when a mutation is in flight — used to disable the toggle button. */
-  pending: boolean;
+  /**
+   * recipe_key currently flipping. Per-key so toggling one heart doesn't
+   * disable every other heart on the page during the round-trip.
+   */
+  pendingKey: string | null;
 }
 
 /** Pure: returns the new set after toggling `key`. Exported for unit tests. */
@@ -110,6 +113,6 @@ export function useRecipeFavorites(): UseRecipeFavoritesResult {
     loading: query.isPending && !!userId,
     error: query.data?.error ?? (query.isError ? String(query.error ?? '') : null),
     toggle,
-    pending: mutation.isPending,
+    pendingKey: mutation.isPending ? (mutation.variables ?? null) : null,
   };
 }
