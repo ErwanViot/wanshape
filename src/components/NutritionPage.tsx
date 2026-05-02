@@ -29,7 +29,10 @@ export function NutritionPage() {
   const isPremium = authProfile?.subscription_tier === 'premium';
   const { profile } = useNutritionProfile();
 
-  const today = todayYYYYMMDD();
+  // Lazy-init so `today` is computed once at mount, not on every render.
+  // Prevents a midnight rollover from silently re-clamping a user-chosen
+  // past date out of the now-shifted [today-7, today] window.
+  const [today] = useState(() => todayYYYYMMDD());
   const minDateKey = useMemo(() => shiftYYYYMMDD(today, -RETRO_WINDOW_DAYS) ?? today, [today]);
   const [searchParams, setSearchParams] = useSearchParams();
   // Clamp the URL-provided date into the allowed retro window so external
@@ -156,11 +159,9 @@ export function NutritionPage() {
 
         <DateSelector dateKey={dateKey} minDateKey={minDateKey} maxDateKey={today} onChange={setDateKey} />
 
-        {isPastDay && (
-          <output className="-mt-4 block text-center text-xs text-muted">
-            {t('date_selector.editing_past_notice')}
-          </output>
-        )}
+        {/* Plain paragraph (no role/live region): the notice is editorial */}
+        {/* and follows a user gesture, no need for a screen-reader announce. */}
+        {isPastDay && <p className="-mt-4 text-center text-xs text-muted">{t('date_selector.editing_past_notice')}</p>}
 
         <section className="flex flex-col sm:flex-row items-center sm:items-start gap-6 rounded-2xl bg-surface-card border border-card-border p-6">
           <div className="shrink-0">
