@@ -14,6 +14,15 @@
     "add_meal_modal_aria": "Ajouter un repas",
     "footer_source": "Base d'aliments : ANSES — Table CIQUAL (licence Etalab 2.0)"
   },
+  "date_selector": {
+    "today": "aujourd'hui",
+    "yesterday": "hier",
+    "tomorrow": "demain",
+    "previous_day": "Jour précédent",
+    "next_day": "Jour suivant",
+    "back_to_today": "Revenir à aujourd'hui",
+    "editing_past_notice": "Tu modifies une journée passée."
+  },
   "setup": {
     "title": "Cible nutritionnelle · Wan2Fit",
     "description": "Définis ta cible calorique quotidienne sans partager tes données corporelles.",
