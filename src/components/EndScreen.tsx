@@ -9,6 +9,7 @@ import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
 import { computeDifficulty } from '../utils/sessionDifficulty.ts';
 import { shareSession } from '../utils/share.ts';
+import { NutritionSuggestion } from './recipes/NutritionSuggestion.tsx';
 
 interface Props {
   session: Session;
@@ -170,6 +171,7 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
 
       {!user && supabase && <SignupNudge />}
       {user && !authLoading && profile && !isPremium && <PremiumTeaser />}
+      {user && <NutritionSuggestion seed={`${session.date}-${session.title}`} />}
 
       <div className="flex flex-col gap-3 mt-4 w-full max-w-xs">
         <button

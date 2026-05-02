@@ -56,5 +56,14 @@
   "card": {
     "kcal": "{{n}} kcal",
     "prep_min": "{{n}} min"
+  },
+  "favorites": {
+    "add": "Ajouter aux favoris",
+    "remove": "Retirer des favoris",
+    "section_heading_one": "Mon favori",
+    "section_heading_other": "Mes favoris ({{count}})"
+  },
+  "nutrition_suggestion": {
+    "label": "Idée recette pour récupérer"
   }
 }
