@@ -32,13 +32,29 @@ interface SeedRecipe {
   category: RecipeCategory;
   name: string;
   description: string;
-  prepTime: number;
-  difficulty: RecipeDifficulty;
+  /** May be missing on future entries; the DB column is nullable. */
+  prepTime?: number | null;
+  difficulty?: RecipeDifficulty | null;
   servings: number;
   nutrition: RecipeNutrition;
   ingredients: RecipeIngredient[];
   steps: string[];
   tags: string[];
+}
+
+/**
+ * Some seed entries use `qty` as free-form seasoning text with an empty `item`
+ * (e.g. `{ qty: "Sel, poivre, paprika fumé", item: "" }`). The UI iterates on
+ * `item` to render the ingredient name, which would print blank rows.
+ * Normalise these into `{ qty: "", item: "<text>" }` so consumers stay simple.
+ */
+function normaliseIngredients(ingredients: RecipeIngredient[]): RecipeIngredient[] {
+  return ingredients.map((ing) => {
+    if ((!ing.item || ing.item.trim() === '') && ing.qty?.trim()) {
+      return { qty: '', item: ing.qty.trim() };
+    }
+    return ing;
+  });
 }
 
 interface SeedFile {
@@ -78,11 +94,11 @@ async function main() {
       category: r.category,
       name: r.name,
       description: r.description,
-      prep_time_min: r.prepTime,
-      difficulty: r.difficulty,
+      prep_time_min: r.prepTime ?? null,
+      difficulty: r.difficulty ?? null,
       servings: r.servings,
       nutrition: r.nutrition,
-      ingredients: r.ingredients,
+      ingredients: normaliseIngredients(r.ingredients),
       steps: r.steps,
       tags: r.tags,
       is_published: true,

@@ -10,10 +10,17 @@
  * server-side, so any drift in the algorithm fails fast at insert time.
  */
 export function slugify(input: string): string {
-  return input
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '') // strip combining diacritical marks
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+  return (
+    input
+      // Ligatures aren't decomposable by NFD — handle them explicitly so URLs
+      // stay readable. "Œuf à la coque" should slugify to "oeuf-..." not "uf-...".
+      .replace(/[Œœ]/g, 'oe')
+      .replace(/[Ææ]/g, 'ae')
+      .replace(/ß/g, 'ss')
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '') // strip combining diacritical marks
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+  );
 }

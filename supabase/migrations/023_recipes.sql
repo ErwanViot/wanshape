@@ -71,6 +71,13 @@ create trigger recipes_updated_at
 
 -- Recipe favorites — per-user bookmarks. recipe_key is the locale-agnostic
 -- identifier so favoriting persists across locale toggles.
+--
+-- We deliberately DO NOT declare a FK on recipe_key. The natural target would
+-- be recipes(recipe_key) but recipes has a composite PK (recipe_key, locale)
+-- so a plain FK isn't possible without locale leakage. Since the catalogue is
+-- service_role-only and recipes are never deleted in this schema (is_published
+-- toggles instead), the integrity risk is bounded; favourites pointing at an
+-- unpublished recipe are silently filtered by the SELECT-side join in PR 4.
 create table if not exists public.recipe_favorites (
   user_id uuid not null references auth.users(id) on delete cascade,
   recipe_key text not null,

@@ -8,8 +8,14 @@ describe('slugify', () => {
 
   it('strips French diacritics', () => {
     expect(slugify('Pâté de campagne')).toBe('pate-de-campagne');
-    expect(slugify('Œuf à la coque')).toBe('uf-a-la-coque');
     expect(slugify("Beurre d'amande")).toBe('beurre-d-amande');
+  });
+
+  it('expands non-decomposable ligatures so URLs stay readable', () => {
+    expect(slugify('Œuf à la coque')).toBe('oeuf-a-la-coque');
+    expect(slugify('Bœuf braisé')).toBe('boeuf-braise');
+    expect(slugify('Cæsar salad')).toBe('caesar-salad');
+    expect(slugify('Straße')).toBe('strasse');
   });
 
   it('strips parentheses and punctuation', () => {
@@ -27,7 +33,7 @@ describe('slugify', () => {
   });
 
   it('handles real seed names without collision', () => {
-    expect(slugify('Toast patate douce & œuf mollet')).toBe('toast-patate-douce-uf-mollet');
+    expect(slugify('Toast patate douce & œuf mollet')).toBe('toast-patate-douce-oeuf-mollet');
     expect(slugify("Pain complet, beurre d'amande & banane")).toBe('pain-complet-beurre-d-amande-banane');
     expect(slugify('Yaourt grec + miel + flocons')).toBe('yaourt-grec-miel-flocons');
   });
