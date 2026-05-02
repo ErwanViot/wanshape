@@ -57,21 +57,14 @@ try {
   let captured = 0;
 
   for (const route of routes) {
-    const url = `${BASE}${route.path}`;
-    // Bilingual pages render under their URL's locale (the components read it
-    // from the path). Setting the browser locale to en-US for /en/ routes also
-    // makes useTranslation honour `accept-language` on the captured tab.
-    const browserLocale = route.path.startsWith('/en/') ? 'en-US' : 'fr-FR';
+    const isEnRoute = route.path.startsWith('/en/');
+    // Bilingual pages render under their URL's locale (recipe components read
+    // it from the path). The `?lng=en` query param drives i18next's initial
+    // language detection so the chrome (header, nav) renders in English too,
+    // matching the URL.
+    const url = `${BASE}${route.path}${isEnRoute ? '?lng=en' : ''}`;
     try {
-      const context = browser.contexts()[0] ?? (await browser.newContext({ locale: browserLocale }));
-      // The page reuses the same context; switching locale per route would
-      // require a new context, but we only need the differentiation for
-      // useTranslation's initial detection — overriding via `?lng=` works.
-      await page.goto(`${url}${route.path.startsWith('/en/') ? `?lng=en` : ''}`, {
-        waitUntil: 'networkidle',
-        timeout: NAV_TIMEOUT_MS,
-      });
-      void context;
+      await page.goto(url, { waitUntil: 'networkidle', timeout: NAV_TIMEOUT_MS });
       await page.waitForTimeout(SETTLE_MS);
       const rawHtml = await page.content();
       // SPA fallback always returns HTTP 200, so detect the NotFoundPage marker
@@ -90,7 +83,7 @@ try {
         skipped.push(route.path);
         continue;
       }
-      const html = injectHreflangs(rawHtml, route);
+      const html = postProcessHtml(rawHtml, route);
       const outDir = route.path === '/' ? DIST : join(DIST, route.path);
       mkdirSync(outDir, { recursive: true });
       writeFileSync(join(outDir, 'index.html'), html);
@@ -193,12 +186,24 @@ function isRecipeDetailPath(path: string): boolean {
   return /^\/(en\/)?nutrition\/(recettes|recipes)\/.+/.test(path);
 }
 
-function injectHreflangs(html: string, route: SeoRoute): string {
-  if (!route.alternates?.length) return html;
-  const links = route.alternates
-    .map((a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${SITE_URL}${a.href}">`)
-    .join('');
-  // Insert just before </head> — works for the prerendered Vite shell which
-  // always emits a single <head> closing tag.
-  return html.replace(/<\/head>/i, `${links}</head>`);
+/**
+ * Post-rendering tweaks applied to every captured HTML before writing it:
+ * - Inject hreflang `<link>` siblings under `<head>` for routes that have
+ *   declared alternates in seoRoutes.
+ * - For EN routes, swap the shell's `<html lang="fr">` for `<html lang="en">`
+ *   so the document's primary language matches its URL and content.
+ */
+function postProcessHtml(html: string, route: SeoRoute): string {
+  let next = html;
+  if (route.path.startsWith('/en/')) {
+    next = next.replace(/<html(\s[^>]*)?\slang="fr"/i, '<html$1 lang="en"');
+  }
+  if (route.alternates?.length) {
+    const links = route.alternates
+      .map((a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${SITE_URL}${a.href}">`)
+      .join('');
+    // Insert just before </head> — works for the Vite shell which emits one.
+    next = next.replace(/<\/head>/i, `${links}</head>`);
+  }
+  return next;
 }

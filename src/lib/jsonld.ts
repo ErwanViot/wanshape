@@ -139,6 +139,26 @@ export function minutesToISODuration(minutes: number | null | undefined): string
   return `PT${Math.round(minutes)}M`;
 }
 
+const STEP_NAME_MAX_CHARS = 60;
+
+/**
+ * Derives a short HowToStep `name` from the full step text. Splits on the first
+ * sentence terminator and truncates to keep the name digestible in rich-result
+ * cards. Falls back to an indexed placeholder for unusable input.
+ */
+export function stepName(text: string, index: number): string {
+  const trimmed = text.trim();
+  if (!trimmed) return `Étape ${index}`;
+  // First sentence — split on a terminator followed by whitespace OR end of
+  // string, then strip any trailing terminator + whitespace.
+  const firstSentence = trimmed
+    .split(/(?<=[.!?])(?:\s|$)/, 1)[0]
+    .replace(/[.!?\s]+$/, '')
+    .trim();
+  if (firstSentence.length <= STEP_NAME_MAX_CHARS) return firstSentence;
+  return `${firstSentence.slice(0, STEP_NAME_MAX_CHARS - 1).trimEnd()}…`;
+}
+
 export function recipeJsonLd(input: RecipeJsonLdInput) {
   return {
     '@context': 'https://schema.org',
@@ -154,6 +174,10 @@ export function recipeJsonLd(input: RecipeJsonLdInput) {
     recipeInstructions: input.recipeInstructions.map((step, i) => ({
       '@type': 'HowToStep',
       position: i + 1,
+      // Google's Recipe rich-results validator wants a non-empty `name` per
+      // step. Use the first sentence (truncated to 60 chars) so the value is
+      // descriptive without duplicating the whole step text.
+      name: stepName(step, i + 1),
       text: step,
     })),
     nutrition: input.nutrition
@@ -164,7 +188,10 @@ export function recipeJsonLd(input: RecipeJsonLdInput) {
           carbohydrateContent: `${input.nutrition.carbs_g} g`,
           fatContent: `${input.nutrition.fat_g} g`,
           fiberContent: input.nutrition.fiber_g != null ? `${input.nutrition.fiber_g} g` : undefined,
-          servingSize: `1 of ${input.nutrition.servings}`,
+          // Schema.org expects a measurable description, not a fraction. Our
+          // recipes don't expose grams-per-serving, so we use the canonical
+          // "1 serving" string which the rich-results tester accepts.
+          servingSize: '1 serving',
         }
       : undefined,
     keywords: input.keywords?.length ? input.keywords.join(', ') : undefined,

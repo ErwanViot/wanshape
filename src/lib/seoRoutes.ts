@@ -1,3 +1,9 @@
+/**
+ * BUILD-TIME ONLY — do not import from any module shipped to the browser.
+ * This file pulls in the recipe seed JSONs (~150 KB combined) to enumerate
+ * sitemap entries; importing it client-side would bundle that payload.
+ * The only legitimate consumer is `scripts/prerender.ts`.
+ */
 import enRecipes from '../../scripts/data/recipes_en_seed.json' with { type: 'json' };
 import frRecipes from '../../scripts/data/recipes_fr_seed.json' with { type: 'json' };
 import { EXERCISES_DATA } from '../data/exercises.ts';
