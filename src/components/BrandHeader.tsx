@@ -18,8 +18,22 @@ const NAV_ITEMS = [
     match: (p: string) => p === '/decouvrir' || p.startsWith('/formats') || p.startsWith('/exercices'),
   },
   { to: '/programmes', labelKey: 'programs', match: (p: string) => p.startsWith('/programme') },
+  // Recipes are public — exposed before the auth-only Nutrition entry so a
+  // visitor can still find them. Match both FR and EN URLs.
+  {
+    to: '/nutrition/recettes',
+    labelKey: 'recipes',
+    match: (p: string) => p.startsWith('/nutrition/recettes') || p.startsWith('/en/nutrition/recipes'),
+  },
   { to: '/tarifs', labelKey: 'pricing', match: (p: string) => p === '/tarifs' },
-  { to: '/nutrition', labelKey: 'nutrition', match: (p: string) => p.startsWith('/nutrition'), requiresAuth: true },
+  // Nutrition stays auth-only and matches only its own pages, not the
+  // public recipe sub-tree (which has its own entry above).
+  {
+    to: '/nutrition',
+    labelKey: 'nutrition',
+    match: (p: string) => p === '/nutrition' || p.startsWith('/nutrition/setup'),
+    requiresAuth: true,
+  },
   { to: '/suivi', labelKey: 'tracking', match: (p: string) => p === '/suivi', requiresAuth: true },
 ] as const;
 
