@@ -127,7 +127,9 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
-      // Public recipes — accessible without auth, indexable by SEO
+      // Public recipes — accessible without auth, indexable by SEO.
+      // FR is the canonical namespace; EN lives under `/en/` with localised
+      // path segments so the URLs themselves are translated for SEO.
       {
         path: 'nutrition/recettes',
         element: (
@@ -138,6 +140,22 @@ export const router = createBrowserRouter([
       },
       {
         path: 'nutrition/recettes/:slug',
+        element: (
+          <Lazy>
+            <LazyRecipeDetailPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/nutrition/recipes',
+        element: (
+          <Lazy>
+            <LazyRecipeListPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/nutrition/recipes/:slug',
         element: (
           <Lazy>
             <LazyRecipeDetailPage />
