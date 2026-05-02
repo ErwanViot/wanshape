@@ -6,6 +6,7 @@ import { useRecipe } from '../../hooks/useRecipes.ts';
 import { JsonLd } from '../../lib/JsonLd.tsx';
 import { breadcrumbJsonLd, minutesToISODuration, recipeJsonLd } from '../../lib/jsonld.ts';
 import { getRecipeLocaleFromPath, recipeListingUrlForLocale } from '../../utils/localePath.ts';
+import { FavoriteButton } from './FavoriteButton.tsx';
 
 export function RecipeDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -97,9 +98,12 @@ export function RecipeDetailPage() {
         </Link>
 
         <header className="space-y-3">
-          <span className="inline-block text-[10px] font-medium uppercase tracking-wider text-brand">
-            {t(`category.${recipe.category}`)}
-          </span>
+          <div className="flex items-start justify-between gap-3">
+            <span className="inline-block text-[10px] font-medium uppercase tracking-wider text-brand pt-1">
+              {t(`category.${recipe.category}`)}
+            </span>
+            <FavoriteButton recipeKey={recipe.recipe_key} />
+          </div>
           <h1 className="font-display text-3xl sm:text-4xl font-black text-heading leading-tight">{recipe.name}</h1>
           <p className="text-base text-body">{recipe.description}</p>
         </header>

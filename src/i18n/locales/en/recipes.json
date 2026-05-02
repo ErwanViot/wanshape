@@ -56,5 +56,14 @@
   "card": {
     "kcal": "{{n}} kcal",
     "prep_min": "{{n}} min"
+  },
+  "favorites": {
+    "add": "Add to favourites",
+    "remove": "Remove from favourites",
+    "section_heading_one": "My favourite",
+    "section_heading_other": "My favourites ({{count}})"
+  },
+  "nutrition_suggestion": {
+    "label": "Pair this session with a recipe"
   }
 }

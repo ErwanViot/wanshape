@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
+import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
+import { useRecipeFavorites } from '../../hooks/useRecipeFavorites.ts';
 import { useRecipes } from '../../hooks/useRecipes.ts';
 import { JsonLd } from '../../lib/JsonLd.tsx';
 import { breadcrumbJsonLd, SITE_URL } from '../../lib/jsonld.ts';
@@ -35,6 +37,15 @@ export function RecipeListPage() {
     tags: selectedTags,
     search,
   });
+  const { user } = useAuth();
+  const { favoriteKeys } = useRecipeFavorites();
+  // Favourites are locale-agnostic in the schema (recipe_key only), but the
+  // section here renders rows from the *current* locale's catalogue. As long
+  // as every recipe ships in both FR and EN (the seed enforces parity), every
+  // favourited recipe surfaces correctly under either URL. If one day a
+  // recipe shipped FR-only, it would silently disappear when the user views
+  // the EN listing — revisit when that happens.
+  const favoriteRecipes = user ? allRecipes.filter((r) => favoriteKeys.has(r.recipe_key)) : [];
 
   const availableTags = useMemo(() => {
     const set = new Set<string>();
@@ -78,6 +89,19 @@ export function RecipeListPage() {
           <h1 className="font-display text-2xl sm:text-3xl font-black text-heading">{t('list.heading')}</h1>
           <p className="text-sm text-muted">{t('list.subtitle')}</p>
         </header>
+
+        {favoriteRecipes.length > 0 && (
+          <section className="space-y-3">
+            <h2 className="font-display text-lg font-bold text-heading">
+              {t('favorites.section_heading', { count: favoriteRecipes.length })}
+            </h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {favoriteRecipes.map((r) => (
+                <RecipeCard key={`fav-${r.locale}-${r.recipe_key}`} recipe={r} />
+              ))}
+            </div>
+          </section>
+        )}
 
         <RecipeFilters
           category={category}

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router';
 import { supabase } from '../lib/supabase.ts';
 import type { Recipe, RecipeCategory, RecipeLocale } from '../types/recipe.ts';
 import { getRecipeLocaleFromPath } from '../utils/localePath.ts';
+import { pickRecipeByCategory } from '../utils/pickRecipe.ts';
 
 export interface RecipesFilters {
   category?: RecipeCategory | null;
@@ -119,4 +120,20 @@ export function useRecipe(slug: string | undefined): {
     loading: query.isPending,
     error: query.data?.error ?? (query.isError ? String(query.error ?? '') : null),
   };
+}
+
+/**
+ * Returns one recipe deterministically picked from the visible catalogue
+ * whose category matches `categories`. Reuses the cached `useRecipes` query
+ * so this hook costs zero extra fetches when the catalogue is already
+ * loaded. The `seed` argument keeps the picked recipe stable across renders
+ * (e.g. on EndScreen, the suggestion shouldn't shuffle on every state flip).
+ */
+export function useRecipeSuggestion(
+  categories: readonly RecipeCategory[],
+  seed: string,
+): { recipe: Recipe | null; loading: boolean } {
+  const { recipes, loading } = useRecipes();
+  const recipe = pickRecipeByCategory(recipes, categories, seed);
+  return { recipe, loading };
 }
