@@ -58,13 +58,15 @@ export function NutritionWidget7d() {
           {summary.days.map((d) => {
             const ratio = d.hasEntries ? Math.min(1, d.totals.calories / denom) : 0;
             const heightPct = Math.max(6, Math.round(ratio * 100));
+            // height: <pct>% on a flex child needs the parent to expose a
+            // resolved height — we set it on the bar directly (sibling of the
+            // h-16 row) instead of nesting an extra wrapper that drops it.
             return (
-              <div key={d.date} className="flex-1 flex items-end">
-                <div
-                  className={`w-full rounded-t ${d.hasEntries ? 'bg-brand/70' : 'bg-divider'}`}
-                  style={{ height: `${heightPct}%` }}
-                />
-              </div>
+              <div
+                key={d.date}
+                className={`flex-1 rounded-t ${d.hasEntries ? 'bg-brand/70' : 'bg-divider'}`}
+                style={{ height: `${heightPct}%` }}
+              />
             );
           })}
         </div>
