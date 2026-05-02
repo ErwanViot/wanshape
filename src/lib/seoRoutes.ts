@@ -13,6 +13,9 @@ const STATIC_ROUTES: SeoRoute[] = [
   { path: '/formats', changefreq: 'monthly', priority: 0.8 },
   { path: '/exercices', changefreq: 'monthly', priority: 0.8 },
   { path: '/programmes', changefreq: 'monthly', priority: 0.8 },
+  // Recipe listing — public, indexable. Per-recipe pages are emitted by PR 5
+  // (Supabase fetch at build time + sitemap entries with hreflang).
+  { path: '/nutrition/recettes', changefreq: 'weekly', priority: 0.8 },
   { path: '/tarifs', changefreq: 'monthly', priority: 0.8 },
   { path: '/premium', changefreq: 'monthly', priority: 0.7 },
   { path: '/a-propos', changefreq: 'monthly', priority: 0.6 },

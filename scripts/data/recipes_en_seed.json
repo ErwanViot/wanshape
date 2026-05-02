@@ -1,0 +1,2636 @@
+{
+  "version": "2.1",
+  "generated": "2026-04",
+  "categories": [
+    {
+      "id": "pre",
+      "label": "Pre-workout",
+      "color": "#1B6EF3"
+    },
+    {
+      "id": "post",
+      "label": "Post-workout",
+      "color": "#0D9E75"
+    },
+    {
+      "id": "breakfast",
+      "label": "Breakfast",
+      "color": "#E0860A"
+    },
+    {
+      "id": "recovery",
+      "label": "Recovery",
+      "color": "#7C3ABD"
+    },
+    {
+      "id": "snack",
+      "label": "Protein snack",
+      "color": "#C23B3B"
+    },
+    {
+      "id": "main",
+      "label": "Everyday meals",
+      "color": "#D4453A"
+    },
+    {
+      "id": "dessert",
+      "label": "Desserts",
+      "color": "#9C4A1E"
+    },
+    {
+      "id": "base",
+      "label": "Bases & doughs",
+      "color": "#5A6270"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "pre-01",
+      "category": "pre",
+      "name": "Sweet potato toast & soft-boiled egg",
+      "description": "Moderate glycemic index carb base + light protein. Ideal 60 min before training.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 340,
+        "protein": 18,
+        "carbs": 44,
+        "fat": 9,
+        "fiber": 5
+      },
+      "ingredients": [
+        {
+          "qty": "2 slices",
+          "item": "Sweet potato (approx. 150g cooked)"
+        },
+        {
+          "qty": "2",
+          "item": "Eggs"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "Salt, pepper, smoked paprika",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Cut the sweet potato into 1 cm slices and pan-fry 5 min per side in olive oil.",
+        "Boil the eggs for 6 min for a soft-boiled center, then transfer to cold water to stop cooking.",
+        "Place the peeled and halved eggs on top of the sweet potato toasts.",
+        "Season with salt, pepper, and smoked paprika. Serve immediately."
+      ],
+      "tags": [
+        "gluten-free",
+        "quick",
+        "slow carbs"
+      ]
+    },
+    {
+      "id": "pre-02",
+      "category": "pre",
+      "name": "Banana & honey porridge",
+      "description": "A timeless classic. Steady energy release and easy to digest.",
+      "prepTime": 10,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 385,
+        "protein": 12,
+        "carbs": 66,
+        "fat": 8,
+        "fiber": 6
+      },
+      "ingredients": [
+        {
+          "qty": "80g",
+          "item": "Rolled oats"
+        },
+        {
+          "qty": "250ml",
+          "item": "Semi-skimmed milk (or plant-based milk)"
+        },
+        {
+          "qty": "1",
+          "item": "Ripe banana"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Honey"
+        },
+        {
+          "qty": "1 pinch",
+          "item": "Cinnamon"
+        }
+      ],
+      "steps": [
+        "Pour the oats and milk into a saucepan over medium heat.",
+        "Stir constantly for 4–5 min until creamy.",
+        "Slice the banana and arrange on top of the porridge.",
+        "Drizzle with honey and sprinkle with cinnamon."
+      ],
+      "tags": [
+        "vegetarian",
+        "slow carbs",
+        "quick"
+      ]
+    },
+    {
+      "id": "pre-03",
+      "category": "pre",
+      "name": "Whole wheat bread, almond butter & banana",
+      "description": "The perfect combo: complex carbs + healthy fats + fast sugars at the end.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 420,
+        "protein": 14,
+        "carbs": 56,
+        "fat": 16,
+        "fiber": 7
+      },
+      "ingredients": [
+        {
+          "qty": "2 slices",
+          "item": "Whole wheat bread (or rye bread)"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Almond butter (or peanut butter)"
+        },
+        {
+          "qty": "1",
+          "item": "Banana"
+        }
+      ],
+      "steps": [
+        "Lightly toast the bread slices.",
+        "Spread generously with almond butter.",
+        "Top with banana slices. Serve."
+      ],
+      "tags": [
+        "vegetarian",
+        "super quick",
+        "2 ingredients"
+      ]
+    },
+    {
+      "id": "pre-04",
+      "category": "pre",
+      "name": "Basmati rice & canned tuna",
+      "description": "A savory, high-density option for those who can't stomach sweet food before training.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 380,
+        "protein": 30,
+        "carbs": 52,
+        "fat": 5,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "100g (cooked weight)",
+          "item": "Basmati rice"
+        },
+        {
+          "qty": "1 can (140g drained)",
+          "item": "Tuna in water"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Light soy sauce"
+        },
+        {
+          "qty": "½ tsp",
+          "item": "Lemon juice"
+        }
+      ],
+      "steps": [
+        "Cook the rice according to the package (or use pre-cooked rice).",
+        "Drain the tuna and flake it into a bowl with soy sauce and lemon juice.",
+        "Toss with the warm rice."
+      ],
+      "tags": [
+        "gluten-free",
+        "dairy-free",
+        "high protein"
+      ]
+    },
+    {
+      "id": "pre-05",
+      "category": "pre",
+      "name": "Oat, milk & banana smoothie",
+      "description": "Light and easy to digest. Great for those with a sensitive stomach before training.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 320,
+        "protein": 13,
+        "carbs": 54,
+        "fat": 6,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "40g",
+          "item": "Rolled oats"
+        },
+        {
+          "qty": "250ml",
+          "item": "Semi-skimmed milk"
+        },
+        {
+          "qty": "1",
+          "item": "Frozen banana"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Honey"
+        }
+      ],
+      "steps": [
+        "Blend all ingredients together until smooth.",
+        "Drink immediately. Add a splash of milk if too thick."
+      ],
+      "tags": [
+        "vegetarian",
+        "super quick",
+        "liquid"
+      ]
+    },
+    {
+      "id": "post-01",
+      "category": "post",
+      "name": "Brown rice, grilled chicken & broccoli bowl",
+      "description": "The post-training classic. Optimal protein-to-carb ratio for muscle recovery.",
+      "prepTime": 20,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 490,
+        "protein": 44,
+        "carbs": 52,
+        "fat": 10,
+        "fiber": 6
+      },
+      "ingredients": [
+        {
+          "qty": "130g",
+          "item": "Chicken breast fillet"
+        },
+        {
+          "qty": "100g (cooked weight)",
+          "item": "Brown rice"
+        },
+        {
+          "qty": "150g",
+          "item": "Broccoli"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "Salt, garlic powder, herbs",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Cook the brown rice according to the package (20 min, or use pre-cooked).",
+        "Slice the chicken, season with salt and garlic, and pan-fry for 6–7 min in olive oil.",
+        "Steam the broccoli for 5 min (it should remain slightly crisp).",
+        "Assemble in a bowl and drizzle with a little olive oil."
+      ],
+      "tags": [
+        "gluten-free",
+        "dairy-free",
+        "muscle",
+        "meal prep"
+      ]
+    },
+    {
+      "id": "post-02",
+      "category": "post",
+      "name": "3-egg mushroom omelette",
+      "description": "Quick, protein-packed, low in carbs. Ideal when you prefer to skip starchy foods after training.",
+      "prepTime": 10,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 310,
+        "protein": 28,
+        "carbs": 5,
+        "fat": 20,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "3",
+          "item": "Whole eggs"
+        },
+        {
+          "qty": "100g",
+          "item": "Button mushrooms"
+        },
+        {
+          "qty": "30g",
+          "item": "Grated cheese (emmental or gruyère)"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "Salt, pepper, parsley",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Sauté the sliced mushrooms in olive oil for 4–5 min.",
+        "Beat the eggs, season, and pour over the mushrooms.",
+        "Sprinkle with cheese and fold the omelette halfway through cooking.",
+        "Cook for another 1–2 min depending on desired texture."
+      ],
+      "tags": [
+        "gluten-free",
+        "keto-friendly",
+        "quick"
+      ]
+    },
+    {
+      "id": "post-03",
+      "category": "post",
+      "name": "Grilled salmon, quinoa & broccoli",
+      "description": "Anti-inflammatory omega-3s + complete proteins. Excellent for deep muscle recovery.",
+      "prepTime": 25,
+      "difficulty": "moyen",
+      "servings": 1,
+      "nutrition": {
+        "calories": 530,
+        "protein": 46,
+        "carbs": 38,
+        "fat": 18,
+        "fiber": 5
+      },
+      "ingredients": [
+        {
+          "qty": "150g",
+          "item": "Salmon fillet"
+        },
+        {
+          "qty": "80g (dry weight)",
+          "item": "Quinoa"
+        },
+        {
+          "qty": "150g",
+          "item": "Broccoli"
+        },
+        {
+          "qty": "½",
+          "item": "Lemon"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "Salt, dill or herbes de Provence",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Rinse and cook the quinoa in 160ml of salted water, covered, for 15 min.",
+        "Season the salmon and pan-fry for 4 min per side.",
+        "Steam the broccoli for 5 min.",
+        "Plate the quinoa, broccoli and salmon. Drizzle with lemon juice and olive oil."
+      ],
+      "tags": [
+        "gluten-free",
+        "dairy-free",
+        "omega-3",
+        "anti-inflammatory"
+      ]
+    },
+    {
+      "id": "post-04",
+      "category": "post",
+      "name": "Whey & banana recovery smoothie",
+      "description": "The express post-workout option. Drink within 30 min after training.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 380,
+        "protein": 35,
+        "carbs": 44,
+        "fat": 6,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "30g",
+          "item": "Whey protein powder (vanilla or unflavored)"
+        },
+        {
+          "qty": "1",
+          "item": "Banana"
+        },
+        {
+          "qty": "250ml",
+          "item": "Semi-skimmed milk"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Peanut butter (optional)"
+        }
+      ],
+      "steps": [
+        "Blend all ingredients together.",
+        "Drink immediately after your workout."
+      ],
+      "tags": [
+        "vegetarian",
+        "super quick",
+        "30 min post-workout"
+      ]
+    },
+    {
+      "id": "post-05",
+      "category": "post",
+      "name": "Chicken & avocado wrap",
+      "description": "Easy to prep ahead. Protein + healthy fats + carbs — all in one hand.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 490,
+        "protein": 38,
+        "carbs": 40,
+        "fat": 17,
+        "fiber": 6
+      },
+      "ingredients": [
+        {
+          "qty": "1 large",
+          "item": "Whole wheat tortilla"
+        },
+        {
+          "qty": "120g",
+          "item": "Cooked sliced chicken (or leftover)"
+        },
+        {
+          "qty": "½",
+          "item": "Avocado"
+        },
+        {
+          "qty": "50g",
+          "item": "Salad leaves"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Fromage blanc 0% (or low-fat plain yogurt)"
+        },
+        {
+          "qty": "Salt, pepper, paprika",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Spread the fromage blanc over the tortilla.",
+        "Layer the salad, chicken, and sliced avocado.",
+        "Season, roll tightly, and cut in half."
+      ],
+      "tags": [
+        "meal prep",
+        "on-the-go",
+        "no cooking"
+      ]
+    },
+    {
+      "id": "post-06",
+      "category": "post",
+      "name": "Fromage blanc, mixed berries & granola",
+      "description": "A light post-workout option for short sessions or when appetite is low.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 295,
+        "protein": 22,
+        "carbs": 36,
+        "fat": 6,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Fromage blanc 0% or 3.2% (or plain low-fat yogurt)"
+        },
+        {
+          "qty": "100g",
+          "item": "Mixed berries (fresh or frozen, thawed)"
+        },
+        {
+          "qty": "30g",
+          "item": "Granola (preferably no added sugar)"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Honey (optional)"
+        }
+      ],
+      "steps": [
+        "Pour the fromage blanc into a bowl.",
+        "Top with mixed berries.",
+        "Sprinkle granola just before eating (to keep it crunchy)."
+      ],
+      "tags": [
+        "vegetarian",
+        "super quick",
+        "low calorie"
+      ]
+    },
+    {
+      "id": "breakfast-01",
+      "category": "breakfast",
+      "name": "Oat & banana pancakes (3 ingredients)",
+      "description": "No flour, no added sugar. Fluffy texture and naturally sweet.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 365,
+        "protein": 18,
+        "carbs": 52,
+        "fat": 9,
+        "fiber": 5
+      },
+      "ingredients": [
+        {
+          "qty": "1",
+          "item": "Ripe banana"
+        },
+        {
+          "qty": "2",
+          "item": "Eggs"
+        },
+        {
+          "qty": "50g",
+          "item": "Rolled oats"
+        },
+        {
+          "qty": "1 pinch",
+          "item": "Cinnamon"
+        },
+        {
+          "qty": "Coconut oil spray or butter",
+          "item": "For cooking"
+        }
+      ],
+      "steps": [
+        "Mash the banana with a fork, then mix with the beaten eggs and oats.",
+        "Let rest for 2 min to allow the oats to absorb.",
+        "Cook small pancakes over medium heat, 2–3 min per side.",
+        "Serve with fresh fruit or honey."
+      ],
+      "tags": [
+        "vegetarian",
+        "gluten-free",
+        "no added sugar",
+        "3 ingredients"
+      ]
+    },
+    {
+      "id": "breakfast-02",
+      "category": "breakfast",
+      "name": "Veggie egg muffins (meal prep)",
+      "description": "Prep on Sunday, eat all week. High protein and free from unnecessary carbs.",
+      "prepTime": 30,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 230,
+        "protein": 20,
+        "carbs": 5,
+        "fat": 14,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "6",
+          "item": "Eggs"
+        },
+        {
+          "qty": "1 pepper",
+          "item": "Red bell pepper, thinly sliced"
+        },
+        {
+          "qty": "½ zucchini",
+          "item": "Zucchini, grated"
+        },
+        {
+          "qty": "50g",
+          "item": "Grated cheese"
+        },
+        {
+          "qty": "Salt, pepper, paprika, herbs",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Preheat the oven to 180°C (350°F). Grease a muffin tin.",
+        "Divide the vegetables among the muffin cups.",
+        "Beat the eggs, season, and pour over the vegetables. Sprinkle with cheese.",
+        "Bake for 20 min. Keeps for 4 days in the fridge."
+      ],
+      "tags": [
+        "meal prep",
+        "gluten-free",
+        "keto-friendly",
+        "weekday meal"
+      ]
+    },
+    {
+      "id": "breakfast-03",
+      "category": "breakfast",
+      "name": "Greek yogurt, homemade granola & fruit",
+      "description": "Probiotics + protein + complex carbs. The perfect base for a strong start.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 390,
+        "protein": 22,
+        "carbs": 50,
+        "fat": 11,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Full-fat Greek yogurt"
+        },
+        {
+          "qty": "40g",
+          "item": "Granola (oats, honey, nuts)"
+        },
+        {
+          "qty": "100g",
+          "item": "Fresh seasonal fruit"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Chia seeds (optional)"
+        }
+      ],
+      "steps": [
+        "Pour the yogurt into a bowl.",
+        "Add the fruit, then the granola.",
+        "Sprinkle with chia seeds if using. Eat immediately."
+      ],
+      "tags": [
+        "vegetarian",
+        "super quick",
+        "probiotics"
+      ]
+    },
+    {
+      "id": "breakfast-04",
+      "category": "breakfast",
+      "name": "Avocado toast & poached egg",
+      "description": "Trendy and effective. Healthy fats + protein + complex carbs to keep you fueled all morning.",
+      "prepTime": 12,
+      "difficulty": "moyen",
+      "servings": 1,
+      "nutrition": {
+        "calories": 430,
+        "protein": 20,
+        "carbs": 36,
+        "fat": 22,
+        "fiber": 8
+      },
+      "ingredients": [
+        {
+          "qty": "2 slices",
+          "item": "Whole wheat bread or rye bread"
+        },
+        {
+          "qty": "1",
+          "item": "Ripe avocado"
+        },
+        {
+          "qty": "2",
+          "item": "Eggs"
+        },
+        {
+          "qty": "½",
+          "item": "Lemon"
+        },
+        {
+          "qty": "Flaky sea salt, pepper, chili flakes (optional)",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Bring water to a gentle simmer with a splash of white vinegar.",
+        "Create a swirl and gently slide in the egg. Cook for 3 min for a runny yolk.",
+        "Mash the avocado on the toasted bread, add a squeeze of lemon, season.",
+        "Top with the poached egg and a pinch of flaky salt."
+      ],
+      "tags": [
+        "vegetarian",
+        "healthy fats",
+        "long satiety"
+      ]
+    },
+    {
+      "id": "breakfast-05",
+      "category": "breakfast",
+      "name": "Protein açaí bowl",
+      "description": "Concentrated antioxidants + protein. Stunning to look at and even better to eat.",
+      "prepTime": 8,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 385,
+        "protein": 16,
+        "carbs": 54,
+        "fat": 13,
+        "fiber": 7
+      },
+      "ingredients": [
+        {
+          "qty": "100g",
+          "item": "Frozen açaí purée (packet)"
+        },
+        {
+          "qty": "1",
+          "item": "Frozen banana"
+        },
+        {
+          "qty": "100ml",
+          "item": "Plant-based milk (almond or oat)"
+        },
+        {
+          "qty": "20g",
+          "item": "Protein powder (optional)"
+        },
+        {
+          "qty": "Toppings of your choice",
+          "item": "Granola, fruit, shredded coconut"
+        }
+      ],
+      "steps": [
+        "Blend the açaí, banana, and plant-based milk until thick and smooth.",
+        "Pour into a bowl.",
+        "Decorate with your chosen toppings."
+      ],
+      "tags": [
+        "vegan",
+        "antioxidants",
+        "photogenic"
+      ]
+    },
+    {
+      "id": "recovery-01",
+      "category": "recovery",
+      "name": "Red lentil dahl",
+      "description": "Anti-inflammatory, rich in plant protein and iron. Perfect for rest days.",
+      "prepTime": 30,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 380,
+        "protein": 18,
+        "carbs": 52,
+        "fat": 10,
+        "fiber": 12
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Dry red lentils"
+        },
+        {
+          "qty": "1 can (400ml)",
+          "item": "Coconut milk"
+        },
+        {
+          "qty": "1 can (400g)",
+          "item": "Crushed tomatoes"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Turmeric"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Cumin"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Fresh grated ginger"
+        },
+        {
+          "qty": "1 clove",
+          "item": "Garlic"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Coconut oil or olive oil"
+        }
+      ],
+      "steps": [
+        "Sauté the garlic and ginger in oil for 2 min. Add the spices and stir for 30 sec.",
+        "Add the rinsed lentils, tomatoes, and coconut milk.",
+        "Simmer over medium heat for 20–25 min, stirring regularly, until the lentils are soft.",
+        "Adjust seasoning. Serve with rice or naan bread."
+      ],
+      "tags": [
+        "vegan",
+        "anti-inflammatory",
+        "meal prep",
+        "iron"
+      ]
+    },
+    {
+      "id": "recovery-02",
+      "category": "recovery",
+      "name": "Miso soup with tofu & edamame",
+      "description": "Light, remineralizing, and probiotic-rich. Perfect for the evening after an intense session.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 190,
+        "protein": 16,
+        "carbs": 15,
+        "fat": 7,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "1 tbsp",
+          "item": "Miso paste (white preferred)"
+        },
+        {
+          "qty": "400ml",
+          "item": "Hot water (not boiling)"
+        },
+        {
+          "qty": "100g",
+          "item": "Silken tofu, diced"
+        },
+        {
+          "qty": "50g",
+          "item": "Edamame (frozen, thawed)"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Soy sauce"
+        },
+        {
+          "qty": "Green onion or cilantro",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Dissolve the miso paste in the hot water (do not boil — this preserves the probiotics).",
+        "Add the diced tofu, edamame, and soy sauce.",
+        "Serve topped with sliced green onion."
+      ],
+      "tags": [
+        "vegan",
+        "low calorie",
+        "probiotics",
+        "light recovery"
+      ]
+    },
+    {
+      "id": "recovery-03",
+      "category": "recovery",
+      "name": "Chickpea, avocado & feta salad",
+      "description": "Plant protein + healthy fats + calcium. No cooking needed, ready in 5 min.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 430,
+        "protein": 16,
+        "carbs": 40,
+        "fat": 22,
+        "fiber": 10
+      },
+      "ingredients": [
+        {
+          "qty": "1 can (240g drained)",
+          "item": "Chickpeas"
+        },
+        {
+          "qty": "½",
+          "item": "Avocado"
+        },
+        {
+          "qty": "50g",
+          "item": "Feta cheese"
+        },
+        {
+          "qty": "1 handful",
+          "item": "Spinach or arugula"
+        },
+        {
+          "qty": "½",
+          "item": "Lemon"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "Salt, pepper, cumin",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Rinse and drain the chickpeas.",
+        "Toss all ingredients together in a bowl.",
+        "Season with lemon juice, olive oil, salt, pepper, and cumin."
+      ],
+      "tags": [
+        "vegetarian",
+        "gluten-free",
+        "no cooking",
+        "super quick"
+      ]
+    },
+    {
+      "id": "recovery-04",
+      "category": "recovery",
+      "name": "Vegetable & chickpea curry",
+      "description": "Turmeric and ginger make this an actively anti-inflammatory meal. Comforting and satisfying.",
+      "prepTime": 30,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 390,
+        "protein": 14,
+        "carbs": 54,
+        "fat": 13,
+        "fiber": 11
+      },
+      "ingredients": [
+        {
+          "qty": "1 can",
+          "item": "Cooked chickpeas"
+        },
+        {
+          "qty": "1",
+          "item": "Zucchini, diced"
+        },
+        {
+          "qty": "1",
+          "item": "Red bell pepper, diced"
+        },
+        {
+          "qty": "1 can (400ml)",
+          "item": "Coconut milk"
+        },
+        {
+          "qty": "2 tsp",
+          "item": "Curry powder"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Turmeric"
+        },
+        {
+          "qty": "Basmati rice",
+          "item": "To serve"
+        }
+      ],
+      "steps": [
+        "Sauté the vegetables in a pan for 5 min.",
+        "Add the spices and stir for 30 sec.",
+        "Add the chickpeas and coconut milk. Simmer for 15 min.",
+        "Serve over cooked basmati rice."
+      ],
+      "tags": [
+        "vegan",
+        "anti-inflammatory",
+        "meal prep"
+      ]
+    },
+    {
+      "id": "recovery-05",
+      "category": "recovery",
+      "name": "Quinoa & mint tabbouleh",
+      "description": "Complete proteins from quinoa + fresh herbs. Light, digestible, perfect for the evening.",
+      "prepTime": 20,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 320,
+        "protein": 10,
+        "carbs": 48,
+        "fat": 10,
+        "fiber": 5
+      },
+      "ingredients": [
+        {
+          "qty": "160g (dry weight)",
+          "item": "Quinoa"
+        },
+        {
+          "qty": "1",
+          "item": "Cucumber"
+        },
+        {
+          "qty": "2",
+          "item": "Tomatoes"
+        },
+        {
+          "qty": "1 bunch",
+          "item": "Flat-leaf parsley + fresh mint"
+        },
+        {
+          "qty": "2",
+          "item": "Lemons, juiced"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Olive oil"
+        }
+      ],
+      "steps": [
+        "Cook the quinoa in 320ml of salted water for 12 min. Let cool.",
+        "Finely chop the cucumber, tomatoes, and herbs.",
+        "Toss everything together and season with lemon juice, olive oil, and salt.",
+        "Can be prepared the night before (better the next day)."
+      ],
+      "tags": [
+        "vegan",
+        "gluten-free",
+        "meal prep",
+        "cold dish"
+      ]
+    },
+    {
+      "id": "snack-01",
+      "category": "snack",
+      "name": "Homemade hummus & crudités",
+      "description": "Homemade hummus in 5 min in the blender. Way tastier than store-bought.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 280,
+        "protein": 10,
+        "carbs": 28,
+        "fat": 14,
+        "fiber": 7
+      },
+      "ingredients": [
+        {
+          "qty": "1 can (240g drained)",
+          "item": "Chickpeas"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Tahini (sesame paste)"
+        },
+        {
+          "qty": "1",
+          "item": "Lemon, juiced"
+        },
+        {
+          "qty": "1 clove",
+          "item": "Garlic"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Olive oil + extra for serving"
+        },
+        {
+          "qty": "Crudités of your choice",
+          "item": "Carrots, cucumber, bell pepper, celery"
+        }
+      ],
+      "steps": [
+        "Blend all hummus ingredients with 3–4 tbsp of cold water.",
+        "Blend for a long time (3 min) for an ultra-creamy texture.",
+        "Serve in a bowl, drizzled with olive oil and paprika.",
+        "Accompany with crudités cut into sticks."
+      ],
+      "tags": [
+        "vegan",
+        "gluten-free",
+        "batch",
+        "make ahead"
+      ]
+    },
+    {
+      "id": "snack-02",
+      "category": "snack",
+      "name": "Oat & dark chocolate energy balls",
+      "description": "The ideal snack to prep on Sunday for the whole week. Zero cooking required.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 4,
+      "nutrition": {
+        "calories": 185,
+        "protein": 6,
+        "carbs": 24,
+        "fat": 8,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "100g",
+          "item": "Rolled oats"
+        },
+        {
+          "qty": "3 tbsp",
+          "item": "Peanut butter"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Honey"
+        },
+        {
+          "qty": "30g",
+          "item": "Dark chocolate chips"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Chia seeds (optional)"
+        }
+      ],
+      "steps": [
+        "Mix all the ingredients together in a bowl.",
+        "Refrigerate for 20 min to firm up.",
+        "Roll into walnut-sized balls.",
+        "Store in the fridge for up to 1 week (or freeze)."
+      ],
+      "tags": [
+        "vegetarian",
+        "no cooking",
+        "batch",
+        "on-the-go"
+      ]
+    },
+    {
+      "id": "snack-03",
+      "category": "snack",
+      "name": "Hard-boiled eggs & fromage blanc",
+      "description": "The simplest, most effective protein snack. No excuses not to have it.",
+      "prepTime": 12,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 205,
+        "protein": 24,
+        "carbs": 4,
+        "fat": 10,
+        "fiber": 0
+      },
+      "ingredients": [
+        {
+          "qty": "2",
+          "item": "Hard-boiled eggs"
+        },
+        {
+          "qty": "150g",
+          "item": "Fromage blanc 0% (or plain low-fat yogurt)"
+        },
+        {
+          "qty": "Salt, pepper, herbs",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Boil the eggs for 10 min. Cool under cold water, then peel.",
+        "Season the fromage blanc.",
+        "Eat together. Can be prepped in advance and kept for 3 days."
+      ],
+      "tags": [
+        "gluten-free",
+        "keto-friendly",
+        "ultra-simple",
+        "batch"
+      ]
+    },
+    {
+      "id": "snack-04",
+      "category": "snack",
+      "name": "Cottage cheese, nuts & honey",
+      "description": "Slow proteins (casein) + healthy fats. Ideal in the evening for overnight recovery.",
+      "prepTime": 2,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 260,
+        "protein": 20,
+        "carbs": 22,
+        "fat": 10,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Cottage cheese"
+        },
+        {
+          "qty": "20g",
+          "item": "Walnuts or cashews"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Honey"
+        },
+        {
+          "qty": "Cinnamon",
+          "item": "Optional"
+        }
+      ],
+      "steps": [
+        "Pour the cottage cheese into a bowl.",
+        "Add the nuts and honey.",
+        "Sprinkle with cinnamon if desired."
+      ],
+      "tags": [
+        "vegetarian",
+        "gluten-free",
+        "casein",
+        "evening snack"
+      ]
+    },
+    {
+      "id": "main-01",
+      "category": "main",
+      "name": "Homemade beef & cheddar burger",
+      "description": "A real homemade burger. No reason to hold back — the difference from fast food is all about ingredient quality and portion size.",
+      "prepTime": 20,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 650,
+        "protein": 36,
+        "carbs": 44,
+        "fat": 36,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "150g",
+          "item": "Ground beef 15% fat"
+        },
+        {
+          "qty": "1+2+4 tbsp",
+          "item": "Burger sauce (1 mustard + 2 ketchup + 4 mayonnaise)"
+        },
+        {
+          "qty": "1 slice",
+          "item": "Cheddar"
+        },
+        {
+          "qty": "2 leaves",
+          "item": "Lettuce"
+        },
+        {
+          "qty": "2 slices",
+          "item": "Tomato"
+        },
+        {
+          "qty": "1+2+4 tbsp",
+          "item": "Burger sauce (1 mustard + 2 ketchup + 4 mayonnaise)"
+        },
+        {
+          "qty": "Salt, pepper",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Shape the ground beef into a ball, season, and press gently into a patty. Don't overwork the meat.",
+        "Cook over high heat for 2–3 min per side for a medium patty. Place the cheddar on top 30 sec before the end, cover to melt.",
+        "Lightly toast the bun, cut in half.",
+        "Assemble: sauce on both bun halves, lettuce, tomato, patty. Serve immediately."
+      ],
+      "tags": [
+        "gluten-free possible",
+        "protein",
+        "complete meal"
+      ]
+    },
+    {
+      "id": "main-02",
+      "category": "main",
+      "name": "Pasta carbonara (the real recipe)",
+      "description": "The real deal: no cream. Guanciale or lardons, egg yolks, pecorino. Simple, technical, perfect.",
+      "prepTime": 20,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 720,
+        "protein": 32,
+        "carbs": 62,
+        "fat": 38,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "160g",
+          "item": "Spaghetti or rigatoni"
+        },
+        {
+          "qty": "120g",
+          "item": "Guanciale or smoked lardons"
+        },
+        {
+          "qty": "3",
+          "item": "Egg yolks + 1 whole egg"
+        },
+        {
+          "qty": "60g",
+          "item": "Grated pecorino romano (or parmesan)"
+        },
+        {
+          "qty": "Black pepper",
+          "item": "Generous, freshly ground"
+        },
+        {
+          "qty": "Salt",
+          "item": "For pasta water"
+        }
+      ],
+      "steps": [
+        "Cook the pasta al dente in heavily salted water. Reserve 2 ladlefuls of pasta water.",
+        "Cook the guanciale in a large pan over medium heat until lightly crisp. Remove from heat.",
+        "Whisk together the egg yolks, whole egg, pecorino, and plenty of black pepper in a bowl.",
+        "Drain the pasta and add to the pan with the guanciale, off the heat. Pour the egg-cheese mixture over and toss vigorously, adding pasta water a spoonful at a time to create a creamy sauce. Never put back on the heat."
+      ],
+      "tags": [
+        "quick",
+        "no vegetables",
+        "signature dish"
+      ]
+    },
+    {
+      "id": "main-03",
+      "category": "main",
+      "name": "Pasta with basil pesto & parmesan",
+      "description": "Ten minutes, zero technique. Homemade pesto makes all the difference.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 580,
+        "protein": 18,
+        "carbs": 68,
+        "fat": 26,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "160g",
+          "item": "Penne or trofie"
+        },
+        {
+          "qty": "1 bunch",
+          "item": "Fresh basil (30g)"
+        },
+        {
+          "qty": "40g",
+          "item": "Grated parmesan"
+        },
+        {
+          "qty": "30g",
+          "item": "Pine nuts (or cashews)"
+        },
+        {
+          "qty": "1 clove",
+          "item": "Garlic"
+        },
+        {
+          "qty": "6 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "Salt, pepper",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Cook the pasta al dente in heavily salted water.",
+        "Blend the basil, pine nuts, garlic, and oil into a paste. Add the parmesan and pulse briefly. Season.",
+        "Reserve 1 ladleful of pasta water. Drain the pasta.",
+        "Toss with the pesto off the heat. Loosen with a little pasta water if needed."
+      ],
+      "tags": [
+        "vegetarian",
+        "quick",
+        "no-cook pesto"
+      ]
+    },
+    {
+      "id": "main-04",
+      "category": "main",
+      "name": "Roast chicken with lemon & garlic",
+      "description": "The ultimate Sunday roast. One homemade roast chicken gives you 6 portions for the week.",
+      "prepTime": 90,
+      "difficulty": "facile",
+      "servings": 4,
+      "nutrition": {
+        "calories": 420,
+        "protein": 46,
+        "carbs": 4,
+        "fat": 24,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "1 (approx. 1.4kg)",
+          "item": "Whole chicken"
+        },
+        {
+          "qty": "1",
+          "item": "Lemon"
+        },
+        {
+          "qty": "6 cloves",
+          "item": "Garlic (unpeeled)"
+        },
+        {
+          "qty": "3 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "Fresh thyme, rosemary",
+          "item": ""
+        },
+        {
+          "qty": "Salt, pepper",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Preheat the oven to 200°C (400°F). Take the chicken out of the fridge 30 min before.",
+        "Rub the outside with olive oil and generous salt and pepper. Stuff the herbs and halved lemon inside.",
+        "Arrange the garlic cloves around the chicken in the roasting pan.",
+        "Roast for 1h20, basting every 20 min. Check doneness by piercing a thigh — the juices should run clear."
+      ],
+      "tags": [
+        "gluten-free",
+        "dairy-free",
+        "meal prep",
+        "protein"
+      ]
+    },
+    {
+      "id": "main-05",
+      "category": "main",
+      "name": "Steak & sweet potato fries",
+      "description": "The homemade version is incomparable. Oven-baked sweet potato fries are a genuinely great swap — no cheating involved.",
+      "prepTime": 40,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 560,
+        "protein": 40,
+        "carbs": 52,
+        "fat": 18,
+        "fiber": 6
+      },
+      "ingredients": [
+        {
+          "qty": "180g",
+          "item": "Steak (flank, ribeye, or sirloin)"
+        },
+        {
+          "qty": "300g",
+          "item": "Sweet potato"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Smoked paprika"
+        },
+        {
+          "qty": "Salt, pepper, thyme",
+          "item": ""
+        },
+        {
+          "qty": "Butter or compound butter",
+          "item": "Optional, for steak cooking"
+        }
+      ],
+      "steps": [
+        "Preheat the oven to 200°C (400°F). Cut the sweet potato into sticks, toss with oil, paprika, and salt. Roast for 30 min, flipping halfway.",
+        "Take the steak out of the fridge 15 min before. Season just before cooking.",
+        "Sear over very high heat for 2 min per side for rare, or 3 min for medium. Rest for 3 min before slicing.",
+        "Serve immediately with the fries."
+      ],
+      "tags": [
+        "gluten-free",
+        "dairy-free",
+        "main course",
+        "slow carbs"
+      ]
+    },
+    {
+      "id": "main-06",
+      "category": "main",
+      "name": "Quick homemade ramen",
+      "description": "Not a 4-hour restaurant ramen — a 25-min version that's still delicious and hearty.",
+      "prepTime": 25,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 490,
+        "protein": 32,
+        "carbs": 54,
+        "fat": 16,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "160g",
+          "item": "Ramen noodles (or soba)"
+        },
+        {
+          "qty": "2",
+          "item": "Eggs (for soft-boiled)"
+        },
+        {
+          "qty": "200g",
+          "item": "Chicken breast or thin pork belly"
+        },
+        {
+          "qty": "1 L",
+          "item": "Chicken broth (cube or homemade)"
+        },
+        {
+          "qty": "3 tbsp",
+          "item": "Soy sauce"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "White miso"
+        },
+        {
+          "qty": "Mushrooms, green onion, corn",
+          "item": "Toppings of your choice"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Sesame oil"
+        }
+      ],
+      "steps": [
+        "Boil the eggs for 6 min, cool immediately in cold water. Peel and halve.",
+        "Bring the broth to a simmer, add soy sauce and miso. Taste and adjust.",
+        "Cook the noodles separately according to the package. Brown the meat in a pan.",
+        "Divide the noodles between bowls, ladle the hot broth over, then top with meat, egg, and toppings. Finish with a drizzle of sesame oil."
+      ],
+      "tags": [
+        "complete meal",
+        "umami",
+        "winter warmer"
+      ]
+    },
+    {
+      "id": "main-07",
+      "category": "main",
+      "name": "Chicken & cheese quesadillas",
+      "description": "Ready in 15 minutes. Crispy, gooey, filling. Perfect for nights when inspiration runs low.",
+      "prepTime": 15,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 510,
+        "protein": 36,
+        "carbs": 44,
+        "fat": 20,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "2 large",
+          "item": "Flour tortillas"
+        },
+        {
+          "qty": "120g",
+          "item": "Cooked shredded chicken (leftover roast chicken works great)"
+        },
+        {
+          "qty": "60g",
+          "item": "Grated cheese (comté or emmental)"
+        },
+        {
+          "qty": "½",
+          "item": "Red bell pepper, thinly sliced"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Cumin + paprika"
+        },
+        {
+          "qty": "Sour cream or guacamole",
+          "item": "To serve"
+        }
+      ],
+      "steps": [
+        "Toss the chicken with the bell pepper and spices.",
+        "Heat a large dry pan over medium heat.",
+        "Place one tortilla in the pan, add the chicken and cheese on one half, fold over. Cook for 2–3 min per side until golden.",
+        "Cut into triangles and serve with sour cream or guacamole."
+      ],
+      "tags": [
+        "quick",
+        "leftovers",
+        "stovetop only"
+      ]
+    },
+    {
+      "id": "main-08",
+      "category": "main",
+      "name": "Parmesan & mushroom risotto",
+      "description": "The ultimate comfort dish. Needs 30 min of attention but no difficult technique.",
+      "prepTime": 35,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 520,
+        "protein": 18,
+        "carbs": 72,
+        "fat": 18,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "160g",
+          "item": "Arborio or carnaroli rice"
+        },
+        {
+          "qty": "200g",
+          "item": "Button mushrooms or shiitake"
+        },
+        {
+          "qty": "1",
+          "item": "Shallot"
+        },
+        {
+          "qty": "100ml",
+          "item": "Dry white wine"
+        },
+        {
+          "qty": "800ml",
+          "item": "Hot broth (chicken or vegetable)"
+        },
+        {
+          "qty": "60g",
+          "item": "Grated parmesan"
+        },
+        {
+          "qty": "20g",
+          "item": "Butter"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Olive oil"
+        }
+      ],
+      "steps": [
+        "Sauté the shallot and mushrooms in olive oil for 5 min.",
+        "Add the rice and stir for 2 min to toast it.",
+        "Pour in the white wine and let it absorb.",
+        "Add the hot broth one ladle at a time, stirring constantly. Each ladle must be absorbed before adding the next. This takes about 18–20 min.",
+        "Off the heat, stir in butter and parmesan vigorously (the mantecatura). Serve immediately."
+      ],
+      "tags": [
+        "vegetarian",
+        "dinner party",
+        "gluten-free possible"
+      ]
+    },
+    {
+      "id": "main-09",
+      "category": "main",
+      "name": "Spicy beef tacos & guacamole",
+      "description": "Colorful, convivial, eaten with your hands. The ideal format when you don't want to weigh every gram.",
+      "prepTime": 25,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 620,
+        "protein": 34,
+        "carbs": 52,
+        "fat": 28,
+        "fiber": 8
+      },
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Ground beef"
+        },
+        {
+          "qty": "4 small",
+          "item": "Corn tortillas"
+        },
+        {
+          "qty": "1",
+          "item": "Avocado"
+        },
+        {
+          "qty": "1",
+          "item": "Lime"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Cumin + chili"
+        },
+        {
+          "qty": "1",
+          "item": "Red onion, thinly sliced"
+        },
+        {
+          "qty": "Fresh cilantro, sour cream",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Brown the ground beef with the spices until cooked through. Season.",
+        "Mash the avocado with lime juice, salt, and a pinch of cumin — quick guacamole.",
+        "Warm the tortillas directly over the flame or in a dry pan.",
+        "Assemble: guacamole, spicy beef, red onion, cilantro, sour cream."
+      ],
+      "tags": [
+        "dairy-free possible",
+        "convivial",
+        "sharing format"
+      ]
+    },
+    {
+      "id": "main-10",
+      "category": "main",
+      "name": "Homemade tomato & mozzarella pizza",
+      "description": "Made with the homemade pizza dough (see Bases). A real pizza, not a lighter version.",
+      "prepTime": 30,
+      "difficulty": "moyen",
+      "servings": 2,
+      "nutrition": {
+        "calories": 580,
+        "protein": 24,
+        "carbs": 74,
+        "fat": 20,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "1 portion",
+          "item": "Homemade pizza dough (see Bases recipe)"
+        },
+        {
+          "qty": "150g",
+          "item": "Tomato sauce (passata or crushed tomatoes)"
+        },
+        {
+          "qty": "150g",
+          "item": "Buffalo mozzarella"
+        },
+        {
+          "qty": "Fresh basil",
+          "item": ""
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "Salt",
+          "item": ""
+        }
+      ],
+      "steps": [
+        "Preheat the oven to maximum heat (250°C / 480°F or higher) with the baking sheet inside.",
+        "Stretch the dough thinly over floured parchment paper, leaving the edge slightly thicker.",
+        "Spread the tomato sauce, tear the mozzarella on top. Season.",
+        "Bake for 10–12 min until the crust is golden and the mozzarella is bubbling. Add fresh basil and olive oil right out of the oven."
+      ],
+      "tags": [
+        "vegetarian",
+        "signature dish",
+        "homemade"
+      ],
+      "linkedBase": "base-02"
+    },
+    {
+      "id": "main-11",
+      "category": "breakfast",
+      "name": "Classic crêpes",
+      "description": "The base recipe. Thin, golden, to fill as you like — sweet or savory.",
+      "prepTime": 25,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 360,
+        "protein": 12,
+        "carbs": 58,
+        "fat": 10,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "125g",
+          "item": "All-purpose flour (T45)"
+        },
+        {
+          "qty": "2",
+          "item": "Eggs"
+        },
+        {
+          "qty": "300ml",
+          "item": "Milk"
+        },
+        {
+          "qty": "20g",
+          "item": "Melted butter"
+        },
+        {
+          "qty": "1 pinch",
+          "item": "Salt"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Vanilla sugar (for sweet version)"
+        }
+      ],
+      "steps": [
+        "Combine flour, salt, and sugar. Make a well and add the beaten eggs in the center.",
+        "Gradually whisk in the milk to avoid lumps. Stir in the melted butter.",
+        "Rest for 30 min if possible (not mandatory).",
+        "Cook in a lightly buttered pan over medium heat, 1 min per side."
+      ],
+      "tags": [
+        "vegetarian",
+        "base",
+        "sweet or savory"
+      ]
+    },
+    {
+      "id": "main-12",
+      "category": "breakfast",
+      "name": "Cinnamon French toast & maple syrup",
+      "description": "Day-old brioche transformed into something exceptional. Ready in 10 minutes.",
+      "prepTime": 10,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 420,
+        "protein": 16,
+        "carbs": 54,
+        "fat": 14,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "2 thick slices",
+          "item": "Brioche or day-old bread"
+        },
+        {
+          "qty": "2",
+          "item": "Eggs"
+        },
+        {
+          "qty": "60ml",
+          "item": "Milk"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Cinnamon"
+        },
+        {
+          "qty": "1 tsp",
+          "item": "Vanilla extract"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Butter"
+        },
+        {
+          "qty": "Maple syrup or honey",
+          "item": "To serve"
+        }
+      ],
+      "steps": [
+        "Beat the eggs with the milk, cinnamon, and vanilla.",
+        "Soak the brioche slices for 30 seconds per side.",
+        "Cook over medium heat in foaming butter for 2–3 min per side until golden.",
+        "Serve with maple syrup, fresh fruit, or powdered sugar."
+      ],
+      "tags": [
+        "vegetarian",
+        "zero waste",
+        "quick"
+      ]
+    },
+    {
+      "id": "dessert-01",
+      "category": "dessert",
+      "name": "Chocolate mousse (Erwan's recipe)",
+      "description": "3 ingredients, zero compromise. The purest mousse imaginable — dark chocolate, whipped egg whites, sugar.",
+      "prepTime": 15,
+      "difficulty": "moyen",
+      "servings": 4,
+      "nutrition": {
+        "calories": 255,
+        "protein": 6,
+        "carbs": 24,
+        "fat": 15,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "140g",
+          "item": "Dark chocolate (70% minimum)"
+        },
+        {
+          "qty": "4",
+          "item": "Egg whites"
+        },
+        {
+          "qty": "35g",
+          "item": "Granulated sugar"
+        }
+      ],
+      "steps": [
+        "Melt the chocolate in a bain-marie or microwave in 30-second bursts. Let cool slightly.",
+        "Whip the egg whites to stiff peaks. When they form soft peaks, gradually add the sugar and continue beating.",
+        "Gently fold the egg whites into the melted chocolate in three additions, lifting with a spatula. Do not beat — you want to preserve the air.",
+        "Pour into ramekins or glasses. Refrigerate for at least 2 hours before serving."
+      ],
+      "tags": [
+        "vegetarian",
+        "flour-free",
+        "personal recipe",
+        "3 ingredients"
+      ],
+      "personal": true,
+      "author": "Erwan"
+    },
+    {
+      "id": "dessert-02",
+      "category": "dessert",
+      "name": "Oat & dark chocolate cookies",
+      "description": "Crispy on the outside, chewy in the middle. Real cookies, not sports bars.",
+      "prepTime": 25,
+      "difficulty": "facile",
+      "servings": 4,
+      "nutrition": {
+        "calories": 210,
+        "protein": 5,
+        "carbs": 28,
+        "fat": 9,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "100g",
+          "item": "Rolled oats"
+        },
+        {
+          "qty": "80g",
+          "item": "Whole wheat flour"
+        },
+        {
+          "qty": "80g",
+          "item": "Softened butter"
+        },
+        {
+          "qty": "60g",
+          "item": "Brown sugar"
+        },
+        {
+          "qty": "1",
+          "item": "Egg"
+        },
+        {
+          "qty": "60g",
+          "item": "Dark chocolate chips"
+        },
+        {
+          "qty": "1 pinch",
+          "item": "Salt + baking soda"
+        }
+      ],
+      "steps": [
+        "Preheat the oven to 170°C (340°F). Beat the butter and sugar until creamy.",
+        "Add the egg and mix. Fold in the flour, oats, salt, and baking soda.",
+        "Stir in the chocolate chips. Roll into walnut-sized balls and press lightly onto the baking sheet.",
+        "Bake for 12–14 min. Let cool on the tray (they firm up as they cool)."
+      ],
+      "tags": [
+        "vegetarian",
+        "batch",
+        "afternoon snack"
+      ]
+    },
+    {
+      "id": "dessert-03",
+      "category": "dessert",
+      "name": "Brownie à la papy Brossard",
+      "description": "The family recipe. Dense, fudgy, with flaky salt that makes all the difference. More chocolate than classic versions.",
+      "prepTime": 35,
+      "difficulty": "facile",
+      "servings": 10,
+      "nutrition": {
+        "calories": 342,
+        "protein": 7,
+        "carbs": 40,
+        "fat": 19,
+        "fiber": 2
+      },
+      "ingredients": [
+        {
+          "qty": "200g",
+          "item": "Dark chocolate"
+        },
+        {
+          "qty": "100g",
+          "item": "Butter"
+        },
+        {
+          "qty": "20g",
+          "item": "Oil (sunflower or coconut)"
+        },
+        {
+          "qty": "2",
+          "item": "Eggs"
+        },
+        {
+          "qty": "150g",
+          "item": "Sugar"
+        },
+        {
+          "qty": "150g",
+          "item": "Flour"
+        },
+        {
+          "qty": "1 pinch",
+          "item": "Baking soda (optional)"
+        },
+        {
+          "qty": "1 pinch",
+          "item": "Flaky sea salt"
+        },
+        {
+          "qty": "40g",
+          "item": "Chocolate chips"
+        }
+      ],
+      "steps": [
+        "Melt the chocolate with the butter. Add the oil. Let cool slightly.",
+        "Whisk the eggs with the sugar until pale and fluffy.",
+        "Fold the melted chocolate into the egg-sugar mixture.",
+        "Add the sifted flour and baking soda. Mix without overworking.",
+        "Stir in the flaky salt and chocolate chips.",
+        "Pour into a greased pan. Bake at 180°C (350°F): 20 min for a large dish, 25 min for a smaller pan. The center should still jiggle slightly."
+      ],
+      "tags": [
+        "vegetarian",
+        "family recipe",
+        "batch",
+        "fudgy"
+      ],
+      "personal": true,
+      "author": "Famille"
+    },
+    {
+      "id": "dessert-04",
+      "category": "dessert",
+      "name": "Quick tiramisu",
+      "description": "No lecithin, no light mascarpone. The authentic Italian recipe, in a simplified version.",
+      "prepTime": 20,
+      "difficulty": "moyen",
+      "servings": 4,
+      "nutrition": {
+        "calories": 340,
+        "protein": 10,
+        "carbs": 36,
+        "fat": 18,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Mascarpone"
+        },
+        {
+          "qty": "3",
+          "item": "Eggs (yolks and whites separated)"
+        },
+        {
+          "qty": "80g",
+          "item": "Sugar"
+        },
+        {
+          "qty": "200ml",
+          "item": "Strong espresso, cooled"
+        },
+        {
+          "qty": "16–20",
+          "item": "Ladyfingers (savoiardi)"
+        },
+        {
+          "qty": "Unsweetened cocoa powder",
+          "item": "For dusting"
+        }
+      ],
+      "steps": [
+        "Whisk the egg yolks with the sugar until pale. Fold in the mascarpone with a spatula.",
+        "Beat the egg whites to stiff peaks. Gently fold into the mascarpone cream.",
+        "Quickly dip the ladyfingers in the coffee (1 second per side — don't soak them).",
+        "Layer the cookies and cream in a dish, finishing with cream. Refrigerate for at least 3 hours.",
+        "Dust with cocoa powder just before serving."
+      ],
+      "tags": [
+        "vegetarian",
+        "make ahead",
+        "dinner party dessert"
+      ]
+    },
+    {
+      "id": "dessert-05",
+      "category": "dessert",
+      "name": "Banana nice cream",
+      "description": "2 ingredients, ice cream texture, zero guilt. Frozen blended banana does all the work.",
+      "prepTime": 5,
+      "difficulty": "facile",
+      "servings": 1,
+      "nutrition": {
+        "calories": 180,
+        "protein": 4,
+        "carbs": 38,
+        "fat": 2,
+        "fiber": 4
+      },
+      "ingredients": [
+        {
+          "qty": "3",
+          "item": "Ripe frozen bananas (cut into chunks)"
+        },
+        {
+          "qty": "1 tbsp",
+          "item": "Peanut butter or cocoa powder (optional)"
+        },
+        {
+          "qty": "Toppings of your choice",
+          "item": "Fruit, granola, shredded coconut"
+        }
+      ],
+      "steps": [
+        "Blend the frozen banana chunks alone for 3–4 min, scraping the sides regularly.",
+        "The texture will first look crumbly, then turn creamy like ice cream.",
+        "Add peanut butter or cocoa if desired, blend for another 30 sec.",
+        "Serve immediately for a soft-serve texture, or freeze for 30 min for a firmer scoop."
+      ],
+      "tags": [
+        "vegan",
+        "gluten-free",
+        "no added sugar",
+        "2 ingredients"
+      ]
+    },
+    {
+      "id": "base-01",
+      "category": "base",
+      "name": "Homemade pasta dough",
+      "description": "The foundation for all fresh pasta. Requires a pasta machine (or serious motivation with a rolling pin). The result is worlds apart from dried pasta.",
+      "prepTime": 75,
+      "difficulty": "moyen",
+      "servings": 4,
+      "nutrition": {
+        "calories": 347,
+        "protein": 13,
+        "carbs": 53,
+        "fat": 8,
+        "fiber": 2
+      },
+      "note": "Values for the dough alone, without sauce. Add 200–300 kcal depending on the topping.",
+      "ingredients": [
+        {
+          "qty": "280g",
+          "item": "Tipo 00 flour (or all-purpose as a substitute)"
+        },
+        {
+          "qty": "4",
+          "item": "Egg yolks"
+        },
+        {
+          "qty": "2",
+          "item": "Whole eggs"
+        }
+      ],
+      "steps": [
+        "Make a well with the flour. Add the yolks and whole eggs in the center.",
+        "Gradually incorporate the flour from the edges using a fork.",
+        "Knead by hand for 8–10 min until you have a smooth, elastic, non-sticky dough. Add a few drops of water if too dry.",
+        "Wrap in plastic wrap. Refrigerate for at least 1 hour (up to 24h — longer means better texture).",
+        "Divide into 4 portions. Roll through a pasta machine (setting 1 → 5 or 6) or very thinly by hand.",
+        "Cut into tagliatelle, fettuccine, or use for lasagna, ravioli, etc."
+      ],
+      "tags": [
+        "vegetarian",
+        "base",
+        "fresh pasta",
+        "personal recipe"
+      ],
+      "personal": true,
+      "author": "Erwan",
+      "usedIn": [
+        "Tagliatelle with bolognese",
+        "Carbonara",
+        "Lasagna",
+        "Ravioli"
+      ]
+    },
+    {
+      "id": "base-02",
+      "category": "base",
+      "name": "Homemade pizza dough",
+      "description": "A reliable home recipe — easier to handle than a high-hydration Neapolitan dough, with great structure thanks to olive oil.",
+      "prepTime": 75,
+      "difficulty": "facile",
+      "servings": 2,
+      "nutrition": {
+        "calories": 547,
+        "protein": 13,
+        "carbs": 93,
+        "fat": 11,
+        "fiber": 3
+      },
+      "note": "Values for 1 individual pizza base (half the recipe). Toppings are extra.",
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Tipo 00 or all-purpose flour"
+        },
+        {
+          "qty": "140g",
+          "item": "Warm water (approx. 30°C / 86°F)"
+        },
+        {
+          "qty": "20g",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "2.5g (½ packet)",
+          "item": "Dry active yeast"
+        },
+        {
+          "qty": "6g",
+          "item": "Salt"
+        }
+      ],
+      "steps": [
+        "Dissolve the yeast in the warm water. Let activate for 5 min.",
+        "In a large bowl, mix flour and salt. Add the water + yeast and olive oil.",
+        "Knead by hand for 10 min until you have a smooth, soft, slightly elastic dough.",
+        "Cover with a damp cloth. Let rise for 1 hour at room temperature (or overnight in the fridge for more flavor).",
+        "Divide into 2 dough balls. Stretch thinly by hand or with a rolling pin. Top and bake at 250°C (480°F) on a preheated baking sheet for 10–12 min."
+      ],
+      "tags": [
+        "vegetarian",
+        "base",
+        "pizza",
+        "personal recipe"
+      ],
+      "personal": true,
+      "author": "Erwan",
+      "usedIn": [
+        "Tomato mozzarella pizza",
+        "Pizza bianca",
+        "Calzone"
+      ]
+    },
+    {
+      "id": "post-07",
+      "category": "post",
+      "name": "Marinated salmon poke bowl",
+      "description": "The post-workout dish that doesn't look like athlete food. Vinegared rice, soy-honey-ginger marinated salmon. The homemade version is incomparable.",
+      "prepTime": 30,
+      "difficulty": "facile",
+      "servings": 4,
+      "nutrition": {
+        "calories": 480,
+        "protein": 38,
+        "carbs": 52,
+        "fat": 14,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "500g",
+          "item": "Short-grain rice (sushi rice)"
+        },
+        {
+          "qty": "600g",
+          "item": "Fresh salmon (fillet or steak)"
+        },
+        {
+          "qty": "6–7 mL",
+          "item": "Rice vinegar"
+        },
+        {
+          "qty": "2+ tsp",
+          "item": "Sugar"
+        },
+        {
+          "qty": "1 pinch",
+          "item": "Salt"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Soy sauce"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Honey"
+        },
+        {
+          "qty": "2 tsp",
+          "item": "Fresh grated ginger"
+        },
+        {
+          "qty": "Lemon juice",
+          "item": ""
+        },
+        {
+          "qty": "Toppings of your choice",
+          "item": "Avocado, edamame, cucumber, radish, sesame seeds"
+        }
+      ],
+      "steps": [
+        "Cook the rice in a rice cooker (equal volume of water to rice). Meanwhile, gently heat the rice vinegar with the sugar and salt until dissolved — do not boil.",
+        "Once cooked, gently fold the vinegar mixture into the warm rice. Let cool to room temperature.",
+        "Cut the salmon into cubes. Marinate for 15–20 min in soy sauce + honey + ginger + lemon juice.",
+        "Assemble the bowls: rice, marinated salmon, toppings. Drizzle with the remaining marinade."
+      ],
+      "tags": [
+        "gluten-free",
+        "omega-3",
+        "personal recipe",
+        "convivial",
+        "batch"
+      ],
+      "personal": true,
+      "author": "Erwan"
+    },
+    {
+      "id": "dessert-06",
+      "category": "dessert",
+      "name": "Homemade flan pâtissier",
+      "description": "The bakery flan, made at home. Creamy, vanilla-scented, with a lightly crisp pastry base.",
+      "prepTime": 70,
+      "difficulty": "moyen",
+      "servings": 8,
+      "nutrition": {
+        "calories": 310,
+        "protein": 9,
+        "carbs": 46,
+        "fat": 10,
+        "fiber": 1
+      },
+      "ingredients": [
+        {
+          "qty": "3",
+          "item": "Eggs"
+        },
+        {
+          "qty": "1 L",
+          "item": "Whole milk (875ml + 125ml)"
+        },
+        {
+          "qty": "100g",
+          "item": "Cornstarch"
+        },
+        {
+          "qty": "160g",
+          "item": "Sugar"
+        },
+        {
+          "qty": "2 packets",
+          "item": "Vanilla sugar"
+        },
+        {
+          "qty": "1",
+          "item": "Vanilla bean"
+        },
+        {
+          "qty": "1 roll",
+          "item": "Shortcrust or puff pastry (homemade or store-bought)"
+        }
+      ],
+      "steps": [
+        "Mix the 3 eggs with 125ml of cold milk and the cornstarch until smooth with no lumps.",
+        "In a saucepan, heat the remaining 875ml of milk with the sugar, vanilla sugar, and split vanilla bean. Bring to a boil.",
+        "Pour the hot milk over the egg mixture, whisking constantly. Return to the saucepan over medium heat, stirring continuously until thickened.",
+        "Line a 24–26 cm pan with the pastry. Pour the custard filling on top.",
+        "Bake at 180°C (350°F) for 40 min. The top should be lightly golden and still jiggle slightly in the center.",
+        "Let cool completely before unmolding."
+      ],
+      "tags": [
+        "vegetarian",
+        "personal recipe",
+        "dinner party dessert",
+        "make ahead"
+      ],
+      "personal": true,
+      "author": "Erwan"
+    },
+    {
+      "id": "base-03",
+      "category": "base",
+      "name": "Buckwheat galette dough",
+      "description": "The Breton buckwheat galette batter. Simple, no butter in the dough, leaving all the room for the fillings. The version that works at home.",
+      "prepTime": 75,
+      "difficulty": "facile",
+      "servings": 8,
+      "nutrition": {
+        "calories": 143,
+        "protein": 5,
+        "carbs": 22,
+        "fat": 5,
+        "fiber": 3
+      },
+      "note": "Calories for one galette alone, without filling. Add 150–400 kcal depending on the filling (complete, chicken-cheese, etc.)",
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "Buckwheat flour"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "All-purpose flour"
+        },
+        {
+          "qty": "1 pinch",
+          "item": "Salt + pepper"
+        },
+        {
+          "qty": "1",
+          "item": "Egg"
+        },
+        {
+          "qty": "2 tbsp",
+          "item": "Olive oil"
+        },
+        {
+          "qty": "500mL",
+          "item": "Water"
+        }
+      ],
+      "steps": [
+        "Mix the flours, salt, and pepper in a large bowl. Make a well.",
+        "Add the egg and oil in the center. Incorporate by stirring from the center outward.",
+        "Gradually add the water to avoid lumps. The batter should be fluid.",
+        "Rest for at least 1 hour (or overnight in the fridge — the galettes will be better).",
+        "Cook on a very hot, lightly oiled crêpe pan or non-stick skillet for 1–2 min per side."
+      ],
+      "tags": [
+        "vegan",
+        "gluten-free",
+        "base",
+        "brittany",
+        "personal recipe"
+      ],
+      "personal": true,
+      "author": "Erwan",
+      "usedIn": [
+        "Complete galette (ham, egg, cheese)",
+        "Chicken & cheese galette",
+        "Goat cheese & honey galette"
+      ]
+    },
+    {
+      "id": "snack-05",
+      "category": "snack",
+      "name": "Chickpea & peanut butter cookies",
+      "description": "The recipe that surprises everyone. No chickpea taste, cookie texture, protein snack macros. Zero flour.",
+      "prepTime": 20,
+      "difficulty": "facile",
+      "servings": 8,
+      "nutrition": {
+        "calories": 113,
+        "protein": 8,
+        "carbs": 13,
+        "fat": 5,
+        "fiber": 3
+      },
+      "ingredients": [
+        {
+          "qty": "1 can (400g)",
+          "item": "Chickpeas, undrained"
+        },
+        {
+          "qty": "40g",
+          "item": "Peanut butter"
+        },
+        {
+          "qty": "20g",
+          "item": "Honey"
+        },
+        {
+          "qty": "60g",
+          "item": "Caramel whey protein (or cocoa powder as a substitute)"
+        },
+        {
+          "qty": "Dark chocolate chips",
+          "item": "For inside + topping"
+        }
+      ],
+      "steps": [
+        "Blend the undrained chickpeas with the peanut butter, honey, and whey until smooth.",
+        "Fold in a few chocolate chips with a spatula.",
+        "Shape into cookies on a sheet of parchment paper. Press more chips on top.",
+        "Bake for 10–12 min at 180°C (350°F). Let cool completely before handling."
+      ],
+      "tags": [
+        "flour-free",
+        "high protein",
+        "batch",
+        "gluten-free"
+      ]
+    },
+    {
+      "id": "base-04",
+      "category": "base",
+      "name": "Homemade crêpe batter",
+      "description": "The generous version — more butter, more eggs. Rich, golden crêpes. Two versions in the notes; this is the fuller one.",
+      "prepTime": 80,
+      "difficulty": "facile",
+      "servings": 15,
+      "nutrition": {
+        "calories": 148,
+        "protein": 5,
+        "carbs": 18,
+        "fat": 6,
+        "fiber": 0
+      },
+      "note": "For a lighter version: 250g flour, 3 eggs, 60g sugar, 5g salt, 400ml milk. Thinner result, no butter.",
+      "ingredients": [
+        {
+          "qty": "250g",
+          "item": "All-purpose flour (T45)"
+        },
+        {
+          "qty": "60g",
+          "item": "Sugar"
+        },
+        {
+          "qty": "6",
+          "item": "Eggs"
+        },
+        {
+          "qty": "5cl",
+          "item": "Oil"
+        },
+        {
+          "qty": "80g",
+          "item": "Butter (melted)"
+        },
+        {
+          "qty": "75cl",
+          "item": "Milk (room temperature)"
+        }
+      ],
+      "steps": [
+        "Melt the butter and let it cool slightly.",
+        "Beat the eggs in a large bowl. Add the flour and sugar, mix.",
+        "Stir in the oil and melted butter.",
+        "Gradually add 50cl of milk, whisking to avoid lumps.",
+        "Rest for 1 hour (mandatory for this recipe).",
+        "Add the remaining 25cl of milk if the batter is too thick. Cook over medium heat in a lightly buttered crêpe pan."
+      ],
+      "tags": [
+        "vegetarian",
+        "base",
+        "crêpes",
+        "personal recipe",
+        "brittany"
+      ],
+      "personal": true,
+      "author": "Erwan"
+    }
+  ],
+  "total": 49
+}

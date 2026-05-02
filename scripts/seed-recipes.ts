@@ -1,20 +1,27 @@
 /**
- * Seed script — inserts the FR recipe library into Supabase.
+ * Seed script — inserts the recipe library into Supabase for one locale at
+ * a time. Defaults to seeding both fr + en sequentially.
  *
  * Usage:
- *   npx tsx scripts/seed-recipes.ts
+ *   npx tsx scripts/seed-recipes.ts          # seeds fr then en
+ *   npx tsx scripts/seed-recipes.ts fr       # seeds fr only
+ *   npx tsx scripts/seed-recipes.ts en       # seeds en only
  *
  * Requires VITE_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY env vars.
  *
  * Idempotent via UPSERT on the (recipe_key, locale) primary key.
- *
- * The EN translation is shipped in PR 4 with a parallel `recipes_en_seed.json`.
  */
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createClient } from '@supabase/supabase-js';
-import type { RecipeCategory, RecipeDifficulty, RecipeIngredient, RecipeNutrition } from '../src/types/recipe.ts';
+import type {
+  RecipeCategory,
+  RecipeDifficulty,
+  RecipeIngredient,
+  RecipeLocale,
+  RecipeNutrition,
+} from '../src/types/recipe.ts';
 import { slugify } from '../src/utils/slug.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -63,23 +70,21 @@ interface SeedFile {
   recipes: SeedRecipe[];
 }
 
-const seedPath = join(__dirname, 'data', 'recipes_fr_seed.json');
-const seed = JSON.parse(readFileSync(seedPath, 'utf8')) as SeedFile;
-
-console.log(`[seed-recipes] loaded ${seed.recipes.length} FR recipes from ${seedPath}`);
-
 const supabase = createClient(url, serviceKey);
 
-async function main() {
-  // Pre-flight: detect slug collisions before hitting the DB so the error
-  // message is actionable rather than a generic unique-violation from PG.
+async function seedLocale(locale: RecipeLocale): Promise<{ ok: number; failed: number }> {
+  const seedPath = join(__dirname, 'data', `recipes_${locale}_seed.json`);
+  const seed = JSON.parse(readFileSync(seedPath, 'utf8')) as SeedFile;
+  console.log(`[seed-recipes] loaded ${seed.recipes.length} ${locale.toUpperCase()} recipes`);
+
+  // Pre-flight slug-collision detection per locale (the UNIQUE constraint is
+  // (locale, slug), so a collision in the same locale is what would fail PG).
   const slugIndex = new Map<string, string>();
   for (const r of seed.recipes) {
     const s = slugify(r.name);
     const previous = slugIndex.get(s);
     if (previous) {
-      console.error(`[seed-recipes] slug collision: "${s}" produced by both ${previous} and ${r.id}`);
-      process.exit(1);
+      throw new Error(`slug collision in ${locale}: "${s}" produced by both ${previous} and ${r.id}`);
     }
     slugIndex.set(s, r.id);
   }
@@ -89,7 +94,7 @@ async function main() {
   for (const r of seed.recipes) {
     const row = {
       recipe_key: r.id,
-      locale: 'fr',
+      locale,
       slug: slugify(r.name),
       category: r.category,
       name: r.name,
@@ -105,18 +110,33 @@ async function main() {
     };
 
     const { error } = await supabase.from('recipes').upsert(row, { onConflict: 'recipe_key,locale' });
-
     if (error) {
       failed++;
       console.error(`  ✗ ${r.id}: ${error.message}`);
     } else {
       ok++;
-      process.stdout.write(`\r[seed-recipes] ${ok}/${seed.recipes.length} upserted`);
+      process.stdout.write(`\r[seed-recipes:${locale}] ${ok}/${seed.recipes.length} upserted`);
     }
   }
+  console.log(`\n[seed-recipes:${locale}] ok=${ok} failed=${failed}`);
+  return { ok, failed };
+}
 
-  console.log(`\n[seed-recipes] done — ok=${ok} failed=${failed}`);
-  process.exit(failed > 0 ? 1 : 0);
+async function main() {
+  const arg = process.argv[2] as RecipeLocale | undefined;
+  const locales: RecipeLocale[] = arg ? [arg] : ['fr', 'en'];
+
+  if (arg && arg !== 'fr' && arg !== 'en') {
+    console.error(`unknown locale "${arg}" — accepted: fr | en`);
+    process.exit(1);
+  }
+
+  let totalFailed = 0;
+  for (const locale of locales) {
+    const { failed } = await seedLocale(locale);
+    totalFailed += failed;
+  }
+  process.exit(totalFailed > 0 ? 1 : 0);
 }
 
 main().catch((err) => {

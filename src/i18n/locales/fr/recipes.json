@@ -1,0 +1,62 @@
+{
+  "list": {
+    "title": "Recettes Wan2Fit · Cuisine sport et nutrition",
+    "description": "49 recettes pensées pour la performance, la récupération et le quotidien. Filtre par catégorie, tag, ingrédient.",
+    "heading": "Recettes",
+    "subtitle": "49 recettes pensées pour la performance, la récupération et le quotidien.",
+    "empty": "Aucune recette ne correspond aux filtres.",
+    "count_one": "{{n}} recette",
+    "count_other": "{{n}} recettes",
+    "count": "{{n}} recettes"
+  },
+  "detail": {
+    "title_fallback": "Recette · Wan2Fit",
+    "description_fallback": "Une recette Wan2Fit.",
+    "not_found_title": "Recette introuvable",
+    "not_found_body": "Cette recette n'existe pas ou a été retirée.",
+    "back_to_list": "Toutes les recettes",
+    "prep_time": "Préparation",
+    "servings": "Portions",
+    "difficulty": "Difficulté",
+    "nutrition_heading": "Valeurs nutritionnelles",
+    "nutrition_per_serving_one": "Pour {{n}} portion",
+    "nutrition_per_serving_other": "Pour {{n}} portions",
+    "nutrition_per_serving": "Pour {{n}} portion(s)",
+    "ingredients_heading": "Ingrédients",
+    "steps_heading": "Préparation",
+    "tags_heading": "Tags"
+  },
+  "filters": {
+    "search_placeholder": "Rechercher une recette, un ingrédient…",
+    "category_all": "Toutes",
+    "category_aria": "Filtrer par catégorie",
+    "tags_toggle": "Filtrer par tag ({{n}})",
+    "reset": "Réinitialiser les filtres"
+  },
+  "category": {
+    "pre": "Pré-entraînement",
+    "post": "Post-entraînement",
+    "breakfast": "Petit-déjeuner",
+    "recovery": "Récupération",
+    "snack": "Snack protéiné",
+    "main": "Plats du quotidien",
+    "dessert": "Desserts",
+    "base": "Bases & pâtes"
+  },
+  "difficulty": {
+    "facile": "facile",
+    "moyen": "moyen",
+    "difficile": "difficile"
+  },
+  "macro": {
+    "calories": "Calories",
+    "protein": "Protéines",
+    "carbs": "Glucides",
+    "fat": "Lipides",
+    "fiber": "Fibres"
+  },
+  "card": {
+    "kcal": "{{n}} kcal",
+    "prep_min": "{{n}} min"
+  }
+}
