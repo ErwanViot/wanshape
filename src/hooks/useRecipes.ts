@@ -55,7 +55,10 @@ export function useRecipes(filters: RecipesFilters = {}): UseRecipesResult {
   return {
     recipes: filtered,
     loading: query.isPending,
-    error: query.data?.error ?? null,
+    // Distinguish a Supabase-returned error (in `data.error`) from an
+    // un-caught network failure (React Query's `query.error`). Without this,
+    // a connectivity blip looked like an empty catalogue.
+    error: query.data?.error ?? (query.isError ? String(query.error ?? '') : null),
   };
 }
 
@@ -78,6 +81,12 @@ export function applyFilters(recipes: Recipe[], filters: RecipesFilters): Recipe
   return out;
 }
 
+/**
+ * Slug↔locale invariant: each (recipe_key, locale) row has its own slug.
+ * If the user switches language while sitting on a FR slug, this hook will
+ * legitimately return `recipe: null` because the EN row has a different slug.
+ * Per-recipe URL rewrite/redirect on locale toggle lands in PR 5.
+ */
 export function useRecipe(slug: string | undefined): {
   recipe: Recipe | null;
   loading: boolean;
@@ -108,6 +117,6 @@ export function useRecipe(slug: string | undefined): {
   return {
     recipe: query.data?.recipe ?? null,
     loading: query.isPending,
-    error: query.data?.error ?? null,
+    error: query.data?.error ?? (query.isError ? String(query.error ?? '') : null),
   };
 }

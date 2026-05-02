@@ -17,9 +17,12 @@ export function RecipeListPage() {
   const [search, setSearch] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  // Pull the unfiltered list once to drive both the result set AND the
-  // available-tags chip cloud — this way filtering doesn't shrink the chip
-  // options as the user narrows the result set.
+  // Two `useRecipes` calls — one unfiltered for the chip cloud, one filtered
+  // for the result grid. Both share queryKey `['recipes', locale]`, so React
+  // Query dedupes them into a single network fetch; only `applyFilters` runs
+  // twice, which is negligible at ≤ 100 rows. If the queryKey ever grows to
+  // include filters (e.g. server-side filtering), this would split into two
+  // real fetches — revisit then.
   const { recipes: allRecipes } = useRecipes();
   const { recipes, loading, error } = useRecipes({
     category,
@@ -74,7 +77,7 @@ export function RecipeListPage() {
           <p className="text-center text-sm text-muted py-12">{t('list.empty')}</p>
         ) : (
           <>
-            <p className="text-xs text-muted">{t('list.count', { n: recipes.length })}</p>
+            <p className="text-xs text-muted">{t('list.count', { count: recipes.length })}</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {recipes.map((r) => (
                 <RecipeCard key={`${r.locale}-${r.recipe_key}`} recipe={r} />

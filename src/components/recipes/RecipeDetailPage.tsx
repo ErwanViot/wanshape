@@ -112,7 +112,7 @@ export function RecipeDetailPage() {
               </div>
             )}
           </dl>
-          <p className="text-[11px] text-muted">{t('detail.nutrition_per_serving', { n: recipe.servings })}</p>
+          <p className="text-[11px] text-muted">{t('detail.nutrition_per_serving', { count: recipe.servings })}</p>
         </section>
 
         <section className="space-y-3">

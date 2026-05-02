@@ -5,9 +5,8 @@
     "heading": "Recipes",
     "subtitle": "49 recipes built for performance, recovery, and everyday meals.",
     "empty": "No recipe matches your filters.",
-    "count_one": "{{n}} recipe",
-    "count_other": "{{n}} recipes",
-    "count": "{{n}} recipes"
+    "count_one": "{{count}} recipe",
+    "count_other": "{{count}} recipes"
   },
   "detail": {
     "title_fallback": "Recipe · Wan2Fit",
@@ -19,9 +18,8 @@
     "servings": "Servings",
     "difficulty": "Difficulty",
     "nutrition_heading": "Nutrition facts",
-    "nutrition_per_serving_one": "For {{n}} serving",
-    "nutrition_per_serving_other": "For {{n}} servings",
-    "nutrition_per_serving": "For {{n}} serving(s)",
+    "nutrition_per_serving_one": "For {{count}} serving",
+    "nutrition_per_serving_other": "For {{count}} servings",
     "ingredients_heading": "Ingredients",
     "steps_heading": "Steps",
     "tags_heading": "Tags"
