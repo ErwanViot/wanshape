@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Mon assiette — mange en fonction de ce que tu fais",
+    "description": "Suivi macros simplifié et 50+ recettes pensées pour le sport. Pas de balance, pas de catalogue à 5 millions d'aliments."
+  },
+  "hero": {
+    "eyebrow": "Nutrition",
+    "title": "Mange en fonction de ce que tu fais, pas de ce que tu pèses.",
+    "subtitle": "Tracking macros simplifié, recettes calibrées pour le sport. Pas besoin d'une balance, ni d'un catalogue de 5 millions d'aliments — juste ce qui compte.",
+    "cta_primary": "Créer un compte gratuit",
+    "cta_secondary": "Explorer les recettes"
+  },
+  "benefits": {
+    "section_label": "Pourquoi notre nutrition",
+    "context_title": "Au service de ton sport",
+    "context_body": "On ne te propose pas un tracker générique : ce que tu manges est mis en relation avec ce que tu fais. Pas une fin en soi, un carburant.",
+    "recipes_title": "50+ recettes calibrées",
+    "recipes_body": "Petit-déj rapide, repas post-séance, en-cas de récupération. Bilingues FR/EN, macros affichées, étapes claires.",
+    "simple_title": "Sans balance, sans friction",
+    "simple_body": "Le tracking est conçu pour être tenable au quotidien — pas un comptage anxiogène. Tu vois ce qui compte, tu lâches le reste.",
+    "bilingual_title": "FR et EN",
+    "bilingual_body": "Les recettes sont disponibles dans les deux langues, avec leurs URLs traduites pour que ça reste lisible et indexable."
+  },
+  "final_cta": {
+    "title": "Vois ce que ton assiette change.",
+    "subtitle": "Crée ton compte gratuitement et commence à voir le lien entre ce que tu manges et ce que tu fais.",
+    "cta_primary": "Créer un compte gratuit",
+    "cta_secondary": "Explorer les recettes"
+  }
+}

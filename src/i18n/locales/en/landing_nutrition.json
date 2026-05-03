@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "My plate — eat for what you do",
+    "description": "Simple macro tracking and 50+ recipes built for active people. No scale, no 5-million-food catalog."
+  },
+  "hero": {
+    "eyebrow": "Nutrition",
+    "title": "Eat for what you do, not for what you weigh.",
+    "subtitle": "Simple macro tracking, recipes calibrated for sport. No need for a scale or a 5-million-food catalog — just what matters.",
+    "cta_primary": "Create a free account",
+    "cta_secondary": "Browse the recipes"
+  },
+  "benefits": {
+    "section_label": "Why our nutrition",
+    "context_title": "Serving your training",
+    "context_body": "Not just another generic tracker: what you eat is tied to what you do. Not an end in itself — fuel.",
+    "recipes_title": "50+ calibrated recipes",
+    "recipes_body": "Quick breakfast, post-workout meals, recovery snacks. Bilingual FR/EN, macros shown, clear steps.",
+    "simple_title": "No scale, no friction",
+    "simple_body": "Tracking is designed to be sustainable day-to-day — not anxious counting. See what matters, let go of the rest.",
+    "bilingual_title": "FR and EN",
+    "bilingual_body": "Recipes are available in both languages with translated URLs, readable and indexable."
+  },
+  "final_cta": {
+    "title": "See what your plate changes.",
+    "subtitle": "Create a free account and start to see the link between what you eat and what you do.",
+    "cta_primary": "Create a free account",
+    "cta_secondary": "Browse the recipes"
+  }
+}
