@@ -1,29 +1,29 @@
 {
   "meta": {
-    "title": "Suivi — vois enfin si ça marche, au-delà de la balance",
-    "description": "Séances, mensurations, poids, nutrition dans un seul tableau de bord. Vois la corrélation, pas juste les chiffres bruts."
+    "title": "Suivi — la régularité de tes séances, semaine après semaine",
+    "description": "Total séances, temps cumulé, semaine en cours, programme actif. Le tableau de bord pour voir si tu tiens dans la durée."
   },
   "hero": {
     "eyebrow": "Suivi",
-    "title": "Vois enfin si ça marche — au-delà de la balance.",
-    "subtitle": "Tes séances, tes mensurations, ton poids, ce que tu manges. Tout connecté dans un même tableau de bord — pour voir la corrélation, pas juste des chiffres isolés.",
+    "title": "La régularité, c'est ce qui paie.",
+    "subtitle": "Combien de séances cette semaine ? Combien d'heures ce mois-ci ? Où en es-tu sur ton programme ? Le tableau de bord pour voir noir sur blanc si tu tiens — et te corriger avant d'abandonner.",
     "cta_primary": "Créer un compte gratuit",
     "cta_secondary": "Voir les programmes types"
   },
   "benefits": {
-    "section_label": "Pourquoi notre suivi",
-    "correlation_title": "Corrélation, pas juxtaposition",
-    "correlation_body": "Strava te dit ton GPS. MyFitnessPal te dit tes calories. Ici tu vois comment l'un agit sur l'autre — l'écart entre l'effort et le résultat.",
-    "history_title": "Historique des séances",
-    "history_body": "Chaque séance terminée est sauvegardée. Tu vois ta régularité, tes formats préférés, ton volume hebdomadaire.",
-    "body_title": "Mensurations + poids",
-    "body_body": "Hors balance hebdomadaire : tour de taille, hanches, bras. Le vrai indicateur de transformation, sans tomber dans l'obsession.",
-    "signal_title": "Le signal pour ne pas lâcher",
-    "signal_body": "Le moment où on abandonne, c'est quand on ne voit pas que ça marche. Le suivi est conçu pour rendre ce signal visible — semaine après semaine."
+    "section_label": "Ce que tu vois dans le suivi",
+    "totals_title": "Total séances + temps",
+    "totals_body": "Compteur cumulé depuis ton premier jour, durée totale et durée moyenne. Le score qui te rappelle que tu as déjà construit quelque chose.",
+    "week_title": "Cette semaine en un coup d'œil",
+    "week_body": "WeekDots (un point par jour de la semaine), volume hebdomadaire, message contextuel selon ton activité. Tu vois si tu es sur ta lancée ou si tu glisses.",
+    "program_title": "Ton programme actif",
+    "program_body": "Si tu suis un programme, sa progression est intégrée au tableau de bord. Sessions complétées, prochaine séance, raccourci pour la lancer.",
+    "history_title": "Tes dernières séances",
+    "history_body": "Liste des séances récemment terminées avec date et format. Pour te souvenir de ce que tu as fait — et pour le revoir si besoin."
   },
   "final_cta": {
-    "title": "Vois enfin que ton effort paie.",
-    "subtitle": "Crée ton compte gratuit, commence à suivre, et regarde la courbe se dessiner.",
+    "title": "Vois noir sur blanc que tu tiens dans la durée.",
+    "subtitle": "Crée ton compte gratuit, fais ta première séance, et regarde la régularité s'installer.",
     "cta_primary": "Créer un compte gratuit",
     "cta_secondary": "Découvrir les programmes"
   }

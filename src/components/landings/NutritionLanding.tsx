@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { FeatureLandingTemplate } from './FeatureLandingTemplate.tsx';
 
-function LinkIcon() {
+function PieIcon() {
   return (
     <svg
       width="20"
@@ -15,13 +15,13 @@ function LinkIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+      <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+      <path d="M22 12A10 10 0 0 0 12 2v10z" />
     </svg>
   );
 }
 
-function BookIcon() {
+function BarcodeIcon() {
   return (
     <svg
       width="20"
@@ -34,13 +34,12 @@ function BookIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+      <path d="M3 5v14M7 5v14M11 5v9M15 5v14M19 5v14" />
     </svg>
   );
 }
 
-function FeatherIcon() {
+function HistoryIcon() {
   return (
     <svg
       width="20"
@@ -53,14 +52,14 @@ function FeatherIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-      <line x1="16" y1="8" x2="2" y2="22" />
-      <line x1="17.5" y1="15" x2="9" y2="15" />
+      <path d="M3 12a9 9 0 1 0 9-9 9.7 9.7 0 0 0-6.4 2.4L3 8" />
+      <polyline points="3 3 3 8 8 8" />
+      <path d="M12 7v5l3 2" />
     </svg>
   );
 }
 
-function GlobeIcon() {
+function SparkleIcon() {
   return (
     <svg
       width="20"
@@ -73,9 +72,8 @@ function GlobeIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <circle cx="12" cy="12" r="10" />
-      <line x1="2" y1="12" x2="22" y2="12" />
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" />
+      <path d="M19 17l.6 1.5L21 19l-1.4.5L19 21l-.6-1.5L17 19l1.4-.5z" />
     </svg>
   );
 }
@@ -101,10 +99,10 @@ export function NutritionLanding() {
       benefits={{
         sectionLabel: t('benefits.section_label'),
         items: [
-          { icon: <LinkIcon />, title: t('benefits.context_title'), body: t('benefits.context_body') },
-          { icon: <BookIcon />, title: t('benefits.recipes_title'), body: t('benefits.recipes_body') },
-          { icon: <FeatherIcon />, title: t('benefits.simple_title'), body: t('benefits.simple_body') },
-          { icon: <GlobeIcon />, title: t('benefits.bilingual_title'), body: t('benefits.bilingual_body') },
+          { icon: <PieIcon />, title: t('benefits.kcal_title'), body: t('benefits.kcal_body') },
+          { icon: <BarcodeIcon />, title: t('benefits.search_title'), body: t('benefits.search_body') },
+          { icon: <HistoryIcon />, title: t('benefits.history_title'), body: t('benefits.history_body') },
+          { icon: <SparkleIcon />, title: t('benefits.insight_title'), body: t('benefits.insight_body') },
         ],
       }}
       finalCta={{

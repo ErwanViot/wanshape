@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { FeatureLandingTemplate } from './FeatureLandingTemplate.tsx';
 
-function NetworkIcon() {
+function HashIcon() {
   return (
     <svg
       width="20"
@@ -15,15 +15,15 @@ function NetworkIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <circle cx="12" cy="5" r="3" />
-      <circle cx="5" cy="19" r="3" />
-      <circle cx="19" cy="19" r="3" />
-      <path d="M12 8v6M5.5 17l5-5M18.5 17l-5-5" />
+      <line x1="4" y1="9" x2="20" y2="9" />
+      <line x1="4" y1="15" x2="20" y2="15" />
+      <line x1="10" y1="3" x2="8" y2="21" />
+      <line x1="16" y1="3" x2="14" y2="21" />
     </svg>
   );
 }
 
-function CalendarIcon() {
+function CalendarWeekIcon() {
   return (
     <svg
       width="20"
@@ -44,7 +44,7 @@ function CalendarIcon() {
   );
 }
 
-function RulerIcon() {
+function FlagIcon() {
   return (
     <svg
       width="20"
@@ -57,13 +57,13 @@ function RulerIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M21.3 8.7l-12.6 12.6a1 1 0 0 1-1.4 0L2.7 16.7a1 1 0 0 1 0-1.4L15.3 2.7a1 1 0 0 1 1.4 0l4.6 4.6a1 1 0 0 1 0 1.4z" />
-      <path d="M7 17l-2-2M11 13l-2-2M15 9l-2-2" />
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+      <line x1="4" y1="22" x2="4" y2="15" />
     </svg>
   );
 }
 
-function TrendIcon() {
+function ListIcon() {
   return (
     <svg
       width="20"
@@ -76,8 +76,12 @@ function TrendIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-      <polyline points="17 6 23 6 23 12" />
+      <line x1="8" y1="6" x2="21" y2="6" />
+      <line x1="8" y1="12" x2="21" y2="12" />
+      <line x1="8" y1="18" x2="21" y2="18" />
+      <line x1="3" y1="6" x2="3.01" y2="6" />
+      <line x1="3" y1="12" x2="3.01" y2="12" />
+      <line x1="3" y1="18" x2="3.01" y2="18" />
     </svg>
   );
 }
@@ -103,14 +107,10 @@ export function SuiviLanding() {
       benefits={{
         sectionLabel: t('benefits.section_label'),
         items: [
-          {
-            icon: <NetworkIcon />,
-            title: t('benefits.correlation_title'),
-            body: t('benefits.correlation_body'),
-          },
-          { icon: <CalendarIcon />, title: t('benefits.history_title'), body: t('benefits.history_body') },
-          { icon: <RulerIcon />, title: t('benefits.body_title'), body: t('benefits.body_body') },
-          { icon: <TrendIcon />, title: t('benefits.signal_title'), body: t('benefits.signal_body') },
+          { icon: <HashIcon />, title: t('benefits.totals_title'), body: t('benefits.totals_body') },
+          { icon: <CalendarWeekIcon />, title: t('benefits.week_title'), body: t('benefits.week_body') },
+          { icon: <FlagIcon />, title: t('benefits.program_title'), body: t('benefits.program_body') },
+          { icon: <ListIcon />, title: t('benefits.history_title'), body: t('benefits.history_body') },
         ],
       }}
       finalCta={{
