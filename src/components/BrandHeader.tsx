@@ -44,12 +44,13 @@ function NavLink({ to, labelKey, active }: { to: string; labelKey: string; activ
 
 export function BrandHeader() {
   const { pathname } = useLocation();
-  const { user, profile } = useAuth();
+  const { user, profile, loading } = useAuth();
   const { t } = useTranslation('nav');
 
   const isLoggedIn = !!user;
   const isPremium = profile?.subscription_tier === 'premium';
-  const showPricing = !isPremium;
+  // Hide while loading to avoid flashing "Tarifs" for premium users before profile resolves
+  const showPricing = !loading && !isPremium;
   const isPricingActive = pathname === '/tarifs';
   const isExploreActive = matchExplore(pathname);
   const isTrackingActive = pathname === '/suivi';

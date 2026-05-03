@@ -51,7 +51,6 @@ export function NavDropdown({ triggerLabelKey, items }: NavDropdownProps) {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        aria-haspopup="menu"
         aria-expanded={open}
         className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
           anyChildActive ? 'text-brand bg-brand/10' : 'text-muted hover:text-heading hover:bg-divider'
@@ -74,17 +73,13 @@ export function NavDropdown({ triggerLabelKey, items }: NavDropdownProps) {
         </svg>
       </button>
       {open && (
-        <div
-          role="menu"
-          className="absolute left-0 top-full mt-1 min-w-[180px] py-1 bg-card-bg border border-divider rounded-lg shadow-lg z-50"
-        >
+        <div className="absolute left-0 top-full mt-1 min-w-[180px] py-1 bg-card-bg border border-divider rounded-lg shadow-lg z-50">
           {items.map((item) => {
             const active = item.match(pathname);
             return (
               <Link
                 key={item.to}
                 to={item.to}
-                role="menuitem"
                 className={`block px-3 py-2 text-sm font-medium transition-colors ${
                   active ? 'text-brand bg-brand/10' : 'text-body hover:bg-divider'
                 }`}
