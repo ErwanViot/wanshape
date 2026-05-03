@@ -1,30 +1,30 @@
 {
   "meta": {
-    "title": "Mon assiette — mange en fonction de ce que tu fais",
-    "description": "Suivi macros simplifié et 50+ recettes pensées pour le sport. Pas de balance, pas de catalogue à 5 millions d'aliments."
+    "title": "Mon assiette — ton journal alimentaire au quotidien",
+    "description": "Suivi calorique et macros (P/G/L) journalier. Recherche dans la base CIQUAL ou scan code-barres. Historique sur 7 jours."
   },
   "hero": {
-    "eyebrow": "Nutrition",
-    "title": "Mange en fonction de ce que tu fais, pas de ce que tu pèses.",
-    "subtitle": "Tracking macros simplifié, recettes calibrées pour le sport. Pas besoin d'une balance, ni d'un catalogue de 5 millions d'aliments — juste ce qui compte.",
+    "eyebrow": "Mon assiette",
+    "title": "Sache ce que tu manges, sans en faire une obsession.",
+    "subtitle": "Calories et macros au quotidien. Tu cherches l'aliment dans la base CIQUAL, tu scannes un code-barres, c'est compté. Avec ou sans cible chiffrée — tu décides du niveau d'engagement.",
     "cta_primary": "Créer un compte gratuit",
-    "cta_secondary": "Explorer les recettes"
+    "cta_secondary": "Voir les recettes"
   },
   "benefits": {
-    "section_label": "Pourquoi notre nutrition",
-    "context_title": "Au service de ton sport",
-    "context_body": "On ne te propose pas un tracker générique : ce que tu manges est mis en relation avec ce que tu fais. Pas une fin en soi, un carburant.",
-    "recipes_title": "50+ recettes calibrées",
-    "recipes_body": "Petit-déj rapide, repas post-séance, en-cas de récupération. Bilingues FR/EN, macros affichées, étapes claires.",
-    "simple_title": "Sans balance, sans friction",
-    "simple_body": "Le tracking est conçu pour être tenable au quotidien — pas un comptage anxiogène. Tu vois ce qui compte, tu lâches le reste.",
-    "bilingual_title": "FR et EN",
-    "bilingual_body": "Les recettes sont disponibles dans les deux langues, avec leurs URLs traduites pour que ça reste lisible et indexable."
+    "section_label": "Pourquoi notre journal alimentaire",
+    "kcal_title": "Calories et macros",
+    "kcal_body": "Compteur calorique journalier + protéines / glucides / lipides. Une cible si tu en veux une, sinon mode \"prise de conscience\" pour démarrer en douceur.",
+    "search_title": "Base CIQUAL + code-barres",
+    "search_body": "Recherche directe dans la base alimentaire française CIQUAL, ou scan d'un code-barres pour récupérer l'info nutritionnelle (OpenFoodFacts).",
+    "history_title": "Historique 7 jours",
+    "history_body": "Tu peux saisir ou corriger jusqu'à 7 jours en arrière. Pas de pression d'être parfait au moment T, l'app s'adapte à ton rythme.",
+    "insight_title": "Insight quotidien (Premium)",
+    "insight_body": "Une lecture courte de ta journée par l'IA, qui pointe ce qui se passe et te suggère un ajustement. Pas un coach moralisateur — un éclaireur."
   },
   "final_cta": {
-    "title": "Vois ce que ton assiette change.",
-    "subtitle": "Crée ton compte gratuitement et commence à voir le lien entre ce que tu manges et ce que tu fais.",
+    "title": "Reprends la main sur ce que tu manges.",
+    "subtitle": "Crée ton compte gratuitement et commence à voir clair, sans calculer dans ta tête.",
     "cta_primary": "Créer un compte gratuit",
-    "cta_secondary": "Explorer les recettes"
+    "cta_secondary": "Voir les recettes"
   }
 }

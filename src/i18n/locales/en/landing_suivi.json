@@ -1,29 +1,29 @@
 {
   "meta": {
-    "title": "Tracking — finally see it's working, beyond the scale",
-    "description": "Workouts, measurements, weight, nutrition in one dashboard. See the correlation, not just raw numbers."
+    "title": "Tracking — your training consistency, week after week",
+    "description": "Total sessions, cumulative time, current week, active program. The dashboard to see whether you're sticking with it."
   },
   "hero": {
     "eyebrow": "Tracking",
-    "title": "Finally see it's working — beyond the scale.",
-    "subtitle": "Your workouts, your measurements, your weight, what you eat. All connected in one dashboard — see the correlation, not just isolated numbers.",
+    "title": "Consistency is what pays.",
+    "subtitle": "How many sessions this week? How many hours this month? Where are you on your program? The dashboard to see in black and white if you're sticking with it — and to course-correct before you quit.",
     "cta_primary": "Create a free account",
     "cta_secondary": "Browse the standard programs"
   },
   "benefits": {
-    "section_label": "Why our tracking",
-    "correlation_title": "Correlation, not juxtaposition",
-    "correlation_body": "Strava shows your GPS. MyFitnessPal shows your calories. Here you see how one acts on the other — the gap between effort and result.",
-    "history_title": "Workout history",
-    "history_body": "Every completed session is saved. You see your regularity, your favorite formats, your weekly volume.",
-    "body_title": "Measurements and weight",
-    "body_body": "Beyond the weekly scale: waist, hips, arms. The real transformation indicator, without falling into obsession.",
-    "signal_title": "The signal to keep going",
-    "signal_body": "People quit when they can't see it's working. Tracking is designed to make that signal visible — week after week."
+    "section_label": "What you see in tracking",
+    "totals_title": "Total sessions + time",
+    "totals_body": "Cumulative counter since day one, total time and average duration. The score that reminds you you've already built something.",
+    "week_title": "This week at a glance",
+    "week_body": "WeekDots (one dot per day), weekly volume, contextual message based on your activity. You see whether you're on a roll or slipping.",
+    "program_title": "Your active program",
+    "program_body": "If you're following a program, its progress is built into the dashboard. Completed sessions, next session, shortcut to launch it.",
+    "history_title": "Your recent sessions",
+    "history_body": "List of recently completed sessions with date and format. To remember what you did — and revisit if needed."
   },
   "final_cta": {
-    "title": "Finally see your effort pay off.",
-    "subtitle": "Create a free account, start tracking, and watch the curve take shape.",
+    "title": "See in black and white that you're sticking with it.",
+    "subtitle": "Create a free account, finish your first session, and watch consistency take root.",
     "cta_primary": "Create a free account",
     "cta_secondary": "Browse the programs"
   }

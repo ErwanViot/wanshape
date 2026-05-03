@@ -1,29 +1,29 @@
 {
   "meta": {
-    "title": "My plate — eat for what you do",
-    "description": "Simple macro tracking and 50+ recipes built for active people. No scale, no 5-million-food catalog."
+    "title": "My plate — your daily food journal",
+    "description": "Daily calorie and macro (P/C/F) tracking. Search the CIQUAL food database or scan barcodes. 7-day history."
   },
   "hero": {
-    "eyebrow": "Nutrition",
-    "title": "Eat for what you do, not for what you weigh.",
-    "subtitle": "Simple macro tracking, recipes calibrated for sport. No need for a scale or a 5-million-food catalog — just what matters.",
+    "eyebrow": "My plate",
+    "title": "Know what you eat, without obsessing over it.",
+    "subtitle": "Daily calories and macros. Search the food database, scan a barcode, it's logged. With or without a calorie target — you decide how committed you want to be.",
     "cta_primary": "Create a free account",
     "cta_secondary": "Browse the recipes"
   },
   "benefits": {
-    "section_label": "Why our nutrition",
-    "context_title": "Serving your training",
-    "context_body": "Not just another generic tracker: what you eat is tied to what you do. Not an end in itself — fuel.",
-    "recipes_title": "50+ calibrated recipes",
-    "recipes_body": "Quick breakfast, post-workout meals, recovery snacks. Bilingual FR/EN, macros shown, clear steps.",
-    "simple_title": "No scale, no friction",
-    "simple_body": "Tracking is designed to be sustainable day-to-day — not anxious counting. See what matters, let go of the rest.",
-    "bilingual_title": "FR and EN",
-    "bilingual_body": "Recipes are available in both languages with translated URLs, readable and indexable."
+    "section_label": "Why our food journal",
+    "kcal_title": "Calories and macros",
+    "kcal_body": "Daily calorie counter plus protein / carbs / fat. Set a target if you want one, or stay in \"awareness\" mode to ease into it.",
+    "search_title": "Food database + barcodes",
+    "search_body": "Search the French CIQUAL food database directly, or scan a barcode to pull nutrition info from OpenFoodFacts.",
+    "history_title": "7-day history",
+    "history_body": "Log or correct up to 7 days back. No pressure to be perfect in real time — the app adapts to your rhythm.",
+    "insight_title": "Daily insight (Premium)",
+    "insight_body": "A short AI reading of your day that flags what's happening and suggests one adjustment. Not a preachy coach — a heads-up."
   },
   "final_cta": {
-    "title": "See what your plate changes.",
-    "subtitle": "Create a free account and start to see the link between what you eat and what you do.",
+    "title": "Get back the upper hand on what you eat.",
+    "subtitle": "Create a free account and start to see things clearly, without doing math in your head.",
     "cta_primary": "Create a free account",
     "cta_secondary": "Browse the recipes"
   }
