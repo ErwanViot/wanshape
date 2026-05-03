@@ -7,7 +7,7 @@ import { NavDropdown } from './NavDropdown.tsx';
 
 const matchExplore = (p: string) => p === '/decouvrir' || p.startsWith('/formats') || p.startsWith('/exercices');
 const matchPrograms = (p: string) => p.startsWith('/programme');
-const matchSessions = (p: string) => p === '/seances' || p.startsWith('/seance');
+const matchSessions = (p: string) => p === '/seances' || p.startsWith('/seance') || p === '/decouvrir/seances';
 const matchRecipes = (p: string) => p.startsWith('/nutrition/recettes') || p.startsWith('/en/nutrition/recipes');
 const matchPlate = (p: string) => p === '/nutrition' || p.startsWith('/nutrition/setup');
 
@@ -21,10 +21,11 @@ const NUTRITION_ITEMS = [
   { to: '/nutrition/recettes', labelKey: 'recipes', match: matchRecipes },
 ] as const;
 
-const VISITOR_ITEMS = [
-  { to: '/decouvrir', labelKey: 'explore', match: matchExplore },
-  { to: '/programmes', labelKey: 'programs', match: matchPrograms },
-  { to: '/nutrition/recettes', labelKey: 'recipes', match: matchRecipes },
+// Visitor sees mirror of the logged-in nav. Auth-only destinations
+// route to public landings (/decouvrir/*); the rest reuses public listings.
+const VISITOR_TRAIN_ITEMS = [
+  { to: '/decouvrir/seances', labelKey: 'my_sessions', match: matchSessions },
+  { to: '/programmes', labelKey: 'my_programs', match: matchPrograms },
 ] as const;
 
 function NavLink({ to, labelKey, active }: { to: string; labelKey: string; active: boolean }) {
@@ -54,6 +55,7 @@ export function BrandHeader() {
   const isPricingActive = pathname === '/tarifs';
   const isExploreActive = matchExplore(pathname);
   const isTrackingActive = pathname === '/suivi';
+  const isRecipesActive = matchRecipes(pathname);
 
   return (
     <header className="px-6 md:px-10 lg:px-14 py-4 border-b border-divider">
@@ -72,9 +74,11 @@ export function BrandHeader() {
               <NavLink to="/suivi" labelKey="tracking" active={isTrackingActive} />
             </>
           ) : (
-            VISITOR_ITEMS.map((item) => (
-              <NavLink key={item.to} to={item.to} labelKey={item.labelKey} active={item.match(pathname)} />
-            ))
+            <>
+              <NavDropdown triggerLabelKey="train" items={VISITOR_TRAIN_ITEMS} />
+              <NavLink to="/decouvrir" labelKey="explore" active={isExploreActive} />
+              <NavLink to="/nutrition/recettes" labelKey="recipes" active={isRecipesActive} />
+            </>
           )}
         </nav>
 
