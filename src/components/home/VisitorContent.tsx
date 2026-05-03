@@ -1,26 +1,12 @@
-import {
-  ArrowRight,
-  Calendar,
-  ChevronRight,
-  Clock,
-  Dumbbell,
-  ListChecks,
-  Play,
-  RotateCcw,
-  Shuffle,
-  Target,
-  TrendingUp,
-  Wand2,
-  Zap,
-} from 'lucide-react';
+import { ArrowRight, Calendar, ChevronRight, Clock, Dumbbell, Play, Shuffle, TrendingUp, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { supabase } from '../../lib/supabase.ts';
 import type { Session } from '../../types/session.ts';
 import { getSessionImage } from '../../utils/sessionImage.ts';
 import { DifficultyBadge } from '../DifficultyBadge.tsx';
-import { ScreenshotCarousel } from '../ScreenshotCarousel.tsx';
 import { SessionAccordion } from '../SessionAccordion.tsx';
+import { HomePillarsGrid } from './HomePillarsGrid.tsx';
 import { TomorrowCard } from './TomorrowCard.tsx';
 
 export function VisitorContent({
@@ -100,7 +86,10 @@ export function VisitorContent({
         </div>
       </section>
 
-      {/* ── 2. Comment ça marche — 3 étapes ── */}
+      {/* ── 2. Pillars grid — entry points to feature landings (NEW) ── */}
+      <HomePillarsGrid />
+
+      {/* ── 3. Comment ça marche — 3 étapes ── */}
       <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-display text-2xl md:text-3xl font-black text-heading text-center mb-12">
@@ -144,7 +133,7 @@ export function VisitorContent({
         </div>
       </section>
 
-      {/* ── 3. Feature : Séance du jour ── */}
+      {/* ── 4. Feature : Séance du jour (preview live, conservée comme hook unique) ── */}
       <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -259,186 +248,7 @@ export function VisitorContent({
         </div>
       </section>
 
-      {/* ── 4. Feature : Le player ── */}
-      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Texte (à droite en desktop) */}
-            <div className="space-y-5 order-1 md:order-2">
-              <span className="text-xs font-bold tracking-widest uppercase text-brand">
-                {t('visitor.feature_player.label')}
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                {t('visitor.feature_player.heading_1')}
-                <br />
-                {t('visitor.feature_player.heading_2')}
-              </h2>
-              <p className="text-muted leading-relaxed">{t('visitor.feature_player.body')}</p>
-              <ul className="space-y-3">
-                {[
-                  { icon: Play, text: t('visitor.feature_player.bullet_1') },
-                  { icon: Shuffle, text: t('visitor.feature_player.bullet_2') },
-                  { icon: Zap, text: t('visitor.feature_player.bullet_3') },
-                ].map((item) => (
-                  <li key={item.text} className="flex items-start gap-3">
-                    <item.icon className="w-5 h-5 text-brand shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-sm text-body">{item.text}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                onClick={onStart}
-                className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand/80 transition-colors cursor-pointer"
-              >
-                {t('visitor.feature_player.cta')}
-                <ChevronRight className="w-4 h-4" aria-hidden="true" />
-              </button>
-            </div>
-
-            {/* Visuel : carrousel player (à gauche en desktop) */}
-            <ScreenshotCarousel
-              images={[
-                { src: '/images/screenshot-player-reps.webp', alt: t('visitor.feature_player.carousel_reps_alt') },
-                { src: '/images/screenshot-player-emom.webp', alt: t('visitor.feature_player.carousel_emom_alt') },
-                { src: '/images/screenshot-player-hiit.webp', alt: t('visitor.feature_player.carousel_hiit_alt') },
-                {
-                  src: '/images/screenshot-player-cooldown.webp',
-                  alt: t('visitor.feature_player.carousel_cooldown_alt'),
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. Feature : IA sur-mesure (Premium) ── */}
-      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Texte */}
-            <div className="space-y-5">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold tracking-widest uppercase text-accent">
-                  {t('visitor.feature_ai.label')}
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full">
-                  {t('visitor.feature_ai.badge')}
-                </span>
-              </div>
-              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                {t('visitor.feature_ai.heading_1')}
-                <br />
-                {t('visitor.feature_ai.heading_2')}
-              </h2>
-              <p className="text-muted leading-relaxed">{t('visitor.feature_ai.body')}</p>
-              <ul className="space-y-3">
-                {[
-                  { icon: Wand2, text: t('visitor.feature_ai.bullet_1') },
-                  { icon: TrendingUp, text: t('visitor.feature_ai.bullet_2') },
-                  { icon: RotateCcw, text: t('visitor.feature_ai.bullet_3') },
-                ].map((item) => (
-                  <li key={item.text} className="flex items-start gap-3">
-                    <item.icon className="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-sm text-body">{item.text}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/tarifs"
-                className="inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors"
-              >
-                {t('visitor.feature_ai.cta')}
-                <ChevronRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
-            </div>
-
-            {/* Visuel : carrousel 3 modes de création */}
-            <ScreenshotCarousel
-              fit="contain"
-              images={[
-                { src: '/images/screenshot-custom-session.webp', alt: t('visitor.feature_ai.carousel_quick_alt') },
-                { src: '/images/screenshot-custom-detailed.webp', alt: t('visitor.feature_ai.carousel_detailed_alt') },
-                { src: '/images/screenshot-custom-expert.webp', alt: t('visitor.feature_ai.carousel_expert_alt') },
-                { src: '/images/screenshot-custom-detail.webp', alt: t('visitor.feature_ai.carousel_detail_alt') },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. Feature : Programmes guidés ── */}
-      <section className="px-6 md:px-10 lg:px-14 py-14 md:py-20 bg-surface-2/50">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Texte (à droite en desktop) */}
-            <div className="space-y-5 order-1 md:order-2">
-              <span className="text-xs font-bold tracking-widest uppercase text-brand-secondary">
-                {t('visitor.feature_programs.label')}
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-black text-heading leading-tight">
-                {t('visitor.feature_programs.heading_1')}
-                <br />
-                {t('visitor.feature_programs.heading_2')}
-              </h2>
-              <p className="text-muted leading-relaxed">{t('visitor.feature_programs.body')}</p>
-              <ul className="space-y-3">
-                {[
-                  { icon: ListChecks, text: t('visitor.feature_programs.bullet_1') },
-                  { icon: Target, text: t('visitor.feature_programs.bullet_2') },
-                  { icon: Wand2, text: t('visitor.feature_programs.bullet_3'), premium: true },
-                ].map((item) => (
-                  <li key={item.text} className="flex items-start gap-3">
-                    <item.icon className="w-5 h-5 text-brand-secondary shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-sm text-body">
-                      {item.text}
-                      {'premium' in item && item.premium && (
-                        <span className="ml-2 text-[10px] font-bold uppercase tracking-wider text-accent/80 bg-accent/10 px-2 py-0.5 rounded-full align-middle">
-                          Premium
-                        </span>
-                      )}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/programmes"
-                className="inline-flex items-center gap-2 text-sm font-bold text-brand-secondary hover:text-brand-secondary/80 transition-colors"
-              >
-                {t('visitor.feature_programs.cta')}
-                <ChevronRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
-            </div>
-
-            {/* Visuel : carrousel programmes (à gauche en desktop) */}
-            <div className="order-2 md:order-1">
-              <ScreenshotCarousel
-                fit="contain"
-                images={[
-                  {
-                    src: '/images/screenshot-program-list.webp',
-                    alt: t('visitor.feature_programs.carousel_list_alt'),
-                  },
-                  {
-                    src: '/images/screenshot-program-objectif.webp',
-                    alt: t('visitor.feature_programs.carousel_goal_alt'),
-                  },
-                  {
-                    src: '/images/screenshot-program-profil.webp',
-                    alt: t('visitor.feature_programs.carousel_profile_alt'),
-                  },
-                  {
-                    src: '/images/screenshot-program-config.webp',
-                    alt: t('visitor.feature_programs.carousel_config_alt'),
-                  },
-                ]}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. À propos — encart discret ── */}
+      {/* ── 5. À propos — encart discret ── */}
       <section className="px-6 md:px-10 lg:px-14 pt-12 pb-0">
         <div className="max-w-md mx-auto">
           <Link
@@ -464,7 +274,7 @@ export function VisitorContent({
         </div>
       </section>
 
-      {/* ── 8. CTA final ── */}
+      {/* ── 6. CTA final ── */}
       <section className="px-6 md:px-10 lg:px-14 pt-10 pb-16 md:pt-12 md:pb-20">
         <div className="max-w-2xl mx-auto text-center space-y-6">
           <h2 className="font-display text-3xl md:text-4xl font-black text-heading">
