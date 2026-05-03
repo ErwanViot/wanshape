@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Mes programmes — un plan sur-mesure qui sait quand te faire souffler",
+    "description": "Un programme structuré sur 4 à 8 semaines, adapté à ta fréquence et ton niveau. Généré par IA, déload automatique inclus."
+  },
+  "hero": {
+    "eyebrow": "Programmes IA",
+    "title": "Un plan sur-mesure qui sait quand te faire souffler.",
+    "subtitle": "3 questions, un plan complet en 30 secondes. Ta fréquence, ton objectif, ton niveau — l'IA fait le reste, déload de récupération inclus.",
+    "cta_primary": "Créer mon programme gratuit",
+    "cta_secondary": "Voir les programmes types"
+  },
+  "benefits": {
+    "section_label": "Pourquoi nos programmes",
+    "ai_title": "Onboarding 3 questions",
+    "ai_body": "Objectif, fréquence, niveau. C'est tout. L'IA assemble un plan structuré, semaine par semaine, sans question à se poser.",
+    "deload_title": "Déload automatique",
+    "deload_body": "Semaine 4 (ou 8) plus légère, intégrée par défaut. On planifie le repos comme on planifie l'effort. Ton corps progresse vraiment.",
+    "personal_title": "Adapté à toi, pas l'inverse",
+    "personal_body": "Une à six séances par semaine selon ce que tu peux. Le programme s'ajuste, tu n'as pas à te plier à un format rigide.",
+    "fixed_title": "Ou pars sur du déjà fait",
+    "fixed_body": "3 programmes types prêts à lancer si tu veux démarrer sans onboarding : débutant, remise en forme, cardio express."
+  },
+  "final_cta": {
+    "title": "Lance ton plan en 30 secondes.",
+    "subtitle": "Crée un compte gratuit, réponds à 3 questions, ton programme est prêt.",
+    "cta_primary": "Créer mon programme gratuit",
+    "cta_secondary": "Découvrir les programmes types"
+  }
+}
