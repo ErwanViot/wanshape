@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Tracking — finally see it's working, beyond the scale",
+    "description": "Workouts, measurements, weight, nutrition in one dashboard. See the correlation, not just raw numbers."
+  },
+  "hero": {
+    "eyebrow": "Tracking",
+    "title": "Finally see it's working — beyond the scale.",
+    "subtitle": "Your workouts, your measurements, your weight, what you eat. All connected in one dashboard — see the correlation, not just isolated numbers.",
+    "cta_primary": "Create a free account",
+    "cta_secondary": "Browse the standard programs"
+  },
+  "benefits": {
+    "section_label": "Why our tracking",
+    "correlation_title": "Correlation, not juxtaposition",
+    "correlation_body": "Strava shows your GPS. MyFitnessPal shows your calories. Here you see how one acts on the other — the gap between effort and result.",
+    "history_title": "Workout history",
+    "history_body": "Every completed session is saved. You see your regularity, your favorite formats, your weekly volume.",
+    "body_title": "Measurements and weight",
+    "body_body": "Beyond the weekly scale: waist, hips, arms. The real transformation indicator, without falling into obsession.",
+    "signal_title": "The signal to keep going",
+    "signal_body": "People quit when they can't see it's working. Tracking is designed to make that signal visible — week after week."
+  },
+  "final_cta": {
+    "title": "Finally see your effort pay off.",
+    "subtitle": "Create a free account, start tracking, and watch the curve take shape.",
+    "cta_primary": "Create a free account",
+    "cta_secondary": "Browse the programs"
+  }
+}

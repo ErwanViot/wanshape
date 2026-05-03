@@ -60,7 +60,7 @@ export function BrandHeader() {
   const showPricing = !loading && !isPremium;
   const isPricingActive = pathname === '/tarifs';
   const isExploreActive = matchExplore(pathname);
-  const isTrackingActive = pathname === '/suivi';
+  const isTrackingActive = pathname === '/suivi' || pathname === '/decouvrir/suivi';
 
   return (
     <header className="px-6 md:px-10 lg:px-14 py-4 border-b border-divider">
@@ -83,6 +83,7 @@ export function BrandHeader() {
               <NavDropdown triggerLabelKey="train" items={VISITOR_TRAIN_ITEMS} />
               <NavLink to="/decouvrir" labelKey="explore" active={isExploreActive} />
               <NavDropdown triggerLabelKey="nutrition" items={VISITOR_NUTRITION_ITEMS} />
+              <NavLink to="/decouvrir/suivi" labelKey="tracking" active={isTrackingActive} />
             </>
           )}
         </nav>
