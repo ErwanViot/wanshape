@@ -33,6 +33,7 @@ export interface SeoRoute {
 const STATIC_ROUTES: SeoRoute[] = [
   { path: '/', changefreq: 'daily', priority: 1.0 },
   { path: '/decouvrir', changefreq: 'monthly', priority: 0.5 },
+  { path: '/decouvrir/seances', changefreq: 'monthly', priority: 0.8 },
   { path: '/formats', changefreq: 'monthly', priority: 0.8 },
   { path: '/exercices', changefreq: 'monthly', priority: 0.8 },
   { path: '/programmes', changefreq: 'monthly', priority: 0.8 },

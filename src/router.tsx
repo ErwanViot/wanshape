@@ -25,6 +25,9 @@ const LazySettingsPage = lazy(() =>
   import('./components/auth/SettingsPage.tsx').then((m) => ({ default: m.SettingsPage })),
 );
 const LazyDiscover = lazy(() => import('./components/Discover.tsx').then((m) => ({ default: m.Discover })));
+const LazySeancesLanding = lazy(() =>
+  import('./components/landings/SeancesLanding.tsx').then((m) => ({ default: m.SeancesLanding })),
+);
 const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
 const LazyProgramContentPage = lazy(() =>
   import('./components/ProgramContentPage.tsx').then((m) => ({ default: m.ProgramContentPage })),
@@ -92,6 +95,15 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyDiscover />
+          </Lazy>
+        ),
+      },
+      // Public feature landings — visitor-facing presentation of auth-only sections
+      {
+        path: 'decouvrir/seances',
+        element: (
+          <Lazy>
+            <LazySeancesLanding />
           </Lazy>
         ),
       },
