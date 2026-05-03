@@ -140,6 +140,40 @@ export const router = createBrowserRouter([
           </Lazy>
         ),
       },
+      // English mirrors of the feature landings — same components, locale forced
+      // by FeatureLandingTemplate based on the path. URLs are translated for SEO.
+      {
+        path: 'en/discover/sessions',
+        element: (
+          <Lazy>
+            <LazySeancesLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/discover/programs',
+        element: (
+          <Lazy>
+            <LazyProgramsLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/discover/nutrition',
+        element: (
+          <Lazy>
+            <LazyNutritionLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/discover/tracking',
+        element: (
+          <Lazy>
+            <LazySuiviLanding />
+          </Lazy>
+        ),
+      },
       {
         path: 'formats',
         element: (
