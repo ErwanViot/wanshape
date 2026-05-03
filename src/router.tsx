@@ -34,6 +34,9 @@ const LazyProgramsLanding = lazy(() =>
 const LazyNutritionLanding = lazy(() =>
   import('./components/landings/NutritionLanding.tsx').then((m) => ({ default: m.NutritionLanding })),
 );
+const LazySuiviLanding = lazy(() =>
+  import('./components/landings/SuiviLanding.tsx').then((m) => ({ default: m.SuiviLanding })),
+);
 const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
 const LazyProgramContentPage = lazy(() =>
   import('./components/ProgramContentPage.tsx').then((m) => ({ default: m.ProgramContentPage })),
@@ -126,6 +129,14 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyNutritionLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'decouvrir/suivi',
+        element: (
+          <Lazy>
+            <LazySuiviLanding />
           </Lazy>
         ),
       },

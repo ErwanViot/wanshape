@@ -36,6 +36,7 @@ const STATIC_ROUTES: SeoRoute[] = [
   { path: '/decouvrir/seances', changefreq: 'monthly', priority: 0.8 },
   { path: '/decouvrir/programmes', changefreq: 'monthly', priority: 0.8 },
   { path: '/decouvrir/nutrition', changefreq: 'monthly', priority: 0.8 },
+  { path: '/decouvrir/suivi', changefreq: 'monthly', priority: 0.7 },
   { path: '/formats', changefreq: 'monthly', priority: 0.8 },
   { path: '/exercices', changefreq: 'monthly', priority: 0.8 },
   { path: '/programmes', changefreq: 'monthly', priority: 0.8 },
