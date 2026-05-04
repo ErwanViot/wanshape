@@ -71,6 +71,16 @@ Puis dans Xcode : **Signing & Capabilities** → **+ Capability** → **Associat
 </intent-filter>
 ```
 
+**iOS — désactiver le rubber-band bounce du WKWebView** : Capacitor 8 n'expose pas d'option typée pour ça. Éditer `ios/App/App/AppDelegate.swift` (ou créer un `ViewController` custom) pour ajouter, après le chargement initial du WebView :
+
+```swift
+// In AppDelegate.swift, after WebView creation, or via a custom ViewController:
+webView.scrollView.bounces = false
+webView.scrollView.alwaysBounceVertical = false
+```
+
+Le but : empêcher le surface sombre du fond de l'app d'apparaître quand l'utilisateur tire trop bas/haut. Pas de modif côté Android (WebView Android n'a pas de bounce par défaut).
+
 **AASA + assetlinks.json** : déjà commités sous `public/.well-known/`. Servis par Vercel sur `https://wan2fit.fr/.well-known/{apple-app-site-association,assetlinks.json}` via `vercel.json` (Content-Type `application/json` forcé). Deux placeholders à remplacer **avant la première soumission** :
 - `TODO_APPLE_TEAM_ID` dans `apple-app-site-association` → Team ID Apple Developer (ex. `ABCDEFGHIJ`), visible sur https://developer.apple.com/account/#/membership
 - `TODO_ANDROID_RELEASE_SHA256` dans `assetlinks.json` → fingerprint du keystore Android release : `keytool -list -v -keystore release.keystore -alias upload | grep SHA256`
