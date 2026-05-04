@@ -20,6 +20,7 @@ const LazySignupPage = lazy(() => import('./components/auth/SignupPage.tsx').the
 const LazyAuthCallback = lazy(() =>
   import('./components/auth/AuthCallback.tsx').then((m) => ({ default: m.AuthCallback })),
 );
+const LazyUpgradePage = lazy(() => import('./components/UpgradePage.tsx').then((m) => ({ default: m.UpgradePage })));
 const LazyStatsPage = lazy(() => import('./components/auth/StatsPage.tsx').then((m) => ({ default: m.StatsPage })));
 const LazySettingsPage = lazy(() =>
   import('./components/auth/SettingsPage.tsx').then((m) => ({ default: m.SettingsPage })),
@@ -287,6 +288,14 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyAuthCallback />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'upgrade',
+        element: (
+          <Lazy>
+            <LazyUpgradePage />
           </Lazy>
         ),
       },

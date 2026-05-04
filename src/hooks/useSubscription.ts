@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import i18n from '../i18n/index.ts';
+import { isNative } from '../lib/capacitor.ts';
+import { openWebUpgrade } from '../lib/native-upgrade.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Subscription } from '../types/subscription.ts';
@@ -45,6 +47,13 @@ export function useSubscription() {
     async (priceId: string): Promise<string | null> => {
       if (!supabase || !user) return tHookError('not_signed_in');
 
+      // Native bypass: hand the user off to wan2fit.fr via a one-shot
+      // magic link so the Stripe checkout never runs inside the app
+      // WebView (Apple guideline 3.1.3(b) — no in-app price/purchase UI).
+      if (isNative()) {
+        return openWebUpgrade(priceId);
+      }
+
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
         body: { priceId },
       });
@@ -77,6 +86,13 @@ export function useSubscription() {
     }
 
     if (data?.url) {
+      // Native: SafariViewController / Chrome Custom Tab so the user stays
+      // inside the app shell and can dismiss with one tap.
+      if (isNative()) {
+        const { Browser } = await import('@capacitor/browser');
+        await Browser.open({ url: data.url, presentationStyle: 'popover' });
+        return null;
+      }
       window.location.href = data.url;
       return null;
     }
