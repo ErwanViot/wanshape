@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { Camera, Crown, Monitor, Moon, Sparkles, Sun } from 'lucide-react';
+import { Camera, Crown, Monitor, Moon, Sparkles, Sun, Trash2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams } from 'react-router';
@@ -11,6 +11,7 @@ import { supabase } from '../../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../../lib/supabaseQuery.ts';
 import { formatDate } from '../../utils/date.ts';
 import { getInitials } from '../../utils/getInitials.ts';
+import { DeleteAccountDialog } from './DeleteAccountDialog.tsx';
 
 const MAX_AVATAR_SIZE = 2 * 1024 * 1024; // 2 Mo
 const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -27,6 +28,7 @@ export function SettingsPage() {
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [portalError, setPortalError] = useState<string | null>(null);
+  const [deleteOpen, setDeleteOpen] = useState(false);
 
   useDocumentHead({
     title: t('page_title'),
@@ -281,7 +283,22 @@ export function SettingsPage() {
         >
           {t('sign_out')}
         </button>
+
+        {/* Danger zone — Apple guideline 5.1.1(v) requires in-app account deletion. */}
+        <section className="space-y-3 pt-4 border-t border-divider">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-red-400">{t('danger_zone.heading')}</h2>
+          <p className="text-xs text-muted">{t('danger_zone.description')}</p>
+          <button
+            type="button"
+            onClick={() => setDeleteOpen(true)}
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-red-500/10 text-red-400 font-semibold border border-red-500/30 hover:bg-red-500/20 transition-colors cursor-pointer"
+          >
+            <Trash2 className="w-4 h-4" aria-hidden="true" />
+            {t('danger_zone.delete_button')}
+          </button>
+        </section>
       </div>
+      <DeleteAccountDialog open={deleteOpen} onClose={() => setDeleteOpen(false)} />
     </div>
   );
 }

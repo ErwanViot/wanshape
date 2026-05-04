@@ -31,6 +31,20 @@
     "cgv_link": "Conditions Générales de Vente"
   },
   "sign_out": "Se déconnecter",
+  "danger_zone": {
+    "heading": "Zone dangereuse",
+    "description": "La suppression efface définitivement ton compte, ton historique et tes données personnelles. Aucun retour en arrière possible.",
+    "delete_button": "Supprimer mon compte",
+    "confirm_title": "Supprimer ton compte ?",
+    "confirm_body": "Cette action est immédiate et définitive. Pour la confirmer, saisis le mot ci-dessous.",
+    "bullet_data": "Ton profil, tes séances et tes programmes seront effacés.",
+    "bullet_subscription": "Ton abonnement Premium sera annulé chez Stripe.",
+    "bullet_irreversible": "Aucun retour en arrière possible.",
+    "confirm_label": "Tape {{word}} pour confirmer",
+    "confirm_action": "Supprimer définitivement",
+    "deleting": "Suppression…",
+    "cancel": "Annuler"
+  },
   "cgu_modal": {
     "title": "Mise à jour des conditions",
     "body": "Nos Conditions Générales d'Utilisation et notre Politique de Confidentialité ont été mises à jour (version {{version}}). L'accès à l'app est suspendu le temps que tu les acceptes.",

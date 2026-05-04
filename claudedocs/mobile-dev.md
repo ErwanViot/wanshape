@@ -122,6 +122,7 @@ supabase functions deploy <name> --project-ref rgwwpkyuavhqdautpciu --no-verify-
 
 Fonctions à déployer dans le cadre de la migration mobile :
 - `create-web-upgrade-link` (PR #4) — génère un magic link Supabase pointant sur `/upgrade?priceId=…`. Env requis (Supabase dashboard → Edge Functions secrets) : `STRIPE_PRICE_MONTHLY`, `STRIPE_PRICE_YEARLY` (déjà présents puisque `create-checkout-session` les utilise déjà).
+- `delete-account` (PR #5) — annule la subscription Stripe active puis appelle `auth.admin.deleteUser`. Env requis : `STRIPE_SECRET_KEY` (déjà présent). Apple guideline 5.1.1(v) : la suppression in-app est **obligatoire** pour les apps qui permettent la création de compte — sans cette feature, soumission App Store auto-rejetée.
 
 Validation post-deploy :
 
