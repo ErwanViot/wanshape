@@ -112,6 +112,38 @@ npx cap update ios      # met à jour les pods CocoaPods
 npx cap update android  # met à jour les deps Gradle
 ```
 
+## Edge functions à déployer
+
+Les edge functions Supabase ne sont pas auto-déployées par CI. À chaque PR qui en touche une, déployer manuellement sur **dev** d'abord :
+
+```bash
+supabase functions deploy <name> --project-ref rgwwpkyuavhqdautpciu --no-verify-jwt
+```
+
+Fonctions à déployer dans le cadre de la migration mobile :
+- `create-web-upgrade-link` (PR #4) — génère un magic link Supabase pointant sur `/upgrade?priceId=…`. Env requis (Supabase dashboard → Edge Functions secrets) : `STRIPE_PRICE_MONTHLY`, `STRIPE_PRICE_YEARLY` (déjà présents puisque `create-checkout-session` les utilise déjà).
+
+Validation post-deploy :
+
+```bash
+curl -X POST 'https://<project-ref>.supabase.co/functions/v1/create-web-upgrade-link' \
+  -H 'Authorization: Bearer <user JWT>' \
+  -H 'Content-Type: application/json' \
+  -d '{"priceId":"price_xxx"}'
+```
+
+## Apple guideline 3.1.3(b) — Multiplatform Service
+
+Wan2Fit **ne peut pas** afficher de prix ni de bouton d'achat dans l'app native (iOS Apple ou Android Google Play). Le flow respecté est :
+
+1. Dans l'app, l'utilisateur tape sur un CTA "Voir les options premium" (sans prix).
+2. L'app appelle `useSubscription.checkout(priceId)` qui détecte natif et invoque `create-web-upgrade-link`.
+3. Le magic link est ouvert via `@capacitor/browser` (SafariViewController iOS / Chrome Custom Tab Android).
+4. La page `/upgrade?priceId=…` auto-déclenche `create-checkout-session` puis Stripe redirige sur sa page de paiement.
+5. Après succès, le user revient sur `https://wan2fit.fr/parametres?session=…` (le success_url Stripe sera transformé en Universal Link plus tard pour rebasculer dans l'app).
+
+**Règle interne stricte** : aucune chaîne `€/mois`, `9.99`, ou `Acheter` dans les composants montés en natif. Les pages `/tarifs` et `/premium` doivent rester accessibles uniquement via lien externe en natif (jamais via la nav primaire iOS/Android).
+
 ## Différences build web vs build natif
 
 | | `npm run build` (web) | `npm run build:native` |
