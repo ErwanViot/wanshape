@@ -31,6 +31,16 @@
     "cgv_link": "General Terms of Sale"
   },
   "sign_out": "Log out",
+  "notifications": {
+    "heading": "Notifications",
+    "description": "Stay informed about what matters — never a daily reminder.",
+    "info_label": "Important information",
+    "info_description": "Program updates, account events, security alerts.",
+    "progression_label": "Milestones reached",
+    "progression_description": "A short note when you complete a step (program week, history milestone). Off by default.",
+    "new_content_label": "New content",
+    "new_content_description": "Newly added recipes or programs. Off by default."
+  },
   "danger_zone": {
     "heading": "Danger zone",
     "description": "Deleting your account permanently removes your profile, history, and personal data. This cannot be undone.",

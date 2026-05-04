@@ -31,6 +31,16 @@
     "cgv_link": "Conditions Générales de Vente"
   },
   "sign_out": "Se déconnecter",
+  "notifications": {
+    "heading": "Notifications",
+    "description": "Reçois ce qui te concerne, jamais de rappel quotidien.",
+    "info_label": "Informations importantes",
+    "info_description": "Mises à jour de ton programme, événements de compte, alertes de sécurité.",
+    "progression_label": "Étapes franchies",
+    "progression_description": "Un message court quand tu boucles une étape (semaine de programme, palier d'historique). Désactivé par défaut.",
+    "new_content_label": "Nouveaux contenus",
+    "new_content_description": "Nouvelles recettes ou nouveaux programmes ajoutés. Désactivé par défaut."
+  },
   "danger_zone": {
     "heading": "Zone dangereuse",
     "description": "La suppression efface définitivement ton compte, ton historique et tes données personnelles. Aucun retour en arrière possible.",
