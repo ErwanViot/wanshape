@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router';
+import { usePushNotifications } from '../hooks/usePushNotifications.ts';
 import { BottomNav } from './BottomNav.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
 import { Footer } from './Footer.tsx';
@@ -11,6 +12,8 @@ import { SessionExpiredBanner } from './SessionExpiredBanner.tsx';
 export function PublicLayout() {
   const { t } = useTranslation('common');
   const { pathname } = useLocation();
+  // Native-only push registration. No-op on web (hook short-circuits).
+  usePushNotifications();
 
   // Scroll top on route change. Data freshness is no longer tied to
   // navigation — every hook is on TanStack Query and relies on its

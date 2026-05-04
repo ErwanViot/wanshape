@@ -12,6 +12,7 @@ import { notifySessionExpired, supabaseQuery } from '../../lib/supabaseQuery.ts'
 import { formatDate } from '../../utils/date.ts';
 import { getInitials } from '../../utils/getInitials.ts';
 import { DeleteAccountDialog } from './DeleteAccountDialog.tsx';
+import { NotificationsSection } from './NotificationsSection.tsx';
 
 const MAX_AVATAR_SIZE = 2 * 1024 * 1024; // 2 Mo
 const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -258,6 +259,9 @@ export function SettingsPage() {
             </div>
           )}
         </section>
+
+        {/* Notifications */}
+        <NotificationsSection />
 
         {/* Legal */}
         <section className="space-y-3">

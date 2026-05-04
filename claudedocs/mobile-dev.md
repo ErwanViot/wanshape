@@ -123,6 +123,23 @@ supabase functions deploy <name> --project-ref rgwwpkyuavhqdautpciu --no-verify-
 Fonctions à déployer dans le cadre de la migration mobile :
 - `create-web-upgrade-link` (PR #4) — génère un magic link Supabase pointant sur `/upgrade?priceId=…`. Env requis (Supabase dashboard → Edge Functions secrets) : `STRIPE_PRICE_MONTHLY`, `STRIPE_PRICE_YEARLY` (déjà présents puisque `create-checkout-session` les utilise déjà).
 - `delete-account` (PR #5) — annule la subscription Stripe active puis appelle `auth.admin.deleteUser`. Env requis : `STRIPE_SECRET_KEY` (déjà présent). Apple guideline 5.1.1(v) : la suppression in-app est **obligatoire** pour les apps qui permettent la création de compte — sans cette feature, soumission App Store auto-rejetée.
+- `register-push-device` (PR #6) — upsert (user, token, platform) dans `user_devices`. Aucun secret nouveau. Appelé par `usePushNotifications` à chaque launch après acceptation de la permission.
+- `send-push` (PR #6) — envoie une notification FCM HTTP v1 à toutes les devices d'un user. Server-to-server uniquement (header `x-internal-secret` requis). Env nouveaux à provisionner :
+  - `INTERNAL_PUSH_SECRET` — chaîne aléatoire 32+ char (ex : `openssl rand -hex 32`)
+  - `FCM_SERVICE_ACCOUNT_JSON` — JSON brut du Firebase Admin SDK service account (Console Firebase → Project settings → Service accounts → Generate new private key). Doit contenir `client_email`, `private_key`, `project_id`.
+
+## Push notifications philosophy
+
+Wan2Fit interdit les notifications coercitives. Catégories acceptées :
+- `info` — Information transactionnelle (default ON, attendu par les users)
+- `progression` — Célébration d'un palier atteint (default OFF, opt-in)
+- `new_content` — Nouvelle recette / nouveau programme (default OFF, opt-in)
+
+**Catégories proscrites** (à ne JAMAIS introduire) : daily reminder, streak, missed-day prompt, "tu n'as pas fait de séance depuis X jours". Ces patterns poussent au surentraînement et créent du shame, ce qui contredit la philosophie produit (cf. `MEMORY.md`).
+
+Côté natif (post `cap add ios` + `cap add android`) :
+- iOS : capability **Push Notifications** + APNs key (.p8) liée au Bundle ID dans le Firebase project (Cloud Messaging → Apple app configuration). Capability dans Xcode : Signing & Capabilities → +Capability → Push Notifications + Background Modes → Remote notifications.
+- Android : pas de modif manifest (le plugin Capacitor s'en charge), mais le `google-services.json` doit être placé dans `android/app/`.
 
 Validation post-deploy :
 
