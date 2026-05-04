@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { syncStatusBarTheme } from '../lib/capacitor';
+import { syncStatusBarTheme } from '../lib/capacitor.ts';
 
 type ThemePreference = 'system' | 'dark' | 'light';
 type ResolvedTheme = 'dark' | 'light';

@@ -15,6 +15,8 @@ const ReactQueryDevtools = import.meta.env.DEV
   : null;
 
 export default function App() {
+  // SplashScreen.hide is idempotent, so the StrictMode double-effect in dev
+  // is safe. No cleanup needed — the splash is already gone after first call.
   useEffect(() => {
     void hideNativeSplash();
   }, []);
