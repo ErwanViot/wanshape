@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { syncStatusBarTheme } from '../lib/capacitor';
 
 type ThemePreference = 'system' | 'dark' | 'light';
 type ResolvedTheme = 'dark' | 'light';
@@ -42,6 +43,7 @@ export function useTheme() {
   useEffect(() => {
     applyTheme(resolved);
     localStorage.setItem(STORAGE_KEY, preference);
+    void syncStatusBarTheme(resolved);
   }, [preference, resolved]);
 
   // Listen to system theme changes when preference is "system"

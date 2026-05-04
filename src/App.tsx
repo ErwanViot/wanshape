@@ -1,8 +1,9 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router';
 import { ErrorBoundary } from './components/ErrorBoundary.tsx';
 import { AuthProvider } from './contexts/AuthContext.tsx';
+import { hideNativeSplash } from './lib/capacitor.ts';
 import { queryClient } from './lib/queryClient.ts';
 import { router } from './router.tsx';
 
@@ -14,6 +15,10 @@ const ReactQueryDevtools = import.meta.env.DEV
   : null;
 
 export default function App() {
+  useEffect(() => {
+    void hideNativeSplash();
+  }, []);
+
   // QueryClientProvider sits INSIDE ErrorBoundary so any TanStack-originated
   // render error is captured by Sentry via the boundary's componentDidCatch.
   // A provider above the boundary would leak those errors to React's root
