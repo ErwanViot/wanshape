@@ -1,3 +1,4 @@
+import type { PluginListenerHandle } from '@capacitor/core';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { lazy, Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router';
@@ -23,9 +24,22 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const handlePromise = registerDeepLinkListener();
+    // The listener registration is async; if the effect is torn down before
+    // it resolves (StrictMode double-mount in dev, fast unmount in tests),
+    // we must still remove the handle once it lands. The cancelled flag
+    // ensures we never leak a listener nor try to remove a handle twice.
+    let cancelled = false;
+    let activeHandle: PluginListenerHandle | null = null;
+    void registerDeepLinkListener().then((handle) => {
+      if (cancelled) {
+        handle?.remove();
+      } else {
+        activeHandle = handle;
+      }
+    });
     return () => {
-      void handlePromise.then((handle) => handle?.remove());
+      cancelled = true;
+      activeHandle?.remove();
     };
   }, []);
 

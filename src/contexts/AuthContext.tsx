@@ -174,6 +174,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         password,
         options: {
           data: { display_name: displayName },
+          emailRedirectTo: getAuthRedirectUrl('/auth/callback'),
         },
       });
       return { error: translateError(error?.message) };
