@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { FeatureLandingTemplate } from './FeatureLandingTemplate.tsx';
+import { NutritionPreviewMockup } from './NutritionPreviewMockup.tsx';
 
 function PieIcon() {
   return (
@@ -95,6 +96,7 @@ export function NutritionLanding() {
           { label: t('hero.cta_primary'), to: primaryTarget },
           { label: t('hero.cta_secondary'), to: '/nutrition/recettes', variant: 'secondary' },
         ],
+        visual: <NutritionPreviewMockup />,
       }}
       benefits={{
         sectionLabel: t('benefits.section_label'),

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { FeatureLandingTemplate } from './FeatureLandingTemplate.tsx';
+import { TrackingPreviewMockup } from './TrackingPreviewMockup.tsx';
 
 function HashIcon() {
   return (
@@ -103,6 +104,7 @@ export function SuiviLanding() {
           { label: t('hero.cta_primary'), to: primaryTarget },
           { label: t('hero.cta_secondary'), to: '/programmes', variant: 'secondary' },
         ],
+        visual: <TrackingPreviewMockup />,
       }}
       benefits={{
         sectionLabel: t('benefits.section_label'),

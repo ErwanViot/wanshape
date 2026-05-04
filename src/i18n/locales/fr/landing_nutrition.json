@@ -1,23 +1,30 @@
 {
   "meta": {
-    "title": "Mon assiette — ton journal alimentaire au quotidien",
-    "description": "Suivi calorique et macros (P/G/L) journalier. Recherche dans la base CIQUAL ou scan code-barres. Historique sur 7 jours."
+    "title": "Mon assiette — un journal alimentaire au quotidien",
+    "description": "Suivi calorique et macros (P/G/L) journalier. Recherche d'aliment ou scan de code-barres, valeurs nutritionnelles automatiques. Historique sur 7 jours."
   },
   "hero": {
     "eyebrow": "Mon assiette",
-    "title": "Sache ce que tu manges, sans en faire une obsession.",
-    "subtitle": "Calories et macros au quotidien. Tu cherches l'aliment dans la base CIQUAL, tu scannes un code-barres, c'est compté. Avec ou sans cible chiffrée — tu décides du niveau d'engagement.",
+    "title": "Une assiette claire, sans calculatrice.",
+    "subtitle": "Calories et macros au quotidien. Tu tapes le nom d'un aliment ou tu scannes le code-barres — les valeurs nutritionnelles sont récupérées toutes seules. Avec une cible chiffrée si tu veux, sinon en mode prise de conscience.",
     "cta_primary": "Créer un compte gratuit",
-    "cta_secondary": "Voir les recettes"
+    "cta_secondary": "Voir les recettes",
+    "visual_aria": "Aperçu du journal alimentaire d'une journée",
+    "mockup_today": "Aujourd'hui",
+    "mockup_premium_badge": "Aperçu",
+    "mockup_protein": "Prot.",
+    "mockup_carbs": "Gluc.",
+    "mockup_fat": "Lip.",
+    "mockup_search_placeholder": "Tape un aliment ou scanne le code-barres…"
   },
   "benefits": {
     "section_label": "Pourquoi notre journal alimentaire",
     "kcal_title": "Calories et macros",
-    "kcal_body": "Compteur calorique journalier + protéines / glucides / lipides. Une cible si tu en veux une, sinon mode \"prise de conscience\" pour démarrer en douceur.",
-    "search_title": "Base CIQUAL + code-barres",
-    "search_body": "Recherche directe dans la base alimentaire française CIQUAL, ou scan d'un code-barres pour récupérer l'info nutritionnelle (OpenFoodFacts).",
+    "kcal_body": "Compteur calorique journalier + protéines / glucides / lipides. Tu peux te fixer une cible ou rester en mode \"prise de conscience\" pour démarrer en douceur.",
+    "search_title": "Recherche ou scan",
+    "search_body": "Tape le nom d'un aliment ou scanne son code-barres : les valeurs nutritionnelles sont récupérées automatiquement. Pas besoin de tout connaître par cœur.",
     "history_title": "Historique 7 jours",
-    "history_body": "Tu peux saisir ou corriger jusqu'à 7 jours en arrière. Pas de pression d'être parfait au moment T, l'app s'adapte à ton rythme.",
+    "history_body": "Tu peux saisir ou corriger jusqu'à 7 jours en arrière. Pas de pression d'être parfait au moment T — l'app s'adapte à ton rythme.",
     "insight_title": "Insight quotidien (Premium)",
     "insight_body": "Une lecture courte de ta journée par l'IA, qui pointe ce qui se passe et te suggère un ajustement. Pas un coach moralisateur — un éclaireur."
   },
