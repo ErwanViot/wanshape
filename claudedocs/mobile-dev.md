@@ -155,6 +155,17 @@ Fonctions à déployer dans le cadre de la migration mobile :
 - `create-web-upgrade-link` (PR #4) — génère un magic link Supabase pointant sur `/upgrade?priceId=…`. Env requis (Supabase dashboard → Edge Functions secrets) : `STRIPE_PRICE_MONTHLY`, `STRIPE_PRICE_YEARLY` (déjà présents puisque `create-checkout-session` les utilise déjà).
 - `delete-account` (PR #5) — annule la subscription Stripe active puis appelle `auth.admin.deleteUser`. Env requis : `STRIPE_SECRET_KEY` (déjà présent). Apple guideline 5.1.1(v) : la suppression in-app est **obligatoire** pour les apps qui permettent la création de compte — sans cette feature, soumission App Store auto-rejetée.
 - `register-push-device` (PR #6) — upsert (user, token, platform) dans `user_devices`. Aucun secret nouveau. Appelé par `usePushNotifications` à chaque launch après acceptation de la permission.
+
+## Health intégration (HealthKit + Health Connect)
+
+Foundation TS pure dans `src/lib/calorie-estimator.ts` et `src/lib/health-types.ts` — testable avant tout setup natif (cf. `calorie-estimator.test.ts`).
+
+À faire post `cap add` + Apple Dev validé :
+1. Installer plugins natifs : `npm install @perfood/capacitor-healthkit @kiwi-health/capacitor-health-connect`
+2. iOS : ajouter capability **HealthKit** dans Xcode (Signing & Capabilities). Ajouter `NSHealthShareUsageDescription` + `NSHealthUpdateUsageDescription` dans Info.plist (textes user-facing en FR/EN).
+3. Android : ajouter dans `AndroidManifest.xml` la permission `android.permission.health.READ_EXERCISE` + `WRITE_EXERCISE` + `READ_ACTIVE_CALORIES_BURNED` + le `<queries>` pour Health Connect.
+4. Créer `src/lib/health-bridge.ts` qui exporte `writeWorkout(summary: WorkoutSummary)` — utilise `formatToHKActivityType` (iOS) ou `formatToHealthConnectType` (Android).
+5. Câbler `writeWorkout` dans `EndScreen` (séance terminée) avec opt-in user (toggle settings + permission OS).
 - `send-push` (PR #6) — envoie une notification FCM HTTP v1 à toutes les devices d'un user. Server-to-server uniquement (header `x-internal-secret` requis). Env nouveaux à provisionner :
   - `INTERNAL_PUSH_SECRET` — chaîne aléatoire 32+ char (ex : `openssl rand -hex 32`)
   - `FCM_SERVICE_ACCOUNT_JSON` — JSON brut du Firebase Admin SDK service account (Console Firebase → Project settings → Service accounts → Generate new private key). Doit contenir `client_email`, `private_key`, `project_id`.
