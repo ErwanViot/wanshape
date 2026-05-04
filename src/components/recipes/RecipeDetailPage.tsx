@@ -186,10 +186,7 @@ export function RecipeDetailPage() {
         </section>
 
         {recipe.tip && (
-          <section
-            aria-label={t('detail.tip_heading')}
-            className="flex gap-3 rounded-2xl border border-amber-300/50 bg-amber-50/60 dark:border-amber-300/20 dark:bg-amber-300/5 p-4"
-          >
+          <section className="flex gap-3 rounded-2xl border border-amber-300/50 bg-amber-50/60 dark:border-amber-300/20 dark:bg-amber-300/5 p-4">
             <Lightbulb className="w-5 h-5 shrink-0 text-amber-600 dark:text-amber-300 mt-0.5" />
             <div className="space-y-1">
               <h2 className="font-display text-sm font-bold text-heading">{t('detail.tip_heading')}</h2>
