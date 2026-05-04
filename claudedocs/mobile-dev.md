@@ -12,27 +12,44 @@ Workflow pour développer Wan2Fit sur iOS et Android via Capacitor.
 
 ### Android (cross-platform)
 - **Android Studio** dernière stable : https://developer.android.com/studio
-- **JDK 17** : `brew install openjdk@17` si pas déjà présent
+- **JDK 21** : `brew install openjdk@21` (Capacitor 8 + Android Gradle Plugin actuel ciblent Java 21, JDK 17 fait échouer `assembleDebug` avec `error: invalid source release: 21`)
 - Android Emulator + image système (suggestion : Pixel 7 API 34)
 - Acceptation des SDK licenses : `yes | sdkmanager --licenses`
 
 ## Première installation des projets natifs
 
-À faire **une seule fois** après checkout de la branche, quand Xcode/Android Studio sont prêts :
+Les dossiers `ios/` et `android/` sont **déjà commités** au repo (générés par `cap add` et configurés au fil des PRs). Après checkout sur une nouvelle machine :
 
 ```bash
-# Build le bundle web sans SW pour la première fois
+# 1. Préparer le bundle web pour le natif
 npm run build:native
 
-# Génère les dossiers ios/ et android/ (commitables)
-npx cap add ios
-npx cap add android
-
-# Sync les assets web vers les projets natifs
+# 2. Synchroniser les assets web et les plugins vers ios/ et android/
 npx cap sync
 ```
 
-Les dossiers `ios/` et `android/` sont commitables : ils contiennent la config native (Info.plist, AndroidManifest.xml, etc.) qu'on éditera au fil des PRs.
+iOS utilise Swift Package Manager (Capacitor 8 default), pas CocoaPods — pas de `pod install` à lancer.
+
+Variables d'environnement requises (à mettre dans `~/.zshrc`) :
+
+```bash
+export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
+export PATH="$JAVA_HOME/bin:$PATH"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+```
+
+Validation que tout converge (à faire après chaque modif native) :
+
+```bash
+# iOS : build simulator (pas besoin de signing)
+cd ios/App && xcodebuild -project App.xcodeproj -scheme App \
+  -configuration Debug -sdk iphonesimulator \
+  -destination 'generic/platform=iOS Simulator' build
+
+# Android : APK debug
+cd android && ./gradlew assembleDebug
+```
 
 ### À faire après le premier `cap add` (PR #2 deep links)
 
