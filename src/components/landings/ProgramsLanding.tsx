@@ -121,7 +121,7 @@ export function ProgramsLanding() {
         sectionLabel: t('benefits.section_label'),
         items: [
           { icon: <SparkIcon />, title: t('benefits.ai_title'), body: t('benefits.ai_body') },
-          { icon: <MoonIcon />, title: t('benefits.deload_title'), body: t('benefits.deload_body') },
+          { icon: <MoonIcon />, title: t('benefits.rest_title'), body: t('benefits.rest_body') },
           { icon: <SlidersIcon />, title: t('benefits.personal_title'), body: t('benefits.personal_body') },
           { icon: <PackageIcon />, title: t('benefits.fixed_title'), body: t('benefits.fixed_body') },
         ],
