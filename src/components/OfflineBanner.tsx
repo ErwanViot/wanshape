@@ -11,13 +11,17 @@ export function OfflineBanner() {
 
   if (isOnline) return null;
 
+  // aria-live alone is enough for screen readers — no role="status" (would
+  // trigger Biome's useSemanticElements) and no <output> (form-result
+  // semantics, awkward for a generic notification). "polite" instead of
+  // "assertive" because losing connectivity is not an emergency.
   return (
-    <output
+    <div
       aria-live="polite"
       className="pt-safe sticky top-0 z-50 w-full bg-amber-500/95 text-amber-950 text-sm font-medium px-4 py-2 flex items-center justify-center gap-2 shadow"
     >
       <WifiOff className="w-4 h-4" aria-hidden="true" />
       <span>{t('offline.banner')}</span>
-    </output>
+    </div>
   );
 }

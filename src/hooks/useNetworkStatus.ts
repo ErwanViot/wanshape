@@ -8,7 +8,10 @@ import { isNative } from '../lib/capacitor.ts';
 // browsers; the rare false positive (online === true but no DNS) degrades
 // gracefully because TanStack Query retries failed requests.
 export function useNetworkStatus(): boolean {
-  const [isOnline, setIsOnline] = useState<boolean>(() => (typeof navigator !== 'undefined' ? navigator.onLine : true));
+  // Optimistic initial state: assume online so the OfflineBanner doesn't
+  // flash on boot. The effect below corrects it on the first tick via
+  // Network.getStatus() (native) or navigator.onLine (web).
+  const [isOnline, setIsOnline] = useState<boolean>(true);
 
   useEffect(() => {
     if (isNative()) {
@@ -17,6 +20,10 @@ export function useNetworkStatus(): boolean {
 
       void import('@capacitor/network').then(({ Network }) => {
         if (cancelled) return;
+        // Best-effort sync. There's a tiny window between getStatus() and
+        // addListener() where a network change could be missed, but the
+        // listener catches every transition after that — acceptable for a
+        // banner whose only role is to inform the user.
         void Network.getStatus().then((status) => {
           if (!cancelled) setIsOnline(status.connected);
         });
@@ -37,6 +44,7 @@ export function useNetworkStatus(): boolean {
       };
     }
 
+    setIsOnline(navigator.onLine);
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
     window.addEventListener('online', handleOnline);
