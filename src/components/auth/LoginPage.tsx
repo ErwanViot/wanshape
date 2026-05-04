@@ -1,14 +1,24 @@
 import { type FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Navigate } from 'react-router';
+import { Link, Navigate, useSearchParams } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { BackLink } from './BackLink.tsx';
 import { FormInput } from './FormInput.tsx';
 
+// Whitelist for the ?next= post-login redirect to prevent open-redirect
+// abuse — only same-origin paths starting with '/' (and not '//') pass.
+function safeNextPath(raw: string | null): string {
+  if (!raw) return '/suivi';
+  if (!raw.startsWith('/') || raw.startsWith('//')) return '/suivi';
+  return raw;
+}
+
 export function LoginPage() {
   const { t } = useTranslation('auth');
   const { user, loading, signIn } = useAuth();
+  const [params] = useSearchParams();
+  const nextPath = safeNextPath(params.get('next'));
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +29,7 @@ export function LoginPage() {
     description: t('login.page_description'),
   });
 
-  if (!loading && user) return <Navigate to="/suivi" replace />;
+  if (!loading && user) return <Navigate to={nextPath} replace />;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

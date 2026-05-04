@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import i18n from '../i18n/index.ts';
@@ -16,6 +16,7 @@ const tHookError = (key: string) => i18n.t(`hook_errors.${key}`, { ns: 'common' 
 
 export function useSubscription() {
   const { profile, user } = useAuth();
+  const queryClient = useQueryClient();
   const userId = user?.id;
 
   const tier = profile?.subscription_tier ?? 'free';
@@ -87,9 +88,16 @@ export function useSubscription() {
 
     if (data?.url) {
       // Native: SafariViewController / Chrome Custom Tab so the user stays
-      // inside the app shell and can dismiss with one tap.
+      // inside the app shell. We listen for the dismiss event and
+      // invalidate the subscription cache so the UI reflects whatever the
+      // user just did in the Stripe portal (cancel, switch plan, etc.).
       if (isNative()) {
         const { Browser } = await import('@capacitor/browser');
+        const finishedHandle = await Browser.addListener('browserFinished', () => {
+          void queryClient.invalidateQueries({ queryKey: ['subscription'] });
+          void queryClient.invalidateQueries({ queryKey: ['profile'] });
+          void finishedHandle.remove();
+        });
         await Browser.open({ url: data.url, presentationStyle: 'popover' });
         return null;
       }
@@ -97,7 +105,7 @@ export function useSubscription() {
       return null;
     }
     return data?.error || tHookError('portal_open_failed');
-  }, [user]);
+  }, [user, queryClient]);
 
   return {
     tier,

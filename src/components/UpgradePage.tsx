@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate, useSearchParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSubscription } from '../hooks/useSubscription.ts';
+import { isNative } from '../lib/capacitor.ts';
 import { LoadingFallback } from './LoadingFallback.tsx';
 
 // Landing page consumed by the native upgrade flow:
@@ -27,8 +28,15 @@ export function UpgradePage() {
 
   useEffect(() => {
     if (authLoading || triggered) return;
+    // Defense in depth: this page is the web target of a native magic
+    // link. If it ever renders inside the native shell (deep link bug,
+    // user shares the URL, etc.) we punt back to /tarifs to avoid a
+    // checkout → openWebUpgrade → magic link → … loop.
+    if (isNative()) {
+      navigate('/tarifs', { replace: true });
+      return;
+    }
     if (!user) {
-      // Magic link must have failed — punt to /login with returnTo.
       const next = priceId ? `/upgrade?priceId=${encodeURIComponent(priceId)}` : '/upgrade';
       navigate(`/login?next=${encodeURIComponent(next)}`, { replace: true });
       return;
@@ -43,6 +51,7 @@ export function UpgradePage() {
     });
   }, [authLoading, user, priceId, triggered, checkout, navigate]);
 
+  // isPremium short-circuit lives below the hooks (rules of hooks).
   if (isPremium) return <Navigate to="/parametres" replace />;
   if (error) {
     return (

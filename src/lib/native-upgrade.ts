@@ -34,10 +34,13 @@ export async function openWebUpgrade(priceId: string): Promise<string | null> {
   }
 
   const { Browser } = await import('@capacitor/browser');
+  // SafariViewController (iOS) / Chrome Custom Tab (Android) — programmatic
+  // open does NOT trigger Universal Links / App Links resolution, so the
+  // /upgrade* AASA pattern won't bounce the user back into the app and
+  // create a redirect loop.
   await Browser.open({
     url: data.url,
     presentationStyle: 'popover',
-    windowName: '_self',
   });
   return null;
 }
