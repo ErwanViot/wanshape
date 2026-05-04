@@ -586,6 +586,26 @@ body {
   animation: timer-flash 0.5s ease-in-out infinite;
 }
 
+/* Safe-area utilities for native (notch, home indicator, status bar).
+   Capacitor StatusBar/contentInset handles the obvious cases (header offset,
+   keyboard resize), but fixed/absolute positioned UI must inset itself. */
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+@utility pl-safe {
+  padding-left: env(safe-area-inset-left);
+}
+@utility pr-safe {
+  padding-right: env(safe-area-inset-right);
+}
+@utility px-safe {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
