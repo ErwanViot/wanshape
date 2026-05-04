@@ -34,6 +34,47 @@ npx cap sync
 
 Les dossiers `ios/` et `android/` sont commitables : ils contiennent la config native (Info.plist, AndroidManifest.xml, etc.) qu'on éditera au fil des PRs.
 
+### À faire après le premier `cap add` (PR #2 deep links)
+
+**iOS — `ios/App/App/Info.plist`** : ajouter le custom URL scheme et le domaine associé.
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLName</key>
+    <string>fr.wansoft.wan2fit</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>wan2fit</string>
+    </array>
+  </dict>
+</array>
+```
+
+Puis dans Xcode : **Signing & Capabilities** → **+ Capability** → **Associated Domains** → ajouter `applinks:wan2fit.fr` (et `applinks:www.wan2fit.fr` si besoin).
+
+**Android — `android/app/src/main/AndroidManifest.xml`** : ajouter dans `<activity android:name="com.getcapacitor.bridge.MainActivity">` :
+
+```xml
+<intent-filter android:autoVerify="true">
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="https" android:host="wan2fit.fr" />
+</intent-filter>
+<intent-filter>
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="wan2fit" />
+</intent-filter>
+```
+
+**AASA + assetlinks.json** : déjà commités sous `public/.well-known/`. Servis par Vercel sur `https://wan2fit.fr/.well-known/{apple-app-site-association,assetlinks.json}` via `vercel.json` (Content-Type `application/json` forcé). Deux placeholders à remplacer **avant la première soumission** :
+- `TODO_APPLE_TEAM_ID` dans `apple-app-site-association` → Team ID Apple Developer (ex. `ABCDEFGHIJ`), visible sur https://developer.apple.com/account/#/membership
+- `TODO_ANDROID_RELEASE_SHA256` dans `assetlinks.json` → fingerprint du keystore Android release : `keytool -list -v -keystore release.keystore -alias upload | grep SHA256`
+
 ## Cycle de dev quotidien
 
 ```bash

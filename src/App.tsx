@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router';
 import { ErrorBoundary } from './components/ErrorBoundary.tsx';
 import { AuthProvider } from './contexts/AuthContext.tsx';
 import { hideNativeSplash } from './lib/capacitor.ts';
+import { registerDeepLinkListener } from './lib/deepLinks.ts';
 import { queryClient } from './lib/queryClient.ts';
 import { router } from './router.tsx';
 
@@ -19,6 +20,13 @@ export default function App() {
   // is safe. No cleanup needed — the splash is already gone after first call.
   useEffect(() => {
     void hideNativeSplash();
+  }, []);
+
+  useEffect(() => {
+    const handlePromise = registerDeepLinkListener();
+    return () => {
+      void handlePromise.then((handle) => handle?.remove());
+    };
   }, []);
 
   // QueryClientProvider sits INSIDE ErrorBoundary so any TanStack-originated
