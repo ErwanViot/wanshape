@@ -51,6 +51,20 @@ cd ios/App && xcodebuild -project App.xcodeproj -scheme App \
 cd android && ./gradlew assembleDebug
 ```
 
+## Privacy Manifest (App Store requirement)
+
+`ios/App/App/PrivacyInfo.xcprivacy` déclare ce qu'on collecte (email, user content, crash data, performance) et les Required Reasons API qu'on touche (UserDefaults via `@capacitor/preferences`, FileTimestamp via WKWebView, DiskSpace via Sentry, SystemBootTime via Sentry).
+
+Référencé dans `App.xcodeproj` via `scripts/add-ios-resource.mjs`. Quand on touche au manifest, refaire **build iOS** pour vérifier que le fichier est bien dans `App.app/PrivacyInfo.xcprivacy` :
+
+```bash
+cd ios/App
+xcodebuild ... build
+ls -la ./build/Build/Products/Debug-iphonesimulator/App.app/PrivacyInfo.xcprivacy
+```
+
+Si on ajoute un nouveau plugin natif qui touche une nouvelle Required Reasons API (cf. la liste Apple : https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api), ajouter une entrée dans `NSPrivacyAccessedAPITypes`. Soumission App Store rejetée sinon.
+
 ## Régénérer les icônes / splash
 
 Quand le logo brand évolue (`public/icon-512.png`), régénérer toute la chaîne via :
