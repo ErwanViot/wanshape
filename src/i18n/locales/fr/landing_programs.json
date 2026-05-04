@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "title": "Mes programmes — un plan sur-mesure qui s'adapte à toi",
+    "description": "Programmes structurés sur 4 à 8 semaines, adaptés à ta fréquence et ton niveau. Générés par IA en 30 secondes ou choisis parmi les programmes types."
+  },
+  "hero": {
+    "eyebrow": "Programmes IA",
+    "title": "Un plan sur-mesure, qui s'adapte à toi.",
+    "subtitle": "3 questions, ton plan complet en 30 secondes. Ta fréquence, ton objectif, ton niveau — l'IA assemble le programme. Et chaque semaine s'ajuste pour ne pas t'épuiser.",
+    "cta_primary": "Créer mon programme gratuit",
+    "cta_secondary": "Voir les programmes types",
+    "visual_list_alt": "Liste des programmes Wan2Fit",
+    "visual_goal_alt": "Choix de l'objectif d'entraînement",
+    "visual_profile_alt": "Saisie du profil utilisateur",
+    "visual_config_alt": "Configuration du programme généré"
+  },
+  "benefits": {
+    "section_label": "Pourquoi nos programmes",
+    "ai_title": "3 questions, c'est tout",
+    "ai_body": "Objectif, fréquence, niveau. Tu réponds, l'IA assemble un plan structuré semaine par semaine. Pas de catalogue à éplucher.",
+    "rest_title": "On planifie aussi le repos",
+    "rest_body": "Une semaine plus légère est intégrée dans le cycle pour que tu récupères vraiment. Le repos planifié, c'est ce qui fait que tu progresses au lieu de stagner.",
+    "personal_title": "Adapté à toi, pas l'inverse",
+    "personal_body": "Tu choisis combien de séances par semaine tu peux donner. Le programme s'ajuste, tu n'as pas à te plier à un format rigide.",
+    "fixed_title": "Ou pars sur du déjà-fait",
+    "fixed_body": "3 programmes types prêts à lancer si tu veux démarrer sans questions : débutant, remise en forme, cardio express."
+  },
+  "final_cta": {
+    "title": "Lance ton plan en 30 secondes.",
+    "subtitle": "Crée un compte gratuit, réponds à 3 questions, ton programme est prêt.",
+    "cta_primary": "Créer mon programme gratuit",
+    "cta_secondary": "Découvrir les programmes types"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Mes séances — une séance guidée chaque jour",
+    "description": "Une séance de sport guidée chaque jour, prête à lancer. 8 formats variés, sans matériel, de 5 à 40 min."
+  },
+  "hero": {
+    "eyebrow": "Séance du jour",
+    "title": "Ta séance de ce matin t'attend déjà.",
+    "subtitle": "Aucune décision à prendre, aucun matériel requis. Tu arrives, tu lances, tu transpires. La séance du jour est calibrée et prête.",
+    "cta_primary": "Créer un compte gratuit",
+    "cta_secondary": "Voir les formats disponibles"
+  },
+  "benefits": {
+    "section_label": "Pourquoi Wan2Fit pour vos séances",
+    "no_decision_title": "0 décision à prendre",
+    "no_decision_body": "Pas de programme à choisir, pas de niveau à régler. La séance du jour est déjà là, calibrée, prête à lancer.",
+    "no_gear_title": "Sans matériel",
+    "no_gear_body": "Tout est conçu pour ton salon, ta chambre, un parc. Poids du corps uniquement — efficace et prouvé.",
+    "formats_title": "8 formats variés",
+    "formats_body": "HIIT, Tabata, EMOM, AMRAP, Pyramide, Superset, Circuit, Renforcement. Ton corps ne s'habitue jamais.",
+    "duration_title": "5 à 40 min",
+    "duration_body": "Tu choisis ce que tu peux donner aujourd'hui. Court ou long, l'effort compte autant que la durée."
+  },
+  "final_cta": {
+    "title": "Prête à transpirer ?",
+    "subtitle": "Crée ton compte gratuitement. Ta première séance est déjà programmée.",
+    "cta_primary": "Créer un compte gratuit",
+    "cta_secondary": "Découvrir les formats"
+  }
+}

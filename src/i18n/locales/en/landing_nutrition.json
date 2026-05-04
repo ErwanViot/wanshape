@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "My plate — a daily food journal",
+    "description": "Daily calorie and macro (P/C/F) tracking. Search a food or scan a barcode, nutrition values fetched automatically. 7-day history."
+  },
+  "hero": {
+    "eyebrow": "My plate",
+    "title": "A clear plate, no calculator needed.",
+    "subtitle": "Daily calories and macros. Type a food's name or scan its barcode — the nutrition values are fetched for you. Set a target if you want one, or stay in awareness mode to ease into it.",
+    "cta_primary": "Create a free account",
+    "cta_secondary": "Browse the recipes",
+    "visual_aria": "Preview of one day's food journal",
+    "mockup_today": "Today",
+    "mockup_premium_badge": "Preview",
+    "mockup_protein": "Prot.",
+    "mockup_carbs": "Carbs",
+    "mockup_fat": "Fat",
+    "mockup_search_placeholder": "Type a food or scan the barcode…"
+  },
+  "benefits": {
+    "section_label": "Why our food journal",
+    "kcal_title": "Calories and macros",
+    "kcal_body": "Daily calorie counter plus protein / carbs / fat. Set a target if you want one, or stay in \"awareness\" mode to ease into it.",
+    "search_title": "Search or scan",
+    "search_body": "Type a food's name or scan its barcode — the nutrition values are fetched automatically. No need to memorize everything.",
+    "history_title": "7-day history",
+    "history_body": "Log or correct up to 7 days back. No pressure to be perfect in real time — the app adapts to your rhythm.",
+    "insight_title": "Daily insight (Premium)",
+    "insight_body": "A short AI reading of your day that flags what's happening and suggests one adjustment. Not a preachy coach — a heads-up."
+  },
+  "final_cta": {
+    "title": "Get back the upper hand on what you eat.",
+    "subtitle": "Create a free account and start to see things clearly, without doing math in your head.",
+    "cta_primary": "Create a free account",
+    "cta_secondary": "Browse the recipes"
+  }
+}

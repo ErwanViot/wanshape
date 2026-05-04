@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "My sessions — a guided workout every day",
+    "description": "A guided workout every day, ready to launch. 8 varied formats, no equipment, from 5 to 40 minutes."
+  },
+  "hero": {
+    "eyebrow": "Today's session",
+    "title": "Your workout for today is already waiting.",
+    "subtitle": "No decision to make, no equipment needed. Show up, hit play, sweat. Today's session is calibrated and ready.",
+    "cta_primary": "Create a free account",
+    "cta_secondary": "Browse the formats"
+  },
+  "benefits": {
+    "section_label": "Why Wan2Fit for your workouts",
+    "no_decision_title": "Zero decisions",
+    "no_decision_body": "No program to pick, no level to set. Today's workout is already there, calibrated, ready to launch.",
+    "no_gear_title": "No equipment",
+    "no_gear_body": "Designed for your living room, bedroom, a park. Bodyweight only — effective and proven.",
+    "formats_title": "8 varied formats",
+    "formats_body": "HIIT, Tabata, EMOM, AMRAP, Pyramid, Superset, Circuit, Strength. Your body never adapts.",
+    "duration_title": "5 to 40 minutes",
+    "duration_body": "You decide what you can give today. Short or long — effort counts as much as duration."
+  },
+  "final_cta": {
+    "title": "Ready to sweat?",
+    "subtitle": "Create a free account. Your first workout is already programmed.",
+    "cta_primary": "Create a free account",
+    "cta_secondary": "Browse the formats"
+  }
+}

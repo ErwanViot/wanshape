@@ -69,6 +69,35 @@ function buildSlugIndex(seed: SeedFile): Map<string, string> {
 const FR_SLUGS = buildSlugIndex(FR_SEED);
 const EN_SLUGS = buildSlugIndex(EN_SEED);
 
+// Feature landing pages — public visitor-facing presentations of auth-only
+// sections. Each FR canonical URL has an EN mirror with translated path
+// segments so search engines can index and serve the right locale.
+const LANDING_PAIRS = [
+  { fr: '/decouvrir/seances', en: '/en/discover/sessions', priority: 0.8 },
+  { fr: '/decouvrir/programmes', en: '/en/discover/programs', priority: 0.8 },
+  { fr: '/decouvrir/nutrition', en: '/en/discover/nutrition', priority: 0.8 },
+  { fr: '/decouvrir/suivi', en: '/en/discover/tracking', priority: 0.7 },
+] as const;
+
+function buildLandingRoutes(): SeoRoute[] {
+  const routes: SeoRoute[] = [];
+  for (const pair of LANDING_PAIRS) {
+    const alternates: SeoAlternate[] = [
+      { hreflang: 'fr-FR', href: pair.fr },
+      { hreflang: 'en-US', href: pair.en },
+      { hreflang: 'x-default', href: pair.fr },
+    ];
+    routes.push({ path: pair.fr, changefreq: 'monthly', priority: pair.priority, alternates });
+    routes.push({
+      path: pair.en,
+      changefreq: 'monthly',
+      priority: pair.priority - 0.1,
+      alternates,
+    });
+  }
+  return routes;
+}
+
 export function getPublicRoutes(): SeoRoute[] {
   const formatRoutes: SeoRoute[] = FORMATS_DATA.map((f) => ({
     path: `/formats/${f.slug}`,
@@ -126,6 +155,7 @@ export function getPublicRoutes(): SeoRoute[] {
 
   return [
     ...STATIC_ROUTES,
+    ...buildLandingRoutes(),
     recipeListingFr,
     recipeListingEn,
     ...formatRoutes,

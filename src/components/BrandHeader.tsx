@@ -6,10 +6,11 @@ import { LocaleToggle } from './LocaleToggle.tsx';
 import { NavDropdown } from './NavDropdown.tsx';
 
 const matchExplore = (p: string) => p === '/decouvrir' || p.startsWith('/formats') || p.startsWith('/exercices');
-const matchPrograms = (p: string) => p.startsWith('/programme');
-const matchSessions = (p: string) => p === '/seances' || p.startsWith('/seance');
+const matchPrograms = (p: string) => p.startsWith('/programme') || p === '/decouvrir/programmes';
+const matchSessions = (p: string) => p === '/seances' || p.startsWith('/seance') || p === '/decouvrir/seances';
 const matchRecipes = (p: string) => p.startsWith('/nutrition/recettes') || p.startsWith('/en/nutrition/recipes');
-const matchPlate = (p: string) => p === '/nutrition' || p.startsWith('/nutrition/setup');
+const matchPlate = (p: string) =>
+  p === '/nutrition' || p.startsWith('/nutrition/setup') || p === '/decouvrir/nutrition';
 
 const TRAIN_ITEMS = [
   { to: '/seances', labelKey: 'my_sessions', match: matchSessions },
@@ -21,9 +22,15 @@ const NUTRITION_ITEMS = [
   { to: '/nutrition/recettes', labelKey: 'recipes', match: matchRecipes },
 ] as const;
 
-const VISITOR_ITEMS = [
-  { to: '/decouvrir', labelKey: 'explore', match: matchExplore },
-  { to: '/programmes', labelKey: 'programs', match: matchPrograms },
+// Visitor sees mirror of the logged-in nav. Auth-only destinations
+// route to public landings (/decouvrir/*); the rest reuses public listings.
+const VISITOR_TRAIN_ITEMS = [
+  { to: '/decouvrir/seances', labelKey: 'my_sessions', match: matchSessions },
+  { to: '/decouvrir/programmes', labelKey: 'my_programs', match: matchPrograms },
+] as const;
+
+const VISITOR_NUTRITION_ITEMS = [
+  { to: '/decouvrir/nutrition', labelKey: 'my_plate', match: matchPlate },
   { to: '/nutrition/recettes', labelKey: 'recipes', match: matchRecipes },
 ] as const;
 
@@ -53,7 +60,7 @@ export function BrandHeader() {
   const showPricing = !loading && !isPremium;
   const isPricingActive = pathname === '/tarifs';
   const isExploreActive = matchExplore(pathname);
-  const isTrackingActive = pathname === '/suivi';
+  const isTrackingActive = pathname === '/suivi' || pathname === '/decouvrir/suivi';
 
   return (
     <header className="px-6 md:px-10 lg:px-14 py-4 border-b border-divider">
@@ -72,9 +79,12 @@ export function BrandHeader() {
               <NavLink to="/suivi" labelKey="tracking" active={isTrackingActive} />
             </>
           ) : (
-            VISITOR_ITEMS.map((item) => (
-              <NavLink key={item.to} to={item.to} labelKey={item.labelKey} active={item.match(pathname)} />
-            ))
+            <>
+              <NavDropdown triggerLabelKey="train" items={VISITOR_TRAIN_ITEMS} />
+              <NavLink to="/decouvrir" labelKey="explore" active={isExploreActive} />
+              <NavDropdown triggerLabelKey="nutrition" items={VISITOR_NUTRITION_ITEMS} />
+              <NavLink to="/decouvrir/suivi" labelKey="tracking" active={isTrackingActive} />
+            </>
           )}
         </nav>
 
