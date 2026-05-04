@@ -51,6 +51,20 @@ cd ios/App && xcodebuild -project App.xcodeproj -scheme App \
 cd android && ./gradlew assembleDebug
 ```
 
+## Régénérer les icônes / splash
+
+Quand le logo brand évolue (`public/icon-512.png`), régénérer toute la chaîne via :
+
+```bash
+npm run icons
+```
+
+Ce script :
+1. `scripts/generate-app-icon.ts` — rasterize `public/icon-512.png` (512×512) en 3 masters 1024×1024 (`resources/icon.png`, `icon-foreground.png`, `icon-background.png`)
+2. `capacitor-assets generate` — fan out vers toutes les tailles iOS (`ios/App/App/Assets.xcassets/AppIcon.appiconset/*`) + Android (`android/app/src/main/res/mipmap-*/*`)
+
+Source : `public/icon-512.png` est le logo brand officiel (W stylisé dans cercle indigo). Le fichier `public/logo.svg` n'existe plus — c'était une variante non-officielle.
+
 ### À faire après le premier `cap add` (PR #2 deep links)
 
 **iOS — `ios/App/App/Info.plist`** : ajouter le custom URL scheme et le domaine associé.
