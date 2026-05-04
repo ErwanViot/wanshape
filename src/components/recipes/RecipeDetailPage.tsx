@@ -1,4 +1,4 @@
-import { ArrowLeft, ChefHat, Clock, Flame, Users } from 'lucide-react';
+import { ArrowLeft, ChefHat, Clock, Flame, Lightbulb, Users } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useParams } from 'react-router';
 import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
@@ -184,6 +184,16 @@ export function RecipeDetailPage() {
             ))}
           </ol>
         </section>
+
+        {recipe.tip && (
+          <section className="flex gap-3 rounded-2xl border border-amber-300/50 bg-amber-50/60 dark:border-amber-300/20 dark:bg-amber-300/5 p-4">
+            <Lightbulb className="w-5 h-5 shrink-0 text-amber-600 dark:text-amber-300 mt-0.5" />
+            <div className="space-y-1">
+              <h2 className="font-display text-sm font-bold text-heading">{t('detail.tip_heading')}</h2>
+              <p className="text-sm text-body leading-relaxed">{recipe.tip}</p>
+            </div>
+          </section>
+        )}
 
         {recipe.tags.length > 0 && (
           <section className="space-y-2">

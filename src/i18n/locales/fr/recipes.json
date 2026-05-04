@@ -22,7 +22,8 @@
     "nutrition_per_serving_other": "Pour {{count}} portions",
     "ingredients_heading": "Ingrédients",
     "steps_heading": "Préparation",
-    "tags_heading": "Tags"
+    "tags_heading": "Tags",
+    "tip_heading": "Astuce"
   },
   "filters": {
     "search_placeholder": "Rechercher une recette, un ingrédient…",

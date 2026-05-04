@@ -47,6 +47,8 @@ interface SeedRecipe {
   ingredients: RecipeIngredient[];
   steps: string[];
   tags: string[];
+  /** Optional free-form tip (lighter variant, pairing, batch advice…). */
+  tip?: string | null;
 }
 
 /**
@@ -106,6 +108,7 @@ async function seedLocale(locale: RecipeLocale): Promise<{ ok: number; failed: n
       ingredients: normaliseIngredients(r.ingredients),
       steps: r.steps,
       tags: r.tags,
+      tip: r.tip ?? null,
       is_published: true,
     };
 
