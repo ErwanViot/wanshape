@@ -1,4 +1,5 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { getSupabaseStorage } from './supabase-storage.ts';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
@@ -48,6 +49,7 @@ function getClient(): SupabaseClient | null {
       persistSession: true,
       detectSessionInUrl: true,
       lock: inMemoryLock,
+      storage: getSupabaseStorage(),
     },
   });
 

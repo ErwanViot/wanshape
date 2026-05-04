@@ -2,6 +2,7 @@ import type { User } from '@supabase/supabase-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import i18n from '../i18n';
+import { getAuthRedirectUrl } from '../lib/auth-redirects.ts';
 import { supabase } from '../lib/supabase.ts';
 import { sessionEvents } from '../lib/supabaseQuery.ts';
 import type { Profile } from '../types/auth.ts';
@@ -173,6 +174,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         password,
         options: {
           data: { display_name: displayName },
+          emailRedirectTo: getAuthRedirectUrl('/auth/callback'),
         },
       });
       return { error: translateError(error?.message) };
@@ -183,7 +185,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const resetPassword = useCallback(async (email: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: i18n.t('errors.auth_unavailable', { ns: 'auth' }) };
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
+      redirectTo: getAuthRedirectUrl('/reset-password'),
     });
     return { error: translateError(error?.message) };
   }, []);
