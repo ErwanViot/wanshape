@@ -43,11 +43,12 @@ export function usePushNotifications() {
         // we already pushed during this session.
         if (registeredToken.current === token.value) return;
         registeredToken.current = token.value;
+        // Migration 025 enforces platform IN ('ios','android','web') —
+        // fall back to 'web' (instead of 'unknown') so a Capacitor build
+        // running on an unrecognised host doesn't fail the CHECK.
+        const platform = isIOS() ? 'ios' : isAndroid() ? 'android' : 'web';
         const { error } = await supabase!.functions.invoke('register-push-device', {
-          body: {
-            token: token.value,
-            platform: isIOS() ? 'ios' : isAndroid() ? 'android' : 'unknown',
-          },
+          body: { token: token.value, platform },
         });
         if (error) console.warn('register-push-device failed', error);
       });

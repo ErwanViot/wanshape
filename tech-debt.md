@@ -58,3 +58,24 @@ Sentry.replayIntegration({
 Alternative plus fine si `maskAllInputs: true` est trop strict pour le debug :
 - Garder le comportement par défaut
 - Ajouter `className="sentry-mask"` sur tous les inputs qui collectent de la donnée personnelle : formulaire nutrition, étapes onboarding programme, formulaire signup
+
+
+## Push notifications — rate limiting + OAuth cache (PR #6)
+
+**Priorité** : avant scale (>100 users actifs)
+**Statut** : MVP acceptable
+
+### Problème 1 — pas de rate limit sur send-push
+`supabase/functions/send-push` est gardé par un `x-internal-secret` header. Si le secret leak (dev shares, log accidentel), un attaquant peut spam tous les users sans limite. À ajouter avant prod publique :
+- compteur Redis ou table `push_log` (timestamp, user_id, category)
+- quota dur (ex: 10 sends/user/heure)
+
+### Problème 2 — pas de cache du token Google OAuth
+`getFcmAccessToken` génère un JWT RS256 + appel `oauth2.googleapis.com/token` à chaque invocation de `send-push`. Le token est valide 1h. Cache module-level avec expiry check ferait ça en O(1) pour les 99% suivants des appels.
+
+### Fix proposé
+1. Variable module-level `let cachedAccessToken: { value: string; expiresAt: number } | null` dans send-push/index.ts
+2. `if (cached && Date.now() < cached.expiresAt - 60_000) return cached.value`
+3. Sinon refetch et stocker
+
+

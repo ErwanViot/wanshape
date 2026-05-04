@@ -178,13 +178,17 @@ Deno.serve(async (req: Request) => {
   const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
   // Honor the user's category opt-in. info defaults to true on signup;
-  // progression and new_content default to false.
+  // progression and new_content default to false. We select the three
+  // columns explicitly (instead of injecting body.category into the
+  // select) so the query shape stays static even if a future caller
+  // bypasses the ALLOWED_CATEGORIES check above.
   const { data: prefs } = await supabase
     .from('notification_preferences')
-    .select(body.category)
+    .select('info, progression, new_content')
     .eq('user_id', body.user_id)
-    .maybeSingle();
-  if (!prefs || prefs[body.category as keyof typeof prefs] !== true) {
+    .maybeSingle<{ info: boolean; progression: boolean; new_content: boolean }>();
+  const category = body.category as (typeof ALLOWED_CATEGORIES)[number];
+  if (!prefs || prefs[category] !== true) {
     return new Response(JSON.stringify({ sent: 0, removed: 0, skipped: 'opt-out' }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -223,15 +227,26 @@ Deno.serve(async (req: Request) => {
     });
   }
 
+  // Fan out in parallel — same body to every device for the user.
+  const results = await Promise.allSettled(
+    devices.map((device) =>
+      sendFcmMessage(accessToken, serviceAccount.project_id, {
+        token: device.token,
+        title: body.title!,
+        body: body.body!,
+        data: body.data,
+      }).then((res) => ({ device, ...res })),
+    ),
+  );
+
   let sent = 0;
   const idsToRemove: string[] = [];
-  for (const device of devices) {
-    const { status, bodyText } = await sendFcmMessage(accessToken, serviceAccount.project_id, {
-      token: device.token,
-      title: body.title,
-      body: body.body,
-      data: body.data,
-    });
+  for (const result of results) {
+    if (result.status === 'rejected') {
+      console.error('FCM send rejected:', result.reason);
+      continue;
+    }
+    const { device, status, bodyText } = result.value;
     if (status >= 200 && status < 300) {
       sent += 1;
     } else if (status === 404 || status === 400) {
