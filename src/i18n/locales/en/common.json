@@ -55,6 +55,9 @@
     "exercises": "Exercises",
     "programs": "Programs"
   },
+  "offline": {
+    "banner": "Offline — some features are unavailable."
+  },
   "hook_errors": {
     "service_unavailable": "Service unavailable",
     "not_signed_in": "Not signed in",

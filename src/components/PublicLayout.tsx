@@ -5,6 +5,7 @@ import { BottomNav } from './BottomNav.tsx';
 import { BrandHeader } from './BrandHeader.tsx';
 import { Footer } from './Footer.tsx';
 import { CguRevalidationModal } from './legal/CguRevalidationModal.tsx';
+import { OfflineBanner } from './OfflineBanner.tsx';
 import { SessionExpiredBanner } from './SessionExpiredBanner.tsx';
 
 export function PublicLayout() {
@@ -24,6 +25,7 @@ export function PublicLayout() {
       <a href="#main-content" className="skip-to-content">
         {t('layout.skip_to_content')}
       </a>
+      <OfflineBanner />
       <BrandHeader />
       <SessionExpiredBanner />
       <main id="main-content" className="flex-1 pb-16 md:pb-0">
