@@ -38,24 +38,7 @@ type SentrySdk = {
 };
 
 let sentryModule: SentrySdk | null = null;
-let sentryLoading: Promise<SentrySdk> | null = null;
 const queue: QueuedReport[] = [];
-
-async function loadSentry(): Promise<SentrySdk> {
-  if (sentryModule) return sentryModule;
-  if (!sentryLoading) {
-    // Pick the right SDK at the moment of the import. The Capacitor
-    // global is set synchronously when Capacitor's WebView boots, so by
-    // the time captureException / initSentryAsync runs (post-render or
-    // post-error) it's already known.
-    const { isNative } = await import('./capacitor.ts');
-    sentryLoading = isNative()
-      ? (import('@sentry/capacitor') as unknown as Promise<SentrySdk>)
-      : (import('@sentry/react') as unknown as Promise<SentrySdk>);
-  }
-  sentryModule = await sentryLoading;
-  return sentryModule;
-}
 
 export function captureException(error: unknown, context?: CaptureContext): void {
   if (!import.meta.env.PROD) return;
@@ -63,22 +46,12 @@ export function captureException(error: unknown, context?: CaptureContext): void
     sentryModule.captureException(error, context as Parameters<typeof sentryModule.captureException>[1]);
     return;
   }
-  // Hold the error until the bundle resolves; the load was likely already
-  // kicked off by initSentryAsync, so this just hops to the end of the
-  // microtask queue when it lands.
+  // Sentry hasn't booted yet — hold the report until initSentryAsync()
+  // resolves and flushes the queue. We deliberately do NOT trigger an
+  // ad-hoc dynamic import here: the load step alone gives us the SDK
+  // module without ever calling Sentry.init(), and reporting against
+  // an uninitialised SDK is a silent no-op that swallows the event.
   queue.push({ error, context });
-  loadSentry()
-    .then((Sentry) => {
-      while (queue.length) {
-        const { error: err, context: ctx } = queue.shift()!;
-        Sentry.captureException(err, ctx as Parameters<typeof Sentry.captureException>[1]);
-      }
-    })
-    .catch(() => {
-      // Sentry bundle failed to load — drop the queued errors silently.
-      // Reporting the loader failure to Sentry would obviously not help.
-      queue.length = 0;
-    });
 }
 
 // URL identifier scrubbing — kept here so initSentryAsync can pass it to
@@ -98,14 +71,16 @@ function scrubPathIds(value: string): string {
 // Shared options used by both the web init and the Capacitor sibling
 // init. Keeping them in one place ensures the WebView portion of the
 // native app gets the same RGPD masking + URL scrubbing as the PWA.
+// Replay-related options are intentionally NOT included here — the
+// native SDK has no replay product and would silently ignore them,
+// and we deliberately keep replay web-only for RGPD reasons (art. 9
+// data is plentiful in the WebView views).
 function buildBrowserOptions(): Record<string, unknown> {
   return {
     dsn: import.meta.env.VITE_SENTRY_DSN,
     environment: import.meta.env.MODE,
     enabled: import.meta.env.PROD,
     tracesSampleRate: 0.2,
-    replaysSessionSampleRate: 0,
-    replaysOnErrorSampleRate: 1.0,
     beforeBreadcrumb(breadcrumb: { category?: string; data?: Record<string, unknown> }) {
       if (breadcrumb.category === 'fetch' || breadcrumb.category === 'xhr') {
         if (typeof breadcrumb.data?.url === 'string') {
@@ -134,6 +109,10 @@ async function initWeb(): Promise<SentrySdk> {
   const Sentry = await import('@sentry/react');
   Sentry.init({
     ...buildBrowserOptions(),
+    // Replay sampling stays in the web init only — these options are
+    // meaningless for the native SDK.
+    replaysSessionSampleRate: 0,
+    replaysOnErrorSampleRate: 1.0,
     integrations: [
       Sentry.browserTracingIntegration(),
       Sentry.replayIntegration({
