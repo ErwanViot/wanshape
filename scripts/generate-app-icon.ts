@@ -29,6 +29,7 @@ const SOURCE_PATH = join(ROOT, 'public/icon-512.png');
 
 const SIZE = 1024;
 const WHITE_BG = { r: 0xff, g: 0xff, b: 0xff, alpha: 1 };
+const TRANSPARENT = { r: 0, g: 0, b: 0, alpha: 0 };
 const FOREGROUND_INSET = 0.58;
 
 async function upscaledLogo(targetSizePx: number): Promise<Buffer> {
@@ -44,7 +45,11 @@ async function upscaledLogo(targetSizePx: number): Promise<Buffer> {
     .toBuffer();
 }
 
-async function compose(targetSize: number, logoScale: number, background: typeof WHITE_BG): Promise<Buffer> {
+async function compose(
+  targetSize: number,
+  logoScale: number,
+  background: { r: number; g: number; b: number; alpha: number },
+): Promise<Buffer> {
   const logoSize = Math.round(targetSize * logoScale);
   const offset = Math.round((targetSize - logoSize) / 2);
   const logo = await upscaledLogo(logoSize);
@@ -78,8 +83,11 @@ async function main() {
   writeFileSync(join(OUT, 'icon.png'), iconCombined);
 
   // Android adaptive: logo inset on a transparent canvas (foreground)
-  // over a solid white square (background).
-  const iconForeground = await compose(SIZE, FOREGROUND_INSET, WHITE_BG);
+  // over a solid white square (background). Keeping the foreground
+  // transparent matters: if the brand background ever changes from
+  // white to a colour, the foreground will composite cleanly on top
+  // instead of masking it with a white square.
+  const iconForeground = await compose(SIZE, FOREGROUND_INSET, TRANSPARENT);
   writeFileSync(join(OUT, 'icon-foreground.png'), iconForeground);
 
   const iconBackground = await solidBackground(SIZE);
