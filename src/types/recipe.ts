@@ -44,6 +44,9 @@ export interface Recipe {
   ingredients: RecipeIngredient[];
   steps: string[];
   tags: string[];
+  /** Optional free-form tip rendered on the detail page (lighter variant,
+   * pairing, batch advice, storage…). NULL when absent. */
+  tip: string | null;
   is_published: boolean;
   created_at: string;
   updated_at: string;

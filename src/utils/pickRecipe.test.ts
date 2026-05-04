@@ -17,6 +17,7 @@ function r(overrides: Partial<Recipe>): Recipe {
     ingredients: [],
     steps: [],
     tags: [],
+    tip: null,
     is_published: true,
     created_at: '2026-05-02T00:00:00Z',
     updated_at: '2026-05-02T00:00:00Z',

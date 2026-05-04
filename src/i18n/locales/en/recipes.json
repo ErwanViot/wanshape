@@ -22,7 +22,8 @@
     "nutrition_per_serving_other": "For {{count}} servings",
     "ingredients_heading": "Ingredients",
     "steps_heading": "Steps",
-    "tags_heading": "Tags"
+    "tags_heading": "Tags",
+    "tip_heading": "Tip"
   },
   "filters": {
     "search_placeholder": "Search by name or ingredient…",
