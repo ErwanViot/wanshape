@@ -6,6 +6,7 @@ import { useDocumentHead } from '../../hooks/useDocumentHead.ts';
 import { useHistory } from '../../hooks/useHistory.ts';
 import { useActiveProgram } from '../../hooks/useProgram.ts';
 import { LoadingSpinner } from '../LoadingSpinner.tsx';
+import { NutritionWidget7d } from '../nutrition/NutritionWidget7d.tsx';
 import { MetricCard } from '../stats/MetricCard.tsx';
 import { ProgramCard } from '../stats/ProgramCard.tsx';
 import { RecentSessions } from '../stats/RecentSessions.tsx';
@@ -261,6 +262,11 @@ export function StatsPage() {
           <div className="col-span-2 md:col-span-4 rounded-2xl bg-surface-card border border-divider p-5">
             <RecentSessions completions={completions} />
           </div>
+        </div>
+
+        {/* 7-day nutrition rollup — separate row to avoid breaking the bento grid above */}
+        <div className="mt-4">
+          <NutritionWidget7d />
         </div>
       </div>
     </div>

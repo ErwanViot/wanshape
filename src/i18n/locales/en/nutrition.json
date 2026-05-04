@@ -14,6 +14,33 @@
     "add_meal_modal_aria": "Add a meal",
     "footer_source": "Food database: ANSES — CIQUAL Table (Etalab 2.0 licence)"
   },
+  "date_selector": {
+    "today": "today",
+    "yesterday": "yesterday",
+    "tomorrow": "tomorrow",
+    "previous_day": "Previous day",
+    "next_day": "Next day",
+    "back_to_today": "Back to today",
+    "editing_past_notice": "You're editing a past day."
+  },
+  "history": {
+    "week_heading": "This week",
+    "month_heading": "Last 30 days",
+    "insights_heading": "At a glance",
+    "target_pct": "{{pct}}%",
+    "avg_kcal_week": "Avg kcal over 7 days: {{n}}",
+    "avg_kcal_range": "Avg kcal over {{days}} days: {{n}}",
+    "target_days_week": "Target met on {{n}} day(s) this week",
+    "days_without_entry": "{{n}} day(s) with no entry out of {{days}}",
+    "no_insights_yet": "Not enough data yet to compute stats.",
+    "cell_aria_filled": "{{date}} — {{calories}} kcal",
+    "cell_aria_empty": "{{date}} — no entry"
+  },
+  "widget7d": {
+    "heading": "Nutrition · last 7 days",
+    "aria": "Open nutrition",
+    "no_data": "No data this week yet."
+  },
   "setup": {
     "title": "Calorie target · Wan2Fit",
     "description": "Set your daily calorie target without sharing your body data.",

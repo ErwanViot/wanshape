@@ -25,6 +25,18 @@ const LazySettingsPage = lazy(() =>
   import('./components/auth/SettingsPage.tsx').then((m) => ({ default: m.SettingsPage })),
 );
 const LazyDiscover = lazy(() => import('./components/Discover.tsx').then((m) => ({ default: m.Discover })));
+const LazySeancesLanding = lazy(() =>
+  import('./components/landings/SeancesLanding.tsx').then((m) => ({ default: m.SeancesLanding })),
+);
+const LazyProgramsLanding = lazy(() =>
+  import('./components/landings/ProgramsLanding.tsx').then((m) => ({ default: m.ProgramsLanding })),
+);
+const LazyNutritionLanding = lazy(() =>
+  import('./components/landings/NutritionLanding.tsx').then((m) => ({ default: m.NutritionLanding })),
+);
+const LazySuiviLanding = lazy(() =>
+  import('./components/landings/SuiviLanding.tsx').then((m) => ({ default: m.SuiviLanding })),
+);
 const LazyProgramList = lazy(() => import('./components/ProgramList.tsx').then((m) => ({ default: m.ProgramList })));
 const LazyProgramContentPage = lazy(() =>
   import('./components/ProgramContentPage.tsx').then((m) => ({ default: m.ProgramContentPage })),
@@ -63,6 +75,12 @@ const LazyNutritionPage = lazy(() =>
 const LazyNutritionSetupPage = lazy(() =>
   import('./components/NutritionSetupPage.tsx').then((m) => ({ default: m.NutritionSetupPage })),
 );
+const LazyRecipeListPage = lazy(() =>
+  import('./components/recipes/RecipeListPage.tsx').then((m) => ({ default: m.RecipeListPage })),
+);
+const LazyRecipeDetailPage = lazy(() =>
+  import('./components/recipes/RecipeDetailPage.tsx').then((m) => ({ default: m.RecipeDetailPage })),
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingFallback />}>{children}</Suspense>;
@@ -86,6 +104,73 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyDiscover />
+          </Lazy>
+        ),
+      },
+      // Public feature landings — visitor-facing presentation of auth-only sections
+      {
+        path: 'decouvrir/seances',
+        element: (
+          <Lazy>
+            <LazySeancesLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'decouvrir/programmes',
+        element: (
+          <Lazy>
+            <LazyProgramsLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'decouvrir/nutrition',
+        element: (
+          <Lazy>
+            <LazyNutritionLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'decouvrir/suivi',
+        element: (
+          <Lazy>
+            <LazySuiviLanding />
+          </Lazy>
+        ),
+      },
+      // English mirrors of the feature landings — same components, locale forced
+      // by FeatureLandingTemplate based on the path. URLs are translated for SEO.
+      {
+        path: 'en/discover/sessions',
+        element: (
+          <Lazy>
+            <LazySeancesLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/discover/programs',
+        element: (
+          <Lazy>
+            <LazyProgramsLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/discover/nutrition',
+        element: (
+          <Lazy>
+            <LazyNutritionLanding />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/discover/tracking',
+        element: (
+          <Lazy>
+            <LazySuiviLanding />
           </Lazy>
         ),
       },
@@ -118,6 +203,41 @@ export const router = createBrowserRouter([
         element: (
           <Lazy>
             <LazyExercisePage />
+          </Lazy>
+        ),
+      },
+      // Public recipes — accessible without auth, indexable by SEO.
+      // FR is the canonical namespace; EN lives under `/en/` with localised
+      // path segments so the URLs themselves are translated for SEO.
+      {
+        path: 'nutrition/recettes',
+        element: (
+          <Lazy>
+            <LazyRecipeListPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'nutrition/recettes/:slug',
+        element: (
+          <Lazy>
+            <LazyRecipeDetailPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/nutrition/recipes',
+        element: (
+          <Lazy>
+            <LazyRecipeListPage />
+          </Lazy>
+        ),
+      },
+      {
+        path: 'en/nutrition/recipes/:slug',
+        element: (
+          <Lazy>
+            <LazyRecipeDetailPage />
           </Lazy>
         ),
       },

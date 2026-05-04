@@ -1,7 +1,7 @@
 import { Settings2 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDailyNutrition } from '../hooks/useDailyNutrition.ts';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
@@ -9,10 +9,15 @@ import { useNutritionProfile } from '../hooks/useNutritionProfile.ts';
 import { useTodayInsight } from '../hooks/useTodayInsight.ts';
 import type { OpenFoodFactsProduct } from '../lib/openFoodFacts.ts';
 import type { FoodReference, MealLogInsert, MealType } from '../types/nutrition.ts';
+import { clampDateKey, shiftYYYYMMDD, todayYYYYMMDD } from '../utils/nutritionDate.ts';
 import { CalorieRing } from './nutrition/CalorieRing.tsx';
 import { DailyFeed } from './nutrition/DailyFeed.tsx';
+import { DateSelector } from './nutrition/DateSelector.tsx';
 import { InsightCard } from './nutrition/InsightCard.tsx';
 import { MealEntryForm } from './nutrition/MealEntryForm.tsx';
+import { NutritionHistorySection } from './nutrition/NutritionHistorySection.tsx';
+
+const RETRO_WINDOW_DAYS = 7;
 
 export function NutritionPage() {
   const { t } = useTranslation('nutrition');
@@ -24,8 +29,31 @@ export function NutritionPage() {
   const { profile: authProfile } = useAuth();
   const isPremium = authProfile?.subscription_tier === 'premium';
   const { profile } = useNutritionProfile();
-  const { summary, loading, error, addMeal, deleteMeal } = useDailyNutrition();
-  const { insight, setInsight } = useTodayInsight();
+
+  // Lazy-init so `today` is computed once at mount, not on every render.
+  // Prevents a midnight rollover from silently re-clamping a user-chosen
+  // past date out of the now-shifted [today-7, today] window.
+  const [today] = useState(() => todayYYYYMMDD());
+  const minDateKey = useMemo(() => shiftYYYYMMDD(today, -RETRO_WINDOW_DAYS) ?? today, [today]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  // Clamp the URL-provided date into the allowed retro window so external
+  // links (or stale URLs) can never leak forward into the future or further
+  // back than 7 days.
+  const dateKey = clampDateKey(searchParams.get('d'), minDateKey, today);
+  const isPastDay = dateKey !== today;
+
+  const setDateKey = useCallback(
+    (next: string) => {
+      const params = new URLSearchParams(searchParams);
+      if (next === today) params.delete('d');
+      else params.set('d', next);
+      setSearchParams(params, { replace: true });
+    },
+    [searchParams, setSearchParams, today],
+  );
+
+  const { summary, loading, error, addMeal, deleteMeal } = useDailyNutrition(dateKey);
+  const { insight, setInsight } = useTodayInsight(dateKey);
   const [formOpen, setFormOpen] = useState(false);
   const [initialMealType, setInitialMealType] = useState<MealType>('breakfast');
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -130,6 +158,12 @@ export function NutritionPage() {
           </Link>
         </header>
 
+        <DateSelector dateKey={dateKey} minDateKey={minDateKey} maxDateKey={today} onChange={setDateKey} />
+
+        {/* Plain paragraph (no role/live region): the notice is editorial */}
+        {/* and follows a user gesture, no need for a screen-reader announce. */}
+        {isPastDay && <p className="-mt-4 text-center text-xs text-muted">{t('date_selector.editing_past_notice')}</p>}
+
         <section className="flex flex-col sm:flex-row items-center sm:items-start gap-6 rounded-2xl bg-surface-card border border-card-border p-6">
           <div className="shrink-0">
             <CalorieRing current={summary.totals.calories} target={target.calories} size={160} strokeWidth={12} />
@@ -168,6 +202,8 @@ export function NutritionPage() {
         )}
 
         {error && <p className="text-sm text-red-400">{error}</p>}
+
+        <NutritionHistorySection />
 
         {formOpen && (
           <div className="fixed inset-0 z-[60] h-[100dvh] flex items-end sm:items-center justify-center p-0 sm:p-6">

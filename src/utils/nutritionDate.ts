@@ -29,6 +29,18 @@ export function todayYYYYMMDD(): string {
 }
 
 /**
+ * Clamps a candidate YYYYMMDD into the inclusive [min, max] window. Returns
+ * `max` (the safe default — typically today) when the input is missing,
+ * malformed, or out of bounds. Used to sanitise URL-provided retro dates
+ * so a stale or hostile link can never push writes outside the allowed window.
+ */
+export function clampDateKey(raw: string | null | undefined, min: string, max: string): string {
+  if (!raw || !parseYYYYMMDD(raw)) return max;
+  if (raw < min || raw > max) return max;
+  return raw;
+}
+
+/**
  * Shifts a YYYYMMDD string by `days` (positive or negative) in the local
  * timezone. Returns a new YYYYMMDD string, or null if the input is invalid.
  */

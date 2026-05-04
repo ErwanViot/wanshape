@@ -14,6 +14,33 @@
     "add_meal_modal_aria": "Ajouter un repas",
     "footer_source": "Base d'aliments : ANSES — Table CIQUAL (licence Etalab 2.0)"
   },
+  "date_selector": {
+    "today": "aujourd'hui",
+    "yesterday": "hier",
+    "tomorrow": "demain",
+    "previous_day": "Jour précédent",
+    "next_day": "Jour suivant",
+    "back_to_today": "Revenir à aujourd'hui",
+    "editing_past_notice": "Tu modifies une journée passée."
+  },
+  "history": {
+    "week_heading": "Cette semaine",
+    "month_heading": "30 derniers jours",
+    "insights_heading": "En bref",
+    "target_pct": "{{pct}} %",
+    "avg_kcal_week": "Moyenne kcal sur 7 jours : {{n}}",
+    "avg_kcal_range": "Moyenne kcal sur {{days}} jours : {{n}}",
+    "target_days_week": "Cible atteinte {{n}} jour(s) cette semaine",
+    "days_without_entry": "{{n}} jour(s) sans saisie sur {{days}}",
+    "no_insights_yet": "Pas encore assez de données pour produire des stats.",
+    "cell_aria_filled": "{{date}} — {{calories}} kcal",
+    "cell_aria_empty": "{{date}} — aucune saisie"
+  },
+  "widget7d": {
+    "heading": "Nutrition · 7 derniers jours",
+    "aria": "Voir la nutrition",
+    "no_data": "Pas encore de données cette semaine."
+  },
   "setup": {
     "title": "Cible nutritionnelle · Wan2Fit",
     "description": "Définis ta cible calorique quotidienne sans partager tes données corporelles.",

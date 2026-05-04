@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "title": "Suivi — la régularité de tes séances, semaine après semaine",
+    "description": "Total séances, temps cumulé, semaine en cours, programme actif. Le tableau de bord pour voir si tu tiens dans la durée."
+  },
+  "hero": {
+    "eyebrow": "Suivi",
+    "title": "La régularité, c'est ce qui paie.",
+    "subtitle": "Combien de séances cette semaine ? Combien d'heures ce mois-ci ? Où en es-tu sur ton programme ? Le tableau de bord pour voir noir sur blanc si tu tiens — et te corriger avant d'abandonner.",
+    "cta_primary": "Créer un compte gratuit",
+    "cta_secondary": "Voir les programmes types",
+    "visual_aria": "Aperçu du tableau de bord de suivi",
+    "mockup_title": "Mon tableau de bord",
+    "mockup_subtitle": "Aperçu",
+    "mockup_metric_total_label": "Séances",
+    "mockup_metric_total_sub": "Total",
+    "mockup_metric_time_label": "Temps",
+    "mockup_metric_time_sub": "Cumulé",
+    "mockup_metric_avg_label": "Moyenne",
+    "mockup_metric_avg_sub": "Par séance",
+    "mockup_metric_week_label": "Cette semaine",
+    "mockup_metric_week_sub": "Séances",
+    "mockup_week_label": "Lun → Dim",
+    "mockup_volume_label": "Volume des 7 dernières semaines"
+  },
+  "benefits": {
+    "section_label": "Ce que tu vois dans le suivi",
+    "totals_title": "Total séances + temps",
+    "totals_body": "Compteur cumulé depuis ton premier jour, durée totale et durée moyenne. Le score qui te rappelle que tu as déjà construit quelque chose.",
+    "week_title": "Cette semaine en un coup d'œil",
+    "week_body": "WeekDots (un point par jour de la semaine), volume hebdomadaire, message contextuel selon ton activité. Tu vois si tu es sur ta lancée ou si tu glisses.",
+    "program_title": "Ton programme actif",
+    "program_body": "Si tu suis un programme, sa progression est intégrée au tableau de bord. Sessions complétées, prochaine séance, raccourci pour la lancer.",
+    "history_title": "Tes dernières séances",
+    "history_body": "Liste des séances récemment terminées avec date et format. Pour te souvenir de ce que tu as fait — et pour le revoir si besoin."
+  },
+  "final_cta": {
+    "title": "Vois noir sur blanc que tu tiens dans la durée.",
+    "subtitle": "Crée ton compte gratuit, fais ta première séance, et regarde la régularité s'installer.",
+    "cta_primary": "Créer un compte gratuit",
+    "cta_secondary": "Découvrir les programmes"
+  }
+}

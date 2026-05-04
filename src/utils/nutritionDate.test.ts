@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatDateLabel, formatLocalYYYYMMDD, parseYYYYMMDD, shiftYYYYMMDD } from './nutritionDate.ts';
+import { clampDateKey, formatDateLabel, formatLocalYYYYMMDD, parseYYYYMMDD, shiftYYYYMMDD } from './nutritionDate.ts';
 
 describe('formatLocalYYYYMMDD', () => {
   it('uses local getters, not UTC', () => {
@@ -73,5 +73,40 @@ describe('formatDateLabel', () => {
   it('formats short date with provided locale', () => {
     const label = formatDateLabel('20260410', { now, locale: 'en' });
     expect(label).toMatch(/apr/i);
+  });
+});
+
+describe('clampDateKey', () => {
+  const min = '20260425';
+  const max = '20260502';
+
+  it('returns max when input is null', () => {
+    expect(clampDateKey(null, min, max)).toBe(max);
+  });
+
+  it('returns max when input is undefined', () => {
+    expect(clampDateKey(undefined, min, max)).toBe(max);
+  });
+
+  it('returns max when input is malformed', () => {
+    expect(clampDateKey('not-a-date', min, max)).toBe(max);
+    expect(clampDateKey('20261301', min, max)).toBe(max); // invalid month
+  });
+
+  it('returns max when input is in the future', () => {
+    expect(clampDateKey('20260601', min, max)).toBe(max);
+  });
+
+  it('returns max when input is older than min', () => {
+    expect(clampDateKey('20260101', min, max)).toBe(max);
+  });
+
+  it('returns the input unchanged when within window', () => {
+    expect(clampDateKey('20260428', min, max)).toBe('20260428');
+  });
+
+  it('accepts the boundaries inclusively', () => {
+    expect(clampDateKey(min, min, max)).toBe(min);
+    expect(clampDateKey(max, min, max)).toBe(max);
   });
 });
