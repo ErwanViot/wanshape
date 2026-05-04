@@ -40,6 +40,7 @@
     "bullet_data": "Ton profil, tes séances et tes programmes seront effacés.",
     "bullet_subscription": "Ton abonnement Premium sera annulé chez Stripe.",
     "bullet_irreversible": "Aucun retour en arrière possible.",
+    "confirmation_word": "SUPPRIMER",
     "confirm_label": "Tape {{word}} pour confirmer",
     "confirm_action": "Supprimer définitivement",
     "deleting": "Suppression…",

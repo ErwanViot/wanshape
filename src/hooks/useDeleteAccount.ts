@@ -18,12 +18,12 @@ export function useDeleteAccount() {
     if (!supabase) return tHookError('service_unavailable');
     setPending(true);
     try {
-      const { data, error } = await supabase.functions.invoke('delete-account');
+      const { error } = await supabase.functions.invoke('delete-account');
       if (error) {
+        // supabase.functions.invoke surfaces non-2xx HTTP responses through
+        // `error` (FunctionsHttpError), not `data` — so checking `data.ok`
+        // here would be dead code.
         return await extractEdgeFunctionError(error as unknown as Record<string, unknown>, tHookError('generic_retry'));
-      }
-      if (!data?.ok) {
-        return data?.error || tHookError('generic_retry');
       }
       await signOut();
       return null;

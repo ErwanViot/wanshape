@@ -3,8 +3,6 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDeleteAccount } from '../../hooks/useDeleteAccount.ts';
 
-const CONFIRMATION_WORD = 'SUPPRIMER';
-
 interface DeleteAccountDialogProps {
   open: boolean;
   onClose: () => void;
@@ -15,6 +13,7 @@ interface DeleteAccountDialogProps {
 // Backed by useDeleteAccount which calls the delete-account edge function.
 export function DeleteAccountDialog({ open, onClose }: DeleteAccountDialogProps) {
   const { t } = useTranslation('settings');
+  const confirmationWord = t('danger_zone.confirmation_word');
   const { deleteAccount, pending } = useDeleteAccount();
   const [confirmation, setConfirmation] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -32,7 +31,7 @@ export function DeleteAccountDialog({ open, onClose }: DeleteAccountDialogProps)
 
   if (!open) return null;
 
-  const canSubmit = confirmation === CONFIRMATION_WORD && !pending;
+  const canSubmit = confirmation === confirmationWord && !pending;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,9 +42,10 @@ export function DeleteAccountDialog({ open, onClose }: DeleteAccountDialogProps)
       setError(err);
       return;
     }
+    // RequireAuth will now bounce the user to /login because signOut() in
+    // useDeleteAccount has already cleared the auth state. Just close the
+    // dialog and let the router do its job — no manual window.location.
     onClose();
-    // signOut already cleared local state; redirect to home.
-    window.location.href = '/';
   };
 
   return (
@@ -85,19 +85,22 @@ export function DeleteAccountDialog({ open, onClose }: DeleteAccountDialogProps)
 
         <form onSubmit={handleSubmit} className="space-y-3">
           <label htmlFor={inputId} className="block text-xs font-medium text-strong">
-            {t('danger_zone.confirm_label', { word: CONFIRMATION_WORD })}
+            {t('danger_zone.confirm_label', { word: confirmationWord })}
           </label>
           <input
             id={inputId}
             ref={inputRef}
             type="text"
             value={confirmation}
-            onChange={(e) => setConfirmation(e.target.value)}
+            // .toUpperCase() makes the comparison robust regardless of the
+            // user's keyboard auto-capitalize setting (some third-party iOS
+            // keyboards ignore the HTML hint).
+            onChange={(e) => setConfirmation(e.target.value.toUpperCase())}
             disabled={pending}
             autoComplete="off"
             autoCapitalize="characters"
             spellCheck={false}
-            placeholder={CONFIRMATION_WORD}
+            placeholder={confirmationWord}
             className="w-full px-4 py-3 rounded-xl bg-surface border border-divider text-heading placeholder:text-muted focus:border-red-400 focus:outline-none transition-colors"
           />
 

@@ -40,6 +40,7 @@
     "bullet_data": "Your profile, sessions, and programs will be erased.",
     "bullet_subscription": "Your Premium subscription will be cancelled on Stripe.",
     "bullet_irreversible": "There is no way to recover the data afterwards.",
+    "confirmation_word": "DELETE",
     "confirm_label": "Type {{word}} to confirm",
     "confirm_action": "Delete permanently",
     "deleting": "Deleting…",
