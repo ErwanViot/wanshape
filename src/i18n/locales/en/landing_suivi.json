@@ -8,7 +8,20 @@
     "title": "Consistency is what pays.",
     "subtitle": "How many sessions this week? How many hours this month? Where are you on your program? The dashboard to see in black and white if you're sticking with it — and to course-correct before you quit.",
     "cta_primary": "Create a free account",
-    "cta_secondary": "Browse the standard programs"
+    "cta_secondary": "Browse the standard programs",
+    "visual_aria": "Preview of the tracking dashboard",
+    "mockup_title": "My dashboard",
+    "mockup_subtitle": "Preview",
+    "mockup_metric_total_label": "Sessions",
+    "mockup_metric_total_sub": "Total",
+    "mockup_metric_time_label": "Time",
+    "mockup_metric_time_sub": "Cumulative",
+    "mockup_metric_avg_label": "Average",
+    "mockup_metric_avg_sub": "Per session",
+    "mockup_metric_week_label": "This week",
+    "mockup_metric_week_sub": "Sessions",
+    "mockup_week_label": "Mon → Sun",
+    "mockup_volume_label": "Volume over the last 7 weeks"
   },
   "benefits": {
     "section_label": "What you see in tracking",

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.tsx';
+import { ScreenshotCarousel } from '../ScreenshotCarousel.tsx';
 import { FeatureLandingTemplate } from './FeatureLandingTemplate.tsx';
 
 function ZapIcon() {
@@ -98,6 +99,18 @@ export function SeancesLanding() {
           { label: primaryLabel, to: primaryTarget },
           { label: formatsLabel, to: '/formats', variant: 'secondary' },
         ],
+        visual: (
+          <div className="w-full max-w-[320px]">
+            <ScreenshotCarousel
+              images={[
+                { src: '/images/screenshot-player-hiit.webp', alt: t('hero.visual_hiit_alt') },
+                { src: '/images/screenshot-player-emom.webp', alt: t('hero.visual_emom_alt') },
+                { src: '/images/screenshot-player-reps.webp', alt: t('hero.visual_reps_alt') },
+                { src: '/images/screenshot-player-cooldown.webp', alt: t('hero.visual_cooldown_alt') },
+              ]}
+            />
+          </div>
+        ),
       }}
       benefits={{
         sectionLabel: t('benefits.section_label'),

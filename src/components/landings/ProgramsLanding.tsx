@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.tsx';
+import { ScreenshotCarousel } from '../ScreenshotCarousel.tsx';
 import { FeatureLandingTemplate } from './FeatureLandingTemplate.tsx';
 
 function SparkIcon() {
@@ -102,6 +103,19 @@ export function ProgramsLanding() {
           { label: t('hero.cta_primary'), to: primaryTarget },
           { label: t('hero.cta_secondary'), to: '/programmes', variant: 'secondary' },
         ],
+        visual: (
+          <div className="w-full max-w-[320px]">
+            <ScreenshotCarousel
+              fit="contain"
+              images={[
+                { src: '/images/screenshot-program-list.webp', alt: t('hero.visual_list_alt') },
+                { src: '/images/screenshot-program-objectif.webp', alt: t('hero.visual_goal_alt') },
+                { src: '/images/screenshot-program-profil.webp', alt: t('hero.visual_profile_alt') },
+                { src: '/images/screenshot-program-config.webp', alt: t('hero.visual_config_alt') },
+              ]}
+            />
+          </div>
+        ),
       }}
       benefits={{
         sectionLabel: t('benefits.section_label'),
