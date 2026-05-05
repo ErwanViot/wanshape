@@ -1,4 +1,4 @@
-# WanShape Design System
+# Wan2Fit Design System
 
 Guide de référence des tokens visuels et conventions UI.
 
@@ -91,7 +91,7 @@ Bouton solid brand. Pour les form submits et actions secondaires.
 Texte avec dégradé brand.
 
 ```html
-<span class="gradient-text">WanShape</span>
+<span class="gradient-text">Wan2Fit</span>
 ```
 
 ## Typographie
@@ -105,7 +105,7 @@ Texte avec dégradé brand.
 
 3 modes : `system` (défaut), `dark`, `light`.
 
-- Stockage : `localStorage` clé `wan-shape-theme`
+- Stockage : `localStorage` clé `wan2fit-theme`
 - Attribut : `data-theme="light"` sur `<html>` (absent = dark)
 - Player et EndScreen : toujours dark, pas de switch
 - Hook : `useTheme()` retourne `{ preference, theme, cycleTheme }`
