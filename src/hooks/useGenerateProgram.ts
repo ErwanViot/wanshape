@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { isSupportedLocale } from '../i18n';
+import { captureEvent } from '../lib/analytics.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { GenerateProgramResponse, ProgramOnboardingInput } from '../types/custom-program.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
@@ -58,6 +59,17 @@ export function useGenerateProgram() {
         // are compared with strict ===, so undefined ≠ null).
         queryClient.invalidateQueries({ queryKey: ['userPrograms', userId ?? null] });
         queryClient.invalidateQueries({ queryKey: ['activeProgram', userId ?? null] });
+
+        // Structured payload only — input.objectifs / experience / frequence
+        // are categorical enums, never free text. Detail / blessure_detail
+        // (free text fields) intentionally omitted.
+        captureEvent('program_created', {
+          objectifs: input.objectifs,
+          experience_duree: input.experience_duree,
+          frequence_actuelle: input.frequence_actuelle,
+          seances_par_semaine: input.seances_par_semaine,
+          duree_semaines: input.duree_semaines,
+        });
 
         return data as GenerateProgramResponse;
       } catch (e) {
