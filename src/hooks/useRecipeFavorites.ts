@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
+import { captureEvent } from '../lib/analytics.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import { computeToggledFavorites } from '../utils/recipeFavorites.ts';
@@ -93,12 +94,17 @@ export function useRecipeFavorites(): UseRecipeFavoritesResult {
   const toggle = useCallback(
     async (recipeKey: string) => {
       if (!userId) return;
+      // Capture intent BEFORE the mutation flips the optimistic state
+      // — onMutate runs synchronously inside mutateAsync, so reading
+      // favoriteKeys after await would already be inverted.
+      const wasFavorite = favoriteKeys.has(recipeKey);
+      captureEvent(wasFavorite ? 'recipe_unfavorited' : 'recipe_favorited', { recipe_key: recipeKey });
       await mutation.mutateAsync(recipeKey).catch(() => {
         // Error is surfaced via React Query state; the optimistic rollback
         // already happened in `onError`.
       });
     },
-    [userId, mutation],
+    [userId, mutation, favoriteKeys],
   );
 
   return {
