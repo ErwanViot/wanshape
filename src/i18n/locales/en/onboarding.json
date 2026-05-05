@@ -1,0 +1,26 @@
+{
+  "skip": "Skip",
+  "next": "Next",
+  "cta_signup": "Create my account",
+  "cta_explore": "Explore first",
+  "aria_carousel": "Wan2Fit walkthrough",
+  "aria_goto_slide": "Go to slide {{index}}",
+  "slides": {
+    "pitch": {
+      "title": "Your workout, ready to launch",
+      "subtitle": "No equipment, anywhere. Built to fit your day."
+    },
+    "sessions": {
+      "title": "Guided sessions and programs",
+      "subtitle": "8 formats, 25 to 45 minutes. AI programs tailored to your goal."
+    },
+    "nutrition": {
+      "title": "Simple, readable nutrition",
+      "subtitle": "Track meals and tap into 40+ ready-to-log recipes."
+    },
+    "philosophy": {
+      "title": "At your pace, no pressure",
+      "subtitle": "No streak to keep, no guilt-trip reminders. You progress your way."
+    }
+  }
+}
