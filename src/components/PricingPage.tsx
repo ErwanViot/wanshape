@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { captureEvent } from '../lib/analytics.ts';
 import { PricingCards } from './PricingCards.tsx';
 
 export function PricingPage() {
@@ -9,6 +11,10 @@ export function PricingPage() {
     title: t('pricing.page_title'),
     description: t('pricing.page_description'),
   });
+
+  useEffect(() => {
+    captureEvent('pricing_viewed');
+  }, []);
 
   return (
     <div className="max-w-5xl mx-auto px-6 md:px-10 py-10 md:py-16">

@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import i18n from '../i18n/index.ts';
+import { captureEvent } from '../lib/analytics.ts';
 import { isNative } from '../lib/capacitor.ts';
 import { openWebUpgrade } from '../lib/native-upgrade.ts';
 import { supabase } from '../lib/supabase.ts';
@@ -47,6 +48,14 @@ export function useSubscription() {
   const checkout = useCallback(
     async (priceId: string): Promise<string | null> => {
       if (!supabase || !user) return tHookError('not_signed_in');
+
+      // Track BEFORE the redirect — if the Stripe checkout opens in
+      // a new origin or the magic-link bounce navigates away, the
+      // post-call event would never fire from this page.
+      captureEvent('checkout_initiated', {
+        price_id: priceId,
+        platform: isNative() ? 'native' : 'web',
+      });
 
       // Native bypass: hand the user off to wan2fit.fr via a one-shot
       // magic link so the Stripe checkout never runs inside the app
