@@ -1,11 +1,12 @@
 /**
- * Build the master 1024×1024 icons that @capacitor/assets fans out into
+ * Build the master icons + splash that @capacitor/assets fans out into
  * every iOS / Android size.
  *
  * Source: public/icon-512.png — the official Wan2Fit logo (W in circle).
  * 512 → 1024 is a 2× upscale; sharp's lanczos3 keeps the bold strokes
  * crisp enough for SpringBoard. The PNG ships with a white background
- * which we keep — iOS rounds the corners, the colour stays brand-true.
+ * which we keep for the icon — iOS rounds the corners, the colour stays
+ * brand-true.
  *
  * Outputs (in resources/):
  *   - icon.png              1024×1024 — used by iOS as the App Icon source.
@@ -14,6 +15,10 @@
  *                           system safe-area mask).
  *   - icon-background.png   1024×1024 — solid white Android adaptive
  *                           background, matches the source PNG's bg.
+ *   - splash.png            2732×2732 — dark surface (#0f0f17) with the
+ *                           logo composed at the centre. Matches the app's
+ *                           dark theme so the boot transition is not a
+ *                           white flash.
  *
  * Run with: tsx scripts/generate-app-icon.ts
  */
@@ -28,9 +33,12 @@ const OUT = join(ROOT, 'resources');
 const SOURCE_PATH = join(ROOT, 'public/icon-512.png');
 
 const SIZE = 1024;
+const SPLASH_SIZE = 2732;
 const WHITE_BG = { r: 0xff, g: 0xff, b: 0xff, alpha: 1 };
+const DARK_SURFACE = { r: 0x0f, g: 0x0f, b: 0x17, alpha: 1 };
 const TRANSPARENT = { r: 0, g: 0, b: 0, alpha: 0 };
 const FOREGROUND_INSET = 0.58;
+const SPLASH_LOGO_SCALE = 0.22; // 22% of the splash canvas
 
 async function upscaledLogo(targetSizePx: number): Promise<Buffer> {
   return sharp(SOURCE_PATH)
@@ -93,7 +101,13 @@ async function main() {
   const iconBackground = await solidBackground(SIZE);
   writeFileSync(join(OUT, 'icon-background.png'), iconBackground);
 
-  console.log('[icon] generated 3 master files in resources/ from public/icon-512.png');
+  // Splash: 2732×2732 dark surface with the logo composed at the
+  // centre. The source icon's white square stays — visually a small
+  // tablet on dark — but the flash from boot to dark UI is gone.
+  const splash = await compose(SPLASH_SIZE, SPLASH_LOGO_SCALE, DARK_SURFACE);
+  writeFileSync(join(OUT, 'splash.png'), splash);
+
+  console.log('[icon] generated 4 master files in resources/ from public/icon-512.png');
 }
 
 main().catch((err) => {
