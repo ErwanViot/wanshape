@@ -103,13 +103,11 @@ export function OnboardingCarousel({ onComplete, onLogin, onExplore }: Props) {
         {SLIDES.map((slide) => (
           <section
             key={slide.key}
-            className="snap-center shrink-0 w-full h-full flex flex-col items-center justify-center px-6"
+            className="snap-center shrink-0 w-full h-full flex flex-col items-center justify-center gap-6 px-6"
             aria-label={t(`slides.${slide.key}.title`)}
           >
-            <div className="flex-1 flex items-end justify-center w-full max-w-sm">
-              <img src={slide.image} alt={slide.imageAlt} className="w-full max-h-[55vh] object-contain" />
-            </div>
-            <div className="flex flex-col items-center gap-3 max-w-sm text-center pb-4 pt-6">
+            <img src={slide.image} alt={slide.imageAlt} className="w-full max-w-md max-h-[55vh] object-contain" />
+            <div className="flex flex-col items-center gap-3 max-w-sm text-center">
               <h2 className="text-2xl md:text-3xl font-bold text-heading leading-tight">
                 {t(`slides.${slide.key}.title`)}
               </h2>
