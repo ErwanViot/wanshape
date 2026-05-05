@@ -2,6 +2,7 @@ import type { User } from '@supabase/supabase-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import i18n from '../i18n';
+import { captureEvent, identifyUser, resetAnalytics } from '../lib/analytics.ts';
 import { getAuthRedirectUrl } from '../lib/auth-redirects.ts';
 import { supabase } from '../lib/supabase.ts';
 import { sessionEvents } from '../lib/supabaseQuery.ts';
@@ -177,6 +178,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           emailRedirectTo: getAuthRedirectUrl('/auth/callback'),
         },
       });
+      if (!error) captureEvent('signup_completed');
       return { error: translateError(error?.message) };
     },
     [],
@@ -196,6 +198,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error: translateError(error?.message) };
   }, []);
 
+  // Identify the user in PostHog on every transition to authenticated.
+  // identifyUser is idempotent on the same id, so re-runs (token
+  // refresh, browser tab focus) are cheap. signOut() handles the
+  // reset side, so leaving the effect dependency-only on userId is
+  // correct.
+  useEffect(() => {
+    if (userId) identifyUser(userId);
+  }, [userId]);
+
   const signOut = useCallback(async () => {
     if (!supabase) return;
     try {
@@ -206,6 +217,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     setSessionExpired(false);
     queryClient.clear();
+    resetAnalytics();
   }, [queryClient]);
 
   // `loading` stays true until both the initial session is resolved AND —
