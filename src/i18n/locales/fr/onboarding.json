@@ -1,0 +1,26 @@
+{
+  "skip": "Passer",
+  "next": "Suivant",
+  "cta_signup": "Créer mon compte",
+  "cta_explore": "Découvrir d'abord",
+  "aria_carousel": "Présentation Wan2Fit",
+  "aria_goto_slide": "Aller à l'écran {{index}}",
+  "slides": {
+    "pitch": {
+      "title": "Ta séance prête à lancer",
+      "subtitle": "Sans matériel, où tu veux. Conçu pour s'adapter à ton quotidien."
+    },
+    "sessions": {
+      "title": "Séances guidées et programmes",
+      "subtitle": "8 formats variés, de 25 à 45 minutes. Programmes IA personnalisés selon ton objectif."
+    },
+    "nutrition": {
+      "title": "Nutrition simple et lisible",
+      "subtitle": "Suivi de tes repas et 40+ recettes prêtes à enregistrer en deux taps."
+    },
+    "philosophy": {
+      "title": "À ton rythme, sans pression",
+      "subtitle": "Pas de chaîne à maintenir, pas de rappel culpabilisant. Tu progresses comme tu veux."
+    }
+  }
+}

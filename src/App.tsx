@@ -3,7 +3,9 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { lazy, Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router';
 import { ErrorBoundary } from './components/ErrorBoundary.tsx';
+import { OnboardingCarousel } from './components/onboarding/OnboardingCarousel.tsx';
 import { AuthProvider } from './contexts/AuthContext.tsx';
+import { useOnboarding } from './hooks/useOnboarding.ts';
 import { hideNativeSplash } from './lib/capacitor.ts';
 import { registerDeepLinkListener } from './lib/deepLinks.ts';
 import { queryClient } from './lib/queryClient.ts';
@@ -17,6 +19,8 @@ const ReactQueryDevtools = import.meta.env.DEV
   : null;
 
 export default function App() {
+  const onboarding = useOnboarding();
+
   // SplashScreen.hide is idempotent, so the StrictMode double-effect in dev
   // is safe. No cleanup needed — the splash is already gone after first call.
   useEffect(() => {
@@ -54,6 +58,23 @@ export default function App() {
         <AuthProvider>
           <RouterProvider router={router} />
         </AuthProvider>
+        {/* Native first-launch onboarding renders ABOVE the router so the
+            router can stay mounted for the post-onboarding navigate. The
+            hook short-circuits on web (state === 'done') so the overlay
+            never mounts in the PWA. */}
+        {onboarding.state === 'pending' && (
+          <OnboardingCarousel
+            onComplete={() => {
+              void onboarding.markCompleted();
+            }}
+            onLogin={() => {
+              void router.navigate('/signup');
+            }}
+            onExplore={() => {
+              void router.navigate('/');
+            }}
+          />
+        )}
         {ReactQueryDevtools && (
           <Suspense fallback={null}>
             <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
