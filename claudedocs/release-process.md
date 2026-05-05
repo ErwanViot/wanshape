@@ -106,7 +106,7 @@ Sinon le prochain `supabase` sur ce repo touche prod par accident.
 
 - **OTA via Capgo** (patches JS) : `npm run build:native && capgo upload --channel production`. Pas de re-submission stores.
 - **Native rebuild** (changement de plugin natif, permission, bump SDK) : Xcode Archive → App Store Connect, Android Studio AAB → Play Console. Bump version requise.
-- **Versioning multi-cibles** : `scripts/sync-version.ts` (à créer) maintiendra `package.json` + `Info.plist CFBundleShortVersionString` + `android/app/build.gradle versionName` en sync. À documenter ici quand le script existe.
+- **Versioning multi-cibles** : `npm run sync:version` lit `package.json.version` et propage vers iOS (`MARKETING_VERSION` + `CURRENT_PROJECT_VERSION` dans `project.pbxproj`) et Android (`versionName` + `versionCode` dans `build.gradle`). Le code numérique = `major*10000 + minor*100 + patch` (e.g. `2.1.0` → `20100`), strictement croissant. Lancer ce script à chaque bump version, juste après l'edit de `package.json`.
 
 ## Glossaire
 

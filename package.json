@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build && npm run prerender",
     "build:native": "tsc -b && CAPACITOR_BUILD=true vite build",
     "icons": "tsx scripts/generate-app-icon.ts && capacitor-assets generate",
+    "sync:version": "tsx scripts/sync-version.ts",
     "prerender": "tsx scripts/prerender.ts",
     "lint": "biome check src/",
     "lint:fix": "biome check --fix src/",
