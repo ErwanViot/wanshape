@@ -5,14 +5,17 @@ import { useTranslation } from 'react-i18next';
 interface Slide {
   key: string;
   image: string;
-  imageAlt: string;
+  // Decorative slides keep alt="" so screen readers skip them.
+  // Informational slides (e.g. an actual product screenshot) read
+  // their alt from the i18n catalogue at `slides.<key>.image_alt`.
+  decorative: boolean;
 }
 
 const SLIDES: Slide[] = [
-  { key: 'pitch', image: '/images/illustration-onboarding.webp', imageAlt: '' },
-  { key: 'sessions', image: '/images/screenshot-player-hiit.webp', imageAlt: '' },
-  { key: 'nutrition', image: '/images/illustration-empty-state.webp', imageAlt: '' },
-  { key: 'philosophy', image: '/images/illustration-program.webp', imageAlt: '' },
+  { key: 'pitch', image: '/images/illustration-onboarding.webp', decorative: true },
+  { key: 'sessions', image: '/images/screenshot-player-hiit.webp', decorative: false },
+  { key: 'nutrition', image: '/images/illustration-empty-state.webp', decorative: true },
+  { key: 'philosophy', image: '/images/illustration-program.webp', decorative: true },
 ];
 
 interface Props {
@@ -67,15 +70,13 @@ export function OnboardingCarousel({ onComplete, onLogin, onExplore }: Props) {
     onLogin();
   };
 
+  // Skip and "Explore first" share the same destination by design:
+  // both flag onboarding done and drop the user on the public Home.
   const handleExplore = () => {
     onComplete();
     onExplore();
   };
-
-  const handleSkip = () => {
-    onComplete();
-    onExplore();
-  };
+  const handleSkip = handleExplore;
 
   const isLastSlide = activeIndex === SLIDES.length - 1;
 
@@ -106,7 +107,11 @@ export function OnboardingCarousel({ onComplete, onLogin, onExplore }: Props) {
             className="snap-center shrink-0 w-full h-full flex flex-col items-center justify-center gap-6 px-6"
             aria-label={t(`slides.${slide.key}.title`)}
           >
-            <img src={slide.image} alt={slide.imageAlt} className="w-full max-w-md max-h-[55vh] object-contain" />
+            <img
+              src={slide.image}
+              alt={slide.decorative ? '' : t(`slides.${slide.key}.image_alt`)}
+              className="w-full max-w-md max-h-[55vh] object-contain"
+            />
             <div className="flex flex-col items-center gap-3 max-w-sm text-center">
               <h2 className="text-2xl md:text-3xl font-bold text-heading leading-tight">
                 {t(`slides.${slide.key}.title`)}
@@ -117,8 +122,10 @@ export function OnboardingCarousel({ onComplete, onLogin, onExplore }: Props) {
         ))}
       </section>
 
-      {/* Dots */}
-      <div className="flex justify-center gap-2 py-4">
+      {/* Dots — visual indicator stays at h-2 (8 px) but the
+          touch target wrapper meets the 44pt iOS / 48dp Android
+          minimum hit-zone (relative + py-3 px-1 with a min-w). */}
+      <div className="flex justify-center gap-1 py-2">
         {SLIDES.map((slide, idx) => (
           <button
             key={slide.key}
@@ -126,10 +133,14 @@ export function OnboardingCarousel({ onComplete, onLogin, onExplore }: Props) {
             onClick={() => scrollTo(idx)}
             aria-label={t('aria_goto_slide', { index: idx + 1 })}
             aria-current={idx === activeIndex ? 'true' : undefined}
-            className={`h-2 rounded-full transition-all ${
-              idx === activeIndex ? 'w-8 bg-brand' : 'w-2 bg-divider-strong'
-            }`}
-          />
+            className="relative inline-flex items-center justify-center min-h-[44px] px-2 py-3 cursor-pointer"
+          >
+            <span
+              className={`block h-2 rounded-full transition-all ${
+                idx === activeIndex ? 'w-8 bg-brand' : 'w-2 bg-divider-strong'
+              }`}
+            />
+          </button>
         ))}
       </div>
 

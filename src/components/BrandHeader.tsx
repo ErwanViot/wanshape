@@ -65,7 +65,7 @@ export function BrandHeader() {
   return (
     <header className="pl-safe pr-safe px-4 sm:px-6 md:px-10 lg:px-14 py-4 border-b border-divider">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+        <Link to="/" aria-label={`Wan2Fit — ${t('home')}`} className="flex items-center gap-2.5 shrink-0">
           <img src="/logo-wan2fit.png" alt="" className="w-7 h-7 md:w-8 md:h-8 shrink-0" />
           <span className="font-display text-lg font-black tracking-tight gradient-text">Wan2Fit</span>
         </Link>

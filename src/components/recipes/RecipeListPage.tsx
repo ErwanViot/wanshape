@@ -116,24 +116,44 @@ export function RecipeListPage() {
 
         {error && <p className="text-sm text-red-400">{error}</p>}
 
-        {loading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={`recipe-skel-${i}`} className="skeleton h-44 rounded-2xl" />
-            ))}
-          </div>
-        ) : recipes.length === 0 ? (
-          <p className="text-center text-sm text-muted py-12">{t('list.empty')}</p>
-        ) : (
-          <>
-            <p className="text-xs text-muted">{t('list.count', { count: recipes.length })}</p>
+        {/* aria-live so screen readers announce result count or
+            empty state when filters change. polite is enough — the
+            user has just interacted with a filter, no need to barge in. */}
+        <div aria-live="polite" aria-atomic="true">
+          {loading ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {recipes.map((r) => (
-                <RecipeCard key={`${r.locale}-${r.recipe_key}`} recipe={r} />
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={`recipe-skel-${i}`} className="skeleton h-44 rounded-2xl" />
               ))}
             </div>
-          </>
-        )}
+          ) : recipes.length === 0 ? (
+            <div className="flex flex-col items-center text-center py-12 gap-4">
+              <img
+                src="/images/illustration-empty-state.webp"
+                alt=""
+                className="w-32 h-auto opacity-80"
+                loading="lazy"
+              />
+              <p className="text-sm text-muted">{t('list.empty')}</p>
+              <button
+                type="button"
+                onClick={reset}
+                className="text-sm text-link underline cursor-pointer min-h-[44px] px-4"
+              >
+                {t('list.empty_reset')}
+              </button>
+            </div>
+          ) : (
+            <>
+              <p className="text-xs text-muted">{t('list.count', { count: recipes.length })}</p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {recipes.map((r) => (
+                  <RecipeCard key={`${r.locale}-${r.recipe_key}`} recipe={r} />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

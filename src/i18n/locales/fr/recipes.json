@@ -5,6 +5,7 @@
     "heading": "Recettes",
     "subtitle": "49 recettes pensées pour la performance, la récupération et le quotidien.",
     "empty": "Aucune recette ne correspond aux filtres.",
+    "empty_reset": "Réinitialiser les filtres",
     "count_one": "{{count}} recette",
     "count_other": "{{count}} recettes"
   },

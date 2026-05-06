@@ -27,18 +27,14 @@ interface QueuedEvent {
   properties?: CaptureProperties;
 }
 
+import { isNative } from './capacitor.ts';
+import { scrubPathIds } from './scrub.ts';
+
 type PosthogModule = typeof import('posthog-js');
 type PosthogClient = PosthogModule['default'];
 
 let client: PosthogClient | null = null;
 const queue: QueuedEvent[] = [];
-
-function scrubPathIds(value: string): string {
-  return value
-    .replace(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi, ':uuid')
-    .replace(/\/(?:19|20)\d{6}(?=\/|$|\?|#)/g, '/:date')
-    .replace(/\/product\/\d{8,14}(?=\/|$|\?|#)/g, '/product/:barcode');
-}
 
 function sanitizeProperties(props: Record<string, unknown>): Record<string, unknown> {
   const next: Record<string, unknown> = { ...props };
@@ -102,12 +98,11 @@ export function initAnalyticsAsync(): void {
         // does NOT exist in our slugs but the principle holds for
         // future-proofing) never reaches PostHog.
         sanitize_properties: sanitizeProperties,
-        // Prefer memoryStorage on native — Capacitor WebView purges
-        // localStorage and we don't want PostHog to lose its anonymous
-        // id every cold boot. The runtime auto-detects native via UA;
-        // setting persistence: 'memory' explicitly when isNative()
-        // would be cleaner but adds a sync await, so we leave the
-        // default (cookie + localStorage with fallback) for now.
+        // Capacitor WebView's localStorage can be purged by iOS under
+        // disk pressure, so on native we keep the anonymous_id in
+        // memory only. Cookie + localStorage on web (default).
+        // isNative() is a sync Capacitor.isNativePlatform() check.
+        persistence: isNative() ? 'memory' : 'localStorage+cookie',
         loaded(loaded) {
           // Do not track the test/QA email until they identify
           // themselves and PostHog issues a real distinct_id.
