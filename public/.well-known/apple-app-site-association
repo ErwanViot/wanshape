@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["TODO_APPLE_TEAM_ID.fr.wansoft.wan2fit"],
+        "appIDs": ["DL5537MH8T.fr.wansoft.wan2fit"],
         "components": [
           { "/": "/reset-password" },
           { "/": "/auth/callback*" },
