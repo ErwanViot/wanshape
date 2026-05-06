@@ -1,0 +1,1620 @@
+{
+  "cardio-express": {
+    "1": {
+      "title": "HIIT Brûle-Graisses",
+      "description": "Intervalles courts à haute intensité pour un maximum de calories brûlées",
+      "focus": ["cardio", "HIIT"],
+      "blocks": [
+        {
+          "name": "Échauffement express",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rythme soutenu, bras bien tendus au-dessus de la tête" },
+            { "name": "High knees", "instructions": "Monter les genoux au-dessus des hanches, rythme progressif" },
+            {
+              "name": "Arm circles dynamiques",
+              "instructions": "Grands cercles rapides des bras, en avant puis en arrière"
+            }
+          ]
+        },
+        {
+          "name": "HIIT Brûle-Graisses",
+          "exercises": [
+            { "name": "Burpees", "instructions": "Descendre en planche, pompe, remonter et sauter" },
+            { "name": "Mountain climbers", "instructions": "En planche, alterner genoux vers la poitrine rapidement" },
+            { "name": "Squats sautés", "instructions": "Squat profond, exploser vers le haut, amortir en douceur" },
+            {
+              "name": "Planche avec toucher épaule",
+              "instructions": "En planche haute, toucher l'épaule opposée en alternance"
+            }
+          ]
+        },
+        {
+          "name": "Récupération",
+          "exercises": [
+            { "name": "Marche sur place", "instructions": "Ralentir le rythme cardiaque progressivement" },
+            {
+              "name": "Étirement quadriceps",
+              "instructions": "Debout, attraper le pied derrière soi, garder le genou vers le bas"
+            },
+            {
+              "name": "Respiration profonde",
+              "instructions": "Inspirer 4s par le nez, expirer 6s par la bouche — 4 cycles"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "title": "Tabata Explosif",
+      "description": "Format Tabata classique 20/10 pour exploser le cardio en un minimum de temps",
+      "focus": ["cardio", "Tabata"],
+      "blocks": [
+        {
+          "name": "Échauffement rapide",
+          "exercises": [
+            {
+              "name": "Trottiner sur place",
+              "instructions": "Course légère sur place, monter le rythme progressivement"
+            },
+            { "name": "Squats dynamiques", "instructions": "Squats rapides, remonter sur la pointe des pieds" },
+            { "name": "Rotation du buste", "instructions": "Pieds fixes, tourner le haut du corps dynamiquement" }
+          ]
+        },
+        {
+          "name": "Tabata Full-Body",
+          "exercises": [
+            { "name": "Burpees sans saut", "instructions": "Descendre au sol, remonter debout le plus vite possible" },
+            {
+              "name": "Speed skaters",
+              "instructions": "Sauts latéraux, toucher le sol avec la main opposée au pied d'appui"
+            },
+            { "name": "High knees sprint", "instructions": "Sprint sur place, genoux le plus haut possible" },
+            { "name": "Planche saut écart", "instructions": "En planche, sauter pieds écartés puis serrés" }
+          ]
+        },
+        {
+          "name": "Étirements express",
+          "exercises": [
+            { "name": "Marche lente", "instructions": "Baisser le rythme cardiaque en marchant doucement" },
+            { "name": "Étirement mollets", "instructions": "Un pied en avant, pousser le talon arrière au sol" },
+            { "name": "Étirement ischio-jambiers", "instructions": "Jambe tendue devant, pencher le buste" }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "title": "Circuit Cardio Intense",
+      "description": "Enchaînement d'exercices variés en circuit pour travailler le cardio et l'endurance",
+      "focus": ["cardio", "circuit"],
+      "blocks": [
+        {
+          "name": "Échauffement dynamique",
+          "exercises": [
+            { "name": "Pas chassés", "instructions": "Pas latéraux dynamiques, rester bas sur les appuis" },
+            { "name": "Montées de genoux avec bras", "instructions": "Lever les genoux en poussant les bras au ciel" },
+            { "name": "Fentes avant dynamiques", "instructions": "Grandes fentes en avançant, bras en opposition" }
+          ]
+        },
+        {
+          "name": "Circuit Haute Énergie",
+          "exercises": [
+            { "name": "Burpees complets", "instructions": "Planche, pompe, saut explosif, enchaîner rapidement" },
+            {
+              "name": "Mountain climbers sprint",
+              "instructions": "Position planche, genoux vers la poitrine le plus vite possible"
+            },
+            { "name": "Squats sautés", "instructions": "Descente contrôlée, saut explosif, réception pieds à plat" },
+            {
+              "name": "Jumping lunges",
+              "instructions": "Fentes sautées en alternance, rester gainé dans le mouvement"
+            },
+            {
+              "name": "Planche commando",
+              "instructions": "Alterner planche coudes et planche mains sans rotation des hanches"
+            }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche sur place", "instructions": "Décélérer progressivement" },
+            {
+              "name": "Étirement fléchisseurs de hanche",
+              "instructions": "Genou arrière au sol, hanche poussée en avant"
+            },
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, bloquer 7s, expirer 8s — 3 cycles" }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "title": "HIIT Accélération",
+      "description": "Plus de rounds, moins de repos — on monte en intensité",
+      "focus": ["cardio", "HIIT"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            {
+              "name": "Jumping jacks progressifs",
+              "instructions": "Commencer lentement, accélérer sur les dernières secondes"
+            },
+            { "name": "High knees", "instructions": "Genoux hauts, bras en opposition, rythme soutenu" },
+            { "name": "World's greatest stretch", "instructions": "Fente, main au sol, rotation du buste bras levé" }
+          ]
+        },
+        {
+          "name": "HIIT Accélération",
+          "exercises": [
+            { "name": "Burpees avec pompe", "instructions": "Descendre au sol, pompe complète, remonter et sauter" },
+            { "name": "Jump squats", "instructions": "Squat profond, sauter le plus haut possible" },
+            {
+              "name": "Mountain climbers croisés",
+              "instructions": "Genou vers le coude opposé en planche, rythme soutenu"
+            },
+            { "name": "Fentes sautées", "instructions": "Alterner les fentes en sautant, genou arrière frôle le sol" },
+            {
+              "name": "Plank shoulder taps",
+              "instructions": "En planche, toucher épaule opposée sans tourner les hanches"
+            }
+          ]
+        },
+        {
+          "name": "Récupération",
+          "exercises": [
+            { "name": "Marche lente", "instructions": "Décélérer complètement, longues respirations" },
+            { "name": "Étirement quadriceps", "instructions": "Attraper le pied, tirer le talon vers les fessiers" },
+            { "name": "Étirement pectoraux", "instructions": "Bras tendu contre un mur, tourner le buste" }
+          ]
+        }
+      ]
+    },
+    "5": {
+      "title": "Tabata Double Impact",
+      "description": "Deux blocs Tabata ciblés : jambes puis haut du corps",
+      "focus": ["cardio", "Tabata"],
+      "blocks": [
+        {
+          "name": "Échauffement rapide",
+          "exercises": [
+            { "name": "Squats dynamiques", "instructions": "Squats rapides, monter sur la pointe des pieds" },
+            { "name": "Pompes inclinées", "instructions": "Mains sur une chaise, pompes rapides" },
+            { "name": "Jumping jacks", "instructions": "Rythme élevé pour monter le cardio" }
+          ]
+        },
+        {
+          "name": "Tabata Legs",
+          "exercises": [
+            { "name": "Jump squats", "instructions": "Squat explosif, sauter le plus haut possible, amortir" },
+            {
+              "name": "Speed skaters profonds",
+              "instructions": "Grands sauts latéraux, descendre bas, toucher le sol"
+            },
+            { "name": "Fentes sautées", "instructions": "Alterner les fentes en explosant vers le haut" },
+            { "name": "Squat pulses", "instructions": "Rester en bas du squat, faire de petites impulsions rapides" }
+          ]
+        },
+        {
+          "name": "Tabata Upper Body",
+          "exercises": [
+            { "name": "Pompes rapides", "instructions": "Pompes à rythme maximal, descendre la poitrine au sol" },
+            {
+              "name": "Planche commando rapide",
+              "instructions": "Monter et descendre des coudes aux mains le plus vite possible"
+            },
+            { "name": "Mountain climbers sprint", "instructions": "Sprint des genoux vers la poitrine en planche" },
+            { "name": "Pike push-ups", "instructions": "Position V inversé, pompes pour les épaules, rythme rapide" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Marche sur place", "instructions": "Ralentir progressivement" },
+            { "name": "Étirement ischio-jambiers", "instructions": "Jambe tendue devant, pencher le buste" },
+            { "name": "Étirement épaules", "instructions": "Bras devant la poitrine, tirer avec l'autre main" }
+          ]
+        }
+      ]
+    },
+    "6": {
+      "title": "Circuit Endurance-Puissance",
+      "description": "Circuit plus long avec exercices composés pour l'endurance",
+      "focus": ["cardio", "circuit"],
+      "blocks": [
+        {
+          "name": "Échauffement dynamique",
+          "exercises": [
+            { "name": "Bear crawl", "instructions": "Avancer et reculer en quadrupédie, genoux décollés" },
+            { "name": "Fentes avant dynamiques", "instructions": "Grandes fentes en avançant" },
+            { "name": "Jumping jacks", "instructions": "Rythme élevé" }
+          ]
+        },
+        {
+          "name": "Circuit Puissance",
+          "exercises": [
+            { "name": "Burpees complets", "instructions": "Planche, pompe, saut explosif" },
+            { "name": "Squat pulse jumps", "instructions": "3 pulses en bas du squat puis saut explosif" },
+            { "name": "Mountain climbers sprint", "instructions": "Rythme maximal en planche" },
+            { "name": "Tuck jumps", "instructions": "Sauter et ramener les genoux à la poitrine" },
+            {
+              "name": "Planche avec toucher genoux",
+              "instructions": "En planche, toucher les genoux alternativement avec les mains"
+            }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche lente", "instructions": "Décélérer complètement" },
+            { "name": "Étirement mollets profond", "instructions": "Pied arrière bien à plat, pousser le talon" },
+            { "name": "Child's pose", "instructions": "Genoux au sol, bras tendus devant" }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "title": "HIIT Puissance Maximale",
+      "description": "Rounds longs, repos court — exercices avancés",
+      "focus": ["cardio", "HIIT"],
+      "blocks": [
+        {
+          "name": "Échauffement intense",
+          "exercises": [
+            { "name": "Burpees lents", "instructions": "5 burpees contrôlés pour échauffer" },
+            { "name": "Fentes sautées légères", "instructions": "Petits sauts entre les fentes" },
+            { "name": "Bear crawl", "instructions": "Avancer en quadrupédie genoux décollés" }
+          ]
+        },
+        {
+          "name": "HIIT Puissance",
+          "exercises": [
+            {
+              "name": "Burpees avec tuck jump",
+              "instructions": "Burpee complet avec tuck jump au lieu du saut classique"
+            },
+            {
+              "name": "Squats sautés groupés",
+              "instructions": "Squat profond, sauter en ramenant les genoux à la poitrine"
+            },
+            {
+              "name": "Mountain climbers sprinter",
+              "instructions": "En planche, sprinter les genoux le plus vite possible"
+            },
+            { "name": "Jumping lunges explosifs", "instructions": "Fentes sautées avec maximum de hauteur" },
+            { "name": "Sprawls", "instructions": "Se jeter au sol à plat ventre, remonter en explosant" }
+          ]
+        },
+        {
+          "name": "Récupération",
+          "exercises": [
+            { "name": "Marche très lente", "instructions": "Longues respirations nasales" },
+            { "name": "Étirement adducteurs", "instructions": "Jambes écartées, descendre doucement" },
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, retenir 7s, expirer 8s" }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "title": "Tabata Infernal",
+      "description": "3 sets Tabata sans répit",
+      "focus": ["cardio", "Tabata"],
+      "blocks": [
+        {
+          "name": "Échauffement express",
+          "exercises": [
+            { "name": "Sprint sur place", "instructions": "Courir sur place à 70% d'intensité" },
+            { "name": "Scorpion stretch", "instructions": "Sur le ventre, lever un pied vers la main opposée" },
+            { "name": "Squat jumps légers", "instructions": "Petits sauts depuis le squat" }
+          ]
+        },
+        {
+          "name": "Tabata Explosif Set A",
+          "exercises": [
+            { "name": "Burpees avec tuck jump", "instructions": "Burpee complet terminé par un saut genoux poitrine" },
+            { "name": "Speed skaters", "instructions": "Sauts latéraux rapides, toucher le sol" },
+            { "name": "Squat 180° sautés", "instructions": "Squat, sauter avec demi-tour complet" },
+            { "name": "Pompes plyo", "instructions": "Pompe explosive, mains décollent du sol" }
+          ]
+        },
+        {
+          "name": "Tabata Explosif Set B",
+          "exercises": [
+            { "name": "High knees sprint", "instructions": "Genoux le plus haut possible, vitesse maximale" },
+            { "name": "Plank up-downs", "instructions": "Passer des coudes aux mains sans balancer" },
+            { "name": "Jumping lunges rapides", "instructions": "Fentes sautées le plus vite possible" },
+            { "name": "Sprawl to jump", "instructions": "Se jeter au sol, remonter et sauter immédiatement" }
+          ]
+        },
+        {
+          "name": "Tabata Finisher",
+          "exercises": [
+            { "name": "Burpees all-out", "instructions": "Burpees à vitesse maximale" },
+            { "name": "Tuck jumps", "instructions": "Sauts groupés, genoux à la poitrine" },
+            { "name": "Mountain climbers sprint", "instructions": "Le plus vite possible" },
+            { "name": "Star jumps", "instructions": "Sauter en étoile, bras et jambes écartés" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Marche sur place", "instructions": "Baisser le rythme cardiaque" },
+            { "name": "Étirement mollets profond", "instructions": "Pied arrière bien à plat" },
+            { "name": "Pigeon stretch", "instructions": "Jambe avant pliée, descendre le buste" }
+          ]
+        }
+      ]
+    },
+    "9": {
+      "title": "Circuit Haute Intensité",
+      "description": "Exercices avancés, repos minimal",
+      "focus": ["cardio", "circuit"],
+      "blocks": [
+        {
+          "name": "Échauffement dynamique",
+          "exercises": [
+            { "name": "Inchworms avec pompe", "instructions": "Marcher les mains en planche, pompe, revenir" },
+            { "name": "Carioca", "instructions": "Déplacement latéral croisé, pieds rapides" },
+            { "name": "Skipping hauts", "instructions": "Monter les genoux très hauts en sautillant" }
+          ]
+        },
+        {
+          "name": "Circuit Level Up",
+          "exercises": [
+            { "name": "Burpees avec tuck jump", "instructions": "Burpee complet avec saut genoux poitrine" },
+            { "name": "Spider-Man mountain climbers", "instructions": "Genou vers le coude du même côté" },
+            { "name": "Squat sauté étoile", "instructions": "Squat profond, exploser en star jump" },
+            { "name": "Pompes commando", "instructions": "Alterner planche coudes et planche mains" },
+            { "name": "Broad jump burpees", "instructions": "Saut en longueur, burpee à la réception" },
+            { "name": "High knees sprint", "instructions": "Sprint genoux hauts, vitesse absolue" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche lente", "instructions": "Ralentir, secouer bras et jambes" },
+            { "name": "Étirement fessiers assis", "instructions": "Croiser cheville sur genou, tirer" },
+            { "name": "Savasana respirée", "instructions": "Allongé sur le dos, respirer 5 cycles" }
+          ]
+        }
+      ]
+    },
+    "10": {
+      "title": "HIIT Ultime",
+      "description": "Le sommet du programme — travail long, repos court",
+      "focus": ["cardio", "HIIT"],
+      "blocks": [
+        {
+          "name": "Échauffement intense",
+          "exercises": [
+            { "name": "Burpees tempo", "instructions": "Burpees complets à tempo modéré" },
+            { "name": "High knees avec bras", "instructions": "Genoux hauts, bras au ciel" },
+            { "name": "Fentes marchées avec twist", "instructions": "Fente en avançant, tourner le buste" }
+          ]
+        },
+        {
+          "name": "HIIT 45/15",
+          "exercises": [
+            { "name": "Devil press", "instructions": "Burpee, se relever et lever les bras en sautant" },
+            { "name": "Squat jump tuck", "instructions": "Squat profond, sauter en groupé genoux poitrine" },
+            { "name": "Mountain climbers sprint", "instructions": "Sprinter les genoux à vitesse maximale" },
+            { "name": "Jumping lunges alternés", "instructions": "Fentes sautées profondes, explosivité pure" },
+            { "name": "Sprawl to broad jump", "instructions": "Sprawl au sol, remonter et saut en longueur" },
+            { "name": "Plank jacks to push-up", "instructions": "Deux plank jacks puis une pompe explosive" }
+          ]
+        },
+        {
+          "name": "Récupération finale",
+          "exercises": [
+            { "name": "Marche très lente", "instructions": "Réduire le rythme cardiaque doucement" },
+            { "name": "Étirement quadriceps profond", "instructions": "Attraper le pied, pousser la hanche en avant" },
+            { "name": "Étirement dos", "instructions": "Assis, jambes tendues, pencher le buste" },
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, retenir 7s, expirer 8s" }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "title": "Tabata All-Out",
+      "description": "Trois sets Tabata avec les exercices les plus exigeants",
+      "focus": ["cardio", "Tabata"],
+      "blocks": [
+        {
+          "name": "Échauffement complet",
+          "exercises": [
+            { "name": "Jumping jacks progressifs", "instructions": "Commencer lentement, finir à vitesse maximale" },
+            { "name": "World's greatest stretch", "instructions": "Fente, main au sol, rotation du buste" },
+            { "name": "Squat jumps crescendo", "instructions": "Sauter de plus en plus haut à chaque rep" }
+          ]
+        },
+        {
+          "name": "Tabata Devastation Set 1",
+          "exercises": [
+            { "name": "Burpee broad jumps", "instructions": "Burpee puis saut en longueur, se retourner" },
+            { "name": "Squat jump 180° continus", "instructions": "Squat sauté avec demi-tour, ne jamais s'arrêter" },
+            { "name": "Sprawls explosifs", "instructions": "Se jeter au sol, remonter en explosant" },
+            { "name": "Star jumps", "instructions": "Sauter en étoile maximale" }
+          ]
+        },
+        {
+          "name": "Tabata Devastation Set 2",
+          "exercises": [
+            { "name": "Burpees avec tuck jump", "instructions": "Burpee terminé par un tuck jump" },
+            { "name": "Pompes plyo larges", "instructions": "Pompes explosives, mains décollent et se posent large" },
+            { "name": "Speed skaters profonds", "instructions": "Grands sauts latéraux, descendre très bas" },
+            { "name": "High knees all-out", "instructions": "Sprint sur place, 100% d'effort" }
+          ]
+        },
+        {
+          "name": "Étirements de récupération",
+          "exercises": [
+            { "name": "Marche de récupération", "instructions": "Marcher très lentement, respirer par le nez" },
+            { "name": "Étirement ischio-jambiers", "instructions": "Talon sur un support, pencher le buste" },
+            { "name": "Cobra stretch", "instructions": "Sur le ventre, pousser les mains pour ouvrir la poitrine" },
+            { "name": "Respiration complète", "instructions": "Inspirer ventre, côtes, poitrine — expirer lentement" }
+          ]
+        }
+      ]
+    },
+    "12": {
+      "title": "Circuit Final Boss",
+      "description": "Le circuit le plus difficile du programme — repos minimal, tours maximum",
+      "focus": ["cardio", "circuit"],
+      "blocks": [
+        {
+          "name": "Activation maximale",
+          "exercises": [
+            { "name": "Burpees contrôlés", "instructions": "Burpees complets à rythme modéré" },
+            { "name": "Lateral shuffles", "instructions": "Déplacements latéraux rapides, toucher le sol" },
+            { "name": "A-skips", "instructions": "Sauts genoux hauts en avançant, bras en opposition" }
+          ]
+        },
+        {
+          "name": "Circuit Final",
+          "exercises": [
+            {
+              "name": "Burpee tuck jump broad jump",
+              "instructions": "Burpee, tuck jump, saut en longueur — le trio complet"
+            },
+            { "name": "Mountain climbers sprint", "instructions": "Vitesse absolue, hanches basses" },
+            { "name": "Squat sauté 360°", "instructions": "Squat profond, sauter en faisant un tour complet" },
+            { "name": "Pompes superman", "instructions": "Pompe explosive, lever bras et jambes en l'air" },
+            { "name": "High knees à tuck jumps", "instructions": "4 high knees rapides puis 1 tuck jump" },
+            { "name": "Sprawl avec rotation", "instructions": "Sprawl au sol, remonter en tournant 180°" }
+          ]
+        },
+        {
+          "name": "Récupération finale du programme",
+          "exercises": [
+            { "name": "Marche très lente", "instructions": "Laisser le rythme cardiaque descendre" },
+            { "name": "Étirement complet jambes", "instructions": "Fente basse, alterner" },
+            { "name": "Pigeon stretch", "instructions": "Jambe avant pliée, relâcher les hanches" },
+            {
+              "name": "Savasana finale",
+              "instructions": "Allongé, bras écartés, paumes vers le ciel — programme terminé"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "debutant-4-semaines": {
+    "1": {
+      "title": "Découverte Full-Body",
+      "description": "Premiers mouvements fondamentaux : squats, pompes adaptées et gainage",
+      "focus": ["full-body", "mobilité"],
+      "blocks": [
+        {
+          "name": "Échauffement doux",
+          "exercises": [
+            {
+              "name": "Rotations articulaires",
+              "instructions": "Cou, épaules, poignets, hanches, chevilles — lents et contrôlés"
+            },
+            { "name": "Marche sur place", "instructions": "Lever les genoux progressivement, balancer les bras" },
+            { "name": "Cercles de hanches", "instructions": "Mains sur les hanches, grands cercles dans les deux sens" }
+          ]
+        },
+        {
+          "name": "Fondamentaux",
+          "exercises": [
+            {
+              "name": "Squats assistés",
+              "instructions": "Pieds largeur épaules, descendre comme pour s'asseoir, mains devant pour l'équilibre"
+            },
+            {
+              "name": "Pompes sur genoux",
+              "instructions": "Mains largeur épaules, genoux au sol, descendre la poitrine vers le sol"
+            },
+            {
+              "name": "Planche sur genoux",
+              "instructions": "Avant-bras au sol, genoux au sol, corps aligné, tenir 20 secondes"
+            },
+            {
+              "name": "Pont fessier",
+              "instructions": "Allongé sur le dos, pieds au sol, soulever les hanches en serrant les fessiers"
+            }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Étirement quadriceps", "instructions": "Debout, attraper le pied derrière soi, chaque jambe" },
+            {
+              "name": "Étirement ischio-jambiers",
+              "instructions": "Assis, jambes tendues, pencher le buste vers l'avant"
+            },
+            { "name": "Étirement pectoraux", "instructions": "Bras contre un mur, tourner le buste doucement" }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "title": "Cardio Doux",
+      "description": "Circuit léger pour activer le cardio sans surcharger les articulations",
+      "focus": ["cardio", "endurance"],
+      "blocks": [
+        {
+          "name": "Échauffement dynamique",
+          "exercises": [
+            {
+              "name": "Marche rapide sur place",
+              "instructions": "Accélérer progressivement, grands mouvements de bras"
+            },
+            {
+              "name": "Talons-fesses légers",
+              "instructions": "Sur place, ramener les talons vers les fessiers en douceur"
+            },
+            { "name": "Rotations du buste", "instructions": "Pieds fixes, tourner le haut du corps de gauche à droite" }
+          ]
+        },
+        {
+          "name": "Circuit Cardio Débutant",
+          "exercises": [
+            { "name": "Pas chassés", "instructions": "Pas latéraux dynamiques, rester bas sur les appuis" },
+            { "name": "Montées de genoux", "instructions": "Lever les genoux à hauteur des hanches, rythme modéré" },
+            { "name": "Squats sumo", "instructions": "Pieds écartés, pointes vers l'extérieur, descendre lentement" },
+            { "name": "Marche de l'ours", "instructions": "À quatre pattes, genoux décollés du sol, avancer/reculer" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche lente sur place", "instructions": "Ralentir progressivement, respirer profondément" },
+            { "name": "Étirement mollets", "instructions": "Un pied en avant, pousser le talon arrière au sol" },
+            { "name": "Respiration profonde", "instructions": "Inspirer 4s, bloquer 4s, expirer 4s — 3 cycles" }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "title": "Renforcement & Gainage",
+      "description": "Focus core et posture avec des mouvements contrôlés et accessibles",
+      "focus": ["core", "posture"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Cat-cow", "instructions": "À quatre pattes, alterner dos rond et dos creux en respirant" },
+            {
+              "name": "Rotation thoracique",
+              "instructions": "À quatre pattes, une main derrière la tête, ouvrir le coude vers le ciel"
+            },
+            {
+              "name": "Balancement des bras",
+              "instructions": "Debout, laisser les bras se balancer de gauche à droite"
+            }
+          ]
+        },
+        {
+          "name": "Core & Posture",
+          "exercises": [
+            {
+              "name": "Dead bug",
+              "instructions": "Allongé, bras tendus vers le plafond, étendre une jambe et le bras opposé"
+            },
+            {
+              "name": "Superman",
+              "instructions": "Allongé sur le ventre, lever bras et jambes simultanément, tenir 2s"
+            },
+            {
+              "name": "Gainage latéral sur genoux",
+              "instructions": "Sur le coude et le genou, corps aligné, tenir 15 secondes chaque côté"
+            },
+            { "name": "Fentes arrière", "instructions": "Un grand pas en arrière, genou frôle le sol, remonter" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Child's pose", "instructions": "Genoux au sol, bras tendus devant, relâcher le dos" },
+            {
+              "name": "Torsion allongée",
+              "instructions": "Allongé, ramener un genou vers la poitrine et le laisser tomber de l'autre côté"
+            },
+            { "name": "Étirement psoas", "instructions": "Fente basse, pousser la hanche du genou au sol vers l'avant" }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "title": "Full-Body Progression",
+      "description": "On reprend les fondamentaux avec plus de volume et moins de repos",
+      "focus": ["full-body", "renforcement"],
+      "blocks": [
+        {
+          "name": "Échauffement actif",
+          "exercises": [
+            {
+              "name": "Jumping jacks légers",
+              "instructions": "Sauts modérés, bras au-dessus de la tête, rythme confortable"
+            },
+            {
+              "name": "Cercles de bras",
+              "instructions": "Petits cercles puis grands cercles, en avant puis en arrière"
+            },
+            {
+              "name": "Squats de mobilité",
+              "instructions": "Descendre doucement en squat profond, coudes à l'intérieur des genoux pour ouvrir les hanches"
+            }
+          ]
+        },
+        {
+          "name": "Renforcement global",
+          "exercises": [
+            {
+              "name": "Squats",
+              "instructions": "Pieds largeur épaules, descente contrôlée, pousser à travers les talons"
+            },
+            {
+              "name": "Pompes sur genoux",
+              "instructions": "Descendre la poitrine jusqu'au sol, remonter en expirant, garder les abdos serrés"
+            },
+            {
+              "name": "Fentes alternées",
+              "instructions": "Grand pas en avant, genou arrière frôle le sol, alterner les jambes"
+            },
+            {
+              "name": "Planche sur genoux",
+              "instructions": "Avant-bras au sol, genoux au sol, serrer les abdos, tenir 25 secondes"
+            },
+            {
+              "name": "Pont fessier",
+              "instructions": "Soulever les hanches, serrer les fessiers en haut 2 secondes, redescendre"
+            }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            {
+              "name": "Étirement quadriceps debout",
+              "instructions": "Attraper le pied, tirer le talon vers les fessiers, garder le genou pointé vers le sol"
+            },
+            {
+              "name": "Étirement fléchisseurs de hanche",
+              "instructions": "Genou au sol, avancer le bassin, sentir l'étirement devant la hanche"
+            },
+            {
+              "name": "Étirement dos",
+              "instructions": "Debout, croiser les mains devant soi, arrondir le dos en poussant les mains loin"
+            }
+          ]
+        }
+      ]
+    },
+    "5": {
+      "title": "Cardio Progressif",
+      "description": "Circuits plus longs avec des mouvements dynamiques",
+      "focus": ["cardio", "endurance"],
+      "blocks": [
+        {
+          "name": "Échauffement cardio",
+          "exercises": [
+            { "name": "Montées de genoux modérées", "instructions": "Lever les genoux au-dessus des hanches" },
+            { "name": "Pas chassés", "instructions": "Pas latéraux rapides" },
+            { "name": "Rotations de hanches dynamiques", "instructions": "Lever un genou, faire un cercle" }
+          ]
+        },
+        {
+          "name": "Circuit Endurance",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Sauts avec bras au-dessus de la tête" },
+            { "name": "Squats avec impulsion", "instructions": "Squat classique, se mettre sur la pointe des pieds" },
+            {
+              "name": "Mountain climbers lents",
+              "instructions": "Position de pompe, ramener un genou vers la poitrine"
+            },
+            { "name": "Pas chassés + toucher sol", "instructions": "Trois pas latéraux, toucher le sol" },
+            { "name": "Fentes sautées légères", "instructions": "Petits sauts pour alterner" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche sur place", "instructions": "Ralentir progressivement" },
+            { "name": "Étirement mollets au mur", "instructions": "Mains au mur, un pied en arrière" },
+            { "name": "Étirement adducteurs debout", "instructions": "Pieds très écartés, fléchir une jambe" }
+          ]
+        }
+      ]
+    },
+    "6": {
+      "title": "Core & Stabilité",
+      "description": "Renforcement du centre du corps",
+      "focus": ["core", "stabilité"],
+      "blocks": [
+        {
+          "name": "Échauffement ciblé",
+          "exercises": [
+            { "name": "Cat-cow", "instructions": "Dos rond sur l'expiration, dos creux sur l'inspiration" },
+            { "name": "Glute bridge", "instructions": "Monter les hanches sur 3 secondes, tenir 2 secondes" },
+            { "name": "Bird dog alterné", "instructions": "À quatre pattes, tendre bras droit et jambe gauche" }
+          ]
+        },
+        {
+          "name": "Gainage & Contrôle",
+          "exercises": [
+            { "name": "Dead bug", "instructions": "Dos plaqué au sol, tendre bras et jambe opposés" },
+            { "name": "Superman avec pause", "instructions": "Lever bras et jambes, tenir 3 secondes en haut" },
+            { "name": "Planche sur genoux", "instructions": "Avant-bras au sol, genoux au sol, tenir 30 secondes" },
+            { "name": "Gainage latéral sur genoux", "instructions": "Coude et genou au sol, hanches hautes" },
+            { "name": "Crunch inversé", "instructions": "Genoux à 90°, ramener les genoux vers la poitrine" }
+          ]
+        },
+        {
+          "name": "Étirements profonds",
+          "exercises": [
+            { "name": "Child's pose", "instructions": "Fesses sur les talons, bras tendus devant" },
+            { "name": "Cobra doux", "instructions": "Allongé sur le ventre, relever le buste doucement" },
+            { "name": "Torsion assise", "instructions": "Assis jambes croisées, tourner le buste" }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "title": "Full-Body Intermédiaire",
+      "description": "Variantes complètes des mouvements fondamentaux",
+      "focus": ["full-body", "force"],
+      "blocks": [
+        {
+          "name": "Échauffement dynamique",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rythme modéré, bras bien tendus" },
+            { "name": "Fentes de mobilité", "instructions": "Fente avant profonde, coude vers le pied avant" },
+            { "name": "Inchworm", "instructions": "Debout, poser les mains au sol, marcher en planche" }
+          ]
+        },
+        {
+          "name": "Renforcement complet",
+          "exercises": [
+            { "name": "Squats", "instructions": "Descente sur 2 secondes, remonter en expirant" },
+            { "name": "Pompes classiques", "instructions": "Corps gainé, descendre la poitrine au sol, coudes à 45°" },
+            { "name": "Fentes arrière", "instructions": "Grand pas en arrière, genou frôle le sol" },
+            { "name": "Planche complète", "instructions": "Avant-bras et pointes de pieds, corps droit" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Étirement piriforme", "instructions": "Croiser une cheville sur le genou opposé" },
+            { "name": "Étirement épaules", "instructions": "Bras devant la poitrine, le maintenir avec l'autre main" },
+            { "name": "Étirement ischio-jambiers debout", "instructions": "Un pied sur un support, jambe tendue" }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "title": "Cardio EMOM",
+      "description": "Format EMOM pour structurer l'effort cardio",
+      "focus": ["cardio", "rythme"],
+      "blocks": [
+        {
+          "name": "Activation cardio",
+          "exercises": [
+            { "name": "Course sur place", "instructions": "Trottiner sur place, monter le rythme" },
+            { "name": "Montées de genoux dynamiques", "instructions": "Genoux hauts, bras en opposition" },
+            { "name": "Squats sautés légers", "instructions": "Squat classique puis petit saut" }
+          ]
+        },
+        {
+          "name": "EMOM Cardio 8 min",
+          "exercises": [
+            { "name": "Burpees sans saut", "instructions": "Descendre au sol, remonter debout" },
+            { "name": "Montées de genoux rapides", "instructions": "Genoux au-dessus des hanches, rythme rapide" }
+          ]
+        },
+        {
+          "name": "Finisher Cardio",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rythme rapide, bras tendus" },
+            { "name": "Squats sumo dynamiques", "instructions": "Pieds écartés, descendre et remonter sans pause" },
+            { "name": "Planche avec toucher d'épaule", "instructions": "Position de pompe, toucher l'épaule opposée" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche lente", "instructions": "Ralentir progressivement" },
+            { "name": "Étirement quadriceps", "instructions": "Debout, attraper un pied" },
+            { "name": "Respiration diaphragmatique", "instructions": "Mains sur le ventre, inspirer 5s, expirer 5s" }
+          ]
+        }
+      ]
+    },
+    "9": {
+      "title": "Core Avancé",
+      "description": "Gainage complet sur les pieds et exercices de stabilité",
+      "focus": ["core", "stabilité"],
+      "blocks": [
+        {
+          "name": "Réveil du core",
+          "exercises": [
+            { "name": "Cat-cow dynamique", "instructions": "Alterner dos rond et creux rapidement" },
+            { "name": "Dead bug lent", "instructions": "Bras et jambes en l'air, étendre lentement" },
+            { "name": "Rotation thoracique debout", "instructions": "Bras croisés, tourner le haut du corps" }
+          ]
+        },
+        {
+          "name": "Gainage renforcé",
+          "exercises": [
+            { "name": "Planche complète", "instructions": "Avant-bras et pointes de pieds, corps parfaitement aligné" },
+            { "name": "Gainage latéral", "instructions": "Sur le coude et les pieds empilés, hanches hautes" },
+            { "name": "Dead bug avec extension complète", "instructions": "Dos plaqué au sol, étendre complètement" },
+            { "name": "Bicycle crunchs", "instructions": "Coude vers genou opposé en pédalant" },
+            { "name": "Superman nageur", "instructions": "Lever bras et jambes, alterner comme en nageant" }
+          ]
+        },
+        {
+          "name": "Étirements profonds",
+          "exercises": [
+            { "name": "Child's pose", "instructions": "Genoux écartés, bras tendus devant" },
+            { "name": "Cobra", "instructions": "Sur le ventre, pousser sur les mains pour relever le buste" },
+            { "name": "Torsion allongée", "instructions": "Bras en croix, genoux d'un côté" }
+          ]
+        }
+      ]
+    },
+    "10": {
+      "title": "Full-Body Challenge",
+      "description": "Mouvements combinés et supersets",
+      "focus": ["full-body", "endurance musculaire"],
+      "blocks": [
+        {
+          "name": "Échauffement complet",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rythme soutenu, bras bien tendus" },
+            { "name": "Inchworm + pompe", "instructions": "Avancer en planche, 1 pompe, revenir debout" },
+            { "name": "Squat + rotation du buste", "instructions": "Descendre en squat, tourner le buste" }
+          ]
+        },
+        {
+          "name": "Supersets Full-Body",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Squats", "instructions": "Descente sur 2 secondes, remonter dynamiquement" },
+                { "name": "Pompes classiques", "instructions": "Corps gainé, descente contrôlée" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Fentes alternées", "instructions": "Grand pas en avant, genou arrière frôle le sol" },
+                {
+                  "name": "Planche avec toucher d'épaule",
+                  "instructions": "Position de pompe, toucher l'épaule opposée"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Finisher",
+          "exercises": [
+            { "name": "Glute bridge marché", "instructions": "Hanches en haut, faire un pas en avant" },
+            { "name": "Planche complète", "instructions": "Corps droit, serrer abdos et fessiers" }
+          ]
+        },
+        {
+          "name": "Étirements complets",
+          "exercises": [
+            { "name": "Étirement quadriceps", "instructions": "Attraper le pied, tirer vers les fessiers" },
+            { "name": "Étirement pectoraux au mur", "instructions": "Bras en L contre le mur" },
+            { "name": "Child's pose", "instructions": "Fesses sur les talons, bras tendus devant" }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "title": "Cardio Intense",
+      "description": "Circuit exigeant combinant mouvements composés",
+      "focus": ["cardio", "puissance"],
+      "blocks": [
+        {
+          "name": "Activation intense",
+          "exercises": [
+            { "name": "Course sur place", "instructions": "Monter le rythme progressivement" },
+            { "name": "Squats sautés", "instructions": "Squat profond, sauter en remontant" },
+            { "name": "Mountain climbers lents", "instructions": "Position de planche, ramener les genoux" }
+          ]
+        },
+        {
+          "name": "Circuit Haute Énergie",
+          "exercises": [
+            { "name": "Burpees sans saut", "instructions": "Descendre au sol, remonter debout" },
+            { "name": "Mountain climbers rapides", "instructions": "Alterner genoux vers poitrine vite" },
+            { "name": "Squats sautés", "instructions": "Descente contrôlée, sauter dynamiquement" },
+            { "name": "Planche avec rotation", "instructions": "Tourner le corps, bras au ciel" },
+            { "name": "Montées de genoux rapides", "instructions": "Sprint sur place, genoux hauts" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche sur place décélérée", "instructions": "Commencer vite et ralentir" },
+            { "name": "Étirement ischio-jambiers", "instructions": "Un pied sur un support, jambe tendue" },
+            { "name": "Étirement mollets", "instructions": "Pointe du pied sur une marche" },
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, bloquer 7s, expirer 8s" }
+          ]
+        }
+      ]
+    },
+    "12": {
+      "title": "Core & Contrôle Total",
+      "description": "Séance finale combinant gainage et stabilité",
+      "focus": ["core", "contrôle"],
+      "blocks": [
+        {
+          "name": "Activation profonde",
+          "exercises": [
+            { "name": "Cat-cow dynamique", "instructions": "Enchaîner dos rond et dos creux" },
+            { "name": "Inchworm", "instructions": "Debout, mains au sol, avancer en planche" },
+            { "name": "Dead bug échauffement", "instructions": "Dos au sol, bras et genoux à 90°" }
+          ]
+        },
+        {
+          "name": "EMOM Gainage 6 min",
+          "exercises": [
+            { "name": "Planche complète", "instructions": "Tenir 30 secondes en planche" },
+            { "name": "Bicycle crunchs", "instructions": "Coude vers genou opposé en pédalant" }
+          ]
+        },
+        {
+          "name": "Supersets Core",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Dead bug complet", "instructions": "Extension complète bras et jambe opposés" },
+                { "name": "Superman avec pause", "instructions": "Lever bras et jambes, tenir 3 secondes" }
+              ]
+            },
+            {
+              "exercises": [
+                {
+                  "name": "Gainage latéral avec rotation",
+                  "instructions": "Sur le coude, tourner le buste vers le sol"
+                },
+                { "name": "Hip thrust unilatéral", "instructions": "Un pied au sol, l'autre jambe en l'air" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Finisher stabilité",
+          "exercises": [
+            { "name": "Planche avec toucher pied", "instructions": "Monter les hanches en pike, toucher le pied" },
+            { "name": "Hollow hold", "instructions": "Dos au sol, bras et jambes tendus en l'air" }
+          ]
+        },
+        {
+          "name": "Détente finale",
+          "exercises": [
+            { "name": "Child's pose", "instructions": "Genoux écartés, bras tendus devant" },
+            { "name": "Torsion allongée", "instructions": "Bras en croix, genoux d'un côté" },
+            { "name": "Savasana", "instructions": "Allongé sur le dos, fermer les yeux, respirer calmement" }
+          ]
+        }
+      ]
+    }
+  },
+  "remise-en-forme": {
+    "1": {
+      "title": "Haut du corps",
+      "description": "Renforcement push/pull pour épaules, poitrine et dos",
+      "focus": ["haut du corps", "renforcement"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Arm circles", "instructions": "Grands cercles de bras vers l'avant puis vers l'arrière" },
+            { "name": "Inchworms", "instructions": "Debout, marcher les mains en planche, revenir debout" },
+            { "name": "Pompes contre mur", "instructions": "Mains au mur, pompes lentes pour échauffer les épaules" }
+          ]
+        },
+        {
+          "name": "Push & Pull",
+          "exercises": [
+            { "name": "Pompes classiques", "instructions": "Mains largeur épaules, corps gainé" },
+            { "name": "Pike push-ups", "instructions": "Position V inversé, plier les coudes" },
+            { "name": "Superman Y", "instructions": "Allongé, lever les bras en Y et les jambes" },
+            { "name": "Pompes diamant", "instructions": "Mains en losange sous la poitrine" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Étirement pectoraux", "instructions": "Bras tendu contre un mur, tourner le buste" },
+            { "name": "Étirement triceps", "instructions": "Bras au-dessus de la tête, plier le coude" },
+            { "name": "Étirement épaules", "instructions": "Bras tendu devant la poitrine" }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "title": "Cardio Circuit",
+      "description": "Circuit complet pour relancer le cardio",
+      "focus": ["cardio", "full-body"],
+      "blocks": [
+        {
+          "name": "Échauffement dynamique",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Écarter bras et jambes en sautant" },
+            { "name": "Montées de genoux", "instructions": "Genoux à hauteur des hanches" },
+            { "name": "Fentes avant dynamiques", "instructions": "Alterner les fentes en avançant" }
+          ]
+        },
+        {
+          "name": "Full-Body Cardio",
+          "exercises": [
+            { "name": "Burpees sans saut", "instructions": "Planche, pompe, remonter debout" },
+            { "name": "Squats sautés", "instructions": "Squat explosif avec saut" },
+            { "name": "Mountain climbers", "instructions": "En planche, genoux vers la poitrine" },
+            { "name": "Fentes sautées", "instructions": "Alterner les fentes en sautant" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche sur place", "instructions": "Ralentir progressivement" },
+            { "name": "Étirement quadriceps", "instructions": "Attraper le pied derrière soi" },
+            { "name": "Child's pose", "instructions": "Genoux au sol, bras tendus devant" }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "title": "Bas du corps & Core",
+      "description": "Cuisses, fessiers et abdominaux",
+      "focus": ["bas du corps", "core"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Cercles de hanches", "instructions": "Grands cercles dans les deux sens" },
+            { "name": "Good mornings", "instructions": "Mains derrière la tête, pencher le buste" },
+            { "name": "Squats légers", "instructions": "Squats lents pour échauffer les genoux" }
+          ]
+        },
+        {
+          "name": "Jambes & Core",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Squats sumo", "instructions": "Pieds écartés, pointes vers l'extérieur" },
+                { "name": "Crunchs", "instructions": "Soulever les épaules du sol" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Fentes bulgares", "instructions": "Pied arrière sur une chaise" },
+                { "name": "Planche", "instructions": "Avant-bras, corps aligné, 30 secondes" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Pigeon stretch", "instructions": "Jambe croisée devant, pencher le buste" },
+            { "name": "Torsion allongée", "instructions": "Genou vers la poitrine, laisser tomber de l'autre côté" }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "title": "EMOM Endurance",
+      "description": "Travail à la minute pour l'endurance musculaire",
+      "focus": ["endurance", "full-body"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rester léger sur les pieds" },
+            { "name": "Inchworms", "instructions": "Marcher les mains en planche, pompe, revenir" },
+            { "name": "Squats dynamiques", "instructions": "Descendre et remonter rapidement" }
+          ]
+        },
+        {
+          "name": "EMOM 12 minutes",
+          "exercises": [
+            { "name": "Pompes", "instructions": "Pompes classiques, rythme régulier" },
+            { "name": "Squats sautés", "instructions": "Exploser vers le haut, amortir en douceur" },
+            { "name": "Mountain climbers", "instructions": "Genoux vers la poitrine rapidement" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, bloquer 7s, expirer 8s" },
+            { "name": "Étirement ischio-jambiers", "instructions": "Assis, jambes tendues, pencher le buste" },
+            { "name": "Child's pose", "instructions": "Genoux au sol, bras tendus, relâcher" }
+          ]
+        }
+      ]
+    },
+    "5": {
+      "title": "Haut du corps — Force",
+      "description": "Renforcement progressif avec supersets push/pull",
+      "focus": ["haut du corps", "renforcement"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Arm circles progressifs", "instructions": "Petits cercles puis grands cercles" },
+            { "name": "Pompes inclinées", "instructions": "Mains sur une chaise, pompes lentes" },
+            { "name": "Scapular push-ups", "instructions": "En planche, rapprocher et écarter les omoplates" }
+          ]
+        },
+        {
+          "name": "Push & Pull supersets",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Pompes classiques", "instructions": "Descendre la poitrine au sol, rythme contrôlé" },
+                { "name": "Superman W", "instructions": "Lever le buste et tirer les coudes en W" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Pike push-ups", "instructions": "Position V inversé, contrôler la descente" },
+                { "name": "Reverse snow angels", "instructions": "Bras en arc de cercle au-dessus de la tête" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Finition triceps",
+          "exercises": [
+            { "name": "Pompes diamant", "instructions": "Mains en losange, coudes serrés" },
+            { "name": "Dips sur chaise", "instructions": "Descendre les fesses, coudes à 90°" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Étirement pectoraux au sol", "instructions": "Bras tendu à 90°, rouler doucement" },
+            { "name": "Étirement dorsaux", "instructions": "À genoux, bras tendus, pousser les hanches" },
+            { "name": "Étirement triceps", "instructions": "Bras au-dessus de la tête, plier le coude" }
+          ]
+        }
+      ]
+    },
+    "6": {
+      "title": "Cardio HIIT",
+      "description": "Intervalles haute intensité pour le cardio",
+      "focus": ["cardio", "hiit"],
+      "blocks": [
+        {
+          "name": "Échauffement dynamique",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rythme progressif" },
+            { "name": "High knees", "instructions": "Genoux au-dessus des hanches" },
+            { "name": "Fentes latérales dynamiques", "instructions": "Alterner gauche-droite" }
+          ]
+        },
+        {
+          "name": "HIIT Full-Body",
+          "exercises": [
+            { "name": "Burpees complets", "instructions": "Planche, pompe, saut explosif" },
+            { "name": "Speed squats", "instructions": "Squats rapides et profonds" },
+            { "name": "Planche commando", "instructions": "Alterner avant-bras et bras tendus" },
+            { "name": "Tuck jumps", "instructions": "Sauter genoux vers la poitrine" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche sur place", "instructions": "Ralentir le rythme cardiaque" },
+            { "name": "Étirement fléchisseurs de hanche", "instructions": "Genou arrière au sol, hanche en avant" },
+            { "name": "Respiration diaphragmatique", "instructions": "Mains sur le ventre, inspirer 4s, expirer 6s" }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "title": "Bas du corps & Core — Volume",
+      "description": "Montée en volume sur les jambes",
+      "focus": ["bas du corps", "core"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Cercles de chevilles", "instructions": "Pointe du pied, dessiner des cercles" },
+            { "name": "Good mornings", "instructions": "Pencher le buste, dos plat" },
+            { "name": "Squats avec pause", "instructions": "Descendre, tenir 3 secondes en bas" }
+          ]
+        },
+        {
+          "name": "Jambes — Volume",
+          "exercises": [
+            { "name": "Squats sumo", "instructions": "Pieds écartés, descendre lentement" },
+            { "name": "Fentes bulgares", "instructions": "Pied arrière sur une chaise" },
+            { "name": "Hip thrust unilatéral", "instructions": "Une jambe tendue en l'air" }
+          ]
+        },
+        {
+          "name": "Core intensif",
+          "exercises": [
+            { "name": "Bicycle crunchs", "instructions": "Coude vers genou opposé" },
+            { "name": "Planche", "instructions": "Corps aligné tête-pieds" },
+            { "name": "Russian twists", "instructions": "Pieds décollés, tourner le buste" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Pigeon stretch", "instructions": "Jambe croisée devant, relâcher le buste" },
+            { "name": "Étirement quadriceps allongé", "instructions": "Allongé sur le côté, attraper le pied" },
+            { "name": "Cobra", "instructions": "Pousser les mains pour étirer les abdos" }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "title": "EMOM Endurance +",
+      "description": "EMOM allongé avec plus de répétitions",
+      "focus": ["endurance", "full-body"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rythme progressif" },
+            { "name": "Inchworms avec pompe", "instructions": "Marcher en planche, pompe, revenir" },
+            { "name": "Fentes dynamiques", "instructions": "Alterner les fentes, grands pas" }
+          ]
+        },
+        {
+          "name": "EMOM 15 minutes",
+          "exercises": [
+            { "name": "Pompes", "instructions": "Pompes classiques, tempo régulier" },
+            { "name": "Squats sautés", "instructions": "Exploser vers le haut, réception souple" },
+            { "name": "Mountain climbers", "instructions": "Genoux vers la poitrine, rythme rapide" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, bloquer 7s, expirer 8s" },
+            { "name": "Étirement ischio-jambiers", "instructions": "Assis, jambes tendues, pencher le buste" },
+            { "name": "Child's pose", "instructions": "Front au sol, relâcher complètement" }
+          ]
+        }
+      ]
+    },
+    "9": {
+      "title": "Haut du corps — Puissance",
+      "description": "Variations explosives et avancées",
+      "focus": ["haut du corps", "puissance"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Arm circles", "instructions": "Cercles rapides" },
+            { "name": "Pompes inclinées rapides", "instructions": "Pompes rapides mains sur une chaise" },
+            { "name": "Bear crawl", "instructions": "Avancer en quadrupédie genoux décollés" }
+          ]
+        },
+        {
+          "name": "Push explosif",
+          "exercises": [
+            { "name": "Pompes claquées", "instructions": "Pousser explosivement, mains décollent du sol" },
+            {
+              "name": "Pike push-ups pieds surélevés",
+              "instructions": "Pieds sur une chaise, position V, contrôler la descente"
+            },
+            { "name": "Pompes archer", "instructions": "Un bras fait la pompe, l'autre est tendu" }
+          ]
+        },
+        {
+          "name": "Finition volume",
+          "exercises": [
+            { "name": "Pompes diamant", "instructions": "Mains en losange, coudes serrés" },
+            { "name": "Dips sur chaise", "instructions": "Descendre les fesses, coudes à 90°" },
+            { "name": "Superman nageur", "instructions": "Lever bras et jambes, alterner comme en nageant" },
+            { "name": "Planche commando", "instructions": "Alterner avant-bras et bras tendus" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Étirement pectoraux", "instructions": "Bras contre le mur, tourner le buste" },
+            { "name": "Étirement dorsaux", "instructions": "À genoux, bras tendus, pousser les hanches" },
+            { "name": "Étirement cou", "instructions": "Incliner la tête, main sur la tempe" }
+          ]
+        }
+      ]
+    },
+    "10": {
+      "title": "Cardio Tabata",
+      "description": "Format Tabata : 20s effort / 10s repos",
+      "focus": ["cardio", "tabata"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rythme soutenu" },
+            { "name": "Burpees lents", "instructions": "5 burpees contrôlés pour échauffer" },
+            { "name": "Fentes sautées légères", "instructions": "Petits sauts entre les fentes" }
+          ]
+        },
+        {
+          "name": "Tabata Cardio",
+          "exercises": [
+            { "name": "Burpees complets", "instructions": "Planche, pompe, saut explosif" },
+            { "name": "Mountain climbers sprint", "instructions": "Rythme maximal" },
+            { "name": "Squats sautés", "instructions": "Squat profond, saut maximal" },
+            { "name": "Planche saut écart", "instructions": "En planche, sauter pieds écartés puis serrés" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche lente", "instructions": "Décélérer complètement" },
+            { "name": "Étirement quadriceps", "instructions": "Attraper le pied derrière soi" },
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, bloquer 7s, expirer 8s" }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "title": "Bas du corps & Core — Explosif",
+      "description": "Mouvements explosifs pour les jambes et gainage avancé",
+      "focus": ["bas du corps", "puissance"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Squats progressifs", "instructions": "5 lents, 5 normaux, 5 rapides" },
+            { "name": "Fentes multiplanaires", "instructions": "Avant, latérale, arrière — chaque jambe" },
+            { "name": "Dead bug lent", "instructions": "Bras et jambes en l'air, étendre lentement" }
+          ]
+        },
+        {
+          "name": "Puissance Jambes",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Squats sautés avec pause", "instructions": "Descendre, pause 1s en bas, exploser" },
+                { "name": "V-ups", "instructions": "Lever jambes et buste simultanément" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Fentes sautées", "instructions": "Alterner en sautant, genou arrière frôle le sol" },
+                {
+                  "name": "Gainage latéral avec élévation de hanche",
+                  "instructions": "En planche latérale, descendre et remonter la hanche"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Abdos finition",
+          "exercises": [
+            { "name": "Bicycle crunchs", "instructions": "Coude vers genou opposé, rythme rapide" },
+            { "name": "Mountain climbers lents", "instructions": "Genou vers coude opposé, tenir 1 seconde" },
+            { "name": "Planche toucher de pieds", "instructions": "Main au pied opposé en passant sous le corps" }
+          ]
+        },
+        {
+          "name": "Étirements",
+          "exercises": [
+            { "name": "Pigeon stretch", "instructions": "Jambe avant croisée, buste au sol" },
+            { "name": "Torsion allongée", "instructions": "Genoux d'un côté, bras en T" },
+            { "name": "Cobra", "instructions": "Pousser les mains, ouvrir la poitrine" }
+          ]
+        }
+      ]
+    },
+    "12": {
+      "title": "EMOM Endurance Avancé",
+      "description": "EMOM 16 min avec 4 exercices par minute",
+      "focus": ["endurance", "full-body"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Rythme soutenu" },
+            { "name": "Inchworms avec pompe", "instructions": "Marcher en planche, pompe, revenir" },
+            { "name": "Squats sautés légers", "instructions": "Petits sauts pour activer les jambes" }
+          ]
+        },
+        {
+          "name": "EMOM 16 minutes",
+          "exercises": [
+            { "name": "Burpees", "instructions": "Burpee complet avec pompe et saut" },
+            { "name": "Pompes", "instructions": "Pompes classiques, descendre au sol" },
+            { "name": "Squats sautés", "instructions": "Squat profond, saut maximal" },
+            { "name": "Mountain climbers", "instructions": "Genoux vers la poitrine, rythme rapide" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, bloquer 7s, expirer 8s" },
+            { "name": "Étirement ischio-jambiers", "instructions": "Assis, jambes tendues, pencher le buste" },
+            { "name": "Child's pose", "instructions": "Front au sol, relâcher complètement" }
+          ]
+        }
+      ]
+    },
+    "13": {
+      "title": "Haut du corps — Max Effort",
+      "description": "Séance intense combinant volume et explosivité",
+      "focus": ["haut du corps", "puissance"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Inchworms avec pompe", "instructions": "Marcher en planche, pompe, revenir" },
+            { "name": "Scapular push-ups", "instructions": "En planche, rapprocher et écarter les omoplates" },
+            { "name": "Bear crawl", "instructions": "Avancer en quadrupédie, genoux décollés" }
+          ]
+        },
+        {
+          "name": "Push Max",
+          "exercises": [
+            { "name": "Pompes claquées", "instructions": "Pousser explosivement, mains décollent" },
+            { "name": "Pike push-ups pieds surélevés", "instructions": "Pieds sur une chaise, contrôler la descente" },
+            { "name": "Pompes archer", "instructions": "Un bras fait la pompe, l'autre tendu" }
+          ]
+        },
+        {
+          "name": "Finition totale",
+          "exercises": [
+            { "name": "Pompes diamant", "instructions": "Mains en losange, coudes serrés" },
+            { "name": "Dips sur chaise", "instructions": "Descendre, coudes à 90°" },
+            { "name": "Superman nageur", "instructions": "Mouvement de nage, bras et jambes décollés" },
+            { "name": "Planche commando", "instructions": "Alterner avant-bras et bras tendus" }
+          ]
+        },
+        {
+          "name": "Étirements profonds",
+          "exercises": [
+            { "name": "Étirement pectoraux au sol", "instructions": "Allongé, bras en T, rouler sur un côté" },
+            { "name": "Étirement dorsaux", "instructions": "À genoux, bras tendus, pousser les hanches" },
+            { "name": "Étirement cou et trapèzes", "instructions": "Incliner la tête, main sur la tempe" }
+          ]
+        }
+      ]
+    },
+    "14": {
+      "title": "Cardio Extreme",
+      "description": "HIIT maximal avec enchaînements composés",
+      "focus": ["cardio", "hiit"],
+      "blocks": [
+        {
+          "name": "Échauffement haute intensité",
+          "exercises": [
+            { "name": "High knees rapides", "instructions": "Genoux au-dessus des hanches, rythme élevé" },
+            { "name": "Burpees contrôlés", "instructions": "5 burpees avec pompe, rythme modéré" },
+            { "name": "Fentes sautées légères", "instructions": "Petits sauts pour échauffer les cuisses" }
+          ]
+        },
+        {
+          "name": "HIIT Extreme",
+          "exercises": [
+            { "name": "Burpees avec tuck jump", "instructions": "Burpee complet puis saut genoux poitrine" },
+            { "name": "Mountain climbers sprint", "instructions": "Rythme maximal, genoux vers la poitrine" },
+            { "name": "Squats sautés 180", "instructions": "Squat sauté avec demi-tour en l'air" },
+            { "name": "Planche saut écart", "instructions": "En planche, pieds écartés puis serrés" }
+          ]
+        },
+        {
+          "name": "Retour au calme",
+          "exercises": [
+            { "name": "Marche très lente", "instructions": "Expirer longuement à chaque pas" },
+            { "name": "Étirement quadriceps", "instructions": "Attraper le pied, tirer doucement" },
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, bloquer 7s, expirer 8s" }
+          ]
+        }
+      ]
+    },
+    "15": {
+      "title": "Bas du corps & Core — Total",
+      "description": "Séance combinée jambes et abdominaux maximum",
+      "focus": ["bas du corps", "core", "puissance"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Squats progressifs", "instructions": "5 lents, 5 normaux, 5 rapides" },
+            { "name": "Fentes multiplanaires", "instructions": "Avant, latérale, arrière — chaque jambe" },
+            { "name": "Dead bug lent", "instructions": "Bras et jambes en l'air, étendre lentement" }
+          ]
+        },
+        {
+          "name": "Puissance Jambes Max",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Squats sautés avec pause", "instructions": "Descendre, pause 1s, exploser" },
+                { "name": "V-ups", "instructions": "Lever jambes et buste simultanément" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Fentes sautées", "instructions": "Alterner en sautant, genou frôle le sol" },
+                {
+                  "name": "Gainage latéral avec élévation de hanche",
+                  "instructions": "Descendre la hanche au sol puis remonter"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Abdos finition",
+          "exercises": [
+            { "name": "Bicycle crunchs rapides", "instructions": "Coude vers genou opposé, rythme maximal" },
+            { "name": "Mountain climbers lents", "instructions": "Genou vers coude opposé, tenir 1 seconde" },
+            { "name": "Planche toucher de pieds", "instructions": "Main au pied opposé sous le corps" }
+          ]
+        },
+        {
+          "name": "Étirements profonds",
+          "exercises": [
+            { "name": "Pigeon stretch", "instructions": "Jambe avant croisée, buste au sol" },
+            { "name": "Torsion allongée", "instructions": "Genoux d'un côté, bras en T" },
+            { "name": "Cobra", "instructions": "Pousser les mains, ouvrir la poitrine" }
+          ]
+        }
+      ]
+    },
+    "16": {
+      "title": "EMOM Endurance Finale",
+      "description": "EMOM ultime avec exercices composés",
+      "focus": ["endurance", "full-body", "puissance"],
+      "blocks": [
+        {
+          "name": "Échauffement",
+          "exercises": [
+            { "name": "Jumping jacks rapides", "instructions": "Rythme soutenu, bras tendus" },
+            {
+              "name": "Inchworms avec pompe et rotation",
+              "instructions": "Inchworm, pompe, rotation en T bras au ciel"
+            },
+            { "name": "Fentes sautées légères", "instructions": "Petits sauts pour activer les jambes" }
+          ]
+        },
+        {
+          "name": "EMOM 20 minutes",
+          "exercises": [
+            { "name": "Burpees avec pompe", "instructions": "Burpee complet avec pompe et saut" },
+            { "name": "Pike push-ups", "instructions": "Position V inversé, descente contrôlée" },
+            { "name": "Squats sautés", "instructions": "Squat profond, saut maximal, amortir en silence" },
+            { "name": "Mountain climbers croisés", "instructions": "Genou vers coude opposé, rythme rapide" }
+          ]
+        },
+        {
+          "name": "Retour au calme final",
+          "exercises": [
+            { "name": "Respiration 4-7-8", "instructions": "Inspirer 4s, bloquer 7s, expirer 8s — 5 cycles" },
+            { "name": "Étirement ischio-jambiers", "instructions": "Assis, jambes tendues, pencher le buste" },
+            { "name": "Child's pose", "instructions": "Genoux écartés, bras devant, relâcher complètement" }
+          ]
+        }
+      ]
+    }
+  }
+}

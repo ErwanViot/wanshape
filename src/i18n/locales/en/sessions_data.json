@@ -1,0 +1,1569 @@
+{
+  "cardio-express": {
+    "1": {
+      "title": "Fat-Burning HIIT",
+      "description": "Short high-intensity intervals to maximize calorie burn",
+      "focus": ["cardio", "HIIT"],
+      "blocks": [
+        {
+          "name": "Quick warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Steady pace, arms fully extended overhead" },
+            { "name": "High knees", "instructions": "Drive knees above hip height, build pace progressively" },
+            { "name": "Dynamic arm circles", "instructions": "Large fast circles, forward then backward" }
+          ]
+        },
+        {
+          "name": "Fat-Burning HIIT",
+          "exercises": [
+            { "name": "Burpees", "instructions": "Drop to plank, push-up, stand and jump" },
+            {
+              "name": "Mountain climbers",
+              "instructions": "In plank, alternate driving knees toward your chest rapidly"
+            },
+            { "name": "Jump squats", "instructions": "Deep squat, explode upward, land softly" },
+            { "name": "Plank shoulder taps", "instructions": "High plank, alternately tap the opposite shoulder" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Walking in place", "instructions": "Gradually bring your heart rate down" },
+            {
+              "name": "Quad stretch",
+              "instructions": "Standing, grab your foot behind you, keep your knee pointing down"
+            },
+            {
+              "name": "Deep breathing",
+              "instructions": "Inhale 4s through the nose, exhale 6s through the mouth — 4 cycles"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "title": "Explosive Tabata",
+      "description": "Classic 20/10 Tabata format to spike your cardio in minimal time",
+      "focus": ["cardio", "Tabata"],
+      "blocks": [
+        {
+          "name": "Quick warm-up",
+          "exercises": [
+            { "name": "Jogging in place", "instructions": "Light jog, build pace gradually" },
+            { "name": "Dynamic squats", "instructions": "Fast squats, rise onto your toes at the top" },
+            { "name": "Torso rotations", "instructions": "Feet planted, rotate your upper body dynamically" }
+          ]
+        },
+        {
+          "name": "Full-Body Tabata",
+          "exercises": [
+            { "name": "Burpees without jump", "instructions": "Drop to the floor, stand back up as fast as possible" },
+            {
+              "name": "Speed skaters",
+              "instructions": "Lateral jumps, touch the floor with the hand opposite the landing foot"
+            },
+            { "name": "High knees sprint", "instructions": "Sprint in place, drive knees as high as possible" },
+            { "name": "Plank jumping jacks", "instructions": "In plank, jump feet out wide then back together" }
+          ]
+        },
+        {
+          "name": "Express cooldown",
+          "exercises": [
+            { "name": "Slow walk", "instructions": "Ease your heart rate down by walking gently" },
+            { "name": "Calf stretch", "instructions": "Step one foot forward, push the back heel into the floor" },
+            { "name": "Hamstring stretch", "instructions": "Extend one leg in front, hinge forward at the hips" }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "title": "Intense Cardio Circuit",
+      "description": "Variety of exercises in a circuit to build cardio and endurance",
+      "focus": ["cardio", "circuit"],
+      "blocks": [
+        {
+          "name": "Dynamic warm-up",
+          "exercises": [
+            { "name": "Lateral shuffles", "instructions": "Dynamic side steps, stay low on your feet" },
+            { "name": "Knee drives with arms", "instructions": "Drive knees up while pushing arms overhead" },
+            { "name": "Dynamic forward lunges", "instructions": "Long strides forward, arms moving in opposition" }
+          ]
+        },
+        {
+          "name": "High-Energy Circuit",
+          "exercises": [
+            { "name": "Full burpees", "instructions": "Plank, push-up, explosive jump — keep the pace" },
+            {
+              "name": "Mountain climbers sprint",
+              "instructions": "Plank position, drive knees to your chest as fast as possible"
+            },
+            { "name": "Jump squats", "instructions": "Controlled descent, explosive jump, land flat-footed" },
+            {
+              "name": "Jumping lunges",
+              "instructions": "Alternate lunges with a jump, stay braced through the movement"
+            },
+            {
+              "name": "Commando planks",
+              "instructions": "Alternate between forearm plank and high plank without rotating your hips"
+            }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Walking in place", "instructions": "Decelerate gradually" },
+            { "name": "Hip flexor stretch", "instructions": "Back knee on the floor, push hips forward" },
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s — 3 cycles" }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "title": "HIIT Acceleration",
+      "description": "More rounds, less rest — stepping up the intensity",
+      "focus": ["cardio", "HIIT"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Progressive jumping jacks", "instructions": "Start slow, accelerate through the final seconds" },
+            {
+              "name": "High knees",
+              "instructions": "Drive knees high, arms pumping in opposition, keep a steady pace"
+            },
+            {
+              "name": "World's greatest stretch",
+              "instructions": "Lunge, hand to floor, rotate torso and lift opposite arm"
+            }
+          ]
+        },
+        {
+          "name": "HIIT Acceleration",
+          "exercises": [
+            { "name": "Burpees with push-up", "instructions": "Drop to the floor, full push-up, stand and jump" },
+            { "name": "Jump squats", "instructions": "Deep squat, jump as high as possible" },
+            {
+              "name": "Cross-body mountain climbers",
+              "instructions": "Drive knee toward opposite elbow in plank, keep pace high"
+            },
+            {
+              "name": "Jumping lunges",
+              "instructions": "Alternate lunges with a jump, back knee nearly touches the floor"
+            },
+            {
+              "name": "Plank shoulder taps",
+              "instructions": "In high plank, tap opposite shoulder without rotating your hips"
+            }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Slow walk", "instructions": "Fully decelerate, take long breaths" },
+            { "name": "Quad stretch", "instructions": "Grab your foot, pull heel toward your glutes" },
+            { "name": "Chest stretch", "instructions": "Arm extended against a wall, rotate your torso away" }
+          ]
+        }
+      ]
+    },
+    "5": {
+      "title": "Double Impact Tabata",
+      "description": "Two targeted Tabata blocks: legs then upper body",
+      "focus": ["cardio", "Tabata"],
+      "blocks": [
+        {
+          "name": "Quick warm-up",
+          "exercises": [
+            { "name": "Dynamic squats", "instructions": "Fast squats, rise onto your toes" },
+            { "name": "Incline push-ups", "instructions": "Hands on a chair, fast push-ups" },
+            { "name": "Jumping jacks", "instructions": "High pace to get your heart rate up" }
+          ]
+        },
+        {
+          "name": "Tabata Legs",
+          "exercises": [
+            { "name": "Jump squats", "instructions": "Explosive squat, jump as high as possible, land softly" },
+            { "name": "Deep speed skaters", "instructions": "Wide lateral jumps, descend low, touch the floor" },
+            { "name": "Jumping lunges", "instructions": "Alternate lunges by exploding upward" },
+            { "name": "Squat pulses", "instructions": "Hold the bottom of your squat and pulse rapidly" }
+          ]
+        },
+        {
+          "name": "Tabata Upper Body",
+          "exercises": [
+            { "name": "Fast push-ups", "instructions": "Max-pace push-ups, chest to floor" },
+            { "name": "Fast commando planks", "instructions": "Move from forearms to hands as fast as possible" },
+            { "name": "Mountain climbers sprint", "instructions": "Sprint knees to chest in plank" },
+            { "name": "Pike push-ups", "instructions": "Inverted-V position, shoulder-focused push-ups, fast pace" }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Walking in place", "instructions": "Wind down progressively" },
+            { "name": "Hamstring stretch", "instructions": "Leg extended in front, hinge forward" },
+            { "name": "Shoulder stretch", "instructions": "Pull one arm across your chest with the other hand" }
+          ]
+        }
+      ]
+    },
+    "6": {
+      "title": "Endurance-Power Circuit",
+      "description": "Longer circuit with compound exercises for endurance",
+      "focus": ["cardio", "circuit"],
+      "blocks": [
+        {
+          "name": "Dynamic warm-up",
+          "exercises": [
+            {
+              "name": "Bear crawl",
+              "instructions": "Move forward and back on all fours, knees hovering off the floor"
+            },
+            { "name": "Dynamic forward lunges", "instructions": "Long forward strides" },
+            { "name": "Jumping jacks", "instructions": "High pace" }
+          ]
+        },
+        {
+          "name": "Power Circuit",
+          "exercises": [
+            { "name": "Full burpees", "instructions": "Plank, push-up, explosive jump" },
+            {
+              "name": "Squat pulse jumps",
+              "instructions": "3 pulses at the bottom of the squat then an explosive jump"
+            },
+            { "name": "Mountain climbers sprint", "instructions": "Maximum pace in plank" },
+            { "name": "Tuck jumps", "instructions": "Jump and pull your knees to your chest" },
+            { "name": "Plank knee taps", "instructions": "In plank, alternately tap each knee with the opposite hand" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Slow walk", "instructions": "Fully decelerate" },
+            { "name": "Deep calf stretch", "instructions": "Back foot flat on the floor, push through the heel" },
+            { "name": "Child's pose", "instructions": "Knees on the floor, arms extended in front" }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "title": "Maximum Power HIIT",
+      "description": "Long rounds, short rest — advanced exercises",
+      "focus": ["cardio", "HIIT"],
+      "blocks": [
+        {
+          "name": "Intense warm-up",
+          "exercises": [
+            { "name": "Slow burpees", "instructions": "5 controlled burpees to warm up" },
+            { "name": "Light jumping lunges", "instructions": "Small hops between lunges" },
+            { "name": "Bear crawl", "instructions": "Move forward on all fours, knees hovering" }
+          ]
+        },
+        {
+          "name": "Power HIIT",
+          "exercises": [
+            {
+              "name": "Burpees with tuck jump",
+              "instructions": "Full burpee with a tuck jump instead of a regular jump"
+            },
+            { "name": "Tuck jump squats", "instructions": "Deep squat, jump and pull your knees to your chest" },
+            { "name": "Sprint mountain climbers", "instructions": "In plank, sprint your knees as fast as possible" },
+            { "name": "Explosive jumping lunges", "instructions": "Lunge jumps with maximum height" },
+            { "name": "Sprawls", "instructions": "Throw yourself flat to the floor, explode back up" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Very slow walk", "instructions": "Long nasal breaths" },
+            { "name": "Inner thigh stretch", "instructions": "Feet wide apart, lower gently" },
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s" }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "title": "Infernal Tabata",
+      "description": "3 Tabata sets with no break",
+      "focus": ["cardio", "Tabata"],
+      "blocks": [
+        {
+          "name": "Express warm-up",
+          "exercises": [
+            { "name": "Sprint in place", "instructions": "Run in place at 70% intensity" },
+            { "name": "Scorpion stretch", "instructions": "On your stomach, lift one foot toward the opposite hand" },
+            { "name": "Light jump squats", "instructions": "Small hops out of the squat" }
+          ]
+        },
+        {
+          "name": "Explosive Tabata Set A",
+          "exercises": [
+            { "name": "Burpees with tuck jump", "instructions": "Full burpee finishing with a knees-to-chest jump" },
+            { "name": "Speed skaters", "instructions": "Fast lateral jumps, touch the floor" },
+            { "name": "180° jump squats", "instructions": "Squat, jump and spin a full half-turn" },
+            { "name": "Plyometric push-ups", "instructions": "Explosive push-up, hands leave the floor" }
+          ]
+        },
+        {
+          "name": "Explosive Tabata Set B",
+          "exercises": [
+            { "name": "High knees sprint", "instructions": "Drive knees as high as possible, maximum speed" },
+            { "name": "Plank up-downs", "instructions": "Move from forearms to hands without swaying" },
+            { "name": "Fast jumping lunges", "instructions": "Alternating lunge jumps as fast as possible" },
+            { "name": "Sprawl to jump", "instructions": "Throw yourself to the floor, get up and jump immediately" }
+          ]
+        },
+        {
+          "name": "Tabata Finisher",
+          "exercises": [
+            { "name": "All-out burpees", "instructions": "Burpees at maximum speed" },
+            { "name": "Tuck jumps", "instructions": "Jump and pull knees to your chest" },
+            { "name": "Mountain climbers sprint", "instructions": "As fast as you can" },
+            { "name": "Star jumps", "instructions": "Jump wide, arms and legs spread" }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Walking in place", "instructions": "Bring your heart rate down" },
+            { "name": "Deep calf stretch", "instructions": "Back foot flat on the floor" },
+            { "name": "Pigeon stretch", "instructions": "Front leg bent, sink your chest toward the floor" }
+          ]
+        }
+      ]
+    },
+    "9": {
+      "title": "High-Intensity Circuit",
+      "description": "Advanced exercises, minimal rest",
+      "focus": ["cardio", "circuit"],
+      "blocks": [
+        {
+          "name": "Dynamic warm-up",
+          "exercises": [
+            { "name": "Inchworms with push-up", "instructions": "Walk hands out to plank, push-up, walk back up" },
+            { "name": "Carioca", "instructions": "Lateral cross-step shuffle, quick feet" },
+            { "name": "High skipping", "instructions": "Skip with very high knee drive" }
+          ]
+        },
+        {
+          "name": "Circuit Level Up",
+          "exercises": [
+            { "name": "Burpees with tuck jump", "instructions": "Full burpee with a knees-to-chest jump" },
+            { "name": "Spider-Man mountain climbers", "instructions": "Drive knee toward the elbow on the same side" },
+            { "name": "Star jump squats", "instructions": "Deep squat, explode into a star jump" },
+            { "name": "Commando push-ups", "instructions": "Alternate forearm plank and high plank" },
+            { "name": "Broad jump burpees", "instructions": "Broad jump, then burpee on landing" },
+            { "name": "High knees sprint", "instructions": "Knees high sprint, absolute speed" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Slow walk", "instructions": "Wind down, shake out arms and legs" },
+            { "name": "Seated glute stretch", "instructions": "Cross ankle over knee, pull" },
+            { "name": "Breathing savasana", "instructions": "Lie on your back, breathe for 5 cycles" }
+          ]
+        }
+      ]
+    },
+    "10": {
+      "title": "Ultimate HIIT",
+      "description": "The peak of the program — long work, short rest",
+      "focus": ["cardio", "HIIT"],
+      "blocks": [
+        {
+          "name": "Intense warm-up",
+          "exercises": [
+            { "name": "Tempo burpees", "instructions": "Full burpees at a moderate tempo" },
+            { "name": "High knees with arms", "instructions": "Drive knees high, reach arms overhead" },
+            { "name": "Walking lunges with twist", "instructions": "Stride forward into a lunge, rotate your torso" }
+          ]
+        },
+        {
+          "name": "HIIT 45/15",
+          "exercises": [
+            { "name": "Devil press", "instructions": "Burpee, stand up and jump with arms overhead" },
+            { "name": "Tuck jump squats", "instructions": "Deep squat, jump and tuck knees to chest" },
+            { "name": "Mountain climbers sprint", "instructions": "Drive knees to your chest at maximum speed" },
+            { "name": "Alternating jumping lunges", "instructions": "Deep lunge jumps, pure explosiveness" },
+            { "name": "Sprawl to broad jump", "instructions": "Sprawl to the floor, stand and broad jump" },
+            { "name": "Plank jacks to push-up", "instructions": "Two plank jacks then one explosive push-up" }
+          ]
+        },
+        {
+          "name": "Final cooldown",
+          "exercises": [
+            { "name": "Very slow walk", "instructions": "Bring your heart rate down gently" },
+            { "name": "Deep quad stretch", "instructions": "Grab your foot, push your hip forward" },
+            { "name": "Back stretch", "instructions": "Seated, legs extended, hinge forward" },
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s" }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "title": "All-Out Tabata",
+      "description": "Three Tabata sets with the most demanding exercises",
+      "focus": ["cardio", "Tabata"],
+      "blocks": [
+        {
+          "name": "Full warm-up",
+          "exercises": [
+            { "name": "Progressive jumping jacks", "instructions": "Start slow, finish at maximum speed" },
+            { "name": "World's greatest stretch", "instructions": "Lunge, hand to floor, rotate torso upward" },
+            { "name": "Crescendo jump squats", "instructions": "Jump a little higher with each rep" }
+          ]
+        },
+        {
+          "name": "Tabata Devastation Set 1",
+          "exercises": [
+            { "name": "Burpee broad jumps", "instructions": "Burpee then broad jump forward, turn around" },
+            { "name": "Continuous 180° jump squats", "instructions": "Jump squat with half-turn, never stop" },
+            { "name": "Explosive sprawls", "instructions": "Throw yourself to the floor, explode back up" },
+            { "name": "Star jumps", "instructions": "Full star jump at maximum range" }
+          ]
+        },
+        {
+          "name": "Tabata Devastation Set 2",
+          "exercises": [
+            { "name": "Burpees with tuck jump", "instructions": "Burpee finishing with a tuck jump" },
+            { "name": "Wide plyometric push-ups", "instructions": "Explosive push-ups, hands leave and land wide" },
+            { "name": "Deep speed skaters", "instructions": "Wide lateral jumps, descend very low" },
+            { "name": "All-out high knees", "instructions": "Sprint in place at 100% effort" }
+          ]
+        },
+        {
+          "name": "Recovery stretches",
+          "exercises": [
+            { "name": "Recovery walk", "instructions": "Walk very slowly, breathe through your nose" },
+            { "name": "Hamstring stretch", "instructions": "Heel on a surface, hinge forward" },
+            { "name": "Cobra stretch", "instructions": "On your stomach, push through your hands to open your chest" },
+            { "name": "Full breathing", "instructions": "Inhale into belly, ribs, chest — exhale slowly" }
+          ]
+        }
+      ]
+    },
+    "12": {
+      "title": "Final Boss Circuit",
+      "description": "The hardest circuit of the program — minimal rest, maximum rounds",
+      "focus": ["cardio", "circuit"],
+      "blocks": [
+        {
+          "name": "Maximum activation",
+          "exercises": [
+            { "name": "Controlled burpees", "instructions": "Full burpees at a moderate pace" },
+            { "name": "Lateral shuffles", "instructions": "Fast side-to-side shuffles, touch the floor" },
+            { "name": "A-skips", "instructions": "High knee skips moving forward, arms in opposition" }
+          ]
+        },
+        {
+          "name": "Final Circuit",
+          "exercises": [
+            { "name": "Burpee tuck jump broad jump", "instructions": "Burpee, tuck jump, broad jump — the full trio" },
+            { "name": "Mountain climbers sprint", "instructions": "Absolute speed, hips low" },
+            { "name": "360° jump squats", "instructions": "Deep squat, jump and spin a full rotation" },
+            { "name": "Superman push-ups", "instructions": "Explosive push-up, lift arms and legs off the floor" },
+            { "name": "High knees to tuck jumps", "instructions": "4 fast high knees then 1 tuck jump" },
+            { "name": "Sprawl with rotation", "instructions": "Sprawl to the floor, stand up and turn 180°" }
+          ]
+        },
+        {
+          "name": "Program final cooldown",
+          "exercises": [
+            { "name": "Very slow walk", "instructions": "Let your heart rate drop" },
+            { "name": "Full leg stretch", "instructions": "Deep lunge, alternate sides" },
+            { "name": "Pigeon stretch", "instructions": "Front leg bent, release your hips" },
+            { "name": "Final savasana", "instructions": "Lie down, arms out wide, palms up — program complete" }
+          ]
+        }
+      ]
+    }
+  },
+  "debutant-4-semaines": {
+    "1": {
+      "title": "Full-Body Discovery",
+      "description": "First fundamental movements: squats, modified push-ups and core work",
+      "focus": ["full-body", "mobility"],
+      "blocks": [
+        {
+          "name": "Gentle warm-up",
+          "exercises": [
+            {
+              "name": "Joint rotations",
+              "instructions": "Neck, shoulders, wrists, hips, ankles — slow and controlled"
+            },
+            { "name": "Walking in place", "instructions": "Gradually raise your knees, swing your arms" },
+            { "name": "Hip circles", "instructions": "Hands on hips, large circles in both directions" }
+          ]
+        },
+        {
+          "name": "Fundamentals",
+          "exercises": [
+            {
+              "name": "Assisted squats",
+              "instructions": "Feet shoulder-width apart, sit back as if into a chair, hands forward for balance"
+            },
+            {
+              "name": "Knee push-ups",
+              "instructions": "Hands shoulder-width apart, knees on the floor, lower your chest to the ground"
+            },
+            {
+              "name": "Knee plank",
+              "instructions": "Forearms on the floor, knees down, body aligned, hold for 20 seconds"
+            },
+            {
+              "name": "Glute bridge",
+              "instructions": "Lying on your back, feet flat, lift your hips by squeezing your glutes"
+            }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Quad stretch", "instructions": "Standing, grab your foot behind you, each leg" },
+            { "name": "Hamstring stretch", "instructions": "Seated, legs extended, hinge forward at the hips" },
+            { "name": "Chest stretch", "instructions": "Arm against a wall, gently rotate your torso away" }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "title": "Easy Cardio",
+      "description": "Light circuit to activate cardio without stressing your joints",
+      "focus": ["cardio", "endurance"],
+      "blocks": [
+        {
+          "name": "Dynamic warm-up",
+          "exercises": [
+            { "name": "Brisk walking in place", "instructions": "Accelerate gradually, use big arm swings" },
+            { "name": "Light heel flicks", "instructions": "In place, gently flick your heels toward your glutes" },
+            { "name": "Torso rotations", "instructions": "Feet planted, rotate your upper body left and right" }
+          ]
+        },
+        {
+          "name": "Beginner Cardio Circuit",
+          "exercises": [
+            { "name": "Lateral shuffles", "instructions": "Dynamic side steps, stay low" },
+            { "name": "Knee drives", "instructions": "Lift knees to hip height, moderate pace" },
+            { "name": "Sumo squats", "instructions": "Feet wide, toes out, lower slowly" },
+            { "name": "Bear walk", "instructions": "On all fours, knees hovering, move forward and back" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Slow walk in place", "instructions": "Ease down gradually, breathe deeply" },
+            { "name": "Calf stretch", "instructions": "One foot forward, press the back heel into the floor" },
+            { "name": "Deep breathing", "instructions": "Inhale 4s, hold 4s, exhale 4s — 3 cycles" }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "title": "Strength & Core",
+      "description": "Core and posture focus with controlled and accessible movements",
+      "focus": ["core", "posture"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            {
+              "name": "Cat-cow",
+              "instructions": "On all fours, alternate rounding and arching your back with your breath"
+            },
+            {
+              "name": "Thoracic rotation",
+              "instructions": "On all fours, one hand behind your head, open your elbow toward the sky"
+            },
+            { "name": "Arm swings", "instructions": "Standing, let your arms swing loosely side to side" }
+          ]
+        },
+        {
+          "name": "Core & Posture",
+          "exercises": [
+            {
+              "name": "Dead bug",
+              "instructions": "Lying down, arms reaching toward the ceiling, extend one leg and the opposite arm"
+            },
+            { "name": "Superman", "instructions": "Lying face down, lift arms and legs simultaneously, hold for 2s" },
+            {
+              "name": "Side plank on knees",
+              "instructions": "Elbow and knee on the floor, body aligned, hold 15 seconds each side"
+            },
+            {
+              "name": "Reverse lunges",
+              "instructions": "Take a big step back, back knee nearly touches the floor, stand up"
+            }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Child's pose", "instructions": "Knees on the floor, arms extended in front, release your back" },
+            {
+              "name": "Supine twist",
+              "instructions": "Lying down, draw one knee toward your chest and let it fall to the opposite side"
+            },
+            { "name": "Psoas stretch", "instructions": "Low lunge, push the hip of the back knee forward" }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "title": "Full-Body Progression",
+      "description": "Back to the fundamentals with more volume and less rest",
+      "focus": ["full-body", "strength"],
+      "blocks": [
+        {
+          "name": "Active warm-up",
+          "exercises": [
+            { "name": "Light jumping jacks", "instructions": "Moderate jumps, arms overhead, comfortable pace" },
+            { "name": "Arm circles", "instructions": "Small circles then large circles, forward then backward" },
+            {
+              "name": "Mobility squats",
+              "instructions": "Lower slowly into a deep squat, elbows inside knees to open the hips"
+            }
+          ]
+        },
+        {
+          "name": "Full-body strength",
+          "exercises": [
+            {
+              "name": "Squats",
+              "instructions": "Feet shoulder-width apart, controlled descent, drive through your heels"
+            },
+            {
+              "name": "Knee push-ups",
+              "instructions": "Lower your chest to the floor, push up as you exhale, keep your core tight"
+            },
+            {
+              "name": "Alternating lunges",
+              "instructions": "Big step forward, back knee near the floor, alternate legs"
+            },
+            { "name": "Knee plank", "instructions": "Forearms on floor, knees down, brace your core, hold 25 seconds" },
+            {
+              "name": "Glute bridge",
+              "instructions": "Lift your hips, squeeze your glutes at the top for 2 seconds, lower down"
+            }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            {
+              "name": "Standing quad stretch",
+              "instructions": "Grab your foot, pull heel toward glutes, keep knee pointing down"
+            },
+            {
+              "name": "Hip flexor stretch",
+              "instructions": "Back knee on the floor, shift pelvis forward, feel the stretch at the front of the hip"
+            },
+            {
+              "name": "Back stretch",
+              "instructions": "Standing, clasp hands in front, round your back and push hands away"
+            }
+          ]
+        }
+      ]
+    },
+    "5": {
+      "title": "Progressive Cardio",
+      "description": "Longer circuits with dynamic movements",
+      "focus": ["cardio", "endurance"],
+      "blocks": [
+        {
+          "name": "Cardio warm-up",
+          "exercises": [
+            { "name": "Moderate knee drives", "instructions": "Lift knees above hip height" },
+            { "name": "Lateral shuffles", "instructions": "Fast side steps" },
+            { "name": "Dynamic hip circles", "instructions": "Lift one knee and draw a circle" }
+          ]
+        },
+        {
+          "name": "Endurance Circuit",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Jumps with arms reaching overhead" },
+            { "name": "Squats with toe raise", "instructions": "Regular squat, rise onto your toes at the top" },
+            { "name": "Slow mountain climbers", "instructions": "Push-up position, drive one knee toward your chest" },
+            { "name": "Lateral shuffles + floor touch", "instructions": "Three side steps, touch the floor" },
+            { "name": "Light jumping lunges", "instructions": "Small hops to alternate legs" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Walking in place", "instructions": "Wind down gradually" },
+            { "name": "Wall calf stretch", "instructions": "Hands on the wall, one foot back" },
+            { "name": "Standing inner thigh stretch", "instructions": "Feet very wide, bend one knee" }
+          ]
+        }
+      ]
+    },
+    "6": {
+      "title": "Core & Stability",
+      "description": "Strengthening your center",
+      "focus": ["core", "stability"],
+      "blocks": [
+        {
+          "name": "Targeted warm-up",
+          "exercises": [
+            { "name": "Cat-cow", "instructions": "Round your back on the exhale, arch on the inhale" },
+            { "name": "Glute bridge", "instructions": "Lift your hips over 3 seconds, hold for 2 seconds" },
+            { "name": "Alternating bird dogs", "instructions": "On all fours, extend right arm and left leg" }
+          ]
+        },
+        {
+          "name": "Core & Control",
+          "exercises": [
+            { "name": "Dead bug", "instructions": "Back flat on the floor, extend opposite arm and leg" },
+            { "name": "Superman with hold", "instructions": "Lift arms and legs, hold for 3 seconds at the top" },
+            { "name": "Knee plank", "instructions": "Forearms on floor, knees down, hold 30 seconds" },
+            { "name": "Side plank on knees", "instructions": "Elbow and knee on the floor, hips raised" },
+            { "name": "Reverse crunch", "instructions": "Knees at 90°, pull knees toward your chest" }
+          ]
+        },
+        {
+          "name": "Deep stretches",
+          "exercises": [
+            { "name": "Child's pose", "instructions": "Hips back toward heels, arms extended in front" },
+            { "name": "Gentle cobra", "instructions": "Lying face down, gently lift your upper body" },
+            { "name": "Seated twist", "instructions": "Seated with legs crossed, rotate your torso" }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "title": "Intermediate Full-Body",
+      "description": "Full versions of the fundamental movements",
+      "focus": ["full-body", "strength"],
+      "blocks": [
+        {
+          "name": "Dynamic warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Moderate pace, arms fully extended" },
+            { "name": "Mobility lunges", "instructions": "Deep forward lunge, elbow toward the front foot" },
+            { "name": "Inchworm", "instructions": "Standing, walk hands to plank position" }
+          ]
+        },
+        {
+          "name": "Full strength",
+          "exercises": [
+            { "name": "Squats", "instructions": "2-second descent, exhale on the way up" },
+            { "name": "Push-ups", "instructions": "Body braced, chest to floor, elbows at 45°" },
+            { "name": "Reverse lunges", "instructions": "Big step back, back knee near the floor" },
+            { "name": "Full plank", "instructions": "Forearms and toes, body in a straight line" }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Piriforme stretch", "instructions": "Cross one ankle over the opposite knee" },
+            { "name": "Shoulder stretch", "instructions": "Pull one arm across your chest with the other hand" },
+            { "name": "Standing hamstring stretch", "instructions": "One foot on a raised surface, leg straight" }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "title": "EMOM Cardio",
+      "description": "EMOM format to structure your cardio effort",
+      "focus": ["cardio", "rhythm"],
+      "blocks": [
+        {
+          "name": "Cardio activation",
+          "exercises": [
+            { "name": "Running in place", "instructions": "Light jog in place, build pace" },
+            { "name": "Dynamic knee drives", "instructions": "High knees, arms pumping in opposition" },
+            { "name": "Light jump squats", "instructions": "Regular squat then a small hop" }
+          ]
+        },
+        {
+          "name": "EMOM Cardio 8 min",
+          "exercises": [
+            { "name": "Burpees without jump", "instructions": "Drop to the floor, stand back up" },
+            { "name": "Fast knee drives", "instructions": "Drive knees above hip height, quick pace" }
+          ]
+        },
+        {
+          "name": "Cardio finisher",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Fast pace, arms extended" },
+            { "name": "Dynamic sumo squats", "instructions": "Feet wide, lower and rise without pausing" },
+            { "name": "Plank shoulder taps", "instructions": "Push-up position, tap the opposite shoulder" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Slow walk", "instructions": "Wind down gradually" },
+            { "name": "Quad stretch", "instructions": "Standing, grab one foot" },
+            { "name": "Diaphragmatic breathing", "instructions": "Hands on your belly, inhale 5s, exhale 5s" }
+          ]
+        }
+      ]
+    },
+    "9": {
+      "title": "Advanced Core",
+      "description": "Full plank holds and stability exercises",
+      "focus": ["core", "stability"],
+      "blocks": [
+        {
+          "name": "Core wake-up",
+          "exercises": [
+            { "name": "Dynamic cat-cow", "instructions": "Alternate rounding and arching quickly" },
+            { "name": "Slow dead bug", "instructions": "Arms and legs in the air, extend slowly" },
+            { "name": "Standing thoracic rotation", "instructions": "Arms crossed, rotate your upper body" }
+          ]
+        },
+        {
+          "name": "Reinforced core",
+          "exercises": [
+            { "name": "Full plank", "instructions": "Forearms and toes, body perfectly aligned" },
+            { "name": "Side plank", "instructions": "Elbow and stacked feet on the floor, hips raised" },
+            { "name": "Dead bug with full extension", "instructions": "Back flat on the floor, extend fully" },
+            { "name": "Bicycle crunches", "instructions": "Drive elbow toward opposite knee in a pedaling motion" },
+            { "name": "Swimmer Superman", "instructions": "Lift arms and legs, alternate as if swimming" }
+          ]
+        },
+        {
+          "name": "Deep stretches",
+          "exercises": [
+            { "name": "Child's pose", "instructions": "Knees wide, arms extended in front" },
+            { "name": "Cobra", "instructions": "On your stomach, push through your hands to lift your chest" },
+            { "name": "Supine twist", "instructions": "Arms in a T, knees to one side" }
+          ]
+        }
+      ]
+    },
+    "10": {
+      "title": "Full-Body Challenge",
+      "description": "Combined movements and supersets",
+      "focus": ["full-body", "muscular endurance"],
+      "blocks": [
+        {
+          "name": "Full warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Steady pace, arms fully extended" },
+            { "name": "Inchworm + push-up", "instructions": "Walk out to plank, 1 push-up, walk back up" },
+            { "name": "Squat + torso rotation", "instructions": "Squat down, rotate your torso" }
+          ]
+        },
+        {
+          "name": "Full-Body Supersets",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Squats", "instructions": "2-second descent, explosive rise" },
+                { "name": "Push-ups", "instructions": "Body braced, controlled descent" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Alternating lunges", "instructions": "Big step forward, back knee near the floor" },
+                { "name": "Plank shoulder taps", "instructions": "Push-up position, tap the opposite shoulder" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Finisher",
+          "exercises": [
+            { "name": "Walking glute bridge", "instructions": "Hips up, take a step forward" },
+            { "name": "Full plank", "instructions": "Straight body, brace core and glutes" }
+          ]
+        },
+        {
+          "name": "Full stretches",
+          "exercises": [
+            { "name": "Quad stretch", "instructions": "Grab your foot, pull toward your glutes" },
+            { "name": "Wall chest stretch", "instructions": "Arm in an L against the wall" },
+            { "name": "Child's pose", "instructions": "Hips to heels, arms extended in front" }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "title": "Intense Cardio",
+      "description": "Demanding circuit combining compound movements",
+      "focus": ["cardio", "power"],
+      "blocks": [
+        {
+          "name": "Intense activation",
+          "exercises": [
+            { "name": "Running in place", "instructions": "Build pace progressively" },
+            { "name": "Jump squats", "instructions": "Deep squat, jump as you come up" },
+            { "name": "Slow mountain climbers", "instructions": "Plank position, drive knees in" }
+          ]
+        },
+        {
+          "name": "High-Energy Circuit",
+          "exercises": [
+            { "name": "Burpees without jump", "instructions": "Drop to the floor, stand back up" },
+            { "name": "Fast mountain climbers", "instructions": "Alternate knees to chest quickly" },
+            { "name": "Jump squats", "instructions": "Controlled descent, explosive jump" },
+            { "name": "Plank with rotation", "instructions": "Rotate your body, arm reaching skyward" },
+            { "name": "Fast knee drives", "instructions": "Sprint in place, knees high" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Decelerating walk in place", "instructions": "Start fast and slow down" },
+            { "name": "Hamstring stretch", "instructions": "One foot on a raised surface, leg straight" },
+            { "name": "Calf stretch", "instructions": "Toes on a step" },
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s" }
+          ]
+        }
+      ]
+    },
+    "12": {
+      "title": "Core & Total Control",
+      "description": "Final session combining core work and stability",
+      "focus": ["core", "control"],
+      "blocks": [
+        {
+          "name": "Deep activation",
+          "exercises": [
+            { "name": "Dynamic cat-cow", "instructions": "Flow through rounded and arched back" },
+            { "name": "Inchworm", "instructions": "Standing, walk hands to plank position" },
+            { "name": "Dead bug warm-up", "instructions": "Back on the floor, arms and knees at 90°" }
+          ]
+        },
+        {
+          "name": "Core EMOM 6 min",
+          "exercises": [
+            { "name": "Full plank", "instructions": "Hold a plank for 30 seconds" },
+            { "name": "Bicycle crunches", "instructions": "Drive elbow toward opposite knee in a pedaling motion" }
+          ]
+        },
+        {
+          "name": "Core Supersets",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Full dead bug", "instructions": "Complete extension of opposite arm and leg" },
+                { "name": "Superman with hold", "instructions": "Lift arms and legs, hold for 3 seconds" }
+              ]
+            },
+            {
+              "exercises": [
+                {
+                  "name": "Side plank with rotation",
+                  "instructions": "On your elbow, rotate your torso toward the floor"
+                },
+                { "name": "Single-leg hip thrust", "instructions": "One foot on the floor, the other leg in the air" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Stability finisher",
+          "exercises": [
+            { "name": "Plank foot tap", "instructions": "Pike your hips up, touch one foot with the opposite hand" },
+            { "name": "Hollow hold", "instructions": "Back on the floor, arms and legs extended in the air" }
+          ]
+        },
+        {
+          "name": "Final relaxation",
+          "exercises": [
+            { "name": "Child's pose", "instructions": "Knees wide, arms extended in front" },
+            { "name": "Supine twist", "instructions": "Arms in a T, knees to one side" },
+            { "name": "Savasana", "instructions": "Lying on your back, eyes closed, breathe calmly" }
+          ]
+        }
+      ]
+    }
+  },
+  "remise-en-forme": {
+    "1": {
+      "title": "Upper Body",
+      "description": "Push/pull strength for shoulders, chest and back",
+      "focus": ["upper body", "strength"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Arm circles", "instructions": "Large circles forward then backward" },
+            { "name": "Inchworms", "instructions": "Standing, walk hands out to plank, walk back up" },
+            { "name": "Wall push-ups", "instructions": "Hands on the wall, slow push-ups to warm up the shoulders" }
+          ]
+        },
+        {
+          "name": "Push & Pull",
+          "exercises": [
+            { "name": "Push-ups", "instructions": "Hands shoulder-width apart, body braced" },
+            { "name": "Pike push-ups", "instructions": "Inverted-V position, bend your elbows" },
+            { "name": "Superman Y", "instructions": "Lying face down, lift arms in a Y shape and your legs" },
+            { "name": "Diamond push-ups", "instructions": "Hands in a diamond shape under your chest" }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Chest stretch", "instructions": "Arm extended against a wall, rotate your torso away" },
+            { "name": "Tricep stretch", "instructions": "Arm overhead, bend your elbow" },
+            { "name": "Shoulder stretch", "instructions": "Arm extended across your chest" }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "title": "Cardio Circuit",
+      "description": "Full circuit to restart your cardio",
+      "focus": ["cardio", "full-body"],
+      "blocks": [
+        {
+          "name": "Dynamic warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Jump with arms and legs wide" },
+            { "name": "Knee drives", "instructions": "Knees to hip height" },
+            { "name": "Dynamic forward lunges", "instructions": "Alternate lunges moving forward" }
+          ]
+        },
+        {
+          "name": "Full-Body Cardio",
+          "exercises": [
+            { "name": "Burpees without jump", "instructions": "Plank, push-up, stand up" },
+            { "name": "Jump squats", "instructions": "Explosive squat with jump" },
+            { "name": "Mountain climbers", "instructions": "In plank, drive knees toward your chest" },
+            { "name": "Jumping lunges", "instructions": "Alternate lunges with a jump" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Walking in place", "instructions": "Wind down gradually" },
+            { "name": "Quad stretch", "instructions": "Grab your foot behind you" },
+            { "name": "Child's pose", "instructions": "Knees on the floor, arms extended in front" }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "title": "Lower Body & Core",
+      "description": "Thighs, glutes and abs",
+      "focus": ["lower body", "core"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Hip circles", "instructions": "Large circles in both directions" },
+            { "name": "Good mornings", "instructions": "Hands behind your head, hinge your torso forward" },
+            { "name": "Light squats", "instructions": "Slow squats to warm up your knees" }
+          ]
+        },
+        {
+          "name": "Legs & Core",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Sumo squats", "instructions": "Feet wide, toes out" },
+                { "name": "Crunches", "instructions": "Lift your shoulder blades off the floor" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Bulgarian lunges", "instructions": "Back foot on a chair" },
+                { "name": "Plank", "instructions": "Forearms, body aligned, 30 seconds" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Pigeon stretch", "instructions": "Leg crossed in front, hinge your torso forward" },
+            { "name": "Supine twist", "instructions": "Knee toward your chest, let it fall to the opposite side" }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "title": "EMOM Endurance",
+      "description": "Every-minute-on-the-minute work for muscular endurance",
+      "focus": ["endurance", "full-body"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Stay light on your feet" },
+            { "name": "Inchworms", "instructions": "Walk hands to plank, push-up, walk back up" },
+            { "name": "Dynamic squats", "instructions": "Lower and rise quickly" }
+          ]
+        },
+        {
+          "name": "EMOM 12 minutes",
+          "exercises": [
+            { "name": "Push-ups", "instructions": "Regular push-ups, steady pace" },
+            { "name": "Jump squats", "instructions": "Explode upward, land softly" },
+            { "name": "Mountain climbers", "instructions": "Drive knees to your chest quickly" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s" },
+            { "name": "Hamstring stretch", "instructions": "Seated, legs extended, hinge forward" },
+            { "name": "Child's pose", "instructions": "Knees on the floor, arms extended, release" }
+          ]
+        }
+      ]
+    },
+    "5": {
+      "title": "Upper Body — Strength",
+      "description": "Progressive strength training with push/pull supersets",
+      "focus": ["upper body", "strength"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Progressive arm circles", "instructions": "Small circles then large circles" },
+            { "name": "Incline push-ups", "instructions": "Hands on a chair, slow push-ups" },
+            { "name": "Scapular push-ups", "instructions": "In plank, squeeze and release your shoulder blades" }
+          ]
+        },
+        {
+          "name": "Push & Pull supersets",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Push-ups", "instructions": "Lower chest to the floor, controlled pace" },
+                { "name": "Superman W", "instructions": "Lift your chest and pull your elbows into a W shape" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Pike push-ups", "instructions": "Inverted-V position, control the descent" },
+                { "name": "Reverse snow angels", "instructions": "Sweep arms in an arc overhead" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tricep finisher",
+          "exercises": [
+            { "name": "Diamond push-ups", "instructions": "Hands in a diamond, elbows tight" },
+            { "name": "Chair dips", "instructions": "Lower your hips, elbows to 90°" }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Floor chest stretch", "instructions": "Arm at 90°, gently roll" },
+            { "name": "Lat stretch", "instructions": "On your knees, arms extended, push hips back" },
+            { "name": "Tricep stretch", "instructions": "Arm overhead, bend your elbow" }
+          ]
+        }
+      ]
+    },
+    "6": {
+      "title": "Cardio HIIT",
+      "description": "High-intensity intervals for cardio",
+      "focus": ["cardio", "hiit"],
+      "blocks": [
+        {
+          "name": "Dynamic warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Progressive pace" },
+            { "name": "High knees", "instructions": "Drive knees above hip height" },
+            { "name": "Dynamic lateral lunges", "instructions": "Alternate left and right" }
+          ]
+        },
+        {
+          "name": "Full-Body HIIT",
+          "exercises": [
+            { "name": "Full burpees", "instructions": "Plank, push-up, explosive jump" },
+            { "name": "Speed squats", "instructions": "Fast and deep squats" },
+            { "name": "Commando planks", "instructions": "Alternate forearm plank and high plank" },
+            { "name": "Tuck jumps", "instructions": "Jump and pull your knees to your chest" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Walking in place", "instructions": "Bring your heart rate down" },
+            { "name": "Hip flexor stretch", "instructions": "Back knee on the floor, hip pushed forward" },
+            { "name": "Diaphragmatic breathing", "instructions": "Hands on your belly, inhale 4s, exhale 6s" }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "title": "Lower Body & Core — Volume",
+      "description": "Increasing volume on legs",
+      "focus": ["lower body", "core"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Ankle circles", "instructions": "Point your toes and draw circles" },
+            { "name": "Good mornings", "instructions": "Hinge your torso, keep your back flat" },
+            { "name": "Squats with pause", "instructions": "Lower down, hold for 3 seconds at the bottom" }
+          ]
+        },
+        {
+          "name": "Legs — Volume",
+          "exercises": [
+            { "name": "Sumo squats", "instructions": "Feet wide, lower slowly" },
+            { "name": "Bulgarian lunges", "instructions": "Back foot on a chair" },
+            { "name": "Single-leg hip thrust", "instructions": "One leg extended in the air" }
+          ]
+        },
+        {
+          "name": "Intensive core",
+          "exercises": [
+            { "name": "Bicycle crunches", "instructions": "Drive elbow toward opposite knee" },
+            { "name": "Plank", "instructions": "Body aligned head to toe" },
+            { "name": "Russian twists", "instructions": "Feet off the floor, rotate your torso" }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Pigeon stretch", "instructions": "Leg crossed in front, release your torso" },
+            { "name": "Lying quad stretch", "instructions": "Lying on your side, grab your foot" },
+            { "name": "Cobra", "instructions": "Push through your hands to stretch your abs" }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "title": "EMOM Endurance +",
+      "description": "Extended EMOM with more reps",
+      "focus": ["endurance", "full-body"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Progressive pace" },
+            { "name": "Inchworms with push-up", "instructions": "Walk to plank, push-up, walk back up" },
+            { "name": "Dynamic lunges", "instructions": "Alternate lunges, long strides" }
+          ]
+        },
+        {
+          "name": "EMOM 15 minutes",
+          "exercises": [
+            { "name": "Push-ups", "instructions": "Regular push-ups, steady tempo" },
+            { "name": "Jump squats", "instructions": "Explode upward, soft landing" },
+            { "name": "Mountain climbers", "instructions": "Drive knees to your chest, quick pace" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s" },
+            { "name": "Hamstring stretch", "instructions": "Seated, legs extended, hinge forward" },
+            { "name": "Child's pose", "instructions": "Forehead to the floor, fully release" }
+          ]
+        }
+      ]
+    },
+    "9": {
+      "title": "Upper Body — Power",
+      "description": "Explosive and advanced variations",
+      "focus": ["upper body", "power"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Arm circles", "instructions": "Fast circles" },
+            { "name": "Fast incline push-ups", "instructions": "Fast push-ups with hands on a chair" },
+            { "name": "Bear crawl", "instructions": "Move forward on all fours, knees hovering" }
+          ]
+        },
+        {
+          "name": "Explosive push",
+          "exercises": [
+            { "name": "Clapping push-ups", "instructions": "Push explosively, hands leave the floor" },
+            { "name": "Elevated pike push-ups", "instructions": "Feet on a chair, inverted-V, control the descent" },
+            { "name": "Archer push-ups", "instructions": "One arm does the push-up, the other extends out" }
+          ]
+        },
+        {
+          "name": "Volume finisher",
+          "exercises": [
+            { "name": "Diamond push-ups", "instructions": "Hands in a diamond, elbows tight" },
+            { "name": "Chair dips", "instructions": "Lower your hips, elbows to 90°" },
+            { "name": "Swimmer Superman", "instructions": "Lift arms and legs, alternate in a swimming motion" },
+            { "name": "Commando planks", "instructions": "Alternate forearm plank and high plank" }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Chest stretch", "instructions": "Arm against the wall, rotate your torso" },
+            { "name": "Lat stretch", "instructions": "On your knees, arms extended, push hips back" },
+            { "name": "Neck stretch", "instructions": "Tilt your head, hand on the temple" }
+          ]
+        }
+      ]
+    },
+    "10": {
+      "title": "Cardio Tabata",
+      "description": "Tabata format: 20s effort / 10s rest",
+      "focus": ["cardio", "tabata"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Steady pace" },
+            { "name": "Slow burpees", "instructions": "5 controlled burpees to warm up" },
+            { "name": "Light jumping lunges", "instructions": "Small hops between lunges" }
+          ]
+        },
+        {
+          "name": "Cardio Tabata",
+          "exercises": [
+            { "name": "Full burpees", "instructions": "Plank, push-up, explosive jump" },
+            { "name": "Mountain climbers sprint", "instructions": "Maximum pace" },
+            { "name": "Jump squats", "instructions": "Deep squat, maximum jump" },
+            { "name": "Plank jumping jacks", "instructions": "In plank, jump feet out wide then back together" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Slow walk", "instructions": "Fully decelerate" },
+            { "name": "Quad stretch", "instructions": "Grab your foot behind you" },
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s" }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "title": "Lower Body & Core — Explosive",
+      "description": "Explosive leg movements and advanced core work",
+      "focus": ["lower body", "power"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Progressive squats", "instructions": "5 slow, 5 normal, 5 fast" },
+            { "name": "Multiplanar lunges", "instructions": "Forward, lateral, backward — each leg" },
+            { "name": "Slow dead bug", "instructions": "Arms and legs in the air, extend slowly" }
+          ]
+        },
+        {
+          "name": "Leg Power",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Jump squats with pause", "instructions": "Lower, pause 1s at the bottom, explode" },
+                { "name": "V-ups", "instructions": "Lift legs and torso simultaneously" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Jumping lunges", "instructions": "Alternate with a jump, back knee near the floor" },
+                { "name": "Side plank with hip lift", "instructions": "In side plank, lower and raise your hip" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Ab finisher",
+          "exercises": [
+            { "name": "Bicycle crunches", "instructions": "Drive elbow toward opposite knee, quick pace" },
+            { "name": "Slow mountain climbers", "instructions": "Knee toward opposite elbow, hold for 1 second" },
+            { "name": "Plank foot touch", "instructions": "Reach under your body to tap the opposite foot" }
+          ]
+        },
+        {
+          "name": "Stretches",
+          "exercises": [
+            { "name": "Pigeon stretch", "instructions": "Front leg crossed, torso toward the floor" },
+            { "name": "Supine twist", "instructions": "Knees to one side, arms in a T" },
+            { "name": "Cobra", "instructions": "Push through your hands to open your chest" }
+          ]
+        }
+      ]
+    },
+    "12": {
+      "title": "Advanced EMOM Endurance",
+      "description": "EMOM 16 min with 4 exercises per minute",
+      "focus": ["endurance", "full-body"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Jumping jacks", "instructions": "Steady pace" },
+            { "name": "Inchworms with push-up", "instructions": "Walk to plank, push-up, walk back up" },
+            { "name": "Light jump squats", "instructions": "Small hops to activate your legs" }
+          ]
+        },
+        {
+          "name": "EMOM 16 minutes",
+          "exercises": [
+            { "name": "Burpees", "instructions": "Full burpee with push-up and jump" },
+            { "name": "Push-ups", "instructions": "Regular push-ups, lower to the floor" },
+            { "name": "Jump squats", "instructions": "Deep squat, maximum jump" },
+            { "name": "Mountain climbers", "instructions": "Drive knees to your chest, quick pace" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s" },
+            { "name": "Hamstring stretch", "instructions": "Seated, legs extended, hinge forward" },
+            { "name": "Child's pose", "instructions": "Forehead to the floor, fully release" }
+          ]
+        }
+      ]
+    },
+    "13": {
+      "title": "Upper Body — Max Effort",
+      "description": "Intense session combining volume and explosiveness",
+      "focus": ["upper body", "power"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Inchworms with push-up", "instructions": "Walk to plank, push-up, walk back up" },
+            { "name": "Scapular push-ups", "instructions": "In plank, squeeze and release your shoulder blades" },
+            { "name": "Bear crawl", "instructions": "Move forward on all fours, knees hovering" }
+          ]
+        },
+        {
+          "name": "Push Max",
+          "exercises": [
+            { "name": "Clapping push-ups", "instructions": "Push explosively, hands leave the floor" },
+            { "name": "Elevated pike push-ups", "instructions": "Feet on a chair, control the descent" },
+            { "name": "Archer push-ups", "instructions": "One arm does the push-up, the other extends out" }
+          ]
+        },
+        {
+          "name": "Total finisher",
+          "exercises": [
+            { "name": "Diamond push-ups", "instructions": "Hands in a diamond, elbows tight" },
+            { "name": "Chair dips", "instructions": "Lower down, elbows to 90°" },
+            { "name": "Swimmer Superman", "instructions": "Swimming motion, arms and legs off the floor" },
+            { "name": "Commando planks", "instructions": "Alternate forearm plank and high plank" }
+          ]
+        },
+        {
+          "name": "Deep stretches",
+          "exercises": [
+            { "name": "Floor chest stretch", "instructions": "Lying down, arm in a T, roll gently to one side" },
+            { "name": "Lat stretch", "instructions": "On your knees, arms extended, push hips back" },
+            { "name": "Neck and trap stretch", "instructions": "Tilt your head, hand on the temple" }
+          ]
+        }
+      ]
+    },
+    "14": {
+      "title": "Extreme Cardio",
+      "description": "Maximum HIIT with compound sequences",
+      "focus": ["cardio", "hiit"],
+      "blocks": [
+        {
+          "name": "High-intensity warm-up",
+          "exercises": [
+            { "name": "Fast high knees", "instructions": "Drive knees above hip height, high pace" },
+            { "name": "Controlled burpees", "instructions": "5 burpees with push-up, moderate pace" },
+            { "name": "Light jumping lunges", "instructions": "Small hops to warm up your thighs" }
+          ]
+        },
+        {
+          "name": "Extreme HIIT",
+          "exercises": [
+            { "name": "Burpees with tuck jump", "instructions": "Full burpee then jump with knees to chest" },
+            { "name": "Mountain climbers sprint", "instructions": "Maximum pace, drive knees to chest" },
+            { "name": "180° jump squats", "instructions": "Jump squat with a half-turn in the air" },
+            { "name": "Plank jumping jacks", "instructions": "In plank, jump feet out wide then back together" }
+          ]
+        },
+        {
+          "name": "Cooldown",
+          "exercises": [
+            { "name": "Very slow walk", "instructions": "Long exhale with every step" },
+            { "name": "Quad stretch", "instructions": "Grab your foot, pull gently" },
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s" }
+          ]
+        }
+      ]
+    },
+    "15": {
+      "title": "Lower Body & Core — Total",
+      "description": "Combined legs and abs at maximum intensity",
+      "focus": ["lower body", "core", "power"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Progressive squats", "instructions": "5 slow, 5 normal, 5 fast" },
+            { "name": "Multiplanar lunges", "instructions": "Forward, lateral, backward — each leg" },
+            { "name": "Slow dead bug", "instructions": "Arms and legs in the air, extend slowly" }
+          ]
+        },
+        {
+          "name": "Max Leg Power",
+          "pairs": [
+            {
+              "exercises": [
+                { "name": "Jump squats with pause", "instructions": "Lower, pause 1s, explode" },
+                { "name": "V-ups", "instructions": "Lift legs and torso simultaneously" }
+              ]
+            },
+            {
+              "exercises": [
+                { "name": "Jumping lunges", "instructions": "Alternate with a jump, knee near the floor" },
+                { "name": "Side plank with hip lift", "instructions": "Lower your hip to the floor then raise back up" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Ab finisher",
+          "exercises": [
+            { "name": "Fast bicycle crunches", "instructions": "Drive elbow toward opposite knee, maximum pace" },
+            { "name": "Slow mountain climbers", "instructions": "Knee toward opposite elbow, hold for 1 second" },
+            { "name": "Plank foot touch", "instructions": "Reach under your body to tap the opposite foot" }
+          ]
+        },
+        {
+          "name": "Deep stretches",
+          "exercises": [
+            { "name": "Pigeon stretch", "instructions": "Front leg crossed, torso toward the floor" },
+            { "name": "Supine twist", "instructions": "Knees to one side, arms in a T" },
+            { "name": "Cobra", "instructions": "Push through your hands to open your chest" }
+          ]
+        }
+      ]
+    },
+    "16": {
+      "title": "Final EMOM Endurance",
+      "description": "Ultimate EMOM with compound exercises",
+      "focus": ["endurance", "full-body", "power"],
+      "blocks": [
+        {
+          "name": "Warm-up",
+          "exercises": [
+            { "name": "Fast jumping jacks", "instructions": "Steady pace, arms extended" },
+            {
+              "name": "Inchworms with push-up and rotation",
+              "instructions": "Inchworm, push-up, T-rotation with arm reaching skyward"
+            },
+            { "name": "Light jumping lunges", "instructions": "Small hops to activate your legs" }
+          ]
+        },
+        {
+          "name": "EMOM 20 minutes",
+          "exercises": [
+            { "name": "Burpees with push-up", "instructions": "Full burpee with push-up and jump" },
+            { "name": "Pike push-ups", "instructions": "Inverted-V position, controlled descent" },
+            { "name": "Jump squats", "instructions": "Deep squat, maximum jump, land silently" },
+            { "name": "Cross-body mountain climbers", "instructions": "Drive knee toward opposite elbow, quick pace" }
+          ]
+        },
+        {
+          "name": "Final cooldown",
+          "exercises": [
+            { "name": "4-7-8 breathing", "instructions": "Inhale 4s, hold 7s, exhale 8s — 5 cycles" },
+            { "name": "Hamstring stretch", "instructions": "Seated, legs extended, hinge forward" },
+            { "name": "Child's pose", "instructions": "Knees wide, arms in front, fully release" }
+          ]
+        }
+      ]
+    }
+  }
+}
