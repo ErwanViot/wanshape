@@ -109,6 +109,10 @@ export function useWorkout(steps: AtomicStep[]) {
         audio.speakCountdown(timer.remaining);
       } else if (status === 'active') {
         audio.beepCountdown();
+      } else {
+        // Other phases (rest, transition, prepare) intentionally have no
+        // audio cue here — and shouldn't get a haptic either.
+        return;
       }
       // Haptic mirror of the audio cue (native only, no-op on web).
       // Heavy pulse on the final tick (1) so the body feels the "go".
