@@ -14,7 +14,7 @@
 // Required env (allow-list): STRIPE_PRICE_MONTHLY, STRIPE_PRICE_YEARLY
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
 import { createClient } from 'jsr:@supabase/supabase-js@2';
-import { getCorsHeaders, NATIVE_APP_ORIGINS, resolveAllowedOrigin } from '../_shared/cors.ts';
+import { getCorsHeaders, resolveAllowedOrigin } from '../_shared/cors.ts';
 
 function jsonResponse(req: Request, data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -83,23 +83,7 @@ Deno.serve(async (req: Request) => {
   }
 
   const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
-
-  // The mobile app bounces the user out of its WebView (Apple guideline
-  // 3.1.3.b) into the system browser via Chrome Custom Tabs / SVC. The
-  // system browser cannot reach https://localhost (which only exists
-  // inside the WebView), so the redirect target must be a publicly
-  // accessible URL serving the same Supabase project the app uses.
-  //
-  // - In production: the soumissions-store mobile app uses Supabase prod
-  //   AND wan2fit.fr serves prod, so DEFAULT_ORIGIN is the right target.
-  // - In dev: the local mobile app uses Supabase dev, so the redirect
-  //   needs to point to a public URL ALSO using Supabase dev — typically
-  //   the Vercel preview of the develop branch. Set UPGRADE_BASE_URL_NATIVE
-  //   in the edge function secrets to that preview URL.
-  const callerOrigin = req.headers.get('origin') ?? '';
-  const isNativeCaller = (NATIVE_APP_ORIGINS as readonly string[]).includes(callerOrigin);
-  const nativeOverride = Deno.env.get('UPGRADE_BASE_URL_NATIVE');
-  const targetOrigin = isNativeCaller && nativeOverride ? nativeOverride : resolveAllowedOrigin(req);
+  const targetOrigin = resolveAllowedOrigin(req);
   const redirectTo = `${targetOrigin}/upgrade?priceId=${encodeURIComponent(body.priceId)}`;
 
   // generateLink with type 'magiclink' returns an action_link the user can
