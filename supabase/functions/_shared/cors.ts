@@ -91,10 +91,19 @@ export function getCorsHeaders(req: Request, options: CorsHeaderOptions = {}): R
 /**
  * Returns the resolved allowed origin for a request — used by Stripe flows
  * that need to construct success/cancel URLs using the caller's origin.
+ *
+ * The Capacitor WebView origins (https://localhost, capacitor://localhost)
+ * are intentionally EXCLUDED here even though they are valid for CORS:
+ * those URLs only exist inside the native app's WebView, so using them as
+ * a redirect target (Chrome Custom Tabs / SafariViewController) would
+ * navigate to a dead address. Mobile callers always need to be bounced to
+ * the canonical web origin (DEFAULT_ORIGIN).
  */
 export function resolveAllowedOrigin(req: Request, environment?: string | null): string {
   const env = environment ?? safeReadEnv('ENVIRONMENT');
-  const allowed = getAllowedOrigins(env);
+  const allowed = getAllowedOrigins(env).filter(
+    (o) => !(NATIVE_APP_ORIGINS as readonly string[]).includes(o),
+  );
   const origin = req.headers.get('origin') ?? '';
   return allowed.includes(origin) ? origin : DEFAULT_ORIGIN;
 }

@@ -146,4 +146,16 @@ describe('resolveAllowedOrigin', () => {
   it('returns DEFAULT_ORIGIN when origin header is missing', () => {
     expect(resolveAllowedOrigin(requestWithOrigin(), 'production')).toBe(DEFAULT_ORIGIN);
   });
+
+  it('returns DEFAULT_ORIGIN (NOT https://localhost) for the Android Capacitor origin', () => {
+    // Capacitor WebView origins are valid for CORS but invalid as redirect
+    // targets — those URLs only exist inside the app's WebView.
+    const req = requestWithOrigin('https://localhost');
+    expect(resolveAllowedOrigin(req, 'production')).toBe(DEFAULT_ORIGIN);
+  });
+
+  it('returns DEFAULT_ORIGIN (NOT capacitor://localhost) for the iOS Capacitor origin', () => {
+    const req = requestWithOrigin('capacitor://localhost');
+    expect(resolveAllowedOrigin(req, 'production')).toBe(DEFAULT_ORIGIN);
+  });
 });
