@@ -39,27 +39,30 @@ export function Formats() {
               to={`/formats/${format.slug}`}
               className="format-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
             >
-              {/* Image — text stays white (over image) */}
+              {/* Image — only the duration badge sits over it now. Title +
+                  subtitle moved into the content block below so the contrast
+                  stays correct in both light and dark themes (the previous
+                  white-on-image overlay relied on a `--color-surface`
+                  gradient that becomes near-white in light mode and washed
+                  out the text). */}
               <div className="relative h-28 overflow-hidden">
                 <img
                   src={format.image}
                   alt={t('formats.img_alt', { name: td(`${format.slug}.name`) })}
                   className="w-full h-full object-cover object-[50%_30%]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
-                <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                  <div>
-                    <h2 className="font-bold text-white text-base drop-shadow-sm">{td(`${format.slug}.name`)}</h2>
-                    <p className="text-xs text-white/60">{td(`${format.slug}.subtitle`)}</p>
-                  </div>
-                  <span className="text-xs font-bold text-white bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full shrink-0">
-                    {format.duration} min
-                  </span>
-                </div>
+                <span className="absolute top-3 right-3 text-xs font-bold text-white bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                  {format.duration} min
+                </span>
               </div>
 
               {/* Content (below image) */}
               <div className="p-4 flex-1 flex flex-col gap-3">
+                <div>
+                  <h2 className="font-bold text-heading text-base">{td(`${format.slug}.name`)}</h2>
+                  <p className="text-xs text-muted mt-0.5">{td(`${format.slug}.subtitle`)}</p>
+                </div>
+
                 {/* Intensity dots */}
                 <div
                   className="flex items-center gap-1.5"
