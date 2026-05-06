@@ -11,7 +11,7 @@
  * same month. The comparison in `useCguStatus` is a strict equality, so
  * lexicographic order does not matter — only uniqueness does.
  */
-export const CURRENT_CGU_VERSION = '2026-04b';
+export const CURRENT_CGU_VERSION = '2026-05a';
 
 /**
  * Short human-readable summary of what changed in the current version.
@@ -22,7 +22,7 @@ export const CURRENT_CGU_VERSION = '2026-04b';
  * and undermine the informed-consent requirement (art. 7 RGPD).
  */
 export const CGU_VERSION_CHANGES: string[] = [
-  "Déclaration explicite de trois sous-traitants jusqu'ici implicites : Sentry (surveillance applicative et Session Replay déclenché sur erreur), Vercel Analytics (mesure d'audience sans cookie), Resend (envoi des emails transactionnels).",
-  'Ajout correspondant de Sentry et Resend dans la liste des transferts encadrés hors Union européenne (CCT).',
-  "Précision sur la distinction entre cookies techniques et mesure d'audience cookieless.",
+  "Ajout de PostHog (analyse produit du parcours utilisateur, hébergée sur l'instance européenne, masquage strict des saisies, aucun rejeu de session ni heatmap, aucune donnée de santé transmise).",
+  'Ajout de Google Firebase Cloud Messaging (acheminement des notifications push pour les applications mobiles iOS/Android uniquement, aucun contenu personnel transmis).',
+  'Mise à jour correspondante de la liste des transferts encadrés hors Union européenne (PostHog Inc. et Google LLC, encadrés par le Data Privacy Framework UE-US et les CCT).',
 ];
