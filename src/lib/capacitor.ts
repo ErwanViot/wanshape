@@ -12,9 +12,16 @@ export const isAndroid = (): boolean => Capacitor.getPlatform() === 'android';
 export async function hideNativeSplash(): Promise<void> {
   if (!isNative()) return;
 
+  // Wait one animation frame so React paints the first route before we
+  // start fading the native splash out — otherwise the user sees a
+  // momentary black gap between the splash dismiss and the rendered UI.
+  await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+
   try {
     const { SplashScreen } = await import('@capacitor/splash-screen');
-    await SplashScreen.hide({ fadeOutDuration: 200 });
+    // 400ms feels noticeably softer than the default 200ms on physical
+    // devices without lengthening total time-to-interactive.
+    await SplashScreen.hide({ fadeOutDuration: 400 });
   } catch (err) {
     console.warn('[capacitor] hideNativeSplash failed', err);
   }
