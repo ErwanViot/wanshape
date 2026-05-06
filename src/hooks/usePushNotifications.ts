@@ -22,6 +22,13 @@ export function usePushNotifications() {
 
   useEffect(() => {
     if (!isNative() || !userId || !supabase) return;
+    // PushNotifications.register() invokes FirebaseMessaging.getInstance()
+    // on Android, which throws IllegalStateException (FATAL EXCEPTION
+    // CapacitorPlugins → process killed) when google-services.json is
+    // missing. Same shape on iOS without GoogleService-Info.plist + APNs.
+    // Gate the whole flow behind an explicit env flag so the app stays
+    // bootable on builds where Firebase hasn't been provisioned yet.
+    if (import.meta.env.VITE_PUSH_ENABLED !== 'true') return;
 
     let cancelled = false;
     const removers: Array<() => void> = [];
