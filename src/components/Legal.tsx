@@ -433,7 +433,7 @@ function PolitiqueConfidentialite() {
           <li>
             <strong className="text-strong">PostHog Inc.</strong> (analyse produit) — l'éditeur a son siège aux
             États-Unis mais les données sont stockées et traitées sur l'instance européenne (Francfort) ; les transferts
-            éventuels vers le siège américain sont encadrés par le Data Privacy Framework UE-US et les CCT
+            éventuels vers le siège américain sont encadrés par les CCT
           </li>
           <li>
             <strong className="text-strong">Google LLC</strong> (Firebase Cloud Messaging — notifications push mobiles)
@@ -470,8 +470,8 @@ function PolitiqueConfidentialite() {
           <strong className="text-strong">Durées chez nos sous-traitants techniques :</strong> Sentry conserve les
           événements d'erreur et rejeux associés 90 jours, Vercel Analytics conserve les métriques d'audience 30 jours,
           PostHog conserve les événements produit 1 an (instance UE), Resend conserve les logs d'envoi d'emails 30
-          jours, Firebase Cloud Messaging ne conserve les tokens d'appareil que tant qu'ils sont valides (révoqués dès
-          la suppression de compte ou la désinstallation de l'application). Passés ces délais, les données sont
+          jours, Firebase Cloud Messaging ne conserve les tokens d'appareil que tant qu'ils sont valides (révoqués lors
+          de la suppression de compte ou de la désinstallation de l'application). Passés ces délais, les données sont
           supprimées par les prestataires selon leurs politiques respectives.
         </p>
       </Section>

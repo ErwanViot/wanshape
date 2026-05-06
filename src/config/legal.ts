@@ -22,7 +22,6 @@ export const CURRENT_CGU_VERSION = '2026-05a';
  * and undermine the informed-consent requirement (art. 7 RGPD).
  */
 export const CGU_VERSION_CHANGES: string[] = [
-  "Ajout de PostHog (analyse produit du parcours utilisateur, hébergée sur l'instance européenne, masquage strict des saisies, aucun rejeu de session ni heatmap, aucune donnée de santé transmise).",
-  'Ajout de Google Firebase Cloud Messaging (acheminement des notifications push pour les applications mobiles iOS/Android uniquement, aucun contenu personnel transmis).',
-  'Mise à jour correspondante de la liste des transferts encadrés hors Union européenne (PostHog Inc. et Google LLC, encadrés par le Data Privacy Framework UE-US et les CCT).',
+  "Ajout de PostHog comme outil d'analyse produit : hébergement sur l'instance européenne, masquage strict des saisies à la source, aucun rejeu de session ni heatmap, aucune donnée de santé transmise.",
+  "Ajout de Google Firebase Cloud Messaging pour acheminer les notifications push des applications mobiles iOS et Android : seul un identifiant technique de l'appareil est transmis, jamais le contenu personnel.",
 ];
