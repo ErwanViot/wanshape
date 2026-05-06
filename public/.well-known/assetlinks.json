@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "fr.wansoft.wan2fit",
-      "sha256_cert_fingerprints": ["TODO_ANDROID_RELEASE_SHA256"]
+      "sha256_cert_fingerprints": ["5C:A9:BC:D1:C9:FD:6B:DB:96:28:E2:AD:49:17:24:C0:91:E9:09:AF:B4:DA:2B:48:95:F1:5B:76:5F:68:08:BB"]
     }
   }
 ]
