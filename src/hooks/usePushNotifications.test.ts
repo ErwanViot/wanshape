@@ -65,9 +65,15 @@ describe('usePushNotifications', () => {
     supabaseValue = { functions: { invoke: mockInvoke } };
     mockAddListener.mockResolvedValue({ remove: mockRemove });
     mockInvoke.mockResolvedValue({ data: null, error: null });
+    // The hook short-circuits unless VITE_PUSH_ENABLED is the string "true".
+    // Default the flag on so existing happy-path tests keep covering the
+    // permission/registration flow; tests that exercise the off-state
+    // override this in their own setup.
+    vi.stubEnv('VITE_PUSH_ENABLED', 'true');
   });
 
   afterEach(() => {
+    vi.unstubAllEnvs();
     vi.clearAllMocks();
   });
 
@@ -97,6 +103,17 @@ describe('usePushNotifications', () => {
       mockIsNative.mockReturnValue(true);
       mockUserId = 'user-1';
       supabaseValue = null;
+
+      renderHook(() => usePushNotifications());
+
+      expect(mockCheckPermissions).not.toHaveBeenCalled();
+      expect(mockRegister).not.toHaveBeenCalled();
+    });
+
+    it('does nothing when VITE_PUSH_ENABLED is not "true" (Firebase not provisioned)', () => {
+      vi.stubEnv('VITE_PUSH_ENABLED', 'false');
+      mockIsNative.mockReturnValue(true);
+      mockUserId = 'user-1';
 
       renderHook(() => usePushNotifications());
 
