@@ -8,7 +8,7 @@
 
 ---
 
-## Avancement réel (mis à jour 2026-05-05)
+## Avancement réel (mis à jour 2026-05-06)
 
 | Phase | PR(s) | Statut | Notes |
 |---|---|---|---|
@@ -27,13 +27,21 @@
 | Onboarding carousel (4 écrans) | [#194](https://github.com/ErwanViot/wanshape/pull/194) + [#196](https://github.com/ErwanViot/wanshape/pull/196) | ✅ | Native-only, gate via Preferences |
 | Tests deep-link + auth-redirects | [#195](https://github.com/ErwanViot/wanshape/pull/195) | ✅ | 13 tests, jsdom devDep |
 | Doc rebrand DESIGN_SYSTEM | [#197](https://github.com/ErwanViot/wanshape/pull/197) | ✅ | |
+| Dark splash (assets + iOS color set) | [#199](https://github.com/ErwanViot/wanshape/pull/199) | ✅ | Removes iOS white flash on cold start |
+| Tests `useOnboarding` + `useNetworkStatus` + `useWakeLock` | [#200](https://github.com/ErwanViot/wanshape/pull/200), [#202](https://github.com/ErwanViot/wanshape/pull/202), [#203](https://github.com/ErwanViot/wanshape/pull/203) | ✅ | 20 tests cumulés |
+| `npm run sync:version` | [#204](https://github.com/ErwanViot/wanshape/pull/204) | ✅ | Propage `package.json#version` vers iOS + Android |
+| PostHog analytics + RGPD-strict masking | [#205](https://github.com/ErwanViot/wanshape/pull/205) → [#208](https://github.com/ErwanViot/wanshape/pull/208) | ✅ | Lazy load, instance EU, mask_all_text, art. 9 RGPD respecté |
+| Haptic countdown 3-2-1 | [#209](https://github.com/ErwanViot/wanshape/pull/209) | ✅ | Light tick sur 3-2, heavy go sur 1, mirror du beep audio |
+| Privacy policy : déclaration PostHog + FCM | [#210](https://github.com/ErwanViot/wanshape/pull/210) | ✅ | Bump `CURRENT_CGU_VERSION` → `2026-05a`, modal de revalidation |
+| Splash polish (rAF + 400ms fade) | [#211](https://github.com/ErwanViot/wanshape/pull/211) | ✅ | Évite le black gap au cold start |
+| Store listings FR (App Store + Play) | #212 | ✅ | Draft `docs/app-store-description.md` prêt |
+| Privacy Labels Apple + Play Data Safety | #213 | ✅ | Réf interne `docs/privacy-labels.md`, no ATT prompt |
 
 **Release web associée** : [#190](https://github.com/ErwanViot/wanshape/pull/190) → tag `v2.1.0` → wan2fit.fr (recettes + nutrition retro + nav + POC acquisition). Migrations prod 023+024 appliquées + 49 recettes FR/EN seedées.
 
 ### Restant
 
-**Sans bloqueur externe** :
-- Splash screen polish (animation transition, fond brand)
+**Sans bloqueur externe** : aucun. Toutes les tâches « pure dev » sont terminées et sur `develop`. La prochaine étape produit (release web `v2.2.0`) consistera à promouvoir `develop` → `main` avec `VITE_POSTHOG_KEY` configuré côté Vercel pour activer les events PostHog en prod.
 
 **Bloqué par Apple Developer enrollment** (D-U-N-S en cours) :
 - Associated Domains entitlement iOS (`applinks:wan2fit.fr`)
@@ -42,15 +50,15 @@
 - Code signing iOS + TestFlight + soumission App Store
 
 **Bloqué par comptes externes à créer** :
-- PostHog Cloud EU (gratuit) — analytics
 - Capgo (14-99 €/mois) — OTA updates
 - Firebase project + APNs key (.p8) + `google-services.json` — push réellement fonctionnel
+- (PostHog Cloud EU est désormais provisionné et intégré, voir #205-#208)
 
 **Bloqué par assets à fournir** :
 - Apple Team ID (post enrollment) → remplacer `TODO_APPLE_TEAM_ID` dans `apple-app-site-association`
 - Android release keystore SHA-256 → remplacer `TODO_ANDROID_RELEASE_SHA256` dans `assetlinks.json`
-- Demo account App Review (`review@wan2fit.fr`)
-- Screenshots stores
+- Screenshots stores (à produire avant soumission)
+- (Le compte démo `review@wan2fit.fr` est créé en prod, premium activé manuellement, cf. memory `reference_review_account.md`)
 
 ---
 
