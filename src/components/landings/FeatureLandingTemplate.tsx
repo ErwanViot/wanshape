@@ -28,11 +28,14 @@ export function FeatureLandingTemplate({ meta, hero, benefits, finalCta }: Featu
   // canonical FR path — that would override a deliberate language switch
   // by the user (LocaleToggle navigates to the twin URL when one exists,
   // but on URLs without a mirror the user's choice must win).
+  // i18n.language is listed as a dep on purpose: the i18n instance is a
+  // stable singleton so the effect would otherwise miss a language change
+  // happening between pathname updates.
   useEffect(() => {
     if (pathname.startsWith('/en/') && i18n.language !== 'en') {
       void i18n.changeLanguage('en');
     }
-  }, [pathname, i18n]);
+  }, [pathname, i18n.language, i18n]);
 
   useDocumentHead({ title: meta.title, description: meta.description });
 

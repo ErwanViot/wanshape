@@ -52,6 +52,9 @@ const PATH_PAIRS: ReadonlyArray<readonly [string, string]> = [
  * target locale, which is the closest stable destination.
  */
 export function twinPath(pathname: string, target: SupportedLocale): string | null {
+  // Prefix checks must come before the exact-match loop: a path like
+  // `/nutrition/recettes/<slug>` would otherwise fall through and return
+  // null instead of falling back to the listing.
   if (target === 'en' && pathname.startsWith('/nutrition/recettes/')) return '/en/nutrition/recipes';
   if (target === 'fr' && pathname.startsWith('/en/nutrition/recipes/')) return '/nutrition/recettes';
 

@@ -79,3 +79,23 @@ Alternative plus fine si `maskAllInputs: true` est trop strict pour le debug :
 3. Sinon refetch et stocker
 
 
+## Recipe slug map — `twinPath` lossy on detail pages
+
+**Priorité** : faible (UX)
+**Introduit par** : PR #216 (fix locale toggle persistence)
+
+### Symptôme
+Sur `/en/nutrition/recipes/marinated-salmon-poke-bowl`, basculer en FR via le LocaleToggle redirige vers l'index `/nutrition/recettes` au lieu de la version FR de la recette (`/nutrition/recettes/poke-bowl-saumon-marine`). L'utilisateur perd son contexte de lecture. Symétrique côté EN.
+
+### Cause
+Les slugs de recette sont localisés indépendamment (FR : `poke-bowl-saumon-marine`, EN : `marinated-salmon-poke-bowl`). `utils/localePath.ts#twinPath` n'a pas accès au mapping `recipe_id → slug` côté client : il se rabat sur l'index, qui est au moins une destination stable.
+
+### Fix proposé
+1. Construire au build un objet `RECIPE_SLUG_MAP: Record<recipe_id, { fr: string; en: string }>` à partir des seeds JSON (`scripts/data/recipes_*_seed.json`) et l'inclure dans le bundle.
+2. Dans `twinPath`, parser le slug courant, retrouver le `recipe_id`, projeter vers le slug de l'autre locale.
+3. Garder le fallback à l'index si l'id n'est pas trouvé (recette ajoutée à un seul locale, etc.).
+
+### Coût/bénéfice
+Map de ~50 entrées soit ~3 KB gzipped. Effort : ~1 h. Bénéfice : pas de saut de contexte sur les détails recettes — important si on push les recettes en SEO.
+
+
