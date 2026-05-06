@@ -99,3 +99,91 @@ Les slugs de recette sont localisés indépendamment (FR : `poke-bowl-saumon-mar
 Map de ~50 entrées soit ~3 KB gzipped. Effort : ~1 h. Bénéfice : pas de saut de contexte sur les détails recettes — important si on push les recettes en SEO.
 
 
+## Migration storage Capacitor : Preferences → Secure Storage (CRITIQUE iOS/Android)
+
+**Priorité** : critique (avant soumission stores)
+**Introduit par** : audit sécurité 2026-05-06
+
+### Symptôme
+`@capacitor/preferences` stocke dans `NSUserDefaults` côté iOS et `SharedPreferences` côté Android, **sans chiffrement**. Les tokens Supabase (access_token, refresh_token) écrits via `src/lib/supabase-storage.ts` sont donc lisibles :
+- iOS : via un backup iTunes non chiffré, ou via une extension d'app, ou via un MDM compromis.
+- Android : via un backup ADB sur device USB-debug enabled, ou via Google Cloud Backup auto-enabled.
+
+Mitigation Android temporaire en place : `allowBackup="false"` + `data_extraction_rules.xml` dans manifest. Couvre les backups, pas le storage en clair sur device rooté.
+
+### Fix proposé
+Migrer vers `@capacitor-community/secure-storage` (Keychain Services iOS / EncryptedSharedPreferences Android) ou écrire un plugin custom `SecureStoragePlugin` qui wrappe les mêmes APIs côté natif.
+
+Côté code :
+1. Remplacer `import { Preferences } from '@capacitor/preferences'` par le plugin secure dans `src/lib/supabase-storage.ts`.
+2. Migration des tokens existants : au cold-start, lire l'éventuel token dans Preferences, ré-écrire dans le secure storage, supprimer l'ancien.
+3. Tester un cycle complet sign-in / app kill / cold-start / session restored sur iPhone réel + Android réel avec un nouvel storage.
+
+### Coût/bénéfice
+Effort : 4-6 h (plugin + migration code + tests + smoke real device). Bénéfice : fermeture du finding sécurité bloquant pour soumission App Store. À traiter en PR dédiée.
+
+
+## a11y backlog — items audit 2026-05-06 non corrigés dans la PR audit
+
+**Priorité** : haute (avant soumission)
+**Introduit par** : audit frontend HIG/a11y 2026-05-06
+
+Items non corrigés dans la PR `fix/post-audit-comprehensive` faute de temps, à traiter en PR dédiée a11y :
+
+- **`MealEntryForm.tsx`** : input fields sans `<label>` explicite, message d'erreur sans `aria-describedby` reliant input ↔ erreur. Wrapper inputs avec label visible ou `aria-label` + lier `aria-describedby` au message d'erreur.
+- **`CguRevalidationModal.tsx`** : message d'erreur de save (`<p text-red-400>`) sans `role="alert"` ou `aria-live="assertive"`. Ajouter `role="alert"` pour annonce VoiceOver/TalkBack.
+- **`PricingPage.tsx`** : conteneur racine sans `pb-[calc(4rem+env(safe-area-inset-bottom))]`. Risque de masquer le bouton d'achat sous le BottomNav + home indicator iPhone.
+- **`RecipeFilters.tsx`** :
+  - Chips de catégorie + tag-chips à `~24-30 px` de hauteur, sous le seuil 44pt iOS / 48dp Android. Élargir hit-zone (wrapper `min-h-[44px]` + visuel inchangé).
+  - `<details>/<summary>` pour les tags : état ouvert/fermé pas annoncé fiablement par TalkBack mobile. Préférer `<button aria-expanded>` + région cachée conditionnelle.
+  - Bouton Reset : icône X seule + `text-xs text-muted` → contraste borderline AA en light mode (~4.1:1). Élargir la hit-zone et utiliser un token sémantique mieux contrasté.
+- **`OnboardingCarousel.tsx`** : ajouter `aria-roledescription="slide"` + `aria-setsize` + `aria-posinset` sur chaque `<section>` slide (déjà présent au niveau du conteneur).
+- **`BrandHeader` BottomNav `text-[10px]`** : labels potentiellement tronqués sur iPhone SE (375 px de large × 5 onglets). Tester sur device et passer à `text-xs` ou réduire le nombre d'onglets si nécessaire.
+
+### Coût/bénéfice
+Effort : 2-3 h cumulés. Bénéfice : conformité WCAG 2.1 AA + Apple guideline 4.0 (accessibility) avant soumission.
+
+
+## Tests gaps — couverture mobile
+
+**Priorité** : moyenne
+**Introduit par** : audit quality 2026-05-06
+
+Hooks/utilitaires mobiles sans test unitaire propre :
+- `registerDeepLinkListener` (`src/lib/deepLinks.ts`) : seul le parser est testé, le lifecycle (cancelled flag, StrictMode double-mount, removeListener) est testé indirectement via `App.tsx`. Ajouter un test propre avec mock `@capacitor/app`.
+- `openWebUpgrade` (`src/lib/native-upgrade.ts`) : flux paywall mobile (invocation edge fn + `Browser.open`) non couvert. Mocker `supabase.functions.invoke` + `@capacitor/browser`.
+- `initAnalyticsAsync` / `initSentryAsync` : pas de test sur la queue/flush des events émis avant init.
+- `supabase/functions/send-push/index.ts` : aucune couverture Deno (FCM JWT signing RS256, FCM HTTP v1 envoi, gestion d'erreurs invalid_token avec cleanup `user_devices`).
+
+### Coût/bénéfice
+Effort : 3-4 h cumulés. Bénéfice : régression-protection sur les chemins critiques mobile.
+
+
+## Sécurité backlog — finding audit 2026-05-06 non bloquants
+
+**Priorité** : moyenne
+**Introduit par** : audit sécurité 2026-05-06
+
+- **`register-push-device` token re-assignment** : `onConflict: 'token'` permet à un user B de réassigner un token FCM existant vers son propre `user_id`. Comportement par-design FCM (un token = un device, ownership courant), mais théoriquement exploitable si un attaquant obtient un token tier. Mitigation propre = device attestation (Play Integrity API + DeviceCheck), gros chantier.
+- **Custom scheme `wan2fit://` hijacking Android** : sans `android:autoVerify` (custom schemes ne le supportent pas), une app malveillante peut déclarer le même intent-filter et intercepter les liens. Mitigation : ne **JAMAIS** transporter de credentials via le custom scheme, utiliser uniquement les App Links HTTPS pour les routes sensibles (reset password déjà via `https://wan2fit.fr/auth/callback`).
+- **Android `minifyEnabled false` en release** : bytecode DEX non obfusqué. Activer R8 + règles ProGuard pour Capacitor (modifs `android/app/build.gradle` + `proguard-rules.pro`).
+- **`send-push` rate-limiting** : pas de quota par user/heure. Si `INTERNAL_PUSH_SECRET` fuit, attaque spam-notifications possible. Cf. note existante "rate limiting + OAuth cache" plus haut dans ce fichier.
+- **iOS Info.plist usage descriptions à anticiper** : `NSFaceIDUsageDescription`, `NSPhotoLibraryUsageDescription` non présents — à ajouter si features futures touchent biométrie ou photos.
+- **WKAppBoundDomains à valider** : `limitsNavigationsToAppBoundDomains: true` dans `capacitor.config.ts`. S'assurer que les navigations programmatiques vers `wan2fit.fr`, `*.supabase.co`, `*.stripe.com` sont déclarées dans `WKAppBoundDomains` dans `Info.plist`.
+- **`deep-link-parse.ts` host validation** : valider que l'host d'un Universal Link est bien `wan2fit.fr` ou `www.wan2fit.fr` avant de router. Risk faible (routage interne, pas d'open externe).
+
+### Coût/bénéfice
+Effort cumulé : 2-3 h. Bénéfice : profondeur défensive avant soumission stores.
+
+
+## UX backlog — convention modales unifiée
+
+**Priorité** : faible (cohérence)
+**Introduit par** : audit frontend 2026-05-06
+
+WelcomeModal, HealthDisclaimer, CguRevalidationModal sont centrées (`items-center`). MealEntryForm est désormais centrée aussi (PR #219). Aucune modale mobile-first en bottom-sheet n'existe vraiment. À trancher : soit on adopte le bottom-sheet Apple HIG/Material (modales mobile depuis le bas) pour TOUTES, soit on garde le centré partout. Décision design + audit complet (rappels, formulaires, scanner barcode) à faire.
+
+### Coût/bénéfice
+Effort : 1 h après décision design. Bénéfice : cohérence de marque.
+
+

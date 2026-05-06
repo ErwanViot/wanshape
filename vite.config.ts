@@ -83,11 +83,21 @@ export default defineConfig(({ mode }) => ({
     sourcemap: 'hidden',
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          router: ['react-router'],
-          supabase: ['@supabase/supabase-js'],
-          sentry: ['@sentry/react'],
+        // The literal-array form of `manualChunks` does NOT force every
+        // submodule of a package into the named chunk: Rollup only puts
+        // the entry point there and lets dependencies (e.g. react-dom's
+        // scheduler) be hoisted into the importer chunks. The function
+        // form below walks each module id and forces every file under
+        // a given package path into the dedicated chunk.
+        manualChunks(id) {
+          if (id.includes('node_modules/react-dom/') || id.includes('node_modules/scheduler/')) {
+            return 'react-vendor';
+          }
+          if (id.includes('node_modules/react/')) return 'react-vendor';
+          if (id.includes('node_modules/react-router')) return 'router';
+          if (id.includes('node_modules/@supabase/supabase-js')) return 'supabase';
+          if (id.includes('node_modules/@sentry/react')) return 'sentry';
+          return undefined;
         },
       },
     },

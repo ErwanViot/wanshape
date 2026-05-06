@@ -31,7 +31,12 @@ export function PublicLayout() {
       <OfflineBanner />
       <BrandHeader />
       <SessionExpiredBanner />
-      <main id="main-content" className="flex-1 pb-16 md:pb-0">
+      {/* BottomNav is h-16 (4rem). On iOS it sits above the home
+          indicator (~34pt = ~2.125rem extra), so on small screens we
+          need padding equal to the nav height + safe-area-bottom to
+          avoid clipping the last items. md:pb-0 because the BottomNav
+          is hidden on desktop. */}
+      <main id="main-content" className="flex-1 pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">
         <div className="animate-fade-in">
           <Outlet />
         </div>

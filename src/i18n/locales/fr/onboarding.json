@@ -12,7 +12,8 @@
     },
     "sessions": {
       "title": "Séances guidées et programmes",
-      "subtitle": "8 formats variés, de 25 à 45 minutes. Programmes IA personnalisés selon ton objectif."
+      "subtitle": "8 formats variés, de 25 à 45 minutes. Programmes IA personnalisés selon ton objectif.",
+      "image_alt": "Capture d'écran du Player Wan2Fit affichant un compte à rebours HIIT en cours"
     },
     "nutrition": {
       "title": "Nutrition simple et lisible",

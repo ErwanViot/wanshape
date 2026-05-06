@@ -27,6 +27,18 @@ interface ServiceAccount {
   project_id: string;
 }
 
+// Constant-time string compare. We can't reuse Node's
+// `crypto.timingSafeEqual` (Deno edge runtime), so we XOR every byte
+// pair and only look at the accumulated result at the end. Strings of
+// different lengths short-circuit to false immediately, but the cost
+// of length mismatch is negligible compared to the secret entropy.
+function timingSafeEqualString(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
 function pemToArrayBuffer(pem: string): ArrayBuffer {
   const cleaned = pem
     .replace('-----BEGIN PRIVATE KEY-----', '')
@@ -138,7 +150,11 @@ Deno.serve(async (req: Request) => {
       headers: { 'Content-Type': 'application/json' },
     });
   }
-  if (req.headers.get('x-internal-secret') !== internalSecret) {
+  // Constant-time compare so an attacker with network access can't
+  // bruteforce INTERNAL_PUSH_SECRET byte-by-byte via timing analysis
+  // on the early-out behaviour of `!==` on string mismatch.
+  const provided = req.headers.get('x-internal-secret') ?? '';
+  if (!timingSafeEqualString(provided, internalSecret)) {
     return new Response(JSON.stringify({ error: 'Forbidden' }), {
       status: 403,
       headers: { 'Content-Type': 'application/json' },

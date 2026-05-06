@@ -5,6 +5,7 @@
     "heading": "Recipes",
     "subtitle": "49 recipes built for performance, recovery, and everyday meals.",
     "empty": "No recipe matches your filters.",
+    "empty_reset": "Reset filters",
     "count_one": "{{count}} recipe",
     "count_other": "{{count}} recipes"
   },
