@@ -7,7 +7,7 @@
     "eyebrow": "AI programs",
     "title": "A tailored plan that fits you.",
     "subtitle": "3 questions, your complete plan in 30 seconds. Your frequency, your goal, your level — the AI builds the program. And each cycle adjusts so you don't burn out.",
-    "cta_primary": "Create my free program",
+    "cta_primary": "Create my program",
     "cta_secondary": "Browse the standard programs",
     "visual_list_alt": "Wan2Fit programs list",
     "visual_goal_alt": "Choose your training goal",
@@ -28,7 +28,7 @@
   "final_cta": {
     "title": "Launch your plan in 30 seconds.",
     "subtitle": "Create a free account, answer 3 questions, your program is ready.",
-    "cta_primary": "Create my free program",
+    "cta_primary": "Create my program",
     "cta_secondary": "Browse the standard programs"
   }
 }
