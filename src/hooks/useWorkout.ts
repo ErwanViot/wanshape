@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { countdownGo, countdownTick } from '../lib/haptics.ts';
 import type { AtomicStep, PlayerStatus } from '../types/player.ts';
 import { useAudio } from './useAudio.ts';
 import { useTimer } from './useTimer.ts';
@@ -108,7 +109,14 @@ export function useWorkout(steps: AtomicStep[]) {
         audio.speakCountdown(timer.remaining);
       } else if (status === 'active') {
         audio.beepCountdown();
+      } else {
+        // Other phases (rest, transition, prepare) intentionally have no
+        // audio cue here — and shouldn't get a haptic either.
+        return;
       }
+      // Haptic mirror of the audio cue (native only, no-op on web).
+      // Heavy pulse on the final tick (1) so the body feels the "go".
+      void (timer.remaining === 1 ? countdownGo() : countdownTick());
     }
   }, [timer.remaining, audio.beepCountdown, audio.speakCountdown, status, timer.isRunning]);
 
