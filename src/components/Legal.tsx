@@ -172,7 +172,7 @@ function PolitiqueConfidentialite() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Politique de confidentialité</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04b)</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : mai 2026 (version 2026-05a)</p>
 
       <Section title="Responsable du traitement">
         <p>
@@ -337,7 +337,11 @@ function PolitiqueConfidentialite() {
       </Section>
 
       <Section title="Services tiers">
-        <p>Le Site fait appel aux services tiers suivants :</p>
+        <p>
+          Le Site et les applications mobiles WAN2FIT (iOS / Android) font appel aux services tiers suivants. Certains
+          services ne sont activés que sur les applications mobiles ou que sur le site — la portée est précisée pour
+          chacun lorsqu'elle est restreinte :
+        </p>
         <ul className="list-disc list-inside space-y-1">
           <li>
             <strong className="text-strong">Vercel</strong> — hébergement du site (logs serveur standard : adresse IP,
@@ -372,6 +376,22 @@ function PolitiqueConfidentialite() {
             d'exécution, rejeu des interactions à l'écran. Saisies textuelles et contenus de champs restituables peuvent
             y figurer — n'entrez jamais d'informations sensibles hors des champs prévus. Siège aux États-Unis
             (Functional Software, Inc.).
+          </li>
+          <li>
+            <strong className="text-strong">PostHog</strong> — analyse produit du parcours utilisateur (écrans
+            consultés, événements de conversion, fonctionnalités utilisées). Hébergement sur l'instance européenne
+            (Francfort). Les saisies textuelles et le contenu de l'interface sont systématiquement masqués avant envoi.
+            Aucun enregistrement vidéo, heatmap ou rejeu de session n'est activé. Aucune donnée déclarée comme étant
+            relative à la santé (objectifs, blessures, repas, poids) n'est transmise. Siège aux États-Unis (PostHog
+            Inc.), traitement effectué sur l'instance UE.
+          </li>
+          <li>
+            <strong className="text-strong">Google Firebase Cloud Messaging</strong> —{' '}
+            <em>applications mobiles iOS et Android uniquement.</em> Acheminement des notifications push que vous avez
+            explicitement activées dans vos préférences. Un identifiant technique de l'appareil (token FCM) est transmis
+            pour permettre l'envoi ; aucun contenu personnel n'est envoyé. Vous pouvez désactiver les notifications à
+            tout moment depuis les réglages système ou les préférences de l'application. Siège aux États-Unis (Google
+            LLC).
           </li>
           <li>
             <strong className="text-strong">Resend</strong> — envoi des emails transactionnels (confirmation
@@ -411,6 +431,15 @@ function PolitiqueConfidentialite() {
             Session Replay déclenché sur erreur) — transferts encadrés par les CCT
           </li>
           <li>
+            <strong className="text-strong">PostHog Inc.</strong> (analyse produit) — l'éditeur a son siège aux
+            États-Unis mais les données sont stockées et traitées sur l'instance européenne (Francfort) ; les transferts
+            éventuels vers le siège américain sont encadrés par les CCT
+          </li>
+          <li>
+            <strong className="text-strong">Google LLC</strong> (Firebase Cloud Messaging — notifications push mobiles)
+            — transferts encadrés par le Data Privacy Framework UE-US et les CCT
+          </li>
+          <li>
             <strong className="text-strong">Resend, Inc.</strong> (emails transactionnels) — transferts encadrés par les
             CCT
           </li>
@@ -440,8 +469,10 @@ function PolitiqueConfidentialite() {
         <p>
           <strong className="text-strong">Durées chez nos sous-traitants techniques :</strong> Sentry conserve les
           événements d'erreur et rejeux associés 90 jours, Vercel Analytics conserve les métriques d'audience 30 jours,
-          Resend conserve les logs d'envoi d'emails 30 jours. Passés ces délais, les données sont supprimées par les
-          prestataires selon leurs politiques respectives.
+          PostHog conserve les événements produit 1 an (instance UE), Resend conserve les logs d'envoi d'emails 30
+          jours, Firebase Cloud Messaging ne conserve les tokens d'appareil que tant qu'ils sont valides (révoqués lors
+          de la suppression de compte ou de la désinstallation de l'application). Passés ces délais, les données sont
+          supprimées par les prestataires selon leurs politiques respectives.
         </p>
       </Section>
 
@@ -491,7 +522,7 @@ function CGU() {
     <>
       <h1 className="text-2xl font-bold text-heading mb-6">Conditions Générales d'Utilisation</h1>
 
-      <p className="text-sm text-faint mb-6">Dernière mise à jour : avril 2026 (version 2026-04b)</p>
+      <p className="text-sm text-faint mb-6">Dernière mise à jour : mai 2026 (version 2026-05a)</p>
 
       <Section title="Objet">
         <p>
