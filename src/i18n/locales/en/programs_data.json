@@ -1,5 +1,8 @@
 {
   "debutant-4-semaines": {
+    "title": "Beginner — 4 weeks",
+    "description": "A progressive program to ease into working out",
+    "goals": ["Discover the basic movements", "Build a routine", "Improve mobility"],
     "headline": "Build your foundations",
     "intro": "Getting back into sport or starting out? This 4-week program guides you step by step. Each week adds a little more intensity so you progress without ever feeling overwhelmed.",
     "audience": "Returning to activity, true beginners, or anyone who wants to (re)start on solid ground.",
@@ -34,6 +37,9 @@
     "tip": "No need to push hard from day one. Consistency is what matters most. 3 sessions per week is enough to see real results in a month."
   },
   "remise-en-forme": {
+    "title": "Get back in shape",
+    "description": "Comprehensive cardio and strength training program",
+    "goals": ["Get back in shape", "Burn calories", "Strengthen the whole body"],
     "headline": "Find your rhythm back",
     "intro": "You used to train but fell off the wagon? This program gets things back on track. Varied formats from the first week, progressive intensity — you'll find your feel quickly.",
     "audience": "Former athletes getting back in shape, or intermediate-level people who want to structure their training.",
@@ -68,6 +74,9 @@
     "tip": "If a session feels easy, that's normal — it means you're in shape for it. The following week will raise the bar."
   },
   "cardio-express": {
+    "title": "Cardio Express",
+    "description": "Short and intense HIIT and Tabata sessions",
+    "goals": ["Improve cardio", "Maximize your time", "Push your limits"],
     "headline": "Short, intense, effective",
     "intro": "No time for an hour of sport? This program bets on short, high-intensity sessions. 20 minutes is all it takes to sweat, progress, and get back to your day.",
     "audience": "Busy schedules, athletes who want results without spending hours training.",
