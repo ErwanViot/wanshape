@@ -7,20 +7,35 @@ function requestWithOrigin(origin?: string): Request {
 }
 
 describe('getAllowedOrigins', () => {
-  it('returns only production domains when ENVIRONMENT is "production"', () => {
+  it('returns the production domains AND the Capacitor WebView origins when ENVIRONMENT is "production"', () => {
     const origins = getAllowedOrigins('production');
-    expect(origins).toEqual(['https://wan2fit.fr', 'https://www.wan2fit.fr']);
+    expect(origins).toEqual([
+      'https://wan2fit.fr',
+      'https://www.wan2fit.fr',
+      'https://localhost',
+      'capacitor://localhost',
+    ]);
   });
 
-  it('includes dev origins for any other environment', () => {
+  it('includes dev origins AND native app origins for any other environment', () => {
     const origins = getAllowedOrigins('preview');
     expect(origins).toContain('http://localhost:5173');
     expect(origins).toContain('http://localhost:4173');
+    expect(origins).toContain('https://localhost');
+    expect(origins).toContain('capacitor://localhost');
   });
 
   it('includes dev origins when environment is null/undefined', () => {
     expect(getAllowedOrigins(null)).toContain('http://localhost:5173');
     expect(getAllowedOrigins(undefined)).toContain('http://localhost:5173');
+  });
+
+  it('always includes the Capacitor WebView origins regardless of environment', () => {
+    for (const env of ['production', 'preview', null, undefined]) {
+      const origins = getAllowedOrigins(env);
+      expect(origins).toContain('https://localhost');
+      expect(origins).toContain('capacitor://localhost');
+    }
   });
 });
 
@@ -53,6 +68,18 @@ describe('getCorsHeaders', () => {
     const req = requestWithOrigin('http://localhost:5173');
     const headers = getCorsHeaders(req, { environment: 'production' });
     expect(headers['Access-Control-Allow-Origin']).toBe(DEFAULT_ORIGIN);
+  });
+
+  it('reflects the Android Capacitor origin (https://localhost) in production', () => {
+    const req = requestWithOrigin('https://localhost');
+    const headers = getCorsHeaders(req, { environment: 'production' });
+    expect(headers['Access-Control-Allow-Origin']).toBe('https://localhost');
+  });
+
+  it('reflects the iOS Capacitor origin (capacitor://localhost) in production', () => {
+    const req = requestWithOrigin('capacitor://localhost');
+    const headers = getCorsHeaders(req, { environment: 'production' });
+    expect(headers['Access-Control-Allow-Origin']).toBe('capacitor://localhost');
   });
 
   it('always advertises POST and OPTIONS', () => {

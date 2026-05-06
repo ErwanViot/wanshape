@@ -18,12 +18,21 @@ export const PROD_ORIGINS = [
 
 export const DEV_ORIGINS = ['http://localhost:5173', 'http://localhost:4173'] as const;
 
+// Origins from which the Capacitor WebView serves the bundled web app:
+//  - Android: capacitor.config.ts sets androidScheme:'https' → https://localhost
+//  - iOS: default scheme (we don't override iosScheme) → capacitor://localhost
+// These need to be allowed in every environment because the live mobile app
+// calls the same edge functions that wan2fit.fr does. Without this entry the
+// signed-in user can't open the upgrade flow from the app.
+export const NATIVE_APP_ORIGINS = ['https://localhost', 'capacitor://localhost'] as const;
+
 export const DEFAULT_ORIGIN = 'https://wan2fit.fr';
 
 /**
  * Returns the list of origins the edge functions should accept CORS requests
- * from. In production, only the live domains are allowed; in any other
- * environment the local dev servers are added.
+ * from. In production, only the live domains AND the Capacitor WebView
+ * origins are allowed; in any other environment the local dev servers are
+ * also added.
  *
  * `environment` can be injected for deterministic tests; it defaults to the
  * `ENVIRONMENT` Deno env variable. The check is loose on purpose: anything
@@ -31,8 +40,8 @@ export const DEFAULT_ORIGIN = 'https://wan2fit.fr';
  * list.
  */
 export function getAllowedOrigins(environment?: string | null): readonly string[] {
-  if (environment === 'production') return PROD_ORIGINS;
-  return [...PROD_ORIGINS, ...DEV_ORIGINS];
+  if (environment === 'production') return [...PROD_ORIGINS, ...NATIVE_APP_ORIGINS];
+  return [...PROD_ORIGINS, ...DEV_ORIGINS, ...NATIVE_APP_ORIGINS];
 }
 
 export interface CorsHeaderOptions {
