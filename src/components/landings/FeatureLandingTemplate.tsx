@@ -23,14 +23,19 @@ export function FeatureLandingTemplate({ meta, hero, benefits, finalCta }: Featu
   const { i18n } = useTranslation();
   const { pathname } = useLocation();
 
-  // Sync i18n locale with URL prefix so EN-mirrored landing URLs always render
-  // English content, even when navigated via SPA (no full reload).
+  // Force EN when the URL is the EN-mirror so a crawler-friendly landing
+  // always renders English content. We deliberately do NOT force FR on the
+  // canonical FR path — that would override a deliberate language switch
+  // by the user (LocaleToggle navigates to the twin URL when one exists,
+  // but on URLs without a mirror the user's choice must win).
+  // i18n.language is listed as a dep on purpose: the i18n instance is a
+  // stable singleton so the effect would otherwise miss a language change
+  // happening between pathname updates.
   useEffect(() => {
-    const targetLng = pathname.startsWith('/en/') ? 'en' : 'fr';
-    if (i18n.language !== targetLng) {
-      void i18n.changeLanguage(targetLng);
+    if (pathname.startsWith('/en/') && i18n.language !== 'en') {
+      void i18n.changeLanguage('en');
     }
-  }, [pathname, i18n]);
+  }, [pathname, i18n.language, i18n]);
 
   useDocumentHead({ title: meta.title, description: meta.description });
 
