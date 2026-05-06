@@ -10,6 +10,13 @@ type OnboardingState = 'loading' | 'pending' | 'done';
 // NSUserDefaults / SharedPreferences) so a WebView storage purge doesn't
 // re-prompt the user.
 //
+// We intentionally use the plain (unencrypted) Preferences store here, NOT
+// the new SecureStorage adapter that supabase-storage.ts uses for auth
+// tokens. The onboarding flag is a non-sensitive boolean ("1"/null) — no
+// security gain to encrypting it, and Keychain entries don't survive an
+// app uninstall on iOS, so a reinstall would unnecessarily re-prompt the
+// user with the carousel.
+//
 // Web: returns 'done' immediately. The onboarding is intentionally
 // native-only — Apple App Reviewers care that the iOS first launch
 // pitches the value of the app, the PWA gets it via wan2fit.fr's home.
