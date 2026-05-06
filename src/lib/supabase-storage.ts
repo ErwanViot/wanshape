@@ -58,7 +58,7 @@ async function migrateLegacyKey(key: string): Promise<string | null> {
     const { value: legacy } = await Preferences.get({ key });
     if (legacy === null || legacy === undefined) return null;
     const { SecureStorage } = await loadSecureStorage();
-    await SecureStorage.set(key, legacy);
+    await SecureStorage.setItem(key, legacy);
     await Preferences.remove({ key });
     return legacy;
   } catch (err) {
@@ -70,15 +70,20 @@ async function migrateLegacyKey(key: string): Promise<string | null> {
 const secureStorageAdapter: StorageAdapter = {
   async getItem(key) {
     const { SecureStorage } = await loadSecureStorage();
-    const value = await SecureStorage.get(key);
-    if (typeof value === 'string') return value;
-    if (value !== null && value !== undefined) return String(value);
+    // `getItem` is the plugin's low-level string-only accessor (mirrors
+    // the `StorageLikeAsync` interface). It bypasses the JSON / Date
+    // round-trip that `get()` does and returns string | null verbatim,
+    // which is exactly what Supabase's storage adapter expects.
+    const value = await SecureStorage.getItem(key);
+    if (value !== null) return value;
     // Cold start after upgrade: token may still be in @capacitor/preferences.
     return migrateLegacyKey(key);
   },
   async setItem(key, value) {
     const { SecureStorage } = await loadSecureStorage();
-    await SecureStorage.set(key, value);
+    // `setItem` is the string-only sibling of `set` — same rationale as
+    // `getItem` above (no JSON encoding, no convertDate magic).
+    await SecureStorage.setItem(key, value);
     // Defensive: if a stale legacy copy exists (mid-migration crash, etc.)
     // wipe it so the secure copy is the unique source of truth from now on.
     try {
@@ -91,7 +96,7 @@ const secureStorageAdapter: StorageAdapter = {
   },
   async removeItem(key) {
     const { SecureStorage } = await loadSecureStorage();
-    await SecureStorage.remove(key);
+    await SecureStorage.removeItem(key);
     try {
       const { Preferences } = await loadPreferences();
       await Preferences.remove({ key });
