@@ -36,7 +36,7 @@ export function localizedProgramFields(program: ProgramFieldsInput, t: TFunction
     return { title: fallbackTitle, description: fallbackDescription, goals: fallbackGoals };
   }
 
-  const title = t(`programs_data:${program.slug}.title`, { defaultValue: fallbackTitle });
+  const titleRaw = t(`programs_data:${program.slug}.title`, { defaultValue: fallbackTitle });
   const descriptionRaw = t(`programs_data:${program.slug}.description`, {
     defaultValue: fallbackDescription ?? '',
   });
@@ -44,6 +44,7 @@ export function localizedProgramFields(program: ProgramFieldsInput, t: TFunction
     returnObjects: true,
     defaultValue: fallbackGoals,
   });
+  const title = typeof titleRaw === 'string' && titleRaw.length > 0 ? titleRaw : fallbackTitle;
   const description = typeof descriptionRaw === 'string' && descriptionRaw.length > 0 ? descriptionRaw : null;
   const goals = Array.isArray(goalsRaw) ? (goalsRaw as string[]) : fallbackGoals;
   return { title, description, goals };
