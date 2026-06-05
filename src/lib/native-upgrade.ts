@@ -44,3 +44,18 @@ export async function openWebUpgrade(priceId: string): Promise<string | null> {
   });
   return null;
 }
+
+// Apple guideline 3.1.3(b) Multiplatform Service: the iOS/Android app must
+// never display prices or purchase CTAs. When the user shows interest in
+// premium without having picked a plan yet, we open wan2fit.fr/tarifs in
+// SafariViewController so they discover and buy the subscription on the
+// web. No magic link here — the user re-authenticates on the website if
+// needed; we don't want to leak a single-use link for a price page that
+// doesn't have a hardcoded priceId yet.
+export async function openWebPricingPage(): Promise<void> {
+  const { Browser } = await import('@capacitor/browser');
+  await Browser.open({
+    url: 'https://wan2fit.fr/tarifs',
+    presentationStyle: 'popover',
+  });
+}
