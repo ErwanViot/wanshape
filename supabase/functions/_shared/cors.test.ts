@@ -7,15 +7,25 @@ function requestWithOrigin(origin?: string): Request {
 }
 
 describe('getAllowedOrigins', () => {
-  it('returns only production domains when ENVIRONMENT is "production"', () => {
+  it('returns prod web domains + Capacitor native schemes when ENVIRONMENT is "production"', () => {
     const origins = getAllowedOrigins('production');
-    expect(origins).toEqual(['https://wan2fit.fr', 'https://www.wan2fit.fr']);
+    expect(origins).toEqual([
+      'https://wan2fit.fr',
+      'https://www.wan2fit.fr',
+      // Native Capacitor app schemes — must be allowed in production so the
+      // iOS/Android shells can hit the edge functions.
+      'capacitor://localhost',
+      'https://localhost',
+      'http://localhost',
+    ]);
   });
 
   it('includes dev origins for any other environment', () => {
     const origins = getAllowedOrigins('preview');
     expect(origins).toContain('http://localhost:5173');
     expect(origins).toContain('http://localhost:4173');
+    // Native schemes also reachable in non-prod since they live in PROD_ORIGINS.
+    expect(origins).toContain('capacitor://localhost');
   });
 
   it('includes dev origins when environment is null/undefined', () => {
@@ -35,6 +45,18 @@ describe('getCorsHeaders', () => {
     const req = requestWithOrigin('http://localhost:5173');
     const headers = getCorsHeaders(req, { environment: 'preview' });
     expect(headers['Access-Control-Allow-Origin']).toBe('http://localhost:5173');
+  });
+
+  it('reflects the iOS Capacitor scheme in production (regression for #225)', () => {
+    const req = requestWithOrigin('capacitor://localhost');
+    const headers = getCorsHeaders(req, { environment: 'production' });
+    expect(headers['Access-Control-Allow-Origin']).toBe('capacitor://localhost');
+  });
+
+  it('reflects the Android Capacitor scheme in production (regression for #225)', () => {
+    const req = requestWithOrigin('https://localhost');
+    const headers = getCorsHeaders(req, { environment: 'production' });
+    expect(headers['Access-Control-Allow-Origin']).toBe('https://localhost');
   });
 
   it('falls back to the default origin for an unknown caller', () => {
