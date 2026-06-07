@@ -13,6 +13,7 @@ import { formatDate } from '../../utils/date.ts';
 import { getInitials } from '../../utils/getInitials.ts';
 import { DeleteAccountDialog } from './DeleteAccountDialog.tsx';
 import { NotificationsSection } from './NotificationsSection.tsx';
+import { RestorePurchasesButton } from './RestorePurchasesButton.tsx';
 
 const MAX_AVATAR_SIZE = 2 * 1024 * 1024; // 2 Mo
 const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -256,6 +257,9 @@ export function SettingsPage() {
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
                 {t('subscription.go_premium')}
               </Link>
+              {/* Restore button — required by Apple App Review for any app
+                  that sells IAPs. Renders nothing on web. */}
+              <RestorePurchasesButton />
             </div>
           )}
         </section>

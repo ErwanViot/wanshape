@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useSubscription } from '../hooks/useSubscription.ts';
 import { isNative } from '../lib/capacitor.ts';
-import { NativeUpgradeWall } from './auth/NativeUpgradeWall.tsx';
+import { NativePricingCards } from './auth/NativePricingCards.tsx';
 import { PricingCards } from './PricingCards.tsx';
 import { ScreenshotCarousel } from './ScreenshotCarousel.tsx';
 
@@ -19,13 +19,13 @@ export function PremiumPromoPage() {
     description: t('premium.page_description'),
   });
 
-  // Apple guideline 3.1.3(b): on native, swap the whole marketing page
+  // Apple guideline 3.1.1: on native, swap the whole marketing page
   // (which includes Tarifs anchor + PricingCards + Stripe CTA) for the
-  // multiplatform-service wall. Premium users keep their normal view —
+  // RevenueCat-backed paywall. Premium users keep their normal view —
   // the page still serves as a "thank you" + feature recap surface for
   // them.
   if (isNative() && !isPremium) {
-    return <NativeUpgradeWall />;
+    return <NativePricingCards />;
   }
 
   return (
