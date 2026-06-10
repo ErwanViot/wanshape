@@ -10,10 +10,10 @@ const MAX_ACTIVE_PROGRAMS = 3;
 const MAX_DAILY_GENERATIONS = 3;
 const MODEL = "claude-sonnet-4-6";
 const MAX_TOKENS = 12288;
-// Defence-in-depth against prompt injection: prefilling the assistant turn
-// with `{"` forces the model to immediately start a JSON object and pre-empts
-// any "ignore previous instructions" jailbreak embedded in user freetext.
-const ASSISTANT_PREFILL = '{"';
+// NB: no assistant-message prefill here — claude-sonnet-4-6 rejects it with a
+// 400 ("This model does not support assistant message prefill"). Prompt-
+// injection defence + JSON-only output are enforced by the system prompt
+// instead (see prompt.ts and the callAnthropic comment below).
 // Sentinel raised by the enforce_user_active_programs_cap trigger
 // (migration 022). Kept as a constant so a future trigger message rename
 // surfaces as a TypeScript build break rather than a silent 500.
@@ -287,21 +287,28 @@ Deno.serve(async (req: Request) => {
 
   // Call Anthropic API. Sonnet with 12K tokens needs a more generous timeout
   // than the Haiku session generation. The fetch/parse/error-taxonomy lives in
-  // _shared/anthropic.ts; here we only assemble the prompt turns. The last
-  // message must be the assistant prefill so the model continues from the
-  // JSON-start token instead of free-form prose.
+  // _shared/anthropic.ts; here we only assemble the prompt turns.
+  //
+  // IMPORTANT: claude-sonnet-4-6 does NOT support assistant message prefill —
+  // ending the conversation with an `{ role: "assistant", content: '{"' }`
+  // turn returns `400 invalid_request_error: "This model does not support
+  // assistant message prefill"`, which is what broke every program generation
+  // in production. The conversation must end with a user message. We rely on
+  // the system prompt's "REGLE ABSOLUE : Reponds UNIQUEMENT avec du JSON
+  // valide" directive (+ the retry-on-parse + the ```json strip in the shared
+  // helper) to keep the output parseable. prefill is "" so nothing is
+  // prepended to the response.
   function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = 120_000) {
     return callAnthropicJson({
       apiKey: anthropicApiKey!,
       model: MODEL,
       maxTokens: MAX_TOKENS,
       systemPrompt,
-      prefill: ASSISTANT_PREFILL,
+      prefill: "",
       timeoutMs,
       messages: [
         { role: "user", content: userPrompt },
         ...extraMessages,
-        { role: "assistant", content: ASSISTANT_PREFILL },
       ],
     });
   }
