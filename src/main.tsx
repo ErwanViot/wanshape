@@ -6,8 +6,12 @@ import './index.css';
 import './i18n';
 import App from './App.tsx';
 import { initAnalyticsAsync } from './lib/analytics.ts';
-import { isNative } from './lib/capacitor.ts';
+import { isNative, lockNativeViewportZoom } from './lib/capacitor.ts';
 import { initSentryAsync } from './lib/sentryReport.ts';
+
+// Must run before first paint so the WKWebView never gets a chance to
+// apply an input-focus zoom on the unlocked viewport (no-op on web).
+lockNativeViewportZoom();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
