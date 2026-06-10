@@ -3,6 +3,7 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import { getCorsHeaders } from "../_shared/cors.ts";
 import { buildSystemPrompt, buildUserPrompt, type Locale } from "./prompt.ts";
 import { validateSession } from "./validate.ts";
+import { AnthropicCallError, callAnthropicJson, describeAnthropicError } from "../_shared/anthropic.ts";
 
 const MAX_DAILY_GENERATIONS = 10;
 const MODEL = "claude-haiku-4-5-20251001";
@@ -237,63 +238,49 @@ Deno.serve(async (req: Request) => {
   const userPrompt = buildUserPrompt({ ...body, locale } as Parameters<typeof buildUserPrompt>[0]);
   const systemPrompt = buildSystemPrompt(locale);
 
-  // Call Anthropic API
-  let aiResponse: Response;
-  try {
-    aiResponse = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": anthropicApiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: MAX_TOKENS,
-        // System prompt is stable across all calls (only varies by locale).
-        // Marking it as cacheable cuts input cost ~90% and shaves latency.
-        system: [
-          { type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } },
-        ],
-        messages: [
-          { role: "user", content: userPrompt },
-          { role: "assistant", content: ASSISTANT_PREFILL },
-        ],
-      }),
-      signal: AbortSignal.timeout(30_000),
+  // Call Anthropic. The fetch/parse/error-taxonomy lives in
+  // _shared/anthropic.ts. A parse failure (the model breaking out of the
+  // forced-JSON prefill and emitting prose, which is the failure captured in
+  // production) is transient, so we retry once with a fresh call before giving
+  // up. API/timeout/network errors are not retried — they won't self-resolve
+  // on an immediate re-call. Every failure is mapped to an honest message +
+  // an actionable HTTP status instead of one opaque 502.
+  function callAi() {
+    return callAnthropicJson({
+      apiKey: anthropicApiKey,
+      model: MODEL,
+      maxTokens: MAX_TOKENS,
+      systemPrompt,
+      prefill: ASSISTANT_PREFILL,
+      timeoutMs: 30_000,
+      messages: [
+        { role: "user", content: userPrompt },
+        { role: "assistant", content: ASSISTANT_PREFILL },
+      ],
     });
-  } catch {
-    return errorResponse(req, "Erreur de communication avec l'IA", 502);
   }
 
-  if (!aiResponse.ok) {
-    const errText = await aiResponse.text().catch(() => "Unknown error");
-    console.error("Anthropic API error:", aiResponse.status, errText);
-    return errorResponse(req, "Erreur de génération", 502);
-  }
-
-  const aiData = await aiResponse.json();
-
-  // Extract token usage
-  const inputTokens = aiData.usage?.input_tokens ?? null;
-  const outputTokens = aiData.usage?.output_tokens ?? null;
-
-  // Parse content. The assistant prefill is included only as the prompt
-  // start — Anthropic returns just the continuation, so prepend it back.
-  const rawContent = aiData.content?.[0]?.text ?? "";
-  const combined = `${ASSISTANT_PREFILL}${rawContent}`;
   let sessionJson: unknown;
-
+  let inputTokens: number | null = null;
+  let outputTokens: number | null = null;
   try {
-    // Handle potential ```json wrapper
-    const cleaned = combined
-      .replace(/^```json\s*/i, "")
-      .replace(/```\s*$/, "")
-      .trim();
-    sessionJson = JSON.parse(cleaned);
-  } catch {
-    console.error("Failed to parse AI response:", combined.slice(0, 500));
-    return errorResponse(req, "Réponse IA invalide, réessayez", 502);
+    let result;
+    try {
+      result = await callAi();
+    } catch (err) {
+      if (err instanceof AnthropicCallError && err.kind === "parse") {
+        console.error("Parse failure on first attempt — retrying once");
+        result = await callAi();
+      } else {
+        throw err;
+      }
+    }
+    sessionJson = result.data;
+    inputTokens = result.inputTokens;
+    outputTokens = result.outputTokens;
+  } catch (err) {
+    const { message, status } = describeAnthropicError(err, "séance");
+    return errorResponse(req, message, status);
   }
 
   // Check for off-topic
@@ -313,7 +300,7 @@ Deno.serve(async (req: Request) => {
   const validation = validateSession(sessionJson, body.duration);
   if (!validation.valid) {
     console.error("Session validation failed:", validation.error);
-    return errorResponse(req, "La séance générée est invalide, réessayez", 502);
+    return errorResponse(req, "La séance générée est invalide. Réessaie.", 422);
   }
 
   // Set date to today (server-side)

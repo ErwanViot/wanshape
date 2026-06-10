@@ -4,6 +4,7 @@ import { getCorsHeaders } from "../_shared/cors.ts";
 import { buildSystemPrompt, buildUserPrompt, type Locale } from "./prompt.ts";
 import { sanitizeOnboardingForPersistence } from "./sanitize.ts";
 import { validateProgram } from "./validate.ts";
+import { AnthropicCallError, callAnthropicJson, describeAnthropicError } from "../_shared/anthropic.ts";
 
 const MAX_ACTIVE_PROGRAMS = 3;
 const MAX_DAILY_GENERATIONS = 3;
@@ -42,6 +43,14 @@ function jsonResponse(req: Request, data: unknown, status = 200) {
 
 function errorResponse(req: Request, message: string, status = 400) {
   return jsonResponse(req, { error: message }, status);
+}
+
+// Map a typed Anthropic failure to a CORS-aware error response. The taxonomy
+// + message/status mapping live in _shared/anthropic.ts so generate-session
+// and generate-program stay in lockstep.
+function mapAnthropicError(req: Request, err: unknown): Response {
+  const { message, status } = describeAnthropicError(err, "programme");
+  return errorResponse(req, message, status);
 }
 
 const VALID_BLESSURES = [
@@ -276,84 +285,54 @@ Deno.serve(async (req: Request) => {
   const userPrompt = buildUserPrompt({ ...body, locale });
   const systemPrompt = buildSystemPrompt(locale);
 
-  // Call Anthropic API
-  // Sonnet with 12K tokens needs more time than Haiku session generation
-  async function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = 120_000): Promise<{ data: unknown; inputTokens: number; outputTokens: number }> {
-    // Last message must be the assistant prefill so the model continues from
-    // the JSON-start token instead of free-form prose.
-    const messages = [
-      { role: "user", content: userPrompt },
-      ...extraMessages,
-      { role: "assistant", content: ASSISTANT_PREFILL },
-    ];
-
-    const aiResponse = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": anthropicApiKey!,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: MAX_TOKENS,
-        // System prompt is stable across all calls (only varies by locale).
-        // Caching cuts input cost ~90% and shaves latency on the second-and-after
-        // call within the 5-minute TTL.
-        system: [
-          { type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } },
-        ],
-        messages,
-      }),
-      signal: AbortSignal.timeout(timeoutMs),
+  // Call Anthropic API. Sonnet with 12K tokens needs a more generous timeout
+  // than the Haiku session generation. The fetch/parse/error-taxonomy lives in
+  // _shared/anthropic.ts; here we only assemble the prompt turns. The last
+  // message must be the assistant prefill so the model continues from the
+  // JSON-start token instead of free-form prose.
+  function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = 120_000) {
+    return callAnthropicJson({
+      apiKey: anthropicApiKey!,
+      model: MODEL,
+      maxTokens: MAX_TOKENS,
+      systemPrompt,
+      prefill: ASSISTANT_PREFILL,
+      timeoutMs,
+      messages: [
+        { role: "user", content: userPrompt },
+        ...extraMessages,
+        { role: "assistant", content: ASSISTANT_PREFILL },
+      ],
     });
-
-    if (!aiResponse.ok) {
-      const errText = await aiResponse.text().catch(() => "Unknown error");
-      console.error("Anthropic API error:", aiResponse.status, errText);
-      throw new Error("Erreur de generation");
-    }
-
-    const aiData = await aiResponse.json();
-    const rawContent = aiData.content?.[0]?.text ?? "";
-    // Anthropic returns only the continuation when the assistant turn is
-    // prefilled — prepend the prefill back before parsing.
-    const combined = `${ASSISTANT_PREFILL}${rawContent}`;
-
-    // Parse JSON (handle potential markdown wrapper, kept as belt-and-
-    // suspenders even though the prefill makes it unreachable in practice).
-    const cleaned = combined
-      .replace(/^```json\s*/i, "")
-      .replace(/```\s*$/, "")
-      .trim();
-
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(cleaned);
-    } catch {
-      console.error("Failed to parse AI response:", combined.slice(0, 500));
-      throw new Error("Réponse IA invalide");
-    }
-
-    return {
-      data: parsed,
-      inputTokens: aiData.usage?.input_tokens ?? 0,
-      outputTokens: aiData.usage?.output_tokens ?? 0,
-    };
   }
 
   let programJson: unknown;
   let totalInputTokens = 0;
   let totalOutputTokens = 0;
 
-  // First attempt
+  // First attempt. A parse failure (the model breaking out of the forced-JSON
+  // format) is transient, so we retry it once with a fresh call before giving
+  // up — this is the single most common production failure and a clean retry
+  // almost always recovers. API/timeout/network errors are NOT retried here:
+  // a 429 needs backoff, a 401/quota error won't fix itself on an immediate
+  // re-call, and a timeout would just burn another timeout window.
   try {
-    const result = await callAnthropic();
+    let result;
+    try {
+      result = await callAnthropic();
+    } catch (err) {
+      if (err instanceof AnthropicCallError && err.kind === "parse") {
+        console.error("Parse failure on first attempt — retrying once");
+        result = await callAnthropic();
+      } else {
+        throw err;
+      }
+    }
     programJson = result.data;
     totalInputTokens = result.inputTokens;
     totalOutputTokens = result.outputTokens;
-  } catch {
-    return errorResponse(req, "Erreur de communication avec l'IA", 502);
+  } catch (err) {
+    return mapAnthropicError(req, err);
   }
 
   // Validate
@@ -372,13 +351,13 @@ Deno.serve(async (req: Request) => {
       totalInputTokens += retryResult.inputTokens;
       totalOutputTokens += retryResult.outputTokens;
       validation = validateProgram(programJson, body.duree_semaines, body.seances_par_semaine);
-    } catch {
-      return errorResponse(req, "La generation a echoue apres retry, reessayez", 502);
+    } catch (err) {
+      return mapAnthropicError(req, err);
     }
 
     if (!validation.valid) {
       console.error("Retry validation failed:", validation.error);
-      return errorResponse(req, "Le programme genere est invalide, reessayez", 502);
+      return errorResponse(req, "Le programme généré est invalide. Réessaie.", 422);
     }
   }
 
