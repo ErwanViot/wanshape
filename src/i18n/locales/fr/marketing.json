@@ -65,6 +65,27 @@
       "premium_4": "Progression adaptée à ton niveau"
     }
   },
+  "native_pricing": {
+    "title": "Passe à Premium",
+    "subtitle": "Programmes IA illimités, séances personnalisées, suivi nutrition complet.",
+    "loading": "Chargement des abonnements…",
+    "retry": "Réessayer",
+    "unavailable": "Les abonnements ne sont pas disponibles pour l'instant. Réessaie dans quelques minutes ou contacte le support.",
+    "plan_yearly": "Premium Annuel",
+    "plan_monthly": "Premium Mensuel",
+    "yearly_savings": "Économise ~17% vs mensuel",
+    "feature_ai": "Programmes & séances IA illimités",
+    "feature_nutrition": "Suivi nutrition complet + analyse IA",
+    "feature_no_ads": "Sans publicité, sans engagement",
+    "opening_store": "Ouverture de la boutique…",
+    "purchase_success": "Premium activé ! Toutes les fonctionnalités sont débloquées.",
+    "restore_cta": "Restaurer mes achats",
+    "restoring": "Restauration en cours…",
+    "restore_success": "Achat restauré. Premium réactivé.",
+    "restore_empty": "Aucun achat à restaurer pour ce compte Apple/Google.",
+    "legal_note": "Abonnement renouvelé automatiquement. Tu peux annuler à tout moment depuis les Réglages de ton iPhone (Réglages > Apple ID > Abonnements) au moins 24h avant la fin de la période en cours.",
+    "active_premium_body": "Tout le contenu Premium est débloqué dans l'app. Gère ton abonnement depuis les Réglages de ton iPhone (Réglages > Apple ID > Abonnements)."
+  },
   "premium": {
     "page_title": "Premium",
     "page_description": "Passe à Premium : séances IA sur-mesure et programmes personnalisés pour atteindre tes objectifs.",

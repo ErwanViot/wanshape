@@ -69,6 +69,13 @@
     "profile_load_failed": "Failed to load profile",
     "meals_load_failed": "Failed to load meals",
     "generic_retry": "An error occurred. Please try again.",
-    "unexpected": "Unexpected error"
+    "unexpected": "Unexpected error",
+    "offerings_timeout": "Subscriptions couldn't be loaded (Apple's service may take a while to make them available). Try again in a few minutes."
+  },
+  "restore_purchases": {
+    "success": "Purchase restored. Premium reactivated.",
+    "empty": "No purchase to restore on this Apple/Google account.",
+    "working": "Restoring…",
+    "cta": "Restore my purchases"
   }
 }
