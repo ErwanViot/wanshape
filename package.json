@@ -1,7 +1,7 @@
 {
   "name": "wan2fit",
   "private": true,
-  "version": "1.1.4",
+  "version": "1.1.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -36,6 +36,7 @@
     "@capacitor/push-notifications": "^8.0.3",
     "@capacitor/splash-screen": "^8.0.1",
     "@capacitor/status-bar": "^8.0.2",
+    "@revenuecat/purchases-capacitor": "^13.1.5",
     "@sentry/capacitor": "^4.0.0",
     "@sentry/react": "10.43.0",
     "@supabase/supabase-js": "^2.97.0",
