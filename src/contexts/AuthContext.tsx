@@ -39,7 +39,12 @@ const SUPABASE_CODE_KEYS: Record<string, string> = {
   email_exists: 'user_already_registered',
   invalid_credentials: 'invalid_credentials',
   email_not_confirmed: 'email_not_confirmed',
-  weak_password: 'password_too_short',
+  // NB: `weak_password` is intentionally NOT mapped here. It is too coarse —
+  // GoTrue uses it for three very different reasons (too short, missing a
+  // character class, or "pwned" i.e. found in a breach database via HIBP).
+  // Mapping it to a single key produced the "password must be 8 characters"
+  // message for a perfectly long but breached password (e.g. "P@ssword01").
+  // The reason is disambiguated by the message needles below instead.
   email_address_invalid: 'invalid_email_format',
   validation_failed: 'invalid_email_format',
   over_email_send_rate_limit: 'email_rate_limited',
@@ -57,6 +62,14 @@ const SUPABASE_ERROR_KEYS: Record<string, string> = {
   'already been registered': 'user_already_registered',
   'already registered': 'user_already_registered',
   'already in use': 'user_already_registered',
+  // The three `weak_password` reasons, disambiguated by GoTrue's message.
+  // "pwned" (found in a breach via HaveIBeenPwned) is the common one and was
+  // previously mis-shown as "too short" — a long but breached password like
+  // "P@ssword01" passes the client strength check, reaches the server, and is
+  // rejected here.
+  'known to be weak': 'password_pwned',
+  'easy to guess': 'password_pwned',
+  'should contain at least one character': 'password_needs_chars',
   // Generic prefix that matches GoTrue's "Password should be at least N
   // characters" regardless of N. The client-side isPasswordStrong() catches
   // weak passwords first; this needle only fires if Supabase Cloud config
