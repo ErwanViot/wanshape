@@ -26,8 +26,35 @@ export function useWakeLock(active: boolean) {
           // Plugin missing or platform refused — degrade silently.
         });
 
+      // iOS can re-enable the idle timer behind our back when the app is
+      // interrupted mid-session (incoming call, control centre, a trip to
+      // the background and back). keepAwake() above only runs once on
+      // mount, so without this listener the screen could start sleeping
+      // again after such an interruption even though the workout is still
+      // running. Re-assert whenever the app returns to the foreground.
+      let removeResumeListener: (() => void) | null = null;
+      void import('@capacitor/app')
+        .then(({ App }) =>
+          App.addListener('appStateChange', ({ isActive }) => {
+            if (cancelled || !isActive) return;
+            void import('@capacitor-community/keep-awake')
+              .then(({ KeepAwake }) => KeepAwake.keepAwake())
+              .catch(() => {});
+          }),
+        )
+        .then((handle) => {
+          if (!handle) return;
+          if (cancelled) {
+            void handle.remove();
+            return;
+          }
+          removeResumeListener = () => void handle.remove();
+        })
+        .catch(() => {});
+
       return () => {
         cancelled = true;
+        removeResumeListener?.();
         void import('@capacitor-community/keep-awake').then(({ KeepAwake }) => KeepAwake.allowSleep()).catch(() => {});
       };
     }
