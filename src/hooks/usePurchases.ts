@@ -42,6 +42,21 @@ type PurchasesSdk = {
 let sdkPromise: Promise<PurchasesSdk> | null = null;
 let configured = false;
 
+// The RevenueCat / StoreKit product fetch can hang indefinitely when the
+// products aren't yet available on Apple's side (e.g. the Paid Apps Agreement
+// just went active, or the products are still propagating after reaching
+// "Ready to Submit"). Without a cap, `getOfferings()` never resolves and the
+// paywall is stuck on a static "loading" forever. Race it against a timeout so
+// the UI can fall back to an actionable error + retry instead.
+const OFFERINGS_TIMEOUT_MS = 12_000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error(`${label}_timeout`)), ms)),
+  ]);
+}
+
 async function loadSdk(): Promise<PurchasesSdk> {
   if (!sdkPromise) {
     sdkPromise = import('@revenuecat/purchases-capacitor').then((m) => m.Purchases as unknown as PurchasesSdk);
@@ -105,8 +120,8 @@ export function usePurchases(): UsePurchasesResult {
     setLoading(true);
     setError(null);
 
-    ensureConfigured(user?.id ?? null)
-      .then((sdk) => sdk.getOfferings())
+    withTimeout(ensureConfigured(user?.id ?? null), OFFERINGS_TIMEOUT_MS, 'configure')
+      .then((sdk) => withTimeout(sdk.getOfferings(), OFFERINGS_TIMEOUT_MS, 'offerings'))
       .then((offerings) => {
         if (cancelled) return;
         const list = offerings.current?.availablePackages ?? [];
@@ -114,7 +129,17 @@ export function usePurchases(): UsePurchasesResult {
       })
       .catch((err: unknown) => {
         if (cancelled) return;
-        const message = err instanceof Error ? err.message : String(err);
+        const raw = err instanceof Error ? err.message : String(err);
+        // A timeout almost always means the products aren't reachable from the
+        // App Store yet (propagation after "Ready to Submit", or a sandbox
+        // hiccup). Surface a clear, retryable message rather than the raw
+        // SDK string.
+        const message = raw.endsWith('_timeout')
+          ? t('hook_errors.offerings_timeout', {
+              defaultValue:
+                "Les abonnements n'ont pas pu être chargés (le service Apple peut mettre un moment à les rendre disponibles). Réessaie dans quelques minutes.",
+            })
+          : raw;
         setError(message);
       })
       .finally(() => {
@@ -124,7 +149,7 @@ export function usePurchases(): UsePurchasesResult {
     return () => {
       cancelled = true;
     };
-  }, [user?.id]);
+  }, [user?.id, t]);
 
   const purchase = useCallback(
     async (pkg: PurchasesPackage): Promise<boolean> => {
