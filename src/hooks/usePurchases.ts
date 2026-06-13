@@ -70,6 +70,10 @@ let configured = false;
 const OFFERINGS_TIMEOUT_MS = 30_000;
 const OFFERINGS_MAX_ATTEMPTS = 3;
 const OFFERINGS_RETRY_BACKOFF_MS = 2_000;
+// configure() only inits the SDK + a single native bridge call — it's fast and,
+// unlike the StoreKit product fetch, doesn't warrant the generous offerings
+// window. A tighter cap keeps the worst-case spinner bounded.
+const CONFIGURE_TIMEOUT_MS = 15_000;
 
 // Records each milestone of the load pipeline (import-sdk → configure →
 // offerings-try-N → …). The accumulated trail is attached to the Sentry report
@@ -202,7 +206,7 @@ export function usePurchases(): UsePurchasesResult {
     const trail: string[] = [];
     const step: StepFn = (s) => trail.push(s);
 
-    withTimeout(ensureConfigured(user?.id ?? null, step), OFFERINGS_TIMEOUT_MS, 'configure')
+    withTimeout(ensureConfigured(user?.id ?? null, step), CONFIGURE_TIMEOUT_MS, 'configure')
       .then(() => fetchOfferingsWithRetry(getSdk(), step))
       .then((list) => {
         if (cancelled) return;

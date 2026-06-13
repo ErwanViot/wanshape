@@ -81,6 +81,7 @@
     "processing": "Traitement en cours…",
     "activating": "Activation de ton abonnement…",
     "purchase_success": "Premium activé ! Toutes les fonctionnalités sont débloquées.",
+    "activation_delayed": "Achat confirmé. L'activation Premium peut prendre un instant — relance l'app si rien ne change.",
     "restore_cta": "Restaurer mes achats",
     "restoring": "Restauration en cours…",
     "restore_success": "Achat restauré. Premium réactivé.",

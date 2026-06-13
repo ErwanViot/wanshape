@@ -175,12 +175,12 @@ Deno.serve(async (req) => {
     .single();
 
   if (readError) {
-    // Distinguish "profile genuinely missing" (PostgREST PGRST116 = no rows)
-    // from a schema/query error (e.g. the 026 subscription_provider migration
-    // not applied in this environment, code 42703 = undefined_column), which
-    // would otherwise masquerade as user_not_found for EVERY subscriber.
-    // The pg code is surfaced in the response body + logs so the failure mode
-    // is diagnosable from the RevenueCat dashboard instead of opaque.
+    // Surface the Postgres error code so a schema/query error (e.g. the 026
+    // subscription_provider migration not applied → code 42703 undefined_column,
+    // which masqueraded as user_not_found for EVERY subscriber) is told apart
+    // from a genuinely missing profile (PostgREST PGRST116 = no rows). Both
+    // still return 200 so RevenueCat stops retrying — the difference is purely
+    // diagnostic (the code lands in the response body + logs).
     const code = (readError as { code?: string }).code ?? "unknown";
     console.warn(
       `[revenuecat-webhook] read error id=${userId} event=${event.type} code=${code} msg=${readError.message}`,

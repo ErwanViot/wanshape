@@ -125,10 +125,18 @@ export function NativePricingCards() {
         await sleep(2000);
       }
       setActivating(false);
+      // Only claim success once premium has actually landed. If the webhook is
+      // slow (> ~24s) the entitlement is still valid but the tier hasn't synced
+      // yet — tell the truth rather than a premature "Premium activé".
       setFeedback(
-        t('native_pricing.purchase_success', {
-          defaultValue: 'Premium activé ! Toutes les fonctionnalités sont débloquées.',
-        }),
+        premiumRef.current
+          ? t('native_pricing.purchase_success', {
+              defaultValue: 'Premium activé ! Toutes les fonctionnalités sont débloquées.',
+            })
+          : t('native_pricing.activation_delayed', {
+              defaultValue:
+                "Achat confirmé. L'activation Premium peut prendre un instant — relance l'app si rien ne change.",
+            }),
       );
     }
   };
@@ -251,7 +259,7 @@ export function NativePricingCards() {
         <button
           type="button"
           onClick={handleRestore}
-          disabled={restoring}
+          disabled={processing}
           className="text-sm text-link underline disabled:opacity-60"
         >
           {restoring
