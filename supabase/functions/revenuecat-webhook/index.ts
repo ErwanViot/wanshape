@@ -175,12 +175,17 @@ Deno.serve(async (req) => {
     .single();
 
   if (readError) {
-    // Most likely: user does not exist (e.g. someone with an Apple-ID-only
-    // account trying to subscribe before completing Wan2Fit signup, or a
-    // sandbox tester whose Supabase user was deleted). Log + 200 OK so
-    // RevenueCat stops retrying — we can investigate in logs.
-    console.warn(`[revenuecat-webhook] user not found id=${userId} event=${event.type}`);
-    return jsonResponse({ ok: true, skipped: "user_not_found" });
+    // Distinguish "profile genuinely missing" (PostgREST PGRST116 = no rows)
+    // from a schema/query error (e.g. the 026 subscription_provider migration
+    // not applied in this environment, code 42703 = undefined_column), which
+    // would otherwise masquerade as user_not_found for EVERY subscriber.
+    // The pg code is surfaced in the response body + logs so the failure mode
+    // is diagnosable from the RevenueCat dashboard instead of opaque.
+    const code = (readError as { code?: string }).code ?? "unknown";
+    console.warn(
+      `[revenuecat-webhook] read error id=${userId} event=${event.type} code=${code} msg=${readError.message}`,
+    );
+    return jsonResponse({ ok: true, skipped: "read_error", code, message: readError.message });
   }
 
   if (current.subscription_tier === action && current.subscription_provider === "revenuecat") {

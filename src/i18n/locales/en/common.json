@@ -70,7 +70,7 @@
     "meals_load_failed": "Failed to load meals",
     "generic_retry": "An error occurred. Please try again.",
     "unexpected": "Unexpected error",
-    "offerings_timeout": "Subscriptions couldn't be loaded (Apple's service may take a while to make them available). Try again in a few minutes."
+    "offerings_timeout": "Loading subscriptions took too long. Check your connection and try again."
   },
   "restore_purchases": {
     "success": "Purchase restored. Premium reactivated.",
