@@ -65,6 +65,30 @@
       "premium_4": "Progression adapted to your level"
     }
   },
+  "native_pricing": {
+    "title": "Go Premium",
+    "subtitle": "Unlimited AI programs, personalized workouts, full nutrition tracking.",
+    "loading": "Loading subscriptions…",
+    "retry": "Try again",
+    "unavailable": "Subscriptions aren't available right now. Try again in a few minutes or contact support.",
+    "plan_yearly": "Premium Yearly",
+    "plan_monthly": "Premium Monthly",
+    "yearly_savings": "Save ~17% vs monthly",
+    "feature_ai": "Unlimited AI programs & workouts",
+    "feature_nutrition": "Full nutrition tracking + AI analysis",
+    "feature_no_ads": "No ads, no commitment",
+    "opening_store": "Opening the store…",
+    "processing": "Processing…",
+    "activating": "Activating your subscription…",
+    "purchase_success": "Premium activated! All features are unlocked.",
+    "activation_delayed": "Purchase confirmed. Premium may take a moment to activate — restart the app if nothing changes.",
+    "restore_cta": "Restore my purchases",
+    "restoring": "Restoring…",
+    "restore_success": "Purchase restored. Premium reactivated.",
+    "restore_empty": "No purchase to restore for this Apple/Google account.",
+    "legal_note": "Subscription renews automatically. You can cancel anytime from your iPhone Settings (Settings > Apple ID > Subscriptions) at least 24h before the end of the current period.",
+    "active_premium_body": "All Premium content is unlocked in the app. Manage your subscription from your iPhone Settings (Settings > Apple ID > Subscriptions)."
+  },
   "premium": {
     "page_title": "Premium",
     "page_description": "Go Premium: custom AI sessions and personalized programs to reach your goals.",

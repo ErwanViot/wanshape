@@ -69,6 +69,13 @@
     "profile_load_failed": "Erreur de chargement du profil",
     "meals_load_failed": "Erreur de chargement des repas",
     "generic_retry": "Une erreur est survenue. Réessayez.",
-    "unexpected": "Erreur inattendue"
+    "unexpected": "Erreur inattendue",
+    "offerings_timeout": "Le chargement des abonnements a pris trop de temps. Vérifie ta connexion et réessaie."
+  },
+  "restore_purchases": {
+    "success": "Achat restauré. Premium réactivé.",
+    "empty": "Aucun achat à restaurer sur ce compte Apple/Google.",
+    "working": "Restauration en cours…",
+    "cta": "Restaurer mes achats"
   }
 }

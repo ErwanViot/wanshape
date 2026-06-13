@@ -1,8 +1,11 @@
-import { Check, Crown, Sparkles } from 'lucide-react';
-import { useState } from 'react';
+import { Check, Crown, Loader2, Sparkles } from 'lucide-react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../contexts/AuthContext.tsx';
 import { usePurchases } from '../../hooks/usePurchases.ts';
 import { useSubscription } from '../../hooks/useSubscription.ts';
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Native iOS / Android paywall — replaces the web Stripe paywall in
 // PricingCards / PremiumPromoPage when running inside the Capacitor shell.
@@ -16,9 +19,16 @@ import { useSubscription } from '../../hooks/useSubscription.ts';
 export function NativePricingCards() {
   const { t } = useTranslation('marketing');
   const { isPremium } = useSubscription();
+  const { refreshProfile } = useAuth();
   const { packages, loading, error, purchase, restore } = usePurchases();
+
+  // Latest premium flag readable inside async callbacks without re-subscribing.
+  const premiumRef = useRef(isPremium);
+  premiumRef.current = isPremium;
+
   const [purchasing, setPurchasing] = useState<string | null>(null);
   const [restoring, setRestoring] = useState(false);
+  const [activating, setActivating] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
 
   if (isPremium) {
@@ -42,7 +52,8 @@ export function NativePricingCards() {
 
   if (loading) {
     return (
-      <div className="min-h-[40vh] flex items-center justify-center px-6 py-12">
+      <div className="min-h-[40vh] flex flex-col items-center justify-center gap-3 px-6 py-12">
+        <Loader2 className="w-6 h-6 text-brand animate-spin" aria-hidden="true" />
         <p className="text-sm text-subtle">
           {t('native_pricing.loading', { defaultValue: 'Chargement des abonnements…' })}
         </p>
@@ -69,13 +80,22 @@ export function NativePricingCards() {
 
   if (!packages || packages.length === 0) {
     return (
-      <div className="min-h-[40vh] flex items-center justify-center px-6 py-12 text-center">
-        <p className="text-sm text-subtle max-w-md">
-          {t('native_pricing.unavailable', {
-            defaultValue:
-              "Les abonnements ne sont pas disponibles pour l'instant. Réessaie dans quelques minutes ou contacte le support.",
-          })}
-        </p>
+      <div className="min-h-[40vh] flex items-center justify-center px-6 py-12">
+        <div className="max-w-md w-full text-center space-y-3">
+          <p className="text-sm text-subtle">
+            {t('native_pricing.unavailable', {
+              defaultValue:
+                "Les abonnements ne sont pas disponibles pour l'instant. Réessaie dans quelques minutes ou contacte le support.",
+            })}
+          </p>
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="btn-secondary px-4 py-2 rounded-xl text-sm font-medium"
+          >
+            {t('native_pricing.retry', { defaultValue: 'Réessayer' })}
+          </button>
+        </div>
       </div>
     );
   }
@@ -94,10 +114,29 @@ export function NativePricingCards() {
     const ok = await purchase(pkg);
     setPurchasing(null);
     if (ok) {
+      // The StoreKit entitlement is active immediately, but the app's premium
+      // state is sourced from Supabase `profiles.subscription_tier`, which the
+      // revenuecat-webhook flips asynchronously (a few seconds). Poll the
+      // profile until it lands so the UI unlocks without an app restart.
+      setActivating(true);
+      for (let i = 0; i < 12 && !premiumRef.current; i++) {
+        await refreshProfile();
+        if (premiumRef.current) break;
+        await sleep(2000);
+      }
+      setActivating(false);
+      // Only claim success once premium has actually landed. If the webhook is
+      // slow (> ~24s) the entitlement is still valid but the tier hasn't synced
+      // yet — tell the truth rather than a premature "Premium activé".
       setFeedback(
-        t('native_pricing.purchase_success', {
-          defaultValue: 'Premium activé ! Toutes les fonctionnalités sont débloquées.',
-        }),
+        premiumRef.current
+          ? t('native_pricing.purchase_success', {
+              defaultValue: 'Premium activé ! Toutes les fonctionnalités sont débloquées.',
+            })
+          : t('native_pricing.activation_delayed', {
+              defaultValue:
+                "Achat confirmé. L'activation Premium peut prendre un instant — relance l'app si rien ne change.",
+            }),
       );
     }
   };
@@ -118,8 +157,22 @@ export function NativePricingCards() {
     );
   };
 
+  const processing = purchasing !== null || restoring || activating;
+
   return (
     <div className="max-w-2xl mx-auto px-6 py-8 space-y-6">
+      {processing && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-black/70 backdrop-blur-sm px-6 text-center">
+          <Loader2 className="w-8 h-8 text-white animate-spin" aria-hidden="true" />
+          <p className="text-sm font-medium text-white">
+            {activating
+              ? t('native_pricing.activating', { defaultValue: 'Activation de ton abonnement…' })
+              : restoring
+                ? t('native_pricing.restoring', { defaultValue: 'Restauration en cours…' })
+                : t('native_pricing.processing', { defaultValue: 'Traitement en cours…' })}
+          </p>
+        </div>
+      )}
       <header className="text-center space-y-2">
         <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand/10">
           <Sparkles className="w-7 h-7 text-brand" aria-hidden="true" />
@@ -206,7 +259,7 @@ export function NativePricingCards() {
         <button
           type="button"
           onClick={handleRestore}
-          disabled={restoring}
+          disabled={processing}
           className="text-sm text-link underline disabled:opacity-60"
         >
           {restoring

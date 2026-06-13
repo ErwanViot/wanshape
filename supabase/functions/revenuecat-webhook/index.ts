@@ -175,12 +175,17 @@ Deno.serve(async (req) => {
     .single();
 
   if (readError) {
-    // Most likely: user does not exist (e.g. someone with an Apple-ID-only
-    // account trying to subscribe before completing Wan2Fit signup, or a
-    // sandbox tester whose Supabase user was deleted). Log + 200 OK so
-    // RevenueCat stops retrying — we can investigate in logs.
-    console.warn(`[revenuecat-webhook] user not found id=${userId} event=${event.type}`);
-    return jsonResponse({ ok: true, skipped: "user_not_found" });
+    // Surface the Postgres error code so a schema/query error (e.g. the 026
+    // subscription_provider migration not applied → code 42703 undefined_column,
+    // which masqueraded as user_not_found for EVERY subscriber) is told apart
+    // from a genuinely missing profile (PostgREST PGRST116 = no rows). Both
+    // still return 200 so RevenueCat stops retrying — the difference is purely
+    // diagnostic (the code lands in the response body + logs).
+    const code = (readError as { code?: string }).code ?? "unknown";
+    console.warn(
+      `[revenuecat-webhook] read error id=${userId} event=${event.type} code=${code} msg=${readError.message}`,
+    );
+    return jsonResponse({ ok: true, skipped: "read_error", code, message: readError.message });
   }
 
   if (current.subscription_tier === action && current.subscription_provider === "revenuecat") {
