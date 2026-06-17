@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useMemo, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import i18n from '../i18n/index.ts';
+import { captureEvent } from '../lib/analytics.ts';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type {
@@ -119,6 +120,15 @@ export function useDailyNutrition(dateKey: string = todayYYYYMMDD()): UseDailyNu
         // from a separate range query — partial-match on the prefix invalidates
         // every cached window for this user.
         queryClient.invalidateQueries({ queryKey: ['nutritionRange', userId] });
+
+        // Track only structured fields. The user-typed `name` is excluded
+        // (custom meal description) — meal_type and source give us enough
+        // for "which entry mode is most used" without leaking content.
+        captureEvent('meal_logged', {
+          meal_type: input.meal_type,
+          source: input.source ?? 'manual',
+          back_dated: input.logged_date != null && input.logged_date !== dateKey,
+        });
         return inserted;
       } finally {
         inflightRef.current = false;

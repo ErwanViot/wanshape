@@ -1,5 +1,8 @@
 {
   "debutant-4-semaines": {
+    "title": "Débutant 4 semaines",
+    "description": "Programme progressif pour démarrer le sport en douceur",
+    "goals": ["Découvrir les exercices de base", "Construire une routine", "Améliorer la mobilité"],
     "headline": "Construis tes fondations",
     "intro": "Tu reprends le sport ou tu débutes ? Ce programme de 4 semaines t'accompagne pas à pas. Chaque semaine ajoute un peu d'intensité pour que tu progresses sans jamais te sentir dépassé.",
     "audience": "Reprise d'activité, vrai débutant, ou toute personne qui veut (re)partir sur de bonnes bases.",
@@ -34,6 +37,9 @@
     "tip": "Pas besoin de forcer dès le début. Le plus important, c'est la régularité. 3 séances par semaine suffisent pour voir des résultats concrets en un mois."
   },
   "remise-en-forme": {
+    "title": "Remise en forme",
+    "description": "Programme complet cardio et renforcement musculaire",
+    "goals": ["Retrouver la forme", "Brûler des calories", "Renforcer tout le corps"],
     "headline": "Retrouve ton rythme",
     "intro": "Tu as déjà fait du sport mais tu as décroché ? Ce programme remet les choses en place. Formats variés dès la première semaine, intensité progressive — tu retrouves tes sensations rapidement.",
     "audience": "Ancien sportif en reprise, ou niveau intermédiaire qui veut structurer son entraînement.",
@@ -68,6 +74,9 @@
     "tip": "Si une séance te semble facile, c'est normal — c'est le signe que tu es en forme pour ça. La semaine suivante ajustera le curseur."
   },
   "cardio-express": {
+    "title": "Cardio Express",
+    "description": "Sessions courtes et intenses HIIT et Tabata",
+    "goals": ["Améliorer le cardio", "Maximiser le temps", "Repousser ses limites"],
     "headline": "Court, intense, efficace",
     "intro": "Pas le temps de faire une heure de sport ? Ce programme mise sur des séances courtes à haute intensité. 20 minutes suffisent pour transpirer, progresser et repartir.",
     "audience": "Emploi du temps chargé, sportif qui veut du résultat sans y passer des heures.",

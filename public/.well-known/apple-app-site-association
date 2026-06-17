@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["DL5537MH8T.fr.wansoft.wan2fit"],
+        "components": [
+          { "/": "/reset-password" },
+          { "/": "/auth/callback*" },
+          { "/": "/parametres*" },
+          { "/": "/upgrade*" }
+        ]
+      }
+    ]
+  }
+}

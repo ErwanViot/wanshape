@@ -5,16 +5,23 @@ import './styles/fonts.css';
 import './index.css';
 import './i18n';
 import App from './App.tsx';
+import { initAnalyticsAsync } from './lib/analytics.ts';
+import { isNative, lockNativeViewportZoom } from './lib/capacitor.ts';
 import { initSentryAsync } from './lib/sentryReport.ts';
+
+// Must run before first paint so the WKWebView never gets a chance to
+// apply an input-focus zoom on the unlocked viewport (no-op on web).
+lockNativeViewportZoom();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-    <Analytics />
+    {!isNative() && <Analytics />}
   </StrictMode>,
 );
 
-// Defer Sentry init past the first paint — see src/lib/sentryReport.ts.
-// Errors thrown during the React boot before init runs are queued via
-// the captureException wrapper used by both ErrorBoundary classes.
+// Defer Sentry + PostHog init past the first paint — see
+// src/lib/sentryReport.ts and src/lib/analytics.ts. Both modules
+// queue events from before init lands, then flush once the SDK is up.
 initSentryAsync();
+initAnalyticsAsync();

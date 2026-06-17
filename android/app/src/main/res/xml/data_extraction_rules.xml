@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 12+ data extraction rules. Together with allowBackup="false" in
+  the manifest, this disables both Auto Backup (cloud) and Device-to-Device
+  transfer for Wan2Fit. Auth tokens stored by Capacitor (Preferences plugin)
+  are NOT eligible for backup, which is the security posture we want until
+  we migrate to encrypted secure storage (cf. tech-debt: storage migration).
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </device-transfer>
+</data-extraction-rules>

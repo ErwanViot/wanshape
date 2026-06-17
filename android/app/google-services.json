@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "185413071326",
+    "project_id": "wan-shape",
+    "storage_bucket": "wan-shape.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185413071326:android:526841aff209a3892aad4f",
+        "android_client_info": {
+          "package_name": "fr.wansoft.wan2fit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa3qZeYdxenyY5xhDomUfVHBIwVvd2H2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

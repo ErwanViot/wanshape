@@ -2,6 +2,9 @@ import type { User } from '@supabase/supabase-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import i18n from '../i18n';
+import { captureEvent, identifyUser, resetAnalytics } from '../lib/analytics.ts';
+import { getAuthRedirectUrl } from '../lib/auth-redirects.ts';
+import { captureException } from '../lib/sentryReport.ts';
 import { supabase } from '../lib/supabase.ts';
 import { sessionEvents } from '../lib/supabaseQuery.ts';
 import type { Profile } from '../types/auth.ts';
@@ -26,10 +29,47 @@ const AuthContext = createContext<AuthContextValue | null>(null);
  * Resolved with the current locale via the `i18n` instance — this runs outside
  * React (signIn/signUp callbacks), hence the direct module import instead of `useTranslation`.
  */
+// Primary match: GoTrue's stable `error.code` (supabase-js v2 surfaces it on
+// AuthApiError). Codes don't drift across GoTrue releases the way the
+// human-readable `message` does — matching the code first is what makes
+// "email déjà utilisé" reliably reach the user instead of the generic
+// fallback. See https://supabase.com/docs/reference/javascript/auth-error-codes
+const SUPABASE_CODE_KEYS: Record<string, string> = {
+  user_already_exists: 'user_already_registered',
+  email_exists: 'user_already_registered',
+  invalid_credentials: 'invalid_credentials',
+  email_not_confirmed: 'email_not_confirmed',
+  // NB: `weak_password` is intentionally NOT mapped here. It is too coarse —
+  // GoTrue uses it for three very different reasons (too short, missing a
+  // character class, or "pwned" i.e. found in a breach database via HIBP).
+  // Mapping it to a single key produced the "password must be 8 characters"
+  // message for a perfectly long but breached password (e.g. "P@ssword01").
+  // The reason is disambiguated by the message needles below instead.
+  email_address_invalid: 'invalid_email_format',
+  validation_failed: 'invalid_email_format',
+  over_email_send_rate_limit: 'email_rate_limited',
+  over_request_rate_limit: 'rate_limited_short',
+  same_password: 'new_password_same',
+  session_not_found: 'session_missing',
+};
+
+// Fallback match: substring on the human-readable message, for GoTrue
+// responses that don't carry a code (older deployments, edge cases).
 const SUPABASE_ERROR_KEYS: Record<string, string> = {
   'Invalid login credentials': 'invalid_credentials',
   'Email not confirmed': 'email_not_confirmed',
   'User already registered': 'user_already_registered',
+  'already been registered': 'user_already_registered',
+  'already registered': 'user_already_registered',
+  'already in use': 'user_already_registered',
+  // The three `weak_password` reasons, disambiguated by GoTrue's message.
+  // "pwned" (found in a breach via HaveIBeenPwned) is the common one and was
+  // previously mis-shown as "too short" — a long but breached password like
+  // "P@ssword01" passes the client strength check, reaches the server, and is
+  // rejected here.
+  'known to be weak': 'password_pwned',
+  'easy to guess': 'password_pwned',
+  'should contain at least one character': 'password_needs_chars',
   // Generic prefix that matches GoTrue's "Password should be at least N
   // characters" regardless of N. The client-side isPasswordStrong() catches
   // weak passwords first; this needle only fires if Supabase Cloud config
@@ -42,11 +82,32 @@ const SUPABASE_ERROR_KEYS: Record<string, string> = {
   'Email rate limit exceeded': 'email_rate_limited',
 };
 
-function translateError(message: string | undefined): string | null {
-  if (!message) return null;
-  for (const [needle, key] of Object.entries(SUPABASE_ERROR_KEYS)) {
-    if (message.includes(needle)) return i18n.t(`supabase_errors.${key}`, { ns: 'auth' });
+type SupabaseAuthError = { message?: string; code?: string } | null | undefined;
+
+// Map a Supabase auth error to a localized, user-facing message. Returns null
+// when there is no error. Resolution order: stable `error.code` first, then a
+// substring match on the message, then a generic fallback. When we fall
+// through to generic, the raw error is reported to Sentry (PROD only) so we
+// learn about new GoTrue codes/messages instead of silently swallowing them —
+// the exact failure mode that hid "email déjà utilisé" behind a generic toast.
+function translateError(error: SupabaseAuthError): string | null {
+  if (!error) return null;
+  const { message, code } = error;
+
+  if (code) {
+    const key = SUPABASE_CODE_KEYS[code];
+    if (key) return i18n.t(`supabase_errors.${key}`, { ns: 'auth' });
   }
+
+  if (message) {
+    for (const [needle, key] of Object.entries(SUPABASE_ERROR_KEYS)) {
+      if (message.includes(needle)) return i18n.t(`supabase_errors.${key}`, { ns: 'auth' });
+    }
+  }
+
+  captureException(new Error('Unmapped Supabase auth error'), {
+    contexts: { supabaseAuth: { code: code ?? null, message: message ?? null } },
+  });
   return i18n.t('supabase_errors.generic', { ns: 'auth' });
 }
 
@@ -162,7 +223,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signIn = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: i18n.t('errors.auth_unavailable', { ns: 'auth' }) };
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: translateError(error?.message) };
+    return { error: translateError(error) };
   }, []);
 
   const signUp = useCallback(
@@ -173,9 +234,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         password,
         options: {
           data: { display_name: displayName },
+          emailRedirectTo: getAuthRedirectUrl('/auth/callback'),
         },
       });
-      return { error: translateError(error?.message) };
+      if (!error) captureEvent('signup_completed');
+      return { error: translateError(error) };
     },
     [],
   );
@@ -183,16 +246,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const resetPassword = useCallback(async (email: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: i18n.t('errors.auth_unavailable', { ns: 'auth' }) };
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
+      redirectTo: getAuthRedirectUrl('/reset-password'),
     });
-    return { error: translateError(error?.message) };
+    return { error: translateError(error) };
   }, []);
 
   const updatePassword = useCallback(async (password: string): Promise<{ error: string | null }> => {
     if (!supabase) return { error: i18n.t('errors.auth_unavailable', { ns: 'auth' }) };
     const { error } = await supabase.auth.updateUser({ password });
-    return { error: translateError(error?.message) };
+    return { error: translateError(error) };
   }, []);
+
+  // Identify the user in PostHog on every transition to authenticated.
+  // identifyUser is idempotent on the same id, so re-runs (token
+  // refresh, browser tab focus) are cheap. signOut() handles the
+  // reset side, so leaving the effect dependency-only on userId is
+  // correct.
+  useEffect(() => {
+    if (userId) identifyUser(userId);
+  }, [userId]);
 
   const signOut = useCallback(async () => {
     if (!supabase) return;
@@ -204,6 +276,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     setSessionExpired(false);
     queryClient.clear();
+    resetAnalytics();
   }, [queryClient]);
 
   // `loading` stays true until both the initial session is resolved AND —

@@ -5,7 +5,9 @@ import { useAuth } from '../../contexts/AuthContext.tsx';
 import { useActiveProgram } from '../../hooks/useProgram.ts';
 import type { Session } from '../../types/session.ts';
 import { getProgramImage } from '../../utils/programImage.ts';
+import { localizedProgramFields } from '../../utils/programLocale.ts';
 import { getSessionImage } from '../../utils/sessionImage.ts';
+import { localizedSessionData } from '../../utils/sessionLocale.ts';
 import { DifficultyBadge } from '../DifficultyBadge.tsx';
 import { NutritionWidget } from '../nutrition/NutritionWidget.tsx';
 import { SessionAccordion } from '../SessionAccordion.tsx';
@@ -33,7 +35,7 @@ export function ConnectedContent({
   guardNavigation: (path: string) => void;
   formatShortDate: (key: string) => string;
 }) {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation(['home', 'programs_data', 'sessions_data']);
   const { user, profile } = useAuth();
   const { activeProgram, loading: programLoading } = useActiveProgram(user?.id);
 
@@ -41,6 +43,19 @@ export function ConnectedContent({
     activeProgram && activeProgram.totalSessions > 0
       ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
       : 0;
+
+  // Fixed seed programs were inserted FR-only — pull the user's locale
+  // version from i18n. AI-generated programs already store locale-native
+  // content in the DB and are returned unchanged by the helper.
+  const activeLocalized = activeProgram
+    ? localizedProgramFields(activeProgram, t)
+    : { title: '', description: null as string | null, goals: [] as string[] };
+
+  const nextSession =
+    activeProgram?.nextSessionData && activeProgram.nextSessionOrder != null
+      ? localizedSessionData(activeProgram.slug, activeProgram.nextSessionOrder, activeProgram.nextSessionData, t)
+      : null;
+  const nextSessionTitle = nextSession?.title ?? activeProgram?.nextSessionTitle ?? null;
 
   const firstName = (profile?.display_name ?? user?.user_metadata?.display_name ?? '').split(' ')[0];
 
@@ -207,14 +222,14 @@ export function ConnectedContent({
                 </h4>
                 <Link to={`/programme/${activeProgram.slug}/suivi`} className="block relative h-36 group">
                   <img
-                    src={getProgramImage(activeProgram.slug, activeProgram.goals)}
-                    alt={activeProgram.title}
+                    src={getProgramImage(activeProgram.slug, activeLocalized.goals)}
+                    alt={activeLocalized.title}
                     className="w-full h-full object-cover object-[50%_30%]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4">
                     <p className="font-display text-lg font-bold text-white leading-tight group-hover:text-white/80 transition-colors">
-                      {activeProgram.title.toUpperCase()}
+                      {activeLocalized.title.toUpperCase()}
                     </p>
                   </div>
                 </Link>
@@ -236,10 +251,10 @@ export function ConnectedContent({
                       />
                     </div>
                   </div>
-                  {activeProgram.nextSessionTitle && (
+                  {nextSessionTitle && (
                     <p className="text-xs text-muted mt-3">
                       {t('connected.program_card.next_session')}{' '}
-                      <span className="text-heading font-semibold">{activeProgram.nextSessionTitle}</span>
+                      <span className="text-heading font-semibold">{nextSessionTitle}</span>
                     </p>
                   )}
                   {activeProgram.nextSessionOrder != null && (
@@ -257,7 +272,7 @@ export function ConnectedContent({
                     </button>
                   )}
                 </div>
-                {activeProgram.nextSessionData && <SessionAccordion session={activeProgram.nextSessionData} />}
+                {nextSession && <SessionAccordion session={nextSession} />}
               </div>
             ) : (
               <Link

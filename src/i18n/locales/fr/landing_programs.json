@@ -7,7 +7,7 @@
     "eyebrow": "Programmes IA",
     "title": "Un plan sur-mesure, qui s'adapte à toi.",
     "subtitle": "3 questions, ton plan complet en 30 secondes. Ta fréquence, ton objectif, ton niveau — l'IA assemble le programme. Et chaque semaine s'ajuste pour ne pas t'épuiser.",
-    "cta_primary": "Créer mon programme gratuit",
+    "cta_primary": "Créer mon programme",
     "cta_secondary": "Voir les programmes types",
     "visual_list_alt": "Liste des programmes Wan2Fit",
     "visual_goal_alt": "Choix de l'objectif d'entraînement",
@@ -28,7 +28,7 @@
   "final_cta": {
     "title": "Lance ton plan en 30 secondes.",
     "subtitle": "Crée un compte gratuit, réponds à 3 questions, ton programme est prêt.",
-    "cta_primary": "Créer mon programme gratuit",
+    "cta_primary": "Créer mon programme",
     "cta_secondary": "Découvrir les programmes types"
   }
 }

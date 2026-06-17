@@ -14,6 +14,15 @@
 export const PROD_ORIGINS = [
   'https://wan2fit.fr',
   'https://www.wan2fit.fr',
+  // Native Capacitor app schemes (must be allowed in production too —
+  // they are what the iOS/Android shells use when hitting our APIs).
+  // iOS Capacitor serves the bundle from capacitor://localhost.
+  'capacitor://localhost',
+  // Android Capacitor with androidScheme: 'https' (our config) serves
+  // the bundle from https://localhost. With the default 'http' scheme
+  // it would be http://localhost — we keep both for forward-compat.
+  'https://localhost',
+  'http://localhost',
 ] as const;
 
 export const DEV_ORIGINS = ['http://localhost:5173', 'http://localhost:4173'] as const;

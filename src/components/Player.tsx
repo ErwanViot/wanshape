@@ -9,6 +9,7 @@ import { isHealthAccepted } from '../hooks/useHealthCheck.ts';
 import { useSession } from '../hooks/useSession.ts';
 import { useWakeLock } from '../hooks/useWakeLock.ts';
 import { useWorkout } from '../hooks/useWorkout.ts';
+import { captureEvent } from '../lib/analytics.ts';
 import type { AtomicStep } from '../types/player.ts';
 import type { Session } from '../types/session.ts';
 import { getTodayKey } from '../utils/date.ts';
@@ -125,6 +126,19 @@ export function Player({
       startOnce();
     }
   }, [steps.length, startOnce, workout.status]);
+
+  // Single fire-and-forget event when the workout actually begins.
+  // Tied to startedRef so re-mounts (StrictMode dev, navigation back)
+  // don't double-count.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: only fires on the initial mount with the session in scope
+  useEffect(() => {
+    captureEvent('session_started', {
+      block_types: [...new Set(session.blocks.map((b) => b.type))],
+      block_count: session.blocks.length,
+      estimated_minutes: session.estimatedDuration,
+      origin: programSessionId ? 'program' : customSessionId ? 'custom' : 'daily',
+    });
+  }, []);
 
   // Focus the resume button when pause overlay is shown
   useEffect(() => {

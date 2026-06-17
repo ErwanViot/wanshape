@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
 import { useSubscription } from '../hooks/useSubscription.ts';
+import { isNative } from '../lib/capacitor.ts';
+import { NativePricingCards } from './auth/NativePricingCards.tsx';
 import { PricingCards } from './PricingCards.tsx';
 import { ScreenshotCarousel } from './ScreenshotCarousel.tsx';
 
@@ -16,6 +18,15 @@ export function PremiumPromoPage() {
     title: t('premium.page_title'),
     description: t('premium.page_description'),
   });
+
+  // Apple guideline 3.1.1: on native, swap the whole marketing page
+  // (which includes Tarifs anchor + PricingCards + Stripe CTA) for the
+  // RevenueCat-backed paywall. Premium users keep their normal view —
+  // the page still serves as a "thank you" + feature recap surface for
+  // them.
+  if (isNative() && !isPremium) {
+    return <NativePricingCards />;
+  }
 
   return (
     <div className="space-y-0">

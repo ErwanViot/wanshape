@@ -3,10 +3,12 @@ import { Link } from 'react-router';
 import type { Program } from '../types/completion.ts';
 import { FITNESS_COLORS } from '../utils/labels.ts';
 import { getProgramImage } from '../utils/programImage.ts';
+import { localizedProgramFields } from '../utils/programLocale.ts';
 
 export function ProgramCard({ program }: { program: Program }) {
-  const { t } = useTranslation('programs');
-  const image = getProgramImage(program.slug, program.goals);
+  const { t } = useTranslation(['programs', 'programs_data']);
+  const { title, description, goals } = localizedProgramFields(program, t);
+  const image = getProgramImage(program.slug, goals);
 
   return (
     <Link
@@ -35,13 +37,9 @@ export function ProgramCard({ program }: { program: Program }) {
 
           {/* Bottom: info */}
           <div className="space-y-2 mt-auto text-outline">
-            <h3 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors">
-              {program.title}
-            </h3>
+            <h3 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors">{title}</h3>
 
-            {program.description && (
-              <p className="text-sm text-white leading-relaxed line-clamp-2">{program.description}</p>
-            )}
+            {description && <p className="text-sm text-white leading-relaxed line-clamp-2">{description}</p>}
 
             <div className="flex items-center gap-3 text-xs text-white pt-1">
               <span className="flex items-center gap-1.5">
@@ -81,9 +79,9 @@ export function ProgramCard({ program }: { program: Program }) {
               </span>
             </div>
 
-            {program.goals.length > 0 && (
+            {goals.length > 0 && (
               <ul className="flex flex-wrap gap-2 pt-1">
-                {program.goals.map((goal) => (
+                {goals.map((goal) => (
                   <li
                     key={goal}
                     className="text-xs font-medium px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-white"

@@ -8,12 +8,14 @@ import { useActiveProgram, usePrograms } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import { supabase } from '../lib/supabase.ts';
 import { getProgramImage } from '../utils/programImage.ts';
+import { localizedProgramFields } from '../utils/programLocale.ts';
+import { localizedSessionData } from '../utils/sessionLocale.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { ProgramCard } from './ProgramCard.tsx';
 
 export function ProgramList() {
-  const { t } = useTranslation('programs');
+  const { t } = useTranslation(['programs', 'programs_data', 'sessions_data']);
   const { user, profile } = useAuth();
   const { programs, loading } = usePrograms();
   const { programs: userPrograms, loading: userLoading } = useUserPrograms();
@@ -29,7 +31,19 @@ export function ProgramList() {
       ? Math.round((activeProgram.completedCount / activeProgram.totalSessions) * 100)
       : 0;
 
-  const activeImage = activeProgram ? getProgramImage(activeProgram.slug, activeProgram.goals) : '';
+  // The fixed (seed) programs were inserted FR-only in migration 002 — pull
+  // the localised title/goals from i18n so the active-program hero matches
+  // the user's current language.
+  const activeLocalized = activeProgram
+    ? localizedProgramFields(activeProgram, t)
+    : { title: '', description: null as string | null, goals: [] as string[] };
+
+  const activeImage = activeProgram ? getProgramImage(activeProgram.slug, activeLocalized.goals) : '';
+
+  const nextSessionTitle =
+    activeProgram?.nextSessionData && activeProgram.nextSessionOrder != null
+      ? localizedSessionData(activeProgram.slug, activeProgram.nextSessionOrder, activeProgram.nextSessionData, t).title
+      : (activeProgram?.nextSessionTitle ?? null);
 
   useDocumentHead({
     title: t('list.programs'),
@@ -88,7 +102,7 @@ export function ProgramList() {
                 {t('list.active_label')}
               </p>
               <h2 className="font-display text-xl md:text-2xl font-black text-white mb-2 truncate">
-                {activeProgram.title}
+                {activeLocalized.title}
               </h2>
               <div className="flex items-center gap-4 text-sm text-white/60">
                 <span>
@@ -97,10 +111,9 @@ export function ProgramList() {
                     total: activeProgram.totalSessions,
                   })}
                 </span>
-                {activeProgram.nextSessionTitle && (
+                {nextSessionTitle && (
                   <span className="truncate">
-                    {t('list.next_session')}{' '}
-                    <span className="text-white/90 font-semibold">{activeProgram.nextSessionTitle}</span>
+                    {t('list.next_session')} <span className="text-white/90 font-semibold">{nextSessionTitle}</span>
                   </span>
                 )}
               </div>
@@ -197,7 +210,7 @@ export function ProgramList() {
           <h2 className="text-xs font-bold uppercase tracking-wider text-subtle">{t('list.my_programs')}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
             {userPrograms.map((p) => {
-              const goalLabel = p.goals?.[0] ? t(`goal.${p.goals[0]}`) : '';
+              const goalLabel = p.goals?.[0] ?? '';
               const image = getProgramImage(p.slug, p.goals);
               return (
                 <Link

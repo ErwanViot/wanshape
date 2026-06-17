@@ -31,6 +31,31 @@
     "cgv_link": "General Terms of Sale"
   },
   "sign_out": "Log out",
+  "notifications": {
+    "heading": "Notifications",
+    "description": "Stay informed about what matters — never a daily reminder.",
+    "info_label": "Important information",
+    "info_description": "Program updates, account events, security alerts.",
+    "progression_label": "Milestones reached",
+    "progression_description": "A short note when you complete a step (program week, history milestone). Off by default.",
+    "new_content_label": "New content",
+    "new_content_description": "Newly added recipes or programs. Off by default."
+  },
+  "danger_zone": {
+    "heading": "Danger zone",
+    "description": "Deleting your account permanently removes your profile, history, and personal data. This cannot be undone.",
+    "delete_button": "Delete my account",
+    "confirm_title": "Delete your account?",
+    "confirm_body": "This action is immediate and irreversible. Type the word below to confirm.",
+    "bullet_data": "Your profile, sessions, and programs will be erased.",
+    "bullet_subscription": "Your Premium subscription will be cancelled on Stripe.",
+    "bullet_irreversible": "There is no way to recover the data afterwards.",
+    "confirmation_word": "DELETE",
+    "confirm_label": "Type {{word}} to confirm",
+    "confirm_action": "Delete permanently",
+    "deleting": "Deleting…",
+    "cancel": "Cancel"
+  },
   "cgu_modal": {
     "title": "Terms update",
     "body": "Our Terms of Service and Privacy Policy have been updated (version {{version}}). Access to the app is suspended until you accept them.",

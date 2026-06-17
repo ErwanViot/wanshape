@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fr.wansoft.wan2fit",
+      "sha256_cert_fingerprints": ["1B:20:E0:38:0D:54:99:EB:55:88:8B:34:7D:57:94:F6:7F:66:11:29:85:25:2B:74:80:F4:C0:67:BE:A0:38:93"]
+    }
+  }
+]

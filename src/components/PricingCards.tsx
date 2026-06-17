@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSubscription } from '../hooks/useSubscription.ts';
+import { isNative } from '../lib/capacitor.ts';
 import { formatDate } from '../utils/date.ts';
+import { NativePricingCards } from './auth/NativePricingCards.tsx';
 
 const PRICE_IDS = {
   monthly: import.meta.env.VITE_STRIPE_PRICE_MONTHLY as string | undefined,
@@ -61,6 +63,14 @@ export function PricingCards() {
     const err = await manageSubscription();
     if (err) setError(err);
   };
+
+  // Apple guideline 3.1.1 — native iOS/Android must offer purchases via
+  // StoreKit / Google Play Billing. We swap the Stripe-flavoured paywall
+  // for a RevenueCat-backed one. Premium users keep their existing status
+  // block below, so this gate only applies to non-premium native users.
+  if (isNative() && !isPremium) {
+    return <NativePricingCards />;
+  }
 
   // Already premium — simplified view
   if (isPremium) {

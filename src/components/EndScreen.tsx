@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { STORAGE_KEYS } from '../config/storage-keys.ts';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useSaveCompletion } from '../hooks/useSaveCompletion.ts';
+import { captureEvent } from '../lib/analytics.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { Session } from '../types/session.ts';
 import { computeDifficulty } from '../utils/sessionDifficulty.ts';
@@ -52,6 +53,21 @@ export function EndScreen({ session, amrapRounds, durationSeconds, onBack, progr
     durationSeconds,
     amrapRounds,
   ]);
+
+  // Single fire-and-forget event per completion. The session payload
+  // intentionally omits the title (free-text user input via custom
+  // sessions) — only structured fields go to analytics.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: only fires on mount with the initial completion props
+  useEffect(() => {
+    if (!durationSeconds) return;
+    captureEvent('session_completed', {
+      duration_seconds: durationSeconds,
+      block_types: [...new Set(session.blocks.map((b) => b.type))],
+      block_count: session.blocks.length,
+      amrap_rounds: amrapRounds,
+      origin: programSessionId ? 'program' : customSessionId ? 'custom' : 'daily',
+    });
+  }, []);
 
   const rawMinutes = durationSeconds > 0 ? Math.round(durationSeconds / 60) : session.estimatedDuration;
   const realMinutes = rawMinutes > 0 ? rawMinutes : 1;

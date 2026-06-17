@@ -10,12 +10,14 @@ import type { Session } from '../types/session.ts';
 import { getConsigneForWeek } from '../utils/coaching.ts';
 import { FITNESS_COLORS, GOAL_COLORS } from '../utils/labels.ts';
 import { getProgramImage } from '../utils/programImage.ts';
+import { localizedProgramFields } from '../utils/programLocale.ts';
+import { localizedSessionData } from '../utils/sessionLocale.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { LoadingSpinner } from './LoadingSpinner.tsx';
 import { SessionAccordion } from './SessionAccordion.tsx';
 
 export function ProgramPage() {
-  const { t } = useTranslation('programs');
+  const { t } = useTranslation(['programs', 'programs_data', 'sessions_data']);
   const { slug } = useParams<{ slug: string }>();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -27,9 +29,16 @@ export function ProgramPage() {
   const [collapsedWeeks, setCollapsedWeeks] = useState<Set<number>>(new Set());
   const deleteDialogRef = useRef<HTMLDivElement>(null);
 
+  // Fixed programs are seeded in French in the DB; the localised
+  // title/description/goals live in src/i18n/locales/{fr,en}/programs_data.json.
+  // Custom (AI) programs already store locale-native content.
+  const localized = program
+    ? localizedProgramFields(program, t)
+    : { title: '', description: null as string | null, goals: [] as string[] };
+
   useDocumentHead({
-    title: program ? `${program.title} ${t('page.title_suffix')}` : t('page.title_suffix'),
-    description: program?.description ?? undefined,
+    title: program ? `${localized.title} ${t('page.title_suffix')}` : t('page.title_suffix'),
+    description: localized.description ?? undefined,
   });
 
   const isCustom = program && !program.is_fixed;
@@ -192,7 +201,7 @@ export function ProgramPage() {
         <section className="space-y-5 -mx-6 -mt-8 md:mx-0 md:mt-0">
           <div className="relative min-h-[220px] sm:min-h-[280px] md:rounded-2xl overflow-hidden">
             <img
-              src={getProgramImage(program.slug, program.goals)}
+              src={getProgramImage(program.slug, localized.goals)}
               alt=""
               className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
             />
@@ -236,10 +245,12 @@ export function ProgramPage() {
                 </span>
 
                 <h1 className="font-display text-3xl md:text-4xl font-black tracking-tight text-white">
-                  {program.title}
+                  {localized.title}
                 </h1>
 
-                {program.description && <p className="text-sm leading-relaxed text-white/70">{program.description}</p>}
+                {localized.description && (
+                  <p className="text-sm leading-relaxed text-white/70">{localized.description}</p>
+                )}
 
                 <div className={`flex items-center gap-3 text-xs ${isCustom ? 'text-faint' : 'text-white/50'}`}>
                   <span className="flex items-center gap-1.5">
@@ -279,14 +290,14 @@ export function ProgramPage() {
                   </span>
                 </div>
 
-                {program.goals.length > 0 && (
+                {localized.goals.length > 0 && (
                   <ul className="flex flex-wrap gap-2">
-                    {program.goals.map((goal) => (
+                    {localized.goals.map((goal) => (
                       <li
                         key={goal}
                         className={`text-xs font-bold px-2.5 py-1 rounded-full text-white ${GOAL_COLORS[goal] ?? 'bg-rose-400/80'}`}
                       >
-                        {t(`goal.${goal}`) ?? goal}
+                        {goal}
                       </li>
                     ))}
                   </ul>
@@ -380,7 +391,7 @@ export function ProgramPage() {
               {!isCollapsed && (
                 <div className="space-y-3">
                   {sessions.map((ps) => {
-                    const data = ps.session_data as Session;
+                    const data = localizedSessionData(program.slug, ps.session_order, ps.session_data as Session, t);
                     const isDone = user ? program.completedSessionIds.has(ps.id) : false;
                     const isSuggested = user && ps.session_order === nextSessionOrder;
 
