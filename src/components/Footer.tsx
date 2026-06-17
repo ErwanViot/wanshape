@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { SocialLinks } from './SocialLinks.tsx';
 import { StoreBadges } from './StoreBadges.tsx';
 
 export function Footer() {
@@ -10,6 +11,9 @@ export function Footer() {
       <div className="mb-6 flex flex-col items-center gap-2">
         <p className="text-subtle text-xs">{t('store_badges.title')}</p>
         <StoreBadges />
+        <div className="mt-2">
+          <SocialLinks />
+        </div>
       </div>
       <p className="text-faint text-xs text-center">
         Wan2Fit {t('footer.by')}{' '}
