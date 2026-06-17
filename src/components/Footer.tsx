@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer className="px-6 py-8 border-t border-divider">
       <div className="mb-6 flex flex-col items-center gap-2">
-        <p className="text-subtle text-xs">{t('store_badges.title', { defaultValue: "Télécharge l'app" })}</p>
+        <p className="text-subtle text-xs">{t('store_badges.title')}</p>
         <StoreBadges />
       </div>
       <p className="text-faint text-xs text-center">

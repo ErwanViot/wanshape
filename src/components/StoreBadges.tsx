@@ -25,14 +25,14 @@ export function StoreBadges() {
         href={APP_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={t('store_badges.app_store', { defaultValue: "Télécharger dans l'App Store" })}
+        aria-label={t('store_badges.app_store')}
         className="inline-block transition-opacity hover:opacity-80"
       >
         <img
           src="/images/badge-app-store-fr-white.svg"
           alt=""
           className="badge-theme-dark h-10 w-auto"
-          width={120}
+          width={127}
           height={40}
           loading="lazy"
         />
@@ -40,7 +40,7 @@ export function StoreBadges() {
           src="/images/badge-app-store-fr-black.svg"
           alt=""
           className="badge-theme-light h-10 w-auto"
-          width={120}
+          width={127}
           height={40}
           loading="lazy"
         />
@@ -49,7 +49,7 @@ export function StoreBadges() {
         href={PLAY_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={t('store_badges.google_play', { defaultValue: 'Disponible sur Google Play' })}
+        aria-label={t('store_badges.google_play')}
         className="inline-block transition-opacity hover:opacity-80"
       >
         {/* Both lockups fill their canvas with only a few % of padding, so the
