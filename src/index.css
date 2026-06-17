@@ -634,3 +634,16 @@ body {
     transform: none;
   }
 }
+
+/* Store badges (App Store / Google Play) — swap the Apple lockup with the theme
+   so the transparent badge stays legible on both surfaces. White lockup on the
+   dark theme (default), black lockup on the light theme. */
+.badge-theme-light {
+  display: none;
+}
+[data-theme="light"] .badge-theme-dark {
+  display: none;
+}
+[data-theme="light"] .badge-theme-light {
+  display: inline-block;
+}
