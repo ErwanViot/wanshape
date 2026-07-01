@@ -250,7 +250,7 @@ function weeksFromConsigneKey(key: string): number[] {
     if (bounds.length === 2) {
       const start = Number.parseInt(bounds[0], 10);
       const end = Number.parseInt(bounds[1], 10);
-      if (Number.isNaN(start) || Number.isNaN(end)) continue;
+      if (Number.isNaN(start) || Number.isNaN(end) || start > end) continue;
       for (let w = start; w <= end; w++) weeks.push(w);
     } else {
       const n = Number.parseInt(part.trim(), 10);
@@ -280,6 +280,13 @@ export function validateProgram(
   if (!isString(program.niveau)) return { valid: false, error: 'niveau is required' };
   if (!['debutant', 'intermediaire', 'avance'].includes(program.niveau as string))
     return { valid: false, error: 'niveau must be debutant, intermediaire or avance' };
+  // Optional `structure` tag ("repete" | "phase"). Advisory (analytics + UI),
+  // never drives ingestion, but if present it must be one of the two values so
+  // the stored signal stays trustworthy. Absent is fine (older/repeat outputs).
+  // Checked here, before any sanitization mutation, so an invalid value never
+  // leaves the input object half-transformed.
+  if (program.structure !== undefined && program.structure !== 'repete' && program.structure !== 'phase')
+    return { valid: false, error: 'structure must be "repete" or "phase"' };
   if (!isString(program.note_coach) || (program.note_coach as string).length === 0)
     return { valid: false, error: 'note_coach is required' };
 
@@ -404,15 +411,8 @@ export function validateProgram(
     consignes[key] = sanitizeString(consignes[key] as string);
   }
 
-  // Optional `structure` tag ("repete" | "phase"). Advisory (analytics + UI),
-  // never drives ingestion, but if present it must be one of the two values so
-  // the stored signal stays trustworthy. Absent is fine (older/repeat outputs).
-  if (program.structure !== undefined) {
-    if (program.structure !== 'repete' && program.structure !== 'phase')
-      return { valid: false, error: 'structure must be "repete" or "phase"' };
-  }
-
   // Sanitize optional phase labels on calendrier entries (UI-facing text).
+  // (`structure` validity is checked earlier, before sanitization.)
   for (const entry of program.calendrier as CalendrierEntry[]) {
     if (isString(entry.nom)) entry.nom = sanitizeString(entry.nom);
   }

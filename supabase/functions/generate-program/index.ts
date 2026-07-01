@@ -103,7 +103,7 @@ function validateInput(body: RequestInput): string | null {
     return "duree_seance_minutes doit etre entre 30 et 75";
 
   if (!VALID_DUREES.includes(body.duree_semaines))
-    return "duree_semaines doit etre 4, 8 ou 12";
+    return "duree_semaines doit etre 4, 6, 8 ou 12";
 
   if (body.blessures && !Array.isArray(body.blessures))
     return "blessures doit etre un tableau";
@@ -305,9 +305,9 @@ Deno.serve(async (req: Request) => {
   const userPrompt = buildUserPrompt({ ...body, locale }, imposedStructure);
   const systemPrompt = buildSystemPrompt(locale);
 
-  // Call Anthropic API. Sonnet with 12K tokens needs a more generous timeout
-  // than the Haiku session generation. The fetch/parse/error-taxonomy lives in
-  // _shared/anthropic.ts; here we only assemble the prompt turns.
+  // Call Anthropic API. Sonnet with a 20K-token budget needs a more generous
+  // timeout than the Haiku session generation. The fetch/parse/error-taxonomy
+  // lives in _shared/anthropic.ts; here we only assemble the prompt turns.
   //
   // IMPORTANT: claude-sonnet-4-6 does NOT support assistant message prefill —
   // ending the conversation with an `{ role: "assistant", content: '{"' }`
@@ -365,7 +365,9 @@ Deno.serve(async (req: Request) => {
   // Validate
   let validation = validateProgram(programJson, body.duree_semaines, body.seances_par_semaine);
 
-  // Retry once if invalid
+  // Retry once if invalid. Timeout is 90s (not 30s): the correction round must
+  // regenerate a full program under the same 20K-token budget, which at Sonnet
+  // speed can take 45-70s — a 30s cap would time out most phased retries.
   if (!validation.valid) {
     console.error("First attempt validation failed:", validation.error);
     try {

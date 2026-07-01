@@ -199,6 +199,36 @@ describe('validateProgram — phased periodisation', () => {
   });
 });
 
+describe('validateProgram — consigne key parsing', () => {
+  it('accepts a comma-list consigne key ("1,2,3,4")', () => {
+    const result = validateProgram(
+      baseProgram({ consignes_semaine: { '1,2,3,4': 'Tout au long' } }),
+      4,
+      3,
+    );
+    expect(result.valid).toBe(true);
+  });
+
+  it('accepts a mix of range and single-week keys', () => {
+    const result = validateProgram(
+      baseProgram({ consignes_semaine: { '1-2': 'Debut', '3': 'Milieu', '4': 'Fin' } }),
+      4,
+      3,
+    );
+    expect(result.valid).toBe(true);
+  });
+
+  it('treats an inverted range ("4-1") as covering nothing', () => {
+    const result = validateProgram(
+      baseProgram({ consignes_semaine: { '4-1': 'Range inverse' } }),
+      4,
+      3,
+    );
+    expect(result.valid).toBe(false);
+    expect(result.error).toContain('week 1 not covered');
+  });
+});
+
 describe('validateProgram — structure tag', () => {
   it('accepts a valid structure value', () => {
     expect(validateProgram(baseProgram({ structure: 'repete' }), 4, 3).valid).toBe(true);

@@ -430,6 +430,10 @@ export function buildUserPrompt(
   // periodised, we don't leave that high-stakes case to the model's judgement.
   // Any other case falls through to the deduction rules in the system prompt.
   if (imposedStructure === 'phase') {
+    // The sentinel stays in French for every locale on purpose: the system
+    // prompt is language-agnostic (French, with only an EN output directive
+    // prepended for locale 'en'), and it references this exact French string
+    // in its "QUAND CHOISIR phase" rules. Keep the two in lockstep.
     parts.push('');
     parts.push('STRUCTURE IMPOSEE : phase');
     parts.push('→ Genere un programme PHASE : plusieurs phases successives avec des seances DISTINCTES par phase (montee en puissance vers l\'echeance). Indique "structure": "phase".');
