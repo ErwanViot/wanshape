@@ -92,7 +92,7 @@
     "title": "Qu'est-ce qui te motive ?",
     "legend": "Choisis tes objectifs",
     "detail_label": "Dis-nous en plus",
-    "detail_hint": "Plus tu précises, plus ton programme sera adapté.",
+    "detail_hint": "Plus tu précises, plus ton programme sera adapté. Si tu prépares une échéance (compétition, reprise d'un sport, vacances...), mentionne-la : ça change la structure du programme.",
     "detail_placeholder": "Ex : perdre 5kg avant l'été, pré-saison foot, programme en parallèle du basket pour performer le week-end...",
     "next": "Suivant"
   },
@@ -184,6 +184,7 @@
   },
   "duree": {
     "4": "4 semaines",
+    "6": "6 semaines",
     "8": "8 semaines",
     "12": "12 semaines"
   },

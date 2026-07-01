@@ -92,7 +92,7 @@
     "title": "What motivates you?",
     "legend": "Choose your goals",
     "detail_label": "Tell us more",
-    "detail_hint": "The more specific you are, the better your program will be.",
+    "detail_hint": "The more specific you are, the better your program will be. If you're preparing for a deadline (a competition, getting back into a sport, a holiday...), mention it: it changes how the program is structured.",
     "detail_placeholder": "E.g. lose 5kg before summer, pre-season football, program alongside basketball to perform on weekends...",
     "next": "Next"
   },
@@ -184,6 +184,7 @@
   },
   "duree": {
     "4": "4 weeks",
+    "6": "6 weeks",
     "8": "8 weeks",
     "12": "12 weeks"
   },

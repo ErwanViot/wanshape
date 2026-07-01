@@ -9,7 +9,7 @@ export interface StepPreferencesProps {
   dureeSeanceMinutes: number;
   materiel: (Equipment | 'salle')[];
   materielDetail: string;
-  dureeSemaines: 4 | 8 | 12;
+  dureeSemaines: 4 | 6 | 8 | 12;
   isValid: boolean;
   generating: boolean;
   generateError: string | null;
@@ -18,7 +18,7 @@ export interface StepPreferencesProps {
   onChangeDureeSeance: (value: number) => void;
   onToggleMateriel: (value: Equipment | 'salle') => void;
   onChangeMaterielDetail: (value: string) => void;
-  onChangeDureeSemaines: (value: 4 | 8 | 12) => void;
+  onChangeDureeSemaines: (value: 4 | 6 | 8 | 12) => void;
   onBack: () => void;
   onSubmit: () => void;
 }
@@ -136,7 +136,7 @@ export function StepPreferences({
         <legend className="text-sm font-semibold text-heading mb-3">
           {t('step_preferences.program_duration_legend')}
         </legend>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {DUREE_OPTIONS.map((d) => (
             <button
               key={d.value}

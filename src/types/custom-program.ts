@@ -21,7 +21,7 @@ export interface ProgramOnboardingInput {
   seances_par_semaine: number;
   duree_seance_minutes: number;
   materiel: Equipment[];
-  duree_semaines: 4 | 8 | 12;
+  duree_semaines: 4 | 6 | 8 | 12;
 }
 
 /**

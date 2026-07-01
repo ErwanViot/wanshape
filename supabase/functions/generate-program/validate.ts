@@ -232,6 +232,32 @@ export function validateSession(data: unknown): ValidationResult {
 interface CalendrierEntry {
   semaines: number[];
   sequence: string[];
+  /** Optional phase label (e.g. "Reprise", "Pic") — UI only, sanitized. */
+  nom?: string;
+}
+
+/**
+ * Expand a consigne key into the week numbers it covers. Handles the formats
+ * the model is instructed to emit: "3" (single), "1-4" (range), "1,2,3" (list),
+ * and combinations. Unparseable fragments are skipped (they simply don't
+ * contribute coverage, which surfaces as a "week N not covered" error rather
+ * than a false pass).
+ */
+function weeksFromConsigneKey(key: string): number[] {
+  const weeks: number[] = [];
+  for (const part of key.split(',')) {
+    const bounds = part.trim().split('-');
+    if (bounds.length === 2) {
+      const start = Number.parseInt(bounds[0], 10);
+      const end = Number.parseInt(bounds[1], 10);
+      if (Number.isNaN(start) || Number.isNaN(end)) continue;
+      for (let w = start; w <= end; w++) weeks.push(w);
+    } else {
+      const n = Number.parseInt(part.trim(), 10);
+      if (!Number.isNaN(n)) weeks.push(n);
+    }
+  }
+  return weeks;
 }
 
 export function validateProgram(
@@ -270,10 +296,16 @@ export function validateProgram(
   const sessions = program.sessions as Record<string, unknown>;
   const sessionKeys = Object.keys(sessions);
 
-  if (sessionKeys.length < 2 || sessionKeys.length > 5)
-    return { valid: false, error: `sessions must have 2-5 entries, got ${sessionKeys.length}` };
-  if (sessionKeys.length > maxSessionsPerWeek)
-    return { valid: false, error: `sessions count (${sessionKeys.length}) exceeds seances_par_semaine (${maxSessionsPerWeek})` };
+  // Upper bound raised from 5 to 20 to allow periodised programs: a phased
+  // program declares distinct sessions per phase (A1/B1 phase 1, A2/B2 phase
+  // 2…), so the total unique-session count legitimately exceeds a single
+  // week's session count. Worst realistic case = 4 phases × 5 sessions = 20.
+  // The old `sessionKeys.length > maxSessionsPerWeek` cap is INTENTIONALLY
+  // dropped — it was the exact constraint that forced every week to be
+  // identical. The real per-week limit is enforced on each calendrier
+  // sequence below (sequence.length <= maxSessionsPerWeek).
+  if (sessionKeys.length < 2 || sessionKeys.length > 20)
+    return { valid: false, error: `sessions must have 2-20 entries, got ${sessionKeys.length}` };
 
   // Validate each session
   for (const key of sessionKeys) {
@@ -293,8 +325,21 @@ export function validateProgram(
     if (!isArray(entry.sequence) || entry.sequence.length === 0)
       return { valid: false, error: 'calendrier entry: sequence required' };
 
+    // A week can hold at most `seances_par_semaine` sessions. Fewer is allowed
+    // (deload / taper weeks legitimately run a shorter sequence).
+    if (entry.sequence.length > maxSessionsPerWeek)
+      return {
+        valid: false,
+        error: `calendrier: sequence length (${entry.sequence.length}) exceeds seances_par_semaine (${maxSessionsPerWeek})`,
+      };
+
     for (const week of entry.semaines) {
       if (!isNumber(week)) return { valid: false, error: 'calendrier: semaine must be a number' };
+      // Overlap guard: a week assigned by two entries would insert duplicate
+      // program_sessions rows (index.ts unrolls semaines × sequence), leaving
+      // the player with an undefined week. A Set silently deduped this before.
+      if (coveredWeeks.has(week))
+        return { valid: false, error: `calendrier: week ${week} covered by multiple entries` };
       coveredWeeks.add(week);
     }
 
@@ -326,6 +371,19 @@ export function validateProgram(
       return { valid: false, error: `consignes_semaine["${key}"] must be a string` };
   }
 
+  // Verify the consigne ranges cover every week 1..expectedWeeks. Previously
+  // the keys were opaque strings, so the model could silently skip a phase
+  // (e.g. emit "1-4"/"5-8" for a 12-week program and forget "9-12"), leaving
+  // those weeks without guidance in the UI. More failure-prone with phasing.
+  const consigneWeeks = new Set<number>();
+  for (const key of consigneKeys) {
+    for (const w of weeksFromConsigneKey(key)) consigneWeeks.add(w);
+  }
+  for (let w = 1; w <= expectedWeeks; w++) {
+    if (!consigneWeeks.has(w))
+      return { valid: false, error: `consignes_semaine: week ${w} not covered` };
+  }
+
   // Sanitize top-level strings
   program.titre = sanitizeString(program.titre as string);
   program.description = sanitizeString(program.description as string);
@@ -344,6 +402,19 @@ export function validateProgram(
   // Sanitize consignes_semaine values
   for (const key of consigneKeys) {
     consignes[key] = sanitizeString(consignes[key] as string);
+  }
+
+  // Optional `structure` tag ("repete" | "phase"). Advisory (analytics + UI),
+  // never drives ingestion, but if present it must be one of the two values so
+  // the stored signal stays trustworthy. Absent is fine (older/repeat outputs).
+  if (program.structure !== undefined) {
+    if (program.structure !== 'repete' && program.structure !== 'phase')
+      return { valid: false, error: 'structure must be "repete" or "phase"' };
+  }
+
+  // Sanitize optional phase labels on calendrier entries (UI-facing text).
+  for (const entry of program.calendrier as CalendrierEntry[]) {
+    if (isString(entry.nom)) entry.nom = sanitizeString(entry.nom);
   }
 
   return { valid: true };

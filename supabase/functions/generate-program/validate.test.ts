@@ -85,27 +85,133 @@ describe('validateProgram — sessions count bounds', () => {
     const single = { A: embeddedSession() };
     const result = validateProgram(baseProgram({ sessions: single }), 4, 3);
     expect(result.valid).toBe(false);
-    expect(result.error).toContain('sessions must have 2-5 entries');
+    expect(result.error).toContain('sessions must have 2-20 entries');
   });
 
-  it('rejects more than 5 sessions', () => {
-    const six = Object.fromEntries(
-      ['A', 'B', 'C', 'D', 'E', 'F'].map((k) => [k, embeddedSession({ title: `S ${k}` })]),
-    );
-    const result = validateProgram(baseProgram({ sessions: six }), 4, 6);
+  it('rejects more than 20 sessions', () => {
+    const keys = Array.from({ length: 21 }, (_, i) => `S${i}`);
+    const many = Object.fromEntries(keys.map((k) => [k, embeddedSession({ title: k })]));
+    const result = validateProgram(baseProgram({ sessions: many }), 4, 5);
     expect(result.valid).toBe(false);
-    expect(result.error).toContain('sessions must have 2-5 entries');
+    expect(result.error).toContain('sessions must have 2-20 entries');
   });
 
-  it('rejects more sessions than maxSessionsPerWeek allows', () => {
-    const four = Object.fromEntries(['A', 'B', 'C', 'D'].map((k) => [k, embeddedSession({ title: `S ${k}` })]));
+  it('accepts more unique sessions than seances_par_semaine (phased programs)', () => {
+    // 6 unique sessions with only 3 sessions/week — the old cap rejected this,
+    // it is exactly what periodisation needs.
+    const six = Object.fromEntries(
+      ['A1', 'B1', 'C1', 'A2', 'B2', 'C2'].map((k) => [k, embeddedSession({ title: k })]),
+    );
     const result = validateProgram(
-      baseProgram({ sessions: four, calendrier: [{ semaines: [1, 2, 3, 4], sequence: ['A', 'B', 'C', 'D'] }] }),
+      baseProgram({
+        sessions: six,
+        calendrier: [
+          { semaines: [1, 2], sequence: ['A1', 'B1', 'C1'] },
+          { semaines: [3, 4], sequence: ['A2', 'B2', 'C2'] },
+        ],
+      }),
       4,
       3,
     );
+    expect(result.valid).toBe(true);
+  });
+});
+
+describe('validateProgram — phased periodisation', () => {
+  function phasedProgram(overrides: Record<string, unknown> = {}) {
+    const sessions = Object.fromEntries(
+      ['A1', 'B1', 'C1', 'A2', 'B2', 'C2'].map((k) => [k, embeddedSession({ title: k })]),
+    );
+    return baseProgram({
+      structure: 'phase',
+      sessions,
+      calendrier: [
+        { semaines: [1, 2, 3, 4], sequence: ['A1', 'B1', 'C1'], nom: 'Base' },
+        { semaines: [5, 6, 7, 8], sequence: ['A2', 'B2', 'C2'], nom: 'Développement' },
+      ],
+      consignes_semaine: { '1-4': 'Phase de base', '5-8': 'Montée en intensité' },
+      ...overrides,
+    });
+  }
+
+  it('accepts an 8-week, 2-phase program', () => {
+    expect(validateProgram(phasedProgram(), 8, 3).valid).toBe(true);
+  });
+
+  it('accepts a deload week with a shorter sequence than seances_par_semaine', () => {
+    const result = validateProgram(
+      phasedProgram({
+        calendrier: [
+          { semaines: [1, 2, 3], sequence: ['A1', 'B1', 'C1'] },
+          { semaines: [4], sequence: ['A1'], nom: 'Récupération' },
+          { semaines: [5, 6, 7, 8], sequence: ['A2', 'B2', 'C2'] },
+        ],
+      }),
+      8,
+      3,
+    );
+    expect(result.valid).toBe(true);
+  });
+
+  it('rejects a sequence longer than seances_par_semaine', () => {
+    const result = validateProgram(baseProgram(), 4, 1); // baseProgram sequence = ['A','B']
     expect(result.valid).toBe(false);
     expect(result.error).toContain('exceeds seances_par_semaine');
+  });
+
+  it('rejects overlapping week ranges between two entries', () => {
+    const result = validateProgram(
+      phasedProgram({
+        calendrier: [
+          { semaines: [1, 2, 3, 4], sequence: ['A1', 'B1', 'C1'] },
+          { semaines: [4, 5, 6, 7, 8], sequence: ['A2', 'B2', 'C2'] }, // week 4 twice
+        ],
+      }),
+      8,
+      3,
+    );
+    expect(result.valid).toBe(false);
+    expect(result.error).toContain('week 4 covered by multiple entries');
+  });
+
+  it('rejects consignes that miss a phase', () => {
+    const result = validateProgram(
+      phasedProgram({ consignes_semaine: { '1-4': 'Phase de base' } }), // 5-8 missing
+      8,
+      3,
+    );
+    expect(result.valid).toBe(false);
+    expect(result.error).toContain('week 5 not covered');
+  });
+
+  it('sanitizes phase labels (nom) on calendrier entries', () => {
+    const program = phasedProgram({
+      calendrier: [
+        { semaines: [1, 2, 3, 4], sequence: ['A1', 'B1', 'C1'], nom: 'Base <script>x</script>' },
+        { semaines: [5, 6, 7, 8], sequence: ['A2', 'B2', 'C2'], nom: 'Pic https://x.y' },
+      ],
+    });
+    const result = validateProgram(program, 8, 3);
+    expect(result.valid).toBe(true);
+    const cal = (program as Record<string, unknown>).calendrier as { nom: string }[];
+    expect(cal[0].nom).toBe('Base x');
+    expect(cal[1].nom).toBe('Pic ');
+  });
+});
+
+describe('validateProgram — structure tag', () => {
+  it('accepts a valid structure value', () => {
+    expect(validateProgram(baseProgram({ structure: 'repete' }), 4, 3).valid).toBe(true);
+  });
+
+  it('accepts an absent structure (backward compat)', () => {
+    expect(validateProgram(baseProgram(), 4, 3).valid).toBe(true);
+  });
+
+  it('rejects an invalid structure value', () => {
+    const result = validateProgram(baseProgram({ structure: 'linear' }), 4, 3);
+    expect(result.valid).toBe(false);
+    expect(result.error).toContain('structure must be');
   });
 });
 
@@ -194,14 +300,14 @@ describe('validateProgram — sanitization', () => {
   it('sanitizes progression.logique and consignes_semaine values', () => {
     const program = baseProgram({
       progression: { logique: 'On augmente <b>lourd</b> via https://x.y' },
-      consignes_semaine: { '1': 'Attention <script>x</script>' },
+      consignes_semaine: { '1-4': 'Attention <script>x</script>' },
     });
     const result = validateProgram(program, 4, 3);
     expect(result.valid).toBe(true);
     const progression = (program as Record<string, unknown>).progression as Record<string, unknown>;
     expect(progression.logique).toBe('On augmente lourd via ');
     const consignes = (program as Record<string, unknown>).consignes_semaine as Record<string, string>;
-    expect(consignes['1']).toBe('Attention x');
+    expect(consignes['1-4']).toBe('Attention x');
   });
 
   it('sanitizes the optional progression.cible_semaine_X fields', () => {

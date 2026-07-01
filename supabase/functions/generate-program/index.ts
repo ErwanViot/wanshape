@@ -9,7 +9,11 @@ import { AnthropicCallError, callAnthropicJson, describeAnthropicError } from ".
 const MAX_ACTIVE_PROGRAMS = 3;
 const MAX_DAILY_GENERATIONS = 3;
 const MODEL = "claude-sonnet-4-6";
-const MAX_TOKENS = 12288;
+// Raised from 12288 to absorb periodised ("phase") programs, which declare
+// distinct sessions per phase (worst realistic case ~15-20 unique sessions ≈
+// 14-16K output tokens + JSON overhead). Truncation is now detected via
+// stop_reason in _shared/anthropic.ts rather than surfacing as a parse error.
+const MAX_TOKENS = 20480;
 // NB: no assistant-message prefill here — claude-sonnet-4-6 rejects it with a
 // 400 ("This model does not support assistant message prefill"). Prompt-
 // injection defence + JSON-only output are enforced by the system prompt
@@ -31,7 +35,7 @@ const VALID_MATERIEL = [
   'corde_a_sauter', 'medecine_ball', 'swiss_ball', 'tapis',
   'step', 'foam_roller', 'anneaux',
 ];
-const VALID_DUREES = [4, 8, 12];
+const VALID_DUREES = [4, 6, 8, 12];
 const VALID_LOCALES: Locale[] = ["fr", "en"];
 
 function jsonResponse(req: Request, data: unknown, status = 200) {
@@ -133,6 +137,21 @@ function validateInput(body: RequestInput): string | null {
   }
 
   return null;
+}
+
+/**
+ * Deterministic structure decision for the high-stakes, high-confidence case:
+ * a sport-performance goal on a program long enough to periodise (≥ 6 weeks)
+ * is ALWAYS phased — we never leave that to the model, because the asymmetric
+ * failure (a sportif with a deadline getting a flat, repeated program) is the
+ * one that matters. Every other case returns undefined and falls through to
+ * the deduction rules in the system prompt (repeat is the safe default there).
+ */
+function classifyStructure(body: RequestInput): "phase" | undefined {
+  if (body.objectifs.includes("performance_sportive") && body.duree_semaines >= 6) {
+    return "phase";
+  }
+  return undefined;
 }
 
 function slugify(text: string): string {
@@ -282,7 +301,8 @@ Deno.serve(async (req: Request) => {
 
   // Build prompt
   const locale: Locale = (body.locale as Locale) ?? "fr";
-  const userPrompt = buildUserPrompt({ ...body, locale });
+  const imposedStructure = classifyStructure(body);
+  const userPrompt = buildUserPrompt({ ...body, locale }, imposedStructure);
   const systemPrompt = buildSystemPrompt(locale);
 
   // Call Anthropic API. Sonnet with 12K tokens needs a more generous timeout
@@ -353,7 +373,7 @@ Deno.serve(async (req: Request) => {
       const retryResult = await callAnthropic([
         { role: "assistant", content: truncatedPrev },
         { role: "user", content: `Ta reponse precedente etait invalide: ${validation.error}. Corrige et renvoie le JSON complet.` },
-      ], 30_000);
+      ], 90_000);
       programJson = retryResult.data;
       totalInputTokens += retryResult.inputTokens;
       totalOutputTokens += retryResult.outputTokens;
@@ -371,6 +391,19 @@ Deno.serve(async (req: Request) => {
   const pgm = programJson as Record<string, unknown>;
   const sessions = pgm.sessions as Record<string, Record<string, unknown>>;
   const calendrier = pgm.calendrier as CalendrierEntry[];
+
+  // Observability (non-fatal): surface two silent-waste / drift signals.
+  // 1) Orphan sessions — declared but never scheduled → wasted output tokens.
+  const referencedIds = new Set(calendrier.flatMap((e) => e.sequence));
+  const orphanIds = Object.keys(sessions).filter((id) => !referencedIds.has(id));
+  if (orphanIds.length > 0) {
+    console.warn(`Orphan sessions declared but never scheduled: ${orphanIds.join(", ")}`);
+  }
+  // 2) Structure conformance — when we imposed "phase" deterministically, log
+  //    any divergence so we can measure how often the model ignores the order.
+  if (imposedStructure === "phase" && pgm.structure !== "phase") {
+    console.warn(`Imposed structure "phase" but model returned "${String(pgm.structure)}"`);
+  }
 
   // Generate slug
   const baseSlug = slugify(pgm.titre as string) || 'programme';

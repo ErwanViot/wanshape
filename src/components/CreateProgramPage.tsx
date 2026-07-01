@@ -37,7 +37,7 @@ interface DraftState {
   duree_seance_minutes: number;
   materiel: (Equipment | 'salle')[];
   materiel_detail: string;
-  duree_semaines: 4 | 8 | 12;
+  duree_semaines: 4 | 6 | 8 | 12;
 }
 
 const DEFAULT_DRAFT: DraftState = {

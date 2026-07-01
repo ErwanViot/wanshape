@@ -48,6 +48,7 @@ SCHEMA JSON DE SORTIE :
   "titre": "string (nom court et motivant)",
   "description": "string (1-2 phrases)",
   "niveau": "debutant" | "intermediaire" | "avance",
+  "structure": "repete" | "phase" (voir section STRUCTURE ci-dessous),
   "note_coach": "string (3-5 phrases, tutoiement, personnalise selon le profil)",
   "progression": {
     "logique": "string (explication de la logique de progression)",
@@ -57,17 +58,21 @@ SCHEMA JSON DE SORTIE :
     "cible_semaine_12": "string (optionnel)"
   },
   "sessions": {
-    "A": Session,
-    "B": Session,
-    "C": Session (optionnel, max 5 sessions uniques A-E)
+    // Mode "repete" : nomme les seances A, B, C… (memes seances toute la duree).
+    // Mode "phase"  : suffixe le numero de phase — A1, B1, C1 (phase 1),
+    //                 A2, B2, C2 (phase 2), etc.
+    // Maximum 20 seances uniques au total.
+    "A1": Session,
+    "B1": Session,
+    "A2": Session
   },
   "calendrier": [
-    { "semaines": [1, 2], "sequence": ["A", "B"] },
-    { "semaines": [3, 4], "sequence": ["A", "B", "C"] }
+    { "semaines": [1, 2, 3], "sequence": ["A1", "B1"], "nom": "Reprise (optionnel)" },
+    { "semaines": [4, 5, 6], "sequence": ["A2", "B2"], "nom": "Developpement" }
   ],
   "consignes_semaine": {
-    "1-2": "string (consigne de progression pour ces semaines)",
-    "3-4": "string"
+    "1-3": "string (consigne de progression pour ces semaines)",
+    "4-6": "string"
   }
 }
 
@@ -93,6 +98,26 @@ TYPES DE BLOCS DISPONIBLES :
 9. superset — { "type": "superset", "name": "string", "sets": number, "restBetweenSets": number (sec), "restBetweenPairs?": number (sec), "pairs": [{ "exercises": [{ "name": "string", "reps": number, "instructions": "string" }] }] }
 10. pyramid — { "type": "pyramid", "name": "string", "pattern": [number], "restBetweenSets": number (sec), "restBetweenExercises?": number (sec), "exercises": [{ "name": "string", "instructions": "string" }] }
 
+STRUCTURE DU PROGRAMME — "repete" ou "phase" :
+Choisis une structure et indique-la dans le champ "structure".
+
+- "repete" : les memes seances reviennent a l'identique toute la duree. La progression se fait uniquement en augmentant series/charges/repetitions, expliquee dans consignes_semaine. Mode par defaut, adapte a la prise de muscle, la force, le renforcement general. Nomme les seances A, B, C…
+
+- "phase" : le programme est decoupe en 2 a 4 phases successives, chacune avec ses PROPRES seances distinctes, pour orchestrer une montee en puissance (ex: reprise → developpement → pic → affutage). Chaque phase couvre une plage de semaines du calendrier. Nomme les seances avec le numero de phase en suffixe : A1/B1/C1 (phase 1), A2/B2/C2 (phase 2)… et donne un "nom" a chaque plage du calendrier.
+
+QUAND CHOISIR "phase" :
+- Si "STRUCTURE IMPOSEE : phase" apparait dans la demande → respecte-la sans exception.
+- Sinon, deduis : objectif de performance sportive avec une echeance (competition, reprise de saison, match, course, date), ou toute mention d'un evenement a preparer dans le detail de l'objectif → "phase".
+- Prise de muscle, force, remise en forme sans echeance, bien-etre, souplesse → "repete".
+- En cas de doute → "repete".
+
+REGLES DU MODE "phase" :
+- 2 a 4 phases. Chaque phase = une plage de semaines consecutives, SANS chevauchement, l'ensemble couvrant les semaines 1 a duree_semaines.
+- Les seances d'une phase doivent differer de celles des autres phases (intensite, format de bloc, volume) pour refleter la progression. Reutilise une seance identique d'une phase a l'autre UNIQUEMENT si la progression ne justifie pas de la changer.
+- La longueur de chaque "sequence" ne depasse jamais seances_par_semaine (plus court autorise pour une semaine d'affutage/recuperation).
+- consignes_semaine doit couvrir chaque plage de phase.
+- Total : 20 seances uniques maximum.
+
 REGLES DE PROGRAMMATION SPORTIVE :
 
 Echauffement :
@@ -108,10 +133,11 @@ Cooldown :
 - Inclure 30-60s de respiration profonde en fin
 
 Progression :
-- Programme 4 sem : progression lineaire simple (volume ou intensite croissante)
+- Programme 4 sem : progression lineaire simple (volume ou intensite croissante), pas de deload
+- Programme 6 sem : progression lineaire, deload leger possible en semaine 4 si l'intensite est elevee
 - Programme 8 sem : deload semaine 4, reprise avec intensite plus elevee sem 5
 - Programme 12 sem : deload sem 4 et sem 8, 3 phases progressives (decouverte, montee en puissance, performance)
-- Deload = semaine de recuperation : reduire le nombre de series de 40% et l'effort de 20%, garder les memes exercices
+- Deload = semaine de recuperation : reduire le nombre de series de 40% et l'effort de 20%, garder les memes exercices (mode "repete"), ou une plage de calendrier a sequence plus courte (mode "phase")
 
 Logique par objectif :
 - Perte de poids : predominance circuits/HIIT, 2-3 blocs cardio par seance, repos courts (15-30s), inclure du renfo pour preserver la masse musculaire
@@ -163,13 +189,14 @@ INTERDICTIONS :
 - Pas de references a des poids specifiques en kg (utiliser "charge moderee" ou "charge lourde")
 - Pas de jargon technique (voir section LANGAGE)
 - Ne jamais depasser la duree demandee par seance (tolerance ±3 min)
-- Ne jamais proposer plus de sessions uniques que le nombre de seances/semaine demande
+- Ne jamais mettre plus de seances dans une meme semaine (longueur de "sequence") que seances_par_semaine
 
 EXEMPLE MINI-PROGRAMME (4 sem, 2 seances/sem, 30 min) :
 {
   "titre": "Debutant Full Body",
   "description": "Programme progressif pour reprendre le sport en douceur.",
   "niveau": "debutant",
+  "structure": "repete",
   "note_coach": "Bienvenue ! Ce programme est concu pour toi qui reprends le sport. On va y aller progressivement : les 2 premieres semaines servent a poser les bases et apprendre les mouvements. Semaines 3-4, on augmente un peu le volume. Ecoute ton corps et n'hesite pas a adapter.",
   "progression": {
     "logique": "Progression lineaire en volume : +1 serie par exercice toutes les 2 semaines.",
@@ -231,9 +258,30 @@ EXEMPLE MINI-PROGRAMME (4 sem, 2 seances/sem, 30 min) :
   }
 }
 
+EXEMPLE DE STRUCTURE "phase" (forme uniquement — chaque Session garde le meme format complet que ci-dessus, avec warmup + blocs + cooldown) :
+Cas : prepa physique 6 sem, 3 seances/sem, echeance sportive.
+{
+  "titre": "Prepa reprise",
+  "structure": "phase",
+  ...
+  "sessions": {
+    "A1": { ... }, "B1": { ... }, "C1": { ... },
+    "A2": { ... }, "B2": { ... }, "C2": { ... }
+  },
+  "calendrier": [
+    { "semaines": [1, 2, 3], "sequence": ["A1", "B1", "C1"], "nom": "Reprise" },
+    { "semaines": [4, 5, 6], "sequence": ["A2", "B2", "C2"], "nom": "Montee en puissance" }
+  ],
+  "consignes_semaine": {
+    "1-3": "Retrouver les sensations, mouvements propres, effort modere.",
+    "4-6": "Seances plus intenses et explosives pour preparer la reprise."
+  }
+}
+Les seances A2/B2/C2 sont DISTINCTES de A1/B1/C1 (plus intenses, formats de blocs differents), pas de simples copies.
+
 RAPPELS CRITIQUES :
 1. Chaque session DOIT commencer par warmup et finir par cooldown
-2. Le nombre de sessions uniques (A, B, C...) doit etre <= seances_par_semaine
+2. La longueur de chaque "sequence" du calendrier doit etre <= seances_par_semaine (plus court autorise pour l'affutage/deload). Le nombre TOTAL de seances uniques peut le depasser en mode "phase" (max 20)
 3. Le calendrier doit couvrir TOUTES les semaines du programme (1 a duree_semaines)
 4. Chaque ID dans les sequences du calendrier doit exister dans "sessions"
 5. consignes_semaine doit couvrir toutes les semaines avec des plages (ex: "1-2", "3-4")
@@ -295,7 +343,10 @@ const BLESSURE_LABELS: Record<string, string> = {
   'hanche': 'Hanche',
 };
 
-export function buildUserPrompt(input: ProgramInput): string {
+export function buildUserPrompt(
+  input: ProgramInput,
+  imposedStructure?: 'phase',
+): string {
   const parts: string[] = [];
 
   // Objectifs
@@ -372,6 +423,16 @@ export function buildUserPrompt(input: ProgramInput): string {
     for (const w of warnings) {
       parts.push(`- ${w}`);
     }
+  }
+
+  // Deterministic override decided server-side (see classifyStructure in
+  // index.ts): a sport-performance goal on a long-enough program is always
+  // periodised, we don't leave that high-stakes case to the model's judgement.
+  // Any other case falls through to the deduction rules in the system prompt.
+  if (imposedStructure === 'phase') {
+    parts.push('');
+    parts.push('STRUCTURE IMPOSEE : phase');
+    parts.push('→ Genere un programme PHASE : plusieurs phases successives avec des seances DISTINCTES par phase (montee en puissance vers l\'echeance). Indique "structure": "phase".');
   }
 
   parts.push('');

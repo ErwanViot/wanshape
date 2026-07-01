@@ -9,7 +9,7 @@
 // no actionable signal. We carry the kind + upstream HTTP status so callers
 // can (a) surface an honest message and (b) decide whether a retry can help.
 
-export type AnthropicErrorKind = "api" | "parse" | "timeout" | "network";
+export type AnthropicErrorKind = "api" | "parse" | "timeout" | "network" | "truncation";
 
 export class AnthropicCallError extends Error {
   kind: AnthropicErrorKind;
@@ -77,6 +77,16 @@ export async function callAnthropicJson(opts: {
   }
 
   const aiData = await res.json();
+
+  // Truncation guard: if the model hit the token ceiling, `content` is a
+  // syntactically broken JSON fragment. Detecting it here (via stop_reason)
+  // gives callers a distinct, honest signal instead of a misleading "parse"
+  // error that would trigger a same-shape retry doomed to truncate again.
+  if (aiData.stop_reason === "max_tokens") {
+    console.error("Anthropic response truncated: stop_reason=max_tokens");
+    throw new AnthropicCallError("truncation", "Anthropic response truncated (max_tokens)");
+  }
+
   const rawContent = aiData.content?.[0]?.text ?? "";
   const combined = `${opts.prefill}${rawContent}`;
   const cleaned = combined
@@ -115,6 +125,9 @@ export function describeAnthropicError(err: unknown, noun = "contenu"): { messag
     }
     if (err.kind === "parse") {
       return { message: `L'IA n'a pas réussi à produire un ${noun} exploitable. Réessaie.`, status: 422 };
+    }
+    if (err.kind === "truncation") {
+      return { message: `Le ${noun} généré était trop volumineux et a été coupé. Réessaie.`, status: 422 };
     }
     if (err.kind === "network") {
       return { message: "Impossible de joindre le service IA. Vérifie ta connexion et réessaie.", status: 502 };
