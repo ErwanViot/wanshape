@@ -41,7 +41,10 @@ export interface ProgramProgression {
   cible_semaine_12?: string;
 }
 
+export type ProgramStatus = 'generating' | 'ready' | 'failed';
+
 export interface GenerateProgramResponse {
   programId: string;
   slug: string;
+  status?: ProgramStatus;
 }

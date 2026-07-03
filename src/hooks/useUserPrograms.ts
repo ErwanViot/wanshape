@@ -9,7 +9,7 @@ import type { Program } from '../types/completion.ts';
 // (progression / consignes_semaine / onboarding_data) on the listing
 // view. ProgramPage refetches the full row by slug when needed.
 const PROGRAM_LIST_COLS =
-  'id, slug, title, description, goals, duration_weeks, frequency_per_week, fitness_level, is_fixed, locale, created_at';
+  'id, slug, title, description, goals, duration_weeks, frequency_per_week, fitness_level, is_fixed, locale, created_at, status, error_reason';
 
 export function useUserPrograms() {
   const { user } = useAuth();
@@ -34,6 +34,10 @@ export function useUserPrograms() {
       return (data as Program[]) ?? [];
     },
     enabled: !!userId && !!supabase,
+    // While any program is still generating in the background, poll so its
+    // card flips from "en préparation" to ready (or failed) without a manual
+    // refresh. Stops once nothing is generating.
+    refetchInterval: (query) => ((query.state.data ?? []).some((p) => p.status === 'generating') ? 4000 : false),
   });
 
   const deleteProgram = useCallback(

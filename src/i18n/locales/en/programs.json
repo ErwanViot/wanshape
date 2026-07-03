@@ -25,7 +25,9 @@
   },
   "card": {
     "weeks": "{{n}} weeks",
-    "freq_per_week": "{{n}}x / week"
+    "freq_per_week": "{{n}}x / week",
+    "status_generating": "Preparing…",
+    "status_failed": "Failed"
   },
   "page": {
     "title_suffix": "— Program",
@@ -43,6 +45,11 @@
     "login": "Sign in",
     "not_found": "Program not found or service unavailable.",
     "see_all": "See all programs",
+    "generating_title": "Your program is being prepared",
+    "generating_body": "Generation is in progress. You can leave this page — your program will show up in \"My programs\" as soon as it's ready.",
+    "failed_title": "Generation failed",
+    "failed_body": "Something went wrong during generation. Delete this program and try again.",
+    "failed_delete": "Delete and retry",
     "session_start": "Start",
     "session_continue": "Continue",
     "session_redo": "Redo",
@@ -126,7 +133,18 @@
   },
   "generating": {
     "title": "Building your program",
-    "estimate": "Estimated: 30-60 seconds"
+    "estimate": "This takes 1 to 3 minutes. You can leave this page — your program keeps being prepared.",
+    "timeout": "Your program is taking longer than expected. It's still being prepared — find it in \"My programs\" in a few minutes."
+  },
+  "revision": {
+    "cta": "Adjust this program",
+    "title": "What would you like to change?",
+    "help": "Describe what to adjust: your program will be regenerated with your request in mind. Available until you start it.",
+    "placeholder": "E.g. more core work, shorter sessions, remove squats…",
+    "submit": "Regenerate",
+    "cancel": "Cancel",
+    "working_title": "Adjusting your program",
+    "working_body": "We're regenerating your program with your request. This takes 1 to 3 minutes."
   },
   "fitness_level": {
     "beginner": "Beginner",

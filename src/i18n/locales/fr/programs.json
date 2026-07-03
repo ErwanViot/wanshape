@@ -25,7 +25,9 @@
   },
   "card": {
     "weeks": "{{n}} semaines",
-    "freq_per_week": "{{n}}x / semaine"
+    "freq_per_week": "{{n}}x / semaine",
+    "status_generating": "En préparation…",
+    "status_failed": "Échec"
   },
   "page": {
     "title_suffix": "— Programme",
@@ -43,6 +45,11 @@
     "login": "Se connecter",
     "not_found": "Programme introuvable ou service indisponible.",
     "see_all": "Voir tous les programmes",
+    "generating_title": "Ton programme se prépare",
+    "generating_body": "La génération est en cours. Tu peux quitter cette page : ton programme apparaîtra dans « Mes programmes » dès qu'il est prêt.",
+    "failed_title": "La génération a échoué",
+    "failed_body": "Quelque chose s'est mal passé pendant la génération. Supprime ce programme et réessaie.",
+    "failed_delete": "Supprimer et réessayer",
     "session_start": "Commencer",
     "session_continue": "Continuer",
     "session_redo": "Refaire",
@@ -126,7 +133,18 @@
   },
   "generating": {
     "title": "Création de ton programme",
-    "estimate": "Estimation : 30-60 secondes"
+    "estimate": "Cela prend 1 à 3 minutes. Tu peux quitter cette page, le programme continue de se préparer.",
+    "timeout": "Ton programme met plus de temps que prévu. Il se prépare toujours : retrouve-le dans « Mes programmes » d'ici quelques minutes."
+  },
+  "revision": {
+    "cta": "Ajuster ce programme",
+    "title": "Qu'aimerais-tu changer ?",
+    "help": "Décris ce que tu veux ajuster : ton programme sera régénéré en tenant compte de ta demande. Possible tant que tu ne l'as pas commencé.",
+    "placeholder": "Ex : plus de gainage, des séances plus courtes, enlève les squats…",
+    "submit": "Régénérer",
+    "cancel": "Annuler",
+    "working_title": "Ajustement en cours",
+    "working_body": "On régénère ton programme avec ta demande. Ça prend 1 à 3 minutes."
   },
   "fitness_level": {
     "beginner": "Débutant",
