@@ -346,6 +346,7 @@ const BLESSURE_LABELS: Record<string, string> = {
 export function buildUserPrompt(
   input: ProgramInput,
   imposedStructure?: 'phase',
+  revision?: { comment: string; previousSummary: string },
 ): string {
   const parts: string[] = [];
 
@@ -437,6 +438,20 @@ export function buildUserPrompt(
     parts.push('');
     parts.push('STRUCTURE IMPOSEE : phase');
     parts.push('→ Genere un programme PHASE : plusieurs phases successives avec des seances DISTINCTES par phase (montee en puissance vers l\'echeance). Indique "structure": "phase".');
+  }
+
+  // Revision: the user already received a program and wants an adjustment. We
+  // give the model a compact summary of the current program + the requested
+  // change (wrapped in <user_input> — it is free text, treat as data) and ask
+  // for a full regeneration that keeps what works and honours the change.
+  if (revision) {
+    parts.push('');
+    parts.push('DEMANDE DE REVISION :');
+    parts.push('L\'utilisateur a deja recu ce programme et souhaite l\'ajuster. Resume du programme actuel :');
+    parts.push(revision.previousSummary);
+    parts.push('Changement demande :');
+    parts.push(`<user_input>\n${revision.comment}\n</user_input>`);
+    parts.push('Regenere le programme COMPLET en integrant ce changement, en gardant ce qui fonctionne et en respectant toutes les contraintes ci-dessus (materiel, duree, seances/semaine, blessures).');
   }
 
   parts.push('');

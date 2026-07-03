@@ -68,6 +68,10 @@ interface RequestInput {
   materiel: string[];
   duree_semaines: number;
   locale?: string;
+  // Revision: regenerate an existing (not-yet-started) program in place with a
+  // free-text change. The onboarding fields above are resent by the client.
+  revision_program_id?: string;
+  revision_comment?: string;
 }
 
 function validateInput(body: RequestInput): string | null {
@@ -128,6 +132,18 @@ function validateInput(body: RequestInput): string | null {
     return "locale invalide";
   }
 
+  if (body.revision_program_id !== undefined) {
+    // Validate the UUID shape here so a malformed id is a clean 400, not a
+    // Postgres cast error surfaced as a 500 by the begin_program_revision RPC.
+    const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (typeof body.revision_program_id !== "string" || !UUID_RE.test(body.revision_program_id))
+      return "revision_program_id invalide";
+    if (!body.revision_comment || typeof body.revision_comment !== "string" || body.revision_comment.trim().length === 0)
+      return "revision_comment requis";
+    if (body.revision_comment.length > 300)
+      return "revision_comment: 300 caracteres max";
+  }
+
   return null;
 }
 
@@ -144,6 +160,30 @@ function classifyStructure(body: RequestInput): "phase" | undefined {
     return "phase";
   }
   return undefined;
+}
+
+// Compact, bounded summary of a previous program (from generation_metadata) fed
+// to the model on a revision so it can adjust rather than start blind.
+function summarizePreviousProgram(meta: unknown): string {
+  if (!meta || typeof meta !== "object") return "(programme precedent indisponible)";
+  const m = meta as Record<string, unknown>;
+  const lines: string[] = [];
+  if (typeof m.titre === "string") lines.push(`Titre : ${m.titre}`);
+  if (typeof m.structure === "string") lines.push(`Structure : ${m.structure}`);
+  const sessions = m.sessions;
+  if (sessions && typeof sessions === "object" && !Array.isArray(sessions)) {
+    const names = Object.entries(sessions as Record<string, { title?: unknown }>)
+      .map(([k, s]) => `${k}=${typeof s?.title === "string" ? s.title : "?"}`);
+    if (names.length) lines.push(`Seances : ${names.join(" | ")}`);
+  }
+  const cal = m.calendrier;
+  if (Array.isArray(cal)) {
+    const phases = cal.map((e: Record<string, unknown>) =>
+      `${typeof e.nom === "string" ? e.nom : "phase"} (sem ${JSON.stringify(e.semaines)}: ${JSON.stringify(e.sequence)})`
+    );
+    if (phases.length) lines.push(`Calendrier : ${phases.join(" ; ")}`);
+  }
+  return lines.join("\n").slice(0, 2000) || "(programme precedent indisponible)";
 }
 
 function nanoid(size: number): string {
@@ -225,25 +265,31 @@ Deno.serve(async (req: Request) => {
     body.seances_par_semaine = 3;
   }
 
-  // Check active programs limit. A `failed` placeholder does not consume a
-  // slot (mirrors the DB trigger in migration 027), so exclude it here too.
-  const { count: activeCount, error: activeError } = await supabaseAdmin
-    .from("programs")
-    .select("*", { count: "exact", head: true })
-    .eq("user_id", user.id)
-    .eq("is_fixed", false)
-    .neq("status", "failed");
+  // A revision regenerates an existing program in place (no new row), so it
+  // skips the active-programs cap. New programs are capped.
+  const isRevision = typeof body.revision_program_id === "string" && body.revision_program_id.length > 0;
 
-  if (activeError) {
-    return errorResponse(req, "Erreur serveur", 500);
-  }
+  if (!isRevision) {
+    // Check active programs limit. A `failed` placeholder does not consume a
+    // slot (mirrors the DB trigger in migration 027), so exclude it here too.
+    const { count: activeCount, error: activeError } = await supabaseAdmin
+      .from("programs")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", user.id)
+      .eq("is_fixed", false)
+      .neq("status", "failed");
 
-  if ((activeCount ?? 0) >= MAX_ACTIVE_PROGRAMS) {
-    return errorResponse(
-      req,
-      `Limite atteinte : ${MAX_ACTIVE_PROGRAMS} programmes actifs maximum. Supprime un programme existant pour en creer un nouveau.`,
-      429,
-    );
+    if (activeError) {
+      return errorResponse(req, "Erreur serveur", 500);
+    }
+
+    if ((activeCount ?? 0) >= MAX_ACTIVE_PROGRAMS) {
+      return errorResponse(
+        req,
+        `Limite atteinte : ${MAX_ACTIVE_PROGRAMS} programmes actifs maximum. Supprime un programme existant pour en creer un nouveau.`,
+        429,
+      );
+    }
   }
 
   // Atomic rate limit: insert a tracking row first, then count. If we end up
@@ -283,24 +329,61 @@ Deno.serve(async (req: Request) => {
   // call, validation, DB insert). A failed attempt still counts against the
   // 24h quota to prevent free retry storms — same policy as estimate-nutrition.
 
-  // Build prompt
+  // Build prompt basics. classifyStructure also applies to revisions (the
+  // onboarding is resent unchanged), so a sport-performance revision stays phased.
   const locale: Locale = (body.locale as Locale) ?? "fr";
   const imposedStructure = classifyStructure(body);
-  const userPrompt = buildUserPrompt({ ...body, locale }, imposedStructure);
   const systemPrompt = buildSystemPrompt(locale);
 
-  // Create the `generating` placeholder row and respond immediately. A single
-  // blocking Anthropic call for a large periodised program exceeds Supabase's
-  // 150s gateway idle timeout, so the actual generation runs in the background
-  // (runGeneration below) under EdgeRuntime.waitUntil — the isolate is kept
-  // alive up to the 400s wall-clock limit AFTER the response is sent. The
-  // client polls the program row for status generating → ready | failed.
-  const slug = `programme-${nanoid(10)}`;
-  const provisionalTitle = locale === "en" ? "Program in preparation" : "Programme en préparation";
+  // Resolve the target program then respond immediately; the generation runs in
+  // the background (runGeneration) under EdgeRuntime.waitUntil to escape the
+  // 150s gateway idle timeout. Revision reuses the existing row; a new program
+  // creates a `generating` placeholder.
+  let programId: string;
+  let slug: string;
+  let revisionContext: { comment: string; previousSummary: string } | undefined;
 
-  const { data: programId, error: placeholderError } = await supabaseAdmin.rpc(
-    "create_program_placeholder",
-    {
+  if (isRevision) {
+    // Narrowed post-validateInput: both are guaranteed present for a revision.
+    const revisionProgramId = body.revision_program_id as string;
+    const revisionComment = body.revision_comment as string;
+
+    // Atomically gate (owned, not-started, ready|failed) and flip to generating.
+    const { data: revId, error: revErr } = await supabaseAdmin.rpc("begin_program_revision", {
+      p_program_id: revisionProgramId,
+      p_user_id: user.id,
+    });
+    if (revErr) {
+      await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+      console.error("begin_program_revision error:", revErr);
+      return errorResponse(req, "Erreur serveur", 500);
+    }
+    if (!revId) {
+      // NULL = ineligible: not owned, already started, or a revision already in
+      // flight (status generating). Refund the quota slot and reject.
+      await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+      return errorResponse(
+        req,
+        "Révision impossible : ce programme est introuvable, déjà commencé, ou une révision est déjà en cours.",
+        409,
+      );
+    }
+    programId = revId as string;
+
+    const { data: prev } = await supabaseAdmin
+      .from("programs")
+      .select("slug, generation_metadata")
+      .eq("id", programId)
+      .single();
+    slug = (prev?.slug as string) ?? "";
+    revisionContext = {
+      comment: revisionComment,
+      previousSummary: summarizePreviousProgram(prev?.generation_metadata),
+    };
+  } else {
+    slug = `programme-${nanoid(10)}`;
+    const provisionalTitle = locale === "en" ? "Program in preparation" : "Programme en préparation";
+    const { data: newId, error: placeholderError } = await supabaseAdmin.rpc("create_program_placeholder", {
       p_user_id: user.id,
       p_slug: slug,
       p_title: provisionalTitle,
@@ -310,24 +393,26 @@ Deno.serve(async (req: Request) => {
       // Strip age/sexe before persistence — RGPD art. 5(1)(c) minimization.
       p_onboarding_data: sanitizeOnboardingForPersistence(body),
       p_locale: locale,
-    },
-  );
-
-  if (placeholderError || !programId) {
-    // No generation started, so refund the rate-limit slot taken above.
-    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
-    // The cap trigger (migration 027) raises 'active_programs_cap_reached' if a
-    // race slipped past the pre-flight count. Surface the same message.
-    if (placeholderError?.message?.includes(TRIGGER_CAP_REACHED)) {
-      return errorResponse(
-        req,
-        `Limite atteinte : ${MAX_ACTIVE_PROGRAMS} programmes actifs maximum. Supprime un programme existant pour en creer un nouveau.`,
-        429,
-      );
+    });
+    if (placeholderError || !newId) {
+      // No generation started, so refund the rate-limit slot taken above.
+      await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+      // The cap trigger (migration 027) raises 'active_programs_cap_reached' if
+      // a race slipped past the pre-flight count. Surface the same message.
+      if (placeholderError?.message?.includes(TRIGGER_CAP_REACHED)) {
+        return errorResponse(
+          req,
+          `Limite atteinte : ${MAX_ACTIVE_PROGRAMS} programmes actifs maximum. Supprime un programme existant pour en creer un nouveau.`,
+          429,
+        );
+      }
+      console.error("Placeholder creation failed:", placeholderError);
+      return errorResponse(req, "Erreur de création du programme", 500);
     }
-    console.error("Placeholder creation failed:", placeholderError);
-    return errorResponse(req, "Erreur de création du programme", 500);
+    programId = newId as string;
   }
+
+  const userPrompt = buildUserPrompt({ ...body, locale }, imposedStructure, revisionContext);
 
   // ── Background generation ────────────────────────────────────────────────
   // MUST carry its own try/catch: an unhandled rejection inside waitUntil is
