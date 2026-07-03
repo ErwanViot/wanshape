@@ -103,7 +103,7 @@ Choisis une structure et indique-la dans le champ "structure".
 
 - "repete" : les memes seances reviennent a l'identique toute la duree. La progression se fait uniquement en augmentant series/charges/repetitions, expliquee dans consignes_semaine. Mode par defaut, adapte a la prise de muscle, la force, le renforcement general. Nomme les seances A, B, C…
 
-- "phase" : le programme est decoupe en 2 a 4 phases successives, chacune avec ses PROPRES seances distinctes, pour orchestrer une montee en puissance (ex: reprise → developpement → pic → affutage). Chaque phase couvre une plage de semaines du calendrier. Nomme les seances avec le numero de phase en suffixe : A1/B1/C1 (phase 1), A2/B2/C2 (phase 2)… et donne un "nom" a chaque plage du calendrier.
+- "phase" : le programme est decoupe en 2 a 3 phases successives, chacune avec ses PROPRES seances distinctes, pour orchestrer une montee en puissance (ex: reprise → developpement → pic/affutage). Chaque phase couvre une plage de semaines du calendrier. Nomme les seances avec le numero de phase en suffixe : A1/B1/C1 (phase 1), A2/B2/C2 (phase 2)… et donne un "nom" a chaque plage du calendrier.
 
 QUAND CHOISIR "phase" :
 - Si "STRUCTURE IMPOSEE : phase" apparait dans la demande → respecte-la sans exception.
@@ -112,11 +112,11 @@ QUAND CHOISIR "phase" :
 - En cas de doute → "repete".
 
 REGLES DU MODE "phase" :
-- 2 a 4 phases. Chaque phase = une plage de semaines consecutives, SANS chevauchement, l'ensemble couvrant les semaines 1 a duree_semaines.
-- Les seances d'une phase doivent differer de celles des autres phases (intensite, format de bloc, volume) pour refleter la progression. Reutilise une seance identique d'une phase a l'autre UNIQUEMENT si la progression ne justifie pas de la changer.
+- 2 a 3 phases maximum. Chaque phase = une plage de semaines consecutives, SANS chevauchement, l'ensemble couvrant les semaines 1 a duree_semaines.
+- Les seances d'une phase doivent differer de celles des autres phases (intensite, format de bloc, volume) pour refleter la progression.
+- IMPORTANT (garde la sortie compacte) : vise un TOTAL de 6 seances uniques ou moins (maximum absolu 20). Reutilise une meme seance d'une phase a l'autre des que la progression le permet — ne cree une nouvelle version d'une seance QUE si son intensite ou son format change vraiment. Il vaut mieux 2 phases bien distinctes que 3 phases aux differences minimes.
 - La longueur de chaque "sequence" ne depasse jamais seances_par_semaine (plus court autorise pour une semaine d'affutage/recuperation).
 - consignes_semaine doit couvrir chaque plage de phase.
-- Total : 20 seances uniques maximum.
 
 REGLES DE PROGRAMMATION SPORTIVE :
 

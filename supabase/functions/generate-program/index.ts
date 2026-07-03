@@ -318,7 +318,13 @@ Deno.serve(async (req: Request) => {
   // valide" directive (+ the retry-on-parse + the ```json strip in the shared
   // helper) to keep the output parseable. prefill is "" so nothing is
   // prepended to the response.
-  function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = 120_000) {
+  // Default 145s: Supabase's gateway returns a hard 504 if the function does
+  // not respond within 150s (request idle timeout), so we abort at 145s to fail
+  // with our own honest "trop volumineux" message just under that ceiling. This
+  // is the real limit on a single blocking call — larger phased programs are
+  // kept generatable-in-window by the prompt bounding them (≤3 phases, strong
+  // session reuse). Programs too large for 145s still surface an honest 504.
+  function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = 145_000) {
     return callAnthropicJson({
       apiKey: anthropicApiKey!,
       model: MODEL,
