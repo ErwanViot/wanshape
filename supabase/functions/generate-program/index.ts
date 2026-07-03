@@ -49,14 +49,6 @@ function errorResponse(req: Request, message: string, status = 400) {
   return jsonResponse(req, { error: message }, status);
 }
 
-// Map a typed Anthropic failure to a CORS-aware error response. The taxonomy
-// + message/status mapping live in _shared/anthropic.ts so generate-session
-// and generate-program stay in lockstep.
-function mapAnthropicError(req: Request, err: unknown): Response {
-  const { message, status } = describeAnthropicError(err, "programme");
-  return errorResponse(req, message, status);
-}
-
 const VALID_BLESSURES = [
   'genou', 'dos', 'epaule', 'cheville', 'poignet', 'cervicales', 'hanche',
 ];
@@ -154,16 +146,6 @@ function classifyStructure(body: RequestInput): "phase" | undefined {
   return undefined;
 }
 
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 50);
-}
-
 function nanoid(size: number): string {
   const chars = 'abcdefghijklmnopqrstuvwxyz234567'; // 32 chars = power of 2
   const mask = 0x1f; // 5 bits → indices 0-31, no modulo bias
@@ -243,12 +225,14 @@ Deno.serve(async (req: Request) => {
     body.seances_par_semaine = 3;
   }
 
-  // Check active programs limit
+  // Check active programs limit. A `failed` placeholder does not consume a
+  // slot (mirrors the DB trigger in migration 027), so exclude it here too.
   const { count: activeCount, error: activeError } = await supabaseAdmin
     .from("programs")
     .select("*", { count: "exact", head: true })
     .eq("user_id", user.id)
-    .eq("is_fixed", false);
+    .eq("is_fixed", false)
+    .neq("status", "failed");
 
   if (activeError) {
     return errorResponse(req, "Erreur serveur", 500);
@@ -305,199 +289,212 @@ Deno.serve(async (req: Request) => {
   const userPrompt = buildUserPrompt({ ...body, locale }, imposedStructure);
   const systemPrompt = buildSystemPrompt(locale);
 
-  // Call Anthropic API. Sonnet with a 20K-token budget needs a more generous
-  // timeout than the Haiku session generation. The fetch/parse/error-taxonomy
-  // lives in _shared/anthropic.ts; here we only assemble the prompt turns.
-  //
-  // IMPORTANT: claude-sonnet-4-6 does NOT support assistant message prefill —
-  // ending the conversation with an `{ role: "assistant", content: '{"' }`
-  // turn returns `400 invalid_request_error: "This model does not support
-  // assistant message prefill"`, which is what broke every program generation
-  // in production. The conversation must end with a user message. We rely on
-  // the system prompt's "REGLE ABSOLUE : Reponds UNIQUEMENT avec du JSON
-  // valide" directive (+ the retry-on-parse + the ```json strip in the shared
-  // helper) to keep the output parseable. prefill is "" so nothing is
-  // prepended to the response.
-  // Default 145s: Supabase's gateway returns a hard 504 if the function does
-  // not respond within 150s (request idle timeout), so we abort at 145s to fail
-  // with our own honest "trop volumineux" message just under that ceiling. This
-  // is the real limit on a single blocking call — larger phased programs are
-  // kept generatable-in-window by the prompt bounding them (≤3 phases, strong
-  // session reuse). Programs too large for 145s still surface an honest 504.
-  function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = 145_000) {
-    return callAnthropicJson({
-      apiKey: anthropicApiKey!,
-      model: MODEL,
-      maxTokens: MAX_TOKENS,
-      systemPrompt,
-      prefill: "",
-      timeoutMs,
-      messages: [
-        { role: "user", content: userPrompt },
-        ...extraMessages,
-      ],
-    });
-  }
+  // Create the `generating` placeholder row and respond immediately. A single
+  // blocking Anthropic call for a large periodised program exceeds Supabase's
+  // 150s gateway idle timeout, so the actual generation runs in the background
+  // (runGeneration below) under EdgeRuntime.waitUntil — the isolate is kept
+  // alive up to the 400s wall-clock limit AFTER the response is sent. The
+  // client polls the program row for status generating → ready | failed.
+  const slug = `programme-${nanoid(10)}`;
+  const provisionalTitle = locale === "en" ? "Program in preparation" : "Programme en préparation";
 
-  let programJson: unknown;
-  let totalInputTokens = 0;
-  let totalOutputTokens = 0;
-
-  // First attempt. A parse failure (the model breaking out of the forced-JSON
-  // format) is transient, so we retry it once with a fresh call before giving
-  // up — this is the single most common production failure and a clean retry
-  // almost always recovers. API/timeout/network errors are NOT retried here:
-  // a 429 needs backoff, a 401/quota error won't fix itself on an immediate
-  // re-call, and a timeout would just burn another timeout window.
-  try {
-    let result;
-    try {
-      result = await callAnthropic();
-    } catch (err) {
-      if (err instanceof AnthropicCallError && err.kind === "parse") {
-        console.error("Parse failure on first attempt — retrying once");
-        result = await callAnthropic();
-      } else {
-        throw err;
-      }
-    }
-    programJson = result.data;
-    totalInputTokens = result.inputTokens;
-    totalOutputTokens = result.outputTokens;
-  } catch (err) {
-    return mapAnthropicError(req, err);
-  }
-
-  // Validate
-  let validation = validateProgram(programJson, body.duree_semaines, body.seances_par_semaine);
-
-  // Retry once if invalid. Timeout is 90s (not 30s): the correction round must
-  // regenerate a full program under the same 20K-token budget, which at Sonnet
-  // speed can take 45-70s — a 30s cap would time out most phased retries.
-  if (!validation.valid) {
-    console.error("First attempt validation failed:", validation.error);
-    try {
-      const truncatedPrev = JSON.stringify(programJson).slice(0, 2000);
-      const retryResult = await callAnthropic([
-        { role: "assistant", content: truncatedPrev },
-        { role: "user", content: `Ta reponse precedente etait invalide: ${validation.error}. Corrige et renvoie le JSON complet.` },
-      ], 90_000);
-      programJson = retryResult.data;
-      totalInputTokens += retryResult.inputTokens;
-      totalOutputTokens += retryResult.outputTokens;
-      validation = validateProgram(programJson, body.duree_semaines, body.seances_par_semaine);
-    } catch (err) {
-      return mapAnthropicError(req, err);
-    }
-
-    if (!validation.valid) {
-      console.error("Retry validation failed:", validation.error);
-      return errorResponse(req, "Le programme généré est invalide. Réessaie.", 422);
-    }
-  }
-
-  const pgm = programJson as Record<string, unknown>;
-  const sessions = pgm.sessions as Record<string, Record<string, unknown>>;
-  const calendrier = pgm.calendrier as CalendrierEntry[];
-
-  // Observability (non-fatal): surface two silent-waste / drift signals.
-  // 1) Orphan sessions — declared but never scheduled → wasted output tokens.
-  const referencedIds = new Set(calendrier.flatMap((e) => e.sequence));
-  const orphanIds = Object.keys(sessions).filter((id) => !referencedIds.has(id));
-  if (orphanIds.length > 0) {
-    console.warn(`Orphan sessions declared but never scheduled: ${orphanIds.join(", ")}`);
-  }
-  // 2) Structure conformance — when we imposed "phase" deterministically, log
-  //    any divergence so we can measure how often the model ignores the order.
-  if (imposedStructure === "phase" && pgm.structure !== "phase") {
-    console.warn(`Imposed structure "phase" but model returned "${String(pgm.structure)}"`);
-  }
-
-  // Generate slug
-  const baseSlug = slugify(pgm.titre as string) || 'programme';
-  const slug = `${baseSlug}-${nanoid(6)}`;
-
-  // Map niveau to fitness_level
-  const niveauMap: Record<string, string> = {
-    debutant: 'beginner',
-    intermediaire: 'intermediate',
-    avance: 'advanced',
-  };
-
-  // Build program_sessions rows (program_id is filled by the RPC, not us)
-  const sessionRows: {
-    week_number: number;
-    session_order: number;
-    session_data: Record<string, unknown>;
-  }[] = [];
-
-  let globalOrder = 1;
-  for (const entry of calendrier) {
-    for (const week of entry.semaines) {
-      for (const sessionId of entry.sequence) {
-        const sessionData = sessions[sessionId];
-        if (!sessionData) {
-          // Malformed AI output: calendrier references a session id that
-          // isn't in the sessions map. Fail fast with a clear error rather
-          // than letting the RPC raise an opaque NOT NULL violation.
-          console.error("Missing session data for id:", sessionId);
-          return errorResponse(req, "Erreur de génération (sessions invalides)", 500);
-        }
-        sessionRows.push({
-          week_number: week,
-          session_order: globalOrder,
-          session_data: sessionData,
-        });
-        globalOrder++;
-      }
-    }
-  }
-
-  // Atomic INSERT programs + program_sessions via RPC (migration 021).
-  // Wrapping both writes in a single transaction prevents the orphaned-
-  // program-row class of failures the previous "manual rollback" was trying
-  // to handle: if the sessions insert raises, the program insert is rolled
-  // back by Postgres rather than by a best-effort DELETE in JS.
-  const { data: programId, error: rpcError } = await supabaseAdmin.rpc("create_program_with_sessions", {
-    p_user_id: user.id,
-    p_program: {
-      slug,
-      title: pgm.titre,
-      description: pgm.description,
-      goals: body.objectifs,
-      duration_weeks: body.duree_semaines,
-      frequency_per_week: body.seances_par_semaine,
-      fitness_level: niveauMap[pgm.niveau as string] ?? "intermediate",
-      note_coach: pgm.note_coach,
-      progression: pgm.progression,
-      consignes_semaine: pgm.consignes_semaine,
+  const { data: programId, error: placeholderError } = await supabaseAdmin.rpc(
+    "create_program_placeholder",
+    {
+      p_user_id: user.id,
+      p_slug: slug,
+      p_title: provisionalTitle,
+      p_goals: body.objectifs,
+      p_duration_weeks: body.duree_semaines,
+      p_frequency_per_week: body.seances_par_semaine,
       // Strip age/sexe before persistence — RGPD art. 5(1)(c) minimization.
-      // Both are still sent to Anthropic at generation time (declared in
-      // the Privacy Policy) but never re-read by the app afterwards.
-      onboarding_data: sanitizeOnboardingForPersistence(body),
-      generation_metadata: pgm,
-      input_tokens: totalInputTokens,
-      output_tokens: totalOutputTokens,
-      model: MODEL,
-      locale,
+      p_onboarding_data: sanitizeOnboardingForPersistence(body),
+      p_locale: locale,
     },
-    p_sessions: sessionRows,
-  });
+  );
 
-  if (rpcError || !programId) {
-    console.error("Program RPC error:", rpcError);
-    // The DB trigger (migration 022) raises 'active_programs_cap_reached' if
-    // a race condition let us past the pre-flight count check. Translate it
-    // into the same user-facing message so the experience is consistent.
-    if (rpcError?.message?.includes(TRIGGER_CAP_REACHED)) {
+  if (placeholderError || !programId) {
+    // No generation started, so refund the rate-limit slot taken above.
+    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+    // The cap trigger (migration 027) raises 'active_programs_cap_reached' if a
+    // race slipped past the pre-flight count. Surface the same message.
+    if (placeholderError?.message?.includes(TRIGGER_CAP_REACHED)) {
       return errorResponse(
         req,
         `Limite atteinte : ${MAX_ACTIVE_PROGRAMS} programmes actifs maximum. Supprime un programme existant pour en creer un nouveau.`,
         429,
       );
     }
-    return errorResponse(req, "Erreur de sauvegarde du programme", 500);
+    console.error("Placeholder creation failed:", placeholderError);
+    return errorResponse(req, "Erreur de création du programme", 500);
   }
 
-  return jsonResponse(req, { programId, slug });
+  // ── Background generation ────────────────────────────────────────────────
+  // MUST carry its own try/catch: an unhandled rejection inside waitUntil is
+  // silent and would leave the row stuck in 'generating'. On ANY failure we
+  // flip the row to 'failed' with an honest reason (the client shows a retry).
+  //
+  // IMPORTANT: claude-sonnet-4-6 does NOT support assistant message prefill, so
+  // the conversation must end with a user message (prefill is ""). The JSON-only
+  // output is enforced by the system prompt + the retry-on-parse in the helper.
+  const niveauMap: Record<string, string> = {
+    debutant: "beginner",
+    intermediaire: "intermediate",
+    avance: "advanced",
+  };
+
+  async function failProgram(reason: string): Promise<void> {
+    const { error } = await supabaseAdmin.rpc("fail_program", {
+      p_program_id: programId,
+      p_user_id: user.id,
+      p_error: reason,
+    });
+    if (error) console.error("fail_program RPC error:", error);
+  }
+
+  async function runGeneration(): Promise<void> {
+    // Timeouts must fit the 400s wall-clock ceiling: we allow AT MOST ONE retry
+    // across the parse and validation paths (each retry is a full re-generation),
+    // so worst case = first (220s) + one retry (160s) = 380s < 400s. Beyond
+    // that the isolate is killed and the row would be stuck 'generating'.
+    const FIRST_TIMEOUT = 220_000;
+    const RETRY_TIMEOUT = 160_000;
+    let retriesLeft = 1;
+
+    function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = FIRST_TIMEOUT) {
+      return callAnthropicJson({
+        apiKey: anthropicApiKey!,
+        model: MODEL,
+        maxTokens: MAX_TOKENS,
+        systemPrompt,
+        prefill: "",
+        timeoutMs,
+        messages: [{ role: "user", content: userPrompt }, ...extraMessages],
+      });
+    }
+
+    try {
+      // First attempt. A parse failure (model breaking the forced-JSON format)
+      // is transient; spend our one retry on a fresh call. API/network/timeout
+      // errors propagate to the catch → fail_program.
+      let result!: Awaited<ReturnType<typeof callAnthropic>>;
+      try {
+        result = await callAnthropic();
+      } catch (err) {
+        if (err instanceof AnthropicCallError && err.kind === "parse" && retriesLeft > 0) {
+          retriesLeft--;
+          console.error("Parse failure on first attempt — retrying once");
+          result = await callAnthropic([], RETRY_TIMEOUT);
+        } else {
+          throw err;
+        }
+      }
+      let programJson: unknown = result.data;
+      let totalInputTokens = result.inputTokens;
+      let totalOutputTokens = result.outputTokens;
+
+      let validation = validateProgram(programJson, body.duree_semaines, body.seances_par_semaine);
+      if (!validation.valid && retriesLeft > 0) {
+        retriesLeft--;
+        console.error("First attempt validation failed:", validation.error);
+        // A multi-turn assistant turn here is a normal conversation turn (NOT
+        // an unfinished-prefill turn, which sonnet rejects), so it's allowed.
+        const truncatedPrev = JSON.stringify(programJson).slice(0, 2000);
+        const retryResult = await callAnthropic(
+          [
+            { role: "assistant", content: truncatedPrev },
+            { role: "user", content: `Ta reponse precedente etait invalide: ${validation.error}. Corrige et renvoie le JSON complet.` },
+          ],
+          RETRY_TIMEOUT,
+        );
+        programJson = retryResult.data;
+        totalInputTokens += retryResult.inputTokens;
+        totalOutputTokens += retryResult.outputTokens;
+        validation = validateProgram(programJson, body.duree_semaines, body.seances_par_semaine);
+      }
+      if (!validation.valid) {
+        console.error("Validation failed after retry budget:", validation.error);
+        await failProgram("Le programme généré est invalide. Réessaie.");
+        return;
+      }
+
+      const pgm = programJson as Record<string, unknown>;
+      const sessions = pgm.sessions as Record<string, Record<string, unknown>>;
+      const calendrier = pgm.calendrier as CalendrierEntry[];
+
+      // Observability (non-fatal): orphan sessions + imposed-structure drift.
+      const referencedIds = new Set(calendrier.flatMap((e) => e.sequence));
+      const orphanIds = Object.keys(sessions).filter((id) => !referencedIds.has(id));
+      if (orphanIds.length > 0) {
+        console.warn(`Orphan sessions declared but never scheduled: ${orphanIds.join(", ")}`);
+      }
+      if (imposedStructure === "phase" && pgm.structure !== "phase") {
+        console.warn(`Imposed structure "phase" but model returned "${String(pgm.structure)}"`);
+      }
+
+      // Unroll the calendrier into one program_sessions row per (week, slot).
+      const sessionRows: {
+        week_number: number;
+        session_order: number;
+        session_data: Record<string, unknown>;
+      }[] = [];
+      let globalOrder = 1;
+      for (const entry of calendrier) {
+        for (const week of entry.semaines) {
+          for (const sessionId of entry.sequence) {
+            const sessionData = sessions[sessionId];
+            if (!sessionData) {
+              console.error("Missing session data for id:", sessionId);
+              await failProgram("Erreur de génération (sessions invalides)");
+              return;
+            }
+            sessionRows.push({ week_number: week, session_order: globalOrder, session_data: sessionData });
+            globalOrder++;
+          }
+        }
+      }
+
+      // Fill the placeholder + insert its sessions atomically, flip to 'ready'.
+      const { error: finalizeError } = await supabaseAdmin.rpc("finalize_program", {
+        p_program_id: programId,
+        p_user_id: user.id,
+        p_program: {
+          title: pgm.titre,
+          description: pgm.description,
+          goals: body.objectifs,
+          duration_weeks: body.duree_semaines,
+          frequency_per_week: body.seances_par_semaine,
+          fitness_level: niveauMap[pgm.niveau as string] ?? "intermediate",
+          note_coach: pgm.note_coach,
+          progression: pgm.progression,
+          consignes_semaine: pgm.consignes_semaine,
+          generation_metadata: pgm,
+          input_tokens: totalInputTokens,
+          output_tokens: totalOutputTokens,
+          model: MODEL,
+        },
+        p_sessions: sessionRows,
+      });
+
+      if (finalizeError) {
+        console.error("finalize_program RPC error:", finalizeError);
+        await failProgram("Erreur de sauvegarde du programme");
+        return;
+      }
+
+      console.log(`Program ${programId} ready (${sessionRows.length} sessions, ${totalOutputTokens} out tokens)`);
+    } catch (err) {
+      // Turn any Anthropic/parse/timeout/truncation failure into an honest,
+      // user-facing reason stored on the row for the client to display.
+      const { message } = describeAnthropicError(err, "programme");
+      console.error("Background generation failed:", err);
+      await failProgram(message);
+    }
+  }
+
+  // Start the promise BEFORE returning, then hand it to waitUntil.
+  const task = runGeneration();
+  EdgeRuntime.waitUntil(task);
+
+  return jsonResponse(req, { programId, slug, status: "generating" }, 202);
 });
