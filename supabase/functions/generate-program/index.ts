@@ -4,7 +4,7 @@ import { getCorsHeaders } from "../_shared/cors.ts";
 import { buildSystemPrompt, buildUserPrompt, type Locale } from "./prompt.ts";
 import { sanitizeOnboardingForPersistence } from "./sanitize.ts";
 import { validateProgram } from "./validate.ts";
-import { AnthropicCallError, callAnthropicJson, describeAnthropicError } from "../_shared/anthropic.ts";
+import { AnthropicCallError, anthropicErrorCode, callAnthropicJson } from "../_shared/anthropic.ts";
 
 const MAX_ACTIVE_PROGRAMS = 3;
 const MAX_DAILY_GENERATIONS = 3;
@@ -22,6 +22,21 @@ const MAX_TOKENS = 20480;
 // (migration 022). Kept as a constant so a future trigger message rename
 // surfaces as a TypeScript build break rather than a silent 500.
 const TRIGGER_CAP_REACHED = "active_programs_cap_reached";
+// Raised by finalize_program (migration 029) when a session of the program was
+// completed while a revision was generating — replacing the sessions would
+// orphan that completion, so the original program is kept.
+const FINALIZE_STARTED_DURING_REVISION = "program_started_during_revision";
+
+// Supabase kills an isolate after 400s of WALL-CLOCK for the whole worker —
+// that clock may already be partly consumed when this request arrives, and it
+// covers auth + rate-limit + placeholder RPCs before the model is even called.
+// So we budget from OUR request start and keep a wide margin: at most one
+// retry, and never start a call that could not finish inside the budget. A row
+// left `generating` by a kill is still recovered by reap_stale_programs.
+const GENERATION_BUDGET_MS = 300_000;
+const FIRST_TIMEOUT_MS = 170_000;
+const RETRY_TIMEOUT_MS = 110_000;
+const MIN_RETRY_MS = 30_000;
 
 const VALID_OBJECTIFS = [
   'perte_poids', 'prise_muscle', 'remise_forme', 'force',
@@ -199,6 +214,7 @@ interface CalendrierEntry {
 }
 
 Deno.serve(async (req: Request) => {
+  const requestStartedAt = Date.now();
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: getCorsHeaders(req) });
   }
@@ -269,9 +285,15 @@ Deno.serve(async (req: Request) => {
   // skips the active-programs cap. New programs are capped.
   const isRevision = typeof body.revision_program_id === "string" && body.revision_program_id.length > 0;
 
+  // Settle any `generating` row whose background task died (isolate killed,
+  // redeploy): it would otherwise occupy an active slot forever. Non-fatal.
+  const { error: reapError } = await supabaseAdmin.rpc("reap_stale_programs", { p_user_id: user.id });
+  if (reapError) console.error("reap_stale_programs error:", reapError);
+
   if (!isRevision) {
     // Check active programs limit. A `failed` placeholder does not consume a
     // slot (mirrors the DB trigger in migration 027), so exclude it here too.
+    // Stale `generating` rows were just reaped to `failed` above.
     const { count: activeCount, error: activeError } = await supabaseAdmin
       .from("programs")
       .select("*", { count: "exact", head: true })
@@ -305,6 +327,11 @@ Deno.serve(async (req: Request) => {
     return errorResponse(req, "Erreur serveur", 500);
   }
 
+  // Give the quota slot back when no generation was started.
+  async function refundRateSlot(): Promise<void> {
+    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow!.id);
+  }
+
   const { count: dailyCount, error: dailyError } = await supabaseAdmin
     .from("ai_generation_calls")
     .select("*", { count: "exact", head: true })
@@ -313,12 +340,12 @@ Deno.serve(async (req: Request) => {
     .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
 
   if (dailyError) {
-    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+    await refundRateSlot();
     return errorResponse(req, "Erreur serveur", 500);
   }
 
   if ((dailyCount ?? 0) > MAX_DAILY_GENERATIONS) {
-    await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+    await refundRateSlot();
     return errorResponse(
       req,
       `Limite atteinte : ${MAX_DAILY_GENERATIONS} programmes par 24h. Réessaye plus tard.`,
@@ -354,14 +381,14 @@ Deno.serve(async (req: Request) => {
       p_user_id: user.id,
     });
     if (revErr) {
-      await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+      await refundRateSlot();
       console.error("begin_program_revision error:", revErr);
       return errorResponse(req, "Erreur serveur", 500);
     }
     if (!revId) {
       // NULL = ineligible: not owned, already started, or a revision already in
       // flight (status generating). Refund the quota slot and reject.
-      await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+      await refundRateSlot();
       return errorResponse(
         req,
         "Révision impossible : ce programme est introuvable, déjà commencé, ou une révision est déjà en cours.",
@@ -370,12 +397,20 @@ Deno.serve(async (req: Request) => {
     }
     programId = revId as string;
 
-    const { data: prev } = await supabaseAdmin
+    const { data: prev, error: prevError } = await supabaseAdmin
       .from("programs")
       .select("slug, generation_metadata")
       .eq("id", programId)
       .single();
-    slug = (prev?.slug as string) ?? "";
+    if (prevError || !prev?.slug) {
+      // begin_program_revision already flipped the row to generating: settle it
+      // back (fail_program keeps `ready` since the sessions are intact).
+      console.error("Revision context fetch failed:", prevError);
+      await supabaseAdmin.rpc("fail_program", { p_program_id: programId, p_user_id: user.id, p_error: "unexpected" });
+      await refundRateSlot();
+      return errorResponse(req, "Erreur serveur", 500);
+    }
+    slug = prev.slug as string;
     revisionContext = {
       comment: revisionComment,
       previousSummary: summarizePreviousProgram(prev?.generation_metadata),
@@ -396,7 +431,7 @@ Deno.serve(async (req: Request) => {
     });
     if (placeholderError || !newId) {
       // No generation started, so refund the rate-limit slot taken above.
-      await supabaseAdmin.from("ai_generation_calls").delete().eq("id", rateRow.id);
+      await refundRateSlot();
       // The cap trigger (migration 027) raises 'active_programs_cap_reached' if
       // a race slipped past the pre-flight count. Surface the same message.
       if (placeholderError?.message?.includes(TRIGGER_CAP_REACHED)) {
@@ -428,6 +463,9 @@ Deno.serve(async (req: Request) => {
     avance: "advanced",
   };
 
+  // `reason` is a machine code (see src/utils/programErrors.ts), localised by
+  // the client. fail_program keeps the row `ready` when it still has sessions
+  // (a failed revision must not hide a valid program).
   async function failProgram(reason: string): Promise<void> {
     const { error } = await supabaseAdmin.rpc("fail_program", {
       p_program_id: programId,
@@ -438,15 +476,18 @@ Deno.serve(async (req: Request) => {
   }
 
   async function runGeneration(): Promise<void> {
-    // Timeouts must fit the 400s wall-clock ceiling: we allow AT MOST ONE retry
-    // across the parse and validation paths (each retry is a full re-generation),
-    // so worst case = first (220s) + one retry (160s) = 380s < 400s. Beyond
-    // that the isolate is killed and the row would be stuck 'generating'.
-    const FIRST_TIMEOUT = 220_000;
-    const RETRY_TIMEOUT = 160_000;
+    // At most ONE retry across the parse and validation paths (each retry is a
+    // full re-generation), and only if enough of the budget is left to finish
+    // it. See GENERATION_BUDGET_MS for why the budget starts at request start.
     let retriesLeft = 1;
 
-    function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = FIRST_TIMEOUT) {
+    function retryTimeoutMs(): number | null {
+      const remaining = GENERATION_BUDGET_MS - (Date.now() - requestStartedAt);
+      if (remaining < MIN_RETRY_MS) return null;
+      return Math.min(RETRY_TIMEOUT_MS, remaining);
+    }
+
+    function callAnthropic(extraMessages: { role: string; content: string }[] = [], timeoutMs = FIRST_TIMEOUT_MS) {
       return callAnthropicJson({
         apiKey: anthropicApiKey!,
         model: MODEL,
@@ -466,10 +507,11 @@ Deno.serve(async (req: Request) => {
       try {
         result = await callAnthropic();
       } catch (err) {
-        if (err instanceof AnthropicCallError && err.kind === "parse" && retriesLeft > 0) {
+        const retryMs = retryTimeoutMs();
+        if (err instanceof AnthropicCallError && err.kind === "parse" && retriesLeft > 0 && retryMs !== null) {
           retriesLeft--;
           console.error("Parse failure on first attempt — retrying once");
-          result = await callAnthropic([], RETRY_TIMEOUT);
+          result = await callAnthropic([], retryMs);
         } else {
           throw err;
         }
@@ -479,7 +521,8 @@ Deno.serve(async (req: Request) => {
       let totalOutputTokens = result.outputTokens;
 
       let validation = validateProgram(programJson, body.duree_semaines, body.seances_par_semaine);
-      if (!validation.valid && retriesLeft > 0) {
+      const validationRetryMs = retriesLeft > 0 ? retryTimeoutMs() : null;
+      if (!validation.valid && validationRetryMs !== null) {
         retriesLeft--;
         console.error("First attempt validation failed:", validation.error);
         // A multi-turn assistant turn here is a normal conversation turn (NOT
@@ -490,7 +533,7 @@ Deno.serve(async (req: Request) => {
             { role: "assistant", content: truncatedPrev },
             { role: "user", content: `Ta reponse precedente etait invalide: ${validation.error}. Corrige et renvoie le JSON complet.` },
           ],
-          RETRY_TIMEOUT,
+          validationRetryMs,
         );
         programJson = retryResult.data;
         totalInputTokens += retryResult.inputTokens;
@@ -499,7 +542,7 @@ Deno.serve(async (req: Request) => {
       }
       if (!validation.valid) {
         console.error("Validation failed after retry budget:", validation.error);
-        await failProgram("Le programme généré est invalide. Réessaie.");
+        await failProgram("invalid_program");
         return;
       }
 
@@ -530,7 +573,7 @@ Deno.serve(async (req: Request) => {
             const sessionData = sessions[sessionId];
             if (!sessionData) {
               console.error("Missing session data for id:", sessionId);
-              await failProgram("Erreur de génération (sessions invalides)");
+              await failProgram("sessions_invalid");
               return;
             }
             sessionRows.push({ week_number: week, session_order: globalOrder, session_data: sessionData });
@@ -563,17 +606,18 @@ Deno.serve(async (req: Request) => {
 
       if (finalizeError) {
         console.error("finalize_program RPC error:", finalizeError);
-        await failProgram("Erreur de sauvegarde du programme");
+        await failProgram(
+          finalizeError.message?.includes(FINALIZE_STARTED_DURING_REVISION) ? "started_during_revision" : "save_failed",
+        );
         return;
       }
 
       console.log(`Program ${programId} ready (${sessionRows.length} sessions, ${totalOutputTokens} out tokens)`);
     } catch (err) {
-      // Turn any Anthropic/parse/timeout/truncation failure into an honest,
-      // user-facing reason stored on the row for the client to display.
-      const { message } = describeAnthropicError(err, "programme");
+      // Turn any Anthropic/parse/timeout/truncation failure into a stable code
+      // stored on the row; the client localises it.
       console.error("Background generation failed:", err);
-      await failProgram(message);
+      await failProgram(anthropicErrorCode(err));
     }
   }
 

@@ -9,6 +9,7 @@ import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import type { ExperienceDuree, FrequenceActuelle, ProgramOnboardingInput } from '../types/custom-program.ts';
 import type { Equipment } from '../types/equipment.ts';
 import { toggleArrayElement } from '../utils/array.ts';
+import { isActiveProgram } from '../utils/programStatus.ts';
 import { LOADING_PHASES_COUNT } from './create-program/formOptions.ts';
 import { GeneratingOverlay } from './create-program/GeneratingOverlay.tsx';
 import { StepObjective } from './create-program/StepObjective.tsx';
@@ -171,7 +172,9 @@ export function CreateProgramPage() {
     }
   };
 
-  const atLimit = !programsLoading && userPrograms.length >= MAX_ACTIVE;
+  // Mirrors the server (edge function + DB trigger): failed and stale rows
+  // don't consume a slot, so don't block the user on them here either.
+  const atLimit = !programsLoading && userPrograms.filter((p) => isActiveProgram(p)).length >= MAX_ACTIVE;
 
   if (atLimit) {
     return (

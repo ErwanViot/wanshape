@@ -62,7 +62,10 @@
     "delete_confirm": "Delete",
     "deleting": "Deleting...",
     "blocks": "{{n}} blocks",
-    "duration_min": "~{{n}} min"
+    "duration_min": "~{{n}} min",
+    "generating_delete": "Cancel and delete",
+    "generating_stale_hint": "If nothing happens after 8 minutes, the generation will be marked as failed and you'll be able to delete it.",
+    "revision_failed_banner": "The last adjustment failed: {{reason}} Your current program is still available."
   },
   "content": {
     "back_aria": "Back to programs",
@@ -215,5 +218,23 @@
     "5": "Balancing the load",
     "6": "Personalizing coaching",
     "7": "Final checks"
+  },
+  "errors": {
+    "timeout": "Generation took too long. Try again in a moment.",
+    "parse": "The AI couldn't produce a usable program. Try again.",
+    "truncation": "The generated program was too large and got cut off. Try again.",
+    "network": "Couldn't reach the AI service. Check your connection and try again.",
+    "api_overloaded": "The AI service is temporarily overloaded. Try again in a few moments.",
+    "api_unavailable": "The AI service is temporarily unavailable. Try again in a moment.",
+    "api_auth": "The AI service refused authentication. This is a server-side configuration issue — contact support.",
+    "api_rejected": "The AI service rejected the request (quota exhausted or configuration). If this persists, contact support.",
+    "api_error": "The AI service returned an error. Try again or contact support if it persists.",
+    "invalid_program": "The generated program is invalid. Try again.",
+    "sessions_invalid": "Generation error (invalid sessions). Try again.",
+    "save_failed": "Failed to save the program. Try again.",
+    "started_during_revision": "A session of this program was recorded while it was being adjusted: the original program was kept.",
+    "stale": "Generation appears stuck for more than 8 minutes. Delete this program and try again.",
+    "deleted": "This program no longer exists.",
+    "unexpected": "Unexpected error while talking to the AI. Try again."
   }
 }

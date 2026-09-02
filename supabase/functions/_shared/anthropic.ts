@@ -118,6 +118,34 @@ export async function callAnthropicJson(opts: {
  *
  * `noun` lets the message name what failed ("séance" / "programme").
  */
+/**
+ * Stable machine code for a call failure, persisted in programs.error_reason
+ * and localised client-side (src/utils/programErrors.ts). Keep the code list in
+ * sync with PROGRAM_ERROR_CODES there.
+ */
+export type AnthropicErrorCode =
+  | "timeout"
+  | "parse"
+  | "truncation"
+  | "network"
+  | "api_overloaded"
+  | "api_unavailable"
+  | "api_auth"
+  | "api_rejected"
+  | "api_error"
+  | "unexpected";
+
+export function anthropicErrorCode(err: unknown): AnthropicErrorCode {
+  if (!(err instanceof AnthropicCallError)) return "unexpected";
+  if (err.kind !== "api") return err.kind;
+  const s = err.status ?? 0;
+  if (s === 429) return "api_overloaded";
+  if (s === 529 || s === 503) return "api_unavailable";
+  if (s === 401 || s === 403) return "api_auth";
+  if (s === 400) return "api_rejected";
+  return "api_error";
+}
+
 export function describeAnthropicError(err: unknown, noun = "contenu"): { message: string; status: number } {
   if (err instanceof AnthropicCallError) {
     if (err.kind === "timeout") {

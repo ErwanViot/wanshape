@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { isSupportedLocale } from '../i18n';
@@ -7,6 +7,8 @@ import { captureEvent } from '../lib/analytics.ts';
 import { supabase } from '../lib/supabase.ts';
 import type { GenerateProgramResponse, ProgramOnboardingInput, ProgramStatus } from '../types/custom-program.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
+import { programErrorMessage } from '../utils/programErrors.ts';
+import { effectiveProgramStatus } from '../utils/programStatus.ts';
 
 /** Revision request: adjust an existing (not-yet-started) program in place. */
 export interface ReviseOptions {
@@ -15,12 +17,48 @@ export interface ReviseOptions {
 }
 
 const POLL_INTERVAL_MS = 3000;
-// Generation runs server-side up to the 400s wall-clock; poll a bit beyond that
-// before giving up on the client. The program keeps generating regardless and
-// will appear ready in the list — the timeout only ends THIS overlay.
+// Generation runs server-side inside a ~5 min budget (see generate-program);
+// poll a bit beyond that before giving up on the client. The program keeps
+// generating regardless and will appear ready in the list — the timeout only
+// ends THIS overlay.
 const POLL_TIMEOUT_MS = 7 * 60 * 1000;
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+type Settled =
+  | { status: Exclude<ProgramStatus, 'generating'>; error_reason: string | null }
+  | { status: 'timeout' | 'cancelled'; error_reason: null };
+
+// Poll a single program's status until it leaves 'generating', we time out, or
+// the caller unmounts. RLS lets a user read their own row, so the anon /
+// publishable client is enough here. A transient query error is NOT a
+// settlement: we keep polling. A missing row (no data, no error) means the
+// program was deleted meanwhile.
+async function pollUntilSettled(programId: string, isCancelled: () => boolean): Promise<Settled> {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < POLL_TIMEOUT_MS) {
+    await sleep(POLL_INTERVAL_MS);
+    if (isCancelled()) return { status: 'cancelled', error_reason: null };
+
+    const { data, error } = await supabase!
+      .from('programs')
+      .select('status, error_reason, generation_started_at')
+      .eq('id', programId)
+      .maybeSingle();
+
+    if (error) {
+      console.error('Program status poll error:', error);
+      continue;
+    }
+    if (!data) return { status: 'failed', error_reason: 'deleted' };
+
+    const status = effectiveProgramStatus(data);
+    if (status !== 'generating') {
+      return { status, error_reason: (data.error_reason as string | null) ?? null };
+    }
+  }
+  return { status: 'timeout', error_reason: null };
+}
 
 export function useGenerateProgram() {
   const { user } = useAuth();
@@ -31,29 +69,13 @@ export function useGenerateProgram() {
   const [error, setError] = useState<string | null>(null);
 
   const inflightRef = useRef(false);
-
-  // Poll a single program's status until it leaves 'generating' (or we time
-  // out). RLS lets a user read their own row, so the anon/publishable client
-  // is enough here.
-  const pollUntilSettled = useCallback(
-    async (programId: string): Promise<{ status: ProgramStatus | 'timeout'; error_reason: string | null }> => {
-      const startedAt = Date.now();
-      while (Date.now() - startedAt < POLL_TIMEOUT_MS) {
-        await sleep(POLL_INTERVAL_MS);
-        const { data } = await supabase!
-          .from('programs')
-          .select('status, error_reason')
-          .eq('id', programId)
-          .maybeSingle();
-        const status = (data?.status as ProgramStatus | undefined) ?? 'ready';
-        if (status !== 'generating') {
-          return { status, error_reason: (data?.error_reason as string | null) ?? null };
-        }
-      }
-      return { status: 'timeout', error_reason: null };
-    },
-    [],
-  );
+  const unmountedRef = useRef(false);
+  useEffect(() => {
+    unmountedRef.current = false;
+    return () => {
+      unmountedRef.current = true;
+    };
+  }, []);
 
   // i18n.t is a fresh function reference each render; depending on i18n.language
   // is the project-wide pattern for stable callbacks resolving localised strings.
@@ -69,6 +91,14 @@ export function useGenerateProgram() {
       inflightRef.current = true;
       setLoading(true);
       setError(null);
+
+      const invalidateProgramQueries = () => {
+        queryClient.invalidateQueries({ queryKey: ['userPrograms', userId ?? null] });
+        queryClient.invalidateQueries({ queryKey: ['activeProgram', userId ?? null] });
+        // The detail page keys on slug, which a revision caller may not pass —
+        // invalidate the whole prefix (same approach as useSaveCompletion).
+        queryClient.invalidateQueries({ queryKey: ['program'] });
+      };
 
       try {
         const locale = isSupportedLocale(i18n.language) ? i18n.language : 'fr';
@@ -100,19 +130,26 @@ export function useGenerateProgram() {
           return null;
         }
 
-        // Show the `generating` placeholder in the list right away (fire-and-
-        // forget: the user can leave this screen and find it there).
-        queryClient.invalidateQueries({ queryKey: ['userPrograms', userId ?? null] });
+        // Show the `generating` placeholder right away (fire-and-forget: the
+        // user can leave this screen and find it in the list).
+        invalidateProgramQueries();
 
         // The generation runs in the background (edge waitUntil). Poll until the
         // row settles so the overlay can navigate on ready / surface failures.
-        const settled = await pollUntilSettled(response.programId);
+        const settled = await pollUntilSettled(response.programId, () => unmountedRef.current);
+        if (settled.status === 'cancelled') return null;
 
-        queryClient.invalidateQueries({ queryKey: ['userPrograms', userId ?? null] });
-        queryClient.invalidateQueries({ queryKey: ['activeProgram', userId ?? null] });
+        // Whatever the outcome, the cached rows are behind the DB now.
+        invalidateProgramQueries();
 
         if (settled.status === 'failed') {
-          setError(settled.error_reason || i18n.t('hook_errors.generic_retry', { ns: 'common' }));
+          setError(
+            programErrorMessage(
+              settled.error_reason,
+              i18n.getFixedT(null, 'programs'),
+              i18n.t('hook_errors.generic_retry', { ns: 'common' }),
+            ),
+          );
           return null;
         }
         if (settled.status === 'timeout') {
@@ -130,7 +167,7 @@ export function useGenerateProgram() {
           duree_semaines: input.duree_semaines,
         });
 
-        return { ...response, status: 'ready' };
+        return response;
       } catch (e) {
         setError(e instanceof Error ? e.message : i18n.t('hook_errors.unexpected', { ns: 'common' }));
         return null;
@@ -139,7 +176,7 @@ export function useGenerateProgram() {
         inflightRef.current = false;
       }
     },
-    [queryClient, userId, i18n.language, pollUntilSettled],
+    [queryClient, userId, i18n.language],
   );
 
   return { generate, loading, error };

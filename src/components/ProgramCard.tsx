@@ -6,6 +6,7 @@ import type { Program } from '../types/completion.ts';
 import { FITNESS_COLORS } from '../utils/labels.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 import { localizedProgramFields } from '../utils/programLocale.ts';
+import { effectiveProgramStatus } from '../utils/programStatus.ts';
 
 export function ProgramCard({ program }: { program: Program }) {
   const { t } = useTranslation(['programs', 'programs_data']);
@@ -16,8 +17,9 @@ export function ProgramCard({ program }: { program: Program }) {
   // page would be empty — keep the card non-navigable and show a spinner. A
   // `failed` one links to its page (which surfaces the error + a way to remove
   // it). Legacy rows have no status → treated as ready.
-  const isPending = program.status === 'generating';
-  const isFailed = program.status === 'failed';
+  const status = effectiveProgramStatus(program);
+  const isPending = status === 'generating';
+  const isFailed = status === 'failed';
 
   const wrapperClass =
     'group relative rounded-2xl overflow-hidden transition-transform block ' +

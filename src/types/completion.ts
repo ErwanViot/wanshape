@@ -36,6 +36,8 @@ export interface Program {
    */
   status?: import('./custom-program.ts').ProgramStatus;
   error_reason?: string | null;
+  /** When the current/last generation started; NULL once settled (migration 029). */
+  generation_started_at?: string | null;
 }
 
 export interface ProgramSession {

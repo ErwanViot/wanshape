@@ -62,7 +62,10 @@
     "delete_confirm": "Supprimer",
     "deleting": "Suppression...",
     "blocks": "{{n}} blocs",
-    "duration_min": "~{{n}} min"
+    "duration_min": "~{{n}} min",
+    "generating_delete": "Annuler et supprimer",
+    "generating_stale_hint": "Si rien ne se passe au bout de 8 minutes, la génération sera marquée en échec et tu pourras la supprimer.",
+    "revision_failed_banner": "Le dernier ajustement a échoué : {{reason}} Ton programme actuel reste disponible."
   },
   "content": {
     "back_aria": "Retour aux programmes",
@@ -215,5 +218,23 @@
     "5": "Équilibrage des charges",
     "6": "Personnalisation du coaching",
     "7": "Vérifications finales"
+  },
+  "errors": {
+    "timeout": "La génération a pris trop de temps. Réessaie dans un instant.",
+    "parse": "L'IA n'a pas réussi à produire un programme exploitable. Réessaie.",
+    "truncation": "Le programme généré était trop volumineux et a été coupé. Réessaie.",
+    "network": "Impossible de joindre le service IA. Vérifie ta connexion et réessaie.",
+    "api_overloaded": "Le service IA est momentanément surchargé. Réessaie dans quelques instants.",
+    "api_unavailable": "Le service IA est temporairement indisponible. Réessaie dans un instant.",
+    "api_auth": "Le service IA a refusé l'authentification. C'est un problème de configuration côté serveur — contacte le support.",
+    "api_rejected": "Le service IA a rejeté la requête (quota épuisé ou configuration). Si cela persiste, contacte le support.",
+    "api_error": "Le service IA a renvoyé une erreur. Réessaie ou contacte le support si cela persiste.",
+    "invalid_program": "Le programme généré est invalide. Réessaie.",
+    "sessions_invalid": "Erreur de génération (séances invalides). Réessaie.",
+    "save_failed": "Erreur de sauvegarde du programme. Réessaie.",
+    "started_during_revision": "Une séance de ce programme a été enregistrée pendant l'ajustement : le programme d'origine a été conservé.",
+    "stale": "La génération semble bloquée depuis plus de 8 minutes. Supprime ce programme et réessaie.",
+    "deleted": "Ce programme n'existe plus.",
+    "unexpected": "Erreur inattendue lors de la communication avec l'IA. Réessaie."
   }
 }
