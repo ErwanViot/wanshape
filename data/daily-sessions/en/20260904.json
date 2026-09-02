@@ -1,0 +1,124 @@
+{
+  "date": "04092026",
+  "title": "Sculpt Lower",
+  "description": "Lower body session with assisted pistol squat, lateral lunges and table reverse hyper to sculpt legs and glutes",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Unilateral",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Assisted pistol squat",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Single-leg squat holding a support",
+          "bilateral": true
+        },
+        {
+          "name": "Lateral lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Step wide to the side, bend one knee, keep the other straight",
+          "bilateral": true
+        },
+        {
+          "name": "Table reverse hyper",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Belly on the edge, lift legs behind you"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Lateral Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Side plank",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "On one forearm, body aligned, hips high",
+          "bilateral": true
+        },
+        {
+          "name": "Bicycle crunches",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        },
+        {
+          "name": "Flutter kicks",
+          "sets": 3,
+          "reps": 20,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, quick alternating kicks"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

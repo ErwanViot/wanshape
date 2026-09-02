@@ -1,0 +1,110 @@
+{
+  "date": "24082026",
+  "title": "Master Circuit Pyramid",
+  "description": "Dynamic 3-round circuit followed by a jump lunge pyramid for progressive full-body challenge",
+  "estimatedDuration": 38,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Strength-Cardio Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Bodyweight goblet squat",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Hands in front of the chest, squat deep"
+        },
+        {
+          "name": "Wide push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands wider than shoulders, focus on the chest"
+        },
+        {
+          "name": "Glute bridge",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Back on the floor, drive hips toward the ceiling"
+        },
+        {
+          "name": "Shoulder tap plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In a high plank, touch the opposite shoulder alternating"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Jump Lunge Pyramid",
+      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Jump lunges",
+          "instructions": "Jump lunges alternating legs, explosive"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

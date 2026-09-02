@@ -1,0 +1,105 @@
+{
+  "date": "27062026",
+  "title": "Vitality Circuit",
+  "description": "Dynamic 3-round circuit alternating lunges, Hindu push-ups, plank and mountain climbers",
+  "estimatedDuration": 35,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Vitality Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Reverse lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Big step back, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Hindu push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Dive movement: pike down then sweep up in an arc"
+        },
+        {
+          "name": "Dead bug",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Back on the floor, arms and legs in the air, extend opposite arm/leg alternating"
+        },
+        {
+          "name": "Mountain climbers",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        },
+        {
+          "name": "Floor hip thrust",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Back on the floor, feet flat, drive hips up, squeeze glutes"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

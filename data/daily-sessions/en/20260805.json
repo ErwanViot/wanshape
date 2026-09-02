@@ -1,0 +1,89 @@
+{
+  "date": "05082026",
+  "title": "Tabata Storm",
+  "description": "8-round tabata with jump lunges, star jumps, flutter kicks and shoulder tap plank",
+  "estimatedDuration": 26,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 45,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Storm Tabata",
+      "sets": 1,
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Jump lunges",
+          "instructions": "Alternating jump lunges"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs into a star shape"
+        },
+        {
+          "name": "Flutter kicks",
+          "instructions": "Back on the floor, legs extended, rapid alternating kicks"
+        },
+        {
+          "name": "Shoulder tap plank",
+          "instructions": "In a high plank, tap opposite shoulder alternating"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

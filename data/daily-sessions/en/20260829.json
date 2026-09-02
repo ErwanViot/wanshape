@@ -1,0 +1,115 @@
+{
+  "date": "29082026",
+  "title": "Granite Superset",
+  "description": "3-set push-pull supersets with commando push-ups and table rows for a dense upper body",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, squeeze and spread shoulder blades without bending elbows"
+        },
+        {
+          "name": "Plank to downward dog",
+          "duration": 35,
+          "instructions": "Alternate between high plank and downward dog position"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Strength Supersets",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Commando push-ups",
+              "reps": 8,
+              "instructions": "Alternate between plank position and push-up position"
+            },
+            {
+              "name": "Inverse table rows",
+              "reps": 10,
+              "instructions": "Under a table, pull chest toward the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Diamond push-ups",
+              "reps": 10,
+              "instructions": "Hands together under the chest, elbows close to the body"
+            },
+            {
+              "name": "Prone Y raises",
+              "reps": 12,
+              "instructions": "On your stomach, arms in a Y shape, lift and hold 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "On your stomach, lift your chest off the floor, squeeze shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "On your stomach, bring your foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

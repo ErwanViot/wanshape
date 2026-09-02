@@ -1,0 +1,105 @@
+{
+  "date": "18062026",
+  "title": "Athletic Circuit",
+  "description": "3-round full body circuit chaining squats, push-ups, planks and cardio for athletic fitness",
+  "estimatedDuration": 35,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Athletic Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Bodyweight goblet squat",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Hands in front of chest, squat deep"
+        },
+        {
+          "name": "Commando push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Alternate between plank and push-up position",
+          "bilateral": true
+        },
+        {
+          "name": "Forward lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Big step forward, back knee grazes the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Superman plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In a plank, lift one arm and the opposite leg, alternate"
+        },
+        {
+          "name": "No-push-up burpees",
+          "mode": "reps",
+          "reps": 6,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring foot toward opposite hand by rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

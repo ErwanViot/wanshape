@@ -1,0 +1,122 @@
+{
+  "date": "28082026",
+  "title": "Jambes Tonus",
+  "description": "Séance complète bas du corps avec squats 1.5, fentes avec pause et glute bridge pour sculpter et renforcer",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine à rythme modéré"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un côté à l'autre"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Tension",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Squats 1.5",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Descendre, remonter à mi-chemin, redescendre, remonter complètement"
+        },
+        {
+          "name": "Fentes avec pause",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "Descendre et maintenir 3s en bas avant de remonter",
+          "bilateral": true
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Mains derrière la tête, pencher le buste en gardant le dos droit"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Fessiers et Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Glute bridge",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Comme le hip thrust mais dos au sol, pousser les hanches vers le ciel"
+        },
+        {
+          "name": "Gainage Superman",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "En planche, lever un bras et la jambe opposée, alterner"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes tendues, croiser en alternant dessus/dessous"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

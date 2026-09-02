@@ -1,0 +1,90 @@
+{
+  "date": "10062026",
+  "title": "AMRAP Marathon",
+  "description": "12 minutes non-stop to accumulate maximum rounds with squats, no-push-up burpees and v-ups",
+  "estimatedDuration": 30,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Brisk in-place march",
+          "duration": 40,
+          "instructions": "March quickly in place with arm swing"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 35,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 12 Minutes",
+      "duration": 720,
+      "exercises": [
+        {
+          "name": "Squats",
+          "reps": 10,
+          "instructions": "Feet shoulder-width apart, lower until thighs are parallel to the floor"
+        },
+        {
+          "name": "No-push-up burpees",
+          "reps": 5,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        },
+        {
+          "name": "V-ups",
+          "reps": 8,
+          "instructions": "Back on the floor, lift arms and legs simultaneously to touch feet"
+        },
+        {
+          "name": "Walking lunges",
+          "reps": 10,
+          "instructions": "Step forward continuously with long strides"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

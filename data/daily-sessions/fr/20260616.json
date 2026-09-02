@@ -1,0 +1,93 @@
+{
+  "date": "16062026",
+  "title": "Cardio Puissance",
+  "description": "3 rounds explosifs alternant jump lunges, star jumps, broad jumps et lateral bounds",
+  "estimatedDuration": 27,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 40,
+          "instructions": "Déplacements latéraux rapides, 3-4 pas de chaque côté"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "HIIT Puissance",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Jump lunges",
+          "instructions": "Fentes sautées en alternant les jambes"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Sauter en écartant bras et jambes en étoile"
+        },
+        {
+          "name": "Broad jumps",
+          "instructions": "Sauts en longueur, amortir et recommencer"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Sauts latéraux puissants d'un pied à l'autre"
+        },
+        {
+          "name": "Burpees",
+          "instructions": "Descendre, poser les mains, sauter les pieds en arrière, pompe, sauter debout"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "À genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

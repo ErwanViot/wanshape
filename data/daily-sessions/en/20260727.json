@@ -1,0 +1,122 @@
+{
+  "date": "27072026",
+  "title": "Sculpted Lower",
+  "description": "Complete legs and glutes workout with Bulgarian split squats, single-leg hip thrust and core stability",
+  "estimatedDuration": 32,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Jog in place, heels kicking toward glutes"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 40,
+          "instructions": "Seated, legs at 90 degrees, pivot side to side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Strong Glutes",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Bulgarian split squats",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Back foot on a chair, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Single-leg hip thrust",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hip thrust on one leg, other leg in the air",
+          "bilateral": true
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands behind head, hinge forward keeping back straight"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core Control",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Bear hold",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "On all fours, knees 2cm off the floor, hold position"
+        },
+        {
+          "name": "Bicycle crunches",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        },
+        {
+          "name": "Side plank",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "On one forearm, body aligned, hips high",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

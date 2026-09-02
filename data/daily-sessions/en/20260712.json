@@ -1,0 +1,114 @@
+{
+  "date": "12072026",
+  "title": "Superset Pro",
+  "description": "Antagonist upper body supersets: push-pull pairs for balanced and efficient effort",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 45,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, squeeze and spread the shoulder blades without bending elbows"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Upper Body Supersets",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Diamond push-ups",
+              "reps": 8,
+              "instructions": "Hands together under the chest, elbows close to the body"
+            },
+            {
+              "name": "Alternating superman",
+              "reps": 12,
+              "instructions": "Lift right arm and left leg, alternate"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 10,
+              "instructions": "Lying face down, arms in T position, squeeze the shoulder blades"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hips high in inverted V, lower head between hands"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "Lying face down, lift torso off the floor, squeeze shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

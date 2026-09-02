@@ -1,0 +1,122 @@
+{
+  "date": "02082026",
+  "title": "Lower Challenge",
+  "description": "Legs and core challenge: isometric squats, paused lunges and dynamic plank work",
+  "estimatedDuration": 32,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Jog in place, heels kicking toward glutes"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + thoracic rotation + arm reaching to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Endurance",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Isometric squat",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Hold the bottom squat position without moving"
+        },
+        {
+          "name": "Paused lunges",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Lower and hold 3s at the bottom before standing",
+          "bilateral": true
+        },
+        {
+          "name": "Single-leg Romanian deadlift",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "On one leg, lean torso forward, back leg extended",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Dynamic Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Plank to downward dog",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Alternate between high plank and downward dog position"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 16,
+          "restBetweenSets": 60,
+          "instructions": "Seated, feet off the floor, rotate torso left and right"
+        },
+        {
+          "name": "Hollow hold",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, arms and legs extended above the floor, lower back pressed down"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

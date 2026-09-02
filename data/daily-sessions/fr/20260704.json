@@ -1,0 +1,101 @@
+{
+  "date": "04072026",
+  "title": "Push-Pull Superset",
+  "description": "Supersets push-pull ciblés : pectoraux vs dos en 3 séries intenses pour un équilibre parfait",
+  "estimatedDuration": 31,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Planche to downward dog",
+          "duration": 40,
+          "instructions": "Alterner entre planche haute et position du chien tête en bas"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "À quatre pattes, alterner dos rond et dos creux, respirer"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Push-Pull Supersets",
+      "sets": 3,
+      "restBetweenSets": 75,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes declinees",
+              "reps": 10,
+              "instructions": "Pieds surélevés sur une chaise, corps gainé"
+            },
+            {
+              "name": "Rowing inverse (table)",
+              "reps": 10,
+              "instructions": "Sous une table, tirer la poitrine vers le bord"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pompes Hindu",
+              "reps": 8,
+              "instructions": "Mouvement de plongée : piquer vers le bas puis remonter en arc"
+            },
+            {
+              "name": "Superman",
+              "reps": 12,
+              "instructions": "À plat ventre, lever bras et jambes simultanément, maintenir 2s"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 30,
+          "instructions": "Bras derrière la tête, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "À plat ventre, amener le pied vers la main opposée en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

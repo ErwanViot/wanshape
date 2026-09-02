@@ -1,0 +1,124 @@
+{
+  "date": "04092026",
+  "title": "Lower Sculpt",
+  "description": "Séance bas du corps avec pistol squat assisté, fentes latérales et reverse hyper pour sculpter jambes et fessiers",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes - Unilatéral",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Pistol squat assiste",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Squat sur une jambe en se tenant à un support",
+          "bilateral": true
+        },
+        {
+          "name": "Fentes laterales",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Grand pas latéral, plier une jambe, l'autre tendue",
+          "bilateral": true
+        },
+        {
+          "name": "Reverse hyper sur table",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Ventre sur le bord, lever les jambes derrière soi"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core Latéral",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Gainage lateral",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Sur un avant-bras, corps aligné, hanches hautes",
+          "bilateral": true
+        },
+        {
+          "name": "Bicycle crunchs",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Coude vers genou opposé en alternant, jambe tendue"
+        },
+        {
+          "name": "Flutter kicks",
+          "sets": 3,
+          "reps": 20,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes tendues, battements rapides"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

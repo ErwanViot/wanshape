@@ -1,0 +1,104 @@
+{
+  "date": "20082026",
+  "title": "Full Body Master",
+  "description": "3-round circuit mixing squats, push-ups, core and plyometrics for a complete and balanced workout",
+  "estimatedDuration": 35,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Body Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "1.5 squats",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Lower, rise halfway, lower again, then rise fully"
+        },
+        {
+          "name": "Diamond push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Hands together under the chest, elbows close to the body"
+        },
+        {
+          "name": "Reverse lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Step back, lower the knee"
+        },
+        {
+          "name": "Russian twists",
+          "mode": "reps",
+          "reps": 14,
+          "instructions": "Seated, feet lifted, rotate torso left and right"
+        },
+        {
+          "name": "No-push-up burpees",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "On your stomach, bring your foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

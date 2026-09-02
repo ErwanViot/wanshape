@@ -1,0 +1,103 @@
+{
+  "date": "06062026",
+  "title": "Circuit Full Body",
+  "description": "Circuit complet 3 rounds alternant squats, pompes, fentes et gainage pour un travail total du corps",
+  "estimatedDuration": 34,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 45,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un côté à l'autre"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Full Body",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
+        },
+        {
+          "name": "Pompes classiques",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mains largeur épaules, corps gainé, descendre poitrine au sol"
+        },
+        {
+          "name": "Fentes alternees",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Alterner avant gauche et avant droite sans pause"
+        },
+        {
+          "name": "Mountain climbers",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        },
+        {
+          "name": "Gainage planche",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Sur les avant-bras, corps parfaitement aligné, serrer les abdos"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "À genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

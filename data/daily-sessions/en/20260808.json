@@ -1,0 +1,93 @@
+{
+  "date": "08082026",
+  "title": "HIIT Rage",
+  "description": "Intense cardio burst with burpees, jump lunges and star jumps to burn maximum calories",
+  "estimatedDuration": 27,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Intense Cardio HIIT",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Burpees",
+          "instructions": "Drop down, hands on the floor, jump feet back, push-up, jump up"
+        },
+        {
+          "name": "Jump lunges",
+          "instructions": "Jump lunges alternating legs"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs in a star shape"
+        },
+        {
+          "name": "Mountain climbers",
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        },
+        {
+          "name": "Pop squats",
+          "instructions": "Jump feet wide into a squat, jump feet together"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "date": "30082026",
+  "title": "Granite Circuit",
+  "description": "Complete 3-round circuit with jump squats, push-ups and plank for an intense total body session",
+  "estimatedDuration": 34,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Complete Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Jump squats",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Explosive squat with a jump, absorb on landing"
+        },
+        {
+          "name": "Incline push-ups",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Hands on an elevated surface, easier variation"
+        },
+        {
+          "name": "Bulgarian split squats",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Rear foot on a chair, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Forearm plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On forearms, body perfectly aligned, brace the abs"
+        },
+        {
+          "name": "Mountain climbers",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "date": "03082026",
+  "title": "Twin Antagonist",
+  "description": "Upper body antagonist pair supersets for balanced muscle development",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Antagonist Supersets",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Push-ups",
+              "reps": 12,
+              "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+            },
+            {
+              "name": "Inverse table rows",
+              "reps": 10,
+              "instructions": "Under a table, pull chest toward the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hips high in inverted V, lower head between hands"
+            },
+            {
+              "name": "Floor face pulls",
+              "reps": 12,
+              "instructions": "Lying face down, elbows at 90 degrees, pull elbows back"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "Lying face down, lift torso off the floor, squeeze shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring foot toward opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

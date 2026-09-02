@@ -1,0 +1,103 @@
+{
+  "date": "26082026",
+  "title": "Total Cardio Master",
+  "description": "Intense 10-minute EMOM followed by an 8-minute AMRAP for a complete cardio-endurance workout",
+  "estimatedDuration": 37,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM 10 Minutes",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "No-push-up burpees",
+          "reps": 8,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        },
+        {
+          "name": "Jump squats",
+          "reps": 10,
+          "instructions": "Explosive squat with a jump, absorb on landing"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 8 Minutes",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Alternating lunges",
+          "reps": 10,
+          "instructions": "Alternate left foot forward then right foot forward without pausing"
+        },
+        {
+          "name": "Push-ups",
+          "reps": 8,
+          "instructions": "Hands shoulder-width, body straight, chest to the floor"
+        },
+        {
+          "name": "Bicycle crunches",
+          "reps": 12,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "On your stomach, bring your foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "date": "30072026",
+  "title": "Push-Pull Pro",
+  "description": "Upper body push-pull strength in classic blocks: varied push-ups and back mobilization",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, squeeze and spread the shoulder blades without bending elbows"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Strength",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Commando push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Alternate between plank and push-up position",
+          "bilateral": true
+        },
+        {
+          "name": "Diamond push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands together under the chest, elbows close to the body"
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Back Strength",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Superman",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, lift arms and legs simultaneously, hold 2s"
+        },
+        {
+          "name": "Reverse snow angels",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, arms along body, arc along the floor"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, arms in Y position, lift and hold 2s"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 35,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

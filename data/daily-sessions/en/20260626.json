@@ -1,0 +1,109 @@
+{
+  "date": "26062026",
+  "title": "Antagonist Duo",
+  "description": "Targeted antagonist supersets: push-pull pairs for chest and back in harmony",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk in-place march",
+          "duration": 45,
+          "instructions": "March quickly in place with arm swing"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, squeeze and spread shoulder blades without bending elbows"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Upper Antagonist Supersets",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Push-ups",
+              "reps": 12,
+              "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "Face down, lift torso off the floor, squeeze shoulder blades"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Diamond push-ups",
+              "reps": 10,
+              "instructions": "Hands together under the chest, elbows close to the body"
+            },
+            {
+              "name": "Inverse table rows",
+              "reps": 10,
+              "instructions": "Under a table, pull chest toward the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hips high in an inverted V, lower head between hands"
+            },
+            {
+              "name": "Alternating superman",
+              "reps": 12,
+              "instructions": "Lift right arm + left leg, alternate"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring foot toward opposite hand by rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

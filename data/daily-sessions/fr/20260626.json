@@ -1,0 +1,109 @@
+{
+  "date": "26062026",
+  "title": "Duo Antagoniste",
+  "description": "Supersets antagonistes ciblés : paires squat-hinge pour cuisses et fessiers en harmonie",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Marche rapide sur place",
+          "duration": 45,
+          "instructions": "Marcher rapidement sur place avec balancement des bras"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "À quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "En planche, serrer et écarter les omoplates sans plier les coudes"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Supersets Haut Antagonistes",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes classiques",
+              "reps": 12,
+              "instructions": "Mains largeur épaules, corps gainé, descendre poitrine au sol"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "À plat ventre, lever le buste du sol, serrer les omoplates"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pompes diamant",
+              "reps": 10,
+              "instructions": "Mains rapprochées sous la poitrine, coudes le long du corps"
+            },
+            {
+              "name": "Rowing inverse (table)",
+              "reps": 10,
+              "instructions": "Sous une table, tirer la poitrine vers le bord"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hanches hautes en V inversé, descendre la tête entre les mains"
+            },
+            {
+              "name": "Superman alterne",
+              "reps": 12,
+              "instructions": "Lever bras droit + jambe gauche, alterner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "À plat ventre, amener le pied vers la main opposée en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "À genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

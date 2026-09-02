@@ -1,0 +1,128 @@
+{
+  "date": "06082026",
+  "title": "Upper Sling Pro",
+  "description": "Upper body strength: varied push-ups and complete back work in 2 full blocks",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Jog in place, heels kicking toward glutes"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, squeeze and spread the shoulder blades without bending elbows"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + thoracic rotation + arm reaching to the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Variations",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Push-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        },
+        {
+          "name": "Decline push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Feet elevated on a chair, body braced"
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+        },
+        {
+          "name": "Knee push-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Knees on the floor, same upper body movement"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Complete Back",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Alternating superman",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lift right arm and left leg, alternate"
+        },
+        {
+          "name": "Prone T raises",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, arms in T position, squeeze the shoulder blades"
+        },
+        {
+          "name": "Reverse snow angels",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lying face down, arms along body, arc along the floor"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring foot toward opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

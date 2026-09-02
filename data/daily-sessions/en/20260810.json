@@ -1,0 +1,103 @@
+{
+  "date": "10082026",
+  "title": "Master Circuit",
+  "description": "Full-body 3-round circuit alternating push, squat, plank and cardio for an efficient total workout",
+  "estimatedDuration": 34,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Body Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Jump squats",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Explosive squat with a jump, absorb on landing"
+        },
+        {
+          "name": "Push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands shoulder-width, body straight, chest to the floor"
+        },
+        {
+          "name": "Alternating lunges",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Alternate left foot forward then right foot forward without pausing"
+        },
+        {
+          "name": "Forearm plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On forearms, body perfectly aligned, brace the abs"
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "On your stomach, bring your foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}
