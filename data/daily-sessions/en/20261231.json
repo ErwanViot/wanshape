@@ -1,0 +1,132 @@
+{
+  "date": "31122026",
+  "title": "Sculpted Lower Body",
+  "description": "Sculpted lower body with pause lunges and single leg deadlifts, plus a core control block",
+  "estimatedDuration": 33,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Fast marching in place",
+          "duration": 40,
+          "instructions": "March quickly in place while swinging the arms"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Sculpted Legs",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Isometric squat",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Hold the bottom squat position without moving"
+        },
+        {
+          "name": "Pause lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 65,
+          "instructions": "Lower and hold 3s at the bottom before rising",
+          "bilateral": true
+        },
+        {
+          "name": "Single leg deadlift",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Hinge forward, one leg lifts behind, keep your balance",
+          "bilateral": true
+        },
+        {
+          "name": "Glute bridge",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Like the hip thrust but flat on the floor, push the hips skyward"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core Control",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Sit-ups",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, rise fully to touch the feet"
+        },
+        {
+          "name": "Flutter kicks",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, quick flutter kicks"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, cross alternating over-under"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

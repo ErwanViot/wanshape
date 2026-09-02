@@ -1,0 +1,127 @@
+{
+  "date": "21122026",
+  "title": "Push & Pull Power",
+  "description": "Upper body push-pull strength session with wide push-ups, chair dips and inverted rows",
+  "estimatedDuration": 32,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push Block",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Wide push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands wider than shoulder-width, focus on the chest"
+        },
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Hips high in an inverted V, lower your head between your hands"
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+        },
+        {
+          "name": "Explosive push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "Push hard enough for your hands to leave the floor"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull Block",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Inverted row (table)",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Under a table, pull your chest toward the edge"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, arms in a Y, lift and hold 2s"
+        },
+        {
+          "name": "Face pulls (floor)",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, elbows at 90 degrees, pull backward"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

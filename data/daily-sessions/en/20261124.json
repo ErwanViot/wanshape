@@ -1,0 +1,128 @@
+{
+  "date": "24112026",
+  "title": "Diamond Upper Body",
+  "description": "Diamond push work with Hindu and explosive push-ups, pulling with alternating superman for a sculpted chest and back",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Diamond Push",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Diamond push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Hands close together under the chest, elbows along the body"
+        },
+        {
+          "name": "Hindu push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Diving motion: swoop down then rise back up in an arc"
+        },
+        {
+          "name": "Explosive push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Push hard enough to lift the hands off the floor"
+        },
+        {
+          "name": "Decline push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 65,
+          "instructions": "Feet elevated on a chair, body braced"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Powerful Pull",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Alternating superman",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Lift the right arm and left leg, then alternate"
+        },
+        {
+          "name": "Scapular push-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "In a plank, squeeze and spread the shoulder blades without bending the elbows"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, arms in a Y, lift and hold 2s"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

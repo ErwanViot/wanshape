@@ -1,0 +1,86 @@
+{
+  "date": "28122026",
+  "title": "EMOM Pulse",
+  "description": "10-minute EMOM with squat jumps, diamond push-ups and toe touches to keep the pulse up",
+  "estimatedDuration": 29,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Fast lateral movements, 3-4 steps each side"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Total Pulse EMOM",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Squat jumps",
+          "reps": 10,
+          "instructions": "Explosive squat with a maximum jump, cushion the landing"
+        },
+        {
+          "name": "Diamond push-ups",
+          "reps": 10,
+          "instructions": "Hands close together under the chest, elbows along the body"
+        },
+        {
+          "name": "Toe touches",
+          "reps": 15,
+          "instructions": "Back on the floor, legs vertical, touch the feet with your hands"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

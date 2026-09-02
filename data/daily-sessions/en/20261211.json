@@ -1,0 +1,92 @@
+{
+  "date": "11122026",
+  "title": "Volcano AMRAP",
+  "description": "10-minute AMRAP with jump squats, incline push-ups and mountain climbers to push your limits",
+  "estimatedDuration": 29,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk march in place",
+          "duration": 45,
+          "instructions": "March briskly in place while swinging your arms"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching your back, breathe"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "Volcano AMRAP",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Jump squats",
+          "reps": 10,
+          "instructions": "Explosive squat with a maximum jump, cushion the landing"
+        },
+        {
+          "name": "Incline push-ups",
+          "reps": 10,
+          "instructions": "Hands on an elevated surface, an easier variation"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 20,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        },
+        {
+          "name": "Jumping lunges",
+          "reps": 12,
+          "instructions": "Alternate legs while jumping, explosive"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring one foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

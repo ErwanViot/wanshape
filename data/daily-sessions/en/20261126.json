@@ -1,0 +1,84 @@
+{
+  "date": "26112026",
+  "title": "Tabata Blitz",
+  "description": "Explosive 8-round Tabata with burpees, tuck jumps and star jumps for maximum cardio impact",
+  "estimatedDuration": 26,
+  "focus": ["cardio", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Fast lateral movements, 3-4 steps each side"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 35,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Impact Tabata",
+      "sets": 1,
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Burpees",
+          "instructions": "Drop down, hands on the floor, jump feet back, push-up, jump up"
+        },
+        {
+          "name": "Tuck jumps",
+          "instructions": "Jump while pulling the knees to the chest"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Lateral jumps from foot to foot, arms swinging"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs in a star shape"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

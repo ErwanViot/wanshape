@@ -1,0 +1,86 @@
+{
+  "date": "16122026",
+  "title": "EMOM Discipline",
+  "description": "EMOM de 12 minutes alternant dips, squats 1.5 et bicycle crunchs pour une endurance musculaire totale",
+  "estimatedDuration": 28,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un côté à l'autre"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine à rythme modéré"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Discipline",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Dips sur chaise",
+          "reps": 10,
+          "instructions": "Mains sur le bord, coudes vers l'arrière, descendre à 90 degrés"
+        },
+        {
+          "name": "Squats 1.5",
+          "reps": 10,
+          "instructions": "Descendre, remonter à mi-chemin, redescendre, remonter complètement"
+        },
+        {
+          "name": "Bicycle crunchs",
+          "reps": 14,
+          "instructions": "Coude vers genou opposé en alternant, jambe tendue"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 35,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

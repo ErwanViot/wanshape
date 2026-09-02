@@ -1,0 +1,112 @@
+{
+  "date": "09112026",
+  "title": "Circuit Éclair",
+  "description": "Circuit de 3 rounds mêlant fentes bulgares, pompes inclinées, gainage et sprints sur place",
+  "estimatedDuration": 33,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Toe taps (marche)",
+          "duration": 35,
+          "instructions": "Taper le pied sur une marche en alternant rapidement"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Éclair Total",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Fentes bulgares",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Pied arrière sur une chaise, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Pompes inclinees",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mains sur un support surélevé, plus facile"
+        },
+        {
+          "name": "Gainage planche",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Sur les avant-bras, corps parfaitement aligné, serrer les abdos"
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Course sur place, genoux au-dessus des hanches, bras coordonnés"
+        },
+        {
+          "name": "Squats sumo",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Pieds très largement écartés, pointes vers l'extérieur"
+        },
+        {
+          "name": "Burpees sans pompe",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Descendre, sauter les pieds en arrière, revenir, sauter debout"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

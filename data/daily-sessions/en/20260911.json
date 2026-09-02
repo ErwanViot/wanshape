@@ -1,0 +1,115 @@
+{
+  "date": "11092026",
+  "title": "Double Fire Clock",
+  "description": "12-minute EMOM then a 15-minute AMRAP: burpees, commando push-ups and goblet squats",
+  "estimatedDuration": 34,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "12-Minute EMOM",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Burpees without push-up",
+          "reps": 8,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        },
+        {
+          "name": "Commando push-ups",
+          "reps": 8,
+          "instructions": "Alternate between forearm plank and high plank push-up position"
+        },
+        {
+          "name": "Russian twists",
+          "reps": 16,
+          "instructions": "Seated, feet lifted, rotate torso left and right"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "Final AMRAP",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Goblet squat (no weight)",
+          "reps": 12,
+          "instructions": "Hands in front of your chest, squat down deep"
+        },
+        {
+          "name": "Pike push-ups",
+          "reps": 8,
+          "instructions": "Hips high in an inverted V, lower your head between your hands"
+        },
+        {
+          "name": "Bicycle crunches",
+          "reps": 16,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        },
+        {
+          "name": "Split lunge jumps",
+          "reps": 10,
+          "instructions": "Alternate legs while jumping, explosive"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

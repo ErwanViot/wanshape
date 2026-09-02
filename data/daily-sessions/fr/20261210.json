@@ -1,0 +1,124 @@
+{
+  "date": "10122026",
+  "title": "Ancrage Bas du Corps",
+  "description": "Renforcement jambes en unilatéral et gainage profond avec squats sumo, fentes curtsy et gainage latéral",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 40,
+          "instructions": "Déplacements latéraux rapides, 3-4 pas de chaque côté"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes Unilatérales",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Single leg deadlift",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Pencher le buste, une jambe se lève derrière, garder l'équilibre",
+          "bilateral": true
+        },
+        {
+          "name": "Fentes curtsy",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Croiser la jambe derrière en diagonale",
+          "bilateral": true
+        },
+        {
+          "name": "Squats sumo",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Pieds très largement écartés, pointes vers l'extérieur"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Gainage Profond",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Gainage lateral",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Sur un avant-bras, corps aligné, hanches hautes",
+          "bilateral": true
+        },
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes verticales, toucher les pieds avec les mains"
+        },
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, bras et jambes en l'air, étendre bras/jambe opposés en alternant"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

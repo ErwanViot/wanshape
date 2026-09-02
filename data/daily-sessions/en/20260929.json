@@ -1,0 +1,92 @@
+{
+  "date": "29092026",
+  "title": "AMRAP Cadence",
+  "description": "10-minute AMRAP of jump lunges, decline push-ups and pulse squats to finish on a steady cadence",
+  "estimatedDuration": 29,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Fast lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "Final Cadence AMRAP",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Jumping lunges",
+          "reps": 10,
+          "instructions": "Alternate legs while jumping, explosive"
+        },
+        {
+          "name": "Decline push-ups",
+          "reps": 8,
+          "instructions": "Feet elevated on a chair, body braced"
+        },
+        {
+          "name": "Crunches",
+          "reps": 15,
+          "instructions": "Back on the floor, lift the shoulders, brace your abs"
+        },
+        {
+          "name": "Pulse squats",
+          "reps": 12,
+          "instructions": "Stay at the bottom of the squat, small up-down pulses"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

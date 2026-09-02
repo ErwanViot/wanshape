@@ -1,0 +1,100 @@
+{
+  "date": "09092026",
+  "title": "Thunder AMRAP",
+  "description": "20-minute AMRAP: squats, wide push-ups, mountain climbers and alternating lunges",
+  "estimatedDuration": 28,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 45,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching your back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "Thunder AMRAP",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Squats",
+          "reps": 10,
+          "instructions": "Feet shoulder-width apart, lower until thighs are parallel to the floor"
+        },
+        {
+          "name": "Wide push-ups",
+          "reps": 10,
+          "instructions": "Hands wider than shoulder-width, focus on the chest"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 16,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        },
+        {
+          "name": "Alternating lunges",
+          "reps": 12,
+          "instructions": "Alternate stepping forward left and right without pausing"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring your foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "date": "12092026",
+  "title": "Piliers du Haut",
+  "description": "Poussée explosive (pompes Hindu, archer) et tirage dorsal complet en 4 exercices chacun",
+  "estimatedDuration": 34,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Step-ups (marche)",
+          "duration": 45,
+          "instructions": "Monter et descendre d'une marche en alternant les jambes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 40,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Poussee Explosive",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Pompes Hindu",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 65,
+          "instructions": "Mouvement de plongée : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Pompes archer",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "Un bras tendu sur le côté, descendre vers l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Pompes explosives",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "Pousser fort pour décoller les mains du sol"
+        },
+        {
+          "name": "Pompes inclinees",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "Mains sur un support surélevé, plus facile"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Tirage Dorsal",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Back extensions",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "A plat ventre, lever le buste du sol, serrer les omoplates"
+        },
+        {
+          "name": "Scapular push-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "En planche, serrer et écarter les omoplates sans plier les coudes"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "A plat ventre, bras en Y, lever et maintenir 2s"
+        },
+        {
+          "name": "Superman",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "A plat ventre, lever bras et jambes simultanément, maintenir 2s"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 30,
+          "instructions": "Bras derrière la tête, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un côté à l'autre"
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

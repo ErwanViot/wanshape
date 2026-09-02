@@ -1,0 +1,105 @@
+{
+  "date": "19102026",
+  "title": "Full Body Climb",
+  "description": "Push-up pyramid followed by full body strength: sumo squats, lateral lunges and toe touches",
+  "estimatedDuration": 37,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Push-up Pyramid",
+      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Push-ups",
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Full Body Strength",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Feet very wide apart, toes pointing outward"
+        },
+        {
+          "name": "Lateral lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Step wide to the side, bend one knee, keep the other straight",
+          "bilateral": true
+        },
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs vertical, touch your feet with your hands"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

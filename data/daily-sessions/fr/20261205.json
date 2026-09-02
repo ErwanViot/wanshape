@@ -1,0 +1,130 @@
+{
+  "date": "05122026",
+  "title": "Jambes & Gainage Intense",
+  "description": "Jambes unilatérales avec fentes bulgares et romanian deadlift, gainage profond en planche et leg raises",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes Unilatérales",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Fentes bulgares",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Pied arrière sur une chaise, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Romanian deadlift unilateral",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Sur une jambe, pencher le buste en avant, jambe arrière tendue",
+          "bilateral": true
+        },
+        {
+          "name": "Glute bridge marche",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "En pont, alterner lever une jambe puis l'autre comme une marche"
+        },
+        {
+          "name": "Squats 1.5",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Descendre, remonter à mi-chemin, redescendre, remonter complètement"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Gainage Profond",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Gainage planche",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Sur les avant-bras, corps parfaitement aligné, serrer les abdos"
+        },
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever bras et jambes simultanément pour toucher les pieds"
+        },
+        {
+          "name": "Leg raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever les jambes tendues à la verticale"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

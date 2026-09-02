@@ -1,0 +1,116 @@
+{
+  "date": "23102026",
+  "title": "Double Ascent",
+  "description": "3-round circuit with sumo squats and burpees, followed by a bicycle crunch pyramid to finish strong",
+  "estimatedDuration": 38,
+  "focus": ["full-body", "explosive"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Ascension Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide apart, toes pointing outward"
+        },
+        {
+          "name": "Decline push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Feet elevated on a chair, body braced"
+        },
+        {
+          "name": "Plank",
+          "mode": "timed",
+          "duration": 35,
+          "instructions": "On forearms, body perfectly aligned, brace the abs"
+        },
+        {
+          "name": "Forward lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Big step forward, back knee grazes the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Burpees without push-up",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Final Pyramid",
+      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Bicycle crunches",
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

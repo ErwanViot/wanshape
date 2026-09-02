@@ -1,0 +1,92 @@
+{
+  "date": "07112026",
+  "title": "Comet Tabata",
+  "description": "Explosive tabata cycling through squat jumps, broad jumps, star jumps and skaters for intense cardio",
+  "estimatedDuration": 26,
+  "focus": [
+    "cardio",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Brisk marching in place",
+          "duration": 40,
+          "instructions": "March briskly in place with arm swings"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 35,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Comet Fire Tabata",
+      "sets": 1,
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Squat jumps",
+          "instructions": "Explosive squat with a maximum jump, absorb the landing"
+        },
+        {
+          "name": "Broad jumps",
+          "instructions": "Standing long jumps, absorb the landing and repeat"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs into a star shape"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Lateral jumps from foot to foot, arms swinging"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

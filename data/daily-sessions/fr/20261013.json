@@ -1,0 +1,122 @@
+{
+  "date": "13102026",
+  "title": "Racines Solides",
+  "description": "Renforcement bas du corps avec squats pulse, fentes bulgares et good morning, complété par un gainage profond",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine à rythme modéré"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Puissance Jambes",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Squats pulse",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 70,
+          "instructions": "Rester en bas du squat, petits mouvements de montée-descente"
+        },
+        {
+          "name": "Fentes bulgares",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Pied arrière sur une chaise, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Mains derrière la tête, pencher le buste en gardant le dos droit"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Gainage Profond",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Gainage planche",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Sur les avant-bras, corps parfaitement aligné, serrer les abdos"
+        },
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, bras et jambes en l'air, étendre bras/jambe opposés en alternant"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Assis, pieds décollés, tourner le buste de gauche à droite"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

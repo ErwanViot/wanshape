@@ -1,0 +1,117 @@
+{
+  "date": "05112026",
+  "title": "Superset Global",
+  "description": "Supersets combinant poussée-tirage et squat-hinge en 3 sets pour un renforcement complet du corps",
+  "estimatedDuration": 32,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 40,
+          "instructions": "Déplacements latéraux rapides, 3-4 pas de chaque côté"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Supersets Full Body",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pompes larges",
+              "reps": 10,
+              "instructions": "Mains plus larges que les épaules, focus pectoraux"
+            },
+            {
+              "name": "Prone Y raises",
+              "reps": 12,
+              "instructions": "A plat ventre, bras en Y, lever et maintenir 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Squats sumo",
+              "reps": 12,
+              "instructions": "Pieds très largement écartés, pointes vers l'extérieur"
+            },
+            {
+              "name": "Romanian deadlift unilateral",
+              "reps": 8,
+              "instructions": "Sur une jambe, pencher le buste en avant, jambe arrière tendue"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Dips sur chaise",
+              "reps": 10,
+              "instructions": "Mains sur le bord, coudes vers l'arrière, descendre à 90 degrés"
+            },
+            {
+              "name": "Reverse snow angels",
+              "reps": 12,
+              "instructions": "A plat ventre, bras le long du corps, arc de cercle au sol"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un côté à l'autre"
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

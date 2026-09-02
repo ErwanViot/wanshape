@@ -1,0 +1,92 @@
+{
+  "date": "08122026",
+  "title": "Max Pulse",
+  "description": "Intense HIIT with skaters, high knees, star jumps, box jumps and split squat jumps",
+  "estimatedDuration": 26,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Fast marching in place",
+          "duration": 40,
+          "instructions": "Walk briskly in place swinging your arms"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching your back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Pulse HIIT",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Skaters",
+          "instructions": "Lateral jumps from foot to foot, arms swinging"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs in a star shape"
+        },
+        {
+          "name": "Box jumps (step)",
+          "instructions": "Jump onto a step or low platform, step back down"
+        },
+        {
+          "name": "Split squat jumps",
+          "instructions": "Low lunge, jump without switching legs"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

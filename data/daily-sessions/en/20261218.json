@@ -1,0 +1,123 @@
+{
+  "date": "18122026",
+  "title": "Bulletproof Thighs",
+  "description": "Stability leg work with assisted pistol squat and forward lunges, finished with a control core block",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Fast lateral movements, 3-4 steps each side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Stability Legs",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Assisted pistol squat",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Single-leg squat holding a support",
+          "bilateral": true
+        },
+        {
+          "name": "Forward lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Big step forward, back knee nearly grazes the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Floor hip thrust",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, feet flat, raise hips, squeeze the glutes"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Control Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "L-sit hold",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Hands on the floor, lift straight legs in front of you"
+        },
+        {
+          "name": "Crunches",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift shoulders off, squeeze the abs"
+        },
+        {
+          "name": "Flutter kicks",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, quick alternating kicks"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 35,
+          "instructions": "Face down, bring one foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "date": "07102026",
+  "title": "Total Body Powerhouse",
+  "description": "Full body circuit with wall sit, Hindu push-ups, side plank and walking lunges, 3 rounds",
+  "estimatedDuration": 34,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 35,
+          "instructions": "Fast lateral steps, 3-4 steps each side"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Dynamo Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Wall sit",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Back against the wall, thighs parallel, hold the position"
+        },
+        {
+          "name": "Hindu push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Diving movement: swoop down close to the floor then rise in an arc"
+        },
+        {
+          "name": "Side plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On one forearm, body aligned, hips high",
+          "bilateral": true
+        },
+        {
+          "name": "Walking lunges",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Advance in continuous lunges, big steps"
+        },
+        {
+          "name": "Crunches",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Back on the floor, lift the shoulders, brace your core"
+        },
+        {
+          "name": "Broad jumps",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Standing long jumps, absorb the landing and repeat"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

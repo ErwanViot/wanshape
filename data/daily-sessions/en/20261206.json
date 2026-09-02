@@ -1,0 +1,121 @@
+{
+  "date": "06122026",
+  "title": "Vertical Strength",
+  "description": "Vertical strength with pike, archer and explosive push-ups, then superman and scapular push-ups",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 35,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate rounding and arching your back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Vertical Push",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "Hips high in an inverted V, lower your head between your hands"
+        },
+        {
+          "name": "Archer push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "One arm extended to the side, lower toward the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Explosive push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Push hard to lift your hands off the floor"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Posterior Pull",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Alternating superman",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 55,
+          "instructions": "Lift right arm and left leg, alternate"
+        },
+        {
+          "name": "Back extensions",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 55,
+          "instructions": "Face down, lift your chest off the floor, squeeze the shoulder blades"
+        },
+        {
+          "name": "Scapular push-ups",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 55,
+          "instructions": "In a plank, squeeze and spread the shoulder blades without bending the elbows"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind your head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

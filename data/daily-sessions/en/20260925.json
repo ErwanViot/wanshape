@@ -1,0 +1,92 @@
+{
+  "date": "25092026",
+  "title": "HIIT Volcano",
+  "description": "3-round intervals with star jumps, high knees and broad jumps for a cardio eruption",
+  "estimatedDuration": 27,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Cardio Eruption",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs in a star shape"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        },
+        {
+          "name": "Broad jumps",
+          "instructions": "Long jumps forward, absorb the landing and repeat"
+        },
+        {
+          "name": "Jump lunges",
+          "instructions": "Jump lunges alternating legs"
+        },
+        {
+          "name": "Depth jumps",
+          "instructions": "Step down from a platform, touch the floor and jump immediately"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

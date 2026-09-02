@@ -1,0 +1,103 @@
+{
+  "date": "12122026",
+  "title": "Full Body Turbine",
+  "description": "Circuit 3 rounds mêlant squats, pompes larges, fentes, gainage et burpees pour un full body complet",
+  "estimatedDuration": 32,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Turbine",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Pieds largeur épaules, descendre cuisses parallèles au sol"
+        },
+        {
+          "name": "Pompes larges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mains plus larges que les épaules, focus pectoraux"
+        },
+        {
+          "name": "Fentes alternees",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Alterner avant gauche et avant droite sans pause"
+        },
+        {
+          "name": "Gainage planche",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Sur les avant-bras, corps parfaitement aligné, serrer les abdos"
+        },
+        {
+          "name": "Burpees sans pompe",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Descendre, sauter les pieds en arrière, revenir, sauter debout"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 25,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 30,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

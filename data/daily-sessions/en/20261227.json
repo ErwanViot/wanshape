@@ -1,0 +1,128 @@
+{
+  "date": "27122026",
+  "title": "Legs on Fire",
+  "description": "Legs on fire with 1.5 squats and forward lunges, completed by a core resistance block",
+  "estimatedDuration": 33,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs on Fire",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "1.5 squats",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 65,
+          "instructions": "Lower, rise halfway, lower again, then rise fully"
+        },
+        {
+          "name": "Forward lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Big step forward, back knee grazes the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands behind the head, hinge forward keeping the back straight"
+        },
+        {
+          "name": "Marching glute bridge",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "In a bridge, alternate lifting one leg then the other like marching"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core Resistance",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, arms and legs up, extend opposite arm and leg alternating"
+        },
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift arms and legs together to touch the feet"
+        },
+        {
+          "name": "Shoulder tap plank",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "In a high plank, tap the opposite shoulder alternating"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "date": "07102026",
+  "title": "Full Body Dynamo",
+  "description": "Circuit full body en wall sit, pompes hindu, gainage latéral et fentes marchées, 3 rounds",
+  "estimatedDuration": 34,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 35,
+          "instructions": "Déplacements latéraux rapides, 3-4 pas de chaque côté"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Dynamo",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Wall sit",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Dos contre le mur, cuisses parallèles, maintenir la position"
+        },
+        {
+          "name": "Pompes Hindu",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mouvement de plongée : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Gainage lateral",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Sur un avant-bras, corps aligné, hanches hautes",
+          "bilateral": true
+        },
+        {
+          "name": "Fentes marchees",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Crunchs",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Dos au sol, décoller les épaules, serrer les abdos"
+        },
+        {
+          "name": "Broad jumps",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Sauts en longueur, amortir et recommencer"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

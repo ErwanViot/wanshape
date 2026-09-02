@@ -1,0 +1,110 @@
+{
+  "date": "10112026",
+  "title": "Marathon Clock",
+  "description": "12-minute EMOM followed by a 12-minute AMRAP to push your endurance to the limit",
+  "estimatedDuration": 33,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Quick lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Clock EMOM",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Feet shoulder-width, lower until thighs are parallel to the floor"
+        },
+        {
+          "name": "Decline push-ups",
+          "reps": 8,
+          "instructions": "Feet elevated on a chair, body braced"
+        },
+        {
+          "name": "Squat jumps",
+          "reps": 10,
+          "instructions": "Explosive squat with a maximum jump, absorb the landing"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "Marathon AMRAP",
+      "duration": 720,
+      "exercises": [
+        {
+          "name": "Walking lunges",
+          "reps": 10,
+          "instructions": "Step forward continuously in walking lunges"
+        },
+        {
+          "name": "Commando push-ups",
+          "reps": 8,
+          "instructions": "Alternate between plank position and push-up position"
+        },
+        {
+          "name": "Leg raises",
+          "reps": 12,
+          "instructions": "Back on the floor, lift the straight legs to vertical"
+        },
+        {
+          "name": "Jump squats",
+          "reps": 10,
+          "instructions": "Explosive squat with a jump, absorb the landing"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

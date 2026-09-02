@@ -1,0 +1,123 @@
+{
+  "date": "01112026",
+  "title": "Pyramide Cyclone",
+  "description": "Circuit explosif suivi d'une pyramide de pompes plyo pour un full body électrique",
+  "estimatedDuration": 35,
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine à rythme modéré"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 50,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Cyclone",
+      "rounds": 3,
+      "restBetweenExercises": 20,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats sautes",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Squat explosif avec saut, amortir à la réception"
+        },
+        {
+          "name": "Fentes avant",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Grand pas en avant, genou arrière frôle le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Dips sur chaise",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Mains sur le bord, coudes vers l'arrière, descendre à 90 degrés"
+        },
+        {
+          "name": "Hollow hold",
+          "mode": "timed",
+          "duration": 35,
+          "instructions": "Dos au sol, bras et jambes tendus au-dessus du sol, dos plaqué"
+        },
+        {
+          "name": "Mountain climbers",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Plyo",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 45,
+      "exercises": [
+        {
+          "name": "Plyo push-ups",
+          "instructions": "Pompe explosive, mains décollent du sol"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

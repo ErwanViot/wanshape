@@ -1,0 +1,103 @@
+{
+  "date": "17122026",
+  "title": "Total Body Fusion",
+  "description": "3-round circuit with isometric squat, decline push-ups, bear hold and walking lunges for a full body burn",
+  "estimatedDuration": 32,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 45,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Fusion Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Isometric squat",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Hold the bottom squat position with no support"
+        },
+        {
+          "name": "Decline push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Feet elevated on a chair, body braced"
+        },
+        {
+          "name": "Bear hold",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On all fours, knees lifted 2cm off the floor, hold"
+        },
+        {
+          "name": "Walking lunges",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Advance with continuous lunges, big steps"
+        },
+        {
+          "name": "Star jumps",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Jump spreading arms and legs in a star shape"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 25,
+          "instructions": "Arm against a wall at 90 degrees, rotate your body",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 30,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

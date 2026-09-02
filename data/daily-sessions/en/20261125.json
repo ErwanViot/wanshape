@@ -1,0 +1,119 @@
+{
+  "date": "25112026",
+  "title": "Iron Endurance",
+  "description": "10-minute EMOM followed by an 8-minute AMRAP to truly test your iron endurance",
+  "estimatedDuration": 36,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Iron EMOM",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "reps": 12,
+          "instructions": "Feet very wide, toes pointing out"
+        },
+        {
+          "name": "Walking lunges",
+          "reps": 10,
+          "instructions": "Advance in continuous lunges with a big step"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 20,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "Iron AMRAP",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Wide push-ups",
+          "reps": 10,
+          "instructions": "Hands wider than the shoulders, focus on the chest"
+        },
+        {
+          "name": "1.5 squats",
+          "reps": 10,
+          "instructions": "Lower, rise halfway, lower again, then rise fully"
+        },
+        {
+          "name": "Russian twists",
+          "reps": 16,
+          "instructions": "Seated, feet lifted, rotate torso left and right"
+        },
+        {
+          "name": "Alternating lunges",
+          "reps": 10,
+          "instructions": "Alternate stepping forward left and right without pausing"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

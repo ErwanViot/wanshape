@@ -1,0 +1,127 @@
+{
+  "date": "18112026",
+  "title": "Buste Élancé",
+  "description": "Poussée et tirage combinés : pompes larges, pike push-ups et rowing inversé pour un buste puissant",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Poussée Totale",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Pompes classiques",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 70,
+          "instructions": "Mains largeur épaules, corps gainé, descendre poitrine au sol"
+        },
+        {
+          "name": "Pompes larges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Mains plus larges que les épaules, focus pectoraux"
+        },
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Hanches hautes en V inversé, descendre la tête entre les mains"
+        },
+        {
+          "name": "Dips sur chaise",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "Mains sur le bord, coudes vers l'arrière, descendre à 90 degrés"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Tirage Dos",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Rowing inverse (table)",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Sous une table, tirer la poitrine vers le bord"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, bras en Y, lever et maintenir 2s"
+        },
+        {
+          "name": "Face pulls au sol",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "A plat ventre, coudes à 90 degrés, tirer vers l'arrière"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 30,
+          "instructions": "Bras derrière la tête, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

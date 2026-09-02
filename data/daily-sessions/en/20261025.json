@@ -1,0 +1,110 @@
+{
+  "date": "25102026",
+  "title": "Titan Endurance",
+  "description": "15-minute EMOM plus a 12-minute AMRAP to push your endurance limits without let-up",
+  "estimatedDuration": 33,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Fast lateral steps, 3-4 steps each side"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate arched and rounded back, breathe"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Titan EMOM",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "Incline push-ups",
+          "reps": 10,
+          "instructions": "Hands on an elevated support, easier variation"
+        },
+        {
+          "name": "Burpees without push-up",
+          "reps": 8,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "Titan AMRAP",
+      "duration": 720,
+      "exercises": [
+        {
+          "name": "Alternating lunges",
+          "reps": 10,
+          "instructions": "Alternate forward left and forward right without pausing"
+        },
+        {
+          "name": "Wide push-ups",
+          "reps": 10,
+          "instructions": "Hands wider than shoulders, focus on the chest"
+        },
+        {
+          "name": "Leg raises",
+          "reps": 12,
+          "instructions": "Back on the floor, lift the straight legs to vertical"
+        },
+        {
+          "name": "Jump squats",
+          "reps": 10,
+          "instructions": "Explosive squat with a jump, cushion the landing"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

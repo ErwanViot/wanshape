@@ -1,0 +1,140 @@
+{
+  "date": "10092026",
+  "title": "Jambes & Abdos Toniques",
+  "description": "Jambes en unilatéral (squats pulse, fentes bulgares) puis gainage complet avec V-ups",
+  "estimatedDuration": 34,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 45,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 40,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Bloc Jambes",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Squats pulse",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Rester en bas du squat, petits mouvements de montée-descente"
+        },
+        {
+          "name": "Fentes bulgares",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Pied arrière sur une chaise, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Romanian deadlift unilateral",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Sur une jambe, pencher le buste en avant, jambe arrière tendue",
+          "bilateral": true
+        },
+        {
+          "name": "Squat isometrique",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Maintenir la position basse du squat sans bouger"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Bloc Gainage",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Gainage planche",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "Sur les avant-bras, corps parfaitement aligné, serrer les abdos"
+        },
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever bras et jambes simultanément pour toucher les pieds"
+        },
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, bras et jambes en l'air, étendre bras/jambe opposés en alternant"
+        },
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes verticales, toucher les pieds avec les mains"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

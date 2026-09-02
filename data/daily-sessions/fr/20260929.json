@@ -1,0 +1,92 @@
+{
+  "date": "29092026",
+  "title": "AMRAP Cadence",
+  "description": "AMRAP de 10 minutes en fentes sautées, pompes déclinées et squats pulse pour finir en cadence",
+  "estimatedDuration": 29,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 45,
+          "instructions": "Déplacements latéraux rapides, 3-4 pas de chaque côté"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Cadence Finale",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Fentes sautees",
+          "reps": 10,
+          "instructions": "Alterner les jambes en sautant, explosif"
+        },
+        {
+          "name": "Pompes declinees",
+          "reps": 8,
+          "instructions": "Pieds surélevés sur une chaise, corps gainé"
+        },
+        {
+          "name": "Crunchs",
+          "reps": 15,
+          "instructions": "Dos au sol, décoller les épaules, serrer les abdos"
+        },
+        {
+          "name": "Squats pulse",
+          "reps": 12,
+          "instructions": "Rester en bas du squat, petits mouvements de montée-descente"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

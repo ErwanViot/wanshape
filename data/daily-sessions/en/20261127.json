@@ -1,0 +1,115 @@
+{
+  "date": "27112026",
+  "title": "Shoulders & Back Superset",
+  "description": "Shoulders-back supersets with pike push-ups and floor face pulls for a balanced upper body",
+  "estimatedDuration": 33,
+  "focus": ["upper-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Shoulders-Back Supersets",
+      "sets": 3,
+      "restBetweenSets": 85,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hips high in an inverted V, lower the head between the hands"
+            },
+            {
+              "name": "Face pulls on the floor",
+              "reps": 12,
+              "instructions": "Face down, elbows at 90 degrees, pull back"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Incline push-ups",
+              "reps": 12,
+              "instructions": "Hands on an elevated surface, easier variation"
+            },
+            {
+              "name": "Superman",
+              "reps": 10,
+              "instructions": "Face down, lift arms and legs simultaneously, hold 2s"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Explosive push-ups",
+              "reps": 8,
+              "instructions": "Push hard enough to lift the hands off the floor"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 12,
+              "instructions": "Face down, arms in a T, squeeze the shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "date": "09112026",
+  "title": "Lightning Circuit",
+  "description": "3-round circuit blending Bulgarian split squats, incline push-ups, planks and sprint bursts",
+  "estimatedDuration": 33,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Toe taps (step)",
+          "duration": 35,
+          "instructions": "Tap your foot on a step, alternating quickly"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Total Lightning Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Bulgarian split squats",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Rear foot on a chair, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Incline push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands on an elevated support, easier variation"
+        },
+        {
+          "name": "Plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Forearms on the floor, body perfectly aligned, brace your core"
+        },
+        {
+          "name": "High knees",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Run in place, knees above hip height, arms coordinated"
+        },
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide apart, toes pointed outward"
+        },
+        {
+          "name": "Burpees without push-up",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "date": "19112026",
+  "title": "EMOM Countdown",
+  "description": "10-minute EMOM cycling through squats, mountain climbers and burpees for a timed cardio blast",
+  "estimatedDuration": 29,
+  "focus": ["endurance"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Fast marching in place",
+          "duration": 40,
+          "instructions": "March quickly in place while swinging the arms"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Step-ups",
+          "duration": 40,
+          "instructions": "Step up and down off a step, alternating legs"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Total Chrono EMOM",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 20,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        },
+        {
+          "name": "Burpees without push-up",
+          "reps": 8,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

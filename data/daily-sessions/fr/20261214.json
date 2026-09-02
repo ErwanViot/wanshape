@@ -1,0 +1,123 @@
+{
+  "date": "14122026",
+  "title": "Bas du Corps Titan",
+  "description": "Renforcement jambes en puissance avec fentes arrière et squats pulse, suivi d'un gainage anti-rotation",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes Puissance",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Romanian deadlift unilateral",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Sur une jambe, pencher le buste en avant, jambe arrière tendue",
+          "bilateral": true
+        },
+        {
+          "name": "Fentes arriere",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Grand pas en arrière, descendre le genou",
+          "bilateral": true
+        },
+        {
+          "name": "Squats pulse",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Rester en bas du squat, petits mouvements de montée-descente"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core Anti-Rotation",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Gainage Superman",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "En planche, lever un bras et la jambe opposée, alterner"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Assis, pieds décollés, tourner le buste de gauche à droite"
+        },
+        {
+          "name": "Leg raises",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, lever les jambes tendues à la verticale"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

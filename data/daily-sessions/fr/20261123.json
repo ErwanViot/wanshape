@@ -1,0 +1,130 @@
+{
+  "date": "23112026",
+  "title": "Cuisses & Gainage",
+  "description": "Jambes dynamiques en goblet squat et fentes curtsy suivies d'un gainage ciblé pour cuisses et abdos",
+  "estimatedDuration": 32,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine à rythme modéré"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "Step-ups (marche)",
+          "duration": 40,
+          "instructions": "Monter et descendre d'une marche en alternant les jambes"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Jambes Dynamiques",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Goblet squat (sans poids)",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 70,
+          "instructions": "Mains devant la poitrine, descendre profond"
+        },
+        {
+          "name": "Fentes curtsy",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Croiser la jambe derrière en diagonale",
+          "bilateral": true
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "Mains derrière la tête, pencher le buste en gardant le dos droit"
+        },
+        {
+          "name": "Glute bridge marche",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "En pont, alterner lever une jambe puis l'autre comme une marche"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Gainage Intense",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, bras et jambes en l'air, étendre bras/jambe opposés en alternant"
+        },
+        {
+          "name": "Russian twists",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Assis, pieds décollés, tourner le buste de gauche à droite"
+        },
+        {
+          "name": "Toe touches",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Dos au sol, jambes verticales, toucher les pieds avec les mains"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un côté à l'autre"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

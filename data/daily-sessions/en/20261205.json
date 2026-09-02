@@ -1,0 +1,130 @@
+{
+  "date": "05122026",
+  "title": "Legs & Core Blitz",
+  "description": "Unilateral legs with Bulgarian split squats and Romanian deadlift, deep plank core and leg raises",
+  "estimatedDuration": 34,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Unilateral Legs",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Bulgarian split squats",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Rear foot on a chair, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Single-leg Romanian deadlift",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "On one leg, lean torso forward, back leg extended",
+          "bilateral": true
+        },
+        {
+          "name": "Marching glute bridge",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "In a bridge, alternate lifting one leg then the other like marching"
+        },
+        {
+          "name": "1.5 squats",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lower, rise halfway, lower again, rise fully"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Deep Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Plank",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "On your forearms, body perfectly aligned, brace the abs"
+        },
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift arms and legs together to touch the feet"
+        },
+        {
+          "name": "Leg raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift straight legs to vertical"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

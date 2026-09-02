@@ -1,0 +1,129 @@
+{
+  "date": "29102026",
+  "title": "Concrete Base",
+  "description": "Unilateral leg strength and full core work: Bulgarian lunges, hip thrust and planks",
+  "estimatedDuration": 35,
+  "focus": ["lower-body", "core"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate arched and rounded back, breathe"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Leg Foundation",
+      "restBetweenExercises": 60,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Feet very wide, toes pointing outward"
+        },
+        {
+          "name": "Bulgarian split squats",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 70,
+          "instructions": "Back foot on a chair, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Hip thrust",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 70,
+          "instructions": "Back on the floor, feet flat, lift the hips, squeeze the glutes"
+        },
+        {
+          "name": "Reverse hyper on table",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 70,
+          "instructions": "Belly on the edge, lift the legs behind you"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core Belt",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Plank",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "On the forearms, body perfectly aligned, brace the abs"
+        },
+        {
+          "name": "Dead bug",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, arms and legs up, extend opposite arm/leg alternating"
+        },
+        {
+          "name": "V-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, lift arms and legs simultaneously to touch the feet"
+        },
+        {
+          "name": "Sit-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, rise fully to sitting, touch the feet"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hip flexor stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

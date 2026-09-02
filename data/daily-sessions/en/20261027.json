@@ -1,0 +1,87 @@
+{
+  "date": "27102026",
+  "title": "Endless AMRAP",
+  "description": "24-minute AMRAP looping squats, incline push-ups, crunches and walking lunges",
+  "estimatedDuration": 30,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate arched and rounded back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "Long AMRAP",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Squats",
+          "reps": 12,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "Incline push-ups",
+          "reps": 10,
+          "instructions": "Hands on an elevated support, easier variation"
+        },
+        {
+          "name": "Crunches",
+          "reps": 15,
+          "instructions": "Back on the floor, lift the shoulders, brace the abs"
+        },
+        {
+          "name": "Walking lunges",
+          "reps": 10,
+          "instructions": "Move forward with continuous lunges, big steps"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

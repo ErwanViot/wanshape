@@ -1,0 +1,92 @@
+{
+  "date": "21092026",
+  "title": "HIIT Hurricane",
+  "description": "3-round intervals with squat jumps, star jumps and plyo push-ups for a total cardio explosion",
+  "estimatedDuration": 27,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Cardio Burst",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Squat jumps",
+          "instructions": "Explosive squat with a maximum jump, absorb the landing"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs in a star shape"
+        },
+        {
+          "name": "High knees",
+          "instructions": "Run in place, knees above hips, arms coordinated"
+        },
+        {
+          "name": "Plyo push-ups",
+          "instructions": "Explosive push-up, hands leave the floor"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Powerful lateral jumps from foot to foot"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

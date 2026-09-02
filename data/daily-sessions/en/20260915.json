@@ -1,0 +1,117 @@
+{
+  "date": "15092026",
+  "title": "Push Pull Duel",
+  "description": "Three antagonist supersets: wide push-ups, pike push-ups and chair dips against back pulls",
+  "estimatedDuration": 30,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "On all fours, alternate rounding and arching your back, breathe"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Push Pull Duel",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 60,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Wide push-ups",
+              "reps": 10,
+              "instructions": "Hands wider than shoulder-width, focus on the chest"
+            },
+            {
+              "name": "Reverse snow angels",
+              "reps": 12,
+              "instructions": "Face down, arms by your sides, sweep them in an arc on the floor"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hips high in an inverted V, lower your head between your hands"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 12,
+              "instructions": "Face down, arms in a T position, squeeze shoulder blades"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+            },
+            {
+              "name": "Floor face pulls",
+              "reps": 12,
+              "instructions": "Face down, elbows at 90 degrees, pull back"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate your body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind your head, pull the elbow with your other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring your foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

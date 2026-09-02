@@ -1,0 +1,107 @@
+{
+  "date": "30102026",
+  "title": "Limitless Circuit",
+  "description": "Full-body circuit over 5 rounds: squats, commando push-ups, bear hold and burpee variations",
+  "estimatedDuration": 31,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Step-ups",
+          "duration": 35,
+          "instructions": "Step up and down from a step, alternating legs"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Metabolic Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 20,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "Commando push-ups",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Alternate between plank position and push-up position",
+          "bilateral": true
+        },
+        {
+          "name": "Bear hold",
+          "mode": "timed",
+          "duration": 35,
+          "instructions": "On all fours, knees lifted 2cm off the floor, hold"
+        },
+        {
+          "name": "Curtsy lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Cross the back leg behind diagonally",
+          "bilateral": true
+        },
+        {
+          "name": "Burpees without push-up",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        },
+        {
+          "name": "Toe taps",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Tap your foot on a step, alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

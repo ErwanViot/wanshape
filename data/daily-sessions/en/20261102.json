@@ -1,0 +1,111 @@
+{
+  "date": "02112026",
+  "title": "Upper Antagonists",
+  "description": "Upper-body push-pull supersets: incline push-ups, face pulls and alternating superman",
+  "estimatedDuration": 34,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Step-ups",
+          "duration": 35,
+          "instructions": "Step up and down from a step, alternating legs"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate arched and rounded back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Upper Body Supersets",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 90,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Incline push-ups",
+              "reps": 10,
+              "instructions": "Hands on an elevated support, easier variation"
+            },
+            {
+              "name": "Face pulls on the floor",
+              "reps": 12,
+              "instructions": "Face down, elbows at 90 degrees, pull backward"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Decline push-ups",
+              "reps": 10,
+              "instructions": "Feet elevated on a chair, body braced"
+            },
+            {
+              "name": "Alternating superman",
+              "reps": 12,
+              "instructions": "Lift right arm and left leg, alternate"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Explosive push-ups",
+              "reps": 8,
+              "instructions": "Push hard enough for the hands to leave the floor"
+            },
+            {
+              "name": "Inverted row (table)",
+              "reps": 10,
+              "instructions": "Under a table, pull the chest toward the edge"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

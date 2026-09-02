@@ -1,0 +1,105 @@
+{
+  "date": "22122026",
+  "title": "Volcano Circuit",
+  "description": "3-round circuit blending sumo squats, incline push-ups, side plank and mountain climbers",
+  "estimatedDuration": 33,
+  "focus": ["full-body"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Fast marching in place",
+          "duration": 40,
+          "instructions": "March quickly in place while swinging the arms"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Volcano Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide apart, toes pointing outward"
+        },
+        {
+          "name": "Incline push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands on an elevated surface, easier version"
+        },
+        {
+          "name": "Side plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On one forearm, body aligned, hips high",
+          "bilateral": true
+        },
+        {
+          "name": "Reverse lunges",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Big step backward, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Mountain climbers",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

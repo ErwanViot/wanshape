@@ -1,0 +1,116 @@
+{
+  "date": "25122026",
+  "title": "Double Detonation",
+  "description": "Explosive HIIT with tuck jumps and squat jumps followed by a mountain climbers tabata",
+  "estimatedDuration": 31,
+  "focus": ["cardio"],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Step toe taps",
+          "duration": 40,
+          "instructions": "Tap your foot on a step alternating quickly"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Detonation HIIT",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Tuck jumps",
+          "instructions": "Jump bringing the knees to the chest"
+        },
+        {
+          "name": "Broad jumps",
+          "instructions": "Standing long jumps, cushion and repeat"
+        },
+        {
+          "name": "Star jumps",
+          "instructions": "Jump spreading arms and legs into a star"
+        },
+        {
+          "name": "Squat jumps",
+          "instructions": "Explosive squat with a maximum jump, cushion the landing"
+        },
+        {
+          "name": "Pop squats",
+          "instructions": "Jump feet apart into a squat, jump feet back together"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Impact Finish Tabata",
+      "sets": 1,
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Mountain climbers",
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        },
+        {
+          "name": "Toe touches",
+          "instructions": "Back on the floor, legs vertical, touch the feet with your hands"
+        },
+        {
+          "name": "Scissors",
+          "instructions": "Back on the floor, legs extended, cross alternating over-under"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}
