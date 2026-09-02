@@ -1,9 +1,12 @@
 {
-  "date": "28082026",
+  "date": "20260828",
   "title": "Jambes Tonus",
   "description": "Séance complète bas du corps avec squats 1.5, fentes avec pause et glute bridge pour sculpter et renforcer",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

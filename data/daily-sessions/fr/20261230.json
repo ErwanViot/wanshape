@@ -1,9 +1,11 @@
 {
-  "date": "30122026",
+  "date": "20261230",
   "title": "Circuit Tonnerre",
   "description": "Circuit tonnerre avec squats sumo, pompes archer et fentes marchées en 3 rounds",
   "estimatedDuration": 33,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

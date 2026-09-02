@@ -1,9 +1,11 @@
 {
-  "date": "19092026",
+  "date": "20260919",
   "title": "Choc Cardio Duo",
   "description": "Combo HIIT 3 rounds en broad jumps et skaters puis tabata mountain climbers pour finir en intensité",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

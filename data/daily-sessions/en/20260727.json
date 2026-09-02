@@ -1,9 +1,12 @@
 {
-  "date": "27072026",
+  "date": "20260727",
   "title": "Sculpted Lower",
   "description": "Complete legs and glutes workout with Bulgarian split squats, single-leg hip thrust and core stability",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

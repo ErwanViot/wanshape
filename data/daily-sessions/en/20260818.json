@@ -1,9 +1,11 @@
 {
-  "date": "18082026",
+  "date": "20260818",
   "title": "Push-Pull Master",
   "description": "Structured push-pull upper body session with archer push-ups and table rows for perfect symmetry",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

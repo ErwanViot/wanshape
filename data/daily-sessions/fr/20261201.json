@@ -1,9 +1,11 @@
 {
-  "date": "01122026",
+  "date": "20261201",
   "title": "Rythme Infernal",
   "description": "HIIT 3 rounds avec squat jumps, broad jumps, star jumps, high knees et skaters pour un cardio explosif",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

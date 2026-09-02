@@ -1,9 +1,11 @@
 {
-  "date": "19102026",
+  "date": "20261019",
   "title": "Escalade Complète",
   "description": "Pyramide de pompes classiques suivie d'un renforcement complet : squats sumo, fentes latérales et toe touches",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Pompes",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

@@ -1,9 +1,11 @@
 {
-  "date": "20062026",
+  "date": "20260620",
   "title": "Explosive Tabata",
   "description": "Intense tabata: skaters, tuck jumps, mountain climbers and plyo push-ups to multiply power",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

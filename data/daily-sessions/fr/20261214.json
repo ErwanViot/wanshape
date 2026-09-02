@@ -1,9 +1,12 @@
 {
-  "date": "14122026",
+  "date": "20261214",
   "title": "Bas du Corps Titan",
   "description": "Renforcement jambes en puissance avec fentes arrière et squats pulse, suivi d'un gainage anti-rotation",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

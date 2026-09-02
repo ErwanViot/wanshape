@@ -1,9 +1,11 @@
 {
-  "date": "30122026",
+  "date": "20261230",
   "title": "Thunder Circuit",
   "description": "Thunder circuit with sumo squats, archer push-ups and walking lunges over 3 rounds",
   "estimatedDuration": 33,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

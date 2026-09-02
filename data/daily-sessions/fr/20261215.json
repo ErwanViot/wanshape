@@ -1,9 +1,11 @@
 {
-  "date": "15122026",
+  "date": "20261215",
   "title": "Bras & Dos Robustes",
   "description": "Renforcement haut du corps en push-pull avec pompes archer, pike push-ups et face pulls au sol",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

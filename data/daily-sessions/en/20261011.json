@@ -1,9 +1,11 @@
 {
-  "date": "11102026",
+  "date": "20261011",
   "title": "Peak Pyramid Challenge",
   "description": "Squat pyramid followed by a strength finisher with curtsy lunges, decline push-ups and leg raises",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -35,7 +37,15 @@
     {
       "type": "pyramid",
       "name": "Squat Pyramid",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

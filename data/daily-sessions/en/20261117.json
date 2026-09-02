@@ -1,9 +1,12 @@
 {
-  "date": "17112026",
+  "date": "20261117",
   "title": "Titan Foundations",
   "description": "Lower-body strength with sumo squats and alternating lunges, finished off with a deep targeted core burn",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,12 @@
 {
-  "date": "05072026",
+  "date": "20260705",
   "title": "Granite Lower",
   "description": "Two classic lower body and core blocks: goblet squat, single-leg hip thrust and dead bug",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

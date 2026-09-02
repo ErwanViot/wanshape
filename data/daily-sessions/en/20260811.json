@@ -1,9 +1,11 @@
 {
-  "date": "11082026",
+  "date": "20260811",
   "title": "Master Superset",
   "description": "Antagonist upper body supersets: explosive push and back pull for optimal muscular balance",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

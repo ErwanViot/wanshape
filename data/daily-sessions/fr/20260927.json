@@ -1,9 +1,11 @@
 {
-  "date": "27092026",
+  "date": "20260927",
   "title": "Chrono & Rounds",
   "description": "EMOM de 12 minutes en squats sautés et pike push-ups puis AMRAP de 10 minutes en fentes et squats",
   "estimatedDuration": 34,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

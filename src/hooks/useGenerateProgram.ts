@@ -167,7 +167,8 @@ export function useGenerateProgram() {
           duree_semaines: input.duree_semaines,
         });
 
-        return response;
+        // The 202 ack carries status 'generating'; we only get here once settled.
+        return { ...response, status: 'ready' };
       } catch (e) {
         setError(e instanceof Error ? e.message : i18n.t('hook_errors.unexpected', { ns: 'common' }));
         return null;

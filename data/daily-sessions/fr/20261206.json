@@ -1,9 +1,11 @@
 {
-  "date": "06122026",
+  "date": "20261206",
   "title": "Force Verticale",
   "description": "Force verticale avec pike push-ups, pompes archer et explosives, puis superman et scapular push-ups",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "30072026",
+  "date": "20260730",
   "title": "Push-Pull Pro",
   "description": "Upper body push-pull strength in classic blocks: varied push-ups and back mobilization",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

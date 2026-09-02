@@ -1,9 +1,11 @@
 {
-  "date": "29062026",
+  "date": "20260629",
   "title": "Cardio Double Impact",
   "description": "HIIT 3 rounds puis Tabata 8 rounds : double dose cardio pour un effort maximal court et intense",
   "estimatedDuration": 30,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

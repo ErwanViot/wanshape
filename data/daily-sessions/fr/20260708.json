@@ -1,9 +1,11 @@
 {
-  "date": "08072026",
+  "date": "20260708",
   "title": "Buste Sculpté",
   "description": "Renforcement haut du corps avec poussée et tirage : pompes variées et dos renforcé en 2 blocs",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

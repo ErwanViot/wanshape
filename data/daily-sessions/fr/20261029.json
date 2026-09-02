@@ -1,9 +1,12 @@
 {
-  "date": "29102026",
+  "date": "20261029",
   "title": "Base Béton",
   "description": "Renforcement jambes unilatéral et core complet : fentes bulgares, hip thrust et gainage",
   "estimatedDuration": 35,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "03102026",
+  "date": "20261003",
   "title": "Cardio Sans Frein",
   "description": "HIIT en burpees et jump lunges suivi d'un tabata core pour un cardio sans temps mort",
   "estimatedDuration": 30,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

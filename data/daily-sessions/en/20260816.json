@@ -1,9 +1,12 @@
 {
-  "date": "16082026",
+  "date": "20260816",
   "title": "Master Legs",
   "description": "Lower body session focused on lunges and unilateral work, completed with intense core training",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

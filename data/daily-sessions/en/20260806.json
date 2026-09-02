@@ -1,9 +1,11 @@
 {
-  "date": "06082026",
+  "date": "20260806",
   "title": "Upper Sling Pro",
   "description": "Upper body strength: varied push-ups and complete back work in 2 full blocks",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

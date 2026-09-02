@@ -1,9 +1,11 @@
 {
-  "date": "29082026",
+  "date": "20260829",
   "title": "Granite Superset",
   "description": "3-set push-pull supersets with commando push-ups and table rows for a dense upper body",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

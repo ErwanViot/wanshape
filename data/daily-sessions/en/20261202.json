@@ -1,9 +1,11 @@
 {
-  "date": "02122026",
+  "date": "20261202",
   "title": "Precision Push Pull",
   "description": "Precise push-pull with classic, diamond push-ups and chair dips, then inverted rows and prone raises",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

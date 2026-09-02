@@ -1,9 +1,11 @@
 {
-  "date": "18062026",
+  "date": "20260618",
   "title": "Athletic Circuit",
   "description": "3-round full body circuit chaining squats, push-ups, planks and cardio for athletic fitness",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

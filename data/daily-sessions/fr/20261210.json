@@ -1,9 +1,12 @@
 {
-  "date": "10122026",
+  "date": "20261210",
   "title": "Ancrage Bas du Corps",
   "description": "Renforcement jambes en unilatéral et gainage profond avec squats sumo, fentes curtsy et gainage latéral",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

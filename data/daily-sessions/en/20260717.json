@@ -1,9 +1,11 @@
 {
-  "date": "17072026",
+  "date": "20260717",
   "title": "Solid Upper Pro",
   "description": "Upper body strength: wide and decline push for pressing, inverse table rows and pulls for back",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

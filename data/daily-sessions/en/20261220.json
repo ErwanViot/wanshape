@@ -1,9 +1,11 @@
 {
-  "date": "20122026",
+  "date": "20261220",
   "title": "Blazing Intervals",
   "description": "Explosive intervals with burpees, jump lunges and plyo push-ups for a total cardio blast in 3 rounds",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

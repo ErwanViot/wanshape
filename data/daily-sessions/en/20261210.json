@@ -1,9 +1,12 @@
 {
-  "date": "10122026",
+  "date": "20261210",
   "title": "Lower Body Anchor",
   "description": "Single-leg strength and deep core work with sumo squats, curtsy lunges and side plank",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "08062026",
+  "date": "20260608",
   "title": "HIIT Express",
   "description": "3 rounds intenses alternant burpees, high knees, tuck jumps et skaters pour brûler maximum",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

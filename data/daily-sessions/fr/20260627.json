@@ -1,9 +1,11 @@
 {
-  "date": "27062026",
+  "date": "20260627",
   "title": "Circuit Vitalité",
   "description": "Circuit dynamique 3 rounds alternant fentes, pompes Hindu, gainage et mountain climbers",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

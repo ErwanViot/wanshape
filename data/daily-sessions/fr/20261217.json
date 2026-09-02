@@ -1,9 +1,11 @@
 {
-  "date": "17122026",
+  "date": "20261217",
   "title": "Full Body Fusion",
   "description": "Circuit 3 rounds avec squat isométrique, pompes déclinées, bear hold et fentes marchées pour tout le corps",
   "estimatedDuration": 32,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

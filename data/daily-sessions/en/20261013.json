@@ -1,9 +1,12 @@
 {
-  "date": "13102026",
+  "date": "20261013",
   "title": "Solid Foundations",
   "description": "Lower body strength with pulse squats, Bulgarian split squats and good mornings, finished with deep core work",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

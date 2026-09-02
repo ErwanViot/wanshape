@@ -1,9 +1,11 @@
 {
-  "date": "17072026",
+  "date": "20260717",
   "title": "Haut Costaud",
   "description": "Force du haut du corps : pompes larges et déclives en push, rowing inverse et tirage en pull",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

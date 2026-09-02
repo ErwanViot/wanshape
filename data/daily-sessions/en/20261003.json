@@ -1,9 +1,11 @@
 {
-  "date": "03102026",
+  "date": "20261003",
   "title": "Cardio Unleashed",
   "description": "HIIT with burpees and jump lunges followed by a core tabata for non-stop cardio",
   "estimatedDuration": 30,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

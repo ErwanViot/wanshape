@@ -1,9 +1,11 @@
 {
-  "date": "06102026",
+  "date": "20261006",
   "title": "EMOM Consistency",
   "description": "11-minute EMOM alternating decline push-ups, jump squats and sit-ups for endurance",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

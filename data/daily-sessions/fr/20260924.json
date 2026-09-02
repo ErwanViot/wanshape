@@ -1,9 +1,11 @@
 {
-  "date": "24092026",
+  "date": "20260924",
   "title": "Superset Verticale",
   "description": "Supersets push-pull verticaux : pompes déclinées, dips sur chaise et pompes Hindu pour un haut du corps dense",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

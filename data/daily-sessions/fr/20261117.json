@@ -1,9 +1,12 @@
 {
-  "date": "17112026",
+  "date": "20261117",
   "title": "Fondations Titanesques",
   "description": "Renforcement bas du corps avec squats sumo et fentes alternées, suivi d'un gainage profond ciblé",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

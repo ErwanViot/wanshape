@@ -1,9 +1,11 @@
 {
-  "date": "03092026",
+  "date": "20260903",
   "title": "Granite Pyramid",
   "description": "Mountain climber pyramid followed by a full-body classic circuit for a complete and progressive session",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,15 @@
     {
       "type": "pyramid",
       "name": "Mountain Climber Pyramid",
-      "pattern": [4, 6, 8, 10, 8, 6, 4],
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
       "restBetweenSets": 20,
       "exercises": [
         {

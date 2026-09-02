@@ -1,9 +1,12 @@
 {
-  "date": "18092026",
+  "date": "20260918",
   "title": "Circuit & Explosive Pyramid",
   "description": "3-round strength-cardio circuit followed by a jump squat pyramid across 9 explosive steps",
   "estimatedDuration": 34,
-  "focus": ["full-body", "explosive"],
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -80,7 +83,17 @@
     {
       "type": "pyramid",
       "name": "Jump Squat Pyramid",
-      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 30,
       "exercises": [
         {

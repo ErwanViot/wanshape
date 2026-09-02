@@ -1,9 +1,11 @@
 {
-  "date": "26062026",
+  "date": "20260626",
   "title": "Antagonist Duo",
   "description": "Targeted antagonist supersets: push-pull pairs for chest and back in harmony",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

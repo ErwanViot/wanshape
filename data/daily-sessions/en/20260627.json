@@ -1,9 +1,11 @@
 {
-  "date": "27062026",
+  "date": "20260627",
   "title": "Vitality Circuit",
   "description": "Dynamic 3-round circuit alternating lunges, Hindu push-ups, plank and mountain climbers",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

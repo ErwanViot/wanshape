@@ -1,9 +1,11 @@
 {
-  "date": "31072026",
+  "date": "20260731",
   "title": "Total Cardio Challenge",
   "description": "10-minute EMOM then 8-minute AMRAP for formidable cardio endurance",
   "estimatedDuration": 35,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

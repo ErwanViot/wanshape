@@ -1,9 +1,11 @@
 {
-  "date": "20082026",
+  "date": "20260820",
   "title": "Full Body Master",
   "description": "Circuit 3 rounds mixant squats, pompes, core et plyométrie pour un entraînement complet et équilibré",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

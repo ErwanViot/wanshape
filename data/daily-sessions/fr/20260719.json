@@ -1,9 +1,11 @@
 {
-  "date": "19072026",
+  "date": "20260719",
   "title": "Pyramide Pro",
   "description": "Pyramide de squats sautés en montée et descente, suivie d'un bloc classique full body",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,17 @@
     {
       "type": "pyramid",
       "name": "Pyramide Squats Sautés",
-      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

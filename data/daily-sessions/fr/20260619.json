@@ -1,9 +1,11 @@
 {
-  "date": "19062026",
+  "date": "20260619",
   "title": "Superset Force",
   "description": "Supersets force haut du corps : paires push-pull intensives pour sculpturer pecs et dos",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

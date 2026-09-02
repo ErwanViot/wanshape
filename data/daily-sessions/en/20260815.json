@@ -1,9 +1,11 @@
 {
-  "date": "15082026",
+  "date": "20260815",
   "title": "Master Pyramid",
   "description": "Push-up pyramid ascending and descending followed by a full-body classic reinforcement circuit",
   "estimatedDuration": 36,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,17 @@
     {
       "type": "pyramid",
       "name": "Push-up Pyramid",
-      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

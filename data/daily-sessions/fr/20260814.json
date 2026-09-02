@@ -1,9 +1,11 @@
 {
-  "date": "14082026",
+  "date": "20260814",
   "title": "Tabata Fury",
   "description": "Tabata haute intensité avec high knees, burpees sans pompe et skaters pour booster le cardio",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

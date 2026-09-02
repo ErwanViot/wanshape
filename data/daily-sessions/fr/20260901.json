@@ -1,9 +1,11 @@
 {
-  "date": "01092026",
+  "date": "20260901",
   "title": "HIIT Tonnerre",
   "description": "HIIT explosif 3 rounds avec pop squats, plyo push-ups et lateral bounds pour une session détonante",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

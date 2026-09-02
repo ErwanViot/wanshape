@@ -1,9 +1,11 @@
 {
-  "date": "24112026",
+  "date": "20261124",
   "title": "Diamond Upper Body",
   "description": "Diamond push work with Hindu and explosive push-ups, pulling with alternating superman for a sculpted chest and back",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

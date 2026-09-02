@@ -1,9 +1,11 @@
 {
-  "date": "16102026",
+  "date": "20261016",
   "title": "Circuit Tempête",
   "description": "Circuit complet de 3 rounds mêlant squats, pompes inclinées, mountain climbers et burpees pour tout le corps",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

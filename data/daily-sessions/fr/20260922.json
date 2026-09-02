@@ -1,9 +1,11 @@
 {
-  "date": "22092026",
+  "date": "20260922",
   "title": "Superset Corps Entier",
   "description": "Supersets full body push-pull et squat-hinge : pompes archer, squats pulse et pike push-ups",
   "estimatedDuration": 30,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

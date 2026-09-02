@@ -1,9 +1,11 @@
 {
-  "date": "10072026",
+  "date": "20260710",
   "title": "HIIT Boost",
   "description": "Séquence cardio haute intensité 3 rounds avec burpees, high knees et skaters pour brûler un maximum",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

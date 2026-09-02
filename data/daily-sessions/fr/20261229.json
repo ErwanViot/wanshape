@@ -1,9 +1,11 @@
 {
-  "date": "29122026",
+  "date": "20261229",
   "title": "HIIT Vitesse Pure",
   "description": "HIIT pur en high knees, box jumps et burpees pour un cardio à vitesse maximale",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

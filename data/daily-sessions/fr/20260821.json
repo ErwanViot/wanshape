@@ -1,9 +1,11 @@
 {
-  "date": "21082026",
+  "date": "20260821",
   "title": "Antagoniste Brut",
   "description": "Supersets antagonistes push-pull : pompes inclinees et extensions de dos pour un haut du corps équilibré",
   "estimatedDuration": 31,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

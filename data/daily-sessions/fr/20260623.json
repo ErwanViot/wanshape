@@ -1,9 +1,11 @@
 {
-  "date": "23062026",
+  "date": "20260623",
   "title": "Force du Haut",
   "description": "Deux blocs haut du corps en classique : poussée poitrine-triceps et tirage dos-épaules complet",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

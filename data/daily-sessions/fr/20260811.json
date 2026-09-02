@@ -1,9 +1,11 @@
 {
-  "date": "11082026",
+  "date": "20260811",
   "title": "Superset Master",
   "description": "Supersets antagonistes haut du corps : poussée explosive et tirage dossal pour un équilibre musculaire optimal",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

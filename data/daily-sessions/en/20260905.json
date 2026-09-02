@@ -1,9 +1,11 @@
 {
-  "date": "05092026",
+  "date": "20260905",
   "title": "Raw Cardio Combo",
   "description": "Explosive HIIT combo + Tabata core for maximum cardio intensity at the end of the cycle",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

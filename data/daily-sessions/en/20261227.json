@@ -1,9 +1,12 @@
 {
-  "date": "27122026",
+  "date": "20261227",
   "title": "Legs on Fire",
   "description": "Legs on fire with 1.5 squats and forward lunges, completed by a core resistance block",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

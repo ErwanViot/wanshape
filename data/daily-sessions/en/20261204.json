@@ -1,9 +1,11 @@
 {
-  "date": "04122026",
+  "date": "20261204",
   "title": "Max Rounds Blaze",
   "description": "Explosive AMRAP with alternating lunges, pulse squats, decline push-ups and bicycle crunches",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

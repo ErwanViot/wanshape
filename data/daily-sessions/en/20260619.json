@@ -1,9 +1,11 @@
 {
-  "date": "19062026",
+  "date": "20260619",
   "title": "Strength Superset",
   "description": "Upper body strength supersets: intensive push-pull pairs to sculpt chest and back",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

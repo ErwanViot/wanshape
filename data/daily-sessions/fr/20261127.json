@@ -1,9 +1,11 @@
 {
-  "date": "27112026",
+  "date": "20261127",
   "title": "Superset Épaules Dos",
   "description": "Supersets épaules-dos avec pike push-ups et face pulls au sol pour un haut du corps équilibré",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

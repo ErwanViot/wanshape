@@ -1,9 +1,11 @@
 {
-  "date": "28072026",
+  "date": "20260728",
   "title": "Tabata Lava",
   "description": "Tabata brûlant avec skaters, tuck jumps, high knees et bicycle crunchs",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

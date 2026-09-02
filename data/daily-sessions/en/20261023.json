@@ -1,9 +1,12 @@
 {
-  "date": "23102026",
+  "date": "20261023",
   "title": "Double Ascent",
   "description": "3-round circuit with sumo squats and burpees, followed by a bicycle crunch pyramid to finish strong",
   "estimatedDuration": 38,
-  "focus": ["full-body", "explosive"],
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -74,7 +77,15 @@
     {
       "type": "pyramid",
       "name": "Final Pyramid",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

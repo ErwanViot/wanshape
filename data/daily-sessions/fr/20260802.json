@@ -1,9 +1,12 @@
 {
-  "date": "02082026",
+  "date": "20260802",
   "title": "Lower Defi",
   "description": "Défi jambes et core : squats isométriques, fentes avec pause et gainage dynamique",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

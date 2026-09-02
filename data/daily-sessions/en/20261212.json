@@ -1,9 +1,11 @@
 {
-  "date": "12122026",
+  "date": "20261212",
   "title": "Full Body Turbo",
   "description": "3-round circuit mixing squats, wide push-ups, lunges, plank and burpees for a complete full body session",
   "estimatedDuration": 32,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

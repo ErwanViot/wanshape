@@ -1,9 +1,12 @@
 {
-  "date": "26092026",
+  "date": "20260926",
   "title": "Pyramide Tempête",
   "description": "Circuit force-cardio de 3 rounds puis pyramide de fentes sautées en 7 paliers explosifs",
   "estimatedDuration": 38,
-  "focus": ["full-body", "explosive"],
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -68,7 +71,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Fentes Sautées",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

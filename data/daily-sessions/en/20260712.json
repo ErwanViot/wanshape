@@ -1,9 +1,11 @@
 {
-  "date": "12072026",
+  "date": "20260712",
   "title": "Superset Pro",
   "description": "Antagonist upper body supersets: push-pull pairs for balanced and efficient effort",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

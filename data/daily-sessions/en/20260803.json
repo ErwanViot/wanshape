@@ -1,9 +1,11 @@
 {
-  "date": "03082026",
+  "date": "20260803",
   "title": "Twin Antagonist",
   "description": "Upper body antagonist pair supersets for balanced muscle development",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

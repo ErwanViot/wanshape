@@ -1,9 +1,11 @@
 {
-  "date": "17062026",
+  "date": "20260617",
   "title": "Steel Chest",
   "description": "Upper body in two classic blocks: push with varied push-ups and reinforced back pull",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

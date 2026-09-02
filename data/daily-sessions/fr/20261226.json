@@ -1,9 +1,11 @@
 {
-  "date": "26122026",
+  "date": "20261226",
   "title": "Circuit Puissance",
   "description": "Circuit puissant de 6 exercices : squats, pompes commando, fentes curtsy et burpees",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

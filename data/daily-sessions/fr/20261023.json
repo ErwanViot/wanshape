@@ -1,9 +1,12 @@
 {
-  "date": "23102026",
+  "date": "20261023",
   "title": "Double Ascension",
   "description": "Circuit de 3 rounds avec squats sumo et burpees, suivi d'une pyramide de bicycle crunchs pour finir fort",
   "estimatedDuration": 38,
-  "focus": ["full-body", "explosive"],
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -74,7 +77,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Finale",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

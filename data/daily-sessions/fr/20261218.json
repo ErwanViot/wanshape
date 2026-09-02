@@ -1,9 +1,12 @@
 {
-  "date": "18122026",
+  "date": "20261218",
   "title": "Cuisses Blindées",
   "description": "Jambes en stabilité avec pistol squat assisté et fentes avant, complétées par un core de contrôle",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

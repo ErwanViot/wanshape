@@ -1,9 +1,11 @@
 {
-  "date": "25082026",
+  "date": "20260825",
   "title": "Haut Tonique",
   "description": "Séance classique haut du corps avec pompes déclinees, pompes explosives et tirage dorsal en 3 séries",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

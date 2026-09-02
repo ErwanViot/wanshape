@@ -1,9 +1,11 @@
 {
-  "date": "11122026",
+  "date": "20261211",
   "title": "AMRAP Volcan",
   "description": "AMRAP 10 minutes avec squats sautés, pompes inclinées et mountain climbers pour repousser tes limites",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

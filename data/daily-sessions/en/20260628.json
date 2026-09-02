@@ -1,9 +1,12 @@
 {
-  "date": "28062026",
+  "date": "20260628",
   "title": "Central Sling",
   "description": "Lower body and core in two classic blocks: paused lunges and glute bridge then advanced core",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

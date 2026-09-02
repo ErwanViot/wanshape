@@ -1,9 +1,11 @@
 {
-  "date": "02122026",
+  "date": "20261202",
   "title": "Push Pull Précision",
   "description": "Push-pull précis avec pompes classiques, diamant et dips sur chaise, puis rowing inversé et prone raises",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

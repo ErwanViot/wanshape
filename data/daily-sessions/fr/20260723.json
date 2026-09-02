@@ -1,9 +1,11 @@
 {
-  "date": "23072026",
+  "date": "20260723",
   "title": "Circuit Defi",
   "description": "Circuit 3 rounds polyvalent mêlant force, cardio et core pour un entraînement complet",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

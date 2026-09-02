@@ -1,9 +1,11 @@
 {
-  "date": "19082026",
+  "date": "20260819",
   "title": "Granite AMRAP",
   "description": "12-minute AMRAP with bodyweight goblet squat, commando push-ups and V-ups to test full endurance",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

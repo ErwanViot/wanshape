@@ -1,9 +1,11 @@
 {
-  "date": "01082026",
+  "date": "20260801",
   "title": "Adrenaline HIIT",
   "description": "3-round HIIT with lateral bounds, star jumps and pop squats to boost adrenaline",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

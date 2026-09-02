@@ -1,9 +1,11 @@
 {
-  "date": "26082026",
+  "date": "20260826",
   "title": "Total Cardio Master",
   "description": "Intense 10-minute EMOM followed by an 8-minute AMRAP for a complete cardio-endurance workout",
   "estimatedDuration": 37,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

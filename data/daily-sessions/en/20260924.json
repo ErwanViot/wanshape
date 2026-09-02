@@ -1,9 +1,11 @@
 {
-  "date": "24092026",
+  "date": "20260924",
   "title": "Vertical Superset",
   "description": "Vertical push-pull supersets: decline push-ups, chair dips and Hindu push-ups for a dense upper body",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

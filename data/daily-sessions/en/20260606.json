@@ -1,9 +1,11 @@
 {
-  "date": "06062026",
+  "date": "20260606",
   "title": "Full Body Circuit",
   "description": "Complete 3-round circuit alternating squats, push-ups, lunges and plank for total body work",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

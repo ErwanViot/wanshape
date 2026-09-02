@@ -1,9 +1,11 @@
 {
-  "date": "24112026",
+  "date": "20261124",
   "title": "Haut du Corps Diamant",
   "description": "Poussée diamant avec pompes Hindu et explosives, tirage avec superman alterné pour un buste sculpté",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "13122026",
+  "date": "20261213",
   "title": "HIIT Météore",
   "description": "Intervalles explosifs avec squat jumps, tuck jumps et broad jumps pour un cardio à haute intensité",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

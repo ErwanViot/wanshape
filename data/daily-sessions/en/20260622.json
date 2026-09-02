@@ -1,9 +1,11 @@
 {
-  "date": "22062026",
+  "date": "20260622",
   "title": "Pyramidal Circuit",
   "description": "3-round circuit followed by a squat pyramid: progressive full body power build-up",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -68,7 +70,15 @@
     {
       "type": "pyramid",
       "name": "Sumo Squat Pyramid",
-      "pattern": [4, 6, 8, 10, 8, 6, 4],
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

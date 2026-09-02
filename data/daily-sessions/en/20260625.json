@@ -1,9 +1,11 @@
 {
-  "date": "25062026",
+  "date": "20260625",
   "title": "Brutal Intervals",
   "description": "3 explosive HIIT rounds chaining pop squats, high knees, plyo push-ups and jump squats",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

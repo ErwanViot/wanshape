@@ -1,9 +1,11 @@
 {
-  "date": "16062026",
+  "date": "20260616",
   "title": "Cardio Puissance",
   "description": "3 rounds explosifs alternant jump lunges, star jumps, broad jumps et lateral bounds",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

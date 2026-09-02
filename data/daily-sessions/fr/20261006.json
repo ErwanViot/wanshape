@@ -1,9 +1,11 @@
 {
-  "date": "06102026",
+  "date": "20261006",
   "title": "EMOM Constance",
   "description": "EMOM de 11 minutes alternant pompes déclinées, squats sautés et sit-ups pour l'endurance",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

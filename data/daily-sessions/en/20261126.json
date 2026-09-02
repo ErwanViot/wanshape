@@ -1,9 +1,12 @@
 {
-  "date": "26112026",
+  "date": "20261126",
   "title": "Tabata Blitz",
   "description": "Explosive 8-round Tabata with burpees, tuck jumps and star jumps for maximum cardio impact",
   "estimatedDuration": 26,
-  "focus": ["cardio", "explosive"],
+  "focus": [
+    "cardio",
+    "explosive"
+  ],
   "blocks": [
     {
       "type": "warmup",

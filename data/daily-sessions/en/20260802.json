@@ -1,9 +1,12 @@
 {
-  "date": "02082026",
+  "date": "20260802",
   "title": "Lower Challenge",
   "description": "Legs and core challenge: isometric squats, paused lunges and dynamic plank work",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

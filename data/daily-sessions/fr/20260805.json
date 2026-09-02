@@ -1,9 +1,11 @@
 {
-  "date": "05082026",
+  "date": "20260805",
   "title": "Tabata Tempête",
   "description": "Tabata 8 rounds avec jump lunges, star jumps, flutter kicks et planche épaule",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

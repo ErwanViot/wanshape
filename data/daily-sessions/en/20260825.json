@@ -1,9 +1,11 @@
 {
-  "date": "25082026",
+  "date": "20260825",
   "title": "Tonic Upper",
   "description": "Classic upper body session with decline push-ups, explosive push-ups and back pulls in 3 sets",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

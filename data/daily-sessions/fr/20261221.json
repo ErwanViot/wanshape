@@ -1,9 +1,11 @@
 {
-  "date": "21122026",
+  "date": "20261221",
   "title": "Poussée & Traction",
   "description": "Renforcement haut du corps en push-pull avec pompes larges, dips et rowing inversé",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

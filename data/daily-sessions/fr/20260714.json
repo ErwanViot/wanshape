@@ -1,9 +1,11 @@
 {
-  "date": "14072026",
+  "date": "20260714",
   "title": "EMOM Pro",
   "description": "10 minutes EMOM avec squats, pompes et mountain climbers pour maintenir l'effort chaque minute",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

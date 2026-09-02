@@ -15,8 +15,9 @@
 -- 4) error_reason now carries a machine code (see programErrors.ts) so the
 --    client can localise it; legacy French prose is still rendered verbatim.
 -- 5) Dead code: create_program_with_sessions (migration 021) was replaced by
---    the placeholder/finalize pair in 027; programs_user_status_idx is used by
---    no query (lists filter on user_id + is_fixed).
+--    the placeholder/finalize pair in 027; programs_user_status_idx is dropped
+--    because the per-user cardinality (≤ a handful of rows) makes an index on
+--    (user_id, status) useless for the cap count / reaper filters.
 
 ALTER TABLE public.programs
   ADD COLUMN IF NOT EXISTS generation_started_at timestamptz;
@@ -36,7 +37,7 @@ CREATE OR REPLACE FUNCTION public.program_generation_is_stale(
   p_started_at timestamptz
 ) RETURNS boolean
 LANGUAGE sql
-IMMUTABLE
+STABLE
 SET search_path = ''
 AS $$
   SELECT p_status = 'generating'

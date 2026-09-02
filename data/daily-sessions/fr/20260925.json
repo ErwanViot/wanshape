@@ -1,9 +1,11 @@
 {
-  "date": "25092026",
+  "date": "20260925",
   "title": "HIIT Volcan",
   "description": "Intervalles de 3 rounds en star jumps, high knees et broad jumps pour une éruption cardio",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

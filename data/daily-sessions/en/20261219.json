@@ -1,9 +1,11 @@
 {
-  "date": "19122026",
+  "date": "20261219",
   "title": "Endless Rounds",
   "description": "10-minute AMRAP with goblet squats, Hindu push-ups and Bulgarian split squats to chain as many rounds as possible",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

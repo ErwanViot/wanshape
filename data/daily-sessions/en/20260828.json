@@ -1,9 +1,12 @@
 {
-  "date": "28082026",
+  "date": "20260828",
   "title": "Tonus Legs",
   "description": "Complete lower body session with 1.5 squats, paused lunges and glute bridge to sculpt and strengthen",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

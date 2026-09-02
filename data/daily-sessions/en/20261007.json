@@ -1,9 +1,11 @@
 {
-  "date": "07102026",
+  "date": "20261007",
   "title": "Total Body Powerhouse",
   "description": "Full body circuit with wall sit, Hindu push-ups, side plank and walking lunges, 3 rounds",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

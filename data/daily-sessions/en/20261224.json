@@ -1,9 +1,11 @@
 {
-  "date": "24122026",
+  "date": "20261224",
   "title": "EMOM Clockwork",
   "description": "10-minute EMOM cycling through decline push-ups, jump squats and bicycle crunches",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

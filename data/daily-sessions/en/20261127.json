@@ -1,9 +1,11 @@
 {
-  "date": "27112026",
+  "date": "20261127",
   "title": "Shoulders & Back Superset",
   "description": "Shoulders-back supersets with pike push-ups and floor face pulls for a balanced upper body",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

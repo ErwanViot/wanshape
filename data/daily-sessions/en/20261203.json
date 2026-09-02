@@ -1,9 +1,11 @@
 {
-  "date": "03122026",
+  "date": "20261203",
   "title": "Cardio Crossfire",
   "description": "HIIT combo of burpees and jump lunges then tabata mountain climbers and russian twists for intense cardio",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "14082026",
+  "date": "20260814",
   "title": "Tabata Fury",
   "description": "High-intensity tabata with high knees, no-push-up burpees and skaters to boost cardio fitness",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

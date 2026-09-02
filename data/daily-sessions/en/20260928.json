@@ -1,9 +1,11 @@
 {
-  "date": "28092026",
+  "date": "20260928",
   "title": "Full Body Antagonists",
   "description": "Full body antagonist supersets: incline push-ups, 1.5 squats and chair dips for a complete session",
   "estimatedDuration": 30,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "02092026",
+  "date": "20260902",
   "title": "Sangle Sup Force",
   "description": "Renforcement haut du corps axé poitrine et dos avec pompes archer et prone Y raises en 3 séries",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

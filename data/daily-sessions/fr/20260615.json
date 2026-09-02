@@ -1,9 +1,11 @@
 {
-  "date": "15062026",
+  "date": "20260615",
   "title": "EMOM Précision",
   "description": "12 minutes EMOM avec pompes, squats et mountain climbers : intensité maîtrisée chaque minute",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

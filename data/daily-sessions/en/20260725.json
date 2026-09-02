@@ -1,9 +1,11 @@
 {
-  "date": "25072026",
+  "date": "20260725",
   "title": "Strength Superset Pro",
   "description": "3-pair upper body supersets: decline push-ups, dips and inverse rows in 3 sets",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "28092026",
+  "date": "20260928",
   "title": "Antagonistes Full Body",
   "description": "Supersets antagonistes full body : pompes inclinées, squats 1.5 et dips sur chaise pour un travail complet",
   "estimatedDuration": 30,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

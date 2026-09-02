@@ -1,9 +1,11 @@
 {
-  "date": "15122026",
+  "date": "20261215",
   "title": "Iron Arms & Back",
   "description": "Upper body push-pull strength with archer push-ups, pike push-ups and floor face pulls",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

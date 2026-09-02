@@ -1,9 +1,11 @@
 {
-  "date": "12062026",
+  "date": "20260612",
   "title": "4 Minutes de Feu",
   "description": "Tabata intense : burpees, squat jumps, high knees et flutter kicks pour un cardio explosif",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

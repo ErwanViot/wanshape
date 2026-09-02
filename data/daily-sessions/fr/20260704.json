@@ -1,9 +1,11 @@
 {
-  "date": "04072026",
+  "date": "20260704",
   "title": "Push-Pull Superset",
   "description": "Supersets push-pull ciblés : pectoraux vs dos en 3 séries intenses pour un équilibre parfait",
   "estimatedDuration": 31,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

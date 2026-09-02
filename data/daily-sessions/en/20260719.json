@@ -1,9 +1,11 @@
 {
-  "date": "19072026",
+  "date": "20260719",
   "title": "Pyramid Pro",
   "description": "Jump squat pyramid going up and down, followed by a classic full body block",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,17 @@
     {
       "type": "pyramid",
       "name": "Jump Squat Pyramid",
-      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

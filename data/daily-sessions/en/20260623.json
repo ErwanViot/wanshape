@@ -1,9 +1,11 @@
 {
-  "date": "23062026",
+  "date": "20260623",
   "title": "Upper Strength",
   "description": "Two classic upper body blocks: chest-triceps push and complete back-shoulder pull",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

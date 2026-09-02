@@ -1,9 +1,11 @@
 {
-  "date": "07062026",
+  "date": "20260607",
   "title": "Push & Pull",
   "description": "Renforcement haut du corps en deux blocs : poussée avec pompes variées et tirage dos/épaules",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

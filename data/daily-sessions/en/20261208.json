@@ -1,9 +1,11 @@
 {
-  "date": "08122026",
+  "date": "20261208",
   "title": "Max Pulse",
   "description": "Intense HIIT with skaters, high knees, star jumps, box jumps and split squat jumps",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

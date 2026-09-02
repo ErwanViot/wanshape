@@ -1,9 +1,12 @@
 {
-  "date": "14122026",
+  "date": "20261214",
   "title": "Titan Legs",
   "description": "Powerful leg strength work with reverse lunges and pulse squats, finished with anti-rotation core",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

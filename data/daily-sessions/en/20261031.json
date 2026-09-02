@@ -1,9 +1,11 @@
 {
-  "date": "31102026",
+  "date": "20261031",
   "title": "Marble Chest",
   "description": "Complete upper-body push-pull: wide push-ups, pike push-ups, superman and back work",
   "estimatedDuration": 35,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

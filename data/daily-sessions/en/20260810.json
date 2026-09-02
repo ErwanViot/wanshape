@@ -1,9 +1,11 @@
 {
-  "date": "10082026",
+  "date": "20260810",
   "title": "Master Circuit",
   "description": "Full-body 3-round circuit alternating push, squat, plank and cardio for an efficient total workout",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

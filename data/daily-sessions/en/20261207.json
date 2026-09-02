@@ -1,9 +1,11 @@
 {
-  "date": "07122026",
+  "date": "20261207",
   "title": "Total Body Blast",
   "description": "Full 3-round circuit with squats, incline push-ups, plank, lunges and burpees without push-up",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

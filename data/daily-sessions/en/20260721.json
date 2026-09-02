@@ -1,9 +1,11 @@
 {
-  "date": "21072026",
+  "date": "20260721",
   "title": "AMRAP Pro",
   "description": "10 minutes non-stop: 1.5 squats, commando push-ups and leg raises to test endurance",
   "estimatedDuration": 28,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "25072026",
+  "date": "20260725",
   "title": "Superset Charge",
   "description": "Supersets haut du corps 3 paires : pompes déclives, dips et rowing inverse en 3 séries",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

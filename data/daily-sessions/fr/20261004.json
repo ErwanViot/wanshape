@@ -1,9 +1,11 @@
 {
-  "date": "04102026",
+  "date": "20261004",
   "title": "Structure Haute",
   "description": "Renforcement du haut du corps en push-pull : pompes larges, dips, rowing inversé et face pulls",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

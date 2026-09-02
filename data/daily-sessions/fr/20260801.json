@@ -1,9 +1,11 @@
 {
-  "date": "01082026",
+  "date": "20260801",
   "title": "HIIT Adrénaline",
   "description": "HIIT 3 rounds avec lateral bounds, star jumps et pop squats pour booster l'adrénaline",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

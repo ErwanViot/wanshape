@@ -1,9 +1,12 @@
 {
-  "date": "17102026",
+  "date": "20261017",
   "title": "Jambes Puissantes",
   "description": "Bas du corps avec squats 1.5, fentes arrière et hip thrust, suivi d'un gainage dynamique complet",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

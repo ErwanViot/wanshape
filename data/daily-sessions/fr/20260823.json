@@ -1,9 +1,11 @@
 {
-  "date": "23082026",
+  "date": "20260823",
   "title": "Tabata Forte",
   "description": "Tabata 4 exercices explosive avec pop squats, mountain climbers et jump lunges pour un cardio intense",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

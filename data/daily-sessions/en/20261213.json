@@ -1,9 +1,11 @@
 {
-  "date": "13122026",
+  "date": "20261213",
   "title": "Meteor HIIT",
   "description": "Explosive intervals with squat jumps, tuck jumps and broad jumps for a high-intensity cardio blast",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

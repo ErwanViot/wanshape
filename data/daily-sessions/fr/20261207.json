@@ -1,9 +1,11 @@
 {
-  "date": "07122026",
+  "date": "20261207",
   "title": "Full Body Impact",
   "description": "Circuit complet de 3 rounds avec squats, pompes inclinées, gainage, fentes et burpees sans pompe",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

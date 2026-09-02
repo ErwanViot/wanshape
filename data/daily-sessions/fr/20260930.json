@@ -1,9 +1,11 @@
 {
-  "date": "30092026",
+  "date": "20260930",
   "title": "Ascension Totale",
   "description": "Pyramide de pompes puis renforcement complet en fentes, superman et V-ups pour tout le corps",
   "estimatedDuration": 36,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Pompes",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

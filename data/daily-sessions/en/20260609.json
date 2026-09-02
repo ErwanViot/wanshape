@@ -1,9 +1,12 @@
 {
-  "date": "09062026",
+  "date": "20260609",
   "title": "Solid Foundations",
   "description": "Legs and core in two classic blocks: squats and hip thrust followed by deep core work",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

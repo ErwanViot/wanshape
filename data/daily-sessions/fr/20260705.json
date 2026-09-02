@@ -1,9 +1,12 @@
 {
-  "date": "05072026",
+  "date": "20260705",
   "title": "Bas Granit",
   "description": "Deux blocs classiques bas du corps et core : squat isométrique, hip thrust unilatéral et dead bug",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

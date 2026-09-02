@@ -1,9 +1,11 @@
 {
-  "date": "10102026",
+  "date": "20261010",
   "title": "HIIT Éclair",
   "description": "HIIT plyométrique en tuck jumps, lateral bounds, depth jumps et burpees pour un cardio éclair",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "07082026",
+  "date": "20260807",
   "title": "AMRAP Master",
   "description": "Enchaînement non-stop de squats, pompes larges et gainage dynamique pour un maximum de rounds en 10 minutes",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

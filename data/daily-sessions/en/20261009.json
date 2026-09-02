@@ -1,9 +1,11 @@
 {
-  "date": "09102026",
+  "date": "20261009",
   "title": "Strong Shoulders & Back",
   "description": "Shoulders and back strength with pike push-ups, diamond push-ups, Superman and scapular push-ups",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "28122026",
+  "date": "20261228",
   "title": "EMOM Pulsation",
   "description": "EMOM de 10 minutes avec squat jumps, pompes diamant et toe touches pour pulser",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

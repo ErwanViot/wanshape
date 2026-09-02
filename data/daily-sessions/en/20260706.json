@@ -1,9 +1,11 @@
 {
-  "date": "06072026",
+  "date": "20260706",
   "title": "Tabata Volcano",
   "description": "Tabata 8 rounds of volcanic power: pop squats, v-ups, star jumps and no-push-up burpees",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "24082026",
+  "date": "20260824",
   "title": "Circuit Pyramide Master",
   "description": "Circuit dynamique 3 rounds suivi d'une pyramide de fentes sautées pour un full body progressif",
   "estimatedDuration": 38,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -68,7 +70,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Fentes Sautees",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

@@ -1,9 +1,11 @@
 {
-  "date": "16102026",
+  "date": "20261016",
   "title": "Circuit Storm",
   "description": "Full 3-round circuit mixing squats, incline push-ups, mountain climbers and burpees for total-body work",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

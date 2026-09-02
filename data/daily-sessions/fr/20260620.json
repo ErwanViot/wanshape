@@ -1,9 +1,11 @@
 {
-  "date": "20062026",
+  "date": "20260620",
   "title": "Tabata Explosif",
   "description": "Tabata intense : skaters, tuck jumps, mountain climbers et plyo push-ups pour décupler la puissance",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

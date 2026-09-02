@@ -1,9 +1,11 @@
 {
-  "date": "30062026",
+  "date": "20260630",
   "title": "Sculpted Upper",
   "description": "Two classic upper body blocks: chest-shoulder push and pull with archer push-ups",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

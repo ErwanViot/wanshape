@@ -1,9 +1,11 @@
 {
-  "date": "14102026",
+  "date": "20261014",
   "title": "Limitless Endurance",
   "description": "10-minute EMOM followed by an 8-minute AMRAP with walking lunges, V-ups and jump squats",
   "estimatedDuration": 36,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

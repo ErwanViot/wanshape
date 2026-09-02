@@ -1,9 +1,11 @@
 {
-  "date": "13082026",
+  "date": "20260813",
   "title": "Raw Upper",
   "description": "Classic push-pull chest and back strengthening to build a solid upper body in 3 sets",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

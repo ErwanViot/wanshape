@@ -1,9 +1,12 @@
 {
-  "date": "16072026",
+  "date": "20260716",
   "title": "Lower Charge",
   "description": "Lower body work with walking lunges and single-leg deadlift followed by an intense core",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

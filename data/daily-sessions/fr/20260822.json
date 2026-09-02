@@ -1,9 +1,12 @@
 {
-  "date": "22082026",
+  "date": "20260822",
   "title": "Bas Granit Plus",
   "description": "Renforcement bas du corps avec squats isométriques, fentes curtsy et hip thrust unilatéral",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "30082026",
+  "date": "20260830",
   "title": "Granite Circuit",
   "description": "Complete 3-round circuit with jump squats, push-ups and plank for an intense total body session",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

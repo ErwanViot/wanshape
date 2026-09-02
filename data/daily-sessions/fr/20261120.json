@@ -1,9 +1,11 @@
 {
-  "date": "20112026",
+  "date": "20261120",
   "title": "Circuit Total",
   "description": "Circuit de 3 rounds mêlant squats sautés, pompes inclinées, gainage et V-ups pour un corps complet",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

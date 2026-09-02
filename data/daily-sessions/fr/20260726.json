@@ -1,9 +1,11 @@
 {
-  "date": "26072026",
+  "date": "20260726",
   "title": "EMOM Sprint",
   "description": "EMOM 12 minutes avec fentes sautées, pompes et crunchs pour maintenir un rythme soutenu",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

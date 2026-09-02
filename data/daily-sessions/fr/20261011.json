@@ -1,9 +1,11 @@
 {
-  "date": "11102026",
+  "date": "20261011",
   "title": "Pyramide Titan",
   "description": "Pyramide de squats suivie d'un renforcement en fentes curtsy, pompes déclinées et leg raises",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -35,7 +37,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Squats",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

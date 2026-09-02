@@ -1,9 +1,11 @@
 {
-  "date": "07072026",
+  "date": "20260707",
   "title": "Full Body Charge",
   "description": "Circuit complet 3 rounds enchaînant squats, pompes, fentes et gainage pour un effort total",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "25122026",
+  "date": "20261225",
   "title": "Double Detonation",
   "description": "Explosive HIIT with tuck jumps and squat jumps followed by a mountain climbers tabata",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

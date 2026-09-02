@@ -1,9 +1,11 @@
 {
-  "date": "31082026",
+  "date": "20260831",
   "title": "Raw AMRAP",
   "description": "10-minute AMRAP with walking lunges, decline push-ups and sit-ups for maximum endurance",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "13082026",
+  "date": "20260813",
   "title": "Upper Brut",
   "description": "Développé poitrine et renforcement dorsal en classic push-pull pour bâtir un haut du corps solide",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

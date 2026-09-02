@@ -1,9 +1,11 @@
 {
-  "date": "09122026",
+  "date": "20261209",
   "title": "Concrete Pyramid",
   "description": "Crunch pyramid followed by full-body strength work with squats, wide push-ups and leg raises",
   "estimatedDuration": 38,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -35,7 +37,15 @@
     {
       "type": "pyramid",
       "name": "Crunch Pyramid",
-      "pattern": [4, 6, 8, 10, 8, 6, 4],
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
       "restBetweenSets": 20,
       "exercises": [
         {

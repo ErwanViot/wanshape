@@ -1,9 +1,11 @@
 {
-  "date": "07072026",
+  "date": "20260707",
   "title": "Full Body Charge",
   "description": "3-round full body circuit combining squats, push-ups, lunges and plank for total effort",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "21122026",
+  "date": "20261221",
   "title": "Push & Pull Power",
   "description": "Upper body push-pull strength session with wide push-ups, chair dips and inverted rows",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "23072026",
+  "date": "20260723",
   "title": "Circuit Challenge",
   "description": "Versatile 3-round circuit mixing strength, cardio and core for a complete workout",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

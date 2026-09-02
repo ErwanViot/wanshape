@@ -1,9 +1,11 @@
 {
-  "date": "26072026",
+  "date": "20260726",
   "title": "EMOM Sprint",
   "description": "12-minute EMOM with jump lunges, push-ups and crunches to maintain a sustained pace",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

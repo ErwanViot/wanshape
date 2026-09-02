@@ -1,9 +1,11 @@
 {
-  "date": "20102026",
+  "date": "20261020",
   "title": "EMOM Tempo",
   "description": "EMOM de 10 minutes avec dips sur chaise, squats 1.5 et mountain climbers pour un cardio chrono intense",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

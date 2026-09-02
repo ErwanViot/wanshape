@@ -1,9 +1,11 @@
 {
-  "date": "12102026",
+  "date": "20261012",
   "title": "Max Endurance AMRAP",
   "description": "10-minute AMRAP with sumo squats, wide push-ups, alternating lunges and sit-ups to push your endurance limits",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

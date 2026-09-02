@@ -1,9 +1,11 @@
 {
-  "date": "19122026",
+  "date": "20261219",
   "title": "Rounds Infinis",
   "description": "AMRAP 10 minutes avec goblet squats, pompes hindu et fentes bulgares pour enchaîner un max de rounds",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

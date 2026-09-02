@@ -1,9 +1,11 @@
 {
-  "date": "03092026",
+  "date": "20260903",
   "title": "Pyramide Granit",
   "description": "Pyramide de crunchs suivie d'un renforcement classique full body pour une séance complète et progressive",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Mountain Climbers",
-      "pattern": [4, 6, 8, 10, 8, 6, 4],
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
       "restBetweenSets": 20,
       "exercises": [
         {

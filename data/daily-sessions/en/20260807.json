@@ -1,9 +1,11 @@
 {
-  "date": "07082026",
+  "date": "20260807",
   "title": "AMRAP Master",
   "description": "Non-stop squats, wide push-ups and dynamic core for maximum rounds in 10 minutes",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

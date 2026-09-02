@@ -1,9 +1,12 @@
 {
-  "date": "08102026",
+  "date": "20261008",
   "title": "Tabata Dynamite",
   "description": "Tabata explosif en squat jumps, pompes pliométriques, split squat jumps et mountain climbers",
   "estimatedDuration": 26,
-  "focus": ["cardio", "explosive"],
+  "focus": [
+    "cardio",
+    "explosive"
+  ],
   "blocks": [
     {
       "type": "warmup",

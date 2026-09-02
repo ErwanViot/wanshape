@@ -1,9 +1,11 @@
 {
-  "date": "10082026",
+  "date": "20260810",
   "title": "Circuit Master",
   "description": "Circuit complet 3 rounds alternant poussée, squat, gainage et cardio pour un full body efficace",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

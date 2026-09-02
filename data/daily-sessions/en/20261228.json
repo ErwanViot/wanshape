@@ -1,9 +1,11 @@
 {
-  "date": "28122026",
+  "date": "20261228",
   "title": "EMOM Pulse",
   "description": "10-minute EMOM with squat jumps, diamond push-ups and toe touches to keep the pulse up",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

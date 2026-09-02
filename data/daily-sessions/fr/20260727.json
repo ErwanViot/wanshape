@@ -1,9 +1,12 @@
 {
-  "date": "27072026",
+  "date": "20260727",
   "title": "Bas Sculpté",
   "description": "Travail complet jambes et fessiers avec squats bulgares, hip thrust unilatéral et stabilisation core",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

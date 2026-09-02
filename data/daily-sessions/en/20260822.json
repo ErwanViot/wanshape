@@ -1,9 +1,12 @@
 {
-  "date": "22082026",
+  "date": "20260822",
   "title": "Plus Granite Lower",
   "description": "Lower body strengthening with pulse squats, curtsy lunges and single-leg hip thrusts",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

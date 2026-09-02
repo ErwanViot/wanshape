@@ -1,9 +1,11 @@
 {
-  "date": "20102026",
+  "date": "20261020",
   "title": "Tempo EMOM Blast",
   "description": "10-minute EMOM with chair dips, 1.5 squats and mountain climbers for intense chrono cardio",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "15062026",
+  "date": "20260615",
   "title": "EMOM Precision",
   "description": "12-minute EMOM with push-ups, squats and mountain climbers: controlled intensity every minute",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

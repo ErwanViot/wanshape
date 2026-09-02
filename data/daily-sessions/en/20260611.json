@@ -1,9 +1,11 @@
 {
-  "date": "11062026",
+  "date": "20260611",
   "title": "Antagonists",
   "description": "Upper body antagonist supersets: push vs pull in 3 sets for muscular balance",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

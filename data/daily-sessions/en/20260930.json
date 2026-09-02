@@ -1,9 +1,11 @@
 {
-  "date": "30092026",
+  "date": "20260930",
   "title": "Total Body Climb",
   "description": "Push-up pyramid followed by a full-body strength block with lunges, Superman and V-ups",
   "estimatedDuration": 36,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,15 @@
     {
       "type": "pyramid",
       "name": "Push-up Pyramid",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

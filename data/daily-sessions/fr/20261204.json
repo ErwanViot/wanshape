@@ -1,9 +1,11 @@
 {
-  "date": "04122026",
+  "date": "20261204",
   "title": "Max Rounds Feu",
   "description": "AMRAP explosif avec fentes alternées, squats pulse, pompes déclinées et bicycle crunchs",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

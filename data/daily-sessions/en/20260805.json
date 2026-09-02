@@ -1,9 +1,11 @@
 {
-  "date": "05082026",
+  "date": "20260805",
   "title": "Tabata Storm",
   "description": "8-round tabata with jump lunges, star jumps, flutter kicks and shoulder tap plank",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

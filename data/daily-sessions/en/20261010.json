@@ -1,9 +1,11 @@
 {
-  "date": "10102026",
+  "date": "20261010",
   "title": "Lightning HIIT",
   "description": "Plyometric HIIT with tuck jumps, lateral bounds, depth jumps and burpees for lightning cardio",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

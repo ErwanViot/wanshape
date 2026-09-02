@@ -1,9 +1,12 @@
 {
-  "date": "05122026",
+  "date": "20261205",
   "title": "Legs & Core Blitz",
   "description": "Unilateral legs with Bulgarian split squats and Romanian deadlift, deep plank core and leg raises",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

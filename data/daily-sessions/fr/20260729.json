@@ -1,9 +1,11 @@
 {
-  "date": "29072026",
+  "date": "20260729",
   "title": "Athletic Tour",
   "description": "Circuit athlétique 3 rounds combinant force, agilité et endurance pour un effort total",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "14102026",
+  "date": "20261014",
   "title": "Endurance Sans Limite",
   "description": "EMOM de 10 minutes suivi d'un AMRAP de 8 minutes avec fentes marchées, V-ups et squats sautés",
   "estimatedDuration": 36,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

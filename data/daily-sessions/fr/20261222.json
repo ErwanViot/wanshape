@@ -1,9 +1,11 @@
 {
-  "date": "22122026",
+  "date": "20261222",
   "title": "Circuit Volcan",
   "description": "Circuit 3 rounds mêlant squats sumo, pompes inclinées, gainage latéral et mountain climbers",
   "estimatedDuration": 33,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

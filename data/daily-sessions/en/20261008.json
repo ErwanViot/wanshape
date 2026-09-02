@@ -1,9 +1,12 @@
 {
-  "date": "08102026",
+  "date": "20261008",
   "title": "Tabata Blast",
   "description": "Explosive tabata with squat jumps, plyo push-ups, split squat jumps and mountain climbers",
   "estimatedDuration": 26,
-  "focus": ["cardio", "explosive"],
+  "focus": [
+    "cardio",
+    "explosive"
+  ],
   "blocks": [
     {
       "type": "warmup",

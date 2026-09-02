@@ -1,9 +1,11 @@
 {
-  "date": "26062026",
+  "date": "20260626",
   "title": "Duo Antagoniste",
   "description": "Supersets antagonistes ciblés : paires squat-hinge pour cuisses et fessiers en harmonie",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

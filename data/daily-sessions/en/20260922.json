@@ -1,9 +1,11 @@
 {
-  "date": "22092026",
+  "date": "20260922",
   "title": "Full Body Superset",
   "description": "Full body push-pull and squat-hinge supersets: archer push-ups, pulse squats and pike push-ups",
   "estimatedDuration": 30,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

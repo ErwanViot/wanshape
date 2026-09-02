@@ -1,9 +1,11 @@
 {
-  "date": "27082026",
+  "date": "20260827",
   "title": "HIIT Lava",
   "description": "HIIT enflammé avec tuck jumps, lateral bounds et mountain climbers pour élever le rythme cardiaque",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "08072026",
+  "date": "20260708",
   "title": "Sculpted Chest",
   "description": "Upper body strength with push and pull: varied push-ups and back reinforcement in 2 blocks",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

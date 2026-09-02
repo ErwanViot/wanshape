@@ -1,9 +1,12 @@
 {
-  "date": "01102026",
+  "date": "20261001",
   "title": "Tabata Étincelle",
   "description": "Tabata intense en squat jumps, tuck jumps, skaters et broad jumps pour un cardio explosif",
   "estimatedDuration": 26,
-  "focus": ["cardio", "explosive"],
+  "focus": [
+    "cardio",
+    "explosive"
+  ],
   "blocks": [
     {
       "type": "warmup",

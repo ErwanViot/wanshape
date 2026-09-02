@@ -1,9 +1,11 @@
 {
-  "date": "18072026",
+  "date": "20260718",
   "title": "Tabata Bombe",
   "description": "Tabata 8 rounds explosifs avec burpees, pop squats, mountain climbers et v-ups",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

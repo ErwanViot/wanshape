@@ -1,9 +1,11 @@
 {
-  "date": "26122026",
+  "date": "20261226",
   "title": "Power Circuit",
   "description": "Powerful 6-exercise circuit: squats, commando push-ups, curtsy lunges and burpees",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

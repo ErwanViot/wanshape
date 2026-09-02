@@ -1,9 +1,11 @@
 {
-  "date": "24062026",
+  "date": "20260624",
   "title": "AMRAP Sprint",
   "description": "10-minute explosive AMRAP with commando push-ups, jump squats and crunches to beat your record",
   "estimatedDuration": 28,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

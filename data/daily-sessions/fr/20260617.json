@@ -1,9 +1,11 @@
 {
-  "date": "17062026",
+  "date": "20260617",
   "title": "Buste d'Acier",
   "description": "Haut du corps en deux blocs classiques : poussée avec pompes variées et tirage dos renforcé",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

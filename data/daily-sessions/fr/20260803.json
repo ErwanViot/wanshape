@@ -1,9 +1,11 @@
 {
-  "date": "03082026",
+  "date": "20260803",
   "title": "Twin Antagoniste",
   "description": "Supersets haut du corps en paires antagonistes pour un développement musculaire équilibré",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

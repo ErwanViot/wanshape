@@ -1,9 +1,11 @@
 {
-  "date": "08122026",
+  "date": "20261208",
   "title": "Pulsations Max",
   "description": "HIIT intense avec skaters, high knees, star jumps, box jumps et split squat jumps",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

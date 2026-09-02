@@ -1,9 +1,11 @@
 {
-  "date": "12072026",
+  "date": "20260712",
   "title": "Superset Pro",
   "description": "Supersets antagonistes haut du corps : paires push-pull pour un effort équilibré et efficace",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

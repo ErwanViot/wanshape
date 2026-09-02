@@ -1,9 +1,11 @@
 {
-  "date": "11122026",
+  "date": "20261211",
   "title": "Volcano AMRAP",
   "description": "10-minute AMRAP with jump squats, incline push-ups and mountain climbers to push your limits",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

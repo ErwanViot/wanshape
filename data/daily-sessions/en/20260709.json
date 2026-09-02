@@ -1,9 +1,11 @@
 {
-  "date": "09072026",
+  "date": "20260709",
   "title": "AMRAP Challenge",
   "description": "Maximum rounds in 10 minutes with sumo squats, push-ups and crunches back to back",
   "estimatedDuration": 28,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

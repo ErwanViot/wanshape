@@ -1,9 +1,11 @@
 {
-  "date": "09102026",
+  "date": "20261009",
   "title": "Épaules & Dos Solides",
   "description": "Renforcement épaules et dos en pike push-ups, pompes diamant, superman et scapular push-ups",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "15082026",
+  "date": "20260815",
   "title": "Pyramide Master",
   "description": "Pyramide de pompes classiques montante et descendante suivie d'un circuit full body de renforcement",
   "estimatedDuration": 36,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -34,7 +36,17 @@
     {
       "type": "pyramid",
       "name": "Pyramide Pompes",
-      "pattern": [2, 4, 6, 8, 10, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

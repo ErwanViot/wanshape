@@ -1,9 +1,11 @@
 {
-  "date": "24072026",
+  "date": "20260724",
   "title": "Combo Cardio Express",
   "description": "HIIT 3 rounds explosifs enchaîné avec un Tabata 8 rounds pour un cardio double dose",
   "estimatedDuration": 30,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

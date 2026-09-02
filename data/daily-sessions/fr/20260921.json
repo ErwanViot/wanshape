@@ -1,9 +1,11 @@
 {
-  "date": "21092026",
+  "date": "20260921",
   "title": "HIIT Ouragan",
   "description": "Intervalles de 3 rounds en squat jumps, star jumps et plyo push-ups pour une explosion cardio totale",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

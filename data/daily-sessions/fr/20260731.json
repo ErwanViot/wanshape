@@ -1,9 +1,11 @@
 {
-  "date": "31072026",
+  "date": "20260731",
   "title": "Defi Cardio Total",
   "description": "EMOM 10 minutes puis AMRAP 8 minutes pour une endurance cardio redoutable",
   "estimatedDuration": 35,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

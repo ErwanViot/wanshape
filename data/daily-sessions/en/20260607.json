@@ -1,9 +1,11 @@
 {
-  "date": "07062026",
+  "date": "20260607",
   "title": "Push & Pull",
   "description": "Upper body strength in two blocks: push with varied push-ups and back/shoulder pull",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

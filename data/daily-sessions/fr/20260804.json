@@ -1,9 +1,11 @@
 {
-  "date": "04082026",
+  "date": "20260804",
   "title": "Pyramide Full",
   "description": "Circuit athlétique puis pyramide de mountain climbers pour une séance full body complète",
   "estimatedDuration": 36,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -67,7 +69,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Mountain Climbers",
-      "pattern": [4, 6, 8, 10, 8, 6, 4],
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
       "restBetweenSets": 20,
       "exercises": [
         {

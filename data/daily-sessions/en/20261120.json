@@ -1,9 +1,11 @@
 {
-  "date": "20112026",
+  "date": "20261120",
   "title": "Total Circuit",
   "description": "3-round circuit blending jump squats, incline push-ups, plank and V-ups for a complete full-body burn",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

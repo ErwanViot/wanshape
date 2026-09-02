@@ -1,9 +1,11 @@
 {
-  "date": "25062026",
+  "date": "20260625",
   "title": "Intervalles Infernaux",
   "description": "3 rounds HIIT explosifs enchaînant depth jumps, pop squats, high knees et plyo push-ups",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

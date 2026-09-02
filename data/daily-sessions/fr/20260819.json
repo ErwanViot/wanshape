@@ -1,9 +1,11 @@
 {
-  "date": "19082026",
+  "date": "20260819",
   "title": "AMRAP Granit",
   "description": "AMRAP 12 minutes avec goblet squat, pompes commando et V-ups pour tester l'endurance globale",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

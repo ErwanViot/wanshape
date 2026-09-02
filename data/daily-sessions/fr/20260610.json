@@ -1,9 +1,11 @@
 {
-  "date": "10062026",
+  "date": "20260610",
   "title": "AMRAP Marathon",
   "description": "12 minutes non-stop pour accumuler le maximum de rounds avec squats, burpees sans pompe et v-ups",
   "estimatedDuration": 30,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

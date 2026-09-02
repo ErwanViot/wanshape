@@ -1,9 +1,11 @@
 {
-  "date": "15102026",
+  "date": "20261015",
   "title": "Haut du Corps Roc",
   "description": "Renforcement haut du corps en push-pull : pompes diamant, dips et superman alterné pour un buste solide",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

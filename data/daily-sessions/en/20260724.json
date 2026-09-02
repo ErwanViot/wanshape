@@ -1,9 +1,11 @@
 {
-  "date": "24072026",
+  "date": "20260724",
   "title": "Express Cardio Combo",
   "description": "3-round explosive HIIT chained with an 8-round Tabata for a double-dose cardio session",
   "estimatedDuration": 30,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

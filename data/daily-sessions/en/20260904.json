@@ -1,9 +1,12 @@
 {
-  "date": "04092026",
+  "date": "20260904",
   "title": "Sculpt Lower",
   "description": "Lower body session with assisted pistol squat, lateral lunges and table reverse hyper to sculpt legs and glutes",
   "estimatedDuration": 34,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

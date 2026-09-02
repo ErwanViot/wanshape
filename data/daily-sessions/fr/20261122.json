@@ -1,9 +1,11 @@
 {
-  "date": "22112026",
+  "date": "20261122",
   "title": "Superset Push Pull",
   "description": "Supersets push-pull en 3 sets avec pompes commando et reverse snow angels pour un haut du corps dense",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

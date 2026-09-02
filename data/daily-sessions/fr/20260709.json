@@ -1,9 +1,11 @@
 {
-  "date": "09072026",
+  "date": "20260709",
   "title": "AMRAP Defi",
   "description": "Maximum de rounds en 10 minutes avec squats sumo, pompes et crunchs enchaînés",
   "estimatedDuration": 28,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

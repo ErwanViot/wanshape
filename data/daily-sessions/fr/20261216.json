@@ -1,9 +1,11 @@
 {
-  "date": "16122026",
+  "date": "20261216",
   "title": "EMOM Discipline",
   "description": "EMOM de 12 minutes alternant dips, squats 1.5 et bicycle crunchs pour une endurance musculaire totale",
   "estimatedDuration": 28,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

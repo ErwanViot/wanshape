@@ -1,9 +1,11 @@
 {
-  "date": "25112026",
+  "date": "20261125",
   "title": "Iron Endurance",
   "description": "10-minute EMOM followed by an 8-minute AMRAP to truly test your iron endurance",
   "estimatedDuration": 36,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

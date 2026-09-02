@@ -1,9 +1,11 @@
 {
-  "date": "02092026",
+  "date": "20260902",
   "title": "Upper Sling Strength",
   "description": "Chest and back strengthening with archer push-ups and prone Y raises in 3 structured sets",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

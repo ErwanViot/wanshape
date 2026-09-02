@@ -1,9 +1,11 @@
 {
-  "date": "12082026",
+  "date": "20260812",
   "title": "EMOM Master",
   "description": "EMOM 10 minutes avec pompes, squats et mountain climbers : une répétition à la minute pour l'endurance",
   "estimatedDuration": 28,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

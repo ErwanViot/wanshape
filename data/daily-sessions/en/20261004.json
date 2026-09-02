@@ -1,9 +1,11 @@
 {
-  "date": "04102026",
+  "date": "20261004",
   "title": "Upper Body Framework",
   "description": "Upper body push-pull strength: wide push-ups, chair dips, inverted rows and face pulls",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

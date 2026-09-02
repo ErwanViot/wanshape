@@ -1,9 +1,11 @@
 {
-  "date": "01072026",
+  "date": "20260701",
   "title": "Endurance Totale",
   "description": "EMOM 10 min puis AMRAP 8 min : la combinaison ultime pour développer endurance et puissance",
   "estimatedDuration": 36,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

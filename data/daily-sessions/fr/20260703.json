@@ -1,9 +1,11 @@
 {
-  "date": "03072026",
+  "date": "20260703",
   "title": "HIIT Machine",
   "description": "3 rounds HIIT non-stop : lateral bounds, single leg hops, burpees et high knees pour une cardio intense",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

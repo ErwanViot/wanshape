@@ -1,9 +1,11 @@
 {
-  "date": "22062026",
+  "date": "20260622",
   "title": "Circuit Pyramidal",
   "description": "Circuit 3 rounds suivi d'une pyramide de squats : montée en puissance progressive full body",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -68,7 +70,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Squats Sumo",
-      "pattern": [4, 6, 8, 10, 8, 6, 4],
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

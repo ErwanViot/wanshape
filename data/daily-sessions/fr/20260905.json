@@ -1,9 +1,11 @@
 {
-  "date": "05092026",
+  "date": "20260905",
   "title": "Combo Cardio Brut",
   "description": "Combo HIIT explosif + Tabata core pour une session cardio-intensité maximale en fin de cycle",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

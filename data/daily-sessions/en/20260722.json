@@ -1,9 +1,12 @@
 {
-  "date": "22072026",
+  "date": "20260722",
   "title": "Robust Legs",
   "description": "Robust legs session with hip thrusts, curtsy lunges and floor core work",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

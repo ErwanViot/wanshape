@@ -1,9 +1,11 @@
 {
-  "date": "23092026",
+  "date": "20260923",
   "title": "Combo Haute Tension",
   "description": "HIIT 3 rounds en sauts et burpees puis tabata scissors et leg raises pour intensité maximale",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "21102026",
+  "date": "20261021",
   "title": "Superset Torse",
   "description": "Supersets push-pull en 3 sets : pompes larges, rowing inversé, pompes commando et prone T raises",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

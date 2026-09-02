@@ -1,9 +1,12 @@
 {
-  "date": "29102026",
+  "date": "20261029",
   "title": "Concrete Base",
   "description": "Unilateral leg strength and full core work: Bulgarian lunges, hip thrust and planks",
   "estimatedDuration": 35,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

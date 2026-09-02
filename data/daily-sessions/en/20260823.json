@@ -1,9 +1,11 @@
 {
-  "date": "23082026",
+  "date": "20260823",
   "title": "Strong Tabata",
   "description": "4-exercise tabata with pop squats, mountain climbers and jump lunges for intense cardio power",
   "estimatedDuration": 26,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "29092026",
+  "date": "20260929",
   "title": "AMRAP Cadence",
   "description": "10-minute AMRAP of jump lunges, decline push-ups and pulse squats to finish on a steady cadence",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

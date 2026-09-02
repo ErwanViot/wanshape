@@ -1,9 +1,11 @@
 {
-  "date": "06122026",
+  "date": "20261206",
   "title": "Vertical Strength",
   "description": "Vertical strength with pike, archer and explosive push-ups, then superman and scapular push-ups",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

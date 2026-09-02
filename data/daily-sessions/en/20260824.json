@@ -1,9 +1,11 @@
 {
-  "date": "24082026",
+  "date": "20260824",
   "title": "Master Circuit Pyramid",
   "description": "Dynamic 3-round circuit followed by a jump lunge pyramid for progressive full-body challenge",
   "estimatedDuration": 38,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -68,7 +70,15 @@
     {
       "type": "pyramid",
       "name": "Jump Lunge Pyramid",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

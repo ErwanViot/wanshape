@@ -1,9 +1,11 @@
 {
-  "date": "06062026",
+  "date": "20260606",
   "title": "Circuit Full Body",
   "description": "Circuit complet 3 rounds alternant squats, pompes, fentes et gainage pour un travail total du corps",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

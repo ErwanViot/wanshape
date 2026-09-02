@@ -1,9 +1,11 @@
 {
-  "date": "13072026",
+  "date": "20260713",
   "title": "Circuit Pyramid Pro",
   "description": "3-round full body circuit then push-up pyramid for an intensive finish",
   "estimatedDuration": 36,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -69,7 +71,15 @@
     {
       "type": "pyramid",
       "name": "Push-up Pyramid",
-      "pattern": [2, 4, 6, 8, 6, 4, 2],
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        6,
+        4,
+        2
+      ],
       "restBetweenSets": 25,
       "exercises": [
         {

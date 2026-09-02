@@ -1,9 +1,11 @@
 {
-  "date": "20072026",
+  "date": "20260720",
   "title": "Antagonist Pulse",
   "description": "Push-pull antagonist supersets with archer push-ups and back extensions for a toned upper body",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

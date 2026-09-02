@@ -1,9 +1,11 @@
 {
-  "date": "12122026",
+  "date": "20261212",
   "title": "Full Body Turbine",
   "description": "Circuit 3 rounds mêlant squats, pompes larges, fentes, gainage et burpees pour un full body complet",
   "estimatedDuration": 32,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

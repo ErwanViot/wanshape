@@ -1,9 +1,11 @@
 {
-  "date": "12082026",
+  "date": "20260812",
   "title": "EMOM Master",
   "description": "10-minute EMOM with push-ups, squats and mountain climbers: structured reps every minute for endurance",
   "estimatedDuration": 28,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

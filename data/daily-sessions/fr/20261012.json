@@ -1,9 +1,11 @@
 {
-  "date": "12102026",
+  "date": "20261012",
   "title": "AMRAP Endurance Max",
   "description": "AMRAP de 10 minutes avec squats sumo, pompes larges, fentes alternées et sit-ups pour repousser l'endurance",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

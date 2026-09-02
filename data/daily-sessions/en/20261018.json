@@ -1,9 +1,11 @@
 {
-  "date": "18102026",
+  "date": "20261018",
   "title": "Cardio Fusion Blast",
   "description": "HIIT and Tabata combo with tuck jumps, broad jumps, skaters and V-ups for explosive full cardio",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

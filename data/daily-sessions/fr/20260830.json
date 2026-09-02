@@ -1,9 +1,11 @@
 {
-  "date": "30082026",
+  "date": "20260830",
   "title": "Circuit Granit",
   "description": "Circuit complet 3 rounds avec squats sautés, pompes et gainage pour un travail global intense",
   "estimatedDuration": 34,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

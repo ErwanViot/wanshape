@@ -1,9 +1,11 @@
 {
-  "date": "11062026",
+  "date": "20260611",
   "title": "Antagonistes",
   "description": "Supersets antagonistes haut du corps : pompes vs tirage en 3 séries pour un équilibre musculaire",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

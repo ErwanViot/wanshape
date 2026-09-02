@@ -1,9 +1,11 @@
 {
-  "date": "22112026",
+  "date": "20261122",
   "title": "Push-Pull Superset",
   "description": "Push-pull supersets across 3 sets with commando push-ups and reverse snow angels for a dense upper body",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

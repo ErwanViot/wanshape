@@ -1,9 +1,11 @@
 {
-  "date": "21112026",
+  "date": "20261121",
   "title": "Dynamo AMRAP Blast",
   "description": "10-minute AMRAP with reverse lunges, decline push-ups and sit-ups for maximum endurance",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

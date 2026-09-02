@@ -1,9 +1,11 @@
 {
-  "date": "03122026",
+  "date": "20261203",
   "title": "Cardio Feu Croisé",
   "description": "Combo HIIT burpees et jump lunges puis tabata mountain climbers et russian twists pour un cardio intense",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

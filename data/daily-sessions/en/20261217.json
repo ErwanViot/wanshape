@@ -1,9 +1,11 @@
 {
-  "date": "17122026",
+  "date": "20261217",
   "title": "Total Body Fusion",
   "description": "3-round circuit with isometric squat, decline push-ups, bear hold and walking lunges for a full body burn",
   "estimatedDuration": 32,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

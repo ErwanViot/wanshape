@@ -1,9 +1,11 @@
 {
-  "date": "25122026",
+  "date": "20261225",
   "title": "Double Détonation",
   "description": "HIIT explosif en tuck jumps et squat jumps suivi d'un tabata mountain climbers",
   "estimatedDuration": 31,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

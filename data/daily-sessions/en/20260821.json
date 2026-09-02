@@ -1,9 +1,11 @@
 {
-  "date": "21082026",
+  "date": "20260821",
   "title": "Raw Antagonist",
   "description": "Antagonist push-pull supersets: incline push-ups and back extensions for a balanced upper body",
   "estimatedDuration": 31,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

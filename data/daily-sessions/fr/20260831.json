@@ -1,9 +1,11 @@
 {
-  "date": "31082026",
+  "date": "20260831",
   "title": "AMRAP Brut",
   "description": "AMRAP 10 minutes avec fentes marchées, pompes déclinees et sit-ups pour une endurance maximale",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "18112026",
+  "date": "20261118",
   "title": "Buste Élancé",
   "description": "Poussée et tirage combinés : pompes larges, pike push-ups et rowing inversé pour un buste puissant",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

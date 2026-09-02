@@ -64,12 +64,23 @@ const EN_DIR = 'data/daily-sessions/en';
 const frPath = join(FR_DIR, `${dateKey}.json`);
 const enPath = join(EN_DIR, `${dateKey}.json`);
 
+// session_data.date is copied verbatim into session_completions.session_date
+// when the user finishes the session (EndScreen → useSaveCompletion) and must be
+// YYYYMMDD, i.e. identical to date_key. Refuse anything else up front.
+function assertDateField(path, session) {
+  if (session?.date !== dateKey) {
+    console.error(`${path}: session.date is "${session?.date}", expected "${dateKey}" (YYYYMMDD, same as the filename).`);
+    process.exit(1);
+  }
+  return session;
+}
+
 const rows = [];
 if (existsSync(frPath)) {
-  rows.push({ date_key: dateKey, locale: 'fr', session_data: JSON.parse(readFileSync(frPath, 'utf8')) });
+  rows.push({ date_key: dateKey, locale: 'fr', session_data: assertDateField(frPath, JSON.parse(readFileSync(frPath, 'utf8'))) });
 }
 if (existsSync(enPath)) {
-  rows.push({ date_key: dateKey, locale: 'en', session_data: JSON.parse(readFileSync(enPath, 'utf8')) });
+  rows.push({ date_key: dateKey, locale: 'en', session_data: assertDateField(enPath, JSON.parse(readFileSync(enPath, 'utf8'))) });
 }
 
 if (rows.length === 0) {

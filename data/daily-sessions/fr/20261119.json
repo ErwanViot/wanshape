@@ -1,9 +1,11 @@
 {
-  "date": "19112026",
+  "date": "20261119",
   "title": "EMOM Minute Chrono",
   "description": "EMOM de 10 minutes alternant squats, mountain climbers et burpees pour un cardio chronométré",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

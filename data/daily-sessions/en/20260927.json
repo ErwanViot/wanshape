@@ -1,9 +1,11 @@
 {
-  "date": "27092026",
+  "date": "20260927",
   "title": "Clock & Rounds",
   "description": "12-minute EMOM with jump squats and pike push-ups, then a 10-minute AMRAP of lunges and squats",
   "estimatedDuration": 34,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

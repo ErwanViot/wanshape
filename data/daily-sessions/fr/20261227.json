@@ -1,9 +1,12 @@
 {
-  "date": "27122026",
+  "date": "20261227",
   "title": "Jambes en Feu",
   "description": "Jambes en feu avec squats 1.5 et fentes avant, complété par un core résistance",
   "estimatedDuration": 33,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",

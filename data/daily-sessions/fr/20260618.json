@@ -1,9 +1,11 @@
 {
-  "date": "18062026",
+  "date": "20260618",
   "title": "Circuit Athlétique",
   "description": "Circuit 3 rounds full body enchaînant squat, pompes, gainage et cardio pour une forme athlétique",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

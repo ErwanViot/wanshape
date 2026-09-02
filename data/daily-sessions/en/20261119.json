@@ -1,9 +1,11 @@
 {
-  "date": "19112026",
+  "date": "20261119",
   "title": "EMOM Countdown",
   "description": "10-minute EMOM cycling through squats, mountain climbers and burpees for a timed cardio blast",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "04072026",
+  "date": "20260704",
   "title": "Push-Pull Superset",
   "description": "Targeted push-pull supersets: chest vs back in 3 intense sets for perfect balance",
   "estimatedDuration": 31,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

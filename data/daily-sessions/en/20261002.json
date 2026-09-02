@@ -1,9 +1,11 @@
 {
-  "date": "02102026",
+  "date": "20261002",
   "title": "Meteor Circuit",
   "description": "Full 3-round circuit mixing sumo squats, incline push-ups, plank holds and no-push burpees",
   "estimatedDuration": 33,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

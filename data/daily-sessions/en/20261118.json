@@ -1,9 +1,11 @@
 {
-  "date": "18112026",
+  "date": "20261118",
   "title": "Sculpted Upper Body",
   "description": "Combined push and pull work: wide push-ups, pike push-ups and inverted rows for a powerful upper body",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

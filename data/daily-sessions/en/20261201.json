@@ -1,9 +1,11 @@
 {
-  "date": "01122026",
+  "date": "20261201",
   "title": "Relentless Rhythm",
   "description": "3-round HIIT with squat jumps, broad jumps, star jumps, high knees and skaters for explosive cardio",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

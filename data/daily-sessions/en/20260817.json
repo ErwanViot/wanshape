@@ -1,9 +1,11 @@
 {
-  "date": "17082026",
+  "date": "20260817",
   "title": "Cardio Charge",
   "description": "Powerful cardio HIIT with broad jumps, skaters and burpees for maximum calorie burn",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

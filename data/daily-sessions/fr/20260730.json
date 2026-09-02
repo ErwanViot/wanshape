@@ -1,9 +1,11 @@
 {
-  "date": "30072026",
+  "date": "20260730",
   "title": "Push-Pull Pro",
   "description": "Renforcement haut du corps push-pull en blocs classiques : pompes variées et dos mobilisé",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

@@ -1,9 +1,11 @@
 {
-  "date": "06082026",
+  "date": "20260806",
   "title": "Sangle Sup Pro",
   "description": "Force du haut du corps : travail de la sangle abdominale et pompes variées en 2 blocs complets",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

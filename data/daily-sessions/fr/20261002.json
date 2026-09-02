@@ -1,9 +1,11 @@
 {
-  "date": "02102026",
+  "date": "20261002",
   "title": "Circuit Météore",
   "description": "Circuit complet de 3 rounds mêlant squats sumo, pompes inclinées, gainage et burpees sans pompe",
   "estimatedDuration": 33,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

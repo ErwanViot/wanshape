@@ -1,9 +1,11 @@
 {
-  "date": "08082026",
+  "date": "20260808",
   "title": "HIIT Rage",
   "description": "Rafale cardio intense avec burpees, jump lunges et star jumps pour brûler les calories",
   "estimatedDuration": 27,
-  "focus": ["cardio"],
+  "focus": [
+    "cardio"
+  ],
   "blocks": [
     {
       "type": "warmup",

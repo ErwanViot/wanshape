@@ -1,9 +1,11 @@
 {
-  "date": "02072026",
+  "date": "20260702",
   "title": "Solid Pyramid",
   "description": "Crunch pyramid followed by full classic strength: squats, push-ups and plank",
   "estimatedDuration": 37,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -35,7 +37,15 @@
     {
       "type": "pyramid",
       "name": "Crunch Pyramid",
-      "pattern": [5, 8, 10, 12, 10, 8, 5],
+      "pattern": [
+        5,
+        8,
+        10,
+        12,
+        10,
+        8,
+        5
+      ],
       "restBetweenSets": 20,
       "exercises": [
         {

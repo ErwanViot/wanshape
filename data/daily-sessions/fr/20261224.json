@@ -1,9 +1,11 @@
 {
-  "date": "24122026",
+  "date": "20261224",
   "title": "EMOM Horloge",
   "description": "EMOM de 10 minutes alternant pompes déclinées, squats sautés et bicycle crunchs",
   "estimatedDuration": 29,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

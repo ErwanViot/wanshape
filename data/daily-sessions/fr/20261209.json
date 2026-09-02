@@ -1,9 +1,11 @@
 {
-  "date": "09122026",
+  "date": "20261209",
   "title": "Pyramide Béton",
   "description": "Pyramide de crunchs suivie d'un renforcement complet avec squats, pompes larges et leg raises",
   "estimatedDuration": 38,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",
@@ -35,7 +37,15 @@
     {
       "type": "pyramid",
       "name": "Pyramide Crunchs",
-      "pattern": [4, 6, 8, 10, 8, 6, 4],
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
       "restBetweenSets": 20,
       "exercises": [
         {

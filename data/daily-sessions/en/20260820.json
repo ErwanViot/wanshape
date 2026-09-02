@@ -1,9 +1,11 @@
 {
-  "date": "20082026",
+  "date": "20260820",
   "title": "Full Body Master",
   "description": "3-round circuit mixing squats, push-ups, core and plyometrics for a complete and balanced workout",
   "estimatedDuration": 35,
-  "focus": ["full-body"],
+  "focus": [
+    "full-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

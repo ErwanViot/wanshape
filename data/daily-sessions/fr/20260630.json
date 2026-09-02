@@ -1,9 +1,11 @@
 {
-  "date": "30062026",
+  "date": "20260630",
   "title": "Haut Sculpté",
   "description": "Deux blocs classiques haut du corps : poussée poitrine-épaules et tirage avec pompes archer",
   "estimatedDuration": 33,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

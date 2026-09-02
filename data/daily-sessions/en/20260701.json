@@ -1,9 +1,11 @@
 {
-  "date": "01072026",
+  "date": "20260701",
   "title": "Total Endurance",
   "description": "EMOM 10 min then AMRAP 8 min: the ultimate combination to build endurance and power",
   "estimatedDuration": 36,
-  "focus": ["endurance"],
+  "focus": [
+    "endurance"
+  ],
   "blocks": [
     {
       "type": "warmup",

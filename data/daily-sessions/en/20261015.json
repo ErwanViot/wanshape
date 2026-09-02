@@ -1,9 +1,11 @@
 {
-  "date": "15102026",
+  "date": "20261015",
   "title": "Rock-Solid Upper Body",
   "description": "Upper body push-pull strength: diamond push-ups, chair dips and alternating superman for a rock-solid torso",
   "estimatedDuration": 34,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

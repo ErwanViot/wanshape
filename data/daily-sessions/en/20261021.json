@@ -1,9 +1,11 @@
 {
-  "date": "21102026",
+  "date": "20261021",
   "title": "Chest & Back Superset",
   "description": "Push-pull supersets in 3 sets: wide push-ups, inverted rows, commando push-ups and prone T raises",
   "estimatedDuration": 32,
-  "focus": ["upper-body"],
+  "focus": [
+    "upper-body"
+  ],
   "blocks": [
     {
       "type": "warmup",

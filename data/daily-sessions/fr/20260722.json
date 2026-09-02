@@ -1,9 +1,12 @@
 {
-  "date": "22072026",
+  "date": "20260722",
   "title": "Jambes Robustes",
   "description": "Séance jambes robustes avec hip thrust, fentes curtsy et core au sol",
   "estimatedDuration": 32,
-  "focus": ["lower-body", "core"],
+  "focus": [
+    "lower-body",
+    "core"
+  ],
   "blocks": [
     {
       "type": "warmup",
