@@ -1,0 +1,117 @@
+{
+  "date": "20260617",
+  "title": "Steel Chest",
+  "description": "Upper body in two classic blocks: push with varied push-ups and reinforced back pull",
+  "estimatedDuration": 34,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Plank to downward dog",
+          "duration": 40,
+          "instructions": "Alternate between high plank and downward dog position"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Sculpt",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Hindu push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Dive movement: pike down then sweep up in an arc"
+        },
+        {
+          "name": "Archer push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "One arm extended to the side, lower toward the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Reinforcement",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Inverse table rows",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Under a table, pull chest toward the edge"
+        },
+        {
+          "name": "Reverse snow angels",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, arms along the body, arc on the floor"
+        },
+        {
+          "name": "Back extensions",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, lift torso off the floor, squeeze shoulder blades"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

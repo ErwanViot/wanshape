@@ -1,0 +1,136 @@
+{
+  "date": "20260912",
+  "title": "Upper Body Pillars",
+  "description": "Explosive push (Hindu, archer push-ups) and a full back pull with 4 exercises each",
+  "estimatedDuration": 34,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Step-ups",
+          "duration": 45,
+          "instructions": "Step up and down alternating legs"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 40,
+          "instructions": "On all fours, alternate rounding and arching your back, breathe"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 40,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Explosive Push",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Hindu push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 65,
+          "instructions": "Diving motion: swoop down then rise back up in an arc"
+        },
+        {
+          "name": "Archer push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "One arm extended to the side, lower toward the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Explosive push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "Push hard enough for your hands to leave the floor"
+        },
+        {
+          "name": "Incline push-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "Hands on an elevated surface, easier variation"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Back Pull",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Back extensions",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "Lying face down, lift your torso off the floor, squeeze shoulder blades"
+        },
+        {
+          "name": "Scapular push-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "In a plank, squeeze and spread shoulder blades without bending elbows"
+        },
+        {
+          "name": "Prone Y raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "Face down, arms in a Y position, lift and hold 2s"
+        },
+        {
+          "name": "Superman",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 65,
+          "instructions": "Lying face down, lift arms and legs at the same time, hold 2s"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate your body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind your head, pull the elbow with your other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

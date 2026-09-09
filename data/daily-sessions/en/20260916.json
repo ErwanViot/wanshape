@@ -1,0 +1,113 @@
+{
+  "date": "20260916",
+  "title": "Marathon Circuit",
+  "description": "6-exercise circuit over 5 rounds: broad jumps, sit-ups, curtsy lunges and bear hold",
+  "estimatedDuration": 33,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Step toe taps",
+          "duration": 45,
+          "instructions": "Tap your foot on a step alternating quickly"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Marathon Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 20,
+      "restBetweenRounds": 75,
+      "exercises": [
+        {
+          "name": "Broad jumps",
+          "mode": "reps",
+          "instructions": "Long jumps forward, land softly and repeat",
+          "reps": 8
+        },
+        {
+          "name": "Sit-ups",
+          "mode": "reps",
+          "instructions": "Back on the floor, sit all the way up, touch your feet",
+          "reps": 14
+        },
+        {
+          "name": "Curtsy lunges",
+          "mode": "reps",
+          "instructions": "Cross your leg behind diagonally",
+          "reps": 10,
+          "bilateral": true
+        },
+        {
+          "name": "Bear hold",
+          "mode": "timed",
+          "instructions": "On all fours, knees hovering 2cm off the floor, hold",
+          "duration": 30
+        },
+        {
+          "name": "Skaters",
+          "mode": "timed",
+          "instructions": "Lateral jumps from foot to foot, arms swinging",
+          "duration": 30
+        },
+        {
+          "name": "Toe touches",
+          "mode": "reps",
+          "instructions": "Back on the floor, legs vertical, touch your feet with your hands",
+          "reps": 14
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

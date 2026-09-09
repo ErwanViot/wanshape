@@ -1,0 +1,88 @@
+{
+  "date": "20261020",
+  "title": "Tempo EMOM Blast",
+  "description": "10-minute EMOM with chair dips, 1.5 squats and mountain climbers for intense chrono cardio",
+  "estimatedDuration": 30,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Cat-Cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Chrono EMOM",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Chair dips",
+          "reps": 10,
+          "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+        },
+        {
+          "name": "1.5 squats",
+          "reps": 10,
+          "instructions": "Lower down, rise halfway, lower again, then rise all the way"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 15,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

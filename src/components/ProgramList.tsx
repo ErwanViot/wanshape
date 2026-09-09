@@ -1,4 +1,4 @@
-import { ChevronRight, Play, Rocket, Sparkles } from 'lucide-react';
+import { ChevronRight, Loader2, Play, Rocket, Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -9,6 +9,7 @@ import { useUserPrograms } from '../hooks/useUserPrograms.ts';
 import { supabase } from '../lib/supabase.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 import { localizedProgramFields } from '../utils/programLocale.ts';
+import { effectiveProgramStatus } from '../utils/programStatus.ts';
 import { localizedSessionData } from '../utils/sessionLocale.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { LoadingSpinner } from './LoadingSpinner.tsx';
@@ -212,12 +213,18 @@ export function ProgramList() {
             {userPrograms.map((p) => {
               const goalLabel = p.goals?.[0] ?? '';
               const image = getProgramImage(p.slug, p.goals);
-              return (
-                <Link
-                  key={p.id}
-                  to={`/programme/${p.slug}/suivi`}
-                  className="group relative rounded-2xl overflow-hidden cursor-pointer transition-transform hover:scale-[1.01] min-h-[200px] sm:min-h-[240px] flex flex-col"
-                >
+              // Async generation states (see ProgramCard for the seed cards): a
+              // generating program has no sessions yet, so keep its card
+              // non-navigable; a failed one links to its page, which surfaces the
+              // error and a way to remove it. Stale generating counts as failed.
+              const status = effectiveProgramStatus(p);
+              const isPending = status === 'generating';
+              const isFailed = status === 'failed';
+              const cardClass =
+                'group relative rounded-2xl overflow-hidden transition-transform min-h-[200px] sm:min-h-[240px] flex flex-col ' +
+                (isPending ? 'cursor-default opacity-70' : 'cursor-pointer hover:scale-[1.01]');
+              const inner = (
+                <>
                   <img
                     src={image}
                     alt=""
@@ -226,9 +233,22 @@ export function ProgramList() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/50 transition-opacity group-hover:opacity-50" />
                   <div className="relative z-10 flex flex-col justify-between flex-1 p-5">
-                    <span className="self-start text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand/30 border border-brand/40 text-white backdrop-blur-sm">
-                      IA
-                    </span>
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand/30 border border-brand/40 text-white backdrop-blur-sm">
+                        IA
+                      </span>
+                      {isPending && (
+                        <span className="text-xs font-bold px-3 py-1.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-sm text-white flex items-center gap-1.5">
+                          <Loader2 className="w-3 h-3 animate-spin" aria-hidden="true" />
+                          {t('card.status_generating')}
+                        </span>
+                      )}
+                      {isFailed && (
+                        <span className="text-xs font-bold px-3 py-1.5 rounded-full border border-red-400/30 bg-red-500/20 backdrop-blur-sm text-red-200">
+                          {t('card.status_failed')}
+                        </span>
+                      )}
+                    </div>
                     <div className="mt-auto space-y-1.5 text-outline">
                       <p className="text-lg font-bold text-white group-hover:text-white/90 transition-colors line-clamp-2">
                         {p.title}
@@ -239,6 +259,18 @@ export function ProgramList() {
                       </p>
                     </div>
                   </div>
+                </>
+              );
+              if (isPending) {
+                return (
+                  <output key={p.id} className={cardClass} aria-busy="true" aria-label={t('card.status_generating')}>
+                    {inner}
+                  </output>
+                );
+              }
+              return (
+                <Link key={p.id} to={`/programme/${p.slug}/suivi`} className={cardClass}>
+                  {inner}
                 </Link>
               );
             })}

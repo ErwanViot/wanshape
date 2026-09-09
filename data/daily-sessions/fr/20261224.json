@@ -1,0 +1,88 @@
+{
+  "date": "20261224",
+  "title": "EMOM Horloge",
+  "description": "EMOM de 10 minutes alternant pompes déclinées, squats sautés et bicycle crunchs",
+  "estimatedDuration": 29,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Step-ups (marche)",
+          "duration": 40,
+          "instructions": "Monter et descendre d'une marche en alternant les jambes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Horloge Totale",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Pompes declinees",
+          "reps": 10,
+          "instructions": "Pieds surélevés sur une chaise, corps gainé"
+        },
+        {
+          "name": "Squats sautes",
+          "reps": 10,
+          "instructions": "Squat explosif avec saut, amortir à la réception"
+        },
+        {
+          "name": "Bicycle crunchs",
+          "reps": 16,
+          "instructions": "Coude vers genou opposé en alternant, jambe tendue"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

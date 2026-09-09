@@ -1,0 +1,117 @@
+{
+  "date": "20260725",
+  "title": "Strength Superset Pro",
+  "description": "3-pair upper body supersets: decline push-ups, dips and inverse rows in 3 sets",
+  "estimatedDuration": 34,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, squeeze and spread the shoulder blades without bending elbows"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Upper Body Supersets",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Decline push-ups",
+              "reps": 10,
+              "instructions": "Feet elevated on a chair, body braced"
+            },
+            {
+              "name": "Alternating superman",
+              "reps": 12,
+              "instructions": "Lift right arm and left leg, alternate"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+            },
+            {
+              "name": "Inverse table rows",
+              "reps": 10,
+              "instructions": "Under a table, pull chest toward the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Wide push-ups",
+              "reps": 12,
+              "instructions": "Hands wider than shoulders, focus on chest"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 10,
+              "instructions": "Lying face down, arms in T position, squeeze the shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring foot toward opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

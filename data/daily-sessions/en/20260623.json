@@ -1,0 +1,116 @@
+{
+  "date": "20260623",
+  "title": "Upper Strength",
+  "description": "Two classic upper body blocks: chest-triceps push and complete back-shoulder pull",
+  "estimatedDuration": 33,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 45,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Plank to downward dog",
+          "duration": 40,
+          "instructions": "Alternate between high plank and downward dog position"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, squeeze and spread shoulder blades without bending elbows"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push - Complete",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Explosive push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Push hard to lift hands off the floor"
+        },
+        {
+          "name": "Incline push-ups",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands on an elevated surface, easier variation"
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull - Complete",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Prone T raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, arms in a T shape, squeeze shoulder blades"
+        },
+        {
+          "name": "Floor face pulls",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, elbows at 90 degrees, pull backward"
+        },
+        {
+          "name": "Reverse snow angels",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, arms along the body, arc on the floor"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

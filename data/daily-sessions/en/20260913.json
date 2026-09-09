@@ -1,0 +1,136 @@
+{
+  "date": "20260913",
+  "title": "Lightning Circuit Pyramid",
+  "description": "4-round metabolic circuit then a 9-step pyramid of classic push-ups",
+  "estimatedDuration": 34,
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Fast lateral movements, 3-4 steps each side"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Metabolic Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 20,
+      "restBetweenRounds": 75,
+      "exercises": [
+        {
+          "name": "Squat jumps",
+          "mode": "reps",
+          "instructions": "Explosive squat with a maximum jump, land softly",
+          "reps": 12
+        },
+        {
+          "name": "Chair dips",
+          "mode": "reps",
+          "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees",
+          "reps": 10
+        },
+        {
+          "name": "Plank hold",
+          "mode": "timed",
+          "instructions": "On your forearms, body perfectly aligned, brace your core",
+          "duration": 30
+        },
+        {
+          "name": "Forward lunges",
+          "mode": "reps",
+          "instructions": "Big step forward, back knee grazes the floor",
+          "reps": 10,
+          "bilateral": true
+        },
+        {
+          "name": "Crunches",
+          "mode": "reps",
+          "instructions": "Back on the floor, lift shoulders off the ground, brace your core",
+          "reps": 15
+        },
+        {
+          "name": "Mountain climbers",
+          "mode": "timed",
+          "instructions": "In a plank, drive knees to chest alternating quickly",
+          "duration": 30
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Push-up Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 30,
+      "exercises": [
+        {
+          "name": "Push-ups",
+          "instructions": "Hands shoulder-width apart, body braced, lower your chest to the floor"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring your foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

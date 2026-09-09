@@ -1,0 +1,88 @@
+{
+  "date": "20261224",
+  "title": "EMOM Clockwork",
+  "description": "10-minute EMOM cycling through decline push-ups, jump squats and bicycle crunches",
+  "estimatedDuration": 29,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Step-ups",
+          "duration": 40,
+          "instructions": "Step up and down off a step, alternating legs"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Total Clockwork EMOM",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Decline push-ups",
+          "reps": 10,
+          "instructions": "Feet elevated on a chair, body braced"
+        },
+        {
+          "name": "Jump squats",
+          "reps": 10,
+          "instructions": "Explosive squat with a jump, cushion the landing"
+        },
+        {
+          "name": "Bicycle crunches",
+          "reps": 16,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

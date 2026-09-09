@@ -1,0 +1,117 @@
+{
+  "date": "20260922",
+  "title": "Full Body Superset",
+  "description": "Full body push-pull and squat-hinge supersets: archer push-ups, pulse squats and pike push-ups",
+  "estimatedDuration": 30,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Step-ups",
+          "duration": 45,
+          "instructions": "Step up and down alternating legs"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Full Body Supersets",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 60,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Archer push-ups",
+              "reps": 8,
+              "instructions": "One arm extended to the side, lower toward the other hand"
+            },
+            {
+              "name": "Reverse snow angels",
+              "reps": 12,
+              "instructions": "Lying face down, arms by your sides, arc them along the floor"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pulse squats",
+              "reps": 12,
+              "instructions": "Stay at the bottom of the squat, small up-down pulses"
+            },
+            {
+              "name": "Single-leg deadlift",
+              "reps": 10,
+              "instructions": "Hinge the torso forward, one leg lifts behind you, keep your balance"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 8,
+              "instructions": "Hips high in an inverted V, lower your head between your hands"
+            },
+            {
+              "name": "Floor face pulls",
+              "reps": 12,
+              "instructions": "Lying face down, elbows at 90 degrees, pull backward"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate your body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

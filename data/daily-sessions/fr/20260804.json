@@ -1,0 +1,119 @@
+{
+  "date": "20260804",
+  "title": "Pyramide Full",
+  "description": "Circuit athlétique puis pyramide de mountain climbers pour une séance full body complète",
+  "estimatedDuration": 36,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un côté à l'autre"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Multi-Forces",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats 1.5",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Descendre, remonter à mi-chemin, redescendre, remonter complètement"
+        },
+        {
+          "name": "Pompes Hindu",
+          "mode": "reps",
+          "reps": 8,
+          "instructions": "Mouvement de plongée : piquer vers le bas puis remonter en arc"
+        },
+        {
+          "name": "Fentes sautees",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Alterner les jambes en sautant, explosif"
+        },
+        {
+          "name": "Planche RKC",
+          "mode": "timed",
+          "duration": 25,
+          "instructions": "Planche avec contraction maximale, serrer poings et fessiers"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Pyramide Mountain Climbers",
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
+      "restBetweenSets": 20,
+      "exercises": [
+        {
+          "name": "Mountain climbers",
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

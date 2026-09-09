@@ -1,0 +1,94 @@
+{
+  "date": "20261204",
+  "title": "Max Rounds Blaze",
+  "description": "Explosive AMRAP with alternating lunges, pulse squats, decline push-ups and bicycle crunches",
+  "estimatedDuration": 30,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Quick lateral steps, 3-4 steps each side"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 9 Minutes",
+      "duration": 540,
+      "exercises": [
+        {
+          "name": "Alternating lunges",
+          "reps": 10,
+          "instructions": "Alternate left and right forward lunges without pausing"
+        },
+        {
+          "name": "Pulse squats",
+          "reps": 15,
+          "instructions": "Stay at the bottom of the squat, small up-down pulses"
+        },
+        {
+          "name": "Decline push-ups",
+          "reps": 8,
+          "instructions": "Feet elevated on a chair, body braced"
+        },
+        {
+          "name": "Bicycle crunches",
+          "reps": 16,
+          "instructions": "Elbow to opposite knee alternating, leg extended"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}
