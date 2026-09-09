@@ -1,0 +1,105 @@
+{
+  "date": "20260826",
+  "title": "Cardio Master Total",
+  "description": "EMOM 10 minutes intensif suivi d'un AMRAP 8 minutes pour un entraînement cardio-endurance complet",
+  "estimatedDuration": 37,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Assis, jambes à 90 degrés, pivoter d'un côté à l'autre"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM 10 Minutes",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Burpees sans pompe",
+          "reps": 8,
+          "instructions": "Descendre, sauter les pieds en arrière, revenir, sauter debout"
+        },
+        {
+          "name": "Squats sautes",
+          "reps": 10,
+          "instructions": "Squat explosif avec saut, amortir à la réception"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 8 Minutes",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Fentes alternees",
+          "reps": 10,
+          "instructions": "Alterner avant gauche et avant droite sans pause"
+        },
+        {
+          "name": "Pompes classiques",
+          "reps": 8,
+          "instructions": "Mains largeur épaules, corps gainé, descendre poitrine au sol"
+        },
+        {
+          "name": "Bicycle crunchs",
+          "reps": 12,
+          "instructions": "Coude vers genou opposé en alternant, jambe tendue"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "date": "20261226",
+  "title": "Power Circuit",
+  "description": "Powerful 6-exercise circuit: squats, commando push-ups, curtsy lunges and burpees",
+  "estimatedDuration": 35,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Fast marching in place",
+          "duration": 40,
+          "instructions": "March quickly in place while swinging the arms"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Power Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "Commando push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Alternate between forearm plank and high plank position",
+          "bilateral": true
+        },
+        {
+          "name": "Curtsy lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Cross the leg behind diagonally",
+          "bilateral": true
+        },
+        {
+          "name": "Plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On the forearms, body perfectly aligned, brace the core"
+        },
+        {
+          "name": "Burpees without push-up",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        },
+        {
+          "name": "Crunches",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Back on the floor, lift the shoulders, brace the abs"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, pivot the body",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

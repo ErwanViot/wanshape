@@ -1,0 +1,121 @@
+{
+  "date": "20261125",
+  "title": "Endurance de Fer",
+  "description": "EMOM de 10 minutes suivi d'un AMRAP de 8 minutes pour une endurance de fer testée à fond",
+  "estimatedDuration": 36,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 40,
+          "instructions": "Genoux vers la poitrine à rythme modéré"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Fer",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Squats sumo",
+          "reps": 12,
+          "instructions": "Pieds très largement écartés, pointes vers l'extérieur"
+        },
+        {
+          "name": "Fentes marchees",
+          "reps": 10,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 20,
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Fer",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Pompes larges",
+          "reps": 10,
+          "instructions": "Mains plus larges que les épaules, focus pectoraux"
+        },
+        {
+          "name": "Squats 1.5",
+          "reps": 10,
+          "instructions": "Descendre, remonter à mi-chemin, redescendre, remonter complètement"
+        },
+        {
+          "name": "Russian twists",
+          "reps": 16,
+          "instructions": "Assis, pieds décollés, tourner le buste de gauche à droite"
+        },
+        {
+          "name": "Fentes alternees",
+          "reps": 10,
+          "instructions": "Alterner avant gauche et avant droite sans pause"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

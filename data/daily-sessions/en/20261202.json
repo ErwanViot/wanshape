@@ -1,0 +1,129 @@
+{
+  "date": "20261202",
+  "title": "Precision Push Pull",
+  "description": "Precise push-pull with classic, diamond push-ups and chair dips, then inverted rows and prone raises",
+  "estimatedDuration": 33,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Scapular push-ups",
+          "duration": 35,
+          "instructions": "In a plank, squeeze and spread the shoulder blades without bending the elbows"
+        },
+        {
+          "name": "Plank to downward dog",
+          "duration": 35,
+          "instructions": "Alternate between high plank and downward dog"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Push Block",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        },
+        {
+          "name": "Diamond push-ups",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 65,
+          "instructions": "Hands close together under the chest, elbows along the body"
+        },
+        {
+          "name": "Chair dips",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Hands on the edge, elbows pointing back, lower to 90 degrees"
+        },
+        {
+          "name": "Pike push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "Hips high in an inverted V, lower your head between your hands"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Pull Block",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Inverted row (table)",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Under a table, pull your chest toward the edge"
+        },
+        {
+          "name": "Prone T raises",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, arms in a T, squeeze the shoulder blades"
+        },
+        {
+          "name": "Face pulls on the floor",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Face down, elbows at 90 degrees, pull backward"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind your head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring your foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,12 +1,69 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { isSupportedLocale } from '../i18n';
 import { captureEvent } from '../lib/analytics.ts';
 import { supabase } from '../lib/supabase.ts';
-import type { GenerateProgramResponse, ProgramOnboardingInput } from '../types/custom-program.ts';
+import type { GenerateProgramResponse, ProgramOnboardingInput, ProgramStatus } from '../types/custom-program.ts';
 import { extractEdgeFunctionError } from '../utils/edgeFunction.ts';
+import { programErrorMessage } from '../utils/programErrors.ts';
+import { effectiveProgramStatus } from '../utils/programStatus.ts';
+
+/** Revision request: adjust an existing (not-yet-started) program in place. */
+export interface ReviseOptions {
+  programId: string;
+  comment: string;
+}
+
+const POLL_INTERVAL_MS = 3000;
+// Generation runs server-side inside a ~5 min budget (see generate-program);
+// poll a bit beyond that before giving up on the client. The program keeps
+// generating regardless and will appear ready in the list — the timeout only
+// ends THIS overlay.
+const POLL_TIMEOUT_MS = 7 * 60 * 1000;
+
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+type Settled =
+  | { status: Exclude<ProgramStatus, 'generating'>; error_reason: string | null }
+  | { status: 'timeout' | 'cancelled'; error_reason: null };
+
+// Poll a single program's status until it leaves 'generating', we time out, or
+// the caller unmounts. RLS lets a user read their own row, so the anon /
+// publishable client is enough here. A transient query error is NOT a
+// settlement: we keep polling. A missing row (no data, no error) means the
+// program was deleted meanwhile.
+async function pollUntilSettled(programId: string, isCancelled: () => boolean): Promise<Settled> {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < POLL_TIMEOUT_MS) {
+    await sleep(POLL_INTERVAL_MS);
+    if (isCancelled()) return { status: 'cancelled', error_reason: null };
+
+    const { data, error } = await supabase!
+      .from('programs')
+      .select('status, error_reason, generation_started_at')
+      .eq('id', programId)
+      .maybeSingle();
+
+    if (error) {
+      console.error('Program status poll error:', error);
+      continue;
+    }
+    if (!data) return { status: 'failed', error_reason: 'deleted' };
+
+    const status = effectiveProgramStatus(data);
+    if (status !== 'generating') {
+      const errorReason = (data.error_reason as string | null) ?? null;
+      // fail_program keeps a program `ready` when it still has sessions (a failed
+      // REVISION must not hide a valid program) but records the reason; both
+      // finalize_program and begin_program_revision clear it. So a settled row
+      // carrying a reason is a failed attempt, whatever its status.
+      return { status: errorReason ? 'failed' : status, error_reason: errorReason };
+    }
+  }
+  return { status: 'timeout', error_reason: null };
+}
 
 export function useGenerateProgram() {
   const { user } = useAuth();
@@ -17,12 +74,19 @@ export function useGenerateProgram() {
   const [error, setError] = useState<string | null>(null);
 
   const inflightRef = useRef(false);
+  const unmountedRef = useRef(false);
+  useEffect(() => {
+    unmountedRef.current = false;
+    return () => {
+      unmountedRef.current = true;
+    };
+  }, []);
 
   // i18n.t is a fresh function reference each render; depending on i18n.language
   // is the project-wide pattern for stable callbacks resolving localised strings.
   // biome-ignore lint/correctness/useExhaustiveDependencies: i18n.language is the stable trigger, not i18n.t.
   const generate = useCallback(
-    async (input: ProgramOnboardingInput): Promise<GenerateProgramResponse | null> => {
+    async (input: ProgramOnboardingInput, revise?: ReviseOptions): Promise<GenerateProgramResponse | null> => {
       if (inflightRef.current) return null;
       if (!supabase) {
         setError(i18n.t('hook_errors.service_unavailable', { ns: 'common' }));
@@ -33,11 +97,25 @@ export function useGenerateProgram() {
       setLoading(true);
       setError(null);
 
+      const invalidateProgramQueries = () => {
+        queryClient.invalidateQueries({ queryKey: ['userPrograms', userId ?? null] });
+        queryClient.invalidateQueries({ queryKey: ['activeProgram', userId ?? null] });
+        // The detail page keys on slug, which a revision caller may not pass —
+        // invalidate the whole prefix (same approach as useSaveCompletion).
+        queryClient.invalidateQueries({ queryKey: ['program'] });
+        // Player query: it caches `null` while the program is generating.
+        queryClient.invalidateQueries({ queryKey: ['programSession'] });
+      };
+
       try {
         const locale = isSupportedLocale(i18n.language) ? i18n.language : 'fr';
-        const { data, error: fnError } = await supabase.functions.invoke('generate-program', {
-          body: { ...input, locale },
-        });
+        const body: Record<string, unknown> = { ...input, locale };
+        if (revise) {
+          body.revision_program_id = revise.programId;
+          body.revision_comment = revise.comment;
+        }
+
+        const { data, error: fnError } = await supabase.functions.invoke('generate-program', { body });
 
         if (fnError) {
           const message = await extractEdgeFunctionError(
@@ -53,17 +131,42 @@ export function useGenerateProgram() {
           return null;
         }
 
-        // The new program must appear in the user programs list and may become
-        // the active program on first session completion. Use `userId ?? null`
-        // so the keys match the ones the read hooks registered (TanStack keys
-        // are compared with strict ===, so undefined ≠ null).
-        queryClient.invalidateQueries({ queryKey: ['userPrograms', userId ?? null] });
-        queryClient.invalidateQueries({ queryKey: ['activeProgram', userId ?? null] });
+        const response = data as GenerateProgramResponse;
+        if (!response?.programId) {
+          setError(i18n.t('hook_errors.generic_retry', { ns: 'common' }));
+          return null;
+        }
 
-        // Structured payload only — input.objectifs / experience / frequence
-        // are categorical enums, never free text. Detail / blessure_detail
-        // (free text fields) intentionally omitted.
-        captureEvent('program_created', {
+        // Show the `generating` placeholder right away (fire-and-forget: the
+        // user can leave this screen and find it in the list).
+        invalidateProgramQueries();
+
+        // The generation runs in the background (edge waitUntil). Poll until the
+        // row settles so the overlay can navigate on ready / surface failures.
+        const settled = await pollUntilSettled(response.programId, () => unmountedRef.current);
+        if (settled.status === 'cancelled') return null;
+
+        // Whatever the outcome, the cached rows are behind the DB now.
+        invalidateProgramQueries();
+
+        if (settled.status === 'failed') {
+          setError(
+            programErrorMessage(
+              settled.error_reason,
+              i18n.getFixedT(null, 'programs'),
+              i18n.t('hook_errors.generic_retry', { ns: 'common' }),
+            ),
+          );
+          return null;
+        }
+        if (settled.status === 'timeout') {
+          // Not an error per se — the program is still being generated and will
+          // appear in the list. Tell the user where to find it.
+          setError(i18n.t('generating.timeout', { ns: 'programs' }));
+          return null;
+        }
+
+        captureEvent(revise ? 'program_revised' : 'program_created', {
           objectifs: input.objectifs,
           experience_duree: input.experience_duree,
           frequence_actuelle: input.frequence_actuelle,
@@ -71,7 +174,8 @@ export function useGenerateProgram() {
           duree_semaines: input.duree_semaines,
         });
 
-        return data as GenerateProgramResponse;
+        // The 202 ack carries status 'generating'; we only get here once settled.
+        return { ...response, status: 'ready' };
       } catch (e) {
         setError(e instanceof Error ? e.message : i18n.t('hook_errors.unexpected', { ns: 'common' }));
         return null;

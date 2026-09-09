@@ -1,0 +1,125 @@
+{
+  "date": "20260828",
+  "title": "Tonus Legs",
+  "description": "Complete lower body session with 1.5 squats, paused lunges and glute bridge to sculpt and strengthen",
+  "estimatedDuration": 34,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Legs - Tension",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "1.5 squats",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "Lower, rise halfway, lower again, then rise fully"
+        },
+        {
+          "name": "Paused lunges",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 65,
+          "instructions": "Lower and hold 3s at the bottom before rising",
+          "bilateral": true
+        },
+        {
+          "name": "Good morning",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "Hands behind the head, hinge forward keeping back straight"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Glutes and Core",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Glute bridge",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, drive hips toward the ceiling"
+        },
+        {
+          "name": "Superman plank",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 60,
+          "instructions": "In a plank, lift one arm and the opposite leg, alternate"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 14,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, cross alternating over/under"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

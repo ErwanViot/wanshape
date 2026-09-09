@@ -1,0 +1,94 @@
+{
+  "date": "20261204",
+  "title": "Max Rounds Feu",
+  "description": "AMRAP explosif avec fentes alternées, squats pulse, pompes déclinées et bicycle crunchs",
+  "estimatedDuration": 30,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Pas chasses",
+          "duration": 45,
+          "instructions": "Déplacements latéraux rapides, 3-4 pas de chaque côté"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 9 Minutes",
+      "duration": 540,
+      "exercises": [
+        {
+          "name": "Fentes alternees",
+          "reps": 10,
+          "instructions": "Alterner avant gauche et avant droite sans pause"
+        },
+        {
+          "name": "Squats pulse",
+          "reps": 15,
+          "instructions": "Rester en bas du squat, petits mouvements de montée-descente"
+        },
+        {
+          "name": "Pompes declinees",
+          "reps": 8,
+          "instructions": "Pieds surélevés sur une chaise, corps gainé"
+        },
+        {
+          "name": "Bicycle crunchs",
+          "reps": 16,
+          "instructions": "Coude vers genou opposé en alternant, jambe tendue"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

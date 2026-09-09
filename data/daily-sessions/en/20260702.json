@@ -1,0 +1,115 @@
+{
+  "date": "20260702",
+  "title": "Solid Pyramid",
+  "description": "Crunch pyramid followed by full classic strength: squats, push-ups and plank",
+  "estimatedDuration": 37,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, rotate from side to side"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Crunch Pyramid",
+      "pattern": [
+        5,
+        8,
+        10,
+        12,
+        10,
+        8,
+        5
+      ],
+      "restBetweenSets": 20,
+      "exercises": [
+        {
+          "name": "Crunches",
+          "instructions": "Back on the floor, lift shoulders, brace the abs"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Global Strength",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Squats",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Feet shoulder-width apart, lower until thighs are parallel to the floor"
+        },
+        {
+          "name": "Commando push-ups",
+          "sets": 3,
+          "reps": 8,
+          "restBetweenSets": 60,
+          "instructions": "Alternate between plank and push-up position",
+          "bilateral": true
+        },
+        {
+          "name": "Forearm plank",
+          "sets": 3,
+          "reps": "max",
+          "restBetweenSets": 60,
+          "instructions": "On forearms, body perfectly aligned, brace the abs"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate cat and cow, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "date": "20260731",
+  "title": "Total Cardio Challenge",
+  "description": "10-minute EMOM then 8-minute AMRAP for formidable cardio endurance",
+  "estimatedDuration": 35,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Jog in place, heels kicking toward glutes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM 10 Minutes",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Jump squats",
+          "reps": 8,
+          "instructions": "Explosive squat with maximum jump, absorb the landing"
+        },
+        {
+          "name": "Push-ups",
+          "reps": 8,
+          "instructions": "Hands shoulder-width apart, body braced, lower chest to the floor"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP 8 Minutes",
+      "duration": 480,
+      "exercises": [
+        {
+          "name": "Alternating lunges",
+          "reps": 10,
+          "instructions": "Alternate left foot forward then right foot forward without pausing"
+        },
+        {
+          "name": "Incline push-ups",
+          "reps": 8,
+          "instructions": "Hands on an elevated surface, easier variation"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 16,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

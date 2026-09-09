@@ -30,6 +30,14 @@ export interface Program {
   onboarding_data: import('./custom-program.ts').PersistedProgramOnboarding | null;
   /** Language the program content was generated in. Pre-i18n rows are 'fr'. */
   locale: 'fr' | 'en';
+  /**
+   * Async generation state. Absent on legacy rows (treat as 'ready'):
+   * 'generating' = being produced in the background, 'failed' = errored.
+   */
+  status?: import('./custom-program.ts').ProgramStatus;
+  error_reason?: string | null;
+  /** When the current/last generation started; NULL once settled (migration 029). */
+  generation_started_at?: string | null;
 }
 
 export interface ProgramSession {

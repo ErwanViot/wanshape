@@ -1,0 +1,110 @@
+{
+  "date": "20261120",
+  "title": "Total Circuit",
+  "description": "3-round circuit blending jump squats, incline push-ups, plank and V-ups for a complete full-body burn",
+  "estimatedDuration": 34,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 40,
+          "instructions": "Fast lateral movements, 3-4 steps each side"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "Toe taps (step)",
+          "duration": 35,
+          "instructions": "Tap the foot on a step alternating quickly"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Metabolic Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Jump squats",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Explosive squat with a jump, cushion the landing"
+        },
+        {
+          "name": "Incline push-ups",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Hands on an elevated surface, easier variation"
+        },
+        {
+          "name": "Plank",
+          "mode": "timed",
+          "duration": 35,
+          "instructions": "On the forearms, body perfectly aligned, brace the abs"
+        },
+        {
+          "name": "Walking lunges",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Advance in continuous lunges with a big step"
+        },
+        {
+          "name": "V-ups",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Back on the floor, lift arms and legs simultaneously to touch the feet"
+        },
+        {
+          "name": "Skaters",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Lateral jumps from foot to foot, arms swinging"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 30,
+          "instructions": "Seated, legs at 90 degrees, pivot from side to side"
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

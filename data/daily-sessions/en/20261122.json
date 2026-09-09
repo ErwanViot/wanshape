@@ -1,0 +1,118 @@
+{
+  "date": "20261122",
+  "title": "Push-Pull Superset",
+  "description": "Push-pull supersets across 3 sets with commando push-ups and reverse snow angels for a dense upper body",
+  "estimatedDuration": 33,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Push-Pull Supersets",
+      "sets": 3,
+      "restBetweenSets": 85,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Commando push-ups",
+              "reps": 8,
+              "instructions": "Alternate between forearm plank and high plank push-up position"
+            },
+            {
+              "name": "Reverse snow angels",
+              "reps": 12,
+              "instructions": "Face down, arms along the body, arc across the floor"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Archer push-ups",
+              "reps": 8,
+              "instructions": "One arm extended to the side, lower toward the other hand"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 12,
+              "instructions": "Face down, arms in a T, squeeze the shoulder blades"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows pointing back, lower to a 90-degree angle"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "Face down, lift the torso off the floor, squeeze the shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

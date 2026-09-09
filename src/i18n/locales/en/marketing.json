@@ -138,6 +138,10 @@
     "app_store": "Download on the App Store",
     "google_play": "Get it on Google Play"
   },
+  "social": {
+    "instagram": "Wan2Fit on Instagram",
+    "facebook": "Wan2Fit on Facebook"
+  },
   "carousel": {
     "slide_aria": "Go to slide {{current}} of {{total}}"
   }

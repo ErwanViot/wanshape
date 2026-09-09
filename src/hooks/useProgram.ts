@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program, ProgramSession } from '../types/completion.ts';
 import type { Session } from '../types/session.ts';
+import { effectiveProgramStatus } from '../utils/programStatus.ts';
 
 // Columns needed by ProgramCard / ProgramList. JSONB-heavy columns
 // (progression, consignes_semaine, onboarding_data) and note_coach
@@ -167,6 +168,11 @@ export function useProgram(slug: string | undefined, userId: string | undefined)
       };
     },
     enabled: !!slug && !!supabase,
+    // The detail page has a dedicated "generating" view; poll while the row is
+    // in that state so it flips to ready/failed without a manual reload (same
+    // cadence as useUserPrograms). A stale row is treated as failed → stops.
+    refetchInterval: (query) =>
+      query.state.data && effectiveProgramStatus(query.state.data) === 'generating' ? 4000 : false,
   });
 
   return { program: query.data ?? null, loading: query.isPending };
@@ -177,13 +183,18 @@ export function useProgramSession(slug: string | undefined, order: number | unde
     queryKey: ['programSession', slug ?? null, order ?? null],
     queryFn: async () => {
       const { data: pgm, sessionExpired } = await supabaseQuery(() =>
-        supabase!.from('programs').select('id').eq('slug', slug!).single(),
+        supabase!.from('programs').select('id, status, generation_started_at').eq('slug', slug!).single(),
       );
       if (sessionExpired) {
         notifySessionExpired();
         return null;
       }
       if (!pgm) return null;
+      // A program being (re)generated has no stable sessions: the revision flow
+      // replaces them on finalize, which would orphan a completion recorded
+      // now. Refuse to serve a playable session until it settles.
+      if (effectiveProgramStatus(pgm as Pick<Program, 'status' | 'generation_started_at'>) === 'generating')
+        return null;
 
       const { data: ps, sessionExpired: sessExp } = await supabaseQuery(() =>
         supabase!
@@ -200,6 +211,9 @@ export function useProgramSession(slug: string | undefined, order: number | unde
       return (ps as ProgramSession | null) ?? null;
     },
     enabled: !!slug && order != null && !!supabase,
+    // `null` is cached while the program is generating; don't serve it again
+    // from cache when the player is re-entered after the generation settled.
+    refetchOnMount: (query) => (query.state.data === null ? 'always' : true),
   });
 
   return { session: query.data ?? null, loading: query.isPending };

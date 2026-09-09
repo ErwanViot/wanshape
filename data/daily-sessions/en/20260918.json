@@ -1,0 +1,135 @@
+{
+  "date": "20260918",
+  "title": "Circuit & Explosive Pyramid",
+  "description": "3-round strength-cardio circuit followed by a jump squat pyramid across 9 explosive steps",
+  "estimatedDuration": 34,
+  "focus": [
+    "full-body",
+    "explosive"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Fast lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Strength-Explosive Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 20,
+      "restBetweenRounds": 75,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide apart, toes pointing outward"
+        },
+        {
+          "name": "Chair dips",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+        },
+        {
+          "name": "Plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On your forearms, body perfectly aligned, brace your core"
+        },
+        {
+          "name": "Lateral lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Big step to the side, bend one leg, keep the other straight",
+          "bilateral": true
+        },
+        {
+          "name": "Crunches",
+          "mode": "reps",
+          "reps": 15,
+          "instructions": "Back on the floor, lift the shoulders, brace your abs"
+        },
+        {
+          "name": "Tuck jumps",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Jump while bringing your knees to your chest"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Jump Squat Pyramid",
+      "pattern": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4,
+        2
+      ],
+      "restBetweenSets": 30,
+      "exercises": [
+        {
+          "name": "Jump squats",
+          "instructions": "Explosive squat with a jump, absorb the landing"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

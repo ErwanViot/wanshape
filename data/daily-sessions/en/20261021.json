@@ -1,0 +1,117 @@
+{
+  "date": "20261021",
+  "title": "Chest & Back Superset",
+  "description": "Push-pull supersets in 3 sets: wide push-ups, inverted rows, commando push-ups and prone T raises",
+  "estimatedDuration": 32,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 35,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        },
+        {
+          "name": "Cat-Cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Push-Pull Duos",
+      "sets": 3,
+      "restBetweenSets": 80,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Wide push-ups",
+              "reps": 10,
+              "instructions": "Hands wider than shoulders, focus on the chest"
+            },
+            {
+              "name": "Inverted row (table)",
+              "reps": 12,
+              "instructions": "Under a table, pull the chest toward the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Commando push-ups",
+              "reps": 8,
+              "instructions": "Alternate between forearm plank and high plank push-up"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 12,
+              "instructions": "Face down, arms in a T, squeeze the shoulder blades"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Pike push-ups",
+              "reps": 10,
+              "instructions": "Hips high in an inverted V, lower the head between the hands"
+            },
+            {
+              "name": "Back extensions",
+              "reps": 12,
+              "instructions": "Face down, lift the chest off the floor, squeeze the shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

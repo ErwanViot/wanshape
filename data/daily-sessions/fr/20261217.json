@@ -1,0 +1,105 @@
+{
+  "date": "20261217",
+  "title": "Full Body Fusion",
+  "description": "Circuit 3 rounds avec squat isométrique, pompes déclinées, bear hold et fentes marchées pour tout le corps",
+  "estimatedDuration": 32,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 45,
+          "instructions": "Debout, marcher les mains en avant jusqu'en planche, revenir"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 30,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Fusion",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squat isometrique",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Maintenir la position basse du squat sans support"
+        },
+        {
+          "name": "Pompes declinees",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Pieds surélevés sur une chaise, corps gainé"
+        },
+        {
+          "name": "Bear hold",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "A quatre pattes, genoux décollés du sol de 2cm, maintenir"
+        },
+        {
+          "name": "Fentes marchees",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Star jumps",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Sauter en écartant bras et jambes en étoile"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement pectoraux",
+          "duration": 25,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 30,
+          "instructions": "A genoux, bras tendus devant, front au sol, respirer profondément"
+        }
+      ]
+    }
+  ]
+}

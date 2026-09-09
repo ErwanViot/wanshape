@@ -1,20 +1,90 @@
+import { Loader2 } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import type { Program } from '../types/completion.ts';
 import { FITNESS_COLORS } from '../utils/labels.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 import { localizedProgramFields } from '../utils/programLocale.ts';
+import { effectiveProgramStatus } from '../utils/programStatus.ts';
 
 export function ProgramCard({ program }: { program: Program }) {
   const { t } = useTranslation(['programs', 'programs_data']);
   const { title, description, goals } = localizedProgramFields(program, t);
   const image = getProgramImage(program.slug, goals);
 
+  // Async generation states. A `generating` program has no sessions yet, so its
+  // page would be empty — keep the card non-navigable and show a spinner. A
+  // `failed` one links to its page (which surfaces the error + a way to remove
+  // it). Legacy rows have no status → treated as ready.
+  const status = effectiveProgramStatus(program);
+  const isPending = status === 'generating';
+  const isFailed = status === 'failed';
+
+  const wrapperClass =
+    'group relative rounded-2xl overflow-hidden transition-transform block ' +
+    (isPending ? 'cursor-default' : 'cursor-pointer hover:scale-[1.01]');
+
+  const statusBadge = isPending ? (
+    <span className="text-xs font-bold px-3 py-1.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-sm text-white flex items-center gap-1.5">
+      <Loader2 className="w-3 h-3 animate-spin" aria-hidden="true" />
+      {t('card.status_generating')}
+    </span>
+  ) : isFailed ? (
+    <span className="text-xs font-bold px-3 py-1.5 rounded-full border border-red-400/30 bg-red-500/20 backdrop-blur-sm text-red-200">
+      {t('card.status_failed')}
+    </span>
+  ) : null;
+
+  const inner = (
+    <CardInner
+      image={image}
+      title={title}
+      description={description}
+      goals={goals}
+      program={program}
+      dimmed={isPending}
+      statusBadge={statusBadge}
+      t={t}
+    />
+  );
+
+  if (isPending) {
+    return (
+      <output className={wrapperClass} aria-busy="true" aria-label={t('card.status_generating')}>
+        {inner}
+      </output>
+    );
+  }
+
   return (
-    <Link
-      to={`/programme/${program.slug}`}
-      className="group relative rounded-2xl overflow-hidden cursor-pointer transition-transform hover:scale-[1.01]"
-    >
+    <Link to={`/programme/${program.slug}`} className={wrapperClass}>
+      {inner}
+    </Link>
+  );
+}
+
+function CardInner({
+  image,
+  title,
+  description,
+  goals,
+  program,
+  dimmed,
+  statusBadge,
+  t,
+}: {
+  image: string;
+  title: string;
+  description: string | null;
+  goals: string[];
+  program: Program;
+  dimmed: boolean;
+  statusBadge: ReactNode;
+  t: ReturnType<typeof useTranslation>['t'];
+}) {
+  return (
+    <div className={dimmed ? 'opacity-70' : ''}>
       {/* Image background */}
       <div className="relative min-h-[220px] sm:min-h-[260px] flex flex-col">
         <img
@@ -26,13 +96,14 @@ export function ProgramCard({ program }: { program: Program }) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/50 transition-opacity group-hover:opacity-50" />
 
         <div className="relative z-10 flex flex-col justify-between flex-1 p-6">
-          {/* Top: badge */}
+          {/* Top: badges */}
           <div className="flex items-start justify-between gap-3">
             <span
               className={`text-xs font-bold px-3 py-1.5 rounded-full border backdrop-blur-sm ${FITNESS_COLORS[program.fitness_level] ?? ''}`}
             >
               {t(`fitness_level.${program.fitness_level}`) ?? program.fitness_level}
             </span>
+            {statusBadge}
           </div>
 
           {/* Bottom: info */}
@@ -94,6 +165,6 @@ export function ProgramCard({ program }: { program: Program }) {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

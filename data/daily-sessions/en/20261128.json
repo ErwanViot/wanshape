@@ -1,0 +1,131 @@
+{
+  "date": "20261128",
+  "title": "Rock-Solid Lower Body",
+  "description": "Anchored legs with squats and jump lunges, stability core work with shoulder tap plank and flutter kicks",
+  "estimatedDuration": 32,
+  "focus": [
+    "lower-body",
+    "core"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Hold a deep squat, back straight, elbows against the knees"
+        },
+        {
+          "name": "Fast marching in place",
+          "duration": 40,
+          "instructions": "March quickly in place while swinging the arms"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Anchored Legs",
+      "restBetweenExercises": 50,
+      "exercises": [
+        {
+          "name": "Squats",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 70,
+          "instructions": "Feet shoulder-width apart, lower thighs parallel to the floor"
+        },
+        {
+          "name": "Jump lunges",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 70,
+          "instructions": "Alternate legs while jumping, explosive"
+        },
+        {
+          "name": "Single-leg hip thrust",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 65,
+          "instructions": "Hip thrust on one leg, the other lifted in the air",
+          "bilateral": true
+        },
+        {
+          "name": "Sissy squat",
+          "sets": 3,
+          "reps": 10,
+          "restBetweenSets": 65,
+          "instructions": "Lean back, knees forward, quads on fire"
+        }
+      ]
+    },
+    {
+      "type": "classic",
+      "name": "Core Stability",
+      "restBetweenExercises": 45,
+      "exercises": [
+        {
+          "name": "Shoulder tap plank",
+          "sets": 3,
+          "reps": 12,
+          "restBetweenSets": 60,
+          "instructions": "In a high plank, touch the opposite shoulder alternating"
+        },
+        {
+          "name": "Flutter kicks",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, quick alternating kicks"
+        },
+        {
+          "name": "Scissors",
+          "sets": 3,
+          "reps": 15,
+          "restBetweenSets": 60,
+          "instructions": "Back on the floor, legs extended, cross alternating over and under"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 30,
+          "instructions": "Front leg bent in front, back leg extended, lean forward",
+          "bilateral": true
+        },
+        {
+          "name": "Child's pose",
+          "duration": 40,
+          "instructions": "Kneeling, arms extended forward, forehead on the floor, breathe deeply"
+        }
+      ]
+    }
+  ]
+}

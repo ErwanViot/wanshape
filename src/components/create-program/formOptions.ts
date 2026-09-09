@@ -51,8 +51,9 @@ export const MATERIEL_OPTIONS: { value: Equipment | 'salle' }[] = [
   { value: 'salle' },
 ];
 
-export const DUREE_OPTIONS: { value: 4 | 8 | 12; recommended?: boolean }[] = [
+export const DUREE_OPTIONS: { value: 4 | 6 | 8 | 12; recommended?: boolean }[] = [
   { value: 4 },
+  { value: 6 },
   { value: 8, recommended: true },
   { value: 12 },
 ];

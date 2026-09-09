@@ -1,0 +1,115 @@
+{
+  "date": "20260927",
+  "title": "Clock & Rounds",
+  "description": "12-minute EMOM with jump squats and pike push-ups, then a 10-minute AMRAP of lunges and squats",
+  "estimatedDuration": 34,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Moderate high knees",
+          "duration": 40,
+          "instructions": "Knees to chest at a moderate pace"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 40,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "EMOM Clock",
+      "minutes": 12,
+      "exercises": [
+        {
+          "name": "Jump squats",
+          "reps": 10,
+          "instructions": "Explosive squat with a jump, absorb the landing"
+        },
+        {
+          "name": "Pike push-ups",
+          "reps": 8,
+          "instructions": "Hips high in an inverted V, lower your head between your hands"
+        },
+        {
+          "name": "Russian twists",
+          "reps": 16,
+          "instructions": "Seated, feet lifted, rotate torso left and right"
+        }
+      ]
+    },
+    {
+      "type": "amrap",
+      "name": "AMRAP Final Rounds",
+      "duration": 600,
+      "exercises": [
+        {
+          "name": "Walking lunges",
+          "reps": 10,
+          "instructions": "Move forward in continuous lunges, big steps"
+        },
+        {
+          "name": "Decline push-ups",
+          "reps": 8,
+          "instructions": "Feet elevated on a chair, body braced"
+        },
+        {
+          "name": "V-ups",
+          "reps": 10,
+          "instructions": "Back on the floor, lift arms and legs simultaneously to touch your feet"
+        },
+        {
+          "name": "Sumo squats",
+          "reps": 12,
+          "instructions": "Feet very wide apart, toes pointing outward"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

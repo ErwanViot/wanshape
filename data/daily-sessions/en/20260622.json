@@ -1,0 +1,119 @@
+{
+  "date": "20260622",
+  "title": "Pyramidal Circuit",
+  "description": "3-round circuit followed by a squat pyramid: progressive full body power build-up",
+  "estimatedDuration": 37,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 45,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Brisk in-place march",
+          "duration": 40,
+          "instructions": "March quickly in place with arm swing"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm to the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Mix Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Walking lunges",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Step forward continuously with long strides"
+        },
+        {
+          "name": "Wide push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands wider than shoulders, focus on the chest"
+        },
+        {
+          "name": "Forearm plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "On forearms, body perfectly aligned, brace the abs"
+        },
+        {
+          "name": "Step-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Step up and down a step alternating legs"
+        }
+      ]
+    },
+    {
+      "type": "pyramid",
+      "name": "Sumo Squat Pyramid",
+      "pattern": [
+        4,
+        6,
+        8,
+        10,
+        8,
+        6,
+        4
+      ],
+      "restBetweenSets": 25,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "instructions": "Feet very wide, toes pointed out"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Hip 90/90",
+          "duration": 35,
+          "instructions": "Seated, legs at 90 degrees, rotate from side to side"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

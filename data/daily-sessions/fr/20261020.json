@@ -1,0 +1,88 @@
+{
+  "date": "20261020",
+  "title": "EMOM Tempo",
+  "description": "EMOM de 10 minutes avec dips sur chaise, squats 1.5 et mountain climbers pour un cardio chrono intense",
+  "estimatedDuration": 30,
+  "focus": [
+    "endurance"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Deep squat hold",
+          "duration": 35,
+          "instructions": "Maintenir un squat profond, dos droit, coudes contre les genoux"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        }
+      ]
+    },
+    {
+      "type": "emom",
+      "name": "Chrono EMOM",
+      "minutes": 10,
+      "exercises": [
+        {
+          "name": "Dips sur chaise",
+          "reps": 10,
+          "instructions": "Mains sur le bord, coudes vers l'arrière, descendre à 90 degrés"
+        },
+        {
+          "name": "Squats 1.5",
+          "reps": 10,
+          "instructions": "Descendre, remonter à mi-chemin, redescendre, remonter complètement"
+        },
+        {
+          "name": "Mountain climbers",
+          "reps": 15,
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement triceps",
+          "duration": 30,
+          "instructions": "Bras derrière la tête, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": 35,
+          "instructions": "Jambe avant pliée devant, jambe arrière tendue, se pencher",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

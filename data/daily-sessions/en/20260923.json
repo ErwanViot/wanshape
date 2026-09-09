@@ -1,0 +1,118 @@
+{
+  "date": "20260923",
+  "title": "High Tension Combo",
+  "description": "3-round HIIT with jumps and burpees, then a scissors and leg raises tabata for maximum intensity",
+  "estimatedDuration": 31,
+  "focus": [
+    "cardio"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Side shuffles",
+          "duration": 45,
+          "instructions": "Fast lateral shuffles, 3-4 steps each side"
+        },
+        {
+          "name": "Butt kicks",
+          "duration": 40,
+          "instructions": "Run in place, heels toward the glutes"
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 40,
+          "instructions": "Lying face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "Tension HIIT",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Depth jumps",
+          "instructions": "Step down from a platform, touch the floor and jump immediately"
+        },
+        {
+          "name": "Split squat jumps",
+          "instructions": "Low lunge, jump without switching legs"
+        },
+        {
+          "name": "Burpees",
+          "instructions": "Drop down, hands on the floor, jump feet back, push-up, jump up"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Lateral jumps from foot to foot, arms swinging"
+        },
+        {
+          "name": "Pop squats",
+          "instructions": "Jump feet apart into a squat, jump feet back together"
+        }
+      ]
+    },
+    {
+      "type": "tabata",
+      "name": "Core Fire Tabata",
+      "sets": 1,
+      "rounds": 8,
+      "work": 20,
+      "rest": 10,
+      "exercises": [
+        {
+          "name": "Scissors",
+          "instructions": "Back on the floor, legs extended, cross alternating over and under"
+        },
+        {
+          "name": "Leg raises",
+          "instructions": "Back on the floor, lift straight legs to vertical"
+        },
+        {
+          "name": "Sit-ups",
+          "instructions": "Back on the floor, rise fully to touch your feet"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Standing quad stretch",
+          "duration": 30,
+          "instructions": "Grab your foot behind you, knee toward the floor",
+          "bilateral": true
+        },
+        {
+          "name": "Hamstring stretch",
+          "duration": 30,
+          "instructions": "Leg extended forward, lean torso forward",
+          "bilateral": true
+        },
+        {
+          "name": "Psoas stretch",
+          "duration": 30,
+          "instructions": "Low lunge, drive the hip forward",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

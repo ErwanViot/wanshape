@@ -1,16 +1,22 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { Loader2, Sparkles } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useDocumentHead } from '../hooks/useDocumentHead.ts';
+import { useGenerateProgram } from '../hooks/useGenerateProgram.ts';
 import { useHealthCheck } from '../hooks/useHealthCheck.ts';
 import { useProgram } from '../hooks/useProgram.ts';
 import { useUserPrograms } from '../hooks/useUserPrograms.ts';
+import type { ProgramOnboardingInput } from '../types/custom-program.ts';
 import type { Session } from '../types/session.ts';
 import { getConsigneForWeek } from '../utils/coaching.ts';
 import { FITNESS_COLORS, GOAL_COLORS } from '../utils/labels.ts';
+import { programErrorMessage } from '../utils/programErrors.ts';
 import { getProgramImage } from '../utils/programImage.ts';
 import { localizedProgramFields } from '../utils/programLocale.ts';
+import { effectiveProgramStatus } from '../utils/programStatus.ts';
 import { localizedSessionData } from '../utils/sessionLocale.ts';
 import { HealthDisclaimer } from './HealthDisclaimer.tsx';
 import { LoadingSpinner } from './LoadingSpinner.tsx';
@@ -24,9 +30,13 @@ export function ProgramPage() {
   const { program, loading } = useProgram(slug, user?.id);
   const { deleteProgram } = useUserPrograms();
   const { showDisclaimer, guardNavigation, acceptAndNavigate, cancelDisclaimer } = useHealthCheck();
+  const queryClient = useQueryClient();
+  const { generate, loading: revising, error: reviseError } = useGenerateProgram();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [collapsedWeeks, setCollapsedWeeks] = useState<Set<number>>(new Set());
+  const [showRevision, setShowRevision] = useState(false);
+  const [revisionComment, setRevisionComment] = useState('');
   const deleteDialogRef = useRef<HTMLDivElement>(null);
 
   // Fixed programs are seeded in French in the DB; the localised
@@ -151,50 +161,143 @@ export function ProgramPage() {
     }
   };
 
+  // Stale `generating` rows (background task dead for > 8 min) are shown as
+  // failed so the user always has a way out; the server reaps them lazily.
+  const status = effectiveProgramStatus(program);
+  const hasSessions = program.sessions.length > 0;
+
+  // Revision: only offered for a custom program not yet started (no completion)
+  // that is not currently generating. A program whose last revision failed
+  // keeps its sessions and stays revisable (the DB gate accepts ready|failed).
+  // The onboarding is resent (age/sexe were stripped at persistence — they stay
+  // undefined, which is fine, both are optional).
+  const canRevise =
+    !!isCustom && status !== 'generating' && hasSessions && completedCount === 0 && !!program.onboarding_data;
+
+  const handleRevise = async () => {
+    if (!program?.onboarding_data || revisionComment.trim().length === 0) return;
+    const input = { ...program.onboarding_data } as ProgramOnboardingInput;
+    const result = await generate(input, { programId: program.id, comment: revisionComment.trim() });
+    // Success or not, the DB row moved (ready → generating → ready|failed):
+    // never leave the pre-revision snapshot on screen.
+    await queryClient.invalidateQueries({ queryKey: ['program', slug ?? null, user?.id ?? null] });
+    if (result) {
+      setRevisionComment('');
+      setShowRevision(false);
+    }
+  };
+
+  const errorMessage = programErrorMessage(program.error_reason, t, t('page.failed_body'));
+
+  // While a revision regenerates in the background, show the full-screen waiting
+  // state (the hook polls until ready/failed).
+  if (revising) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 px-6 text-center">
+        <Loader2 className="w-10 h-10 text-brand animate-spin" aria-hidden="true" />
+        <h1 className="text-xl font-bold text-heading">{t('revision.working_title')}</h1>
+        <p className="text-muted max-w-sm">{t('revision.working_body')}</p>
+      </div>
+    );
+  }
+
+  // Shared confirm dialog: every delete entry point (generating view, failed
+  // view, ready page) goes through it — no one-tap destructive action.
+  const deleteModal = showDeleteModal && (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Escape is wired in the keydown effect above; the click here is the pointer-only click-outside dismissal.
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-program-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) setShowDeleteModal(false);
+      }}
+    >
+      <div
+        ref={deleteDialogRef}
+        className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4"
+      >
+        <h2 id="delete-program-title" className="text-lg font-bold text-heading">
+          {t('page.delete_modal_title')}
+        </h2>
+        <p className="text-sm text-muted">{t('page.delete_modal_body')}</p>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => setShowDeleteModal(false)}
+            className="flex-1 py-3 rounded-xl text-sm font-semibold border border-divider text-muted hover:text-heading transition-colors cursor-pointer"
+          >
+            {t('page.delete_cancel')}
+          </button>
+          <button
+            type="button"
+            onClick={handleDelete}
+            disabled={deleting}
+            className="flex-1 py-3 rounded-xl text-sm font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer disabled:opacity-50"
+          >
+            {deleting ? t('page.deleting') : t('page.delete_confirm')}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Async generation states. A program still generating in the background has
+  // no sessions yet; a failed one may be an empty placeholder — both would
+  // render an empty/broken page, so intercept them with dedicated views.
+  if (status === 'generating') {
+    return (
+      <div className="min-h-[50vh] flex flex-col items-center justify-center gap-4 px-6 text-center">
+        <Loader2 className="w-10 h-10 text-brand animate-spin" aria-hidden="true" />
+        <h1 className="text-xl font-bold text-heading">{t('page.generating_title')}</h1>
+        <p className="text-muted max-w-sm">{t('page.generating_body')}</p>
+        <p className="text-xs text-faint max-w-sm">{t('page.generating_stale_hint')}</p>
+        <Link to="/programmes" className="text-link hover:text-link-hover underline text-sm">
+          {t('page.see_all')}
+        </Link>
+        {isCustom && user && program.user_id === user.id && (
+          <button
+            type="button"
+            onClick={() => setShowDeleteModal(true)}
+            className="text-xs text-faint hover:text-red-400 transition-colors cursor-pointer"
+          >
+            {t('page.generating_delete')}
+          </button>
+        )}
+        {deleteModal}
+      </div>
+    );
+  }
+
+  // A `failed` row that still has sessions is a program whose REVISION failed
+  // (fail_program keeps it ready since migration 029; older rows may still be
+  // `failed`): render it normally with a banner instead of a dead end.
+  if (status === 'failed' && !hasSessions) {
+    return (
+      <div className="min-h-[50vh] flex flex-col items-center justify-center gap-4 px-6 text-center">
+        <h1 className="text-xl font-bold text-heading">{t('page.failed_title')}</h1>
+        <p className="text-muted max-w-md">{errorMessage}</p>
+        <button
+          type="button"
+          onClick={() => setShowDeleteModal(true)}
+          className="px-6 py-2.5 rounded-full text-sm font-bold text-white bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
+        >
+          {t('page.failed_delete')}
+        </button>
+        <Link to="/programmes" className="text-link hover:text-link-hover underline text-sm">
+          {t('page.see_all')}
+        </Link>
+        {deleteModal}
+      </div>
+    );
+  }
+
   return (
     <>
       {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
 
-      {/* Delete modal */}
-      {showDeleteModal && (
-        // biome-ignore lint/a11y/useKeyWithClickEvents: Escape is wired in the keydown effect above; the click here is the pointer-only click-outside dismissal.
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="delete-program-title"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setShowDeleteModal(false);
-          }}
-        >
-          <div
-            ref={deleteDialogRef}
-            className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4"
-          >
-            <h2 id="delete-program-title" className="text-lg font-bold text-heading">
-              {t('page.delete_modal_title')}
-            </h2>
-            <p className="text-sm text-muted">{t('page.delete_modal_body')}</p>
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={() => setShowDeleteModal(false)}
-                className="flex-1 py-3 rounded-xl text-sm font-semibold border border-divider text-muted hover:text-heading transition-colors cursor-pointer"
-              >
-                {t('page.delete_cancel')}
-              </button>
-              <button
-                type="button"
-                onClick={handleDelete}
-                disabled={deleting}
-                className="flex-1 py-3 rounded-xl text-sm font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer disabled:opacity-50"
-              >
-                {deleting ? t('page.deleting') : t('page.delete_confirm')}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {deleteModal}
 
       <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
         {/* Hero */}
@@ -343,6 +446,65 @@ export function ProgramPage() {
           <div className="glass-card rounded-2xl p-5 border-l-4 border-l-brand space-y-2">
             <h2 className="text-sm font-bold text-heading">{t('page.coach_note')}</h2>
             <p className="text-sm text-subtle leading-relaxed">{program.note_coach}</p>
+          </div>
+        )}
+
+        {/* Last revision failed — the program itself is intact */}
+        {isCustom && program.error_reason && (
+          <output className="block rounded-2xl border border-red-400/30 bg-red-500/10 px-5 py-4 text-sm text-red-300">
+            {t('page.revision_failed_banner', { reason: errorMessage, interpolation: { escapeValue: false } })}
+          </output>
+        )}
+
+        {/* Revision — adjust the program before starting it */}
+        {canRevise && (
+          <div className="glass-card rounded-2xl p-5 space-y-3">
+            {!showRevision ? (
+              <button
+                type="button"
+                onClick={() => setShowRevision(true)}
+                className="flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand/80 transition-colors cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4" aria-hidden="true" />
+                {t('revision.cta')}
+              </button>
+            ) : (
+              <div className="space-y-3">
+                <div className="space-y-1">
+                  <h2 className="text-sm font-bold text-heading">{t('revision.title')}</h2>
+                  <p className="text-xs text-muted">{t('revision.help')}</p>
+                </div>
+                <textarea
+                  value={revisionComment}
+                  onChange={(e) => setRevisionComment(e.target.value)}
+                  maxLength={300}
+                  rows={3}
+                  placeholder={t('revision.placeholder')}
+                  className="w-full rounded-xl border border-divider bg-surface-card px-4 py-3 text-sm text-heading placeholder:text-faint focus:outline-none focus:border-brand resize-none"
+                />
+                {reviseError && <p className="text-xs text-red-400">{reviseError}</p>}
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleRevise}
+                    disabled={revisionComment.trim().length === 0}
+                    className="cta-gradient px-5 py-2 rounded-full text-sm font-bold text-white disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    {t('revision.submit')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowRevision(false);
+                      setRevisionComment('');
+                    }}
+                    className="text-sm text-muted hover:text-heading transition-colors cursor-pointer"
+                  >
+                    {t('revision.cancel')}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
 

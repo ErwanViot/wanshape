@@ -187,3 +187,14 @@ WelcomeModal, HealthDisclaimer, CguRevalidationModal sont centrées (`items-cent
 Effort : 1 h après décision design. Bénéfice : cohérence de marque.
 
 
+
+
+## Programmes IA async — reaper paresseux, pas de cron
+
+**Priorité** : faible
+**Introduit par** : migration 029 (revue PR #239)
+
+Une ligne `programs` bloquée en `generating` (isolate tué, redeploy) n'est settlée que **paresseusement** : `reap_stale_programs(user_id)` est appelée par l'edge function `generate-program` au début de chaque nouvelle génération, et le client traite comme `failed` toute ligne `generating` de plus de 8 min (`src/utils/programStatus.ts`). Il n'y a pas de `pg_cron` : un user qui ne relance jamais de génération garde sa ligne `generating` en base (invisible côté UI, supprimable, exclue du cap actif par le trigger). Le seuil de 8 min est dupliqué SQL (`program_generation_is_stale`) / TS (`STALE_GENERATION_MS`).
+
+### Coût/bénéfice
+Effort : 30 min (job `pg_cron` quotidien appelant le reaper pour tous les users). Bénéfice : hygiène des données, pas d'impact utilisateur.

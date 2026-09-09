@@ -25,7 +25,9 @@
   },
   "card": {
     "weeks": "{{n}} semaines",
-    "freq_per_week": "{{n}}x / semaine"
+    "freq_per_week": "{{n}}x / semaine",
+    "status_generating": "En préparation…",
+    "status_failed": "Échec"
   },
   "page": {
     "title_suffix": "— Programme",
@@ -43,6 +45,11 @@
     "login": "Se connecter",
     "not_found": "Programme introuvable ou service indisponible.",
     "see_all": "Voir tous les programmes",
+    "generating_title": "Ton programme se prépare",
+    "generating_body": "La génération est en cours. Tu peux quitter cette page : ton programme apparaîtra dans « Mes programmes » dès qu'il est prêt.",
+    "failed_title": "La génération a échoué",
+    "failed_body": "Quelque chose s'est mal passé pendant la génération. Supprime ce programme et réessaie.",
+    "failed_delete": "Supprimer et réessayer",
     "session_start": "Commencer",
     "session_continue": "Continuer",
     "session_redo": "Refaire",
@@ -55,7 +62,10 @@
     "delete_confirm": "Supprimer",
     "deleting": "Suppression...",
     "blocks": "{{n}} blocs",
-    "duration_min": "~{{n}} min"
+    "duration_min": "~{{n}} min",
+    "generating_delete": "Annuler et supprimer",
+    "generating_stale_hint": "Si rien ne se passe au bout de 8 minutes, la génération sera marquée en échec et tu pourras la supprimer.",
+    "revision_failed_banner": "Le dernier ajustement a échoué : {{reason}} Ton programme actuel reste disponible."
   },
   "content": {
     "back_aria": "Retour aux programmes",
@@ -92,7 +102,7 @@
     "title": "Qu'est-ce qui te motive ?",
     "legend": "Choisis tes objectifs",
     "detail_label": "Dis-nous en plus",
-    "detail_hint": "Plus tu précises, plus ton programme sera adapté.",
+    "detail_hint": "Plus tu précises, plus ton programme sera adapté. Si tu prépares une échéance (compétition, reprise d'un sport, vacances...), mentionne-la : ça change la structure du programme.",
     "detail_placeholder": "Ex : perdre 5kg avant l'été, pré-saison foot, programme en parallèle du basket pour performer le week-end...",
     "next": "Suivant"
   },
@@ -126,7 +136,18 @@
   },
   "generating": {
     "title": "Création de ton programme",
-    "estimate": "Estimation : 30-60 secondes"
+    "estimate": "Cela prend 1 à 3 minutes. Tu peux quitter cette page, le programme continue de se préparer.",
+    "timeout": "Ton programme met plus de temps que prévu. Il se prépare toujours : retrouve-le dans « Mes programmes » d'ici quelques minutes."
+  },
+  "revision": {
+    "cta": "Ajuster ce programme",
+    "title": "Qu'aimerais-tu changer ?",
+    "help": "Décris ce que tu veux ajuster : ton programme sera régénéré en tenant compte de ta demande. Possible tant que tu ne l'as pas commencé.",
+    "placeholder": "Ex : plus de gainage, des séances plus courtes, enlève les squats…",
+    "submit": "Régénérer",
+    "cancel": "Annuler",
+    "working_title": "Ajustement en cours",
+    "working_body": "On régénère ton programme avec ta demande. Ça prend 1 à 3 minutes."
   },
   "fitness_level": {
     "beginner": "Débutant",
@@ -184,6 +205,7 @@
   },
   "duree": {
     "4": "4 semaines",
+    "6": "6 semaines",
     "8": "8 semaines",
     "12": "12 semaines"
   },
@@ -196,5 +218,23 @@
     "5": "Équilibrage des charges",
     "6": "Personnalisation du coaching",
     "7": "Vérifications finales"
+  },
+  "errors": {
+    "timeout": "La génération a pris trop de temps. Réessaie dans un instant.",
+    "parse": "L'IA n'a pas réussi à produire un programme exploitable. Réessaie.",
+    "truncation": "Le programme généré était trop volumineux et a été coupé. Réessaie.",
+    "network": "Impossible de joindre le service IA. Vérifie ta connexion et réessaie.",
+    "api_overloaded": "Le service IA est momentanément surchargé. Réessaie dans quelques instants.",
+    "api_unavailable": "Le service IA est temporairement indisponible. Réessaie dans un instant.",
+    "api_auth": "Le service IA a refusé l'authentification. C'est un problème de configuration côté serveur — contacte le support.",
+    "api_rejected": "Le service IA a rejeté la requête (quota épuisé ou configuration). Si cela persiste, contacte le support.",
+    "api_error": "Le service IA a renvoyé une erreur. Réessaie ou contacte le support si cela persiste.",
+    "invalid_program": "Le programme généré est invalide. Réessaie.",
+    "sessions_invalid": "Erreur de génération (séances invalides). Réessaie.",
+    "save_failed": "Erreur de sauvegarde du programme. Réessaie.",
+    "started_during_revision": "Une séance de ce programme a été enregistrée pendant l'ajustement : le programme d'origine a été conservé.",
+    "stale": "La génération semble bloquée depuis plus de 8 minutes. Supprime ce programme et réessaie.",
+    "deleted": "Ce programme n'existe plus.",
+    "unexpected": "Erreur inattendue lors de la communication avec l'IA. Réessaie."
   }
 }

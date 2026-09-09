@@ -4,12 +4,13 @@ import { useAuth } from '../contexts/AuthContext.tsx';
 import { supabase } from '../lib/supabase.ts';
 import { notifySessionExpired, supabaseQuery } from '../lib/supabaseQuery.ts';
 import type { Program } from '../types/completion.ts';
+import { effectiveProgramStatus } from '../utils/programStatus.ts';
 
 // Same column subset as usePrograms — avoids fetching the JSONB blobs
 // (progression / consignes_semaine / onboarding_data) on the listing
 // view. ProgramPage refetches the full row by slug when needed.
 const PROGRAM_LIST_COLS =
-  'id, slug, title, description, goals, duration_weeks, frequency_per_week, fitness_level, is_fixed, locale, created_at';
+  'id, slug, title, description, goals, duration_weeks, frequency_per_week, fitness_level, is_fixed, locale, created_at, status, error_reason, generation_started_at';
 
 export function useUserPrograms() {
   const { user } = useAuth();
@@ -34,6 +35,12 @@ export function useUserPrograms() {
       return (data as Program[]) ?? [];
     },
     enabled: !!userId && !!supabase,
+    // While any program is still generating in the background, poll so its
+    // card flips from "en préparation" to ready (or failed) without a manual
+    // refresh. Stops once nothing is generating — a stale row counts as
+    // failed, so a dead background task doesn't keep us polling forever.
+    refetchInterval: (query) =>
+      (query.state.data ?? []).some((p) => effectiveProgramStatus(p) === 'generating') ? 4000 : false,
   });
 
   const deleteProgram = useCallback(

@@ -1,0 +1,112 @@
+{
+  "date": "20261002",
+  "title": "Meteor Circuit",
+  "description": "Full 3-round circuit mixing sumo squats, incline push-ups, plank holds and no-push burpees",
+  "estimatedDuration": 33,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Toe taps (step)",
+          "duration": 35,
+          "instructions": "Tap your foot on a step, alternating quickly"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Lunge + torso rotation + arm toward the sky",
+          "bilateral": true
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Full Circuit",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Sumo squats",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Feet very wide apart, toes pointed outward"
+        },
+        {
+          "name": "Incline push-ups",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Hands on an elevated support, easier variation"
+        },
+        {
+          "name": "Plank",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Forearms on the floor, body perfectly aligned, brace your core"
+        },
+        {
+          "name": "Reverse lunges",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Big step backward, lower the knee",
+          "bilateral": true
+        },
+        {
+          "name": "Mountain climbers",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "In a plank, drive knees to chest alternating quickly"
+        },
+        {
+          "name": "Burpees without push-up",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "Drop down, jump feet back, return, jump up"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate the body",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 30,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}

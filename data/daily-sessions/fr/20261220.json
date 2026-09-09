@@ -1,0 +1,95 @@
+{
+  "date": "20261220",
+  "title": "Intervalles Ardents",
+  "description": "Intervalles explosifs avec burpees, jump lunges et plyo push-ups pour un cardio total en 3 rounds",
+  "estimatedDuration": 27,
+  "focus": [
+    "cardio"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 45,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Sauter en écartant bras et jambes, revenir pieds joints"
+        },
+        {
+          "name": "Talon-fesses",
+          "duration": 40,
+          "instructions": "Course sur place, talons vers les fessiers"
+        },
+        {
+          "name": "Montees de genoux moderees",
+          "duration": 35,
+          "instructions": "Genoux vers la poitrine à rythme modéré"
+        }
+      ]
+    },
+    {
+      "type": "hiit",
+      "name": "HIIT Ardent",
+      "rounds": 3,
+      "work": 30,
+      "rest": 30,
+      "exercises": [
+        {
+          "name": "Burpees",
+          "instructions": "Descendre, poser les mains, sauter les pieds en arrière, pompe, sauter debout"
+        },
+        {
+          "name": "Jump lunges",
+          "instructions": "Fentes sautées en alternant les jambes"
+        },
+        {
+          "name": "Skaters",
+          "instructions": "Sauts latéraux d'un pied à l'autre, bras en balance"
+        },
+        {
+          "name": "Lateral bounds",
+          "instructions": "Sauts latéraux puissants d'un pied à l'autre"
+        },
+        {
+          "name": "Plyo push-ups",
+          "instructions": "Pompe explosive, mains décollent du sol"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement pectoraux",
+          "duration": 30,
+          "instructions": "Bras contre un mur à 90 degrés, pivoter le corps",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement triceps",
+          "duration": 30,
+          "instructions": "Bras derrière la tête, tirer le coude avec l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement quadriceps debout",
+          "duration": 30,
+          "instructions": "Attraper le pied derrière soi, genou vers le sol",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

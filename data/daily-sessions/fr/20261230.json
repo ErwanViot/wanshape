@@ -1,0 +1,107 @@
+{
+  "date": "20261230",
+  "title": "Circuit Tonnerre",
+  "description": "Circuit tonnerre avec squats sumo, pompes archer et fentes marchées en 3 rounds",
+  "estimatedDuration": 33,
+  "focus": [
+    "full-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Echauffement",
+      "exercises": [
+        {
+          "name": "Rotations articulaires",
+          "duration": 60,
+          "instructions": "Cou, épaules, poignets, hanches, chevilles - lents et contrôlés"
+        },
+        {
+          "name": "Step-ups (marche)",
+          "duration": 40,
+          "instructions": "Monter et descendre d'une marche en alternant les jambes"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": 40,
+          "instructions": "Fente + rotation du buste + bras vers le ciel",
+          "bilateral": true
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "A quatre pattes, alterner dos rond et dos creux, respirer"
+        }
+      ]
+    },
+    {
+      "type": "circuit",
+      "name": "Circuit Tonnerre",
+      "rounds": 3,
+      "restBetweenExercises": 15,
+      "restBetweenRounds": 60,
+      "exercises": [
+        {
+          "name": "Squats sumo",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Pieds très largement écartés, pointes vers l'extérieur"
+        },
+        {
+          "name": "Pompes archer",
+          "mode": "reps",
+          "reps": 10,
+          "instructions": "Un bras tendu sur le côté, descendre vers l'autre main",
+          "bilateral": true
+        },
+        {
+          "name": "Bear hold",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "A quatre pattes, genoux décollés du sol de 2cm, maintenir"
+        },
+        {
+          "name": "Fentes marchees",
+          "mode": "reps",
+          "reps": 12,
+          "instructions": "Avancer en fentes continues, grand pas"
+        },
+        {
+          "name": "Mountain climbers",
+          "mode": "timed",
+          "duration": 30,
+          "instructions": "En planche, genoux vers la poitrine en alternant rapidement"
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Retour au calme",
+      "exercises": [
+        {
+          "name": "Etirement ischio-jambiers",
+          "duration": 30,
+          "instructions": "Jambe tendue devant, pencher le buste en avant",
+          "bilateral": true
+        },
+        {
+          "name": "Etirement psoas",
+          "duration": 30,
+          "instructions": "Fente basse, pousser la hanche vers l'avant",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "A plat ventre, amener le pied vers la main opposée en tournant",
+          "bilateral": true
+        },
+        {
+          "name": "Respiration profonde",
+          "duration": 40,
+          "instructions": "Inspirer 4s par le nez, retenir 4s, expirer 6s par la bouche"
+        }
+      ]
+    }
+  ]
+}

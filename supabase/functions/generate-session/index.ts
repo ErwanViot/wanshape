@@ -272,6 +272,9 @@ Deno.serve(async (req: Request) => {
         console.error("Parse failure on first attempt — retrying once");
         result = await callAi();
       } else {
+        // Note: a "truncation" error (stop_reason=max_tokens, added to the
+        // shared helper) intentionally does NOT retry here — a re-run under the
+        // same token budget would just truncate again. It surfaces directly.
         throw err;
       }
     }

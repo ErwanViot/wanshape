@@ -1,0 +1,117 @@
+{
+  "date": "20260924",
+  "title": "Vertical Superset",
+  "description": "Vertical push-pull supersets: decline push-ups, chair dips and Hindu push-ups for a dense upper body",
+  "estimatedDuration": 32,
+  "focus": [
+    "upper-body"
+  ],
+  "blocks": [
+    {
+      "type": "warmup",
+      "name": "Warm-up",
+      "exercises": [
+        {
+          "name": "Joint rotations",
+          "duration": 60,
+          "instructions": "Neck, shoulders, wrists, hips, ankles - slow and controlled"
+        },
+        {
+          "name": "Jumping jacks",
+          "duration": 40,
+          "instructions": "Jump spreading arms and legs, return feet together"
+        },
+        {
+          "name": "Cat-cow",
+          "duration": 35,
+          "instructions": "On all fours, alternate rounding and arching the back, breathe"
+        },
+        {
+          "name": "Inchworms",
+          "duration": 35,
+          "instructions": "Standing, walk hands forward into a plank, then walk back"
+        }
+      ]
+    },
+    {
+      "type": "superset",
+      "name": "Vertical Supersets",
+      "sets": 3,
+      "restBetweenSets": 90,
+      "restBetweenPairs": 50,
+      "pairs": [
+        {
+          "exercises": [
+            {
+              "name": "Decline push-ups",
+              "reps": 10,
+              "instructions": "Feet elevated on a chair, body braced"
+            },
+            {
+              "name": "Scapular push-ups",
+              "reps": 12,
+              "instructions": "In a plank, squeeze and spread the shoulder blades without bending the elbows"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Chair dips",
+              "reps": 10,
+              "instructions": "Hands on the edge, elbows back, lower to 90 degrees"
+            },
+            {
+              "name": "Inverted row (table)",
+              "reps": 10,
+              "instructions": "Under a table, pull your chest toward the edge"
+            }
+          ]
+        },
+        {
+          "exercises": [
+            {
+              "name": "Hindu push-ups",
+              "reps": 8,
+              "instructions": "Diving motion: swoop down then rise up in an arc"
+            },
+            {
+              "name": "Prone T raises",
+              "reps": 12,
+              "instructions": "Lying face down, arms in a T shape, squeeze the shoulder blades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cooldown",
+      "name": "Cool-down",
+      "exercises": [
+        {
+          "name": "Chest stretch",
+          "duration": 30,
+          "instructions": "Arm against a wall at 90 degrees, rotate your body",
+          "bilateral": true
+        },
+        {
+          "name": "Triceps stretch",
+          "duration": 30,
+          "instructions": "Arm behind the head, pull the elbow with the other hand",
+          "bilateral": true
+        },
+        {
+          "name": "Scorpion stretch",
+          "duration": 30,
+          "instructions": "Lying face down, bring the foot toward the opposite hand while rotating",
+          "bilateral": true
+        },
+        {
+          "name": "Deep breathing",
+          "duration": 40,
+          "instructions": "Inhale 4s through the nose, hold 4s, exhale 6s through the mouth"
+        }
+      ]
+    }
+  ]
+}
