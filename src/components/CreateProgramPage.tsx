@@ -176,6 +176,13 @@ export function CreateProgramPage() {
   // don't consume a slot, so don't block the user on them here either.
   const atLimit = !programsLoading && userPrograms.filter((p) => isActiveProgram(p)).length >= MAX_ACTIVE;
 
+  // Checked BEFORE the cap: generate() invalidates the list right after the 202
+  // ack, so our own `generating` placeholder would otherwise flip a 2-program
+  // user to "limit reached" for the whole poll.
+  if (generating) {
+    return <GeneratingOverlay phase={loadingPhase} />;
+  }
+
   if (atLimit) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-12 text-center space-y-6">
@@ -190,10 +197,6 @@ export function CreateProgramPage() {
         </Link>
       </div>
     );
-  }
-
-  if (generating) {
-    return <GeneratingOverlay phase={loadingPhase} />;
   }
 
   return (

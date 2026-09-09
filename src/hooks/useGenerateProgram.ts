@@ -54,7 +54,12 @@ async function pollUntilSettled(programId: string, isCancelled: () => boolean): 
 
     const status = effectiveProgramStatus(data);
     if (status !== 'generating') {
-      return { status, error_reason: (data.error_reason as string | null) ?? null };
+      const errorReason = (data.error_reason as string | null) ?? null;
+      // fail_program keeps a program `ready` when it still has sessions (a failed
+      // REVISION must not hide a valid program) but records the reason; both
+      // finalize_program and begin_program_revision clear it. So a settled row
+      // carrying a reason is a failed attempt, whatever its status.
+      return { status: errorReason ? 'failed' : status, error_reason: errorReason };
     }
   }
   return { status: 'timeout', error_reason: null };
@@ -98,6 +103,8 @@ export function useGenerateProgram() {
         // The detail page keys on slug, which a revision caller may not pass —
         // invalidate the whole prefix (same approach as useSaveCompletion).
         queryClient.invalidateQueries({ queryKey: ['program'] });
+        // Player query: it caches `null` while the program is generating.
+        queryClient.invalidateQueries({ queryKey: ['programSession'] });
       };
 
       try {

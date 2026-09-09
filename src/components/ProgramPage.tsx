@@ -201,6 +201,48 @@ export function ProgramPage() {
     );
   }
 
+  // Shared confirm dialog: every delete entry point (generating view, failed
+  // view, ready page) goes through it — no one-tap destructive action.
+  const deleteModal = showDeleteModal && (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Escape is wired in the keydown effect above; the click here is the pointer-only click-outside dismissal.
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-program-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) setShowDeleteModal(false);
+      }}
+    >
+      <div
+        ref={deleteDialogRef}
+        className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4"
+      >
+        <h2 id="delete-program-title" className="text-lg font-bold text-heading">
+          {t('page.delete_modal_title')}
+        </h2>
+        <p className="text-sm text-muted">{t('page.delete_modal_body')}</p>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => setShowDeleteModal(false)}
+            className="flex-1 py-3 rounded-xl text-sm font-semibold border border-divider text-muted hover:text-heading transition-colors cursor-pointer"
+          >
+            {t('page.delete_cancel')}
+          </button>
+          <button
+            type="button"
+            onClick={handleDelete}
+            disabled={deleting}
+            className="flex-1 py-3 rounded-xl text-sm font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer disabled:opacity-50"
+          >
+            {deleting ? t('page.deleting') : t('page.delete_confirm')}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   // Async generation states. A program still generating in the background has
   // no sessions yet; a failed one may be an empty placeholder — both would
   // render an empty/broken page, so intercept them with dedicated views.
@@ -217,13 +259,13 @@ export function ProgramPage() {
         {isCustom && user && program.user_id === user.id && (
           <button
             type="button"
-            onClick={handleDelete}
-            disabled={deleting}
-            className="text-xs text-faint hover:text-red-400 transition-colors cursor-pointer disabled:opacity-50"
+            onClick={() => setShowDeleteModal(true)}
+            className="text-xs text-faint hover:text-red-400 transition-colors cursor-pointer"
           >
-            {deleting ? t('page.deleting') : t('page.generating_delete')}
+            {t('page.generating_delete')}
           </button>
         )}
+        {deleteModal}
       </div>
     );
   }
@@ -238,15 +280,15 @@ export function ProgramPage() {
         <p className="text-muted max-w-md">{errorMessage}</p>
         <button
           type="button"
-          onClick={handleDelete}
-          disabled={deleting}
-          className="px-6 py-2.5 rounded-full text-sm font-bold text-white bg-red-500 hover:bg-red-600 disabled:opacity-50 transition-colors"
+          onClick={() => setShowDeleteModal(true)}
+          className="px-6 py-2.5 rounded-full text-sm font-bold text-white bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
         >
           {t('page.failed_delete')}
         </button>
         <Link to="/programmes" className="text-link hover:text-link-hover underline text-sm">
           {t('page.see_all')}
         </Link>
+        {deleteModal}
       </div>
     );
   }
@@ -255,46 +297,7 @@ export function ProgramPage() {
     <>
       {showDisclaimer && <HealthDisclaimer onAccept={acceptAndNavigate} onCancel={cancelDisclaimer} />}
 
-      {/* Delete modal */}
-      {showDeleteModal && (
-        // biome-ignore lint/a11y/useKeyWithClickEvents: Escape is wired in the keydown effect above; the click here is the pointer-only click-outside dismissal.
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-20 sm:pb-4 bg-black/50 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="delete-program-title"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setShowDeleteModal(false);
-          }}
-        >
-          <div
-            ref={deleteDialogRef}
-            className="bg-surface-card w-full max-w-sm rounded-2xl shadow-2xl border border-card-border p-6 space-y-4"
-          >
-            <h2 id="delete-program-title" className="text-lg font-bold text-heading">
-              {t('page.delete_modal_title')}
-            </h2>
-            <p className="text-sm text-muted">{t('page.delete_modal_body')}</p>
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={() => setShowDeleteModal(false)}
-                className="flex-1 py-3 rounded-xl text-sm font-semibold border border-divider text-muted hover:text-heading transition-colors cursor-pointer"
-              >
-                {t('page.delete_cancel')}
-              </button>
-              <button
-                type="button"
-                onClick={handleDelete}
-                disabled={deleting}
-                className="flex-1 py-3 rounded-xl text-sm font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer disabled:opacity-50"
-              >
-                {deleting ? t('page.deleting') : t('page.delete_confirm')}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {deleteModal}
 
       <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
         {/* Hero */}
@@ -449,7 +452,7 @@ export function ProgramPage() {
         {/* Last revision failed — the program itself is intact */}
         {isCustom && program.error_reason && (
           <output className="block rounded-2xl border border-red-400/30 bg-red-500/10 px-5 py-4 text-sm text-red-300">
-            {t('page.revision_failed_banner', { reason: errorMessage })}
+            {t('page.revision_failed_banner', { reason: errorMessage, interpolation: { escapeValue: false } })}
           </output>
         )}
 

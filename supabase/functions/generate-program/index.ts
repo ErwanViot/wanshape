@@ -294,12 +294,16 @@ Deno.serve(async (req: Request) => {
     // Check active programs limit. A `failed` placeholder does not consume a
     // slot (mirrors the DB trigger in migration 027), so exclude it here too.
     // Stale `generating` rows were just reaped to `failed` above.
+    // Mirror program_generation_is_stale as well (migration 029), so a stale
+    // `generating` row is not counted even if the reap RPC above errored.
+    const staleCutoff = new Date(Date.now() - 8 * 60 * 1000).toISOString();
     const { count: activeCount, error: activeError } = await supabaseAdmin
       .from("programs")
       .select("*", { count: "exact", head: true })
       .eq("user_id", user.id)
       .eq("is_fixed", false)
-      .neq("status", "failed");
+      .neq("status", "failed")
+      .or(`status.neq.generating,generation_started_at.is.null,generation_started_at.gte.${staleCutoff}`);
 
     if (activeError) {
       return errorResponse(req, "Erreur serveur", 500);
@@ -481,8 +485,12 @@ Deno.serve(async (req: Request) => {
     // it. See GENERATION_BUDGET_MS for why the budget starts at request start.
     let retriesLeft = 1;
 
+    function remainingBudgetMs(): number {
+      return GENERATION_BUDGET_MS - (Date.now() - requestStartedAt);
+    }
+
     function retryTimeoutMs(): number | null {
-      const remaining = GENERATION_BUDGET_MS - (Date.now() - requestStartedAt);
+      const remaining = remainingBudgetMs();
       if (remaining < MIN_RETRY_MS) return null;
       return Math.min(RETRY_TIMEOUT_MS, remaining);
     }
@@ -503,9 +511,11 @@ Deno.serve(async (req: Request) => {
       // First attempt. A parse failure (model breaking the forced-JSON format)
       // is transient; spend our one retry on a fresh call. API/network/timeout
       // errors propagate to the catch → fail_program.
+      // The first call is clamped to the budget too: pre-flight RPCs may have
+      // eaten into it, and a call that cannot finish in time must not start.
       let result!: Awaited<ReturnType<typeof callAnthropic>>;
       try {
-        result = await callAnthropic();
+        result = await callAnthropic([], Math.max(MIN_RETRY_MS, Math.min(FIRST_TIMEOUT_MS, remainingBudgetMs())));
       } catch (err) {
         const retryMs = retryTimeoutMs();
         if (err instanceof AnthropicCallError && err.kind === "parse" && retriesLeft > 0 && retryMs !== null) {

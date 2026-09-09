@@ -211,6 +211,9 @@ export function useProgramSession(slug: string | undefined, order: number | unde
       return (ps as ProgramSession | null) ?? null;
     },
     enabled: !!slug && order != null && !!supabase,
+    // `null` is cached while the program is generating; don't serve it again
+    // from cache when the player is re-entered after the generation settled.
+    refetchOnMount: (query) => (query.state.data === null ? 'always' : true),
   });
 
   return { session: query.data ?? null, loading: query.isPending };
